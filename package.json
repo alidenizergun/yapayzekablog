@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "type": "module",
-  "description": "Nöron — Türkçe yapay zeka haber sitesi. Astro + Claude API ile günde 6 kez otomatik güncellenir.",
+  "description": "Nöron — Türkçe yapay zeka haber sitesi. Astro + Claude API ile günde 2 kez otomatik güncellenir.",
   "engines": { "node": ">=20" },
   "scripts": {
     "dev": "astro dev",

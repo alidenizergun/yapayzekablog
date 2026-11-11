@@ -1,17 +1,17 @@
-# Günde 6 kez yeni yapay zeka haberlerini üretir, siteyi derleyip yayınlar.
-# Saatler UTC'dir: 04,07,10,13,16,19 UTC = İstanbul 07:07, 10:07, 13:07, 16:07, 19:07, 22:07
+# Günde 2 kez yeni yapay zeka haberlerini üretir, siteyi derleyip yayınlar.
+# Saatler UTC'dir: 05:07 ve 14:07 UTC = İstanbul 08:07 ve 17:07
 # Not: GitHub zamanlanmış işleri yoğunluğa göre birkaç dakika gecikmeli başlatabilir.
 name: Haber güncellemesi
 
 on:
   schedule:
-    - cron: '7 4,7,10,13,16,19 * * *'
+    - cron: '7 5,14 * * *'
   workflow_dispatch:
     inputs:
       max_articles:
         description: 'Bu çalışmada en fazla kaç haber?'
         required: false
-        default: '4'
+        default: '10'
 
 concurrency:
   group: news
@@ -20,7 +20,7 @@ concurrency:
 jobs:
   generate:
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 40
     permissions:
       contents: write
     outputs:
@@ -39,10 +39,11 @@ jobs:
         id: news
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          X_BEARER_TOKEN: ${{ secrets.X_BEARER_TOKEN }}
           NEWS_MODEL: ${{ vars.NEWS_MODEL }}
-          MAX_ARTICLES: ${{ inputs.max_articles || vars.MAX_ARTICLES || '4' }}
-          LOOKBACK_HOURS: ${{ vars.LOOKBACK_HOURS || '8' }}
-          MAX_SEARCHES: ${{ vars.MAX_SEARCHES || '10' }}
+          MAX_ARTICLES: ${{ inputs.max_articles || vars.MAX_ARTICLES || '10' }}
+          LOOKBACK_HOURS: ${{ vars.LOOKBACK_HOURS || '15' }}
+          MAX_SEARCHES: ${{ vars.MAX_SEARCHES || '20' }}
           REQUIRE_REVIEW: ${{ vars.REQUIRE_REVIEW || 'false' }}
         run: node scripts/generate-news.mjs
 
@@ -59,12 +60,13 @@ jobs:
             exit 1
           fi
 
+      # Haber çıkmasa da X takip durumu kaydedilir; aynı gönderiler tekrar ücretlendirilmez.
       - name: Kaydet ve gönder
-        if: steps.news.outputs.count != '0'
+        if: always() && steps.news.outcome == 'success'
         run: |
           git config user.name "noron-bot"
           git config user.email "noron-bot@users.noreply.github.com"
-          git add src/content/haberler
+          git add src/content/haberler data 2>/dev/null || git add src/content/haberler
           git diff --cached --quiet && exit 0
           git commit -m "Haberler: ${{ steps.news.outputs.count }} yeni haber ($(TZ=Europe/Istanbul date '+%d.%m.%Y %H:%M'))"
           git pull --rebase origin ${{ github.ref_name }}

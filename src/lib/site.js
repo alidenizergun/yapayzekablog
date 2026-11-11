@@ -7,7 +7,7 @@ export const SITE = {
   description: 'Yapay zeka dünyasındaki gelişmeleri Türkçe, kaynaklı ve hızlı aktaran haber sitesi.',
   locale: 'tr-TR',
   timeZone: 'Europe/Istanbul',
-  updatesPerDay: 6,
+  updatesPerDay: 2,
 };
 
 export const CATEGORIES = [

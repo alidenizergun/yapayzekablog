@@ -1,0 +1,39 @@
+{
+  "_aciklama": "X'te takip edilen hesaplar. Kullanıcı adını @ işareti olmadan yazın. Çok sık paylaşım yapan hesaplar (günde onlarca gönderi) X API maliyetini artırır. Türkiye'den eklemek istediğiniz hesapları 'turkiye' listesine yazın.",
+  "kisiler": [
+    "sama",
+    "DarioAmodei",
+    "demishassabis",
+    "karpathy",
+    "ylecun",
+    "AndrewYNg",
+    "gdb",
+    "mustafasuleyman",
+    "sundarpichai",
+    "satyanadella",
+    "JeffDean",
+    "drfeifei",
+    "OfficialLoganK",
+    "ClementDelangue",
+    "emollick",
+    "simonw",
+    "jackclarkSF",
+    "alexandr_wang"
+  ],
+  "kurumlar": [
+    "OpenAI",
+    "OpenAIDevs",
+    "AnthropicAI",
+    "claudeai",
+    "GoogleDeepMind",
+    "GoogleAI",
+    "AIatMeta",
+    "MistralAI",
+    "deepseek_ai",
+    "Alibaba_Qwen",
+    "xai",
+    "huggingface",
+    "NVIDIAAI"
+  ],
+  "turkiye": []
+}

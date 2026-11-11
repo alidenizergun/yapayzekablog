@@ -16,15 +16,17 @@
  *
  * Ortam değişkenleri (hepsi isteğe bağlı, ANTHROPIC_API_KEY hariç):
  *   NEWS_MODEL        varsayılan: claude-sonnet-5-5
- *   MAX_ARTICLES      bir çalışmada en fazla kaç haber (varsayılan 4)
- *   LOOKBACK_HOURS    kaç saat geriye bakılsın (varsayılan 8)
- *   MAX_SEARCHES      bir çalışmada en fazla kaç web araması (varsayılan 10)
+ *   MAX_ARTICLES      bir çalışmada en fazla kaç haber (varsayılan 10)
+ *   LOOKBACK_HOURS    kaç saat geriye bakılsın (varsayılan 15)
+ *   MAX_SEARCHES      bir çalışmada en fazla kaç web araması (varsayılan 20)
  *   REQUIRE_REVIEW    "true" ise haberler taslak (draft) olarak kaydedilir, siteye çıkmaz
+ *   X_BEARER_TOKEN    tanımlıysa X'teki takip listesi (scripts/x-accounts.json) de taranır
  */
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { CATEGORIES, IMAGES } from '../src/lib/site.js';
+import { fetchXPosts, formatPostsForPrompt } from './x-feed.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const CONTENT_DIR = path.join(ROOT, 'src/content/haberler');
@@ -32,9 +34,9 @@ const GUIDELINES = fs.readFileSync(path.join(ROOT, 'scripts/editorial-guidelines
 
 const DRY = process.argv.includes('--dry-run');
 const MODEL = process.env.NEWS_MODEL || 'claude-sonnet-5-5';
-const MAX_ARTICLES = Number(process.env.MAX_ARTICLES || 4);
-const LOOKBACK_HOURS = Number(process.env.LOOKBACK_HOURS || 8);
-const MAX_SEARCHES = Number(process.env.MAX_SEARCHES || 10);
+const MAX_ARTICLES = Number(process.env.MAX_ARTICLES || 10);
+const LOOKBACK_HOURS = Number(process.env.LOOKBACK_HOURS || 15);
+const MAX_SEARCHES = Number(process.env.MAX_SEARCHES || 20);
 const REQUIRE_REVIEW = /^(1|true|yes|evet)$/i.test(process.env.REQUIRE_REVIEW || '');
 
 const log = (...a) => console.log('[haber]', ...a);
@@ -125,7 +127,7 @@ async function client() {
 }
 
 /** Araştırma adımı: web araması yapar, bulunan gelişmeleri ve görülen tüm adresleri döndürür. */
-async function research(anthropic, existing) {
+async function research(anthropic, existing, xPosts = []) {
   const recent = existing
     .filter((e) => e.date.valueOf() > Date.now() - 7 * 86400e3)
     .sort((a, b) => b.date - a.date)
@@ -142,7 +144,12 @@ Arama önerileri: büyük yapay zeka şirketlerinin son duyuruları, "AI" + bug�
 
 Aşağıdaki haberler son 7 günde zaten yayınlandı. Bunları ve bunların yeni bilgi içermeyen tekrarlarını ATLA:
 ${covered}
+${xPosts.length ? `
+X'TEKİ TAKİP LİSTESİNDEN YENİ GÖNDERİLER (resmi X API'den alındı; adresleri gerçektir):
+${formatPostsForPrompt(xPosts)}
 
+Bu gönderilerden haber değeri taşıyanları (lansman, resmi duyuru, önemli açıklama, yeni araştırma) aday olarak değerlendir. Kişisel görüş, şaka, tanıtım ve sohbet niteliğindeki gönderileri ele. Seçtiğin gönderinin adresini kaynaklara ekle ve mümkünse web aramasıyla resmi blog veya güvenilir bir haber kaynağından doğrula. Bir kişinin gönderisi tek başına olgu değildir: notta "X, şunu söyledi/duyurdu" diye belirt.
+` : ''}
 Her aday için şu biçimde not yaz:
 ### <kısa başlık>
 - Ne oldu: <olgular; kim, ne, ne zaman, rakamlar>
@@ -154,13 +161,15 @@ Kurallar: Yalnızca arama sonuçlarında gördüğün bilgileri yaz. Tarihi ${LO
 
   const messages = [{ role: 'user', content: user }];
   const seen = new Map(); // normalizeUrl -> { url, title }
+  // X API'den gelen gönderi adresleri gerçek olduğu için izinli kaynaklara eklenir
+  for (const p of xPosts) seen.set(normalizeUrl(p.url), { url: p.url, title: `@${p.username} X gönderisi` });
   let text = '';
   let searches = 0;
 
   for (let i = 0; i < 6; i++) {
     const res = await anthropic.messages.create({
       model: MODEL,
-      max_tokens: 16000,
+      max_tokens: 24000,
       system,
       messages,
       tools: [{ type: 'web_search_20250305', name: 'web_search', max_uses: MAX_SEARCHES }],
@@ -342,6 +351,8 @@ function dryRunData() {
   };
 }
 
+let xNote = 'X takibi kapalı';
+
 async function main() {
   const existing = loadExisting();
   log(`model: ${MODEL} · mevcut haber: ${existing.length} · en fazla ${MAX_ARTICLES} yeni haber · ${REQUIRE_REVIEW ? 'editör onayı AÇIK (taslak)' : 'otomatik yayın'}`);
@@ -352,7 +363,16 @@ async function main() {
     log('deneme modu: API çağrılmıyor');
   } else {
     const anthropic = await client();
-    const r = await research(anthropic, existing);
+    let xPosts = [];
+    try {
+      const x = await fetchXPosts({ root: ROOT, lookbackHours: LOOKBACK_HOURS, log: (m) => log(m) });
+      xPosts = x.posts;
+      xNote = x.note;
+    } catch (err) {
+      xNote = `X takibi bu çalışmada atlandı: ${err.message}`;
+    }
+    log(xNote);
+    const r = await research(anthropic, existing, xPosts);
     seen = r.seen;
     searches = r.searches;
     if (!r.notes || /YENİ GELİŞME YOK/i.test(r.notes) && r.notes.length < 200) {
@@ -392,6 +412,7 @@ function summary(written, rejected, searches) {
     `- Yeni haber: **${written.length}**${REQUIRE_REVIEW ? ' (taslak, editör onayı bekliyor)' : ''}`,
     `- Elenen: ${rejected.length}`,
     `- Web araması: ${searches}`,
+    `- ${xNote}`,
     ...written.map((w) => `  - ✅ ${w.title} (${w.sources} kaynak)`),
     ...rejected.map((r) => `  - ❌ ${r.title} — ${r.reasons.join(', ')}`),
   ].join('\n');

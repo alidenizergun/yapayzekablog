@@ -30,6 +30,13 @@ Okur kitlesi: Türkiye'deki profesyoneller, girişimciler, pazarlamacılar, yaz�
 - Kaynak metinden uzun alıntı yapılmaz. Doğrudan alıntı gerekiyorsa tek bir alıntı, 15 kelimeden kısa ve tırnak içinde olur. Geri kalan her şey kendi cümlelerimizle yazılır.
 - Kaynak haberin yapısı ve paragraf sırası taklit edilmez.
 
+## X (Twitter) gönderileri
+- Şirketlerin resmi hesaplarından gelen duyurular birincil kaynak sayılır.
+- Bir kişinin gönderisi tek başına olguyu kanıtlamaz. Haberde "X, şunu söyledi/duyurdu" diye aktarılır; mümkünse resmi blog veya güvenilir bir haber kaynağıyla desteklenir.
+- Kişisel görüş, şaka, tartışma, tanıtım ve sohbet niteliğindeki gönderiler haber yapılmaz. Bir görüş ancak gerçekten önemli bir kişiden geliyor ve sektörü etkileyecek nitelikteyse haber olur.
+- Gönderiden doğrudan alıntı 15 kelimeyi geçmez; gerisi kendi cümlelerimizle aktarılır.
+- Gönderinin adresi haberin kaynakları arasına eklenir.
+
 ## Yazım dili
 - Türkçe, sade, bilgilendirici; Webrazzi'nin haber diline benzer.
 - Başlık: 60–100 karakter, bilgi veren, tık tuzağı olmayan. Özel isimler doğru yazılır (ChatGPT, OpenAI, Gemini, Claude).
