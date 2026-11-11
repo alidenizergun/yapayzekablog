@@ -1,0 +1,23 @@
+---
+import Base from '../layouts/Base.astro';
+import { SITE } from '../lib/site.js';
+---
+<Base title="Hakkımızda" description="Nöron'un yayın ilkeleri ve haberlerin nasıl hazırlandığı.">
+  <article class="article">
+    <h1>Hakkımızda</h1>
+    <p class="spot">{SITE.description}</p>
+    <div class="prose">
+      <h2>Haberler nasıl hazırlanıyor?</h2>
+      <p>Nöron günde {SITE.updatesPerDay} kez yapay zeka alanındaki yeni gelişmeleri tarar. Haberler, şirket duyuruları, araştırma yayınları ve güvenilir haber kaynakları esas alınarak yapay zeka desteğiyle Türkçe olarak yazılır.</p>
+      <h2>Yayın ilkelerimiz</h2>
+      <ul>
+        <li>Her haberde en az bir orijinal kaynak bağlantısı bulunur. Kaynağı doğrulanamayan haber yayınlanmaz.</li>
+        <li>Kaynak metinler kopyalanmaz; haberler kendi cümlelerimizle özetlenir.</li>
+        <li>Söylenti ve doğrulanmamış iddialar haber olarak sunulmaz.</li>
+        <li>Haber görselleri Nöron'a ait illüstrasyonlardır.</li>
+      </ul>
+      <h2>Düzeltme talebi</h2>
+      <p>Bir haberde hata görürseniz [İLETİŞİM E-POSTASI] adresine yazabilirsiniz. Düzeltmeler haberin altında belirtilir.</p>
+    </div>
+  </article>
+</Base>

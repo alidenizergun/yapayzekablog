@@ -1,0 +1,111 @@
+---
+import { render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import Sidebar from '../../components/Sidebar.astro';
+import Time from '../../components/Time.astro';
+import { IMAGES } from '../../lib/site.js';
+import { getNews, slugOf, newsUrl, imgUrl, catName, catUrl, url, readingMinutes, hostOf } from '../../lib/news.js';
+
+export async function getStaticPaths() {
+  const news = await getNews();
+  return news.map((entry) => ({ params: { slug: slugOf(entry) }, props: { entry } }));
+}
+
+const { entry } = Astro.props;
+const d = entry.data;
+const { Content } = await render(entry);
+const all = await getNews();
+const related = all
+  .filter((n) => n.id !== entry.id)
+  .map((n) => ({ n, score: (n.data.category === d.category ? 2 : 0) + n.data.tags.filter((t) => d.tags.includes(t)).length }))
+  .filter((x) => x.score > 0)
+  .sort((a, b) => b.score - a.score || b.n.data.date.valueOf() - a.n.data.date.valueOf())
+  .slice(0, 3)
+  .map((x) => x.n);
+
+const pageUrl = new URL(newsUrl(entry), Astro.site).href;
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'NewsArticle',
+  headline: d.title,
+  description: d.spot,
+  datePublished: d.date.toISOString(),
+  dateModified: d.date.toISOString(),
+  inLanguage: 'tr-TR',
+  image: [new URL(imgUrl(d.image), Astro.site).href],
+  author: { '@type': 'Organization', name: d.author },
+  publisher: { '@type': 'Organization', name: 'Nöron' },
+  mainEntityOfPage: pageUrl,
+  articleSection: catName(d.category),
+  keywords: d.tags.join(', '),
+  citation: d.sources.map((s) => ({ '@type': 'CreativeWork', name: s.title, url: s.url })),
+};
+---
+<Base title={d.title} description={d.spot} ogImage={imgUrl(d.image)} ogType="article" currentCat={d.category} jsonLd={jsonLd}>
+  <div class="cols" style="margin-top:0;gap:56px">
+    <article class="article">
+      <nav class="crumb" aria-label="Konum"><a href={url('/')}>Ana sayfa</a><span aria-hidden="true">/</span><a href={catUrl(d.category)}>{catName(d.category)}</a></nav>
+      <span class="badge">{catName(d.category)}</span>
+      <h1>{d.title}</h1>
+      <p class="spot">{d.spot}</p>
+      <div class="byline">
+        <div class="author">
+          <div class="avatar" aria-hidden="true">N</div>
+          <div style="display:flex;flex-direction:column">
+            <span style="font-weight:600;font-size:15px">{d.author}</span>
+            <span class="meta"><Time date={d.date} /> · {readingMinutes(entry.body)} dk okuma</span>
+          </div>
+        </div>
+        <div class="share">
+          <a class="tag" href={`https://x.com/intent/post?text=${encodeURIComponent(d.title)}&url=${encodeURIComponent(pageUrl)}`} target="_blank" rel="noopener">X'te paylaş</a>
+          <a class="tag" href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(pageUrl)}`} target="_blank" rel="noopener">LinkedIn</a>
+          <button type="button" data-copy>Bağlantıyı kopyala</button>
+        </div>
+      </div>
+
+      <figure>
+        <img class="thumb" src={imgUrl(d.image)} alt={IMAGES[d.image]} width="800" height="420" />
+        <figcaption>İllüstrasyon: Nöron</figcaption>
+      </figure>
+
+      <div class="prose"><Content /></div>
+
+      {d.whyItMatters && (
+        <aside class="why" aria-label="Bu ne anlama geliyor">
+          <span class="cat">Bu ne anlama geliyor?</span>
+          <p>{d.whyItMatters}</p>
+        </aside>
+      )}
+
+      <section class="sources" aria-labelledby="src-h">
+        <h2 id="src-h">Kaynaklar</h2>
+        <ol>
+          {d.sources.map((s) => (
+            <li>
+              <a href={s.url} target="_blank" rel="noopener nofollow">{s.title}</a>
+              <span class="host"> · {s.publisher ?? hostOf(s.url)}</span>
+            </li>
+          ))}
+        </ol>
+        {d.generated && <p class="ai-note">Bu haber, yukarıdaki kaynaklardan yapay zeka desteğiyle derlenmiştir. Bir hata görürseniz bize bildirin.</p>}
+      </section>
+
+      {d.tags.length > 0 && <div class="atags">{d.tags.map((t) => <span class="tag">#{t}</span>)}</div>}
+
+      {related.length > 0 && (
+        <section class="related" aria-labelledby="rel-h">
+          <div class="sechead sm"><h2 id="rel-h">İlgili Haberler</h2></div>
+          <div class="grid4">
+            {related.map((n) => (
+              <a href={newsUrl(n)}>
+                <img class="thumb" src={imgUrl(n.data.image)} alt={IMAGES[n.data.image]} loading="lazy" />
+                <h3>{n.data.title}</h3>
+              </a>
+            ))}
+          </div>
+        </section>
+      )}
+    </article>
+    <Sidebar exclude={entry.id} />
+  </div>
+</Base>

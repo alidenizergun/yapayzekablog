@@ -1,0 +1,16 @@
+---
+import { IMAGES } from '../lib/site.js';
+import { newsUrl, imgUrl, catName } from '../lib/news.js';
+import Time from './Time.astro';
+const { item } = Astro.props;
+const d = item.data;
+---
+<a class="row" href={newsUrl(item)}>
+  <img class="thumb" src={imgUrl(d.image)} alt={IMAGES[d.image]} loading="lazy" width="200" height="128" />
+  <div>
+    <span class="cat">{catName(d.category)}</span>
+    <h3>{d.title}</h3>
+    <p>{d.spot}</p>
+    <span class="meta"><Time date={d.date} /> · {d.sources.length} kaynak</span>
+  </div>
+</a>

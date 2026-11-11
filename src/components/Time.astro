@@ -1,0 +1,5 @@
+---
+import { formatDate } from '../lib/news.js';
+const { date } = Astro.props;
+---
+<time datetime={date.toISOString()} data-rel>{formatDate(date)}</time>

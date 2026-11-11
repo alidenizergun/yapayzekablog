@@ -1,0 +1,29 @@
+---
+import { CATEGORIES } from '../lib/site.js';
+import { getNews, newsUrl, catUrl } from '../lib/news.js';
+import Newsletter from './Newsletter.astro';
+const { exclude } = Astro.props;
+const news = await getNews();
+const weekAgo = Date.now() - 7 * 86400e3;
+const thisWeek = news.filter((n) => n.data.date.valueOf() > weekAgo && n.id !== exclude);
+let picks = thisWeek.filter((n) => n.data.featured);
+if (picks.length < 5) picks = picks.concat(thisWeek.filter((n) => !n.data.featured)).slice(0, 5);
+picks = picks.slice(0, 5);
+const counts = CATEGORIES.map((c) => ({ ...c, n: news.filter((x) => x.data.category === c.slug).length })).filter((c) => c.n > 0);
+---
+<aside class="side-col">
+  {picks.length > 0 && (
+    <section class="pop" aria-labelledby="pop-h">
+      <div class="sechead sm"><h2 id="pop-h">Haftanın Öne Çıkanları</h2></div>
+      {picks.map((n, i) => <a href={newsUrl(n)}><span class="n">{i + 1}</span><span class="t">{n.data.title}</span></a>)}
+    </section>
+  )}
+  <Newsletter id={`email-${exclude ? 'a' : 'h'}`} />
+  <section class="week" aria-labelledby="cats-h">
+    <span class="cat">Kategoriler</span>
+    <h2 id="cats-h">Konuya göre oku</h2>
+    <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:12px">
+      {counts.map((c) => <a class="tag" href={catUrl(c.slug)}>{c.name} <span class="meta">{c.n}</span></a>)}
+    </div>
+  </section>
+</aside>

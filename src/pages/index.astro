@@ -1,0 +1,91 @@
+---
+import Base from '../layouts/Base.astro';
+import NewsRow from '../components/NewsRow.astro';
+import Sidebar from '../components/Sidebar.astro';
+import Time from '../components/Time.astro';
+import { IMAGES, SITE } from '../lib/site.js';
+import { getNews, newsUrl, imgUrl, catName, catUrl, url } from '../lib/news.js';
+
+export const PER_PAGE = 12;
+const news = await getNews();
+// Manşet: son 24 saatteki "featured" haber, yoksa en yeni haber
+const dayAgo = Date.now() - 86400e3;
+const lead = news.find((n) => n.data.featured && n.data.date.valueOf() > dayAgo) ?? news[0];
+const rest = news.filter((n) => n !== lead);
+const side = rest.slice(0, 3);
+const latest = rest.slice(3, 3 + PER_PAGE);
+const hasMore = rest.length > 3 + PER_PAGE;
+
+// Gündem: son 3 günün en sık geçen etiketleri
+const recent = news.filter((n) => n.data.date.valueOf() > Date.now() - 3 * 86400e3);
+const tagCount = new Map();
+for (const n of recent) for (const t of n.data.tags) tagCount.set(t, (tagCount.get(t) ?? 0) + 1);
+const trending = [...tagCount.entries()].sort((a, b) => b[1] - a[1]).slice(0, 8).map(([t]) => t);
+
+const invest = news.filter((n) => n.data.category === 'girisim-yatirim').slice(0, 4);
+---
+<Base>
+  {lead ? (
+    <>
+      <section class="hero" aria-label="Öne çıkanlar">
+        <a class="lead" href={newsUrl(lead)}>
+          <div class="imgbox">
+            <img class="thumb" src={imgUrl(lead.data.image)} alt={IMAGES[lead.data.image]} width="800" height="420" />
+            <span class="badge">{catName(lead.data.category)}</span>
+          </div>
+          <h1>{lead.data.title}</h1>
+          <p>{lead.data.spot}</p>
+          <span class="meta">{lead.data.author} · <Time date={lead.data.date} /> · {lead.data.sources.length} kaynak</span>
+        </a>
+        {side.length > 0 && (
+          <div class="side">
+            {side.map((n, i) => (
+              <a href={newsUrl(n)}>
+                {i === 0 && <img class="thumb" src={imgUrl(n.data.image)} alt={IMAGES[n.data.image]} loading="lazy" />}
+                <div>
+                  <span class="cat">{catName(n.data.category)}</span>
+                  <h2>{n.data.title}</h2>
+                  <span class="meta"><Time date={n.data.date} /></span>
+                </div>
+                {i > 0 && <img class="thumb" src={imgUrl(n.data.image)} alt={IMAGES[n.data.image]} loading="lazy" />}
+              </a>
+            ))}
+          </div>
+        )}
+      </section>
+
+      {trending.length > 0 && (
+        <section class="tags" aria-label="Gündem">
+          <strong>Gündemde:</strong>
+          {trending.map((t) => <span class="tag">#{t}</span>)}
+        </section>
+      )}
+
+      <div class="cols">
+        <section class="main" aria-labelledby="latest-h">
+          <div class="sechead"><h2 id="latest-h">Son Haberler</h2><span class="meta">Günde {SITE.updatesPerDay} kez güncellenir</span></div>
+          {latest.length ? latest.map((n) => <NewsRow item={n} />) : <p class="empty">Yeni haberler bir sonraki güncellemede burada olacak.</p>}
+          {hasMore && <div class="pager"><span></span><a href={url('/sayfa/2/')}>Daha eski haberler →</a></div>}
+        </section>
+        <Sidebar />
+      </div>
+
+      {invest.length > 0 && (
+        <section style="margin-top:64px" aria-labelledby="inv-h">
+          <div class="sechead"><h2 id="inv-h">Girişim &amp; Yatırım</h2><a class="meta" href={catUrl('girisim-yatirim')}>Tümü →</a></div>
+          <div class="grid4">
+            {invest.map((n) => (
+              <a href={newsUrl(n)}>
+                <img class="thumb" src={imgUrl(n.data.image)} alt={IMAGES[n.data.image]} loading="lazy" />
+                <h3>{n.data.title}</h3>
+                <span class="meta"><Time date={n.data.date} /></span>
+              </a>
+            ))}
+          </div>
+        </section>
+      )}
+    </>
+  ) : (
+    <p class="empty">Henüz haber yok. İlk otomatik güncellemeden sonra haberler burada görünecek.</p>
+  )}
+</Base>

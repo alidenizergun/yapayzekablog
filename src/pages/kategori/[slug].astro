@@ -1,0 +1,22 @@
+---
+import Base from '../../layouts/Base.astro';
+import NewsRow from '../../components/NewsRow.astro';
+import Sidebar from '../../components/Sidebar.astro';
+import { CATEGORIES } from '../../lib/site.js';
+import { getNews } from '../../lib/news.js';
+
+export function getStaticPaths() {
+  return CATEGORIES.map((c) => ({ params: { slug: c.slug }, props: { cat: c } }));
+}
+const { cat } = Astro.props;
+const items = (await getNews()).filter((n) => n.data.category === cat.slug).slice(0, 60);
+---
+<Base title={`${cat.name} haberleri`} description={`${cat.name} alanındaki en yeni yapay zeka haberleri.`} currentCat={cat.slug}>
+  <div class="cols" style="margin-top:0">
+    <section class="main" aria-labelledby="h">
+      <div class="sechead"><h2 id="h">{cat.name}</h2><span class="meta">{items.length} haber</span></div>
+      {items.length ? items.map((n) => <NewsRow item={n} />) : <p class="empty">Bu kategoride henüz haber yok. Yeni haberler otomatik güncellemelerle eklenecek.</p>}
+    </section>
+    <Sidebar />
+  </div>
+</Base>

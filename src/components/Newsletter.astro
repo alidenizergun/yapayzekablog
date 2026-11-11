@@ -1,0 +1,16 @@
+---
+// BULTEN_FORM_ACTION: Mailchimp, Brevo, Substack vb. servisinizin form adresi.
+// Boş bırakılırsa form yalnızca teşekkür mesajı gösterir.
+const action = import.meta.env.PUBLIC_NEWSLETTER_ACTION || '#';
+const { id = 'email' } = Astro.props;
+---
+<section class="news" id="bulten" aria-labelledby={`${id}-h`}>
+  <h2 id={`${id}-h`}>Yapay zeka gündemi, her sabah e-postanda</h2>
+  <p>Günün en önemli gelişmeleri, 3 dakikada okunur.</p>
+  <form data-news method="post" action={action}>
+    <label for={id}>E-posta adresin</label>
+    <input id={id} name="email" type="email" required placeholder="ad@sirket.com" autocomplete="email" />
+    <button type="submit">Abone ol</button>
+    <p class="ok" hidden>Kaydın alındı, teşekkürler.</p>
+  </form>
+</section>

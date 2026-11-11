@@ -1,0 +1,11 @@
+---
+import Base from '../layouts/Base.astro';
+import { url } from '../lib/news.js';
+---
+<Base title="Sayfa bulunamadı">
+  <div class="article" style="padding-block:48px">
+    <h1>Bu sayfa bulunamadı</h1>
+    <p class="spot">Aradığınız haber kaldırılmış ya da adresi değişmiş olabilir.</p>
+    <p style="margin-top:24px"><a class="btn" href={url('/')}>Ana sayfaya dön</a></p>
+  </div>
+</Base>

@@ -1,0 +1,21 @@
+{
+  "name": "noron",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Nöron — Türkçe yapay zeka haber sitesi. Astro + Claude API ile günde 6 kez otomatik güncellenir.",
+  "engines": { "node": ">=20" },
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "news": "node scripts/generate-news.mjs",
+    "news:dry": "node scripts/generate-news.mjs --dry-run"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "1.8.0",
+    "@astrojs/rss": "4.0.19",
+    "@astrojs/sitemap": "3.7.4",
+    "astro": "7.4.11"
+  }
+}

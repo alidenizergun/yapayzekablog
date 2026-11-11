@@ -1,0 +1,82 @@
+# Günde 6 kez yeni yapay zeka haberlerini üretir, siteyi derleyip yayınlar.
+# Saatler UTC'dir: 04,07,10,13,16,19 UTC = İstanbul 07:07, 10:07, 13:07, 16:07, 19:07, 22:07
+# Not: GitHub zamanlanmış işleri yoğunluğa göre birkaç dakika gecikmeli başlatabilir.
+name: Haber güncellemesi
+
+on:
+  schedule:
+    - cron: '7 4,7,10,13,16,19 * * *'
+  workflow_dispatch:
+    inputs:
+      max_articles:
+        description: 'Bu çalışmada en fazla kaç haber?'
+        required: false
+        default: '4'
+
+concurrency:
+  group: news
+  cancel-in-progress: false
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    permissions:
+      contents: write
+    outputs:
+      count: ${{ steps.news.outputs.count }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      - name: Haberleri üret
+        id: news
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          NEWS_MODEL: ${{ vars.NEWS_MODEL }}
+          MAX_ARTICLES: ${{ inputs.max_articles || vars.MAX_ARTICLES || '4' }}
+          LOOKBACK_HOURS: ${{ vars.LOOKBACK_HOURS || '8' }}
+          MAX_SEARCHES: ${{ vars.MAX_SEARCHES || '10' }}
+          REQUIRE_REVIEW: ${{ vars.REQUIRE_REVIEW || 'false' }}
+        run: node scripts/generate-news.mjs
+
+      - name: Derleme kontrolü (bozuk haber yayınlanmasın)
+        if: steps.news.outputs.count != '0'
+        env:
+          SITE_URL: ${{ vars.SITE_URL }}
+          BASE_PATH: ${{ vars.BASE_PATH }}
+        run: |
+          if ! npm run build; then
+            echo "::error::Derleme başarısız; yeni haberler geri alınıyor."
+            git clean -fd src/content/haberler
+            git checkout -- src/content/haberler
+            exit 1
+          fi
+
+      - name: Kaydet ve gönder
+        if: steps.news.outputs.count != '0'
+        run: |
+          git config user.name "noron-bot"
+          git config user.email "noron-bot@users.noreply.github.com"
+          git add src/content/haberler
+          git diff --cached --quiet && exit 0
+          git commit -m "Haberler: ${{ steps.news.outputs.count }} yeni haber ($(TZ=Europe/Istanbul date '+%d.%m.%Y %H:%M'))"
+          git pull --rebase origin ${{ github.ref_name }}
+          git push
+
+  deploy:
+    needs: generate
+    if: needs.generate.outputs.count != '0'
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    uses: ./.github/workflows/deploy.yml
+    with:
+      ref: ${{ github.ref_name }}
