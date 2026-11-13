@@ -1,0 +1,32 @@
+---
+title: "DeepSeek, uygulamasındaki arama, dosya, bağlantı ve ses özelliklerini API'ye açtı"
+spot: "DeepSeek, V4.1-Flash modelinin uygulamadaki yeteneklerini API üzerinden geliştiricilere sundu. Arama, dosya okuma, bağlantı okuma ve güvenlik kontrolleri tek arayüzde toplanıyor."
+category: platformlar
+tags: ["DeepSeek", "API", "DeepSeekV4", "Geliştiriciler"]
+date: 2026-11-13T23:52:50+03:00
+image: kod
+whyItMatters: "Geliştiriciler arama, dosya okuma ve ses katmanlarını ayrı ayrı kurmak yerine tek bir API üzerinden alabilecek."
+sources:
+  - title: "The full DeepSeek App experience, now via API"
+    url: "https://api-docs.deepseek.com/news/news261113/"
+    publisher: "DeepSeek API Docs"
+  - title: "@deepseek_ai X gönderisi"
+    url: "https://x.com/deepseek_ai/status/2121247896918253875"
+    publisher: "X (DeepSeek)"
+  - title: "@deepseek_ai X gönderisi"
+    url: "https://x.com/deepseek_ai/status/2121247903603941471"
+    publisher: "X (DeepSeek)"
+  - title: "DeepSeek Turns Its Whole App Into an API With Search, File Reading, Voice and Safety Built In"
+    url: "https://startupfortune.com/deepseek-turns-its-whole-app-into-an-api-with-search-file-reading-voice-and-safety-built-in/"
+    publisher: "Startup Fortune"
+---
+
+DeepSeek, V4.1-Flash (deepseek-flash) modelinin uygulamadaki yeteneklerini Messages, Responses ve Chat Completions arayüzlerinde sunmaya başladı. Araç çağrıları ve bağlam derleme sunucu tarafında yapılıyor. Duyuru 13 Kasım'da yapıldı; şirketin X gönderisi 14:24 UTC'de paylaşıldı.
+
+Özellikler arasında alıntılı web ve görsel arama, çok adımlı akıl yürütme sırasında derin arama ile PDF, Office dosyaları ve görsellerin sohbet bağlamına işlenmesi var. Resmi duyuru ayrıca bağlantı okuma ve güvenlik kontrollerini de sayıyor. Arama, Fetch, OCR, ASR ve TTS ayrıca bağımsız API'ler olarak da sunuluyor.
+
+DeepSeek'in X gönderisine göre şirket, DeepSeek konuşma geçmişini içe aktarmayı destekleyen açık kaynaklı bir ön yüz demosu da yayımladı.
+
+## Fiyatlandırma
+
+DeepSeek'in X gönderisine göre genişletilmiş yetenekler, standart token ücretine ek olarak bir araç kullanım ücreti getiriyor. Bir ikincil kaynak ise V4.1 Flash'ın temel token fiyatlarının değişmediğini yazıyor.
