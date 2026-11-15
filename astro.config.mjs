@@ -1,15 +1,17 @@
 import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
 
-// SITE_URL: sitenin yayınlanacağı adres, örn. https://noron.com.tr
-// GitHub Actions'ta repo değişkeni (Settings › Variables) olarak tanımlanır.
-const site = process.env.SITE_URL || 'https://example.com';
+// Site adresi:
+// - Kendi domaininiz varsa repo değişkeni olarak SITE_URL verin (örn. https://alanadiniz.com).
+// - SITE_URL verilmezse GitHub Pages adresi otomatik kullanılır:
+//   https://KULLANICI.github.io/REPO-ADI
+const [owner, repo] = (process.env.GITHUB_REPOSITORY || '').split('/');
+const site = process.env.SITE_URL || (owner ? `https://${owner}.github.io` : 'https://example.com');
+const base = process.env.BASE_PATH || (process.env.SITE_URL || !repo ? '/' : `/${repo}`);
 
 export default defineConfig({
   site,
-  // Özel domain kullanmıyorsanız ve site https://kullanici.github.io/repo-adi altında
-  // yayınlanacaksa BASE_PATH=/repo-adi verin.
-  base: process.env.BASE_PATH || '/',
+  base,
   trailingSlash: 'ignore',
   integrations: [sitemap()],
   build: { format: 'directory' },
