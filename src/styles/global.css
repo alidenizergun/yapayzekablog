@@ -498,3 +498,40 @@ header.site .masthead { display: flex; align-items: center; justify-content: spa
 .prose a.gloss { color: inherit; text-decoration: underline dotted; text-decoration-color: var(--muted); text-underline-offset: 4px; text-decoration-thickness: 1.5px; }
 .prose a.gloss:hover { color: var(--accent-text); text-decoration-color: currentColor; }
 @media (max-width: 760px) { .glossary-az a { min-width: 44px; height: 44px; } }
+
+/* ---------------------------------------------------------------- haftalık özet */
+.digest { max-width: 820px; }
+.digest h1 { font-size: clamp(30px, 4vw, 44px); line-height: 1.12; margin-top: 12px; }
+.digest .spot { margin-top: 14px; }
+.digest .digest-intro { margin-top: 24px; }
+.digest-list { list-style: none; margin: 32px 0 0; padding: 0; counter-reset: d; }
+.digest-list > li { display: grid; grid-template-columns: 44px minmax(0, 1fr); gap: 16px; padding-block: 24px; border-top: 1px solid var(--line); }
+.digest-n { font-family: var(--display); font-weight: 800; font-size: 34px; line-height: 1; color: var(--accent-text); }
+.digest-item { display: grid; grid-template-columns: 240px minmax(0, 1fr); gap: 20px; align-items: start; }
+.digest-item .visual { height: 150px; }
+.digest-item > div { display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+.digest-item h2 { font-size: 21px; line-height: 1.25; }
+.digest-item:hover h2 { color: var(--accent-text); }
+.digest-item p { margin: 0; font-size: 16px; line-height: 1.6; color: var(--fg); }
+.digest .ai-note { margin-top: 24px; padding-top: 20px; border-top: 1px solid var(--line); }
+.digest-nav { display: flex; justify-content: space-between; gap: 16px; margin-top: 24px; font-weight: 600; }
+.digest-nav a { min-height: 44px; display: inline-flex; align-items: center; }
+.digest-nav a:hover { color: var(--accent-text); }
+.digest-index { max-width: 820px; }
+.digest-archive { list-style: none; margin: 24px 0 0; padding: 0; }
+.digest-archive li { border-top: 1px solid var(--line); }
+.digest-archive a { display: flex; flex-direction: column; gap: 8px; padding-block: 22px; }
+.digest-archive h2 { font-size: 24px; line-height: 1.2; }
+.digest-archive a:hover h2 { color: var(--accent-text); }
+.digest-archive p { margin: 0; color: var(--muted); }
+/* Kenar çubuğunda haftalık özet kartı */
+.digest-card { display: flex; flex-direction: column; gap: 8px; padding: 20px; border-radius: 8px; background: var(--soft); }
+.digest-card h3 { font-size: 18px; line-height: 1.3; }
+.digest-card:hover h3 { color: var(--accent-text); }
+.digest-card .meta { font-weight: 600; }
+@media (max-width: 700px) {
+  .digest-list > li { grid-template-columns: 32px minmax(0, 1fr); gap: 10px; }
+  .digest-n { font-size: 26px; }
+  .digest-item { grid-template-columns: minmax(0, 1fr); gap: 12px; }
+  .digest-item .visual { height: 180px; }
+}

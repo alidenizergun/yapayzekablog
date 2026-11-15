@@ -57,4 +57,18 @@ const haberler = defineCollection({
   }),
 });
 
-export const collections = { haberler };
+// Haftalık özet: geçen haftanın öne çıkan haberleri (scripts/weekly-digest.mjs her pazartesi yazar)
+const ozetler = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/ozetler' }),
+  schema: z.object({
+    title: z.string().min(10).max(140),
+    spot: z.string().min(40).max(320),
+    weekStart: z.coerce.date(),
+    weekEnd: z.coerce.date(),
+    date: z.coerce.date(),
+    items: z.array(z.object({ slug: z.string(), summary: z.string().min(20).max(400) })).min(3).max(10),
+    draft: z.boolean().default(false),
+  }),
+});
+
+export const collections = { haberler, ozetler };

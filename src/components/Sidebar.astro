@@ -1,6 +1,6 @@
 ---
 import { CATEGORIES } from '../lib/site.js';
-import { getNews, newsUrl, catUrl, catName, popularityOf } from '../lib/news.js';
+import { getNews, newsUrl, catUrl, catName, popularityOf, getDigests, digestUrl, weekRange } from '../lib/news.js';
 import Newsletter from './Newsletter.astro';
 import Time from './Time.astro';
 
@@ -14,6 +14,7 @@ const thisWeek = news.filter((n) => n.data.date.valueOf() > weekAgo && !skip.has
 const picks = [...thisWeek].sort((a, b) => popularityOf(b) - popularityOf(a)).slice(0, 5);
 const pickIds = new Set(picks.map((n) => n.id));
 const recent = latest ? news.filter((n) => !skip.has(n.id) && !pickIds.has(n.id)).slice(0, latest) : [];
+const digest = (await getDigests())[0];
 const counts = CATEGORIES.map((c) => ({ ...c, n: news.filter((x) => x.data.category === c.slug).length })).filter((c) => c.n > 0);
 ---
 <aside class="side-col">
@@ -27,6 +28,13 @@ const counts = CATEGORIES.map((c) => ({ ...c, n: news.filter((x) => x.data.categ
         </a>
       ))}
     </section>
+  )}
+  {digest && (
+    <a class="digest-card" href={digestUrl(digest)}>
+      <span class="cat">Haftalık özet · {weekRange(digest.data.weekStart, digest.data.weekEnd)}</span>
+      <h3>{digest.data.title}</h3>
+      <span class="meta">{digest.data.items.length} gelişme tek sayfada →</span>
+    </a>
   )}
   <Newsletter id={`email-${id}`} />
   <section class="week" aria-labelledby={`cats-h-${id}`}>

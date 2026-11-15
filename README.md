@@ -190,3 +190,11 @@ data/x-state.json              X takip durumu (otomatik oluşur)
 .github/workflows/deploy.yml   Siteyi GitHub Pages'e yayınlar
 public/img/                    Kategori illüstrasyonları
 ```
+
+## Arama, haftalık özet, şirket/kişi sayfaları ve sözlük
+
+- **Site içi arama (`/ara/`)**: Derlemede Pagefind ile arama dizini oluşturulur (`npm run build` otomatik yapar). Sunucu gerekmez; arama tarayıcıda çalışır.
+- **Haftalık özet (`/haftalik/`)**: Her pazartesi 07:30'da `.github/workflows/weekly.yml` geçen haftanın haberlerinden özet yazar (`scripts/weekly-digest.mjs`). Web araması yapmaz, yalnızca sitedeki haberleri kullanır; özetteki her rakam ilgili haberde geçmek zorundadır. Elle çalıştırmak için Actions › Haftalık özet › Run workflow.
+- **Şirket ve kişi sayfaları (`/konu/<ad>/`, `/konular/`)**: Liste `src/lib/entities.js` dosyasındadır. Yeni şirket veya kişi eklemek için bir satır eklemek yeterli; en az bir haberi olunca sayfası oluşur.
+- **Terimler sözlüğü (`/sozluk/`)**: Terimler `src/lib/glossary.js` dosyasındadır. Haber metinlerinde bir terim ilk geçtiği yerde otomatik olarak sözlüğe bağlanır.
+- **Türkiye açısından**: Haber hattı, kaynaklarda somut bir Türkiye bağlantısı varsa haberin "Bu ne anlama geliyor?" kutusuna tek cümlelik "Türkiye açısından" notu ekler.

@@ -142,3 +142,18 @@ export function pickLead(news, now = Date.now()) {
   const score = (n) => popularityOf(n) - ((now - n.data.date.valueOf()) / 3600e3) * 0.5;
   return pool.reduce((best, n) => (score(n) > score(best) ? n : best));
 }
+
+/** Haftalık özetler (en yeni önce) */
+export async function getDigests() {
+  const all = await getCollection('ozetler', ({ data }) => !data.draft);
+  return all.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+}
+export const digestUrl = (entry) => url(`/haftalik/${entry.id.replace(/\.md$/, '')}/`);
+/** "9-15 Kasım 2026" biçiminde hafta aralığı */
+export function weekRange(start, end) {
+  const f = (d, o) => new Intl.DateTimeFormat('tr-TR', { timeZone: 'Europe/Istanbul', ...o }).format(d);
+  const sameMonth = f(start, { month: 'long' }) === f(end, { month: 'long' });
+  return sameMonth
+    ? `${f(start, { day: 'numeric' })}-${f(end, { day: 'numeric', month: 'long', year: 'numeric' })}`
+    : `${f(start, { day: 'numeric', month: 'long' })} - ${f(end, { day: 'numeric', month: 'long', year: 'numeric' })}`;
+}

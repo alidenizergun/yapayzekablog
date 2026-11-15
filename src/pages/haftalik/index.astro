@@ -1,0 +1,25 @@
+---
+import Base from '../../layouts/Base.astro';
+import Time from '../../components/Time.astro';
+import { getDigests, digestUrl, weekRange } from '../../lib/news.js';
+const digests = await getDigests();
+---
+<Base title="Haftalık özet" description="Yapay zeka dünyasında haftanın öne çıkan gelişmeleri, her pazartesi tek sayfada."
+  breadcrumbs={[{ name: 'Ana sayfa', path: '/' }, { name: 'Haftalık özet', path: '/haftalik/' }]}>
+  <section class="digest-index">
+    <h1 class="page-h">Haftalık özet</h1>
+    <p class="spot">Yapay zeka dünyasında haftanın öne çıkan gelişmeleri, her pazartesi sabahı tek sayfada.</p>
+    {digests.length ? (
+      <ol class="digest-archive">
+        {digests.map((g) => (
+          <li><a href={digestUrl(g)}>
+            <span class="cat">{weekRange(g.data.weekStart, g.data.weekEnd)}</span>
+            <h2>{g.data.title}</h2>
+            <p>{g.data.spot}</p>
+            <span class="meta">{g.data.items.length} gelişme · <Time date={g.data.date} /></span>
+          </a></li>
+        ))}
+      </ol>
+    ) : <p class="empty">İlk haftalık özet pazartesi sabahı yayınlanacak.</p>}
+  </section>
+</Base>

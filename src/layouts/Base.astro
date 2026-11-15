@@ -176,6 +176,7 @@ const isBreaking = latest && Date.now() - latest.data.date.valueOf() < BREAKING_
       <a class="catbar-logo" href={url('/')} aria-label="YZ Gündemi ana sayfa" tabindex="-1"><span class="wm-badge" aria-hidden="true">YZ</span></a>
       <div class="catbar-scroll" data-catbar-scroll>
         <a href={url('/')} aria-current={isHome ? 'page' : undefined}>Gündem</a>
+        <a href={url('/haftalik/')} aria-current={Astro.url.pathname.startsWith(url('/haftalik')) ? 'page' : undefined}>Haftalık</a>
         {nav.map((slug) => <a href={catUrl(slug)} aria-current={slug === currentCat ? 'page' : undefined}>{categoryBySlug(slug)?.name}</a>)}
       </div>
       <a class="catbar-search" href={url('/ara/')} aria-label="Haberlerde ara" title="Haberlerde ara" aria-current={Astro.url.pathname.startsWith(url('/ara')) ? 'page' : undefined}>

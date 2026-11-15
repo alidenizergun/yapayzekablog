@@ -1,0 +1,65 @@
+---
+import { render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import Visual from '../../components/Visual.astro';
+import Time from '../../components/Time.astro';
+import { getNews, getDigests, digestUrl, weekRange, slugOf, newsUrl, catName, spreadVisuals, url } from '../../lib/news.js';
+
+export async function getStaticPaths() {
+  const digests = await getDigests();
+  return digests.map((entry, i) => ({ params: { slug: entry.id.replace(/\.md$/, '') }, props: { entry, prev: digests[i + 1], next: digests[i - 1] } }));
+}
+const { entry, prev, next } = Astro.props;
+const d = entry.data;
+const { Content } = await render(entry);
+const news = await getNews();
+const bySlug = new Map(news.map((n) => [slugOf(n), n]));
+const items = d.items.map((it) => ({ ...it, news: bySlug.get(it.slug) })).filter((it) => it.news);
+const vis = spreadVisuals(items.map((it) => it.news));
+const range = weekRange(d.weekStart, d.weekEnd);
+const pageUrl = new URL(digestUrl(entry), Astro.site).href;
+const jsonLd = {
+  '@type': 'NewsArticle', headline: d.title, description: d.spot, datePublished: d.date.toISOString(), dateModified: d.date.toISOString(),
+  inLanguage: 'tr-TR', url: pageUrl, mainEntityOfPage: pageUrl, articleSection: 'Haftalık özet',
+  author: { '@type': 'Organization', name: 'YZ Gündemi', url: new URL(url('/hakkimizda/'), Astro.site).href },
+  publisher: { '@id': new URL(url('/#organization'), Astro.site).href },
+  image: [new URL(url('/og/site.png'), Astro.site).href],
+  hasPart: { '@type': 'ItemList', itemListElement: items.map((it, i) => ({ '@type': 'ListItem', position: i + 1, url: new URL(newsUrl(it.news), Astro.site).href })) },
+};
+---
+<Base title={d.title} description={d.spot} ogType="article" jsonLd={jsonLd}
+  article={{ published: d.date, section: 'Haftalık özet' }}
+  breadcrumbs={[{ name: 'Ana sayfa', path: '/' }, { name: 'Haftalık özet', path: '/haftalik/' }, { name: range, path: `/haftalik/${entry.id.replace(/\.md$/, '')}/` }]}>
+  <article class="digest" data-pagefind-body data-pagefind-meta={`date:${range}`}>
+    <nav class="crumb" aria-label="Konum" data-pagefind-ignore><a href={url('/')}>Ana sayfa</a><span aria-hidden="true">/</span><a href={url('/haftalik/')}>Haftalık özet</a></nav>
+    <span class="badge" data-pagefind-ignore>Haftalık özet · {range}</span>
+    <h1 data-pagefind-meta="title">{d.title}</h1>
+    <p class="spot">{d.spot}</p>
+    <div class="prose digest-intro"><Content /></div>
+
+    <ol class="digest-list">
+      {items.map((it, i) => (
+        <li>
+          <span class="digest-n" aria-hidden="true">{i + 1}</span>
+          <a class="digest-item" href={newsUrl(it.news)}>
+            <Visual entry={it.news} choice={vis.get(it.news.id)} w={240} h={150} credit={false} />
+            <div>
+              <span class="cat">{catName(it.news.data.category)}</span>
+              <h2>{it.news.data.title}</h2>
+              <p>{it.summary}</p>
+              <span class="meta"><Time date={it.news.data.date} /> · Haberi oku →</span>
+            </div>
+          </a>
+        </li>
+      ))}
+    </ol>
+
+    <p class="ai-note" data-pagefind-ignore>Bu özet, YZ Gündemi'nde o hafta yayınlanan haberlerden yapay zeka desteğiyle derlenmiştir. Her maddenin kaynakları ilgili haber sayfasındadır.</p>
+    {(prev || next) && (
+      <nav class="digest-nav" aria-label="Diğer haftalar" data-pagefind-ignore>
+        {prev ? <a href={digestUrl(prev)}>← {weekRange(prev.data.weekStart, prev.data.weekEnd)}</a> : <span></span>}
+        {next ? <a href={digestUrl(next)}>{weekRange(next.data.weekStart, next.data.weekEnd)} →</a> : <span></span>}
+      </nav>
+    )}
+  </article>
+</Base>
