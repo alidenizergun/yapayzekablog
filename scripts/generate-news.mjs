@@ -29,6 +29,7 @@ import { CATEGORIES, IMAGES } from '../src/lib/site.js';
 import { BRANDS, BRAND_SLUGS } from '../src/lib/brands.js';
 import { findPhoto, usedPhotoIds, photoYaml, addPhotoToFile, CATEGORY_QUERIES } from './photos.mjs';
 import { fetchXPosts, formatPostsForPrompt } from './x-feed.mjs';
+import { STORIES } from '../src/lib/stories.js';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const CONTENT_DIR = path.join(ROOT, 'src/content/haberler');
@@ -167,6 +168,7 @@ function toMarkdown(a, dateIso) {
   if (a.image_query) lines.push(`imageQuery: ${yamlStr(a.image_query)}`);
   if (a.photo) lines.push(...photoYaml(a.photo));
   if (a.why_it_matters) lines.push(`whyItMatters: ${yamlStr(a.why_it_matters)}`);
+  if (a.story && STORIES.some((s) => s.slug === a.story)) lines.push(`story: ${a.story}`);
   if (a.turkey_angle && !/^(yok|-|—)\.?$/i.test(a.turkey_angle)) lines.push(`turkeyAngle: ${yamlStr(a.turkey_angle)}`);
   lines.push('sources:');
   for (const s of a.sources) {
@@ -273,7 +275,7 @@ const ARTICLE_SCHEMA = {
       items: {
         type: 'object',
         additionalProperties: false,
-        required: ['title', 'spot', 'category', 'tags', 'image', 'brand', 'image_query', 'body_markdown', 'why_it_matters', 'turkey_angle', 'featured', 'popularity', 'tweet', 'sources'],
+        required: ['title', 'spot', 'category', 'tags', 'image', 'brand', 'image_query', 'body_markdown', 'why_it_matters', 'turkey_angle', 'story', 'featured', 'popularity', 'tweet', 'sources'],
         properties: {
           title: { type: 'string', description: 'Haber başlığı, 60-100 karakter' },
           spot: { type: 'string', description: 'Spot metni, 1-2 cümle, 140-280 karakter' },
@@ -284,6 +286,7 @@ const ARTICLE_SCHEMA = {
           image_query: { type: 'string', description: 'Unsplash fotoğraf araması için 2-4 kelimelik İngilizce sorgu; somut bir nesne veya mekan (ör. "data center servers"). Kişi adı, şirket adı, logo yok.' },
           body_markdown: { type: 'string', description: 'Haber gövdesi, Markdown, 3-6 paragraf, başlık tekrarı yok' },
           why_it_matters: { type: 'string', description: '"Bu ne anlama geliyor?" kutusu, 1-2 cümle' },
+          story: { type: 'string', enum: ['', ...STORIES.map((s) => s.slug)], description: 'Haber aşağıdaki süren hikâyelerden birinin devamıysa onun slug\'ı; değilse boş' },
           turkey_angle: { type: 'string', description: '"Türkiye açısından" notu, tek cümle; yalnızca notlarda somut Türkiye bağlantısı varsa, yoksa boş' },
           featured: { type: 'boolean' },
           popularity: { type: 'integer', description: 'Okunma potansiyeli, 1-100 (yayın kurallarındaki ölçüye göre)' },
@@ -325,6 +328,7 @@ Görseller (image alanı için anahtar: açıklama): ${imageList}
 Şirketler (brand alanı; haber tek bir şirketin duyurusu veya o şirketle ilgiliyse): ${Object.entries(BRANDS).map(([k, b]) => `${k} (${b.name})`).join(', ')}
 image_query: Haberi temsil edecek gerçek bir fotoğraf için İngilizce, somut bir sahne yaz (ör. "semiconductor wafer factory", "stock exchange trading floor"). Kişi adı, yüz, logo veya marka adı yazma.
 Kategoriler: ${CATEGORIES.map((c) => `${c.slug} (${c.name})`).join(', ')}
+Süren hikâyeler (story alanı; haber bunlardan birinin yeni gelişmesiyse): ${STORIES.map((s) => `${s.slug} (${s.title})`).join(', ') || 'yok'}
 
 Notlarda "YENİ GELİŞME YOK" yazıyorsa veya yazılabilecek haber yoksa boş bir "articles" listesi döndür.
 

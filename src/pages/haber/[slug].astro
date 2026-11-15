@@ -7,6 +7,7 @@ import { IMAGES } from '../../lib/site.js';
 import { tagUrl, getNews, slugOf, newsUrl, spreadVisuals, defaultVisual, ogImageFor, withUtm, catName, catUrl, url, readingMinutes, hostOf, photoSrc, formatDate } from '../../lib/news.js';
 import { brandOf } from '../../lib/brands.js';
 import { entitiesOf } from '../../lib/entities.js';
+import { storyOf, storyIndex } from '../../lib/stories.js';
 import Visual from '../../components/Visual.astro';
 
 export async function getStaticPaths() {
@@ -30,6 +31,8 @@ const related = all
 const relV = spreadVisuals([entry, ...related]);
 const main = defaultVisual(entry, true);
 const ents = entitiesOf(entry);
+const story = storyOf(entry);
+const storyItems = story ? storyIndex(all).get(story.slug)?.items ?? [] : [];
 const og = ogImageFor(entry);
 const pageUrl = new URL(newsUrl(entry), Astro.site).href;
 // Google haber görseli için üç oran (16:9, 4:3, 1:1), en az 1200px; fotoğraf yoksa paylaşım görseli
@@ -66,6 +69,12 @@ const crumbs = [{ name: 'Ana sayfa', path: '/' }, { name: catName(d.category), p
       <span class="badge" data-pagefind-ignore>{catName(d.category)}</span>
       <h1 data-pagefind-meta="title">{d.title}</h1>
       <p class="spot">{d.spot}</p>
+      {story && storyItems.length >= 2 && (
+        <aside class="story-band" aria-label="Gelişen hikâye" data-pagefind-ignore>
+          <div><span class="cat">Gelişen hikâye · {storyItems.findIndex((n) => n.id === entry.id) + 1}. gelişme / {storyItems.length}</span><strong>{story.title}</strong></div>
+          <a class="more" href={url(`/gelisme/${story.slug}/`)}>Olayların gelişimi →</a>
+        </aside>
+      )}
       <div class="byline">
         <span class="meta byline-meta" data-pagefind-ignore><Time date={d.date} /> · {readingMinutes(entry.body)} dk okuma</span>
         <div class="share" data-pagefind-ignore>

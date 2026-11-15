@@ -39,6 +39,8 @@ const haberler = defineCollection({
     whyItMatters: z.string().optional(),
     // "Türkiye açısından" notu: yalnızca kaynaklarda somut bir Türkiye bağlantısı varsa (boşsa gösterilmez)
     turkeyAngle: z.string().optional(),
+    // Gelişen hikâye (src/lib/stories.js): bu haber süren bir konunun devamıysa hikâyenin slug'ı
+    story: z.string().optional(),
     sources: z
       .array(
         z.object({
