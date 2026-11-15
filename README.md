@@ -1,11 +1,11 @@
 # YZ Gündemi — yzgundemi.com
 
-Webrazzi tarzı, Türkçe yapay zeka haber sitesi. Günde 2 kez, her seferinde en fazla 10 haber olmak üzere kendi kendine yeni haberleri bulur, yazar, kaynaklarını ekler ve yayınlar.
+Webrazzi tarzı, Türkçe yapay zeka haber sitesi. Her sabah en fazla 10 haber olmak üzere kendi kendine yeni haberleri bulur, yazar, kaynaklarını ekler ve yayınlar.
 
 - **Site:** [Astro](https://astro.build) ile üretilen hızlı, statik bir site. Ana sayfa, haber, kategori ve sayfalama sayfaları, RSS, site haritası ve Google için NewsArticle yapılandırılmış verisi hazır.
 - **Haberler:** [Claude API](https://platform.claude.com) web aramasıyla gelişmeleri bulur, yayın kurallarına göre Türkçe yazar.
 - **X takibi:** Yapay zeka alanındaki önemli kişilerin ve şirketlerin X gönderileri resmi X API ile taranır; haber değeri taşıyanlar habere dönüşür.
-- **Otomasyon:** GitHub Actions günde 2 kez çalışır: İstanbul saatiyle 08:07 ve 17:07.
+- **Otomasyon:** GitHub Actions her sabah İstanbul saatiyle 08:00'de çalışır (son 26 saatin gelişmelerini tarar).
 - **Yayın:** GitHub Pages (ücretsiz) + **yzgundemi.com**. Alan adı bağlanana kadar site https://alidenizergun.github.io/yapayzekablog/ adresinde yayındadır.
 
 ## Kaynak güvencesi
@@ -125,14 +125,15 @@ Tüm ayarlar **Settings › Secrets and variables › Actions › Variables** al
 
 ## Tahmini maliyet
 
-Varsayılan ayarlarla (günde 2 çalışma, en fazla 10'ar haber):
+Varsayılan ayarlarla (günde 1 çalışma, en fazla 10 haber):
 
 | Kalem | Aylık tahmin |
 |---|---|
-| Claude API (Sonnet 5.5, web araması dahil; 1.000 arama 10 dolar) | ~45–70 $ |
-| X API (31 hesap; okunan gönderi başına ~0,005 $) | ~15–30 $ |
+| Claude API (Sonnet 5.5, web araması ve editör adımı dahil; çalışma başına ~0,55–0,70 $) | ~17–25 $ |
+| X API okuma (31 hesap; okunan gönderi başına ~0,005 $) | ~5–15 $ |
+| X API paylaşım (günde 2 linkli gönderi, ~0,20 $) | ~12 $ |
 | GitHub Pages ve Actions | Herkese açık repoda ücretsiz |
-| **Toplam** | **~60–100 $** |
+| **Toplam** | **~35–55 $** |
 
 **Her çalışmanın gerçek maliyeti kaydedilir:**
 - **Actions özeti:** Her "Haber güncellemesi" çalışmasının özetinde token sayıları, arama sayısı ve dolar maliyeti tablo halinde görünür.
@@ -184,7 +185,7 @@ scripts/x-feed.mjs             X takibi (resmi X API)
 scripts/x-accounts.json        X takip listesi
 scripts/x-post.mjs             X'te otomatik paylaşım
 data/x-state.json              X takip durumu (otomatik oluşur)
-.github/workflows/news.yml     Günde 2 kez çalışan otomasyon
+.github/workflows/news.yml     Her sabah 08:00'de çalışan otomasyon
 .github/workflows/deploy.yml   Siteyi GitHub Pages'e yayınlar
 public/img/                    Kategori illüstrasyonları
 ```

@@ -8,7 +8,7 @@ export const SITE = {
   description: 'Yapay zeka dünyasındaki gelişmeleri Türkçe, kaynaklı ve hızlı aktaran haber sitesi.',
   locale: 'tr-TR',
   timeZone: 'Europe/Istanbul',
-  updatesPerDay: 2,
+  updatesPerDay: 1,
   // Sosyal hesaplar: kullanıcı adı yazılırsa alt bilgide "Takip et" altında görünür (boşsa gizli)
   social: { x: '', instagram: '', linkedin: '' },
   // Google Analytics 4 ölçüm kimliği. Yalnızca ziyaretçi çerez bandında izin verirse yüklenir (KVKK). Boş bırakılırsa kapalı.

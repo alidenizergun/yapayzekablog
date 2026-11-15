@@ -1,11 +1,11 @@
-# Günde 2 kez yeni yapay zeka haberlerini üretir, siteyi derleyip yayınlar.
-# Saatler UTC'dir: 05:07 ve 14:07 UTC = İstanbul 08:07 ve 17:07
+# Her sabah yeni yapay zeka haberlerini üretir, siteyi derleyip yayınlar.
+# Saatler UTC'dir: 05:00 UTC = İstanbul 08:00
 # Not: GitHub zamanlanmış işleri yoğunluğa göre birkaç dakika gecikmeli başlatabilir.
 name: Haber güncellemesi
 
 on:
   schedule:
-    - cron: '7 5,14 * * *'
+    - cron: '0 5 * * *'
   workflow_dispatch:
     inputs:
       max_articles:
@@ -52,7 +52,7 @@ jobs:
           UNSPLASH_ACCESS_KEY: ${{ secrets.UNSPLASH_ACCESS_KEY }}
           NEWS_MODEL: ${{ vars.NEWS_MODEL }}
           MAX_ARTICLES: ${{ inputs.max_articles || vars.MAX_ARTICLES || '10' }}
-          LOOKBACK_HOURS: ${{ vars.LOOKBACK_HOURS || '15' }}
+          LOOKBACK_HOURS: ${{ vars.LOOKBACK_HOURS || '26' }}
           MAX_SEARCHES: ${{ vars.MAX_SEARCHES || '20' }}
           WEEKEND_SEARCHES: ${{ vars.WEEKEND_SEARCHES }}
           REQUIRE_REVIEW: ${{ vars.REQUIRE_REVIEW || 'false' }}

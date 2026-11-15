@@ -6,7 +6,7 @@
 //   X_API_KEY, X_API_SECRET, X_ACCESS_TOKEN, X_ACCESS_SECRET
 // Ayarlar:  X_POSTS_PER_RUN (varsayılan 2; 0 = paylaşım kapalı) · SITE_URL · BASE_PATH · --dry-run
 //
-// Maliyet: X link içeren her gönderiden ~0,20 $ alıyor (linksiz ~0,015 $). 2 gönderi × 2 çalışma ≈ günde 0,80 $.
+// Maliyet: X link içeren her gönderiden ~0,20 $ alıyor (linksiz ~0,015 $). Günde 1 çalışma × 2 gönderi ≈ günde 0,40 $.
 
 import fs from 'node:fs';
 import path from 'node:path';
@@ -18,7 +18,7 @@ const QUEUE = path.join(ROOT, 'data/x-kuyruk.json');
 const POSTED = path.join(ROOT, 'data/x-paylasilan.json');
 const DRY = process.argv.includes('--dry-run');
 const PER_RUN = Number(process.env.X_POSTS_PER_RUN ?? 2);
-const MAX_AGE_H = 24; // daha eski kuyruk kayıtları paylaşılmadan düşer
+const MAX_AGE_H = 30; // daha eski kuyruk kayıtları paylaşılmadan düşer
 const LINK_PRICE = 0.2;
 const log = (...a) => console.log('[x-paylaşım]', ...a);
 

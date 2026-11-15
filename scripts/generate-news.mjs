@@ -37,7 +37,7 @@ const GUIDELINES = fs.readFileSync(path.join(ROOT, 'scripts/editorial-guidelines
 const DRY = process.argv.includes('--dry-run');
 const MODEL = process.env.NEWS_MODEL || 'claude-sonnet-5-5';
 const MAX_ARTICLES = Number(process.env.MAX_ARTICLES || 10);
-const LOOKBACK_HOURS = Number(process.env.LOOKBACK_HOURS || 15);
+const LOOKBACK_HOURS = Number(process.env.LOOKBACK_HOURS || 26);
 // Hafta sonu (İstanbul saatiyle Cumartesi/Pazar) gelişme az olduğu için arama sayısı yarıya iner.
 // WEEKEND_SEARCHES ile değiştirilebilir.
 const IST_DAY = new Date(Date.now() + 3 * 3600e3).getUTCDay(); // 0 = Pazar, 6 = Cumartesi
