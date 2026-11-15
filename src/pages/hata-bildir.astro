@@ -165,7 +165,7 @@ const index = Object.fromEntries(news.map((n) => [slugOf(n), { t: n.data.title, 
       window.open(ghUrl, '_blank', 'noopener');
       ok.hidden = false;
       ok.querySelector('strong')!.textContent = 'Bildiriminiz GitHub\'da yeni sekmede açıldı.';
-      ok.querySelector('p')!.innerHTML = 'Göndermek için açılan sayfada <b>Create</b> butonuna basın. Sekme açılmadıysa <a target="_blank" rel="noopener">buraya tıklayın</a>.';
+      ok.querySelector('p')!.innerHTML = 'Göndermek için açılan sayfada <b>Create</b> butonuna basın. Sekme açılmadıysa <a target="_blank" rel="nofollow noopener">buraya tıklayın</a>.';
       (ok.querySelector('p a') as HTMLAnchorElement).href = ghUrl;
     });
   </script>

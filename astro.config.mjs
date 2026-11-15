@@ -1,5 +1,6 @@
 import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
+import nofollowExternalLinks from './scripts/nofollow-integration.mjs';
 
 // Site adresi:
 // - Kendi domaininiz varsa repo değişkeni olarak SITE_URL verin (örn. https://alanadiniz.com).
@@ -13,6 +14,6 @@ export default defineConfig({
   site,
   base,
   trailingSlash: 'ignore',
-  integrations: [sitemap()],
+  integrations: [sitemap(), nofollowExternalLinks()],
   build: { format: 'directory' },
 });
