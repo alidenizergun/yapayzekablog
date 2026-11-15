@@ -12,7 +12,10 @@ const { cat } = Astro.props;
 const items = (await getNews()).filter((n) => n.data.category === cat.slug).slice(0, 60);
 const rowV = spreadVisuals(items);
 ---
-<Base title={`${cat.name} haberleri`} description={`${cat.name} alanındaki en yeni yapay zeka haberleri.`} currentCat={cat.slug}>
+<Base title={`${cat.name} haberleri`} description={`${cat.name} alanındaki en yeni yapay zeka haberleri: ${items.slice(0, 2).map((n) => n.data.title).join('; ') || 'yakında'}.`} currentCat={cat.slug}
+  noindex={items.length === 0}
+  breadcrumbs={[{ name: 'Ana sayfa', path: '/' }, { name: cat.name, path: `/kategori/${cat.slug}/` }]}
+  jsonLd={{ '@type': 'CollectionPage', name: `${cat.name} haberleri`, inLanguage: 'tr-TR' }}>
   <div class="cols" style="margin-top:0">
     <section class="main" aria-labelledby="h">
       <div class="sechead"><h1 id="h" class="page-h">{cat.name}</h1><span class="meta">{items.length} haber</span></div>

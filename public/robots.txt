@@ -1,2 +1,6 @@
 User-agent: *
 Allow: /
+Disallow: /hata-bildir/
+
+Sitemap: https://yzgundemi.com/sitemap-index.xml
+Sitemap: https://yzgundemi.com/news-sitemap.xml

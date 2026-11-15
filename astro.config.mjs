@@ -1,6 +1,7 @@
 import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
 import nofollowExternalLinks from './scripts/nofollow-integration.mjs';
+import seoPostBuild from './scripts/seo-integration.mjs';
 
 // Sitenin kendi domaini; repo değişkeni SITE_URL verilirse o kullanılır.
 const DEFAULT_SITE = 'https://yzgundemi.com';
@@ -11,6 +12,6 @@ export default defineConfig({
   site,
   base,
   trailingSlash: 'ignore',
-  integrations: [sitemap(), nofollowExternalLinks()],
+  integrations: [sitemap({ filter: (page) => !page.includes('/hata-bildir') }), nofollowExternalLinks(), seoPostBuild()],
   build: { format: 'directory' },
 });

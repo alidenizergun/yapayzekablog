@@ -22,7 +22,7 @@ const hasNext = news.length > start + PER_PAGE;
 const prev = page === 2 ? url('/') : url(`/sayfa/${page - 1}/`);
 const rowV = spreadVisuals(items);
 ---
-<Base title={`Haberler, sayfa ${page}`}>
+<Base title={`Haberler, sayfa ${page}`} description={`YZ Gündemi yapay zeka haber arşivi, sayfa ${page}: modeller, yatırımlar, regülasyon ve araştırmalar.`}>
   <div class="cols" style="margin-top:0">
     <section class="main" aria-labelledby="h">
       <div class="sechead"><h1 id="h" class="page-h">Tüm Haberler</h1><span class="meta">Sayfa {page}</span></div>

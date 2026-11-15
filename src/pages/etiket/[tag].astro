@@ -11,10 +11,17 @@ export async function getStaticPaths() {
 const { tag } = Astro.props;
 const items = tag.items.slice(0, 60);
 const rowV = spreadVisuals(items);
+// "YönetimKurulu" -> "Yönetim Kurulu" (kısaltmalar korunur: OpenAI, AIArama -> AI Arama)
+const human = tag.name.replace(/(\p{Ll})(\p{Lu})/gu, '$1 $2').replace(/(\p{Lu})(\p{Lu}\p{Ll})/gu, '$1 $2');
+const keep = /^(OpenAI|ChatGPT|DeepSeek|HuggingFace|GitHub|DeepMind|xAI)$/;
+const label = keep.test(tag.name) ? tag.name : human;
+const desc = `${label} ile ilgili ${items.length} yapay zeka haberi. Son gelişme: ${items[0]?.data.title ?? ''}`;
 ---
 <Base
-  title={`#${tag.name} haberleri`}
-  description={`${tag.name} ile ilgili yapay zeka haberleri.`}
+  title={`${label} haberleri`}
+  description={desc}
+  breadcrumbs={[{ name: 'Ana sayfa', path: '/' }, { name: `${label} haberleri`, path: `/etiket/${tag.slug}/` }]}
+  jsonLd={{ '@type': 'CollectionPage', name: `${label} haberleri`, inLanguage: 'tr-TR' }}
   noindex={items.length < 2}
 >
   <div class="cols" style="margin-top:0">

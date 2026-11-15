@@ -9,17 +9,56 @@ interface Props {
   ogImage?: string;
   ogType?: string;
   currentCat?: string;
-  jsonLd?: object;
+  jsonLd?: object | object[];
   noindex?: boolean;
+  // Haber sayfaları için: yayın tarihi, kategori ve etiketler (article:* meta etiketleri)
+  article?: { published: Date; modified?: Date; section?: string; tags?: string[] };
+  // Konum (breadcrumb) şeması: [{ name, path }]
+  breadcrumbs?: { name: string; path: string }[];
 }
-const { title, description = SITE.description, ogImage, ogType = 'website', currentCat, jsonLd, noindex = false } = Astro.props;
-const fullTitle = title ? `${title} · ${SITE.name}` : SITE.title;
+const { title, description: rawDescription = SITE.description, ogImage, ogType = 'website', currentCat, jsonLd, noindex = false, article, breadcrumbs } = Astro.props;
+// Başlık: "Haber başlığı · YZ Gündemi"; çok uzun başlıklarda (70+) marka eki atılır, arama sonucunda kesilmesin
+const fullTitle = title ? (`${title} · ${SITE.name}`.length > 70 ? title : `${title} · ${SITE.name}`) : SITE.title;
+// Açıklama en fazla 160 karakter, kelime ortasında kesilmez
+const description = rawDescription.length > 160 ? rawDescription.slice(0, 157).replace(/[\s,;:.]+\S*$/, '') + '…' : rawDescription;
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const allNews = await getNews();
 const latest = allNews[0];
 // Son dakika şeridi: en yeni 5 haber, 3 saniyede bir sırayla gösterilir
 const tickerNews = allNews.slice(0, 5);
 const og = new URL(ogImage ?? url('/og/site.png'), Astro.site).href;
+const abs = (p: string) => new URL(url(p), Astro.site).href;
+// Site geneli yapılandırılmış veri: yayın kuruluşu + web sitesi; sayfa şemaları bunlara @id ile bağlanır
+const ORG_ID = abs('/#organization');
+const siteLd: object[] = [
+  {
+    '@type': 'NewsMediaOrganization',
+    '@id': ORG_ID,
+    name: SITE.name,
+    url: abs('/'),
+    logo: { '@type': 'ImageObject', url: abs('/logo.png'), width: 512, height: 512 },
+    description: SITE.description,
+    ethicsPolicy: abs('/hakkimizda/'),
+    correctionsPolicy: abs('/hata-bildir/'),
+    publishingPrinciples: abs('/hakkimizda/'),
+    sameAs: [
+      SITE.social?.x && `https://x.com/${SITE.social.x}`,
+      SITE.social?.instagram && `https://www.instagram.com/${SITE.social.instagram}/`,
+      SITE.social?.linkedin && `https://www.linkedin.com/company/${SITE.social.linkedin}/`,
+    ].filter(Boolean),
+  },
+  { '@type': 'WebSite', '@id': abs('/#website'), name: SITE.name, url: abs('/'), inLanguage: 'tr-TR', publisher: { '@id': ORG_ID } },
+];
+if (breadcrumbs?.length) {
+  siteLd.push({
+    '@type': 'BreadcrumbList',
+    itemListElement: breadcrumbs.map((b, i) => ({ '@type': 'ListItem', position: i + 1, name: b.name, item: abs(b.path) })),
+  });
+}
+const pageLd = (Array.isArray(jsonLd) ? jsonLd : jsonLd ? [jsonLd] : []).map((j: any) => { const { ['@context']: _c, ...rest } = j; return rest; });
+const ldGraph = { '@context': 'https://schema.org', '@graph': [...siteLd, ...pageLd] };
+const ogTitle = title ?? SITE.title;
+const robots = noindex ? 'noindex, follow' : 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1';
 // Menüde yalnızca haberi olan kategoriler görünür
 const counts = new Map();
 for (const n of allNews) counts.set(n.data.category, (counts.get(n.data.category) ?? 0) + 1);
@@ -40,7 +79,7 @@ const isBreaking = latest && Date.now() - latest.data.date.valueOf() < BREAKING_
   <title>{fullTitle}</title>
   <meta name="description" content={description} />
   <link rel="canonical" href={canonical.href} />
-  {noindex && <meta name="robots" content="noindex, follow" />}
+  <meta name="robots" content={robots} />
   <link rel="alternate" type="application/rss+xml" title={SITE.title} href={url('/rss.xml')} />
   <link rel="sitemap" href={url('/sitemap-index.xml')} />
   <link rel="icon" href={url('/favicon.svg')} type="image/svg+xml" />
@@ -48,13 +87,21 @@ const isBreaking = latest && Date.now() - latest.data.date.valueOf() < BREAKING_
   <meta property="og:site_name" content={SITE.name} />
   <meta property="og:locale" content="tr_TR" />
   <meta property="og:type" content={ogType} />
-  <meta property="og:title" content={fullTitle} />
+  <meta property="og:title" content={ogTitle} />
   <meta property="og:description" content={description} />
   <meta property="og:url" content={canonical.href} />
   <meta property="og:image" content={og} />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
   <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={ogTitle} />
+  <meta name="twitter:description" content={description} />
+  <meta name="twitter:image" content={og} />
+  {SITE.social?.x && <meta name="twitter:site" content={`@${SITE.social.x}`} />}
+  {article && <meta property="article:published_time" content={article.published.toISOString()} />}
+  {article && <meta property="article:modified_time" content={(article.modified ?? article.published).toISOString()} />}
+  {article?.section && <meta property="article:section" content={article.section} />}
+  {article?.tags?.map((t) => <meta property="article:tag" content={t} />)}
   <script is:inline>
     // Sayfa çizilmeden önce kayıtlı temayı uygula (beyaz yanıp sönmeyi önler)
     try { var t = localStorage.getItem('theme'); if (t === 'dark' || t === 'light') document.documentElement.dataset.theme = t; } catch (e) {}
@@ -62,7 +109,7 @@ const isBreaking = latest && Date.now() - latest.data.date.valueOf() < BREAKING_
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Schibsted+Grotesk:wght@600;700;800&family=Source+Serif+4:ital,wght@0,400;0,600;1,400&display=swap" />
-  {jsonLd && <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />}
+  <script type="application/ld+json" set:html={JSON.stringify(ldGraph)} />
 </head>
 <body>
   <div class="ticker"><div class="wrap">

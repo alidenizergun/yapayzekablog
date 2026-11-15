@@ -27,7 +27,7 @@ const loading = eager ? 'eager' : 'lazy';
     </span>
   ) : photo ? (
     <>
-      <img class="thumb photo" src={photoSrc(photo, w, h)} srcset={`${photoSrc(photo, w, h)} 1x, ${photoSrc(photo, w * 2, h * 2)} 2x`} alt={photo.alt || ''} loading={loading} width={w} height={h} />
+      <img class="thumb photo" src={photoSrc(photo, w, h)} srcset={`${photoSrc(photo, w, h)} 1x, ${photoSrc(photo, w * 2, h * 2)} 2x`} alt={photo.alt || ''} loading={loading} fetchpriority={eager ? 'high' : undefined} decoding={eager ? undefined : 'async'} width={w} height={h} />
       {credit && <span class="credit" aria-hidden="true">{photo.author} / Unsplash</span>}
     </>
   ) : (

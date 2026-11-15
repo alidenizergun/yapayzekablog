@@ -4,7 +4,7 @@ import Base from '../../layouts/Base.astro';
 import Sidebar from '../../components/Sidebar.astro';
 import Time from '../../components/Time.astro';
 import { IMAGES } from '../../lib/site.js';
-import { tagUrl, getNews, slugOf, newsUrl, spreadVisuals, defaultVisual, ogImageFor, withUtm, catName, catUrl, url, readingMinutes, hostOf } from '../../lib/news.js';
+import { tagUrl, getNews, slugOf, newsUrl, spreadVisuals, defaultVisual, ogImageFor, withUtm, catName, catUrl, url, readingMinutes, hostOf, photoSrc } from '../../lib/news.js';
 import { brandOf } from '../../lib/brands.js';
 import Visual from '../../components/Visual.astro';
 
@@ -30,24 +30,34 @@ const relV = spreadVisuals([entry, ...related]);
 const main = defaultVisual(entry, true);
 const og = ogImageFor(entry);
 const pageUrl = new URL(newsUrl(entry), Astro.site).href;
+// Google haber görseli için üç oran (16:9, 4:3, 1:1), en az 1200px; fotoğraf yoksa paylaşım görseli
+const ldImages = d.photo
+  ? [photoSrc(d.photo, 1200, 675), photoSrc(d.photo, 1200, 900), photoSrc(d.photo, 1200, 1200)]
+  : [new URL(og, Astro.site).href];
 const jsonLd = {
-  '@context': 'https://schema.org',
   '@type': 'NewsArticle',
-  headline: d.title,
+  '@id': `${pageUrl}#article`,
+  headline: d.title.length > 110 ? d.title.slice(0, 109) + '…' : d.title,
   description: d.spot,
   datePublished: d.date.toISOString(),
   dateModified: d.date.toISOString(),
   inLanguage: 'tr-TR',
-  image: [new URL(og, Astro.site).href],
-  author: { '@type': 'Organization', name: d.author },
-  publisher: { '@type': 'Organization', name: 'YZ Gündemi' },
+  image: ldImages,
+  author: { '@type': 'Organization', name: d.author, url: new URL(url('/hakkimizda/'), Astro.site).href },
+  publisher: { '@id': new URL(url('/#organization'), Astro.site).href },
+  isPartOf: { '@id': new URL(url('/#website'), Astro.site).href },
   mainEntityOfPage: pageUrl,
+  url: pageUrl,
   articleSection: catName(d.category),
   keywords: d.tags.join(', '),
+  wordCount: entry.body.split(/\s+/).filter(Boolean).length,
+  isAccessibleForFree: true,
   citation: d.sources.map((s) => ({ '@type': 'CreativeWork', name: s.title, url: s.url })),
 };
+const crumbs = [{ name: 'Ana sayfa', path: '/' }, { name: catName(d.category), path: `/kategori/${d.category}/` }, { name: d.title, path: `/haber/${slugOf(entry)}/` }];
 ---
-<Base title={d.title} description={d.spot} ogImage={og} ogType="article" currentCat={d.category} jsonLd={jsonLd}>
+<Base title={d.title} description={d.spot} ogImage={og} ogType="article" currentCat={d.category} jsonLd={jsonLd} breadcrumbs={crumbs}
+  article={{ published: d.date, section: catName(d.category), tags: d.tags }}>
   <div class="cols" style="margin-top:0;gap:56px">
     <article class="article">
       <nav class="crumb" aria-label="Konum"><a href={url('/')}>Ana sayfa</a><span aria-hidden="true">/</span><a href={catUrl(d.category)}>{catName(d.category)}</a></nav>

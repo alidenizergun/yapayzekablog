@@ -13,7 +13,7 @@ const news = (await getNews()).slice(0, 400);
 const site = Astro.site;
 const index = Object.fromEntries(news.map((n) => [slugOf(n), { t: n.data.title, u: new URL(newsUrl(n), site).href }]));
 ---
-<Base title="Hata bildir" description="Bir haberde hata gördüyseniz bize bildirin; inceleyip düzeltelim.">
+<Base title="Hata bildir" noindex description="Bir haberde hata gördüyseniz bize bildirin; inceleyip düzeltelim.">
   <div class="cols" style="margin-top:0;gap:56px">
     <section class="article report" aria-labelledby="report-h">
       <nav class="crumb" aria-label="Konum"><a href={url('/')}>Ana sayfa</a><span aria-hidden="true">/</span><span>Hata bildir</span></nav>
