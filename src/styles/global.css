@@ -61,7 +61,6 @@ h1, h2, h3 { font-family: var(--display); font-weight: 700; text-wrap: balance; 
 header.site { border-bottom: 1px solid var(--line); background: var(--bg); position: sticky; top: 0; z-index: 5; }
 header.site .wrap { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 28px; padding-block: 14px; }
 .logo { display: flex; align-items: center; gap: 10px; min-height: 44px; }
-.logo span { font-family: var(--display); font-weight: 800; font-size: 29px; letter-spacing: -.04em; }
 nav.cats { display: flex; flex-wrap: wrap; gap: 4px 20px; flex: 1 1 420px; font-weight: 600; font-size: 15px; }
 nav.cats a { padding: 6px 0; border-bottom: 2px solid transparent; }
 nav.cats a:hover, nav.cats a[aria-current="page"] { border-color: var(--accent); color: var(--accent-text); }
@@ -166,7 +165,6 @@ figcaption { margin-top: 8px; font-size: 13px; color: var(--muted); }
 
 footer.site { background: var(--band); color: var(--band-muted); font-size: 14px; }
 footer.site .wrap { padding-block: 44px; display: flex; flex-wrap: wrap; gap: 24px 32px; justify-content: space-between; align-items: flex-start; }
-footer.site .logo span { color: #fff; font-size: 26px; }
 footer.site p { margin: 8px 0 0; max-width: 340px; }
 footer.site nav { display: flex; flex-wrap: wrap; gap: 12px 28px; }
 footer.site nav a { color: #fff; }
@@ -211,8 +209,6 @@ a.tag { display: inline-flex; align-items: center; gap: 4px; }
   .ticker a { min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-height: 44px; display: flex; align-items: center; }
   .ticker .wrap { padding-block: 0; }
   header.site .wrap { flex-wrap: nowrap; justify-content: space-between; padding-block: 8px; gap: 12px; }
-  .logo span { font-size: 24px; }
-  .logo svg { width: 30px; height: 30px; }
   header.site nav.cats-desktop, header.site .btn-newsletter { display: none; }
   .cats-mobile { display: block; border-bottom: 1px solid var(--line); background: var(--bg); }
   .cats-mobile .wrap { display: flex; gap: 4px; overflow-x: auto; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
@@ -318,6 +314,20 @@ a.card:hover h3, a.mini:hover h3 { color: var(--accent-text); }
 /* Alt bilgide kategoriler iki sütun */
 footer.site nav.foot-col:first-of-type { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 24px; align-content: start; }
 footer.site nav.foot-col:first-of-type h2 { grid-column: 1 / -1; }
-/* Logo: "YZ" vurgu renginde */
-.logo .wm { white-space: nowrap; }
-.logo .wm b { color: var(--accent); font-weight: 800; }
+
+/* ---------------------------------------------------------------- logo
+   [YZ] rozeti + üstte "YAPAY ZEKA", altta "Gündemi". "YAPAY ZEKA" harf aralığı,
+   "Gündemi" ile tam aynı genişlikte olacak şekilde hesaplandı (Inter 700 / Schibsted Grotesk 800). */
+.wm { display: inline-flex; align-items: stretch; gap: .28em; font-size: 32px; line-height: 1; white-space: nowrap; }
+.wm-badge { display: inline-flex; align-items: center; justify-content: center; padding: .02em .2em 0; border-radius: .16em; background: var(--accent-fill); color: #fff; font-family: var(--display); font-weight: 800; font-size: 1.02em; letter-spacing: -.04em; }
+.wm-text { display: inline-flex; flex-direction: column; align-items: center; justify-content: center; gap: .12em; }
+.wm-sub { font-family: var(--body); font-weight: 700; font-size: .38em; letter-spacing: .293em; margin-right: -.293em; color: var(--accent-text); }
+.wm-main { font-family: var(--display); font-weight: 800; font-size: .82em; letter-spacing: -.03em; line-height: .86; color: var(--fg); }
+footer.site .wm { font-size: 30px; }
+footer.site .wm-main { color: #fff; }
+footer.site .wm-sub { color: #FF7A62; }
+@media (max-width: 760px) { header.site .wm { font-size: 28px; } }
+
+/* Kolonlu sayfalarda bölüm başlıklarının alt çizgileri aynı hizada (Son Haberler / Bu Hafta) */
+.cols .sechead { min-height: 58px; align-items: flex-end; box-sizing: border-box; }
+.cols .sechead > * { line-height: 1.25; }

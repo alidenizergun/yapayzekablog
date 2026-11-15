@@ -73,8 +73,7 @@ const isBreaking = latest && Date.now() - latest.data.date.valueOf() < BREAKING_
 
   <header class="site"><div class="wrap">
     <a class="logo" href={url('/')} aria-label="YZ Gündemi ana sayfa">
-      <svg width="34" height="34" viewBox="0 0 34 34" aria-hidden="true"><circle cx="17" cy="17" r="15" fill="#CF2E13"/><path d="M11 13 L23 13 L17 23 Z" fill="none" stroke="#FFFFFF" stroke-width="1.6"/><circle cx="11" cy="13" r="3" fill="#FFFFFF"/><circle cx="23" cy="13" r="3" fill="#FFFFFF"/><circle cx="17" cy="23" r="3" fill="#FFFFFF"/></svg>
-      <span class="wm"><b>YZ</b> Gündemi</span>
+      <span class="wm" aria-hidden="true"><span class="wm-badge">YZ</span><span class="wm-text"><span class="wm-sub">YAPAY ZEKA</span><span class="wm-main">Gündemi</span></span></span>
     </a>
     <nav class="cats cats-desktop" aria-label="Kategoriler">
       {nav.map((slug) => <a href={catUrl(slug)} aria-current={slug === currentCat ? 'page' : undefined}>{categoryBySlug(slug)?.name}</a>)}
@@ -101,7 +100,7 @@ const isBreaking = latest && Date.now() - latest.data.date.valueOf() < BREAKING_
 
   <footer class="site"><div class="wrap">
     <div class="foot-about">
-      <a class="logo" href={url('/')}><span class="wm"><b>YZ</b> Gündemi</span></a>
+      <a class="logo" href={url('/')} aria-label="YZ Gündemi ana sayfa"><span class="wm" aria-hidden="true"><span class="wm-badge">YZ</span><span class="wm-text"><span class="wm-sub">YAPAY ZEKA</span><span class="wm-main">Gündemi</span></span></span></a>
       <p>{SITE.description}</p>
       <p>Haberler yapay zeka desteğiyle, belirtilen kaynaklardan derlenir. Her haberde kaynak bağlantıları bulunur. <a href={url('/hakkimizda/')}>Nasıl çalışıyoruz?</a></p>
     </div>
