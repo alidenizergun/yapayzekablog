@@ -4,7 +4,9 @@
   "private": true,
   "type": "module",
   "description": "YZ Gündemi (yzgundemi.com) — Türkçe yapay zeka haber sitesi. Astro + Claude API ile günde 2 kez otomatik güncellenir.",
-  "engines": { "node": ">=20" },
+  "engines": {
+    "node": ">=20"
+  },
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
@@ -16,6 +18,9 @@
     "@anthropic-ai/sdk": "1.8.0",
     "@astrojs/rss": "4.0.19",
     "@astrojs/sitemap": "3.7.4",
+    "@fontsource/inter": "5.3.0",
+    "@fontsource/schibsted-grotesk": "5.3.0",
+    "@fontsource/source-serif-4": "5.3.1",
     "astro": "7.4.11"
   }
 }

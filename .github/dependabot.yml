@@ -1,0 +1,15 @@
+# Bağımlılık ve GitHub Actions güncellemeleri: haftada bir güvenlik ve sürüm güncellemesi önerisi (PR) açar.
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 5
+    groups:
+      npm-minor:
+        update-types: [minor, patch]
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: monthly

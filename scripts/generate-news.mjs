@@ -343,6 +343,19 @@ ${notes}`,
 
 // ---------------------------------------------------------------- doğrulama
 
+/** Güvenlik: haber metninden HTML'i ve kaynak listesinde olmayan linkleri temizler.
+ *  Web sayfalarına gizlenmiş talimatlar (prompt injection) metne zararlı kod veya link sokmaya çalışabilir. */
+function sanitizeBody(md, sourceUrls) {
+  const allowed = new Set(sourceUrls);
+  return String(md || '')
+    .replace(/<\/?[a-z][a-z0-9-]*(\s[^>]*)?>/gi, '') // HTML etiketleri
+    .replace(/!\[([^\]]*)\]\([^)]*\)/g, '$1') // görsel gömme yok
+    .replace(/\[([^\]]+)\]\(\s*<?([^)\s>]+)>?[^)]*\)/g, (m, text, url) => (allowed.has(url) ? `[${text}](${url})` : text))
+    .replace(/(javascript|vbscript|data):/gi, '')
+    .trim();
+}
+const cleanTweet = (t) => String(t || '').replace(/https?:\/\/\S+/g, '').replace(/@(\w)/g, '$1').replace(/\s+/g, ' ').trim().slice(0, 240);
+
 function validate(articles, seen, existing) {
   const ok = [];
   const rejected = [];
@@ -380,6 +393,11 @@ function validate(articles, seen, existing) {
       ...a,
       title,
       featured,
+      body_markdown: sanitizeBody(a.body_markdown, sources.map((x) => x.url)),
+      tweet: cleanTweet(a.tweet),
+      title: title.replace(/<[^>]*>/g, ''),
+      spot: String(a.spot || '').replace(/<[^>]*>/g, '').trim(),
+      why_it_matters: String(a.why_it_matters || '').replace(/<[^>]*>/g, '').trim(),
       popularity: Math.min(100, Math.max(1, Math.round(Number(a.popularity) || 50))),
       tags: [...new Set((a.tags || []).map((t) => String(t).replace(/[#\s]+/g, '')).filter(Boolean))].slice(0, 6),
       sources,

@@ -1,4 +1,15 @@
 ---
+// Yazı tipleri sitenin kendi sunucusundan verilir (Google'a ziyaretçi IP'si gitmez, KVKK; CSP daha sıkı)
+import '@fontsource/inter/400.css';
+import '@fontsource/inter/500.css';
+import '@fontsource/inter/600.css';
+import '@fontsource/inter/700.css';
+import '@fontsource/schibsted-grotesk/600.css';
+import '@fontsource/schibsted-grotesk/700.css';
+import '@fontsource/schibsted-grotesk/800.css';
+import '@fontsource/source-serif-4/400.css';
+import '@fontsource/source-serif-4/400-italic.css';
+import '@fontsource/source-serif-4/600.css';
 import '../styles/global.css';
 import { SITE, NAV, CATEGORIES, categoryBySlug } from '../lib/site.js';
 import { getNews, newsUrl, catUrl, url } from '../lib/news.js';
@@ -80,6 +91,7 @@ const isBreaking = latest && Date.now() - latest.data.date.valueOf() < BREAKING_
   <meta name="description" content={description} />
   <link rel="canonical" href={canonical.href} />
   <meta name="robots" content={robots} />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
   <link rel="alternate" type="application/rss+xml" title={SITE.title} href={url('/rss.xml')} />
   <link rel="sitemap" href={url('/sitemap-index.xml')} />
   <link rel="icon" href={url('/favicon.svg')} type="image/svg+xml" />
@@ -106,9 +118,6 @@ const isBreaking = latest && Date.now() - latest.data.date.valueOf() < BREAKING_
     // Sayfa çizilmeden önce kayıtlı temayı uygula (beyaz yanıp sönmeyi önler)
     try { var t = localStorage.getItem('theme'); if (t === 'dark' || t === 'light') document.documentElement.dataset.theme = t; } catch (e) {}
   </script>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Schibsted+Grotesk:wght@600;700;800&family=Source+Serif+4:ital,wght@0,400;0,600;1,400&display=swap" />
   <script type="application/ld+json" set:html={JSON.stringify(ldGraph)} />
 </head>
 <body>

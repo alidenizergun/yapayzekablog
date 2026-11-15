@@ -4,6 +4,10 @@ import { z } from 'astro/zod';
 import { CATEGORIES, IMAGES } from './lib/site.js';
 import { BRAND_SLUGS } from './lib/brands.js';
 
+// Güvenlik: yalnızca http(s) adresleri (javascript:, data: vb. reddedilir); fotoğraflar yalnızca Unsplash'ten
+const httpUrl = z.string().url().refine((u) => /^https?:\/\//i.test(u), 'Yalnızca http(s) adresi');
+const unsplashUrl = (hosts: RegExp) => z.string().url().refine((u) => { try { return hosts.test(new URL(u).hostname); } catch { return false; } }, 'Yalnızca Unsplash adresi');
+
 const categorySlugs = CATEGORIES.map((c) => c.slug) as [string, ...string[]];
 const imageKeys = Object.keys(IMAGES) as [string, ...string[]];
 
@@ -25,11 +29,11 @@ const haberler = defineCollection({
     photo: z
       .object({
         id: z.string(),
-        url: z.string().url(),
+        url: unsplashUrl(/^images\.unsplash\.com$/),
         alt: z.string().optional(),
         author: z.string(),
-        authorUrl: z.string().url(),
-        link: z.string().url(),
+        authorUrl: unsplashUrl(/^(www\.)?unsplash\.com$/),
+        link: unsplashUrl(/^(www\.)?unsplash\.com$/),
       })
       .optional(),
     whyItMatters: z.string().optional(),
@@ -37,7 +41,7 @@ const haberler = defineCollection({
       .array(
         z.object({
           title: z.string(),
-          url: z.string().url(),
+          url: httpUrl,
           publisher: z.string().optional(),
         }),
       )
