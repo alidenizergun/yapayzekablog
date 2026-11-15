@@ -406,13 +406,14 @@ html { scroll-padding-top: 64px; }
 header.site { background: var(--bg); }
 header.site .masthead { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-block: 18px; }
 .head-actions { gap: 16px; }
-.today { font-size: 13px; color: var(--muted); white-space: nowrap; min-width: 1px; }
 .catbar { position: sticky; top: 0; z-index: 6; background: var(--bg); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
-.catbar .wrap { display: flex; align-items: stretch; gap: 0; }
+.catbar .wrap { display: flex; align-items: center; gap: 0; }
+/* Tema anahtarı bölüm çubuğunun sağında */
+.catbar .theme-btn { flex: 0 0 auto; margin-left: 16px; }
 .catbar-logo { display: flex; align-items: center; flex: 0 0 auto; max-width: 0; overflow: hidden; opacity: 0; transition: max-width .2s ease, opacity .2s ease, margin .2s ease; }
 .catbar-logo .wm-badge { font-size: 18px; padding: 3px 6px 2px; white-space: nowrap; }
 .catbar.is-stuck .catbar-logo { max-width: 64px; opacity: 1; margin-right: 14px; }
-.catbar-scroll { flex: 1 1 auto; min-width: 0; display: flex; gap: 24px; overflow-x: auto; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
+.catbar-scroll { flex: 1 1 auto; min-width: 0; align-self: stretch; display: flex; gap: 24px; overflow-x: auto; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
 .catbar-scroll::-webkit-scrollbar { display: none; }
 .catbar-scroll a { flex: 0 0 auto; display: inline-flex; align-items: center; min-height: 48px; font-weight: 600; font-size: 15px; white-space: nowrap; color: var(--fg); box-shadow: inset 0 -3px 0 transparent; transition: box-shadow .15s ease, color .15s ease; }
 .catbar-scroll a:hover { color: var(--accent-text); }
@@ -424,7 +425,6 @@ header.site .masthead { display: flex; align-items: center; justify-content: spa
 .catbar-scroll.fade-l.fade-r { -webkit-mask-image: linear-gradient(to right, transparent, #000 48px, #000 calc(100% - 48px), transparent); mask-image: linear-gradient(to right, transparent, #000 48px, #000 calc(100% - 48px), transparent); }
 @media (max-width: 760px) {
   header.site .masthead { padding-block: 10px; }
-  .today { display: none; }
   .catbar-scroll { gap: 20px; }
   .catbar-scroll a { min-height: 44px; }
   .catbar.is-stuck .catbar-logo { margin-right: 12px; }
