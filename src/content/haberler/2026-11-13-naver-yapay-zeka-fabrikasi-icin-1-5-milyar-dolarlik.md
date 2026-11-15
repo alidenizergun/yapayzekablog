@@ -8,6 +8,13 @@ image: altyapi
 brand: naver
 imageQuery: "data center server racks"
 whyItMatters: "Anlaşma, yapay zeka veri merkezi kapasitesine yönelik talebin somut bir göstergesi. Naver'in yapay zeka fabrikası işi için de ilk ticari doğrulama anlamına geliyor."
+photo:
+  id: "M5tzZtFCOfs"
+  url: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8Mnx8ZGF0YSUyMGNlbnRlciUyMHNlcnZlciUyMHJhY2tzfGVufDF8MHx8fDE3OTQ3NjE4MzZ8MA&ixlib=rb-4.1.0"
+  alt: "cable network"
+  author: "Taylor Vick"
+  authorUrl: "https://unsplash.com/@tvick"
+  link: "https://unsplash.com/photos/cable-network-M5tzZtFCOfs"
 sources:
   - title: "Naver clinches $1.5 bill. AI computing deal with US firm"
     url: "https://www.koreatimes.co.kr/business/tech-science/20261112/naver-clinches-15-bill-ai-computing-deal-with-us-firm"

@@ -8,6 +8,13 @@ image: gemini
 brand: gemini
 imageQuery: "google search phone"
 whyItMatters: "Google, ucuz ve hızlı katmanda Flash serisinin yerine Gemini 4 neslini getiriyor. Hydrogen, ücretsiz kullanıcılara da ulaşan ilk Gemini 4 modeli. Benchmark rakamları şirketin kendi beyanı olduğundan bağımsız testlerle birlikte okunmalı."
+photo:
+  id: "UWVJaDvXW_c"
+  url: "https://images.unsplash.com/photo-1594663653925-365bcbf7ef86?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8MXx8Z29vZ2xlJTIwc2VhcmNoJTIwcGhvbmV8ZW58MXwwfHx8MTc5NDc2MTgzOXww&ixlib=rb-4.1.0"
+  alt: "A hand holding a smartphone displaying the Google search engine homepage"
+  author: "Solen Feyissa"
+  authorUrl: "https://unsplash.com/@solenfeyissa"
+  link: "https://unsplash.com/photos/smartphone-displaying-google-search-engine-UWVJaDvXW_c"
 sources:
   - title: "Introducing Gemini 4 Hydrogen for Agentic Workflows"
     url: "https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-hydrogen/"

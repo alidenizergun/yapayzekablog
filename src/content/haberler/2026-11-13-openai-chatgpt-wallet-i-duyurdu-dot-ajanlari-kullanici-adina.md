@@ -8,6 +8,13 @@ image: pazarlama
 brand: openai
 imageQuery: "online shopping payment phone"
 whyItMatters: "Ajanların yalnızca araştırma yapmasından ödemeyi tamamlamasına geçiş, kart ağlarının jeton altyapısıyla ve her işlemde kullanıcı onayıyla yapılıyor."
+photo:
+  id: "BKq_7oEvFN4"
+  url: "https://images.unsplash.com/photo-1758524944006-ba8116008496?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8MXx8b25saW5lJTIwc2hvcHBpbmclMjBwYXltZW50JTIwcGhvbmV8ZW58MXwwfHx8MTc5NDc2MTgzN3ww&ixlib=rb-4.1.0"
+  alt: "Young woman smiling while holding phone and credit card"
+  author: "Vitaly Gariev"
+  authorUrl: "https://unsplash.com/@silverkblack"
+  link: "https://unsplash.com/photos/young-woman-smiling-while-holding-phone-and-credit-card-BKq_7oEvFN4"
 sources:
   - title: "@gdb X gönderisi"
     url: "https://x.com/gdb/status/2121295213025194172"

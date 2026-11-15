@@ -7,6 +7,13 @@ date: 2026-11-13T23:51:50+03:00
 image: kod
 imageQuery: "terminal code open source"
 whyItMatters: "Yerel (cihaz üstü) model çalıştırmanın en yaygın kütüphanesi, uygulama geliştiricilerine ilk kez resmi bir uyumluluk sözü veriyor."
+photo:
+  id: "ieic5Tq8YMk"
+  url: "https://images.unsplash.com/photo-1515879218367-8466d910aaa4?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8MXx8dGVybWluYWwlMjBjb2RlJTIwb3BlbiUyMHNvdXJjZXxlbnwxfDB8fHwxNzk0NzYxODM5fDA&ixlib=rb-4.1.0"
+  alt: "a computer screen with a bunch of code on it"
+  author: "Chris Ried"
+  authorUrl: "https://unsplash.com/@cdr6934"
+  link: "https://unsplash.com/photos/a-computer-screen-with-a-bunch-of-code-on-it-ieic5Tq8YMk"
 sources:
   - title: "Georgi Gerganov on X: llama.cpp v1.0.0 is now available"
     url: "https://x.com/ggerganov/status/2121246103312212124"

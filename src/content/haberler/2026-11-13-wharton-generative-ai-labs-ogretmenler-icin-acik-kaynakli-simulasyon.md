@@ -7,6 +7,13 @@ date: 2026-11-13T16:00:14+03:00
 image: kod
 imageQuery: "teacher classroom laptop"
 whyItMatters: "Eğitimde genel amaçlı modeller yerine eğitimcinin kontrolünü ve pedagojik çerçeveyi öne çıkaran açık kaynaklı bir yaklaşım sunuluyor. Etkisi şimdilik prototip düzeyinde."
+photo:
+  id: "TOuMSV0Nqjk"
+  url: "https://images.unsplash.com/photo-1758685848142-06e158cf64bc?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8MXx8dGVhY2hlciUyMGNsYXNzcm9vbSUyMGxhcHRvcHxlbnwxfDB8fHwxNzk0NzYxODM3fDA&ixlib=rb-4.1.0"
+  alt: "A female teacher smiling at the desk with a laptop"
+  author: "Vitaly Gariev"
+  authorUrl: "https://unsplash.com/@silverkblack"
+  link: "https://unsplash.com/photos/a-female-teacher-smiling-at-the-desk-with-a-laptop-TOuMSV0Nqjk"
 sources:
   - title: "@emollick X gönderisi"
     url: "https://x.com/emollick/status/2121001056637431873"

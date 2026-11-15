@@ -8,6 +8,13 @@ image: altyapi
 brand: microsoft
 imageQuery: "office laptop error screen"
 whyItMatters: "Yapay zeka asistanları e-posta ve takvim erişimini üçüncü taraf bağlayıcılarla sağlıyor. Bu nedenle bir bulut kesintisi doğrudan yapay zeka hizmetlerine de yansıyor."
+photo:
+  id: "sxiSod0tyYQ"
+  url: "https://images.unsplash.com/photo-1584824486509-112e4181ff6b?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8MXx8b2ZmaWNlJTIwbGFwdG9wJTIwZXJyb3IlMjBzY3JlZW58ZW58MXwwfHx8MTc5NDc2MTgzOHww&ixlib=rb-4.1.0"
+  alt: "black asus laptop computer showing 3 00"
+  author: "Erik Mclean"
+  authorUrl: "https://unsplash.com/@introspectivedsgn"
+  link: "https://unsplash.com/photos/black-asus-laptop-computer-showing-3-00-sxiSod0tyYQ"
 sources:
   - title: "Microsoft Cloud Outage Hits Outlook, Teams, Copilot and AI Services"
     url: "https://securityaffairs.com/202932/security/microsoft-cloud-outage-hits-outlook-teams-copilot-and-ai-services.html"

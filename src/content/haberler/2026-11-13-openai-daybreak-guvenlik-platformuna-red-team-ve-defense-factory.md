@@ -8,6 +8,13 @@ image: guvenlik
 brand: openai
 imageQuery: "cyber security hacker screen"
 whyItMatters: "OpenAI, siber güvenlik modellerini açık tespitinden yama önerisine uzanan ticari ürünlere dönüştürüyor. Ajan tabanlı güvenlik araçları kurumsal pazarda rekabet alanı olmaya başlıyor."
+photo:
+  id: "9SoCnyQmkzI"
+  url: "https://images.unsplash.com/photo-1510915228340-29c85a43dcfe?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8MXx8Y3liZXIlMjBzZWN1cml0eSUyMGhhY2tlciUyMHNjcmVlbnxlbnwxfDB8fHwxNzk0NzYxODM3fDA&ixlib=rb-4.1.0"
+  alt: "person using laptop computers"
+  author: "Jefferson Santos"
+  authorUrl: "https://unsplash.com/@jefflssantos"
+  link: "https://unsplash.com/photos/person-using-laptop-computers-9SoCnyQmkzI"
 sources:
   - title: "@gdb X gönderisi"
     url: "https://x.com/gdb/status/2121004237413142656"

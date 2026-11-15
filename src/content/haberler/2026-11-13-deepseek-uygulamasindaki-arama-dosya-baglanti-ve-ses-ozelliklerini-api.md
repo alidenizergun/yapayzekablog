@@ -8,6 +8,13 @@ image: kod
 brand: deepseek
 imageQuery: "smartphone app voice"
 whyItMatters: "Geliştiriciler arama, dosya okuma ve ses katmanlarını ayrı ayrı kurmak yerine tek bir API üzerinden alabilecek."
+photo:
+  id: "w33-zg-dNL4"
+  url: "https://images.unsplash.com/photo-1480694313141-fce5e697ee25?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8MXx8c21hcnRwaG9uZSUyMGFwcCUyMHZvaWNlfGVufDF8MHx8fDE3OTQ3NjE4NDB8MA&ixlib=rb-4.1.0"
+  alt: "silver Android smartphone"
+  author: "Rami Al-zayat"
+  authorUrl: "https://unsplash.com/@rami_alzayat"
+  link: "https://unsplash.com/photos/silver-android-smartphone-w33-zg-dNL4"
 sources:
   - title: "The full DeepSeek App experience, now via API"
     url: "https://api-docs.deepseek.com/news/news261113/"

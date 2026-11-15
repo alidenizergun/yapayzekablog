@@ -8,6 +8,13 @@ image: girisim
 brand: anthropic
 imageQuery: "stock market chart screen"
 whyItMatters: "Talep rakamı, yapay zeka şirketlerine yönelik halka arz iştahının ve olası bir rekor listelemenin göstergesi. Rakamlar anonim kaynaklara dayandığından kesinleşmiş veri olarak değil, haberin aktardığı bir bilgi olarak okunmalı."
+photo:
+  id: "x07ELaNFt34"
+  url: "https://images.unsplash.com/photo-1651341050677-24dba59ce0fd?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8MXx8c3RvY2slMjBtYXJrZXQlMjBjaGFydCUyMHNjcmVlbnxlbnwxfDB8fHwxNzk0NzYxODQxfDA&ixlib=rb-4.1.0"
+  alt: "graphical user interface, application"
+  author: "Anne Nygård"
+  authorUrl: "https://unsplash.com/@polarmermaid"
+  link: "https://unsplash.com/photos/graphical-user-interface-application-x07ELaNFt34"
 sources:
   - title: "Anthropic's IPO Is Said to Be About Six Times Oversubscribed"
     url: "https://www.bloomberg.com/news/articles/2026-11-12/anthropic-s-ipo-is-said-to-be-about-six-times-oversubscribed"

@@ -8,6 +8,13 @@ image: modeller
 brand: deepmind
 imageQuery: "satellite earth clouds weather"
 whyItMatters: "Yer radarı olmayan bölgelerde sel uyarısı ve güneş enerjisi tahmini gibi uygulamalar için açık bir gözlem verisi sağlanıyor."
+photo:
+  id: "yZygONrUBe8"
+  url: "https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8MXx8c2F0ZWxsaXRlJTIwZWFydGglMjBjbG91ZHMlMjB3ZWF0aGVyfGVufDF8MHx8fDE3OTQ3NjE4NDB8MA&ixlib=rb-4.1.0"
+  alt: "view of Earth and satellite"
+  author: "NASA"
+  authorUrl: "https://unsplash.com/@nasa"
+  link: "https://unsplash.com/photos/view-of-earth-and-satellite-yZygONrUBe8"
 sources:
   - title: "PARDIG & SatWeave: Foundational Datasets for Earth Science"
     url: "https://deepmind.google/blog/opening-the-datasets-behind-our-ai-weather-models/"

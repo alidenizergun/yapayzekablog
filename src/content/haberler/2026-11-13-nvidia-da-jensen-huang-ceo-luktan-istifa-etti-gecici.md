@@ -9,6 +9,13 @@ brand: nvidia
 imageQuery: "graphics card gpu"
 featured: true
 whyItMatters: "Yapay zeka çip pazarının lideri, kurucu CEO'su olmadan ve kalıcı bir lider belirlenmeden bilanço dönemine giriyor. Bu durum, devam eden satın alma gibi stratejik işlerin seyrine dair soruları da gündeme getiriyor."
+photo:
+  id: "vWgoeEYdtIY"
+  url: "https://images.unsplash.com/photo-1624701928517-44c8ac49d93c?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8MXx8Z3JhcGhpY3MlMjBjYXJkJTIwZ3B1fGVufDF8MHx8fDE3OTQ3NjE4Mzh8MA&ixlib=rb-4.1.0"
+  alt: "black and white box fan"
+  author: "Thomas Foster"
+  authorUrl: "https://unsplash.com/@thomasfos"
+  link: "https://unsplash.com/photos/black-and-white-box-fan-vWgoeEYdtIY"
 sources:
   - title: "Nvidia's Jensen Huang resigns, chipmaker names CFO Colette Kress as interim CEO"
     url: "https://techcrunch.com/2026/11/12/nvidias-jensen-huang-resigns-chipmaker-names-cfo-colette-kress-as-interim-ceo/"
