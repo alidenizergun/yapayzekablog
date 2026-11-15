@@ -26,9 +26,8 @@ const read = (f, d) => { try { return JSON.parse(fs.readFileSync(f, 'utf8')); } 
 const write = (f, v) => { fs.mkdirSync(path.dirname(f), { recursive: true }); fs.writeFileSync(f, JSON.stringify(v, null, 2) + '\n'); };
 
 function siteBase() {
-  const [owner, repo] = (process.env.GITHUB_REPOSITORY || '').split('/');
-  const site = (process.env.SITE_URL || (owner ? `https://${owner}.github.io` : '')).replace(/\/$/, '');
-  const base = process.env.BASE_PATH || (process.env.SITE_URL || !repo ? '' : `/${repo}`);
+  const site = (process.env.SITE_URL || 'https://yzgundemi.com').replace(/\/$/, '');
+  const base = process.env.BASE_PATH || '';
   return site + base.replace(/\/$/, '');
 }
 
