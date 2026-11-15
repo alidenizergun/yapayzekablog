@@ -17,6 +17,8 @@ const fullTitle = title ? `${title} · ${SITE.name}` : SITE.title;
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const allNews = await getNews();
 const latest = allNews[0];
+// Son dakika şeridi: en yeni 5 haber, 3 saniyede bir sırayla gösterilir
+const tickerNews = allNews.slice(0, 5);
 const og = new URL(ogImage ?? url('/og/site.png'), Astro.site).href;
 // Menüde yalnızca haberi olan kategoriler görünür
 const counts = new Map();
@@ -66,7 +68,11 @@ const isBreaking = latest && Date.now() - latest.data.date.valueOf() < BREAKING_
     {latest ? (
       <>
         <span class="badge" data-breaking={latest.data.date.toISOString()}>{isBreaking ? 'Son dakika' : 'Son haber'}</span>
-        <a href={newsUrl(latest)}>{latest.data.title}</a>
+        <div class="tick-items" data-ticker aria-live="off">
+          {tickerNews.map((n, i) => (
+            <a href={newsUrl(n)} data-date={n.data.date.toISOString()} hidden={i > 0 ? true : undefined}>{n.data.title}</a>
+          ))}
+        </div>
       </>
     ) : <span>Yeni haberler yakında.</span>}
   </div></div>
@@ -119,10 +125,27 @@ const isBreaking = latest && Date.now() - latest.data.date.valueOf() < BREAKING_
 
   <script>
     // "Son dakika" etiketi: haber 6 saatten eskiyse ziyaret anında "Son haber"e döner
-    document.querySelectorAll<HTMLElement>('[data-breaking]').forEach((b) => {
-      const age = Date.now() - new Date(b.dataset.breaking!).getTime();
-      b.textContent = age < 6 * 3600e3 ? 'Son dakika' : 'Son haber';
-    });
+    const badgeText = (iso: string) => (Date.now() - new Date(iso).getTime() < 6 * 3600e3 ? 'Son dakika' : 'Son haber');
+    document.querySelectorAll<HTMLElement>('[data-breaking]').forEach((b) => { b.textContent = badgeText(b.dataset.breaking!); });
+    // Şerit 3 saniyede bir sonraki habere geçer; fare üzerindeyken veya klavye odağındayken durur
+    const ticker = document.querySelector<HTMLElement>('[data-ticker]');
+    const items = ticker ? [...ticker.querySelectorAll<HTMLAnchorElement>('a')] : [];
+    const badge = document.querySelector<HTMLElement>('.ticker .badge');
+    if (ticker && items.length > 1) {
+      let i = 0, paused = false;
+      const pause = (v: boolean) => () => { paused = v; };
+      ticker.addEventListener('mouseenter', pause(true));
+      ticker.addEventListener('mouseleave', pause(false));
+      ticker.addEventListener('focusin', pause(true));
+      ticker.addEventListener('focusout', pause(false));
+      setInterval(() => {
+        if (paused || document.hidden) return;
+        items[i].hidden = true;
+        i = (i + 1) % items.length;
+        items[i].hidden = false;
+        if (badge) badge.textContent = badgeText(items[i].dataset.date!);
+      }, 3000);
+    }
     // Karanlık mod anahtarı: seçim tarayıcıda saklanır; seçim yoksa cihaz ayarı geçerli
     const root = document.documentElement;
     const media = window.matchMedia('(prefers-color-scheme: dark)');

@@ -54,7 +54,12 @@ h1, h2, h3 { font-family: var(--display); font-weight: 700; text-wrap: balance; 
 
 .ticker { background: var(--band); color: var(--band-fg); font-size: 13px; }
 .ticker .wrap { display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: center; padding-block: 8px; }
-.ticker a { flex: 1 1 260px; }
+.ticker .tick-items { flex: 1 1 260px; min-width: 0; }
+.ticker .tick-items a[hidden] { display: none; }
+.ticker .tick-items a { display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.ticker .tick-items a:not([hidden]) { animation: tick-in .35s ease-out; }
+@keyframes tick-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) { .ticker .tick-items a:not([hidden]) { animation: none; } }
 .ticker a:hover { text-decoration: underline; }
 .ticker .date { color: var(--band-muted); }
 
@@ -206,7 +211,7 @@ a.tag { display: inline-flex; align-items: center; gap: 4px; }
 .cats-mobile { display: none; }
 @media (max-width: 760px) {
   .ticker .wrap { flex-wrap: nowrap; }
-  .ticker a { min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-height: 44px; display: flex; align-items: center; }
+  .ticker .tick-items a { min-height: 44px; line-height: 44px; }
   .ticker .wrap { padding-block: 0; }
   header.site .wrap { flex-wrap: nowrap; justify-content: space-between; padding-block: 8px; gap: 12px; }
   header.site nav.cats-desktop, header.site .btn-newsletter { display: none; }
@@ -240,7 +245,7 @@ a.tag { display: inline-flex; align-items: center; gap: 4px; }
 .ticker .badge { flex: 0 0 auto; white-space: nowrap; }
 .crumb { align-items: center; }
 .report-form .picked a { color: var(--accent-text); text-decoration: underline; text-underline-offset: 3px; }
-@media (max-width: 760px) { .ticker a { display: block; line-height: 44px; } }
+
 
 /* ---------------------------------------------------------------- haber görselleri */
 /* Görsel kutusu: logo kartı, fotoğraf veya illüstrasyon; boyutu bulunduğu yerin kuralı belirler */
