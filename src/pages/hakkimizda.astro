@@ -1,24 +1,156 @@
 ---
 import Base from '../layouts/Base.astro';
-import { SITE } from '../lib/site.js';
-import { url } from '../lib/news.js';
+import { getNews, hostOf, url } from '../lib/news.js';
+
+// Sayfadaki bütün rakamlar haber dosyalarından hesaplanır (derleme anında güncellenir)
+const news = await getNews();
+const sources = news.flatMap((n) => n.data.sources);
+const fmt = (n) => n.toLocaleString('tr-TR');
+const avg = news.length ? (sources.length / news.length).toLocaleString('tr-TR', { maximumFractionDigits: 1 }) : '0';
+const byHost = new Map();
+for (const s of sources) {
+  const h = hostOf(s.url);
+  const name = s.publisher || h;
+  const e = byHost.get(h) ?? { host: h, name, n: 0 };
+  e.n++;
+  byHost.set(h, e);
+}
+const publishers = [...byHost.values()].sort((a, b) => b.n - a.n);
+const topPublishers = publishers.filter((p) => p.host !== 'x.com').slice(0, 12);
+const xCount = byHost.get('x.com')?.n ?? 0;
 ---
-<Base title="Hakkımızda" description="Nöron'un yayın ilkeleri ve haberlerin nasıl hazırlandığı.">
-  <article class="article">
-    <h1>Hakkımızda</h1>
-    <p class="spot">{SITE.description}</p>
-    <div class="prose">
-      <h2>Haberler nasıl hazırlanıyor?</h2>
-      <p>Nöron yapay zeka alanındaki yeni gelişmeleri düzenli olarak tarar. Haberler, şirket duyuruları, araştırma yayınları ve güvenilir haber kaynakları esas alınarak yapay zeka desteğiyle Türkçe olarak yazılır.</p>
-      <h2>Yayın ilkelerimiz</h2>
-      <ul>
-        <li>Her haberde en az bir orijinal kaynak bağlantısı bulunur. Kaynağı doğrulanamayan haber yayınlanmaz.</li>
-        <li>Kaynak metinler kopyalanmaz; haberler kendi cümlelerimizle özetlenir.</li>
-        <li>Söylenti ve doğrulanmamış iddialar haber olarak sunulmaz.</li>
-        <li>Haber görselleri Nöron'a ait illüstrasyonlardır.</li>
+<Base title="Hakkımızda" description="Nöron'un yapay zeka haberlerini nasıl hazırladığı, kaynak kuralları ve yayın ilkeleri.">
+  <div class="about">
+    <header class="about-hero">
+      <div class="about-intro">
+        <span class="cat">Hakkımızda</span>
+        <h1>Yapay zeka gündemini Türkçe, kaynağıyla birlikte takip edin.</h1>
+        <p class="spot">Nöron, yapay zeka alanındaki gelişmeleri her gün tarayıp Türkçe haber olarak yayınlar. Haberler yapay zeka desteğiyle yazılır; her birinin altında, bilginin alındığı orijinal kaynaklar yer alır.</p>
+      </div>
+      <dl class="about-facts" aria-label="Rakamlarla Nöron">
+        <div><dt>Yayınlanan haber</dt><dd>{fmt(news.length)}</dd></div>
+        <div><dt>Kaynak bağlantısı</dt><dd>{fmt(sources.length)}</dd></div>
+        <div><dt>Haber başına kaynak</dt><dd>{avg}</dd></div>
+        <div><dt>Farklı kaynak sitesi</dt><dd>{fmt(publishers.length)}</dd></div>
+        <p class="facts-note">Rakamlar sitedeki haberlerden otomatik hesaplanır.</p>
+      </dl>
+    </header>
+
+    <section class="about-sec" aria-labelledby="how-h">
+      <div class="sechead"><h2 id="how-h">Bir haber nasıl hazırlanır?</h2><span class="meta">Her gün 08.00 ve 17.00 civarı</span></div>
+      <ol class="steps">
+        <li>
+          <span class="step-n" aria-hidden="true">1</span>
+          <h3>Tarama</h3>
+          <p>Son saatlerdeki gelişmeler web aramasıyla bulunur. Yapay zeka alanındaki önemli kişilerin ve şirketlerin X hesapları da taranır. Aramaların bir kısmı her zaman Türkiye'deki gelişmelere ayrılır.</p>
+        </li>
+        <li>
+          <span class="step-n" aria-hidden="true">2</span>
+          <h3>Seçme ve yazma</h3>
+          <p>Haber değeri taşıyan gelişmeler seçilir, daha önce yayınlananlar ve tekrarlar elenir. Haberler kaynak metin kopyalanmadan, kendi cümlelerimizle Türkçe yazılır.</p>
+        </li>
+        <li>
+          <span class="step-n" aria-hidden="true">3</span>
+          <h3>Kaynak doğrulama</h3>
+          <p>Haberdeki her kaynak adresi, araştırma sırasında gerçekten görülen adreslerle karşılaştırılır. Doğrulanmış kaynağı kalmayan haber yayınlanmaz.</p>
+        </li>
+        <li>
+          <span class="step-n" aria-hidden="true">4</span>
+          <h3>Yayın</h3>
+          <p>Site yeniden derlenir; hatalı bir haber dosyası varsa yeni haberler geri alınır ve site bozulmaz. Habere uygun logo veya fotoğraf seçilir.</p>
+        </li>
+      </ol>
+    </section>
+
+    <section class="about-sec" aria-labelledby="rules-h">
+      <div class="sechead"><h2 id="rules-h">Yayın ilkelerimiz</h2></div>
+      <ul class="rules">
+        <li><h3>Kaynaksız haber yok</h3><p>Her haberde en az bir orijinal kaynak bağlantısı bulunur. Mümkün olduğunda şirketin kendi duyurusu veya araştırmanın kendisi de eklenir.</p></li>
+        <li><h3>Kopya yok</h3><p>Kaynak metinler kopyalanmaz. Doğrudan alıntı gerekiyorsa kısa tutulur ve tırnak içinde verilir.</p></li>
+        <li><h3>Söylenti haber değildir</h3><p>Doğrulanmamış iddialar olgu gibi sunulmaz. Bir kişinin açıklaması "söyledi" diye aktarılır, iddia niteliğindeki bilgiler açıkça belirtilir.</p></li>
+        <li><h3>Görseller ne olduğunu söyler</h3><p>Şirket haberlerinde şirketin logosu kullanılır. Fotoğraflar Unsplash'ten alınan temsili görsellerdir ve fotoğrafçının adıyla gösterilir. Gerçek kişilerin fotoğrafı kullanılmaz.</p></li>
+        <li><h3>Yapay zeka kullanımı açıktır</h3><p>Haberler yapay zeka desteğiyle derlenir ve her haberin altında bu belirtilir. Yapay zeka hata yapabilir; bu yüzden kaynaklar her zaman görünür.</p></li>
+        <li><h3>Hatalar düzeltilir</h3><p>Bildirilen her hata kaynaklarla karşılaştırılır. Doğrulanırsa haber düzeltilir ya da yayından kaldırılır.</p></li>
       </ul>
-      <h2>Düzeltme talebi</h2>
-      <p>Bir haberde hata görürseniz <a href={url('/hata-bildir/')}>hata bildirim formunu</a> kullanabilirsiniz. Her bildirimi inceliyoruz; düzeltme gerekirse haber güncellenir.</p>
-    </div>
-  </article>
+    </section>
+
+    {topPublishers.length > 0 && (
+      <section class="about-sec" aria-labelledby="pub-h">
+        <div class="sechead"><h2 id="pub-h">En çok kaynak gösterdiğimiz yayınlar</h2><span class="meta">Kaynak bağlantısı sayısı</span></div>
+        <ul class="pubs">
+          {topPublishers.map((p) => (
+            <li><span class="pub-name">{p.name}</span><span class="pub-host">{p.host}</span><span class="pub-n">{p.n}</span></li>
+          ))}
+        </ul>
+        {xCount > 0 && <p class="meta pubs-note">Bunlara ek olarak {fmt(xCount)} kaynak bağlantısı, şirketlerin ve kişilerin X gönderileridir.</p>}
+      </section>
+    )}
+
+    <section class="about-cta" aria-labelledby="fix-h">
+      <div>
+        <h2 id="fix-h">Bir hata mı gördünüz?</h2>
+        <p>Yanlış bir bilgi, eksik bir kaynak ya da yazım hatası gördüyseniz bize bildirin. Haberden gelirseniz form hangi haber olduğunu otomatik doldurur.</p>
+      </div>
+      <div class="cta-actions">
+        <a class="btn cta-primary" href={url('/hata-bildir/')}>Hata bildir</a>
+        <a class="btn cta-secondary" href={url('/rss.xml')}>RSS ile takip et</a>
+      </div>
+    </section>
+  </div>
 </Base>
+
+<style>
+  .about { display: flex; flex-direction: column; gap: 64px; padding-block: 8px 16px; }
+  .about-hero { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: 48px; align-items: end; padding-bottom: 40px; border-bottom: 3px solid var(--fg); }
+  .about-intro { display: flex; flex-direction: column; gap: 14px; }
+  .about-intro h1 { font-size: clamp(34px, 5vw, 56px); line-height: 1.05; letter-spacing: -0.03em; font-weight: 800; }
+  .about-intro .spot { max-width: 58ch; }
+
+  .about-facts { margin: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 6px; overflow: hidden; }
+  .about-facts > div { background: var(--bg); padding: 18px 20px; display: flex; flex-direction: column-reverse; gap: 4px; }
+  .about-facts dt { font-size: 13px; color: var(--muted); }
+  .about-facts dd { margin: 0; font-family: var(--display); font-size: 40px; font-weight: 800; letter-spacing: -0.03em; line-height: 1; font-variant-numeric: tabular-nums; }
+  .facts-note { grid-column: 1 / -1; margin: 0; padding: 10px 20px; background: var(--soft); font-size: 12px; color: var(--muted); }
+
+  .about-sec .sechead { margin-bottom: 24px; }
+  .steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 28px; counter-reset: none; }
+  .steps li { display: flex; flex-direction: column; gap: 10px; padding-top: 18px; border-top: 1px solid var(--line); position: relative; }
+  .step-n { font-family: var(--display); font-size: 15px; font-weight: 800; color: #fff; background: var(--accent-fill); width: 32px; height: 32px; border-radius: 16px; display: inline-flex; align-items: center; justify-content: center; }
+  .steps h3, .rules h3 { font-size: 20px; line-height: 1.25; }
+  .steps p, .rules p { margin: 0; font-size: 15px; line-height: 1.6; color: var(--muted); }
+
+  .rules { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 28px 32px; }
+  .rules li { display: flex; flex-direction: column; gap: 8px; padding: 22px 24px; background: var(--soft); border-radius: 6px; }
+
+  .pubs { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); column-gap: 32px; }
+  .pubs li { display: grid; grid-template-columns: minmax(0, 1fr) auto; grid-template-areas: "name n" "host n"; column-gap: 12px; padding-block: 12px; border-bottom: 1px solid var(--line); }
+  .pub-name { grid-area: name; font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .pub-host { grid-area: host; font-size: 13px; color: var(--muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .pub-n { grid-area: n; align-self: center; font-family: var(--display); font-size: 24px; font-weight: 800; font-variant-numeric: tabular-nums; }
+  .pubs-note { margin: 14px 0 0; }
+
+  .about-cta { display: flex; flex-wrap: wrap; gap: 24px 48px; align-items: center; justify-content: space-between; padding: 36px 40px; background: var(--band); color: var(--band-fg); border-radius: 8px; }
+  .about-cta > div:first-child { flex: 1 1 420px; min-width: 0; }
+  .about-cta h2 { font-size: 30px; line-height: 1.15; }
+  .about-cta p { margin: 10px 0 0; color: var(--band-muted); max-width: 60ch; }
+  .cta-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+  .cta-primary { background: var(--accent-fill); color: #fff; height: 48px; padding: 0 24px; font-size: 15px; }
+  .cta-secondary { background: transparent; color: #fff; border: 1px solid rgba(255,255,255,.45); height: 48px; padding: 0 24px; font-size: 15px; }
+  .cta-primary:hover { filter: brightness(1.08); }
+  .cta-secondary:hover { border-color: #fff; }
+
+  @media (max-width: 1100px) {
+    .steps { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .rules { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .pubs { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  }
+  @media (max-width: 760px) {
+    .about { gap: 48px; }
+    .about-hero { grid-template-columns: minmax(0, 1fr); gap: 28px; padding-bottom: 32px; }
+    .about-facts dd { font-size: 32px; }
+    .steps, .rules, .pubs { grid-template-columns: minmax(0, 1fr); }
+    .about-cta { padding: 28px 22px; }
+    .about-cta h2 { font-size: 24px; }
+    .cta-actions, .cta-actions .btn { width: 100%; }
+  }
+</style>
