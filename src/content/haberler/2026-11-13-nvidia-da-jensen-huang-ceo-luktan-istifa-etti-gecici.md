@@ -24,6 +24,10 @@ photo:
   author: "Christian Wiediger"
   authorUrl: "https://unsplash.com/@christianw"
   link: "https://unsplash.com/photos/selective-focus-photography-of-geforce-rtx-graphics-card-3GUW88tRmv8"
+keyPoints:
+  - "Huang, 33 yıl sürdürdüğü CEO'luk görevini bıraktı; Nvidia istifa için gerekçe açıklamadı."
+  - "Kalıcı CEO seçilene kadar CFO Colette Kress geçici CEO olarak görev yapacak."
+  - "Nvidia'nın 12,9 milyar dolarlık Hugging Face satın almasının 2027'nin ilk yarısında kapanması planlanıyor."
 sources:
   - title: "Nvidia's Jensen Huang resigns, chipmaker names CFO Colette Kress as interim CEO"
     url: "https://techcrunch.com/2026/11/12/nvidias-jensen-huang-resigns-chipmaker-names-cfo-colette-kress-as-interim-ceo/"

@@ -85,3 +85,8 @@ Puanı artıran: tanınan marka ve kişi, para ve rakam, gündelik hayata etkisi
 
 ## Manşet (featured)
 Bir güncellemede en fazla bir haber manşet olarak işaretlenir: yalnızca gerçekten büyük bir gelişme olduğunda (büyük bir model lansmanı, çok büyük yatırım veya satın alma, önemli bir regülasyon kararı).
+
+## key_points ("Kısaca" kutusu)
+- Haberin en önemli 3 noktası; okur yalnızca bunları okusa da olayı anlamalı.
+- Her madde tek, kısa ve tam bir cümle (en fazla 140 karakter). Başlığı ve spotu tekrar etme; ne oldu, rakam, sonuç.
+- Yalnızca metinde yazan bilgiler. Rakamları metindeki yazımıyla kullan (metinde geçmeyen rakam içeren madde otomatik atılır).

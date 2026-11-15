@@ -100,6 +100,13 @@ const crumbs = [{ name: 'Ana sayfa', path: '/' }, { name: catName(d.category), p
         </figcaption>
       </figure>
 
+      {d.keyPoints && d.keyPoints.length >= 2 && (
+        <aside class="why guide-summary key-points" aria-label="Kısaca">
+          <strong>Kısaca</strong>
+          <ul>{d.keyPoints.map((k) => <li>{k}</li>)}</ul>
+        </aside>
+      )}
+
       <div class="prose"><Content /></div>
 
       {(d.whyItMatters || d.turkeyAngle) && (

@@ -3,7 +3,7 @@ import Base from '../../layouts/Base.astro';
 import NewsRow from '../../components/NewsRow.astro';
 import Sidebar from '../../components/Sidebar.astro';
 import { CATEGORIES } from '../../lib/site.js';
-import { spreadVisuals, getNews } from '../../lib/news.js';
+import { spreadVisuals, getNews, url } from '../../lib/news.js';
 
 export function getStaticPaths() {
   return CATEGORIES.map((c) => ({ params: { slug: c.slug }, props: { cat: c } }));
@@ -12,13 +12,14 @@ const { cat } = Astro.props;
 const items = (await getNews()).filter((n) => n.data.category === cat.slug).slice(0, 60);
 const rowV = spreadVisuals(items);
 ---
-<Base title={`${cat.name} haberleri`} description={`${cat.name} alanındaki en yeni yapay zeka haberleri: ${items.slice(0, 2).map((n) => n.data.title).join('; ') || 'yakında'}.`} currentCat={cat.slug}
+<Base title={`${cat.name} haberleri`} description={cat.intro || `${cat.name} alanındaki en yeni yapay zeka haberleri: ${items.slice(0, 2).map((n) => n.data.title).join('; ') || 'yakında'}.`} currentCat={cat.slug}
   noindex={items.length === 0}
   breadcrumbs={[{ name: 'Ana sayfa', path: '/' }, { name: cat.name, path: `/kategori/${cat.slug}/` }]}
   jsonLd={{ '@type': 'CollectionPage', name: `${cat.name} haberleri`, inLanguage: 'tr-TR' }}>
   <div class="cols" style="margin-top:0">
     <section class="main" aria-labelledby="h">
       <div class="sechead"><h1 id="h" class="page-h">{cat.name}</h1><span class="meta">{items.length} haber</span></div>
+      {cat.intro && <p class="cat-intro">{cat.intro}{cat.links?.length > 0 && <> {cat.links.map((l, i) => <>{i > 0 && ' · '}<a href={url(l.href)}>{l.label}</a></>)}</>}</p>}
       {items.length ? items.map((n) => <NewsRow item={n} choice={rowV.get(n.id)} />) : <p class="empty">Bu kategoride henüz haber yok. Yeni haberler otomatik güncellemelerle eklenecek.</p>}
     </section>
     <Sidebar exclude={items.map((n) => n.id)} />

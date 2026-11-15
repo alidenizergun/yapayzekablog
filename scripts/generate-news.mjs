@@ -181,6 +181,7 @@ function toMarkdown(a, dateIso) {
   }
   if (a.story && STORIES.some((s) => s.slug === a.story)) lines.push(`story: ${a.story}`);
   if (a.turkey_angle && !/^(yok|-|—)\.?$/i.test(a.turkey_angle)) lines.push(`turkeyAngle: ${yamlStr(a.turkey_angle)}`);
+  if (a.key_points?.length >= 2) lines.push('keyPoints:', ...a.key_points.map((k) => `  - ${yamlStr(k)}`));
   lines.push('sources:');
   for (const s of a.sources) {
     lines.push(`  - title: ${yamlStr(s.title)}`, `    url: ${yamlStr(s.url)}`);
@@ -286,7 +287,7 @@ const ARTICLE_SCHEMA = {
       items: {
         type: 'object',
         additionalProperties: false,
-        required: ['title', 'spot', 'category', 'tags', 'image', 'brand', 'image_query', 'body_markdown', 'why_it_matters', 'turkey_angle', 'story', 'deal', 'featured', 'popularity', 'tweet', 'sources'],
+        required: ['title', 'spot', 'category', 'tags', 'image', 'brand', 'image_query', 'body_markdown', 'why_it_matters', 'key_points', 'turkey_angle', 'story', 'deal', 'featured', 'popularity', 'tweet', 'sources'],
         properties: {
           title: { type: 'string', description: 'Haber başlığı, 60-100 karakter' },
           spot: { type: 'string', description: 'Spot metni, 1-2 cümle, 140-280 karakter' },
@@ -309,6 +310,7 @@ const ARTICLE_SCHEMA = {
             },
           },
           story: { type: 'string', enum: ['', ...STORIES.map((s) => s.slug)], description: 'Haber aşağıdaki süren hikâyelerden birinin devamıysa onun slug\'ı; değilse boş' },
+          key_points: { type: 'array', items: { type: 'string' }, description: '"Kısaca" kutusu: haberin en önemli 3 noktası, her biri tek kısa cümle (en fazla 140 karakter); yalnızca metinde yazan bilgiler' },
           turkey_angle: { type: 'string', description: '"Türkiye açısından" notu, tek cümle; yalnızca notlarda somut Türkiye bağlantısı varsa, yoksa boş' },
           featured: { type: 'boolean' },
           popularity: { type: 'integer', description: 'Okunma potansiyeli, 1-100 (yayın kurallarındaki ölçüye göre)' },
@@ -502,6 +504,11 @@ function validate(articles, seen, existing) {
       spot: String(a.spot || '').replace(/<[^>]*>/g, '').trim(),
       why_it_matters: String(a.why_it_matters || '').replace(/<[^>]*>/g, '').trim(),
       turkey_angle: String(a.turkey_angle || '').replace(/<[^>]*>/g, '').trim(),
+      // Kısaca: en fazla 3 madde; metinde geçmeyen rakam içeren madde atılır
+      key_points: (Array.isArray(a.key_points) ? a.key_points : [])
+        .map((k) => String(k).replace(/<[^>]*>/g, '').replace(/\s+/g, ' ').trim().slice(0, 180)).filter(Boolean)
+        .filter((k) => (k.match(/\d+(?:[.,]\d+)*/g) || []).every((n) => `${a.title} ${a.spot} ${a.body_markdown}`.includes(n)))
+        .slice(0, 3),
       popularity: Math.min(100, Math.max(1, Math.round(Number(a.popularity) || 50))),
       tags: [...new Set((a.tags || []).map((t) => String(t).replace(/[#\s]+/g, '')).filter(Boolean))].slice(0, 6),
       sources,
