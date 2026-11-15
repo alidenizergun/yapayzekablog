@@ -19,15 +19,15 @@ const publishers = [...byHost.values()].sort((a, b) => b.n - a.n);
 const topPublishers = publishers.filter((p) => p.host !== 'x.com').slice(0, 12);
 const xCount = byHost.get('x.com')?.n ?? 0;
 ---
-<Base title="Hakkımızda" description="Nöron'un yapay zeka haberlerini nasıl hazırladığı, kaynak kuralları ve yayın ilkeleri.">
+<Base title="Hakkımızda" description="YZ Gündemi'nin yapay zeka haberlerini nasıl hazırladığı, kaynak kuralları ve yayın ilkeleri.">
   <div class="about">
     <header class="about-hero">
       <div class="about-intro">
         <span class="cat">Hakkımızda</span>
         <h1>Yapay zeka gündemini Türkçe, kaynağıyla birlikte takip edin.</h1>
-        <p class="spot">Nöron, yapay zeka alanındaki gelişmeleri her gün tarayıp Türkçe haber olarak yayınlar. Haberler yapay zeka desteğiyle yazılır; her birinin altında, bilginin alındığı orijinal kaynaklar yer alır.</p>
+        <p class="spot">YZ Gündemi, yapay zeka alanındaki gelişmeleri her gün tarayıp Türkçe haber olarak yayınlar. Haberler yapay zeka desteğiyle yazılır; her birinin altında, bilginin alındığı orijinal kaynaklar yer alır.</p>
       </div>
-      <dl class="about-facts" aria-label="Rakamlarla Nöron">
+      <dl class="about-facts" aria-label="Rakamlarla YZ Gündemi">
         <div><dt>Yayınlanan haber</dt><dd>{fmt(news.length)}</dd></div>
         <div><dt>Kaynak bağlantısı</dt><dd>{fmt(sources.length)}</dd></div>
         <div><dt>Haber başına kaynak</dt><dd>{avg}</dd></div>

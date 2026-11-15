@@ -73,8 +73,8 @@ jobs:
       - name: Kaydet ve gönder
         if: always() && steps.news.outcome == 'success'
         run: |
-          git config user.name "noron-bot"
-          git config user.email "noron-bot@users.noreply.github.com"
+          git config user.name "yzgundemi-bot"
+          git config user.email "yzgundemi-bot@users.noreply.github.com"
           git add src/content/haberler data 2>/dev/null || git add src/content/haberler
           git diff --cached --quiet && exit 0
           git commit -m "Haberler: ${{ steps.news.outputs.count }} yeni haber, görseller güncellendi ($(TZ=Europe/Istanbul date '+%d.%m.%Y %H:%M'))"

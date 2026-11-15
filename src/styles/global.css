@@ -1,4 +1,4 @@
-/* Nöron — Türk teknoloji haber sitesi düzeni: üst şerit, kategori menüsü, manşet + yan haberler, liste + kenar çubuğu */
+/* YZ Gündemi — Türk teknoloji haber sitesi düzeni: üst şerit, kategori menüsü, manşet + yan haberler, liste + kenar çubuğu */
 :root {
   --bg: #FFFFFF; --fg: #141414; --muted: #5A5753; --soft: #F4F3F0; --line: #E6E4E0;
   --accent: #CF2E13; --accent-text: #B32610; --accent-fill: #CF2E13; --band: #141414; --band-fg: #FFFFFF; --band-muted: #CFCFCF; --input: #222222;
@@ -318,3 +318,6 @@ a.card:hover h3, a.mini:hover h3 { color: var(--accent-text); }
 /* Alt bilgide kategoriler iki sütun */
 footer.site nav.foot-col:first-of-type { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 24px; align-content: start; }
 footer.site nav.foot-col:first-of-type h2 { grid-column: 1 / -1; }
+/* Logo: "YZ" vurgu renginde */
+.logo .wm { white-space: nowrap; }
+.logo .wm b { color: var(--accent); font-weight: 800; }

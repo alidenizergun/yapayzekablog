@@ -19,7 +19,7 @@ export const imageFor = (entry, v) => imgUrl(entry.data.image, v ?? variantOf(en
 // ---------------------------------------------------------------- haber görselleri
 // Öncelik: şirket logo kartı (brand) > Unsplash fotoğrafı (photo) > illüstrasyon (image)
 
-const UTM = 'utm_source=noron&utm_medium=referral';
+const UTM = 'utm_source=yzgundemi&utm_medium=referral';
 export const withUtm = (u) => `${u}${u.includes('?') ? '&' : '?'}${UTM}`;
 export const photoSrc = (photo, w, h) =>
   `${photo.url}${photo.url.includes('?') ? '&' : '?'}w=${w}&h=${h}&fit=crop&crop=entropy&auto=format&q=70`;

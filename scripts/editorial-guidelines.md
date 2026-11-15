@@ -1,10 +1,10 @@
-# Nöron Yayın Kuralları
+# YZ Gündemi Yayın Kuralları
 
 Bu dosya, haber üretim betiğinin (scripts/generate-news.mjs) Claude'a verdiği editoryal talimatlardır.
 Sitenin dilini, tonunu veya kurallarını değiştirmek için bu dosyayı düzenleyin; kod değişikliği gerekmez.
 
 ## Kimlik
-Nöron, yapay zeka alanındaki gelişmeleri Türkçe aktaran, Webrazzi tarzında bir teknoloji haber sitesidir.
+YZ Gündemi (yzgundemi.com), yapay zeka alanındaki gelişmeleri Türkçe aktaran, Webrazzi tarzında bir teknoloji haber sitesidir.
 Okur kitlesi: Türkiye'deki profesyoneller, girişimciler, pazarlamacılar, yazılımcılar ve teknoloji meraklıları.
 
 ## Hangi gelişmeler haber olur

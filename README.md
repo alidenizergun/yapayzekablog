@@ -1,4 +1,4 @@
-# Nöron — Yapay Zeka Haber Sitesi
+# YZ Gündemi — yzgundemi.com
 
 Webrazzi tarzı, Türkçe yapay zeka haber sitesi. Günde 2 kez, her seferinde en fazla 10 haber olmak üzere kendi kendine yeni haberleri bulur, yazar, kaynaklarını ekler ve yayınlar.
 
@@ -6,7 +6,7 @@ Webrazzi tarzı, Türkçe yapay zeka haber sitesi. Günde 2 kez, her seferinde e
 - **Haberler:** [Claude API](https://platform.claude.com) web aramasıyla gelişmeleri bulur, yayın kurallarına göre Türkçe yazar.
 - **X takibi:** Yapay zeka alanındaki önemli kişilerin ve şirketlerin X gönderileri resmi X API ile taranır; haber değeri taşıyanlar habere dönüşür.
 - **Otomasyon:** GitHub Actions günde 2 kez çalışır: İstanbul saatiyle 08:07 ve 17:07.
-- **Yayın:** GitHub Pages (ücretsiz) + kendi domaininiz.
+- **Yayın:** GitHub Pages (ücretsiz) + **yzgundemi.com**. Alan adı bağlanana kadar site https://alidenizergun.github.io/yapayzekablog/ adresinde yayındadır.
 
 ## Kaynak güvencesi
 
@@ -21,12 +21,12 @@ Haber sayfasında kaynaklar numaralı liste olarak görünür. Altında "yapay z
 ## Yayına alma (bir kerelik, yaklaşık 20 dakika)
 
 ### 1. GitHub reposu
-1. GitHub'da yeni bir repo açın (örn. `noron`). Herkese açık veya gizli olabilir; gizli repoda GitHub Pages için ücretli plan gerekebilir.
+1. GitHub'da yeni bir repo açın (bu proje: `alidenizergun/yapayzekablog`). Herkese açık veya gizli olabilir; gizli repoda GitHub Pages için ücretli plan gerekebilir.
 2. Bu klasördeki dosyaları repoya yükleyin (`main` dalı):
    ```bash
-   git init && git add . && git commit -m "Nöron ilk sürüm"
+   git init && git add . && git commit -m "YZ Gündemi ilk sürüm"
    git branch -M main
-   git remote add origin https://github.com/KULLANICI/noron.git
+   git remote add origin https://github.com/alidenizergun/yapayzekablog.git
    git push -u origin main
    ```
 
@@ -38,16 +38,31 @@ Haber sayfasında kaynaklar numaralı liste olarak görünür. Altında "yapay z
 1. **Settings › Pages › Build and deployment › Source:** `GitHub Actions` seçin.
 2. **Settings › Actions › General › Workflow permissions:** `Read and write permissions` seçin. Bot yeni haberleri repoya bu izinle kaydeder.
 
-### 4. Domain
-1. **Settings › Secrets and variables › Actions › Variables** sekmesinde şu değişkenleri ekleyin:
-   - `SITE_URL` = `https://alanadiniz.com`
-   - `CUSTOM_DOMAIN` = `alanadiniz.com`
-2. Domain sağlayıcınızın DNS ayarlarında:
-   - Kök domain için GitHub Pages'in 4 A kaydını ekleyin: `185.199.108.153`, `185.199.109.153`, `185.199.110.153`, `185.199.111.153`
-   - `www` için CNAME kaydı: `KULLANICI.github.io`
-3. **Settings › Pages** altında domaini doğrulayın ve **Enforce HTTPS** seçeneğini açın.
+### 4. Alan adı: yzgundemi.com
+Sıra önemli: DNS kayıtları hazır olmadan değişkenleri eklerseniz site yeni adrese yönlenir ama açılmaz.
 
-Domaininiz yoksa `SITE_URL` = `https://alidenizergun.github.io/yapayzekablog` ve `BASE_PATH` = `/yapayzekablog` verin; `CUSTOM_DOMAIN` eklemeyin.
+1. **DNS kayıtları** (alan adını aldığınız firmanın DNS panelinde):
+   | Tür | Ad (host) | Değer |
+   |---|---|---|
+   | A | `@` | `185.199.108.153` |
+   | A | `@` | `185.199.109.153` |
+   | A | `@` | `185.199.110.153` |
+   | A | `@` | `185.199.111.153` |
+   | CNAME | `www` | `alidenizergun.github.io` |
+
+   Kök alan adında (`@`) başka A, AAAA veya CNAME kaydı varsa silin (firmanın park sayfası gibi).
+2. **DNS'in yayılmasını bekleyin** (genelde birkaç dakika, en fazla 24–48 saat).
+3. **Settings › Pages › Custom domain** kutusuna `yzgundemi.com` yazıp kaydedin. GitHub DNS'i kontrol eder; yeşil onay işareti görünmeli.
+4. **Settings › Secrets and variables › Actions › Variables** sekmesinde iki değişken ekleyin:
+   - `SITE_URL` = `https://yzgundemi.com`
+   - `CUSTOM_DOMAIN` = `yzgundemi.com`
+
+   (`BASE_PATH` değişkeni varsa silin.)
+5. **Actions › Siteyi yayınla › Run workflow** ile siteyi yeni adresle yeniden yayınlayın.
+6. HTTPS sertifikası hazır olunca (birkaç dakika ile birkaç saat) **Settings › Pages** altında **Enforce HTTPS** seçeneğini açın.
+7. Önerilir: Alan adının başkası tarafından GitHub'da kullanılamaması için GitHub hesabınızda **Settings › Pages › Add a domain** ile `yzgundemi.com`'u doğrulayın.
+
+Eski adres (alidenizergun.github.io/yapayzekablog) yeni adrese otomatik yönlenir.
 
 ### 5. X takibi (isteğe bağlı)
 1. [console.x.com](https://console.x.com) üzerinden bir geliştirici hesabı ve uygulama oluşturun, kredi yükleyin.

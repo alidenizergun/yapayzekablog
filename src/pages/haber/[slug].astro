@@ -40,7 +40,7 @@ const jsonLd = {
   inLanguage: 'tr-TR',
   image: [new URL(og, Astro.site).href],
   author: { '@type': 'Organization', name: d.author },
-  publisher: { '@type': 'Organization', name: 'Nöron' },
+  publisher: { '@type': 'Organization', name: 'YZ Gündemi' },
   mainEntityOfPage: pageUrl,
   articleSection: catName(d.category),
   keywords: d.tags.join(', '),
@@ -77,7 +77,7 @@ const jsonLd = {
           ) : main.kind === 'brand' ? (
             <>{brandOf(d.brand)?.name} logosu. Logolar sahiplerinin tescilli markalarıdır.</>
           ) : (
-            <>İllüstrasyon: Nöron</>
+            <>İllüstrasyon: YZ Gündemi</>
           )}
         </figcaption>
       </figure>

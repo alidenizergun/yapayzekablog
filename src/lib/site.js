@@ -2,8 +2,9 @@
 // Haber üretim betiği (scripts/generate-news.mjs) da bu dosyayı kullanır.
 
 export const SITE = {
-  name: 'nöron',
-  title: 'Nöron Yapay Zeka Haberleri',
+  name: 'YZ Gündemi',
+  domain: 'yzgundemi.com',
+  title: 'YZ Gündemi · Türkçe Yapay Zeka Haberleri',
   description: 'Yapay zeka dünyasındaki gelişmeleri Türkçe, kaynaklı ve hızlı aktaran haber sitesi.',
   locale: 'tr-TR',
   timeZone: 'Europe/Istanbul',

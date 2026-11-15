@@ -44,7 +44,7 @@ const haberler = defineCollection({
       .min(1, 'Her haberde en az bir kaynak olmalı'),
     featured: z.boolean().default(false),
     draft: z.boolean().default(false),
-    author: z.string().default('Nöron Editör Masası'),
+    author: z.string().default('YZ Gündemi Editör Masası'),
     generated: z.boolean().default(true),
   }),
 });

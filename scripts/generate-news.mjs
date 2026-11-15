@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * Nöron haber üretim hattı
+ * YZ Gündemi haber üretim hattı
  *
  * 1) Araştırma: Claude, web aramasıyla son saatlerdeki yapay zeka gelişmelerini bulur.
  * 2) Yazım:     Claude, bulunan gelişmeleri yayın kurallarına göre Türkçe haber olarak
@@ -192,7 +192,7 @@ async function research(anthropic, existing, xPosts = []) {
   const covered = recent.map((e) => `- ${e.title}${e.urls[0] ? ` (${e.urls[0]})` : ''}`).join('\n') || '- (henüz yok)';
   const now = istanbulIso();
 
-  const system = `Sen Nöron adlı Türkçe yapay zeka haber sitesinin araştırma editörüsün. Görevin, haber olmaya değer YENİ gelişmeleri web aramasıyla bulmak ve her biri için doğrulanmış bilgi notu çıkarmak.\n\n${GUIDELINES}`;
+  const system = `Sen YZ Gündemi adlı Türkçe yapay zeka haber sitesinin araştırma editörüsün. Görevin, haber olmaya değer YENİ gelişmeleri web aramasıyla bulmak ve her biri için doğrulanmış bilgi notu çıkarmak.\n\n${GUIDELINES}`;
   const user = `Şu an: ${now} (İstanbul).
 
 Son ${LOOKBACK_HOURS} saat içinde yayınlanmış, yapay zeka alanındaki en önemli gelişmeleri bul. En fazla ${MAX_ARTICLES + 2} aday çıkar; önem sırasına koy.
@@ -308,7 +308,7 @@ async function write(anthropic, notes, seen) {
   const res = await anthropic.messages.create({
     model: MODEL,
     max_tokens: 32000,
-    system: `Sen Nöron adlı Türkçe yapay zeka haber sitesinin haber editörüsün.\n\n${GUIDELINES}`,
+    system: `Sen YZ Gündemi adlı Türkçe yapay zeka haber sitesinin haber editörüsün.\n\n${GUIDELINES}`,
     messages: [{
       role: 'user',
       content: `Aşağıdaki araştırma notlarından en fazla ${MAX_ARTICLES} haber yaz. Notlarda olmayan hiçbir bilgiyi ekleme.
@@ -560,7 +560,7 @@ function summary(written, rejected, searches) {
   log(cost.log);
   appendCostCsv(searches, written.length, 'tamam');
   const md = [
-    `## Nöron haber güncellemesi`,
+    `## YZ Gündemi haber güncellemesi`,
     `- Yeni haber: **${written.length}**${REQUIRE_REVIEW ? ' (taslak, editör onayı bekliyor)' : ''}`,
     `- Elenen: ${rejected.length}`,
     `- Web araması: ${searches}${IS_WEEKEND ? ' (hafta sonu sınırı: ' + MAX_SEARCHES + ')' : ''}`,

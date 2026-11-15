@@ -1,9 +1,9 @@
 {
-  "name": "noron",
+  "name": "yzgundemi",
   "version": "1.0.0",
   "private": true,
   "type": "module",
-  "description": "Nöron — Türkçe yapay zeka haber sitesi. Astro + Claude API ile günde 2 kez otomatik güncellenir.",
+  "description": "YZ Gündemi (yzgundemi.com) — Türkçe yapay zeka haber sitesi. Astro + Claude API ile günde 2 kez otomatik güncellenir.",
   "engines": { "node": ">=20" },
   "scripts": {
     "dev": "astro dev",

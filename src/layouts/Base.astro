@@ -13,7 +13,7 @@ interface Props {
   noindex?: boolean;
 }
 const { title, description = SITE.description, ogImage, ogType = 'website', currentCat, jsonLd, noindex = false } = Astro.props;
-const fullTitle = title ? `${title} · Nöron` : SITE.title;
+const fullTitle = title ? `${title} · ${SITE.name}` : SITE.title;
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const allNews = await getNews();
 const latest = allNews[0];
@@ -42,7 +42,7 @@ const isBreaking = latest && Date.now() - latest.data.date.valueOf() < BREAKING_
   <link rel="sitemap" href={url('/sitemap-index.xml')} />
   <link rel="icon" href={url('/favicon.svg')} type="image/svg+xml" />
   <link rel="apple-touch-icon" href={url('/apple-touch-icon.png')} />
-  <meta property="og:site_name" content="Nöron" />
+  <meta property="og:site_name" content={SITE.name} />
   <meta property="og:locale" content="tr_TR" />
   <meta property="og:type" content={ogType} />
   <meta property="og:title" content={fullTitle} />
@@ -72,9 +72,9 @@ const isBreaking = latest && Date.now() - latest.data.date.valueOf() < BREAKING_
   </div></div>
 
   <header class="site"><div class="wrap">
-    <a class="logo" href={url('/')} aria-label="Nöron ana sayfa">
+    <a class="logo" href={url('/')} aria-label="YZ Gündemi ana sayfa">
       <svg width="34" height="34" viewBox="0 0 34 34" aria-hidden="true"><circle cx="17" cy="17" r="15" fill="#CF2E13"/><path d="M11 13 L23 13 L17 23 Z" fill="none" stroke="#FFFFFF" stroke-width="1.6"/><circle cx="11" cy="13" r="3" fill="#FFFFFF"/><circle cx="23" cy="13" r="3" fill="#FFFFFF"/><circle cx="17" cy="23" r="3" fill="#FFFFFF"/></svg>
-      <span>nöron</span>
+      <span class="wm"><b>YZ</b> Gündemi</span>
     </a>
     <nav class="cats cats-desktop" aria-label="Kategoriler">
       {nav.map((slug) => <a href={catUrl(slug)} aria-current={slug === currentCat ? 'page' : undefined}>{categoryBySlug(slug)?.name}</a>)}
@@ -101,7 +101,7 @@ const isBreaking = latest && Date.now() - latest.data.date.valueOf() < BREAKING_
 
   <footer class="site"><div class="wrap">
     <div class="foot-about">
-      <a class="logo" href={url('/')}><span>nöron</span></a>
+      <a class="logo" href={url('/')}><span class="wm"><b>YZ</b> Gündemi</span></a>
       <p>{SITE.description}</p>
       <p>Haberler yapay zeka desteğiyle, belirtilen kaynaklardan derlenir. Her haberde kaynak bağlantıları bulunur. <a href={url('/hakkimizda/')}>Nasıl çalışıyoruz?</a></p>
     </div>
@@ -110,7 +110,7 @@ const isBreaking = latest && Date.now() - latest.data.date.valueOf() < BREAKING_
       {footerCats.map((c) => <a href={catUrl(c.slug)}>{c.name}</a>)}
     </nav>
     <nav class="foot-col" aria-labelledby="foot-site">
-      <h2 id="foot-site">Nöron</h2>
+      <h2 id="foot-site">YZ Gündemi</h2>
       <a href={url('/hakkimizda/')}>Hakkımızda</a>
       <a href={url('/hata-bildir/')}>Hata bildir</a>
       <a href={url('/rss.xml')}>RSS ile takip et</a>

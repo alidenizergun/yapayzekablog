@@ -1,4 +1,4 @@
-# Nöron tasarım kuralları
+# YZ Gündemi tasarım kuralları
 
 Türkçe yapay zeka haber sitesi. Okur, ne olduğunu hızlıca görmek ve kaynağına güvenmek ister.
 Tasarım bir gazete gibi davranır: haber öne çıkar, süs geri planda kalır.
