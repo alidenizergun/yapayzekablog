@@ -5,15 +5,8 @@ category: modeller
 tags: ["WorldLabs", "Atlas", "FeiFeiLi", "DünyaModeli"]
 date: 2026-11-13T00:24:30+03:00
 image: modeller
-imageQuery: "3d virtual world landscape render"
+imageQuery: "virtual reality headset"
 whyItMatters: "Üç boyutlu dünya modelleri, oyun ve robotik gibi alanlarda geliştiricilerin doğrudan erişebildiği bir araca dönüşüyor. Performans iddiaları şirket beyanına dayandığından bağımsız değerlendirmeler beklenmeli."
-photo:
-  id: "NwAKDvJBL6k"
-  url: "https://images.unsplash.com/photo-1723928818827-b0be7384b841?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8MXx8M2QlMjB2aXJ0dWFsJTIwd29ybGQlMjBsYW5kc2NhcGUlMjByZW5kZXJ8ZW58MXwwfHx8MTc5NDc2MTgzNnww&ixlib=rb-4.1.0"
-  alt: "A picture of a house in the middle of a field"
-  author: "Mohamed Ahmed"
-  authorUrl: "https://unsplash.com/@f5r_tr"
-  link: "https://unsplash.com/photos/a-picture-of-a-house-in-the-middle-of-a-field-NwAKDvJBL6k"
 sources:
   - title: "@drfeifei X gönderisi"
     url: "https://x.com/drfeifei/status/2120942509786558671"

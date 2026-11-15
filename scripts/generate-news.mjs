@@ -421,6 +421,13 @@ let xNote = 'X takibi kapalı';
 
 async function main() {
   const existing = loadExisting();
+  // Yalnızca fotoğraf doldurma: Claude çağrılmaz, ücret yalnızca Unsplash (ücretsiz)
+  if (/^(1|true)$/i.test(process.env.PHOTOS_ONLY || '')) {
+    log('yalnızca fotoğraf doldurma modu');
+    await backfillPhotos();
+    log(`fotoğraf eklenen eski haber: ${photoNote.backfilled}${photoNote.error ? ' (hata: ' + photoNote.error + ')' : ''}`);
+    return summary([], [], 0);
+  }
   log(`model: ${MODEL} · mevcut haber: ${existing.length} · en fazla ${MAX_ARTICLES} yeni haber · en fazla ${MAX_SEARCHES} arama${IS_WEEKEND ? ' (hafta sonu)' : ''} · ${REQUIRE_REVIEW ? 'editör onayı AÇIK (taslak)' : 'otomatik yayın'}`);
 
   let articles, seen, searches = 0;

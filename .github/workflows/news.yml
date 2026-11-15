@@ -12,6 +12,10 @@ on:
         description: 'Bu çalışmada en fazla kaç haber?'
         required: false
         default: '10'
+      only_photos:
+        description: 'Yalnızca eksik fotoğrafları doldur (haber üretme, Claude kullanma)'
+        type: boolean
+        default: false
 
 concurrency:
   group: news
@@ -48,6 +52,8 @@ jobs:
           MAX_SEARCHES: ${{ vars.MAX_SEARCHES || '20' }}
           WEEKEND_SEARCHES: ${{ vars.WEEKEND_SEARCHES }}
           REQUIRE_REVIEW: ${{ vars.REQUIRE_REVIEW || 'false' }}
+          PHOTOS_ONLY: ${{ inputs.only_photos || 'false' }}
+          PHOTO_BACKFILL: ${{ vars.PHOTO_BACKFILL || '15' }}
         run: node scripts/generate-news.mjs
 
       - name: Derleme kontrolü (bozuk haber yayınlanmasın)
