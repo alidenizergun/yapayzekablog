@@ -65,7 +65,7 @@ const crumbs = [{ name: 'Ana sayfa', path: '/' }, { name: catName(d.category), p
       <h1>{d.title}</h1>
       <p class="spot">{d.spot}</p>
       <div class="byline">
-        <span class="meta byline-meta"><Time date={d.date} /> · {readingMinutes(entry.body)} dk okuma · {d.sources.length} kaynak</span>
+        <span class="meta byline-meta"><Time date={d.date} /> · {readingMinutes(entry.body)} dk okuma</span>
         <div class="share">
           <a class="tag" href={`https://x.com/intent/post?text=${encodeURIComponent(d.title)}&url=${encodeURIComponent(pageUrl)}`} target="_blank" rel="noopener">X'te paylaş</a>
           <a class="tag" href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(pageUrl)}`} target="_blank" rel="noopener">LinkedIn</a>
