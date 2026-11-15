@@ -13,8 +13,9 @@ const ga = SITE.analytics?.ga4;
       <h2>Ziyaret istatistikleri (Google Analytics)</h2>
       {ga ? (
         <>
-          <p>Hangi haberlerin okunduğunu ve sitenin nasıl kullanıldığını anlamak için Google Analytics 4 kullanıyoruz. Bu ölçüm <strong>yalnızca çerez bandında "Kabul et" seçeneğini işaretlerseniz</strong> çalışır. İzin vermezseniz Google Analytics kodu sayfaya hiç yüklenmez.</p>
-          <p>İzin verdiğinizde tarayıcınıza Google Analytics çerezleri (<code>_ga</code>, <code>_ga_*</code>) yerleştirilir; bu çerezler en fazla 2 yıl saklanır. Ziyaret ettiğiniz sayfalar, cihaz ve tarayıcı türü, yaklaşık konum (şehir/ülke düzeyinde) ve siteye nereden geldiğiniz gibi bilgiler toplanır. Google Analytics 4 IP adreslerini saklamaz. Reklam ve kişiselleştirme özellikleri kapalıdır; bu veriler reklam amacıyla kullanılmaz.</p>
+          <p>Hangi haberlerin okunduğunu ve sitenin nasıl kullanıldığını anlamak için Google Analytics 4'ü Google'ın "İzin Modu" (Consent Mode) ile kullanıyoruz.</p>
+          <p><strong>İzin vermezseniz</strong> tarayıcınıza hiçbir Google Analytics çerezi yerleştirilmez. Google'a yalnızca çerez içermeyen, sizi tanımlamayan sayım sinyalleri (ör. bir sayfanın görüntülendiği) gönderilir; Google bu sinyallerden toplu istatistik üretir.</p>
+          <p><strong>İzin verirseniz</strong> tarayıcınıza Google Analytics çerezleri (<code>_ga</code>, <code>_ga_*</code>) yerleştirilir ve en fazla 2 yıl saklanır. Ziyaret ettiğiniz sayfalar, cihaz ve tarayıcı türü, yaklaşık konum (şehir/ülke düzeyinde) ve siteye nereden geldiğiniz gibi bilgiler toplanır. Google Analytics 4 IP adreslerini saklamaz. Reklam ve kişiselleştirme özellikleri her durumda kapalıdır.</p>
           <p>Veriler Google'ın sunucularında (yurt dışında) işlenir. Ayrıntılar için <a href="https://policies.google.com/privacy?hl=tr">Google Gizlilik Politikası</a>'na bakabilirsiniz.</p>
           <p><button type="button" class="btn" data-consent-open>Çerez tercihimi değiştir</button></p>
         </>

@@ -114,6 +114,27 @@ const isBreaking = latest && Date.now() - latest.data.date.valueOf() < BREAKING_
   {article && <meta property="article:modified_time" content={(article.modified ?? article.published).toISOString()} />}
   {article?.section && <meta property="article:section" content={article.section} />}
   {article?.tags?.map((t) => <meta property="article:tag" content={t} />)}
+  {SITE.analytics?.ga4 && (
+    <>
+      {/* Google Analytics 4 + Consent Mode v2: her ziyaretçide yüklenir; izin verilmeden çerez yazmaz,
+          yalnızca çerezsiz anonim sinyal gönderir (Google bu ziyaretleri modelleyerek raporlara ekler). */}
+      <script is:inline define:vars={{ GA: SITE.analytics.ga4 }}>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        window.gtag = gtag;
+        var izin = null;
+        try { izin = localStorage.getItem('yz-cerez-izni'); } catch (e) {}
+        gtag('consent', 'default', {
+          analytics_storage: izin === 'granted' ? 'granted' : 'denied',
+          ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied',
+          wait_for_update: 500
+        });
+        gtag('js', new Date());
+        gtag('config', GA, { allow_google_signals: false, allow_ad_personalization_signals: false });
+      </script>
+      <script is:inline async src={`https://www.googletagmanager.com/gtag/js?id=${SITE.analytics.ga4}`}></script>
+    </>
+  )}
   <script is:inline>
     // Sayfa çizilmeden önce kayıtlı temayı uygula (beyaz yanıp sönmeyi önler)
     try { var t = localStorage.getItem('theme'); if (t === 'dark' || t === 'light') document.documentElement.dataset.theme = t; } catch (e) {}
@@ -204,7 +225,7 @@ const isBreaking = latest && Date.now() - latest.data.date.valueOf() < BREAKING_
   {SITE.analytics?.ga4 && (
     <div class="consent" data-consent data-ga={SITE.analytics.ga4} role="region" aria-label="Çerez tercihi" hidden>
       <div class="wrap">
-        <p>Siteyi geliştirmek için hangi haberlerin okunduğunu Google Analytics ile ölçmek istiyoruz. Bunun için tarayıcınıza istatistik çerezleri yerleştirilir; reklam çerezi kullanılmaz. <a href={url('/gizlilik/')}>Ayrıntılar</a></p>
+        <p>Hangi haberlerin okunduğunu Google Analytics ile ölçüyoruz. İzin verirseniz tarayıcınıza istatistik çerezleri yerleştirilir; izin vermezseniz yalnızca çerezsiz, anonim sayım yapılır. Reklam çerezi kullanılmaz. <a href={url('/gizlilik/')}>Ayrıntılar</a></p>
         <div class="consent-actions">
           <button type="button" class="btn btn-ghost" data-consent-choice="denied">Reddet</button>
           <button type="button" class="btn" data-consent-choice="granted">Kabul et</button>
@@ -214,28 +235,13 @@ const isBreaking = latest && Date.now() - latest.data.date.valueOf() < BREAKING_
   )}
 
   <script>
-    // Google Analytics: yalnızca ziyaretçi izin verirse yüklenir (KVKK). Tercih tarayıcıda saklanır; reklam çerezleri her zaman kapalı.
+    // Çerez bandı: Analytics zaten yüklü (çerezsiz). "Kabul et" çerezli ölçümü açar, "Reddet" çerezleri siler.
     const consentBox = document.querySelector<HTMLElement>('[data-consent]');
     if (consentBox) {
-      const GA = consentBox.dataset.ga!;
       const KEY = 'yz-cerez-izni';
       const read = () => { try { return localStorage.getItem(KEY); } catch { return null; } };
       const save = (v: string) => { try { localStorage.setItem(KEY, v); } catch {} };
-      let loaded = false;
-      const loadGA = () => {
-        if (loaded) return;
-        loaded = true;
-        const w = window as any;
-        w.dataLayer = w.dataLayer || [];
-        w.gtag = function () { w.dataLayer.push(arguments); };
-        w.gtag('consent', 'default', { analytics_storage: 'granted', ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied' });
-        w.gtag('js', new Date());
-        w.gtag('config', GA, { allow_google_signals: false, allow_ad_personalization_signals: false });
-        const s = document.createElement('script');
-        s.async = true;
-        s.src = `https://www.googletagmanager.com/gtag/js?id=${encodeURIComponent(GA)}`;
-        document.head.appendChild(s);
-      };
+      const g = (...a: unknown[]) => { const w = window as any; if (typeof w.gtag === 'function') w.gtag(...a); };
       const clearGA = () => {
         const host = location.hostname.replace(/^www\./, '');
         document.cookie.split(';').map((c) => c.split('=')[0].trim()).filter((n) => /^_ga/.test(n)).forEach((n) => {
@@ -243,14 +249,13 @@ const isBreaking = latest && Date.now() - latest.data.date.valueOf() < BREAKING_
         });
       };
       const choice = read();
-      if (choice === 'granted') loadGA();
-      else if (choice !== 'denied') consentBox.hidden = false;
+      if (choice !== 'granted' && choice !== 'denied') consentBox.hidden = false;
       consentBox.querySelectorAll<HTMLButtonElement>('[data-consent-choice]').forEach((b) => b.addEventListener('click', () => {
         const v = b.dataset.consentChoice!;
         save(v);
         consentBox.hidden = true;
-        if (v === 'granted') loadGA();
-        else { clearGA(); if (loaded) location.reload(); }
+        g('consent', 'update', { analytics_storage: v });
+        if (v === 'denied') clearGA();
       }));
       document.querySelectorAll('[data-consent-open]').forEach((b) => b.addEventListener('click', () => { consentBox.hidden = false; consentBox.querySelector('button')?.focus(); }));
     }
