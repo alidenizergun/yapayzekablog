@@ -96,6 +96,8 @@ const isBreaking = latest && Date.now() - latest.data.date.valueOf() < BREAKING_
   <link rel="sitemap" href={url('/sitemap-index.xml')} />
   <link rel="icon" href={url('/favicon.svg')} type="image/svg+xml" />
   <link rel="apple-touch-icon" href={url('/apple-touch-icon.png')} />
+  <!-- Haber fotoğrafları (en büyük görsel, LCP) için bağlantıyı erkenden kur -->
+  <link rel="preconnect" href="https://images.unsplash.com" crossorigin />
   <meta property="og:site_name" content={SITE.name} />
   <meta property="og:locale" content="tr_TR" />
   <meta property="og:type" content={ogType} />
