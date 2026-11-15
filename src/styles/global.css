@@ -32,6 +32,14 @@
 .theme-switch[aria-checked="true"] .moon { display: block; }
 .theme-switch[aria-checked="true"] .sun { display: none; }
 @media (prefers-reduced-motion: reduce) { .theme-switch .knob { transition: none; } }
+/* Anahtarın yazısı geçerli temayı gösterir; sayfa açılırken yanıp sönmesin diye doğrudan temaya bağlı */
+.theme-switch .l-dark { display: none; }
+:root[data-theme="dark"] .theme-switch .l-light { display: none; }
+:root[data-theme="dark"] .theme-switch .l-dark { display: inline; }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .theme-switch .l-light { display: none; }
+  :root:not([data-theme="light"]) .theme-switch .l-dark { display: inline; }
+}
 .head-actions { display: flex; align-items: center; gap: 10px; }
 @media (max-width: 560px) {
   .theme-switch { padding: 0 6px; }
