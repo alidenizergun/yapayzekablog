@@ -76,7 +76,7 @@ Her hesabın en son okunan gönderisi `data/x-state.json` dosyasında tutulur; a
 
 ## X'te otomatik paylaşım
 
-Her haber güncellemesinden sonra, site yayına girince en önemli **2 haber** linkiyle X'te paylaşılır; diğerleri paylaşılmaz. Haber hattı her habere 1–5 arası önem puanı ve kısa bir paylaşım metni yazar (kurallar `scripts/editorial-guidelines.md`). Manşet haber her zaman önce gelir.
+Her haber güncellemesinden sonra, site yayına girince okunma potansiyeli en yüksek **2 haber** X'te **linksiz** paylaşılır (başlık ve kısa özet); diğerleri paylaşılmaz. Linkli paylaşıma dönmek için `X_WITH_LINK` değişkenini `true` yapın. Haber hattı her habere 1–5 arası önem puanı ve kısa bir paylaşım metni yazar (kurallar `scripts/editorial-guidelines.md`). Manşet haber her zaman önce gelir.
 
 Kurulum:
 1. developer.x.com › uygulamanız › **User authentication settings**: App permissions = **Read and write**, Type = Web App/Automated App, Callback ve Website = `https://yzgundemi.com`.
@@ -86,7 +86,7 @@ Kurulum:
 
 Ayarlar: `X_POSTS_PER_RUN` değişkeni çalışma başına paylaşım sayısıdır (varsayılan 2, `0` kapatır). Paylaşılan haberler `data/x-paylasilan.json` dosyasında tutulur; aynı haber iki kez paylaşılmaz. Anahtarlar yoksa paylaşım adımı sessizce atlanır.
 
-Maliyet: X link içeren her gönderiden yaklaşık 0,20 $ alıyor; günde 4 gönderi ≈ ayda 24 $. Denemek için: `node scripts/x-post.mjs --dry-run`.
+Maliyet: Linksiz gönderi başına yaklaşık 0,015 $ (günde 2 gönderi ≈ ayda 1 $). Linkli gönderi ~0,20 $. Denemek için: `node scripts/x-post.mjs --dry-run`.
 
 ### 6. Haber fotoğrafları (Unsplash, isteğe bağlı)
 Haber görselleri şu sırayla seçilir: haber bir şirketle ilgiliyse şirketin logo kartı, değilse Unsplash'ten konuya uygun bir fotoğraf, ikisi de yoksa illüstrasyon.
@@ -131,9 +131,9 @@ Varsayılan ayarlarla (günde 1 çalışma, en fazla 10 haber):
 |---|---|
 | Claude API (Sonnet 5.5, web araması ve editör adımı dahil; çalışma başına ~0,55–0,70 $) | ~17–25 $ |
 | X API okuma (31 hesap; okunan gönderi başına ~0,005 $) | ~5–15 $ |
-| X API paylaşım (günde 2 linkli gönderi, ~0,20 $) | ~12 $ |
+| X API paylaşım (günde 2 linksiz gönderi, ~0,015 $) | ~1 $ |
 | GitHub Pages ve Actions | Herkese açık repoda ücretsiz |
-| **Toplam** | **~35–55 $** |
+| **Toplam** | **~25–40 $** |
 
 **Her çalışmanın gerçek maliyeti kaydedilir:**
 - **Actions özeti:** Her "Haber güncellemesi" çalışmasının özetinde token sayıları, arama sayısı ve dolar maliyeti tablo halinde görünür.

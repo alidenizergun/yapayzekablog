@@ -6,7 +6,8 @@
 //   X_API_KEY, X_API_SECRET, X_ACCESS_TOKEN, X_ACCESS_SECRET
 // Ayarlar:  X_POSTS_PER_RUN (varsayılan 2; 0 = paylaşım kapalı) · SITE_URL · BASE_PATH · --dry-run
 //
-// Maliyet: X link içeren her gönderiden ~0,20 $ alıyor (linksiz ~0,015 $). Günde 1 çalışma × 2 gönderi ≈ günde 0,40 $.
+// Varsayılan: gönderiler LİNKSİZ atılır (X linkli gönderiden ~0,20 $, linksizden ~0,015 $ alıyor).
+// Linkli paylaşıma dönmek için repo değişkeni X_WITH_LINK = true.
 
 import fs from 'node:fs';
 import path from 'node:path';
@@ -19,7 +20,8 @@ const POSTED = path.join(ROOT, 'data/x-paylasilan.json');
 const DRY = process.argv.includes('--dry-run');
 const PER_RUN = Number(process.env.X_POSTS_PER_RUN ?? 2);
 const MAX_AGE_H = 30; // daha eski kuyruk kayıtları paylaşılmadan düşer
-const LINK_PRICE = 0.2;
+const WITH_LINK = /^(1|true|yes|evet)$/i.test(process.env.X_WITH_LINK || '');
+const POST_PRICE = WITH_LINK ? 0.2 : 0.015;
 const log = (...a) => console.log('[x-paylaşım]', ...a);
 
 const read = (f, d) => { try { return JSON.parse(fs.readFileSync(f, 'utf8')); } catch { return d; } };
@@ -68,7 +70,7 @@ async function postTweet(text, keys) {
 }
 
 // ------------------------------------------------------------ metin
-// X'te her link 23 karakter sayılır; sınır 280.
+// Sınır 280 karakter; linkli modda link 23 karakter sayılır.
 // Güvenlik (LLM01/LLM06): tweet metni webden derlenen içerikten üretildiği için, bir kaynağa gizlenmiş talimat
 // metni değiştirmiş olabilir. Metin haberin başlığıyla konu olarak örtüşmüyorsa veya şüpheli öğe içeriyorsa
 // tweet yerine haberin (yayın kurallarından geçmiş) başlığı paylaşılır.
@@ -92,9 +94,9 @@ function compose(item, link) {
   const safe = safeTweetText(item);
   if (safe.reason) log(`tweet metni yerine başlık kullanıldı (${safe.reason}): ${item.title}`);
   let text = safe.text;
-  const room = 280 - 2 - 23;
+  const room = WITH_LINK ? 280 - 2 - 23 : 280;
   if ([...text].length > room) text = [...text].slice(0, room - 1).join('').replace(/\s+\S*$/, '') + '…';
-  return `${text}\n\n${link}`;
+  return WITH_LINK ? `${text}\n\n${link}` : text;
 }
 
 async function isLive(link) {
@@ -161,7 +163,7 @@ async function main() {
   const md = [
     '## X paylaşımı',
     `- Kuyrukta: ${fresh.length} yeni haber · seçilen: ${picks.length} · paylaşılan: ${sent}`,
-    `- Tahmini maliyet: $${(sent * LINK_PRICE).toFixed(2)} (linkli gönderi başına ~$${LINK_PRICE})`,
+    `- Tahmini maliyet: $${(sent * POST_PRICE).toFixed(3)} (${WITH_LINK ? 'linkli' : 'linksiz'} gönderi başına ~$${POST_PRICE})`,
     ...summary,
   ].join('\n');
   if (process.env.GITHUB_STEP_SUMMARY) fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY, md + '\n');

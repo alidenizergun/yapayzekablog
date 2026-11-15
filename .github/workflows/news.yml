@@ -123,6 +123,7 @@ jobs:
           X_ACCESS_TOKEN: ${{ secrets.X_ACCESS_TOKEN }}
           X_ACCESS_SECRET: ${{ secrets.X_ACCESS_SECRET }}
           X_POSTS_PER_RUN: ${{ vars.X_POSTS_PER_RUN || '2' }}
+          X_WITH_LINK: ${{ vars.X_WITH_LINK || 'false' }}
           SITE_URL: ${{ vars.SITE_URL }}
           BASE_PATH: ${{ vars.BASE_PATH }}
         run: node scripts/x-post.mjs
