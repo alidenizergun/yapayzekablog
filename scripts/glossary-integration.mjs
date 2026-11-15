@@ -1,4 +1,4 @@
-// Derleme sonrası: haber metinlerinde (div.prose) sözlükteki bir terim ilk geçtiği yerde /sozluk/#terim bağlantısı olur.
+// Derleme sonrası: haber metinlerinde (div.prose) sözlükteki bir terim ilk geçtiği yerde /sozluk/<terim>/ sayfasına bağlanır.
 // - Her terim bir haberde en fazla bir kez, bir haberde en fazla 6 terim bağlanır
 // - Başlık, mevcut link ve kod içindeki metne dokunulmaz
 import fs from 'node:fs';
@@ -12,7 +12,7 @@ const isLetter = (ch) => !!ch && /\p{L}|\p{N}/u.test(ch);
 const esc = (s) => s.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;');
 
 /** Metinde terimin ilk geçtiği yer: [başlangıç, bitiş] */
-function find(text, entry) {
+export function find(text, entry) {
   const low = lower(text);
   let best = null;
   for (const m of entry.match) {
@@ -57,7 +57,7 @@ export function linkGlossary(html, base = '') {
       if (n >= MAX_PER_PAGE || at[0] < cursor) continue;
       const word = text.slice(at[0], at[1]);
       const short = g.def.length > 140 ? g.def.slice(0, 137).replace(/\s+\S*$/, '') + '…' : g.def;
-      out += text.slice(cursor, at[0]) + `<a class="gloss" href="${base}/sozluk/#${g.slug}" title="${esc(short)}">${word}</a>`;
+      out += text.slice(cursor, at[0]) + `<a class="gloss" href="${base}/sozluk/${g.slug}/" title="${esc(short)}">${word}</a>`;
       cursor = at[1];
       used.add(g.slug);
       n++;

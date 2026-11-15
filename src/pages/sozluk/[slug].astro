@@ -1,0 +1,68 @@
+---
+import Base from '../../layouts/Base.astro';
+import NewsRow from '../../components/NewsRow.astro';
+import Sidebar from '../../components/Sidebar.astro';
+import { GLOSSARY } from '../../lib/glossary.js';
+import { LONG } from '../../lib/glossary-long.js';
+import { getNews, spreadVisuals, url } from '../../lib/news.js';
+import { find } from '../../../scripts/glossary-integration.mjs';
+
+export function getStaticPaths() {
+  return GLOSSARY.map((t) => ({ params: { slug: t.slug }, props: { t } }));
+}
+const { t } = Astro.props;
+const long = LONG[t.slug];
+const news = await getNews();
+// Terimin geçtiği haberler (haber metninde, başlıkta veya spotta)
+const related = news.filter((n) => find(`${n.data.title} ${n.data.spot} ${n.body}`, t)).slice(0, 8);
+const rowV = spreadVisuals(related);
+// Alfabetik komşu terimler + aynı haberlerde sık geçen terimler
+const sorted = [...GLOSSARY].sort((a, b) => a.term.localeCompare(b.term, 'tr'));
+const i = sorted.findIndex((x) => x.slug === t.slug);
+const others = [sorted[i - 1], sorted[i + 1], ...sorted.filter((x) => x.slug !== t.slug && related.some((n) => find(n.body, x)))]
+  .filter(Boolean).filter((x, k, arr) => arr.findIndex((y) => y.slug === x.slug) === k).slice(0, 6);
+const name = t.term;
+const pageUrl = new URL(url(`/sozluk/${t.slug}/`), Astro.site).href;
+const jsonLd = [
+  { '@type': 'DefinedTerm', '@id': `${pageUrl}#terim`, name: t.term, alternateName: t.en, description: t.def, url: pageUrl,
+    inDefinedTermSet: { '@type': 'DefinedTermSet', name: 'Yapay zeka terimleri sözlüğü', url: new URL(url('/sozluk/'), Astro.site).href } },
+  { '@type': 'Article', headline: `${name} nedir?`, description: t.def, inLanguage: 'tr-TR', url: pageUrl, mainEntityOfPage: pageUrl,
+    about: { '@id': `${pageUrl}#terim` }, author: { '@type': 'Organization', name: 'YZ Gündemi' }, publisher: { '@id': new URL(url('/#organization'), Astro.site).href } },
+];
+---
+<Base title={`${name} nedir? Yapay zekada ${t.en} ne demek`} description={t.def} jsonLd={jsonLd}
+  breadcrumbs={[{ name: 'Ana sayfa', path: '/' }, { name: 'Terimler sözlüğü', path: '/sozluk/' }, { name, path: `/sozluk/${t.slug}/` }]}>
+  <div class="cols" style="margin-top:0">
+    <article class="article term" data-pagefind-body data-pagefind-meta="date:Sözlük">
+      <nav class="crumb" aria-label="Konum" data-pagefind-ignore><a href={url('/')}>Ana sayfa</a><span aria-hidden="true">/</span><a href={url('/sozluk/')}>Terimler sözlüğü</a></nav>
+      <span class="badge" data-pagefind-ignore>Sözlük</span>
+      <h1 data-pagefind-meta="title">{name} nedir?</h1>
+      <p class="term-en" data-pagefind-ignore>İngilizcesi: <span lang="en">{t.en}</span></p>
+      <p class="spot term-def">{t.def}</p>
+      {long && (
+        <div class="prose">
+          <h2>Nasıl çalışır?</h2>
+          <p>{long.how}</p>
+          <h2>Neden önemli?</h2>
+          <p>{long.why}</p>
+          <h2>Örnek</h2>
+          <p>{long.example}</p>
+        </div>
+      )}
+      {others.length > 0 && (
+        <nav class="entity-links" aria-label="İlgili terimler" data-pagefind-ignore>
+          <strong>İlgili terimler:</strong>
+          {others.map((o) => <a class="tag" href={url(`/sozluk/${o.slug}/`)}>{o.term}</a>)}
+        </nav>
+      )}
+      {related.length > 0 && (
+        <section class="term-news" aria-labelledby="tn-h" data-pagefind-ignore>
+          <div class="sechead"><h2 id="tn-h">"{name}" geçen haberler</h2><span class="meta">{related.length} haber</span></div>
+          {related.map((n) => <NewsRow item={n} choice={rowV.get(n.id)} />)}
+        </section>
+      )}
+      <p class="ai-note" data-pagefind-ignore><a href={url('/sozluk/')}>Tüm terimler →</a></p>
+    </article>
+    <Sidebar exclude={related.map((n) => n.id)} />
+  </div>
+</Base>

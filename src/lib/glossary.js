@@ -16,7 +16,7 @@ export const GLOSSARY = [
     def: "Yanıt vermeden önce problemi adım adım düşünerek çözen dil modeli. Matematik, kodlama ve çok adımlı görevlerde daha başarılıdır ama daha yavaş ve pahalı çalışır." },
   { slug: 'api', term: 'API', en: 'application programming interface', match: ['=api'],
     def: "Bir yazılımın başka bir yazılımla konuşmasını sağlayan arayüz. Geliştiriciler yapay zeka modellerini kendi uygulamalarına çoğunlukla API üzerinden bağlar ve kullandıkları kadar öder." },
-  { slug: 'bagalam-penceresi', term: 'Bağlam penceresi', en: 'context window', match: ['bağlam pencere'],
+  { slug: 'baglam-penceresi', term: 'Bağlam penceresi', en: 'context window', match: ['bağlam pencere'],
     def: "Bir dil modelinin tek seferde \"görebildiği\" metin miktarı; token cinsinden ölçülür. Pencere ne kadar büyükse model o kadar uzun belge veya konuşmayı aynı anda dikkate alabilir." },
   { slug: 'benchmark', term: 'Benchmark (karşılaştırma testi)', en: 'benchmark', match: ['benchmark'],
     def: "Modellerin aynı görevlerde ölçülüp karşılaştırıldığı standart test. Sonuçlar şirketlerce açıklandığında bağımsız testlerle birlikte okunmalıdır." },
@@ -62,4 +62,4 @@ export const GLOSSARY = [
     def: "Kendisine verilen bir hedefi, adımları kendisi planlayarak ve araçlar kullanarak (web'de arama, form doldurma, kod çalıştırma gibi) yerine getiren yapay zeka sistemi." },
 ];
 
-export const glossaryUrl = (slug) => `/sozluk/#${slug}`;
+export const glossaryUrl = (slug) => `/sozluk/${slug}/`;

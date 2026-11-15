@@ -535,3 +535,11 @@ header.site .masthead { display: flex; align-items: center; justify-content: spa
   .digest-item { grid-template-columns: minmax(0, 1fr); gap: 12px; }
   .digest-item .visual { height: 180px; }
 }
+/* Sözlük terim sayfası */
+.term-en { margin: 6px 0 0; font-size: 14px; color: var(--muted); }
+.term-def { margin-top: 14px; font-weight: 500; color: var(--fg); }
+.term .prose h2 { font-size: 22px; margin-top: 32px; }
+.term-news { margin-top: 40px; }
+.glossary-item dt a:hover { color: var(--accent-text); }
+.glossary-more { display: inline-block; margin-top: 6px; font-family: var(--body); font-size: 14px; font-weight: 600; color: var(--accent-text); }
+.glossary-more:hover { text-decoration: underline; }
