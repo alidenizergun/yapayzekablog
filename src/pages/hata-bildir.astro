@@ -1,0 +1,172 @@
+---
+import Base from '../layouts/Base.astro';
+import { getNews, slugOf, newsUrl, url } from '../lib/news.js';
+
+// Bildirimler nereye gider?
+// - PUBLIC_REPORT_FORM_ACTION tanımlıysa (Formspree, Getform vb. form adresi) form oraya gönderilir
+//   ve bildirim e-postanıza düşer. Ziyaretçinin hiçbir hesaba ihtiyacı olmaz.
+// - Tanımlı değilse bildirim, sitenin GitHub reposunda hazır doldurulmuş bir "issue" olarak açılır.
+const formAction = import.meta.env.PUBLIC_REPORT_FORM_ACTION || '';
+const repo = process.env.GITHUB_REPOSITORY || 'alidenizergun/yapayzekablog';
+
+const news = (await getNews()).slice(0, 400);
+const site = Astro.site;
+const index = Object.fromEntries(news.map((n) => [slugOf(n), { t: n.data.title, u: new URL(newsUrl(n), site).href }]));
+---
+<Base title="Hata bildir" description="Bir haberde hata gördüyseniz bize bildirin; inceleyip düzeltelim.">
+  <div class="cols" style="margin-top:0;gap:56px">
+    <section class="article report" aria-labelledby="report-h">
+      <nav class="crumb" aria-label="Konum"><a href={url('/')}>Ana sayfa</a><span aria-hidden="true">/</span><span>Hata bildir</span></nav>
+      <h1 id="report-h">Hata bildir</h1>
+      <p class="spot">Haberlerimiz yapay zeka desteğiyle, belirtilen kaynaklardan derlenir. Yanlış bir bilgi, eksik bir kaynak ya da yazım hatası gördüyseniz bize bildirin. Her bildirimi inceliyoruz; düzeltme gerekirse haber güncellenir.</p>
+
+      <form id="report-form" class="report-form" data-action={formAction} data-repo={repo} novalidate>
+        <div class="field" id="news-field">
+          <label for="r-news">Hangi haber?</label>
+          <select id="r-news" name="haber">
+            <option value="">Genel bildirim (belirli bir haber değil)</option>
+            {news.map((n) => <option value={slugOf(n)}>{n.data.title}</option>)}
+          </select>
+          <p class="hint" id="r-news-link" hidden><a href="#" target="_blank" rel="noopener">Haberi yeni sekmede aç</a></p>
+        </div>
+
+        <fieldset class="field">
+          <legend>Hatanın türü</legend>
+          <div class="choices">
+            <label class="choice"><input type="radio" name="tur" value="Yanlış bilgi" checked /> Yanlış bilgi</label>
+            <label class="choice"><input type="radio" name="tur" value="Kaynak sorunu" /> Kaynak eksik veya hatalı</label>
+            <label class="choice"><input type="radio" name="tur" value="Güncel değil" /> Bilgi güncel değil</label>
+            <label class="choice"><input type="radio" name="tur" value="Yazım veya çeviri" /> Yazım veya çeviri hatası</label>
+            <label class="choice"><input type="radio" name="tur" value="Diğer" /> Diğer</label>
+          </div>
+        </fieldset>
+
+        <div class="field">
+          <label for="r-desc">Hata nedir?</label>
+          <textarea id="r-desc" name="aciklama" rows="6" required minlength="15" maxlength="3000" placeholder="Örnek: Haberde yatırım tutarı 500 milyon dolar yazıyor, kaynakta 50 milyon dolar geçiyor."></textarea>
+          <p class="error" id="r-desc-err" hidden>Lütfen hatayı en az birkaç kelimeyle açıklayın.</p>
+        </div>
+
+        <div class="field">
+          <label for="r-source">Doğru bilginin kaynağı <span class="opt">(isteğe bağlı)</span></label>
+          <input id="r-source" name="kaynak" type="url" inputmode="url" placeholder="https://" />
+          <p class="error" id="r-source-err" hidden>Bağlantı https:// ile başlamalı.</p>
+        </div>
+
+        <div class="field">
+          <label for="r-email">E-posta adresiniz <span class="opt">(isteğe bağlı, size dönüş yapabilmemiz için)</span></label>
+          <input id="r-email" name="email" type="email" autocomplete="email" placeholder="ad@ornek.com" />
+        </div>
+
+        {!formAction && (
+          <p class="hint">Gönder'e bastığınızda bildiriminiz GitHub'da hazır doldurulmuş olarak açılır. Göndermek için ücretsiz bir GitHub hesabıyla oturum açmanız gerekir.</p>
+        )}
+        <button type="submit" class="btn report-submit">{formAction ? 'Bildirimi gönder' : "GitHub'da bildirimi aç"}</button>
+
+        <div class="report-ok" id="report-ok" role="status" hidden>
+          <strong>Teşekkürler, bildiriminiz bize ulaştı.</strong>
+          <p>İnceleyip gerekirse haberi düzelteceğiz. <a href={url('/')}>Ana sayfaya dön</a></p>
+        </div>
+        <div class="report-err" id="report-err" role="alert" hidden>
+          <strong>Bildirim gönderilemedi.</strong>
+          <p>Bağlantınızı kontrol edip tekrar deneyin.</p>
+        </div>
+      </form>
+    </section>
+
+    <aside class="side-col">
+      <section class="week">
+        <span class="cat">Yayın ilkelerimiz</span>
+        <h2>Düzeltmeleri nasıl yapıyoruz?</h2>
+        <p>Her haberde en az bir kaynak bulunur. Bildirilen hata kaynaklarla karşılaştırılır; doğrulanırsa haber düzeltilir ya da yayından kaldırılır.</p>
+        <a href={url('/hakkimizda/')}>Hakkımızda →</a>
+      </section>
+    </aside>
+  </div>
+
+  <script define:vars={{ index }} is:inline>
+    window.__NEWS_INDEX__ = index;
+  </script>
+  <script>
+    const form = document.getElementById('report-form') as HTMLFormElement;
+    const idx = (window as any).__NEWS_INDEX__ as Record<string, { t: string; u: string }>;
+    const sel = document.getElementById('r-news') as HTMLSelectElement;
+    const linkBox = document.getElementById('r-news-link')!;
+    const link = linkBox.querySelector('a')!;
+    const desc = document.getElementById('r-desc') as HTMLTextAreaElement;
+    const src = document.getElementById('r-source') as HTMLInputElement;
+    const ok = document.getElementById('report-ok')!;
+    const err = document.getElementById('report-err')!;
+
+    const showLink = () => {
+      const n = idx[sel.value];
+      linkBox.hidden = !n;
+      if (n) link.href = n.u;
+    };
+    const preset = new URLSearchParams(location.search).get('haber');
+    if (preset && idx[preset]) sel.value = preset;
+    showLink();
+    sel.addEventListener('change', showLink);
+
+    const valid = () => {
+      const dOk = desc.value.trim().length >= 15;
+      const s = src.value.trim();
+      const sOk = !s || /^https?:\/\/\S+\.\S+/.test(s);
+      document.getElementById('r-desc-err')!.hidden = dOk;
+      document.getElementById('r-source-err')!.hidden = sOk;
+      desc.setAttribute('aria-invalid', String(!dOk));
+      src.setAttribute('aria-invalid', String(!sOk));
+      if (!dOk) desc.focus(); else if (!sOk) src.focus();
+      return dOk && sOk;
+    };
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      ok.hidden = true; err.hidden = true;
+      if (!valid()) return;
+      const fd = new FormData(form);
+      const n = idx[sel.value];
+      const tur = String(fd.get('tur') || 'Diğer');
+      const action = form.dataset.action;
+
+      if (action) {
+        fd.set('haber', n ? `${n.t} — ${n.u}` : 'Genel bildirim');
+        fd.set('_subject', `Hata bildirimi: ${tur}${n ? ' — ' + n.t : ''}`);
+        const btn = form.querySelector('button[type=submit]') as HTMLButtonElement;
+        btn.disabled = true; btn.textContent = 'Gönderiliyor…';
+        try {
+          const res = await fetch(action, { method: 'POST', body: fd, headers: { Accept: 'application/json' } });
+          if (!res.ok) throw new Error(String(res.status));
+          form.querySelectorAll('.field, .report-submit').forEach((el) => ((el as HTMLElement).hidden = true));
+          ok.hidden = false;
+        } catch {
+          err.hidden = false;
+        } finally {
+          btn.disabled = false; btn.textContent = 'Bildirimi gönder';
+        }
+        return;
+      }
+
+      // GitHub issue olarak aç
+      const body = [
+        `**Haber:** ${n ? `[${n.t}](${n.u})` : 'Genel bildirim'}`,
+        `**Hatanın türü:** ${tur}`,
+        '',
+        '**Açıklama:**',
+        desc.value.trim(),
+        '',
+        `**Doğru bilginin kaynağı:** ${src.value.trim() || '-'}`,
+        `**İletişim:** ${String(fd.get('email') || '').trim() || '-'}`,
+        '',
+        '_Bu bildirim sitedeki "Hata bildir" formundan oluşturuldu._',
+      ].join('\n');
+      const title = `[Hata bildirimi] ${tur}${n ? ': ' + n.t : ''}`.slice(0, 200);
+      const ghUrl = `https://github.com/${form.dataset.repo}/issues/new?title=${encodeURIComponent(title)}&body=${encodeURIComponent(body)}`;
+      window.open(ghUrl, '_blank', 'noopener');
+      ok.hidden = false;
+      ok.querySelector('strong')!.textContent = 'Bildiriminiz GitHub\'da yeni sekmede açıldı.';
+      ok.querySelector('p')!.innerHTML = 'Göndermek için açılan sayfada <b>Create</b> butonuna basın. Sekme açılmadıysa <a target="_blank" rel="noopener">buraya tıklayın</a>.';
+      (ok.querySelector('p a') as HTMLAnchorElement).href = ghUrl;
+    });
+  </script>
+</Base>

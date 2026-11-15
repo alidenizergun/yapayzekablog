@@ -63,7 +63,7 @@ const invest = news.filter((n) => n.data.category === 'girisim-yatirim').slice(0
 
       <div class="cols">
         <section class="main" aria-labelledby="latest-h">
-          <div class="sechead"><h2 id="latest-h">Son Haberler</h2><span class="meta">Günde {SITE.updatesPerDay} kez güncellenir</span></div>
+          <div class="sechead"><h2 id="latest-h">Son Haberler</h2></div>
           {latest.length ? latest.map((n) => <NewsRow item={n} />) : <p class="empty">Yeni haberler bir sonraki güncellemede burada olacak.</p>}
           {hasMore && <div class="pager"><span></span><a href={url('/sayfa/2/')}>Daha eski haberler →</a></div>}
         </section>

@@ -49,7 +49,6 @@ const og = ogImage ? new URL(ogImage, Astro.site).href : new URL(url('/img/arama
   <div class="ticker"><div class="wrap">
     <span class="badge">Son dakika</span>
     {latest ? <a href={newsUrl(latest)}>{latest.data.title}</a> : <span>Yeni haberler yakında.</span>}
-    <span class="date" data-today>Günde {SITE.updatesPerDay} kez güncellenir</span>
   </div></div>
 
   <header class="site"><div class="wrap">
@@ -82,6 +81,7 @@ const og = ogImage ? new URL(ogImage, Astro.site).href : new URL(url('/img/arama
     </div>
     <nav aria-label="Alt menü">
       <a href={url('/hakkimizda/')}>Hakkımızda</a>
+      <a href={url('/hata-bildir/')}>Hata bildir</a>
       <a href={url('/rss.xml')}>RSS</a>
       <a href={url('/sitemap-index.xml')}>Site haritası</a>
     </nav>

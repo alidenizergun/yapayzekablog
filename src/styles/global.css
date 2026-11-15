@@ -170,3 +170,30 @@ footer.site nav { display: flex; flex-wrap: wrap; gap: 12px 28px; }
 footer.site nav a { color: #fff; }
 footer.site nav a:hover { text-decoration: underline; }
 @media (prefers-reduced-motion: no-preference) { a img.thumb { transition: opacity .2s; } a:hover img.thumb { opacity: .88; } }
+
+/* Hata bildirim formu */
+.ai-note a { color: var(--accent-text); text-decoration: underline; text-underline-offset: 3px; font-weight: 600; }
+.report-form { margin-top: 32px; display: flex; flex-direction: column; gap: 24px; max-width: 640px; }
+.report-form .field { display: flex; flex-direction: column; gap: 8px; border: 0; margin: 0; padding: 0; min-width: 0; }
+.report-form label, .report-form legend { font-weight: 600; font-size: 15px; padding: 0; }
+.report-form .opt { font-weight: 400; color: var(--muted); }
+.report-form select, .report-form input[type=url], .report-form input[type=email], .report-form textarea {
+  width: 100%; min-height: 46px; padding: 10px 14px; border: 1px solid var(--line); border-radius: 6px;
+  background: var(--bg); color: var(--fg); font: inherit; font-size: 16px;
+}
+.report-form textarea { resize: vertical; line-height: 1.5; }
+.report-form select:focus, .report-form input:focus, .report-form textarea:focus { outline: 3px solid var(--accent); outline-offset: 1px; border-color: transparent; }
+.report-form [aria-invalid="true"] { border-color: var(--accent); }
+.report-form .choices { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 4px; }
+.report-form .choice { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 14px; border: 1px solid var(--line); border-radius: 22px; font-weight: 500; cursor: pointer; }
+.report-form .choice:has(input:checked) { border-color: var(--accent); color: var(--accent-text); background: var(--soft); }
+.report-form .choice input { accent-color: var(--accent); margin: 0; }
+.report-form .hint { margin: 0; font-size: 14px; color: var(--muted); }
+.report-form .hint a { color: var(--accent-text); text-decoration: underline; }
+.report-form .error { margin: 0; font-size: 14px; color: var(--accent-text); font-weight: 600; }
+.report-submit { align-self: flex-start; height: 48px; padding: 0 24px; font-size: 15px; }
+.report-submit:disabled { opacity: .6; cursor: wait; }
+.report-ok, .report-err { padding: 18px 20px; border-radius: 8px; background: var(--soft); border: 1px solid var(--line); }
+.report-ok p, .report-err p { margin: 6px 0 0; font-size: 15px; }
+.report-ok a, .report-err a { color: var(--accent-text); text-decoration: underline; }
+.report-err { border-color: var(--accent); }

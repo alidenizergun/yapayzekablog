@@ -87,7 +87,9 @@ const jsonLd = {
             </li>
           ))}
         </ol>
-        {d.generated && <p class="ai-note">Bu haber, yukarıdaki kaynaklardan yapay zeka desteğiyle derlenmiştir. Bir hata görürseniz bize bildirin.</p>}
+        {d.generated
+          ? <p class="ai-note">Bu haber, yukarıdaki kaynaklardan yapay zeka desteğiyle derlenmiştir. Bir hata görürseniz <a href={`${url('/hata-bildir/')}?haber=${slugOf(entry)}`}>bize bildirin</a>.</p>
+          : <p class="ai-note">Bir hata görürseniz <a href={`${url('/hata-bildir/')}?haber=${slugOf(entry)}`}>bize bildirin</a>.</p>}
       </section>
 
       {d.tags.length > 0 && <div class="atags">{d.tags.map((t) => <span class="tag">#{t}</span>)}</div>}
