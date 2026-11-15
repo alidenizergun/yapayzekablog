@@ -599,3 +599,34 @@ header.site .masthead { display: flex; align-items: center; justify-content: spa
 .guide-more li + li { margin-top: 6px; }
 .guide-more a { font-weight: 600; }
 .guide-more a:hover { color: var(--accent-text); }
+
+/* ---------- Model karşılaştırma ---------- */
+.models-checked { margin-top: 10px; font-size: 14px; color: var(--muted); }
+.model-table { min-width: 860px; }
+.model-table .num { text-align: right; white-space: nowrap; font-variant-numeric: tabular-nums; }
+.model-table tr[hidden] { display: none; }
+.model-note { display: block; margin-top: 4px; font-size: 13px; max-width: 32ch; }
+.model-table .src { font-size: 14px; color: var(--accent-text); }
+.model-table .src:hover { text-decoration: underline; }
+.pclass { display: inline-block; padding: 2px 10px; border-radius: 12px; font-size: 13px; font-weight: 700; background: var(--soft); }
+.pclass-ust { color: var(--accent-text); }
+.calc { margin-top: 44px; padding: 24px; border-radius: 8px; background: var(--soft); max-width: 720px; }
+.calc h2, .models-faq h2, .models-news h2 { font-size: 22px; margin: 0; }
+.calc > p { margin: 8px 0 0; color: var(--muted); }
+.calc-in { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin-top: 16px; }
+.calc-in label { display: grid; gap: 6px; font-size: 14px; font-weight: 600; }
+.calc-in input { height: 44px; padding: 0 12px; border: 1px solid var(--line); border-radius: 8px; background: var(--bg); color: var(--fg); font: inherit; font-size: 16px; min-width: 0; }
+.calc-out { margin: 18px 0 0; padding: 0; list-style: none; counter-reset: c; }
+.calc-out li { display: flex; justify-content: space-between; gap: 12px; padding: 8px 0; border-bottom: 1px solid var(--line); counter-increment: c; }
+.calc-out li span::before { content: counter(c) ". "; color: var(--muted); }
+.calc-out strong { font-variant-numeric: tabular-nums; }
+.models-faq { margin-top: 44px; max-width: 720px; }
+.models-faq details { border-bottom: 1px solid var(--line); padding-block: 14px; }
+.models-faq summary { cursor: pointer; font-weight: 700; font-size: 17px; }
+.models-faq details p { margin: 10px 0 0; line-height: 1.6; }
+.models-faq > p { margin-top: 18px; }
+.models-faq > p a, .models-news a { color: var(--accent-text); }
+.models-news { margin-top: 44px; max-width: 720px; }
+.models-news ul { margin: 12px 0 0; padding-left: 20px; }
+.models-news li + li { margin-top: 8px; }
+@media (max-width: 560px) { .calc-in { grid-template-columns: 1fr; } .calc { padding: 18px; } }

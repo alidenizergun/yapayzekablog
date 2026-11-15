@@ -1,0 +1,104 @@
+---
+import Base from '../layouts/Base.astro';
+import { MODELS, MODELS_CHECKED, priceClass } from '../lib/models.js';
+import { getNews, newsUrl, formatDate, url } from '../lib/news.js';
+
+const rows = [...MODELS].sort((a, b) => b.output - a.output || b.input - a.input);
+const companies = [...new Set(rows.map((m) => m.company))];
+const usd = (n) => '$' + n.toLocaleString('tr-TR', { minimumFractionDigits: Number.isInteger(n) ? 0 : 2, maximumFractionDigits: 2 });
+const checked = formatDate(new Date(`${MODELS_CHECKED}T12:00:00+03:00`), false);
+const modelNews = (await getNews()).filter((n) => n.data.category === 'modeller').slice(0, 5);
+const pageUrl = new URL(url('/modeller-karsilastirma/'), Astro.site).href;
+const faq = [
+  ['En ucuz yapay zeka modeli hangisi?', `Bu tablodaki modeller arasında milyon token başına en düşük fiyatlar ${rows.filter((m) => m.input === Math.min(...rows.map((x) => x.input))).map((m) => m.model).join(' ve ')} modellerine ait (girdi ${usd(Math.min(...rows.map((x) => x.input)))}). Ucuz modeller basit ve yüksek hacimli işler için uygundur; zor görevlerde daha büyük modeller daha iyi sonuç verir.`],
+  ['Token nedir, fiyat nasıl hesaplanır?', 'Token, dil modellerinin metni işlerken kullandığı küçük parçalardır. API fiyatı, modele gönderilen (girdi) ve modelin ürettiği (çıktı) token sayısına göre ayrı ayrı hesaplanır. Çıktı token\'ı genellikle girdiden birkaç kat pahalıdır.'],
+  ['Bağlam penceresi ne demek?', 'Modelin tek seferde dikkate alabildiği toplam metin miktarıdır. 1M (bir milyon) token, yüzlerce sayfalık belge veya büyük bir kod tabanı demektir.'],
+  ['Fiyatlar ne sıklıkla güncelleniyor?', `Tablo, şirketlerin resmi fiyat sayfalarından kontrol edilir; son kontrol tarihi ${checked}. Fiyatlar sık değiştiği için satın alma kararından önce resmi sayfayı kontrol edin.`],
+];
+const jsonLd = [
+  { '@type': 'Dataset', name: 'Yapay zeka modelleri API fiyat karşılaştırması', description: 'Önde gelen yapay zeka modellerinin milyon token başına girdi ve çıktı fiyatları ile bağlam pencereleri.',
+    url: pageUrl, inLanguage: 'tr-TR', dateModified: MODELS_CHECKED, creator: { '@id': new URL(url('/#organization'), Astro.site).href },
+    isBasedOn: [...new Set(rows.map((m) => m.src.url))] },
+  { '@type': 'FAQPage', mainEntity: faq.map(([q, a]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a } })) },
+];
+---
+<Base title="Yapay zeka modelleri karşılaştırma: API fiyatları ve bağlam pencereleri" description={`ChatGPT (OpenAI), Claude, Gemini ve DeepSeek modellerinin milyon token başına API fiyatları, bağlam pencereleri ve aylık maliyet hesaplayıcı. Son kontrol: ${checked}.`}
+  jsonLd={jsonLd} breadcrumbs={[{ name: 'Ana sayfa', path: '/' }, { name: 'Model karşılaştırma', path: '/modeller-karsilastirma/' }]}>
+  <section class="deals models">
+    <span class="cat">Karşılaştırma</span>
+    <h1 class="page-h">Yapay zeka modelleri karşılaştırma tablosu</h1>
+    <p class="spot">Önde gelen yapay zeka modellerinin API fiyatları ve bağlam pencereleri. Fiyatlar ABD doları cinsinden, 1 milyon token başınadır; önbellek ve toplu işlem indirimleri dahil değildir. Her satır şirketin resmi kaynağına bağlanır.</p>
+    <p class="models-checked">Son kontrol: <time datetime={MODELS_CHECKED}>{checked}</time></p>
+
+    <div class="deal-filters" role="group" aria-label="Şirkete göre süz" data-m-filters>
+      <button type="button" aria-pressed="true" data-c="">Tümü</button>
+      {companies.map((c) => <button type="button" aria-pressed="false" data-c={c}>{c}</button>)}
+    </div>
+
+    <div class="deal-table-wrap">
+      <table class="deal-table model-table">
+        <thead><tr><th scope="col">Model</th><th scope="col">Şirket</th><th scope="col" class="num">Girdi</th><th scope="col" class="num">Çıktı</th><th scope="col">Bağlam</th><th scope="col">Fiyat sınıfı</th><th scope="col">Kaynak</th></tr></thead>
+        <tbody>
+          {rows.map((m) => (
+            <tr data-c={m.company}>
+              <td><strong>{m.model}</strong>{m.note && <span class="meta model-note">{m.note}</span>}</td>
+              <td><a href={url(`/konu/${m.entity}/`)}>{m.company}</a></td>
+              <td class="num">{usd(m.input)}</td>
+              <td class="num">{usd(m.output)}</td>
+              <td class="nowrap">{m.context ? `${m.context} token` : <span class="meta">Belirtilmemiş</span>}</td>
+              <td><span class={`pclass pclass-${priceClass(m) === 'Üst' ? 'ust' : priceClass(m) === 'Orta' ? 'orta' : 'eko'}`}>{priceClass(m)}</span></td>
+              <td><a class="src" href={m.src.url} rel="noopener">{m.src.label}</a>{m.checked && <span class="meta"> · {formatDate(new Date(`${m.checked}T12:00:00+03:00`), false)}</span>}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+    <p class="ai-note">"Fiyat sınıfı" YZ Gündemi'nin çıktı fiyatına göre yaptığı sınıflandırmadır (Üst: 20 $ ve üzeri, Orta: 5-20 $, Ekonomik: 5 $ altı); modelin kalitesini değil maliyetini gösterir. "Belirtilmemiş": resmi fiyat sayfasında bağlam penceresi yazmıyor.</p>
+
+    <section class="calc" aria-labelledby="calc-h" data-calc>
+      <h2 id="calc-h">Aylık maliyet hesaplayıcı</h2>
+      <p>Ayda modele göndereceğiniz ve modelden alacağınız token miktarını girin. Kabaca 1 milyon token, Türkçe metinde birkaç yüz sayfaya karşılık gelir.</p>
+      <div class="calc-in">
+        <label>Girdi (milyon token / ay)<input type="number" min="0" step="0.5" value="10" inputmode="decimal" data-in /></label>
+        <label>Çıktı (milyon token / ay)<input type="number" min="0" step="0.5" value="2" inputmode="decimal" data-out /></label>
+      </div>
+      <ol class="calc-out" data-results aria-live="polite">
+        {rows.map((m) => <li data-model={m.model} data-i={m.input} data-o={m.output}><span>{m.model}</span><strong>—</strong></li>)}
+      </ol>
+      <p class="ai-note">Hesap standart fiyatlarla yapılır; önbellek, toplu işlem, yoğun saat dışı ve uzun istem fiyatları hesaba katılmaz.</p>
+    </section>
+
+    <section class="models-faq" aria-labelledby="faq-h">
+      <h2 id="faq-h">Sık sorulanlar</h2>
+      {faq.map(([q, a]) => <details><summary>{q}</summary><p>{a}</p></details>)}
+      <p>Model seçerken fiyatın yanında başka ne önemli? <a href={url('/rehber/hangi-yapay-zeka-modelini-secmeliyim/')}>Hangi yapay zeka modelini seçmeliyim?</a> rehberine bakın. Terimler için: <a href={url('/sozluk/token/')}>Token nedir?</a> · <a href={url('/sozluk/baglam-penceresi/')}>Bağlam penceresi nedir?</a></p>
+    </section>
+
+    {modelNews.length > 0 && (
+      <section class="models-news" aria-labelledby="mn-h">
+        <h2 id="mn-h">Son model haberleri</h2>
+        <ul>{modelNews.map((n) => <li><a href={newsUrl(n)}>{n.data.title}</a> <span class="meta">{formatDate(n.data.date, false)}</span></li>)}</ul>
+      </section>
+    )}
+  </section>
+</Base>
+
+<script>
+  const rows = [...document.querySelectorAll<HTMLTableRowElement>('.model-table tbody tr')];
+  const btns = [...document.querySelectorAll<HTMLButtonElement>('[data-m-filters] button')];
+  btns.forEach((b) => b.addEventListener('click', () => {
+    btns.forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
+    rows.forEach((r) => { r.hidden = !!b.dataset.c && r.dataset.c !== b.dataset.c; });
+  }));
+  const inEl = document.querySelector<HTMLInputElement>('[data-in]')!;
+  const outEl = document.querySelector<HTMLInputElement>('[data-out]')!;
+  const list = document.querySelector<HTMLOListElement>('[data-results]')!;
+  const fmt = new Intl.NumberFormat('tr-TR', { style: 'currency', currency: 'USD', maximumFractionDigits: 2 });
+  const calc = () => {
+    const i = Math.max(0, Number(inEl.value) || 0), o = Math.max(0, Number(outEl.value) || 0);
+    const items = [...list.children] as HTMLLIElement[];
+    items.forEach((li) => { const c = i * Number(li.dataset.i) + o * Number(li.dataset.o); li.dataset.cost = String(c); li.querySelector('strong')!.textContent = fmt.format(c); });
+    items.sort((a, b) => Number(a.dataset.cost) - Number(b.dataset.cost)).forEach((li) => list.appendChild(li));
+  };
+  inEl.addEventListener('input', calc); outEl.addEventListener('input', calc); calc();
+</script>
