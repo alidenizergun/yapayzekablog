@@ -27,7 +27,7 @@ const index = Object.fromEntries(news.map((n) => [slugOf(n), { t: n.data.title, 
             <option value="">Genel bildirim (belirli bir haber değil)</option>
             {news.map((n) => <option value={slugOf(n)}>{n.data.title}</option>)}
           </select>
-          <p class="hint" id="r-news-link" hidden><a href="#" target="_blank" rel="noopener">Haberi yeni sekmede aç</a></p>
+          <p class="picked" id="r-news-link" hidden><strong data-picked-title></strong><a href="#" target="_blank" rel="noopener">Haberi yeni sekmede aç</a></p>
         </div>
 
         <fieldset class="field">
@@ -101,7 +101,7 @@ const index = Object.fromEntries(news.map((n) => [slugOf(n), { t: n.data.title, 
     const showLink = () => {
       const n = idx[sel.value];
       linkBox.hidden = !n;
-      if (n) link.href = n.u;
+      if (n) { link.href = n.u; linkBox.querySelector('[data-picked-title]')!.textContent = n.t; }
     };
     const preset = new URLSearchParams(location.search).get('haber');
     if (preset && idx[preset]) sel.value = preset;

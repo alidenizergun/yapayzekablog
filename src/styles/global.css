@@ -1,7 +1,7 @@
 /* Nöron — Türk teknoloji haber sitesi düzeni: üst şerit, kategori menüsü, manşet + yan haberler, liste + kenar çubuğu */
 :root {
   --bg: #FFFFFF; --fg: #141414; --muted: #5A5753; --soft: #F4F3F0; --line: #E6E4E0;
-  --accent: #CF2E13; --accent-text: #B32610; --band: #141414; --band-fg: #FFFFFF; --band-muted: #CFCFCF; --input: #222222;
+  --accent: #CF2E13; --accent-text: #B32610; --accent-fill: #CF2E13; --band: #141414; --band-fg: #FFFFFF; --band-muted: #CFCFCF; --input: #222222;
   --display: 'Space Grotesk', 'Segoe UI', system-ui, sans-serif;
   --body: Inter, system-ui, -apple-system, 'Segoe UI', sans-serif;
   color-scheme: light;
@@ -10,13 +10,13 @@
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
     --bg: #121212; --fg: #F2F1EE; --muted: #A9A6A0; --soft: #1D1C1B; --line: #2E2D2B;
-    --accent: #E5452A; --accent-text: #FF7A62; --band: #000000; --band-muted: #BDBDBD; --input: #1A1A1A;
+    --accent: #E5452A; --accent-text: #FF7A62; --accent-fill: #C2321A; --band: #000000; --band-muted: #BDBDBD; --input: #1A1A1A;
     color-scheme: dark;
   }
 }
 :root[data-theme="dark"] {
   --bg: #121212; --fg: #F2F1EE; --muted: #A9A6A0; --soft: #1D1C1B; --line: #2E2D2B;
-  --accent: #E5452A; --accent-text: #FF7A62; --band: #000000; --band-muted: #BDBDBD; --input: #1A1A1A;
+  --accent: #E5452A; --accent-text: #FF7A62; --accent-fill: #C2321A; --band: #000000; --band-muted: #BDBDBD; --input: #1A1A1A;
   color-scheme: dark;
 }
 
@@ -49,7 +49,7 @@ h1, h2, h3 { font-family: var(--display); text-wrap: balance; margin: 0; letter-
 .cat { font-size: 12px; font-weight: 700; color: var(--accent-text); letter-spacing: .05em; text-transform: uppercase; }
 .meta { font-size: 13px; color: var(--muted); }
 .thumb { display: block; width: 100%; object-fit: cover; border-radius: 6px; background: var(--soft); }
-.badge { background: var(--accent); color: #fff; font-weight: 700; padding: 2px 8px; border-radius: 3px; letter-spacing: .04em; font-size: 12px; text-transform: uppercase; }
+.badge { background: var(--accent-fill); color: #fff; font-weight: 700; padding: 2px 8px; border-radius: 3px; letter-spacing: .04em; font-size: 12px; text-transform: uppercase; }
 
 .ticker { background: var(--band); color: var(--band-fg); font-size: 13px; }
 .ticker .wrap { display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: center; padding-block: 8px; }
@@ -59,7 +59,7 @@ h1, h2, h3 { font-family: var(--display); text-wrap: balance; margin: 0; letter-
 
 header.site { border-bottom: 1px solid var(--line); background: var(--bg); position: sticky; top: 0; z-index: 5; }
 header.site .wrap { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 28px; padding-block: 14px; }
-.logo { display: flex; align-items: center; gap: 10px; }
+.logo { display: flex; align-items: center; gap: 10px; min-height: 44px; }
 .logo span { font-family: var(--display); font-weight: 700; font-size: 28px; letter-spacing: -.03em; }
 nav.cats { display: flex; flex-wrap: wrap; gap: 4px 20px; flex: 1 1 420px; font-weight: 600; font-size: 15px; }
 nav.cats a { padding: 6px 0; border-bottom: 2px solid transparent; }
@@ -106,7 +106,7 @@ aside.side-col { flex: 1 1 300px; min-width: 0; display: flex; flex-direction: c
 .pager a:hover { background: var(--fg); color: var(--bg); }
 .empty { padding-block: 24px; color: var(--muted); }
 
-.pop a { display: flex; gap: 14px; padding-block: 14px; border-bottom: 1px solid var(--line); }
+.pop a { display: flex; flex-direction: column; gap: 4px; padding-block: 14px; border-bottom: 1px solid var(--line); }
 .pop .n { font-family: var(--display); font-size: 30px; font-weight: 700; color: var(--accent); line-height: 1; width: 28px; flex: 0 0 28px; }
 .pop .t { font-weight: 600; line-height: 1.35; }
 .news { background: var(--band); color: var(--band-fg); border-radius: 8px; padding: 28px; }
@@ -114,7 +114,7 @@ aside.side-col { flex: 1 1 300px; min-width: 0; display: flex; flex-direction: c
 .news p { margin: 0 0 16px; font-size: 15px; color: var(--band-muted); }
 .news label { display: block; font-size: 13px; color: var(--band-muted); margin-bottom: 6px; }
 .news input { width: 100%; height: 46px; border-radius: 6px; border: 1px solid #444; background: var(--input); color: #fff; padding: 0 14px; font-size: 15px; font-family: inherit; }
-.news button { margin-top: 10px; width: 100%; height: 46px; border: 0; border-radius: 6px; background: var(--accent); color: #fff; font-weight: 700; font-size: 15px; cursor: pointer; font-family: inherit; }
+.news button { margin-top: 10px; width: 100%; height: 46px; border: 0; border-radius: 6px; background: var(--accent-fill); color: #fff; font-weight: 700; font-size: 15px; cursor: pointer; font-family: inherit; }
 .news .ok { margin: 10px 0 0; font-size: 14px; color: #9FE0B8; }
 .week { border: 1px solid var(--line); border-radius: 8px; padding: 24px; }
 .week h2 { font-size: 22px; margin: 6px 0 8px; }
@@ -197,3 +197,49 @@ footer.site nav a:hover { text-decoration: underline; }
 .report-ok p, .report-err p { margin: 6px 0 0; font-size: 15px; }
 .report-ok a, .report-err a { color: var(--accent-text); text-decoration: underline; }
 .report-err { border-color: var(--accent); }
+
+/* ---------------------------------------------------------------- inceleme düzeltmeleri */
+.cat-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+a.tag { display: inline-flex; align-items: center; gap: 4px; }
+
+/* 1) Telefonda kompakt başlık: logo + tema anahtarı yapışkan, kategoriler tek satır ve kaydırılabilir */
+.cats-mobile { display: none; }
+@media (max-width: 760px) {
+  .ticker .wrap { flex-wrap: nowrap; }
+  .ticker a { min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-height: 44px; display: flex; align-items: center; }
+  .ticker .wrap { padding-block: 0; }
+  header.site .wrap { flex-wrap: nowrap; justify-content: space-between; padding-block: 8px; gap: 12px; }
+  .logo span { font-size: 24px; }
+  .logo svg { width: 30px; height: 30px; }
+  header.site nav.cats-desktop, header.site .btn-newsletter { display: none; }
+  .cats-mobile { display: block; border-bottom: 1px solid var(--line); background: var(--bg); }
+  .cats-mobile .wrap { display: flex; gap: 4px; overflow-x: auto; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
+  .cats-mobile .wrap::-webkit-scrollbar { display: none; }
+  .cats-mobile a { flex: 0 0 auto; min-height: 44px; display: inline-flex; align-items: center; padding: 0 10px; font-weight: 600; font-size: 15px; border-bottom: 2px solid transparent; white-space: nowrap; }
+  .cats-mobile a:first-child { padding-left: 0; }
+  .cats-mobile a[aria-current="page"] { border-color: var(--accent); color: var(--accent-text); }
+  main { padding-block: 20px 48px; }
+}
+
+/* 3) Telefonda dokunma alanları en az 44px */
+@media (max-width: 760px) {
+  .share .tag, .share button, a.tag { min-height: 44px; display: inline-flex; align-items: center; }
+  .share button { height: auto; padding: 0 14px; }
+  footer.site nav a { min-height: 44px; display: inline-flex; align-items: center; }
+  .crumb a { display: inline-flex; align-items: center; min-height: 44px; }
+}
+
+/* 8) Masaüstünde haber sayfası kenar çubuğu: altta son haberler listesi var, sütun boş kalmıyor */
+.breaking .when { font-weight: 600; }
+
+/* 9) Koyu temada illüstrasyonları hafifçe karart */
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) img.thumb { filter: brightness(.82) saturate(.9); } }
+:root[data-theme="dark"] img.thumb { filter: brightness(.82) saturate(.9); }
+
+/* 10) Hata bildirim formu: seçili haberin tam başlığı */
+.report-form .picked { margin: 0; font-size: 14px; color: var(--muted); display: flex; flex-wrap: wrap; gap: 4px 10px; }
+.report-form .picked strong { color: var(--fg); font-weight: 600; }
+.ticker .badge { flex: 0 0 auto; white-space: nowrap; }
+.crumb { align-items: center; }
+.report-form .picked a { color: var(--accent-text); text-decoration: underline; text-underline-offset: 3px; }
+@media (max-width: 760px) { .ticker a { display: block; line-height: 44px; } }

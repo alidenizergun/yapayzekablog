@@ -56,7 +56,7 @@ const og = ogImage ? new URL(ogImage, Astro.site).href : new URL(url('/img/arama
       <svg width="34" height="34" viewBox="0 0 34 34" aria-hidden="true"><circle cx="17" cy="17" r="15" fill="#CF2E13"/><path d="M11 13 L23 13 L17 23 Z" fill="none" stroke="#FFFFFF" stroke-width="1.6"/><circle cx="11" cy="13" r="3" fill="#FFFFFF"/><circle cx="23" cy="13" r="3" fill="#FFFFFF"/><circle cx="17" cy="23" r="3" fill="#FFFFFF"/></svg>
       <span>nöron</span>
     </a>
-    <nav class="cats" aria-label="Kategoriler">
+    <nav class="cats cats-desktop" aria-label="Kategoriler">
       {NAV.map((slug) => <a href={catUrl(slug)} aria-current={slug === currentCat ? 'page' : undefined}>{categoryBySlug(slug)?.name}</a>)}
     </nav>
     <div class="head-actions">
@@ -67,9 +67,15 @@ const og = ogImage ? new URL(ogImage, Astro.site).href : new URL(url('/img/arama
           <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></svg>
         </span></span>
       </button>
-      <a class="btn" href="#bulten">Bültene abone ol</a>
+      <a class="btn btn-newsletter" href="#bulten">Bültene abone ol</a>
     </div>
   </div></header>
+  <!-- Telefonda kategoriler: tek satır, yana kaydırılır; başlıkla birlikte yapışkan değildir -->
+  <nav class="cats-mobile" aria-label="Kategoriler">
+    <div class="wrap">
+      {NAV.map((slug) => <a href={catUrl(slug)} aria-current={slug === currentCat ? 'page' : undefined}>{categoryBySlug(slug)?.name}</a>)}
+    </div>
+  </nav>
 
   <main class="wrap"><slot /></main>
 

@@ -1,12 +1,12 @@
 ---
 import { IMAGES } from '../lib/site.js';
-import { newsUrl, imgUrl, catName } from '../lib/news.js';
+import { newsUrl, imageFor, catName } from '../lib/news.js';
 import Time from './Time.astro';
-const { item } = Astro.props;
+const { item, v } = Astro.props;
 const d = item.data;
 ---
 <a class="row" href={newsUrl(item)}>
-  <img class="thumb" src={imgUrl(d.image)} alt={IMAGES[d.image]} loading="lazy" width="200" height="128" />
+  <img class="thumb" src={imageFor(item, v)} alt={IMAGES[d.image]} loading="lazy" width="200" height="128" />
   <div>
     <span class="cat">{catName(d.category)}</span>
     <h3>{d.title}</h3>

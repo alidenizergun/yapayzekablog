@@ -4,7 +4,7 @@ import Base from '../../layouts/Base.astro';
 import Sidebar from '../../components/Sidebar.astro';
 import Time from '../../components/Time.astro';
 import { IMAGES } from '../../lib/site.js';
-import { getNews, slugOf, newsUrl, imgUrl, catName, catUrl, url, readingMinutes, hostOf } from '../../lib/news.js';
+import { getNews, slugOf, newsUrl, imgUrl, imageFor, spreadImages, catName, catUrl, url, readingMinutes, hostOf } from '../../lib/news.js';
 
 export async function getStaticPaths() {
   const news = await getNews();
@@ -23,6 +23,8 @@ const related = all
   .slice(0, 3)
   .map((x) => x.n);
 
+// İlgili haberler: bu haberin kendi çizimiyle ve birbirleriyle aynı görünmesin
+const relV = spreadImages([entry, ...related]);
 const pageUrl = new URL(newsUrl(entry), Astro.site).href;
 const jsonLd = {
   '@context': 'https://schema.org',
@@ -64,7 +66,7 @@ const jsonLd = {
       </div>
 
       <figure>
-        <img class="thumb" src={imgUrl(d.image)} alt={IMAGES[d.image]} width="800" height="420" />
+        <img class="thumb" src={imageFor(entry)} alt={IMAGES[d.image]} width="800" height="420" />
         <figcaption>İllüstrasyon: Nöron</figcaption>
       </figure>
 
@@ -100,7 +102,7 @@ const jsonLd = {
           <div class="grid4">
             {related.map((n) => (
               <a href={newsUrl(n)}>
-                <img class="thumb" src={imgUrl(n.data.image)} alt={IMAGES[n.data.image]} loading="lazy" />
+                <img class="thumb" src={imageFor(n, relV.get(n.id))} alt={IMAGES[n.data.image]} loading="lazy" />
                 <h3>{n.data.title}</h3>
               </a>
             ))}
@@ -108,6 +110,6 @@ const jsonLd = {
         </section>
       )}
     </article>
-    <Sidebar exclude={entry.id} />
+    <Sidebar exclude={[entry.id, ...related.map((n) => n.id)]} latest={8} id="a" />
   </div>
 </Base>
