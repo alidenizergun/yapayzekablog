@@ -478,3 +478,21 @@ header.site .masthead { display: flex; align-items: center; justify-content: spa
 .entity-links { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-top: 28px; }
 .entity-links strong { font-size: 14px; margin-right: 4px; }
 @media (max-width: 600px) { .entity-head { flex-direction: column; gap: 14px; } .entity-logo { width: 72px; height: 72px; } }
+
+/* ---------------------------------------------------------------- sözlük */
+.glossary { max-width: 760px; }
+.glossary .spot { margin-top: 10px; }
+.glossary-az { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 24px; padding-block: 12px; border-block: 1px solid var(--line); }
+.glossary-az a { min-width: 36px; height: 36px; display: inline-flex; align-items: center; justify-content: center; border-radius: 18px; font-weight: 700; font-size: 15px; }
+.glossary-az a:hover { background: var(--soft); color: var(--accent-text); }
+.glossary-list { margin: 8px 0 0; }
+.glossary-item { position: relative; padding-block: 20px; border-bottom: 1px solid var(--line); scroll-margin-top: 72px; }
+.glossary-item:target { background: var(--soft); margin-inline: -16px; padding-inline: 16px; border-radius: 8px; }
+.glossary-anchor { position: absolute; top: -72px; }
+.glossary-item dt { font-family: var(--display); font-weight: 700; font-size: 20px; }
+.glossary-en { font-family: var(--body); font-weight: 400; font-size: 14px; color: var(--muted); margin-left: 6px; }
+.glossary-item dd { margin: 8px 0 0; font-size: 17px; line-height: 1.6; color: var(--fg); }
+/* Haber metninde sözlük bağlantısı: noktalı alt çizgi */
+.prose a.gloss { color: inherit; text-decoration: underline dotted; text-decoration-color: var(--muted); text-underline-offset: 4px; text-decoration-thickness: 1.5px; }
+.prose a.gloss:hover { color: var(--accent-text); text-decoration-color: currentColor; }
+@media (max-width: 760px) { .glossary-az a { min-width: 44px; height: 44px; } }

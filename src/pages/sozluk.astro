@@ -1,0 +1,35 @@
+---
+import Base from '../layouts/Base.astro';
+import { GLOSSARY } from '../lib/glossary.js';
+import { url } from '../lib/news.js';
+
+const terms = [...GLOSSARY].sort((a, b) => a.term.localeCompare(b.term, 'tr'));
+// Alfabe gezinmesi: yalnızca terimi olan harfler
+const letterOf = (t) => t.term[0].toLocaleUpperCase('tr');
+const letters = [...new Set(terms.map(letterOf))];
+const pageUrl = new URL(url('/sozluk/'), Astro.site).href;
+const jsonLd = {
+  '@type': 'DefinedTermSet', '@id': `${pageUrl}#sozluk`, name: 'Yapay zeka terimleri sözlüğü', inLanguage: 'tr-TR',
+  hasDefinedTerm: terms.map((t) => ({ '@type': 'DefinedTerm', name: t.term, alternateName: t.en, description: t.def, url: `${pageUrl}#${t.slug}`, inDefinedTermSet: { '@id': `${pageUrl}#sozluk` } })),
+};
+---
+<Base title="Yapay zeka terimleri sözlüğü" description="Yapay zeka haberlerinde sık geçen terimlerin sade Türkçe açıklamaları: çıkarım, açık ağırlıklı model, token, bağlam penceresi, yapay zeka ajanı ve daha fazlası."
+  jsonLd={jsonLd} breadcrumbs={[{ name: 'Ana sayfa', path: '/' }, { name: 'Terimler sözlüğü', path: '/sozluk/' }]}>
+  <section class="glossary" data-pagefind-body>
+    <span class="cat" data-pagefind-ignore>Sözlük</span>
+    <h1 class="page-h" data-pagefind-meta="title">Yapay zeka terimleri sözlüğü</h1>
+    <p class="spot">Haberlerde geçen teknik terimlerin sade Türkçe açıklamaları. Haber metinlerinde bu terimlerin altı noktalıdır; tıklayınca buraya gelirsiniz.</p>
+    <nav class="glossary-az" aria-label="Harfe göre" data-pagefind-ignore>
+      {letters.map((l) => <a href={`#harf-${l}`}>{l}</a>)}
+    </nav>
+    <dl class="glossary-list">
+      {terms.map((t, i) => (
+        <div class="glossary-item" id={t.slug}>
+          {(i === 0 || letterOf(terms[i - 1]) !== letterOf(t)) && <span class="glossary-anchor" id={`harf-${letterOf(t)}`} aria-hidden="true"></span>}
+          <dt>{t.term} <span class="glossary-en" lang="en">{t.en}</span></dt>
+          <dd>{t.def}</dd>
+        </div>
+      ))}
+    </dl>
+  </section>
+</Base>
