@@ -50,7 +50,7 @@ const listV = spreadVisuals(latest);
           </div>
           <h1>{lead.data.title}</h1>
           <p>{lead.data.spot}</p>
-          <span class="meta">{lead.data.author} · <Time date={lead.data.date} /> · {lead.data.sources.length} kaynak</span>
+          <span class="meta"><Time date={lead.data.date} /> · {lead.data.sources.length} kaynak</span>
         </a>
         {side.length > 0 && (
           <div class="side">

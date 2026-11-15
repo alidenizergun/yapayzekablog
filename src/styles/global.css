@@ -146,7 +146,7 @@ aside.side-col { flex: 1 1 300px; min-width: 0; display: flex; flex-direction: c
 .spot { margin: 0; font-size: 20px; line-height: 1.45; color: var(--muted); }
 .byline { margin-top: 24px; padding-block: 16px; border-block: 1px solid var(--line); display: flex; flex-wrap: wrap; align-items: center; gap: 16px; justify-content: space-between; }
 .author { display: flex; align-items: center; gap: 12px; }
-.avatar { width: 44px; height: 44px; border-radius: 22px; background: var(--fg); color: var(--bg); display: flex; align-items: center; justify-content: center; font-weight: 700; }
+.byline-meta { font-size: 14px; }
 .share { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
 .share-note { flex-basis: 100%; font-size: 13px; color: var(--muted); }
 .share-note:empty { display: none; }
