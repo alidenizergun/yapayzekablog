@@ -65,12 +65,7 @@ h1, h2, h3 { font-family: var(--display); font-weight: 700; text-wrap: balance; 
 .ticker a:hover { text-decoration: underline; }
 .ticker .date { color: var(--band-muted); }
 
-header.site { border-bottom: 1px solid var(--line); background: var(--bg); position: sticky; top: 0; z-index: 5; }
-header.site .wrap { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 28px; padding-block: 14px; }
 .logo { display: flex; align-items: center; gap: 10px; min-height: 44px; }
-nav.cats { display: flex; flex-wrap: wrap; gap: 4px 20px; flex: 1 1 420px; font-weight: 600; font-size: 15px; }
-nav.cats a { padding: 6px 0; border-bottom: 2px solid transparent; }
-nav.cats a:hover, nav.cats a[aria-current="page"] { border-color: var(--accent); color: var(--accent-text); }
 .btn { height: 44px; padding: 0 18px; display: inline-flex; align-items: center; justify-content: center; background: var(--fg); color: var(--bg); border-radius: 22px; font-weight: 600; font-size: 14px; border: 0; cursor: pointer; font-family: inherit; }
 main { padding-block: 32px 64px; }
 
@@ -208,7 +203,6 @@ footer.site { background: var(--band); color: var(--band-muted); font-size: 14px
 a.tag { display: inline-flex; align-items: center; gap: 4px; }
 
 /* 1) Telefonda kompakt başlık: logo + tema anahtarı yapışkan, kategoriler tek satır ve kaydırılabilir */
-.cats-mobile { display: none; }
 @media (max-width: 760px) {
   .ticker .wrap { flex-wrap: nowrap; }
   .ticker .tick-items a { min-height: 44px; line-height: 44px; }
@@ -391,19 +385,6 @@ footer.site .linkish { background: none; border: 0; padding: 0; color: #fff; fon
   .home .side a:first-child { grid-column: 1 / -1; }
 }
 
-/* Başlık: menü tek satıra sığmadığında (1080px altı) kategoriler logonun altında kaydırılabilir şeritte; logo ve tema anahtarı aynı satırda */
-@media (max-width: 1080px) {
-  header.site .wrap { flex-wrap: nowrap; justify-content: space-between; gap: 12px; }
-  header.site .wrap { flex-wrap: nowrap; justify-content: space-between; gap: 12px; }
-  header.site nav.cats-desktop, header.site .btn-newsletter { display: none; }
-  .cats-mobile { display: block; border-bottom: 1px solid var(--line); background: var(--bg); }
-  .cats-mobile .wrap { display: flex; gap: 4px; overflow-x: auto; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
-  .cats-mobile .wrap::-webkit-scrollbar { display: none; }
-  .cats-mobile a { flex: 0 0 auto; min-height: 44px; display: inline-flex; align-items: center; padding: 0 10px; font-weight: 600; font-size: 15px; border-bottom: 2px solid transparent; white-space: nowrap; }
-  .cats-mobile a:first-child { padding-left: 0; }
-  .cats-mobile a[aria-current="page"] { border-color: var(--accent); color: var(--accent-text); }
-}
-@media (max-width: 760px) { header.site .wrap { padding-block: 8px; } }
 
 /* Tablet ana sayfa: öne çıkanlar üç sütun, yan haberlerin alt çizgileri simetrik */
 @media (min-width: 601px) and (max-width: 900px) {
@@ -413,3 +394,34 @@ footer.site .linkish { background: none; border: 0; padding: 0; color: #fff; fon
   .home .second h3 { font-size: 18px; }
   .home .side a:not(:first-child) { border-bottom: 0; }
 }
+
+/* ---------------------------------------------------------------- başlık ve bölüm çubuğu
+   Üstte: logo | günün tarihi + tema. Altında: her ekranda tek, yapışkan bölüm çubuğu ("Gündem" + kategoriler). */
+html { scroll-padding-top: 64px; }
+header.site { background: var(--bg); }
+header.site .masthead { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-block: 18px; }
+.head-actions { gap: 16px; }
+.today { font-size: 13px; color: var(--muted); white-space: nowrap; min-width: 1px; }
+.catbar { position: sticky; top: 0; z-index: 6; background: var(--bg); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.catbar .wrap { display: flex; align-items: stretch; gap: 0; }
+.catbar-logo { display: flex; align-items: center; flex: 0 0 auto; max-width: 0; overflow: hidden; opacity: 0; transition: max-width .2s ease, opacity .2s ease, margin .2s ease; }
+.catbar-logo .wm-badge { font-size: 18px; padding: 3px 6px 2px; white-space: nowrap; }
+.catbar.is-stuck .catbar-logo { max-width: 64px; opacity: 1; margin-right: 14px; }
+.catbar-scroll { flex: 1 1 auto; min-width: 0; display: flex; gap: 24px; overflow-x: auto; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
+.catbar-scroll::-webkit-scrollbar { display: none; }
+.catbar-scroll a { flex: 0 0 auto; display: inline-flex; align-items: center; min-height: 48px; font-weight: 600; font-size: 15px; white-space: nowrap; color: var(--fg); box-shadow: inset 0 -3px 0 transparent; transition: box-shadow .15s ease, color .15s ease; }
+.catbar-scroll a:hover { color: var(--accent-text); }
+.catbar-scroll a[aria-current="page"] { color: var(--accent-text); box-shadow: inset 0 -3px 0 var(--accent); }
+.catbar-scroll a:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
+/* Sığmayan liste: kenarda solma ile devamı olduğu gösterilir */
+.catbar-scroll.fade-r { -webkit-mask-image: linear-gradient(to right, #000 calc(100% - 48px), transparent); mask-image: linear-gradient(to right, #000 calc(100% - 48px), transparent); }
+.catbar-scroll.fade-l { -webkit-mask-image: linear-gradient(to left, #000 calc(100% - 48px), transparent); mask-image: linear-gradient(to left, #000 calc(100% - 48px), transparent); }
+.catbar-scroll.fade-l.fade-r { -webkit-mask-image: linear-gradient(to right, transparent, #000 48px, #000 calc(100% - 48px), transparent); mask-image: linear-gradient(to right, transparent, #000 48px, #000 calc(100% - 48px), transparent); }
+@media (max-width: 760px) {
+  header.site .masthead { padding-block: 10px; }
+  .today { display: none; }
+  .catbar-scroll { gap: 20px; }
+  .catbar-scroll a { min-height: 44px; }
+  .catbar.is-stuck .catbar-logo { margin-right: 12px; }
+}
+@media (prefers-reduced-motion: reduce) { .catbar-logo, .catbar-scroll a { transition: none; } }
