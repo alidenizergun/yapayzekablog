@@ -36,7 +36,59 @@ const DRY = process.argv.includes('--dry-run');
 const MODEL = process.env.NEWS_MODEL || 'claude-sonnet-5-5';
 const MAX_ARTICLES = Number(process.env.MAX_ARTICLES || 10);
 const LOOKBACK_HOURS = Number(process.env.LOOKBACK_HOURS || 15);
-const MAX_SEARCHES = Number(process.env.MAX_SEARCHES || 20);
+// Hafta sonu (İstanbul saatiyle Cumartesi/Pazar) gelişme az olduğu için arama sayısı yarıya iner.
+// WEEKEND_SEARCHES ile değiştirilebilir.
+const IST_DAY = new Date(Date.now() + 3 * 3600e3).getUTCDay(); // 0 = Pazar, 6 = Cumartesi
+const IS_WEEKEND = IST_DAY === 0 || IST_DAY === 6;
+const WEEKDAY_SEARCHES = Number(process.env.MAX_SEARCHES || 20);
+const MAX_SEARCHES = IS_WEEKEND
+  ? Number(process.env.WEEKEND_SEARCHES || Math.max(5, Math.round(WEEKDAY_SEARCHES / 2)))
+  : WEEKDAY_SEARCHES;
+
+// ---------------------------------------------------------------- maliyet takibi
+// Fiyatlar: https://platform.claude.com/docs/en/about-claude/pricing (dolar / milyon token)
+// Fiyat değişirse burayı güncelleyin.
+const PRICES = {
+  'claude-sonnet-5-5': { in: 2, out: 10, cacheWrite: 2.5, cacheRead: 0.1 },
+  'claude-opus-5-5': { in: 4, out: 20, cacheWrite: 5, cacheRead: 0.2 },
+  'claude-haiku-5-5': { in: 0.1, out: 0.5, cacheWrite: 0.125, cacheRead: 0.01, longIn: 0.5, longOut: 2.5, longCacheWrite: 0.625, longCacheRead: 0.05, longAbove: 100000 },
+};
+const SEARCH_PRICE = 10 / 1000; // arama başına dolar
+const X_POST_PRICE = 0.005; // okunan X gönderisi başına yaklaşık dolar
+const usage = { requests: 0, input: 0, output: 0, cacheWrite: 0, cacheRead: 0, tokenCost: 0, priced: true };
+
+function track(res) {
+  const u = res?.usage;
+  if (!u) return;
+  const input = u.input_tokens ?? 0;
+  const output = u.output_tokens ?? 0;
+  const cacheWrite = u.cache_creation_input_tokens ?? 0;
+  const cacheRead = u.cache_read_input_tokens ?? 0;
+  usage.requests++;
+  usage.input += input;
+  usage.output += output;
+  usage.cacheWrite += cacheWrite;
+  usage.cacheRead += cacheRead;
+  const p = PRICES[MODEL];
+  if (!p) { usage.priced = false; return; }
+  const long = p.longAbove && input + cacheWrite + cacheRead > p.longAbove;
+  usage.tokenCost += (
+    input * (long ? p.longIn : p.in) +
+    output * (long ? p.longOut : p.out) +
+    cacheWrite * (long ? p.longCacheWrite : p.cacheWrite) +
+    cacheRead * (long ? p.longCacheRead : p.cacheRead)
+  ) / 1e6;
+}
+
+let xPostCount = 0;
+function costReport(searches) {
+  const searchCost = searches * SEARCH_PRICE;
+  const xCost = xPostCount * X_POST_PRICE;
+  const claude = usage.tokenCost + searchCost;
+  return { searchCost, xCost, claude, total: claude + xCost };
+}
+const usd = (n) => `$${n.toFixed(2)}`;
+const tok = (n) => (n >= 1000 ? `${Math.round(n / 1000).toLocaleString('tr-TR')} bin` : String(n));
 const REQUIRE_REVIEW = /^(1|true|yes|evet)$/i.test(process.env.REQUIRE_REVIEW || '');
 
 const log = (...a) => console.log('[haber]', ...a);
@@ -174,7 +226,9 @@ Kurallar: Yalnızca arama sonuçlarında gördüğün bilgileri yaz. Tarihi ${LO
       messages,
       tools: [{ type: 'web_search_20250305', name: 'web_search', max_uses: MAX_SEARCHES }],
     });
+    track(res);
     searches += res.usage?.server_tool_use?.web_search_requests ?? 0;
+    lastSearches = searches;
     for (const block of res.content) {
       if (block.type === 'web_search_tool_result' && Array.isArray(block.content)) {
         for (const r of block.content) {
@@ -266,6 +320,7 @@ ${notes}`,
     }],
     output_config: { format: { type: 'json_schema', schema: ARTICLE_SCHEMA } },
   });
+  track(res);
   if (res.stop_reason === 'refusal' || res.stop_reason === 'max_tokens') {
     throw new Error(`Yazım adımı tamamlanamadı (stop_reason: ${res.stop_reason}).`);
   }
@@ -355,7 +410,7 @@ let xNote = 'X takibi kapalı';
 
 async function main() {
   const existing = loadExisting();
-  log(`model: ${MODEL} · mevcut haber: ${existing.length} · en fazla ${MAX_ARTICLES} yeni haber · ${REQUIRE_REVIEW ? 'editör onayı AÇIK (taslak)' : 'otomatik yayın'}`);
+  log(`model: ${MODEL} · mevcut haber: ${existing.length} · en fazla ${MAX_ARTICLES} yeni haber · en fazla ${MAX_SEARCHES} arama${IS_WEEKEND ? ' (hafta sonu)' : ''} · ${REQUIRE_REVIEW ? 'editör onayı AÇIK (taslak)' : 'otomatik yayın'}`);
 
   let articles, seen, searches = 0;
   if (DRY) {
@@ -367,6 +422,7 @@ async function main() {
     try {
       const x = await fetchXPosts({ root: ROOT, lookbackHours: LOOKBACK_HOURS, log: (m) => log(m) });
       xPosts = x.posts;
+      xPostCount = x.posts.length;
       xNote = x.note;
     } catch (err) {
       xNote = `X takibi bu çalışmada atlandı: ${err.message}`;
@@ -406,15 +462,60 @@ async function main() {
   summary(written, rejected, searches);
 }
 
+function costLines(searches, articleCount) {
+  const c = costReport(searches);
+  const per = articleCount ? ` · haber başına ${usd(c.total / articleCount)}` : '';
+  return {
+    c,
+    log: `maliyet: ${tok(usage.input + usage.cacheWrite + usage.cacheRead)} giriş + ${tok(usage.output)} çıkış token (${usage.requests} istek) · `
+      + `Claude ${usage.priced ? usd(c.claude) : 'fiyat bilinmiyor'} (token ${usd(usage.tokenCost)} + arama ${usd(c.searchCost)}) · `
+      + `X ~${usd(c.xCost)} · toplam ~${usd(c.total)}${per}`,
+    md: [
+      `### Maliyet`,
+      `| Kalem | Miktar | Tutar |`,
+      `|---|---|---|`,
+      `| Claude giriş token | ${usage.input.toLocaleString('tr-TR')} (+ önbellek ${(usage.cacheWrite + usage.cacheRead).toLocaleString('tr-TR')}) | ${usage.priced ? usd(usage.tokenCost) : '?'} (giriş + çıkış) |`,
+      `| Claude çıkış token | ${usage.output.toLocaleString('tr-TR')} | |`,
+      `| Web araması | ${searches} | ${usd(c.searchCost)} |`,
+      `| X gönderisi (tahmini) | ${xPostCount} | ~${usd(c.xCost)} |`,
+      `| **Toplam** | ${articleCount} haber | **~${usd(c.total)}**${articleCount ? ` (haber başına ${usd(c.total / articleCount)})` : ''} |`,
+    ].join('\n'),
+  };
+}
+
+/** Her çalışma data/maliyet.csv dosyasına bir satır ekler; aylık toplamı buradan görebilirsiniz. */
+function appendCostCsv(searches, articleCount, status) {
+  if (DRY) return;
+  const c = costReport(searches);
+  const file = path.join(ROOT, 'data/maliyet.csv');
+  fs.mkdirSync(path.dirname(file), { recursive: true });
+  if (!fs.existsSync(file)) {
+    fs.writeFileSync(file, 'tarih,model,durum,haber,arama,x_gonderi,giris_token,cikis_token,claude_usd,x_usd,toplam_usd\n');
+  }
+  const row = [
+    istanbulIso(), MODEL, status, articleCount, searches, xPostCount,
+    usage.input + usage.cacheWrite + usage.cacheRead, usage.output,
+    c.claude.toFixed(4), c.xCost.toFixed(4), c.total.toFixed(4),
+  ].join(',');
+  fs.appendFileSync(file, row + '\n');
+}
+
+let lastSearches = 0;
 function summary(written, rejected, searches) {
+  lastSearches = searches;
+  const cost = costLines(searches, written.length);
+  log(cost.log);
+  appendCostCsv(searches, written.length, 'tamam');
   const md = [
     `## Nöron haber güncellemesi`,
     `- Yeni haber: **${written.length}**${REQUIRE_REVIEW ? ' (taslak, editör onayı bekliyor)' : ''}`,
     `- Elenen: ${rejected.length}`,
-    `- Web araması: ${searches}`,
+    `- Web araması: ${searches}${IS_WEEKEND ? ' (hafta sonu sınırı: ' + MAX_SEARCHES + ')' : ''}`,
     `- ${xNote}`,
     ...written.map((w) => `  - ✅ ${w.title} (${w.sources} kaynak)`),
     ...rejected.map((r) => `  - ❌ ${r.title} — ${r.reasons.join(', ')}`),
+    '',
+    cost.md,
   ].join('\n');
   if (process.env.GITHUB_STEP_SUMMARY) fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY, md + '\n');
   if (process.env.GITHUB_OUTPUT) fs.appendFileSync(process.env.GITHUB_OUTPUT, `count=${written.length}\n`);
@@ -422,5 +523,7 @@ function summary(written, rejected, searches) {
 
 main().catch((err) => {
   console.error('[haber] HATA:', err?.message || err);
+  // Hata olsa da o ana kadarki harcama görünsün
+  if (usage.requests) log(costLines(lastSearches, 0).log);
   process.exit(1);
 });

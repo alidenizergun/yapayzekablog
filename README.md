@@ -74,7 +74,8 @@ Tüm ayarlar **Settings › Secrets and variables › Actions › Variables** al
 | `NEWS_MODEL` | `claude-sonnet-5-5` | Haberleri yazan model. Daha ucuz seçenek: `claude-haiku-5-5`. Daha güçlü seçenek: `claude-opus-5-5`. |
 | `MAX_ARTICLES` | `10` | Bir çalışmada en fazla kaç haber yayınlansın. Yeterince önemli gelişme yoksa daha az yayınlanır; dolgu haber yazılmaz. |
 | `LOOKBACK_HOURS` | `15` | Kaç saat önceye kadarki gelişmelere bakılsın. İki çalışma arasındaki en uzun boşluk 15 saattir. |
-| `MAX_SEARCHES` | `20` | Bir çalışmada en fazla kaç web araması yapılsın. |
+| `MAX_SEARCHES` | `20` | Hafta içi bir çalışmada en fazla kaç web araması yapılsın. |
+| `WEEKEND_SEARCHES` | `MAX_SEARCHES`'ın yarısı (`10`) | Cumartesi ve Pazar günleri en fazla kaç web araması yapılsın. |
 | `REQUIRE_REVIEW` | `false` | `true` yapılırsa haberler taslak olarak kaydedilir ve siteye çıkmaz. Yayınlamak için dosyadaki `draft: true` satırını silmeniz yeterli. |
 | `NEWSLETTER_ACTION` | yok | Bülten servisinizin (Mailchimp, Brevo vb.) form adresi. |
 
@@ -92,6 +93,11 @@ Varsayılan ayarlarla (günde 2 çalışma, en fazla 10'ar haber):
 | X API (31 hesap; okunan gönderi başına ~0,005 $) | ~15–30 $ |
 | GitHub Pages ve Actions | Herkese açık repoda ücretsiz |
 | **Toplam** | **~60–100 $** |
+
+**Her çalışmanın gerçek maliyeti kaydedilir:**
+- **Actions özeti:** Her "Haber güncellemesi" çalışmasının özetinde token sayıları, arama sayısı ve dolar maliyeti tablo halinde görünür.
+- **`data/maliyet.csv`:** Her çalışma bu dosyaya bir satır ekler. Dosyayı Excel veya Google Sheets'te açıp aylık toplamı görebilirsiniz.
+- **Fiyatlar:** Claude tutarı API'nin döndürdüğü gerçek token sayılarından ve `scripts/generate-news.mjs` içindeki fiyat tablosundan hesaplanır. X tutarı okunan gönderi sayısına göre yapılmış bir tahmindir. Kesin fatura Claude Console ve X Developer Console'dadır.
 
 Bunlar tahmindir; gerçek tutar haber yoğunluğuna ve takip edilen hesapların ne sıklıkla paylaşım yaptığına göre değişir. Gerçek harcamayı Claude Console ve X Developer Console'dan izleyebilir, ikisine de harcama limiti koyabilirsiniz.
 

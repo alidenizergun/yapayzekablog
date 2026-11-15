@@ -44,6 +44,7 @@ jobs:
           MAX_ARTICLES: ${{ inputs.max_articles || vars.MAX_ARTICLES || '10' }}
           LOOKBACK_HOURS: ${{ vars.LOOKBACK_HOURS || '15' }}
           MAX_SEARCHES: ${{ vars.MAX_SEARCHES || '20' }}
+          WEEKEND_SEARCHES: ${{ vars.WEEKEND_SEARCHES }}
           REQUIRE_REVIEW: ${{ vars.REQUIRE_REVIEW || 'false' }}
         run: node scripts/generate-news.mjs
 
