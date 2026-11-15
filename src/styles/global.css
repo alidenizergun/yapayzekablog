@@ -454,3 +454,27 @@ header.site .masthead { display: flex; align-items: center; justify-content: spa
 .catbar-search[aria-current="page"] { color: var(--accent-text); }
 .catbar-search svg { width: 20px; height: 20px; }
 .catbar .catbar-search + .theme-btn { margin-left: 4px; }
+
+/* ---------------------------------------------------------------- şirket ve kişi sayfaları */
+.entity-head { display: flex; gap: 20px; align-items: flex-start; margin: 8px 0 32px; }
+.entity-head > div { min-width: 0; display: flex; flex-direction: column; gap: 6px; }
+.entity-logo { flex: 0 0 auto; width: 88px; height: 88px; border-radius: 12px; background: var(--soft); display: flex; align-items: center; justify-content: center; container-type: size; }
+.entity-logo.brandcard svg { height: 44cqh; max-width: 60cqw; }
+.entity-logo.brandcard.wordmark .bn { font-size: clamp(11px, 22cqh, 20px); padding-inline: 4px; }
+.entity-initials { font-family: var(--display); font-weight: 800; font-size: 30px; color: var(--fg); letter-spacing: -.02em; }
+.entity-about { margin: 4px 0 0; font-size: 17px; line-height: 1.55; color: var(--muted); max-width: 62ch; }
+.entity-site { margin-top: 4px; text-decoration: underline; text-underline-offset: 3px; }
+.entity-logo.sm { width: 56px; height: 56px; border-radius: 10px; }
+.entity-logo.sm.entity-initials { font-size: 20px; }
+.entities-page .spot { margin-top: 8px; }
+.entity-group { margin-top: 40px; }
+.entity-grid { list-style: none; margin: 16px 0 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px; }
+.entity-grid a { display: grid; grid-template-columns: 56px 1fr; grid-template-rows: auto auto; column-gap: 14px; align-items: center; padding: 12px; border: 1px solid var(--line); border-radius: 10px; }
+.entity-grid a:hover { border-color: var(--fg); }
+.entity-grid .entity-logo { grid-row: 1 / 3; }
+.entity-name { font-family: var(--display); font-weight: 700; font-size: 17px; align-self: end; }
+.entity-grid .meta { align-self: start; }
+/* Haber sayfasında "Bu haberde" bağlantıları */
+.entity-links { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-top: 28px; }
+.entity-links strong { font-size: 14px; margin-right: 4px; }
+@media (max-width: 600px) { .entity-head { flex-direction: column; gap: 14px; } .entity-logo { width: 72px; height: 72px; } }

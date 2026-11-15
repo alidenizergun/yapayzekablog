@@ -1,0 +1,51 @@
+---
+import Base from '../../layouts/Base.astro';
+import NewsRow from '../../components/NewsRow.astro';
+import Sidebar from '../../components/Sidebar.astro';
+import { getNews, spreadVisuals, url } from '../../lib/news.js';
+import { entityIndex } from '../../lib/entities.js';
+import { brandOf } from '../../lib/brands.js';
+
+export async function getStaticPaths() {
+  const idx = entityIndex(await getNews());
+  return [...idx.values()].map(({ entity, items }) => ({ params: { slug: entity.slug }, props: { entity, items } }));
+}
+const { entity: e, items } = Astro.props;
+const rowV = spreadVisuals(items);
+const brand = brandOf(e.brand);
+const kind = e.type === 'person' ? 'Kişi' : 'Şirket';
+const pageUrl = new URL(url(`/konu/${e.slug}/`), Astro.site).href;
+const jsonLd = [
+  { '@type': 'CollectionPage', '@id': `${pageUrl}#page`, name: `${e.name} haberleri`, inLanguage: 'tr-TR', about: { '@id': `${pageUrl}#konu` } },
+  e.type === 'person'
+    ? { '@type': 'Person', '@id': `${pageUrl}#konu`, name: e.name, description: e.about, ...(e.org ? { affiliation: { '@type': 'Organization', name: e.org } } : {}) }
+    : { '@type': 'Organization', '@id': `${pageUrl}#konu`, name: e.name, description: e.about, ...(e.url ? { url: e.url } : {}) },
+];
+---
+<Base title={`${e.name} haberleri`} description={`${e.about} ${e.name} ile ilgili ${items.length} haber.`.slice(0, 300)}
+  noindex={items.length < 2} jsonLd={jsonLd}
+  breadcrumbs={[{ name: 'Ana sayfa', path: '/' }, { name: 'Şirketler ve kişiler', path: '/konular/' }, { name: e.name, path: `/konu/${e.slug}/` }]}>
+  <div class="cols" style="margin-top:0">
+    <section class="main" aria-labelledby="h">
+      <nav class="crumb" aria-label="Konum"><a href={url('/')}>Ana sayfa</a><span aria-hidden="true">/</span><a href={url('/konular/')}>Şirketler ve kişiler</a></nav>
+      <header class="entity-head">
+        {brand ? (
+          <span class:list={["entity-logo brandcard", { wordmark: !brand.path }]} style={`--bl:${brand.onLight};--bd:${brand.onDark}`} role="img" aria-label={`${brand.name} logosu`}>
+            {brand.path ? <svg viewBox="0 0 24 24" aria-hidden="true"><path d={brand.path} /></svg> : <span class="bn">{brand.name}</span>}
+          </span>
+        ) : (
+          <span class="entity-logo entity-initials" aria-hidden="true">{e.name.split(/\s+/).map((w) => w[0]).slice(0, 2).join('')}</span>
+        )}
+        <div>
+          <span class="cat">{kind}{e.org ? ` · ${e.org}` : ''}</span>
+          <h1 id="h" class="page-h">{e.name}</h1>
+          <p class="entity-about">{e.about}</p>
+          {e.url && <a class="meta entity-site" href={e.url} target="_blank" rel="noopener">{new URL(e.url).hostname.replace(/^www\./, '')} ↗</a>}
+        </div>
+      </header>
+      <div class="sechead"><h2>{e.name} haberleri</h2><span class="meta">{items.length} haber</span></div>
+      {items.map((n) => <NewsRow item={n} choice={rowV.get(n.id)} />)}
+    </section>
+    <Sidebar exclude={items.map((n) => n.id)} />
+  </div>
+</Base>

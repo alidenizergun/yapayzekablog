@@ -6,6 +6,7 @@ import Time from '../../components/Time.astro';
 import { IMAGES } from '../../lib/site.js';
 import { tagUrl, getNews, slugOf, newsUrl, spreadVisuals, defaultVisual, ogImageFor, withUtm, catName, catUrl, url, readingMinutes, hostOf, photoSrc, formatDate } from '../../lib/news.js';
 import { brandOf } from '../../lib/brands.js';
+import { entitiesOf } from '../../lib/entities.js';
 import Visual from '../../components/Visual.astro';
 
 export async function getStaticPaths() {
@@ -28,6 +29,7 @@ const related = all
 // İlgili haberler: bu haberin kendi çizimiyle ve birbirleriyle aynı görünmesin
 const relV = spreadVisuals([entry, ...related]);
 const main = defaultVisual(entry, true);
+const ents = entitiesOf(entry);
 const og = ogImageFor(entry);
 const pageUrl = new URL(newsUrl(entry), Astro.site).href;
 // Google haber görseli için üç oran (16:9, 4:3, 1:1), en az 1200px; fotoğraf yoksa paylaşım görseli
@@ -113,6 +115,12 @@ const crumbs = [{ name: 'Ana sayfa', path: '/' }, { name: catName(d.category), p
           : <p class="ai-note">Bir hata görürseniz <a href={`${url('/hata-bildir/')}?haber=${slugOf(entry)}`}>bize bildirin</a>.</p>}
       </section>
 
+      {ents.length > 0 && (
+        <nav class="entity-links" aria-label="Bu haberde geçen şirketler ve kişiler" data-pagefind-ignore>
+          <strong>Bu haberde:</strong>
+          {ents.map((e) => <a class="tag" href={url(`/konu/${e.slug}/`)}>{e.name}</a>)}
+        </nav>
+      )}
       {d.tags.length > 0 && <div class="atags" data-pagefind-ignore>{d.tags.map((t) => <a class="tag" href={tagUrl(t)}>#{t}</a>)}</div>}
 
       {related.length > 0 && (
