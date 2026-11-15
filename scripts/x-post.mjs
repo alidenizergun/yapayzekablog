@@ -4,7 +4,7 @@
 // Kayıt:    data/x-paylasilan.json  (paylaşılan her haber: tweet id ve zaman; aynı haber iki kez paylaşılmaz)
 // Anahtarlar (GitHub secrets, OAuth 1.0a, uygulama izni "Read and write"):
 //   X_API_KEY, X_API_SECRET, X_ACCESS_TOKEN, X_ACCESS_SECRET
-// Ayarlar:  X_POSTS_PER_RUN (varsayılan 2; 0 = paylaşım kapalı) · SITE_URL · BASE_PATH · --dry-run
+// Ayarlar:  X_POSTS_PER_RUN (varsayılan 0 = paylaşım kapalı) · SITE_URL · BASE_PATH · --dry-run
 //
 // Varsayılan: gönderiler LİNKSİZ atılır (X linkli gönderiden ~0,20 $, linksizden ~0,015 $ alıyor).
 // Linkli paylaşıma dönmek için repo değişkeni X_WITH_LINK = true.
@@ -18,7 +18,7 @@ const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const QUEUE = path.join(ROOT, 'data/x-kuyruk.json');
 const POSTED = path.join(ROOT, 'data/x-paylasilan.json');
 const DRY = process.argv.includes('--dry-run');
-const PER_RUN = Number(process.env.X_POSTS_PER_RUN ?? 2);
+const PER_RUN = Number(process.env.X_POSTS_PER_RUN ?? 0);
 const MAX_AGE_H = 30; // daha eski kuyruk kayıtları paylaşılmadan düşer
 const WITH_LINK = /^(1|true|yes|evet)$/i.test(process.env.X_WITH_LINK || '');
 const POST_PRICE = WITH_LINK ? 0.2 : 0.015;

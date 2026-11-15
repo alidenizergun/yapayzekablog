@@ -74,7 +74,9 @@ Takip edilen hesaplar `scripts/x-accounts.json` dosyasındadır. Listeye hesap e
 
 Her hesabın en son okunan gönderisi `data/x-state.json` dosyasında tutulur; aynı gönderi iki kez okunup ücretlendirilmez. `X_BEARER_TOKEN` tanımlı değilse X takibi atlanır, site yalnızca web aramasıyla çalışır.
 
-## X'te otomatik paylaşım
+## X'te otomatik paylaşım (şu an kapalı)
+
+> Paylaşım kapalıdır. Açmak için repo değişkeni `X_POSTS_PER_RUN`'a çalışma başına paylaşım sayısını yazın (ör. `2`) ve aşağıdaki anahtarları ekleyin.
 
 Her haber güncellemesinden sonra, site yayına girince okunma potansiyeli en yüksek **2 haber** X'te **linksiz** paylaşılır (başlık ve kısa özet); diğerleri paylaşılmaz. Linkli paylaşıma dönmek için `X_WITH_LINK` değişkenini `true` yapın. Haber hattı her habere 1–5 arası önem puanı ve kısa bir paylaşım metni yazar (kurallar `scripts/editorial-guidelines.md`). Manşet haber her zaman önce gelir.
 
@@ -131,9 +133,8 @@ Varsayılan ayarlarla (günde 1 çalışma, en fazla 10 haber):
 |---|---|
 | Claude API (Sonnet 5.5, web araması ve editör adımı dahil; çalışma başına ~0,55–0,70 $) | ~17–25 $ |
 | X API okuma (31 hesap; okunan gönderi başına ~0,005 $) | ~5–15 $ |
-| X API paylaşım (günde 2 linksiz gönderi, ~0,015 $) | ~1 $ |
 | GitHub Pages ve Actions | Herkese açık repoda ücretsiz |
-| **Toplam** | **~25–40 $** |
+| **Toplam** | **~22–40 $** |
 
 **Her çalışmanın gerçek maliyeti kaydedilir:**
 - **Actions özeti:** Her "Haber güncellemesi" çalışmasının özetinde token sayıları, arama sayısı ve dolar maliyeti tablo halinde görünür.
