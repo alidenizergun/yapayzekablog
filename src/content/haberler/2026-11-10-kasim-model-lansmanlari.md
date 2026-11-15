@@ -8,6 +8,13 @@ date: 2026-11-10T19:10:00+03:00
 image: modeller
 imageQuery: "programmer code screen dark"
 whyItMatters: "Açık ağırlıklı modellerin payının artması, şirketlerin modelleri kendi altyapılarında çalıştırma ve özelleştirme seçeneklerini genişletiyor."
+photo:
+  id: "wvJuYrM5iuw"
+  url: "https://images.unsplash.com/photo-1591439657848-9f4b9ce436b9?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8OXx8cHJvZ3JhbW1lciUyMGNvZGUlMjBzY3JlZW4lMjBkYXJrfGVufDF8MHx8fDE3OTQ3NzE4OTh8MA&ixlib=rb-4.1.0"
+  alt: "black flat screen computer monitor"
+  author: "Riku Lu"
+  authorUrl: "https://unsplash.com/@riku"
+  link: "https://unsplash.com/photos/black-flat-screen-computer-monitor-wvJuYrM5iuw"
 sources:
   - title: "AF.net — Yapay zeka gelişmeleri akışı"
     url: "https://af.net/realtime/page/201/?news_page=12"

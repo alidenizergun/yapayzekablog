@@ -9,6 +9,13 @@ image: kod
 brand: cursor
 imageQuery: "developer coding laptop"
 whyItMatters: "Kodlama asistanlarında model erişimi artık sağlayıcılar arasındaki rekabetin bir parçası. Ekipler, tek bir model sağlayıcısına bağımlı iş akışlarını gözden geçirmek zorunda kalabilir."
+photo:
+  id: "FCHlYvR5gJI"
+  url: "https://images.unsplash.com/photo-1534665482403-a909d0d97c67?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8OHx8ZGV2ZWxvcGVyJTIwY29kaW5nJTIwbGFwdG9wfGVufDF8MHx8fDE3OTQ3NzE4OTd8MA&ixlib=rb-4.1.0"
+  alt: "man programming using laptop"
+  author: "Danial Igdery"
+  authorUrl: "https://unsplash.com/@ricaros"
+  link: "https://unsplash.com/photos/man-programming-using-laptop-FCHlYvR5gJI"
 sources:
   - title: "Yapay Zeka Gündemi #61"
     url: "https://webrazzi.com/2026/09/04/yapay-zeka-gundemi-61/"

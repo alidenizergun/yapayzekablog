@@ -10,6 +10,13 @@ brand: openai
 imageQuery: "smartphone search typing"
 featured: true
 whyItMatters: "Markalar ve yayıncılar için arama motoru optimizasyonu tek başına yetmiyor. ChatGPT, Gemini ve Claude gibi asistanların yanıtlarında nasıl yer alındığı da ölçülmesi gereken bir metrik haline geliyor."
+photo:
+  id: "ri99XpAZamY"
+  url: "https://images.unsplash.com/photo-1762340277299-6addc78d0548?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8OXx8c21hcnRwaG9uZSUyMHNlYXJjaCUyMHR5cGluZ3xlbnwxfDB8fHwxNzk0NzcxODk3fDA&ixlib=rb-4.1.0"
+  alt: "Smartphone displaying search results on a keyboard"
+  author: "Zulfugar Karimov"
+  authorUrl: "https://unsplash.com/@zulfugarkarimov"
+  link: "https://unsplash.com/photos/smartphone-displaying-search-results-on-a-keyboard-ri99XpAZamY"
 sources:
   - title: "AI Update, November 6, 2026: AI News and Views From the Past Week"
     url: "https://www.marketingprofs.com/opinions/2026/56257/ai-update-november-6-2026-ai-news-and-views-from-the-past-week"
