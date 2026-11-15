@@ -11,6 +11,8 @@ export const SITE = {
   updatesPerDay: 2,
   // Sosyal hesaplar: kullanıcı adı yazılırsa alt bilgide "Takip et" altında görünür (boşsa gizli)
   social: { x: '', instagram: '', linkedin: '' },
+  // Google Analytics 4 ölçüm kimliği. Yalnızca ziyaretçi çerez bandında izin verirse yüklenir (KVKK). Boş bırakılırsa kapalı.
+  analytics: { ga4: 'G-N6Q0G7X4GB' },
 };
 
 export const CATEGORIES = [

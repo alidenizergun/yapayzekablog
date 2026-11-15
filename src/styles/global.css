@@ -355,3 +355,18 @@ footer.site .wm-sub { color: #FF7A62; }
 
 /* Bal küpü alanı (hata bildir formu): ekranda ve ekran okuyucuda görünmez */
 .hp { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
+
+/* ---------------------------------------------------------------- çerez bandı */
+.consent { position: fixed; left: 0; right: 0; bottom: 0; z-index: 20; background: var(--bg); border-top: 1px solid var(--line); box-shadow: 0 -6px 24px rgba(0,0,0,.08); }
+.consent .wrap { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 24px; padding-block: 16px; }
+.consent p { margin: 0; flex: 1 1 420px; font-size: 14px; line-height: 1.5; color: var(--fg); }
+.consent p a { color: var(--accent-text); text-decoration: underline; text-underline-offset: 3px; }
+.consent-actions { display: flex; gap: 8px; }
+.btn-ghost { background: transparent; color: var(--fg); border: 1px solid var(--line); }
+.foot-links { display: inline-flex; gap: 16px; align-items: center; }
+footer.site .linkish { background: none; border: 0; padding: 0; color: #fff; font: inherit; font-size: 13px; text-decoration: underline; text-underline-offset: 3px; text-decoration-color: rgba(255,255,255,.4); cursor: pointer; min-height: 44px; }
+@media (max-width: 760px) { .consent-actions { width: 100%; } .consent-actions .btn { flex: 1; } }
+/* Gizlilik sayfası */
+.legal { max-width: 760px; }
+.legal .prose { font-family: var(--body); font-size: 17px; }
+.legal .prose h2 { font-size: 22px; margin-top: 36px; }

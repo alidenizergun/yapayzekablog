@@ -59,7 +59,7 @@ Haberler çoğunlukla İngilizce kaynaklardan derlenir. Metin çeviri gibi deği
 - **İç notlar asla metne girmez.** "Araştırmada görülemedi", "haberin hazırlandığı sırada bulunamadı", "önceki bir özette", "derleme siteleri yanlış yazdı", "bu yazı kapsamında" gibi
   haber hazırlama sürecine ait notlar yayımlanmaz. Doğrulanmamış bilgi gazetecilik diliyle ve bir kez belirtilir: "… iddia ediliyor", "şirket bu rakamı doğrulamadı".
 - **Tekrar yok.** Aynı uyarı (teyit edilmedi, iddia niteliğinde) metin, spot ve "Bu ne anlama geliyor?" kutusunda tekrar tekrar yazılmaz.
-- **Yazım.** Aynı kelimenin art arda tekrarı ("veri merkezi merkezi"), yazım hataları ve eksik ekler düzeltilir. Ondalık ayracı virgüldür (1,5 milyar dolar); binlik ayracı noktadır (136.000).
+- **Yazım.** Sitede "yapay zeka" şapkasız yazılır ("zekâ" değil); TDK yazımı esas alınır ("iş birliği", "bir şey", "her şey"). Aynı kelimenin art arda tekrarı ("veri merkezi merkezi"), yazım hataları ve eksik ekler düzeltilir. Ondalık ayracı virgüldür (1,5 milyar dolar); binlik ayracı noktadır (136.000).
 - **Terimler.** Yerleşik Türkçe karşılığı olan terim Türkçe yazılır; gerekirse ilk geçtiği yerde parantez içinde İngilizcesi verilir. Ürün ve şirket adları özgün yazılışıyla korunur.
 - **Editör yeni bilgi eklemez.** Rakam, tarih, isim ve iddia aynen korunur; yalnızca dil, akış ve açıklık düzeltilir.
 

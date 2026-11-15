@@ -6,6 +6,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import crypto from 'node:crypto';
 import { fileURLToPath } from 'node:url';
+import { SITE } from '../src/lib/site.js';
 
 function walk(dir, out = []) {
   for (const e of fs.readdirSync(dir, { withFileTypes: true })) {
@@ -24,6 +25,12 @@ export default function securityHeaders() {
       'astro:build:done': ({ dir, logger }) => {
         const root = fileURLToPath(dir);
         const forms = [process.env.PUBLIC_NEWSLETTER_ACTION, process.env.PUBLIC_REPORT_FORM_ACTION].map(origin).filter(Boolean);
+        // Google Analytics (yalnızca izin verilince yüklenir) için gereken adresler
+        const ga = SITE.analytics?.ga4 ? {
+          script: 'https://www.googletagmanager.com',
+          connect: 'https://*.google-analytics.com https://*.analytics.google.com https://www.googletagmanager.com',
+          img: 'https://*.google-analytics.com https://www.googletagmanager.com',
+        } : { script: '', connect: '', img: '' };
         let pages = 0;
         for (const file of walk(root)) {
           let html = fs.readFileSync(file, 'utf8');
@@ -35,11 +42,11 @@ export default function securityHeaders() {
           });
           const csp = [
             "default-src 'self'",
-            `script-src 'self' ${[...hashes].join(' ')}`.trim(),
+            `script-src 'self' ${ga.script} ${[...hashes].join(' ')}`.replace(/\s+/g, ' ').trim(),
             "style-src 'self' 'unsafe-inline'",
-            "img-src 'self' https://images.unsplash.com data:",
+            `img-src 'self' https://images.unsplash.com data: ${ga.img}`.trim(),
             "font-src 'self'",
-            `connect-src 'self' ${forms.join(' ')}`.trim(),
+            `connect-src 'self' ${ga.connect} ${forms.join(' ')}`.replace(/\s+/g, ' ').trim(),
             `form-action 'self' https://github.com ${forms.join(' ')}`.trim(),
             "object-src 'none'",
             "base-uri 'self'",

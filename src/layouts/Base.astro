@@ -196,11 +196,64 @@ const isBreaking = latest && Date.now() - latest.data.date.valueOf() < BREAKING_
     <div class="foot-bottom"><div class="wrap">
       <p>© {year} {SITE.name} · {SITE.domain}</p>
       <p class="foot-credits">Fotoğraflar <a href="https://unsplash.com/?utm_source=yzgundemi&utm_medium=referral">Unsplash</a>, şirket logoları <a href="https://simpleicons.org/">Simple Icons</a> kaynaklıdır; logolar sahiplerinin markasıdır.</p>
+      <span class="foot-links"><a href={url('/gizlilik/')}>Gizlilik ve çerezler</a>{SITE.analytics?.ga4 && <button type="button" class="linkish" data-consent-open>Çerez tercihleri</button>}</span>
       <a class="foot-top" href="#">Başa dön <span aria-hidden="true">↑</span></a>
     </div></div>
   </footer>
 
+  {SITE.analytics?.ga4 && (
+    <div class="consent" data-consent data-ga={SITE.analytics.ga4} role="region" aria-label="Çerez tercihi" hidden>
+      <div class="wrap">
+        <p>Siteyi geliştirmek için hangi haberlerin okunduğunu Google Analytics ile ölçmek istiyoruz. Bunun için tarayıcınıza istatistik çerezleri yerleştirilir; reklam çerezi kullanılmaz. <a href={url('/gizlilik/')}>Ayrıntılar</a></p>
+        <div class="consent-actions">
+          <button type="button" class="btn btn-ghost" data-consent-choice="denied">Reddet</button>
+          <button type="button" class="btn" data-consent-choice="granted">Kabul et</button>
+        </div>
+      </div>
+    </div>
+  )}
+
   <script>
+    // Google Analytics: yalnızca ziyaretçi izin verirse yüklenir (KVKK). Tercih tarayıcıda saklanır; reklam çerezleri her zaman kapalı.
+    const consentBox = document.querySelector<HTMLElement>('[data-consent]');
+    if (consentBox) {
+      const GA = consentBox.dataset.ga!;
+      const KEY = 'yz-cerez-izni';
+      const read = () => { try { return localStorage.getItem(KEY); } catch { return null; } };
+      const save = (v: string) => { try { localStorage.setItem(KEY, v); } catch {} };
+      let loaded = false;
+      const loadGA = () => {
+        if (loaded) return;
+        loaded = true;
+        const w = window as any;
+        w.dataLayer = w.dataLayer || [];
+        w.gtag = function () { w.dataLayer.push(arguments); };
+        w.gtag('consent', 'default', { analytics_storage: 'granted', ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied' });
+        w.gtag('js', new Date());
+        w.gtag('config', GA, { allow_google_signals: false, allow_ad_personalization_signals: false });
+        const s = document.createElement('script');
+        s.async = true;
+        s.src = `https://www.googletagmanager.com/gtag/js?id=${encodeURIComponent(GA)}`;
+        document.head.appendChild(s);
+      };
+      const clearGA = () => {
+        const host = location.hostname.replace(/^www\./, '');
+        document.cookie.split(';').map((c) => c.split('=')[0].trim()).filter((n) => /^_ga/.test(n)).forEach((n) => {
+          for (const d of ['', `; domain=${host}`, `; domain=.${host}`]) document.cookie = `${n}=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/${d}`;
+        });
+      };
+      const choice = read();
+      if (choice === 'granted') loadGA();
+      else if (choice !== 'denied') consentBox.hidden = false;
+      consentBox.querySelectorAll<HTMLButtonElement>('[data-consent-choice]').forEach((b) => b.addEventListener('click', () => {
+        const v = b.dataset.consentChoice!;
+        save(v);
+        consentBox.hidden = true;
+        if (v === 'granted') loadGA();
+        else { clearGA(); if (loaded) location.reload(); }
+      }));
+      document.querySelectorAll('[data-consent-open]').forEach((b) => b.addEventListener('click', () => { consentBox.hidden = false; consentBox.querySelector('button')?.focus(); }));
+    }
     // "Son dakika" etiketi: haber 6 saatten eskiyse ziyaret anında "Son haber"e döner
     const badgeText = (iso: string) => (Date.now() - new Date(iso).getTime() < 6 * 3600e3 ? 'Son dakika' : 'Son haber');
     document.querySelectorAll<HTMLElement>('[data-breaking]').forEach((b) => { b.textContent = badgeText(b.dataset.breaking!); });

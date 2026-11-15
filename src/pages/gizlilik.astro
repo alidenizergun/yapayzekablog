@@ -1,0 +1,39 @@
+---
+import Base from '../layouts/Base.astro';
+import { SITE } from '../lib/site.js';
+import { url } from '../lib/news.js';
+const ga = SITE.analytics?.ga4;
+---
+<Base title="Gizlilik ve çerezler" description="YZ Gündemi'nde hangi verilerin işlendiği, çerezlerin nasıl kullanıldığı ve çerez tercihinizi nasıl değiştirebileceğiniz.">
+  <article class="article legal">
+    <span class="badge">Kurumsal</span>
+    <h1>Gizlilik ve çerezler</h1>
+    <p class="spot">YZ Gündemi'ni okumak için üye olmanız ya da kişisel bilgi vermeniz gerekmez. Bu sayfa, hangi verilerin hangi amaçla işlendiğini açıklar.</p>
+    <div class="prose">
+      <h2>Ziyaret istatistikleri (Google Analytics)</h2>
+      {ga ? (
+        <>
+          <p>Hangi haberlerin okunduğunu ve sitenin nasıl kullanıldığını anlamak için Google Analytics 4 kullanıyoruz. Bu ölçüm <strong>yalnızca çerez bandında "Kabul et" seçeneğini işaretlerseniz</strong> çalışır. İzin vermezseniz Google Analytics kodu sayfaya hiç yüklenmez.</p>
+          <p>İzin verdiğinizde tarayıcınıza Google Analytics çerezleri (<code>_ga</code>, <code>_ga_*</code>) yerleştirilir; bu çerezler en fazla 2 yıl saklanır. Ziyaret ettiğiniz sayfalar, cihaz ve tarayıcı türü, yaklaşık konum (şehir/ülke düzeyinde) ve siteye nereden geldiğiniz gibi bilgiler toplanır. Google Analytics 4 IP adreslerini saklamaz. Reklam ve kişiselleştirme özellikleri kapalıdır; bu veriler reklam amacıyla kullanılmaz.</p>
+          <p>Veriler Google'ın sunucularında (yurt dışında) işlenir. Ayrıntılar için <a href="https://policies.google.com/privacy?hl=tr">Google Gizlilik Politikası</a>'na bakabilirsiniz.</p>
+          <p><button type="button" class="btn" data-consent-open>Çerez tercihimi değiştir</button></p>
+        </>
+      ) : (
+        <p>Sitede şu anda ziyaret istatistiği aracı kullanılmıyor.</p>
+      )}
+
+      <h2>Zorunlu tarayıcı kayıtları</h2>
+      <p>Karanlık/aydınlık tema seçiminiz ve çerez tercihiniz, yalnızca kendi tarayıcınızda (localStorage) saklanır ve bize gönderilmez.</p>
+
+      <h2>Hata bildirimleri</h2>
+      <p>"Hata bildir" formunu kullandığınızda, bildiriminiz GitHub'da herkese açık bir kayıt olarak açılır. Bu nedenle bildirime kişisel bilgi eklemeyin. Form bir e-posta hizmetine bağlanırsa e-posta adresiniz yalnızca size dönüş yapmak için kullanılır.</p>
+
+      <h2>Barındırma</h2>
+      <p>Site GitHub Pages üzerinde barındırılır. GitHub, güvenlik ve hizmetin işletilmesi amacıyla ziyaretçilerin IP adreslerini kendi kayıtlarında tutabilir. Yazı tipleri ve sayfa dosyaları kendi sunucumuzdan verilir; haber fotoğrafları Unsplash'ten yüklenir.</p>
+
+      <h2>Haklarınız</h2>
+      <p>6698 sayılı Kişisel Verilerin Korunması Kanunu kapsamında verilerinize ilişkin bilgi alma, düzeltme ve silme taleplerinizi <a href={url('/hata-bildir/')}>bize ulaşarak</a> iletebilirsiniz. Çerez iznini istediğiniz zaman bu sayfadan veya sitenin alt kısmındaki "Çerez tercihleri" bağlantısından geri alabilirsiniz.</p>
+      <p class="meta">Son güncelleme: 15 Kasım 2026</p>
+    </div>
+  </article>
+</Base>
