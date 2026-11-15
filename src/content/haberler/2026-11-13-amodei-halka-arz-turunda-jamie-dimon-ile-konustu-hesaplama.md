@@ -8,6 +8,13 @@ image: girisim
 brand: anthropic
 imageQuery: "wall street new york"
 whyItMatters: "Halka arz öncesinde şirketin kendi anlatısı, yani hesaplama maliyeti ve kamu yararı fonu, bu ayrıntıda ilk kez ortaya çıktı. Tırnak içindeki ifadeler tek bir ikincil kaynağa dayandığı için Bloomberg veya yayının kendisiyle teyit edilmesi gerekiyor."
+photo:
+  id: "oEGDKf4ZtNg"
+  url: "https://images.unsplash.com/photo-1623524713064-257294b0e34b?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8M3x8d2FsbCUyMHN0cmVldCUyMG5ldyUyMHlvcmt8ZW58MXwwfHx8MTc5NDc2MTk1M3ww&ixlib=rb-4.1.0"
+  alt: "a street sign on wall street in new york city"
+  author: "Robb Miller"
+  authorUrl: "https://unsplash.com/@robbmiller"
+  link: "https://unsplash.com/photos/a-street-sign-on-wall-street-in-new-york-city-oEGDKf4ZtNg"
 sources:
   - title: "@AnthropicAI X gönderisi"
     url: "https://x.com/AnthropicAI/status/2121272083863011714"

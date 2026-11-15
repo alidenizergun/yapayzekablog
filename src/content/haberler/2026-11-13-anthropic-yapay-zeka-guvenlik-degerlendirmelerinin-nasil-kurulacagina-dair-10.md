@@ -8,6 +8,13 @@ image: guvenlik
 brand: anthropic
 imageQuery: "cyber security lock computer"
 whyItMatters: "Halka arza hazırlanan bir şirket, “model güvenli” iddialarının dayandığı testlerin nasıl kurulması gerektiğine dair kendi standardını ortaya koyuyor."
+photo:
+  id: "mT7lXZPjk7U"
+  url: "https://images.unsplash.com/photo-1614064641938-3bbee52942c7?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8MXx8Y3liZXIlMjBzZWN1cml0eSUyMGxvY2slMjBjb21wdXRlcnxlbnwxfDB8fHwxNzk0NzYxOTUyfDA&ixlib=rb-4.1.0"
+  alt: "red padlock on black computer keyboard"
+  author: "FlyD"
+  authorUrl: "https://unsplash.com/@flyd2069"
+  link: "https://unsplash.com/photos/red-padlock-on-black-computer-keyboard-mT7lXZPjk7U"
 sources:
   - title: "Building strong safety evaluations"
     url: "https://www.anthropic.com/research/building-strong-safety-evaluations"

@@ -8,6 +8,13 @@ image: girisim
 brand: anthropic
 imageQuery: "stock exchange trading floor"
 whyItMatters: "Yapay zekanın en büyük özel şirketlerinden birinin halka arzı, sektör değerlemeleri için bir ölçüt oluşturabilir. Fiyat aralığı daha önce duyurulduğu için bugünkü gelişmenin yeni kısmı sayfa duyurusu ve Japonya'daki kayıt."
+photo:
+  id: "HpYTYo_jF2Y"
+  url: "https://images.unsplash.com/photo-1761233138997-44d9b002a08f?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8MXx8c3RvY2slMjBleGNoYW5nZSUyMHRyYWRpbmclMjBmbG9vcnxlbnwxfDB8fHwxNzk0NzYxOTU0fDA&ixlib=rb-4.1.0"
+  alt: "New york stock exchange building with american flags"
+  author: "Maxim Klimashin"
+  authorUrl: "https://unsplash.com/@maxim_klimashin"
+  link: "https://unsplash.com/photos/new-york-stock-exchange-building-with-american-flags-HpYTYo_jF2Y"
 sources:
   - title: "@AnthropicAI X gönderisi"
     url: "https://x.com/AnthropicAI/status/2120841731302154708"
