@@ -167,6 +167,7 @@ function toMarkdown(a, dateIso) {
   if (a.image_query) lines.push(`imageQuery: ${yamlStr(a.image_query)}`);
   if (a.photo) lines.push(...photoYaml(a.photo));
   if (a.why_it_matters) lines.push(`whyItMatters: ${yamlStr(a.why_it_matters)}`);
+  if (a.turkey_angle && !/^(yok|-|—)\.?$/i.test(a.turkey_angle)) lines.push(`turkeyAngle: ${yamlStr(a.turkey_angle)}`);
   lines.push('sources:');
   for (const s of a.sources) {
     lines.push(`  - title: ${yamlStr(s.title)}`, `    url: ${yamlStr(s.url)}`);
@@ -214,6 +215,7 @@ Her aday için şu biçimde not yaz:
 - Ne oldu: <olgular; kim, ne, ne zaman, rakamlar>
 - Yayın tarihi: <kaynaktaki tarih>
 - Neden önemli: <1 cümle>
+- Türkiye bağlantısı: <yalnızca kaynakta somut bir bilgi varsa: Türkiye'de kullanılabilirlik/fiyat, Türk şirket veya kurumları, Türkçe desteği, Türkiye'yi etkileyen düzenleme; yoksa "yok">
 - Kaynaklar: <aramada GERÇEKTEN gördüğün sayfaların tam adresleri, her biri ayrı satırda>
 
 Kurallar: Yalnızca arama sonuçlarında gördüğün bilgileri yaz. Tarihi ${LOOKBACK_HOURS} saatten eskiyse veya belirsizse adayı ele. Yeterince önemli yeni gelişme yoksa daha az aday yaz; hiç yoksa yalnızca "YENİ GELİŞME YOK" yaz.`;
@@ -271,7 +273,7 @@ const ARTICLE_SCHEMA = {
       items: {
         type: 'object',
         additionalProperties: false,
-        required: ['title', 'spot', 'category', 'tags', 'image', 'brand', 'image_query', 'body_markdown', 'why_it_matters', 'featured', 'popularity', 'tweet', 'sources'],
+        required: ['title', 'spot', 'category', 'tags', 'image', 'brand', 'image_query', 'body_markdown', 'why_it_matters', 'turkey_angle', 'featured', 'popularity', 'tweet', 'sources'],
         properties: {
           title: { type: 'string', description: 'Haber başlığı, 60-100 karakter' },
           spot: { type: 'string', description: 'Spot metni, 1-2 cümle, 140-280 karakter' },
@@ -282,6 +284,7 @@ const ARTICLE_SCHEMA = {
           image_query: { type: 'string', description: 'Unsplash fotoğraf araması için 2-4 kelimelik İngilizce sorgu; somut bir nesne veya mekan (ör. "data center servers"). Kişi adı, şirket adı, logo yok.' },
           body_markdown: { type: 'string', description: 'Haber gövdesi, Markdown, 3-6 paragraf, başlık tekrarı yok' },
           why_it_matters: { type: 'string', description: '"Bu ne anlama geliyor?" kutusu, 1-2 cümle' },
+          turkey_angle: { type: 'string', description: '"Türkiye açısından" notu, tek cümle; yalnızca notlarda somut Türkiye bağlantısı varsa, yoksa boş' },
           featured: { type: 'boolean' },
           popularity: { type: 'integer', description: 'Okunma potansiyeli, 1-100 (yayın kurallarındaki ölçüye göre)' },
           tweet: { type: 'string', description: 'X paylaşım metni, en fazla 220 karakter, link yazma (otomatik eklenir)' },
@@ -349,10 +352,10 @@ const EDIT_SCHEMA = {
   type: 'object', additionalProperties: false, required: ['articles'],
   properties: { articles: { type: 'array', items: {
     type: 'object', additionalProperties: false,
-    required: ['index', 'title', 'spot', 'body_markdown', 'why_it_matters', 'tweet', 'changes'],
+    required: ['index', 'title', 'spot', 'body_markdown', 'why_it_matters', 'turkey_angle', 'tweet', 'changes'],
     properties: {
       index: { type: 'integer' }, title: { type: 'string' }, spot: { type: 'string' }, body_markdown: { type: 'string' },
-      why_it_matters: { type: 'string' }, tweet: { type: 'string' },
+      why_it_matters: { type: 'string' }, turkey_angle: { type: 'string' }, tweet: { type: 'string' },
       changes: { type: 'array', items: { type: 'string' }, description: 'Yapılan düzeltmeler, her biri kısa' },
     },
   } } },
@@ -363,7 +366,7 @@ const numbersOf = (s) => (String(s).replace(/\(?\d{1,2}[:.]\d{2}\s*UTC\)?/gi, ''
 async function editPass(anthropic, articles) {
   if (!EDITOR_ON || !articles.length) return { articles, notes: [] };
   const input = articles.map((a, index) => ({
-    index, title: a.title, spot: a.spot, body_markdown: a.body_markdown, why_it_matters: a.why_it_matters, tweet: a.tweet,
+    index, title: a.title, spot: a.spot, body_markdown: a.body_markdown, why_it_matters: a.why_it_matters, turkey_angle: a.turkey_angle, tweet: a.tweet,
     kaynaklar: a.sources.map((x) => `${x.publisher || ''} — ${x.title}`),
   }));
   const res = await anthropic.messages.create({
@@ -392,8 +395,8 @@ ${JSON.stringify(input, null, 1)}` }],
   const out = articles.map((a, i) => {
     const e = edited.find((x) => x.index === i);
     if (!e) return a;
-    const before = [a.title, a.spot, a.body_markdown, a.why_it_matters].join(' ');
-    const after = [e.title, e.spot, e.body_markdown, e.why_it_matters].join(' ');
+    const before = [a.title, a.spot, a.body_markdown, a.why_it_matters, a.turkey_angle].join(' ');
+    const after = [e.title, e.spot, e.body_markdown, e.why_it_matters, e.turkey_angle].join(' ');
     const ratio = after.length / Math.max(1, before.length);
     const okTitle = e.title.length >= 20 && e.title.length <= 140;
     const okSpot = e.spot.length >= 60 && e.spot.length <= 320;
@@ -408,6 +411,7 @@ ${JSON.stringify(input, null, 1)}` }],
       spot: e.spot.replace(/<[^>]*>/g, '').trim(),
       body_markdown: sanitizeBody(e.body_markdown, a.sources.map((x) => x.url)),
       why_it_matters: e.why_it_matters.replace(/<[^>]*>/g, '').trim(),
+      turkey_angle: String(e.turkey_angle || '').replace(/<[^>]*>/g, '').trim(),
       tweet: cleanTweet(e.tweet),
     };
   });
@@ -471,6 +475,7 @@ function validate(articles, seen, existing) {
       title: title.replace(/<[^>]*>/g, ''),
       spot: String(a.spot || '').replace(/<[^>]*>/g, '').trim(),
       why_it_matters: String(a.why_it_matters || '').replace(/<[^>]*>/g, '').trim(),
+      turkey_angle: String(a.turkey_angle || '').replace(/<[^>]*>/g, '').trim(),
       popularity: Math.min(100, Math.max(1, Math.round(Number(a.popularity) || 50))),
       tags: [...new Set((a.tags || []).map((t) => String(t).replace(/[#\s]+/g, '')).filter(Boolean))].slice(0, 6),
       sources,

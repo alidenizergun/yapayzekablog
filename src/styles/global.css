@@ -157,6 +157,8 @@ figcaption { margin-top: 8px; font-size: 13px; color: var(--muted); }
 .prose ul, .prose ol { padding-left: 22px; }
 .why { margin-top: 28px; padding: 24px 28px; background: var(--soft); border-radius: 8px; max-width: 68ch; }
 .why p { margin: 8px 0 0; font-size: 17px; line-height: 1.6; }
+.why-tr { margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--line); }
+.why-tr-label { font-size: 12px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--accent-text); }
 .sources { margin-top: 36px; padding: 20px 24px; border: 1px solid var(--line); border-radius: 8px; }
 .sources h2 { font-family: var(--body); font-size: 15px; font-weight: 700; margin-bottom: 10px; letter-spacing: 0; }
 .sources ol { margin: 0; padding-left: 20px; font-size: 15px; display: flex; flex-direction: column; gap: 8px; }

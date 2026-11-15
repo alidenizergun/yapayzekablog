@@ -9,6 +9,7 @@ image: pazarlama
 brand: openai
 imageQuery: "online shopping payment phone"
 whyItMatters: "Yapay zeka ajanları ürün araştırmanın ötesine geçip ödemeyi de tamamlamaya başlıyor. OpenAI bu adımı kart bilgisini ajanla paylaşmayan bir altyapıyla ve her alımda kullanıcı onayı şartıyla atıyor."
+turkeyAngle: "ChatGPT Wallet şimdilik yalnızca ABD'deki 18 yaş üstü Pro abonelerine açık; Türkiye'deki kullanıcılar özelliği henüz kullanamıyor."
 photo:
   id: "BKq_7oEvFN4"
   url: "https://images.unsplash.com/photo-1758524944006-ba8116008496?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8MXx8b25saW5lJTIwc2hvcHBpbmclMjBwYXltZW50JTIwcGhvbmV8ZW58MXwwfHx8MTc5NDc2MTgzN3ww&ixlib=rb-4.1.0"

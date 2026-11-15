@@ -47,6 +47,12 @@ Okur kitlesi: Türkiye'deki profesyoneller, girişimciler, pazarlamacılar, yaz�
 - Para birimleri kaynaktaki gibi verilir (örn. "500 milyon dolar").
 - Ünlem, emoji, "devrim niteliğinde", "inanılmaz" gibi abartılı ifadeler kullanılmaz.
 
+## Türkiye açısından (turkey_angle)
+Haberin Türkiye'deki okur, kullanıcı veya şirketler için somut bir karşılığı varsa tek cümleyle yazılır; "Bu ne anlama geliyor?" kutusunda "Türkiye açısından" başlığıyla gösterilir.
+- Yalnızca araştırma notlarında yer alan bilgiye dayanır: ürünün Türkiye'de kullanılıp kullanılamadığı veya fiyatı, işin içinde Türk şirket ya da kurumların olması, Türkçe desteği, Türkiye'yi etkileyen bir düzenleme.
+- Kaynakta somut bir bağlantı yoksa alan BOŞ bırakılır. Tahmin, genelleme ve "Türkiye'deki şirketler de bundan etkilenebilir" gibi içi boş cümleler yazılmaz.
+- Örnek: "Özellik şimdilik yalnızca ABD'deki kullanıcılara açık; Türkiye'deki kullanıcılar henüz kullanamıyor."
+
 ## Türkçe editoryal kurallar (editör adımı bu bölüme göre metni son kez okur)
 Haberler çoğunlukla İngilizce kaynaklardan derlenir. Metin çeviri gibi değil, baştan Türkçe yazılmış gibi okunmalıdır.
 - **Çeviri kokan ifadeler düzeltilir.** İngilizce kalıbın birebir karşılığı yerine Türkçede doğal olan söylenir.

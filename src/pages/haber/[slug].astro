@@ -93,10 +93,16 @@ const crumbs = [{ name: 'Ana sayfa', path: '/' }, { name: catName(d.category), p
 
       <div class="prose"><Content /></div>
 
-      {d.whyItMatters && (
+      {(d.whyItMatters || d.turkeyAngle) && (
         <aside class="why" aria-label="Bu ne anlama geliyor">
           <span class="cat">Bu ne anlama geliyor?</span>
-          <p>{d.whyItMatters}</p>
+          {d.whyItMatters && <p>{d.whyItMatters}</p>}
+          {d.turkeyAngle && (
+            <div class="why-tr">
+              <span class="why-tr-label">Türkiye açısından</span>
+              <p>{d.turkeyAngle}</p>
+            </div>
+          )}
         </aside>
       )}
 
