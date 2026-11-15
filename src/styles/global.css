@@ -630,3 +630,16 @@ header.site .masthead { display: flex; align-items: center; justify-content: spa
 .models-news ul { margin: 12px 0 0; padding-left: 20px; }
 .models-news li + li { margin-top: 8px; }
 @media (max-width: 560px) { .calc-in { grid-template-columns: 1fr; } .calc { padding: 18px; } }
+
+/* ---------- Etkinlik takvimi ---------- */
+.ev-h { margin: 40px 0 0; font-size: 22px; }
+.ev-list { list-style: none; margin: 12px 0 0; padding: 0; border-top: 1px solid var(--line); max-width: 860px; }
+.ev { display: grid; grid-template-columns: 180px minmax(0, 1fr); gap: 20px; padding-block: 20px; border-bottom: 1px solid var(--line); }
+.ev-date { font-family: var(--display); font-weight: 800; font-size: 17px; line-height: 1.35; }
+.ev-type { font-size: 12px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--accent-text); }
+.ev h3 { margin: 4px 0 0; font-size: 20px; line-height: 1.3; text-wrap: balance; }
+.ev h3 a:hover { color: var(--accent-text); text-decoration: underline; }
+.ev p { margin: 6px 0 0; }
+.ev .meta a { color: var(--accent-text); }
+.ev-past .ev-date, .ev-past h3 { color: var(--muted); }
+@media (max-width: 560px) { .ev { grid-template-columns: 1fr; gap: 6px; } }
