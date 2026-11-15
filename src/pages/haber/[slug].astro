@@ -65,7 +65,10 @@ const jsonLd = {
         <div class="share">
           <a class="tag" href={`https://x.com/intent/post?text=${encodeURIComponent(d.title)}&url=${encodeURIComponent(pageUrl)}`} target="_blank" rel="noopener">X'te paylaş</a>
           <a class="tag" href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(pageUrl)}`} target="_blank" rel="noopener">LinkedIn</a>
+          <a class="tag" href={`https://wa.me/?text=${encodeURIComponent(`${d.title} ${pageUrl}`)}`} target="_blank" rel="noopener">WhatsApp</a>
+          <button type="button" data-share-ig data-title={d.title}>Instagram</button>
           <button type="button" data-copy>Bağlantıyı kopyala</button>
+          <span class="share-note" role="status" aria-live="polite"></span>
         </div>
       </div>
 

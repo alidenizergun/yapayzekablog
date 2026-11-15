@@ -168,6 +168,24 @@ const isBreaking = latest && Date.now() - latest.data.date.valueOf() < BREAKING_
         catch { b.textContent = location.href; }
       });
     });
+    // Instagram'ın web paylaşım adresi yok: telefonda cihazın paylaş menüsü açılır (Instagram oradan seçilir),
+    // bilgisayarda bağlantı kopyalanır ve nasıl paylaşılacağı yazılır.
+    document.querySelectorAll<HTMLButtonElement>('[data-share-ig]').forEach((b) => {
+      const note = b.parentElement?.querySelector<HTMLElement>('.share-note');
+      b.addEventListener('click', async () => {
+        const mobile = matchMedia('(pointer: coarse)').matches;
+        if (mobile && navigator.share) {
+          try { await navigator.share({ title: b.dataset.title, url: location.href }); } catch {}
+          return;
+        }
+        try {
+          await navigator.clipboard.writeText(location.href);
+          if (note) note.textContent = "Bağlantı kopyalandı. Instagram'da hikâyene bağlantı çıkartması olarak ya da DM'e yapıştırabilirsin.";
+        } catch {
+          if (note) note.textContent = location.href;
+        }
+      });
+    });
   </script>
 </body>
 </html>

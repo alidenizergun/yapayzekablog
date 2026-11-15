@@ -140,6 +140,8 @@ aside.side-col { flex: 1 1 300px; min-width: 0; display: flex; flex-direction: c
 .author { display: flex; align-items: center; gap: 12px; }
 .avatar { width: 44px; height: 44px; border-radius: 22px; background: var(--fg); color: var(--bg); display: flex; align-items: center; justify-content: center; font-weight: 700; }
 .share { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+.share-note { flex-basis: 100%; font-size: 13px; color: var(--muted); }
+.share-note:empty { display: none; }
 .share button { height: 34px; padding: 0 12px; border-radius: 17px; border: 1px solid var(--line); background: var(--bg); color: var(--fg); cursor: pointer; font: inherit; font-size: 14px; }
 figure { margin: 28px 0 0; }
 figure .thumb { height: min(420px, 56vw); }
