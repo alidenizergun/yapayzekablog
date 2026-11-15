@@ -88,20 +88,6 @@ const og = ogImage ? new URL(ogImage, Astro.site).href : new URL(url('/img/arama
   </div></footer>
 
   <script>
-    // Tarihleri "12 dk önce" biçimine çevirir; JavaScript yoksa tam tarih görünür.
-    const rtf = new Intl.RelativeTimeFormat('tr', { numeric: 'auto' });
-    const rel = (d) => {
-      const s = (d.getTime() - Date.now()) / 1000;
-      if (Math.abs(s) < 60) return 'az önce';
-      if (Math.abs(s) < 3600) return rtf.format(Math.round(s / 60), 'minute');
-      if (Math.abs(s) < 86400) return rtf.format(Math.round(s / 3600), 'hour');
-      if (Math.abs(s) < 604800) return rtf.format(Math.round(s / 86400), 'day');
-      return null;
-    };
-    document.querySelectorAll<HTMLTimeElement>('time[data-rel]').forEach((t) => {
-      const r = rel(new Date(t.dateTime));
-      if (r) { t.title = t.textContent ?? ''; t.textContent = r; }
-    });
     document.querySelectorAll<HTMLFormElement>('form[data-news]').forEach((f) => {
       f.addEventListener('submit', (e) => {
         const action = f.getAttribute('action');

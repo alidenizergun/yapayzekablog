@@ -1,5 +1,6 @@
 ---
+// Tarih her zaman "15 Kasım 2026" biçiminde gösterilir: saat ve "dün", "3 saat önce" gibi ifadeler yok.
 import { formatDate } from '../lib/news.js';
 const { date } = Astro.props;
 ---
-<time datetime={date.toISOString()} data-rel>{formatDate(date)}</time>
+<time datetime={date.toISOString()}>{formatDate(date, false)}</time>
