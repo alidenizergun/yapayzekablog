@@ -8,7 +8,7 @@ date: 2026-11-13T00:28:30+03:00
 image: gemini
 brand: gemini
 imageQuery: "google search phone"
-whyItMatters: "Google, ucuz ve hızlı katmanda Flash serisinin yerine Gemini 4 neslini getiriyor. Hydrogen, ücretsiz kullanıcılara da ulaşan ilk Gemini 4 modeli. Benchmark rakamları şirketin kendi beyanı olduğundan bağımsız testlerle birlikte okunmalı."
+whyItMatters: "Google, hızlı ve ucuz model katmanında Flash serisinin yerine Gemini 4 neslini getiriyor; böylece yeni nesil ücretsiz kullanıcılara da ulaşıyor. Performans rakamları şimdilik Google'ın kendi ölçümlerine dayanıyor."
 photo:
   id: "UWVJaDvXW_c"
   url: "https://images.unsplash.com/photo-1594663653925-365bcbf7ef86?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8MXx8Z29vZ2xlJTIwc2VhcmNoJTIwcGhvbmV8ZW58MXwwfHx8MTc5NDc2MTgzOXww&ixlib=rb-4.1.0"
@@ -31,14 +31,14 @@ sources:
     publisher: "The Next Web"
 ---
 
-Google, Gemini 4 Hydrogen'ı 12 Kasım 2026'da duyurdu. Şirket, Carbon ve Argon'u derin muhakeme için sunduğu öncü modeller olarak konumlandırırken Hydrogen'ı hızlı yürütme için tasarlanmış model olarak tanımlıyor. Lansmanı Sundar Pichai, Google DeepMind ve Logan Kilpatrick de X'ten duyurdu.
+Google, Gemini 4 Hydrogen'ı 12 Kasım 2026'da duyurdu. Şirket, Carbon ve Argon'u derinlemesine akıl yürütme gerektiren işler için konumlandırırken Hydrogen'ı hız odaklı model olarak tanımlıyor. Lansmanı Sundar Pichai ve Logan Kilpatrick de X hesaplarından duyurdu.
 
-Model, Google AI Studio'nun tüm katmanlarında, Gemini API'de, Gemini for business'ta, Gemini uygulamasında ve Google Search'te sunuluyor. Google AI Pro ve Ultra aboneleri modeli Antigravity'de kullanabiliyor. Ücretsiz Gemini uygulaması kullanıcıları ise Hydrogen'a, Google uygun gördüğünde otomatik model seçimiyle erişecek.
+Model, Google AI Studio'nun tüm katmanlarında, Gemini API'de, Gemini for business'ta, Gemini uygulamasında ve Google Search'te sunuluyor. Google AI Pro ve Ultra aboneleri modeli Antigravity'de kullanabiliyor. Ücretsiz Gemini kullanıcıları ise Hydrogen'ı, uygulamanın otomatik model seçimi devreye girdiğinde kullanabilecek.
 
-Google'a göre model, Gemini 3.8 Flash'a kıyasla görevleri 2,5 kat hızlı tamamlıyor. Terminal-Bench 4.1'de yüzde 57 alırken Flash'ın puanı yüzde 18,2. Şirket ayrıca uydurma iddiaları beş kattan fazla azalttığını belirtiyor. Artificial Analysis Intelligence Index'te modelin varsayılan ayarda 51 puan aldığı, Argon'un ise 50 aldığı bildiriliyor.
+Google'a göre model, Gemini 3.8 Flash'a kıyasla görevleri 2,5 kat hızlı tamamlıyor. Terminal-Bench 4.1'de yüzde 57 alırken Flash'ın puanı yüzde 18,2. Google ayrıca modelin uydurma bilgi üretme oranının beşte birin altına indiğini belirtiyor. Artificial Analysis Intelligence Index'te modelin varsayılan ayarda 51 puan aldığı, Argon'un ise 50 aldığı bildiriliyor.
 
 ## Fiyat ve teknik ayrıntılar
 
-API fiyatı milyon girdi token'ı için 1,50 dolar, milyon çıktı token'ı için 7,50 dolar. Dört düşünme seviyesi bulunuyor: düşük, orta, yüksek (varsayılan) ve yeni xhigh. Girdi, düşünme ve çıktı tek bir 1.048.576 token'lık pencereyi paylaşıyor. Google ayrıca Antigravity'de Hydrogen ile Gemini 4 Carbon arasında geçiş yapan Orchestrator'ı da duyurdu.
+API fiyatı milyon girdi token'ı için 1,50 dolar, milyon çıktı token'ı için 7,50 dolar. Dört düşünme seviyesi bulunuyor: düşük, orta, yüksek (varsayılan) ve yeni xhigh. Girdi, düşünme ve çıktı toplam 1.048.576 token'lık tek bir bağlam penceresini paylaşıyor. Google ayrıca Antigravity'de işe göre Hydrogen ile Gemini 4 Carbon arasında geçiş yapan Orchestrator özelliğini de duyurdu.
 
-The Decoder'a göre bağımsız bir test, Hydrogen'ın nadiren halüsinasyon gördüğünü ancak terminal işlerinde geride kaldığını gösterdi.
+The Decoder'ın aktardığı bağımsız bir test ise Hydrogen'ın nadiren uydurma bilgi ürettiğini, ancak terminal görevlerinde rakiplerinin gerisinde kaldığını gösterdi.

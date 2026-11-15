@@ -31,10 +31,8 @@ sources:
     publisher: "Neowin"
 ---
 
-OpenAI, Daybreak güvenlik platformuna iki yeni ürün ekledi. Daybreak Red Team, web uygulamalarına sızma testi yapmak için birlikte çalışan bir yapay zeka ajanı ekibi kullanıyor. Daybreak Defense Factory ise bulunan güvenlik açıklarının düzeltilmesine odaklanıyor.
+OpenAI, Daybreak güvenlik platformuna iki yeni ürün ekledi. Daybreak Red Team, web uygulamalarına sızma testi yapmak için birlikte çalışan bir grup yapay zeka ajanından oluşuyor. Daybreak Defense Factory ise bulunan güvenlik açıklarının düzeltilmesine odaklanıyor.
 
 Red Team erken erişimle sunuluyor. Defense Factory ise uygun ChatGPT çalışma alanlarında önizleme olarak açılıyor. Ürünler, 12 Kasım'da yapılan "Cyber at the Frontier" yayınında tanıtıldı. OpenAI Başkanı Greg Brockman da ürünleri aynı gün X hesabından duyurdu.
 
-The Register'a göre ajanlar şu an OpenAI'ın GPT-6 Cyber modelini kullanıyor. Önerilen düzeltmeler üretime girmeden önce mühendisler tarafından inceleniyor ve onaylanıyor. Fiyatlandırma henüz açıklanmadı.
-
-OpenAI'ın kendi sayfalarına ulaşılamadığı için haber, Brockman'ın gönderisine ve basın kaynaklarına dayanıyor.
+The Register'a göre ajanlar şu an OpenAI'ın GPT-6 Cyber modelini kullanıyor. Ajanların önerdiği düzeltmeler, canlı sisteme uygulanmadan önce mühendisler tarafından inceleniyor ve onaylanıyor. Fiyatlandırma henüz açıklanmadı.

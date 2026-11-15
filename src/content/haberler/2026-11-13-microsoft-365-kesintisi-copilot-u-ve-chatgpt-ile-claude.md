@@ -33,8 +33,6 @@ sources:
 
 Reuters'a göre Perşembe günü Microsoft 365, Outlook ve Teams ABD'de binlerce kullanıcı için çalışmadı. Kesinti, OpenAI ve Anthropic hizmetlerinin kullandığı bağlayıcıları (connector) da etkiledi. The Next Web, kesintinin 12 saati geçtiğini yazdı; sorun Cuma gününe sarktı.
 
-OpenAI durum sayfasında, yeni Microsoft bağlayıcı bağlantılarının başarısız olabileceğini ve bazı araçların beklendiği gibi çalışmayabileceğini bildirdi. Anthropic ise sorunu önce üst sağlayıcıya bağladı, ardından Microsoft 365 olayından kaynaklandığını doğruladı.
+OpenAI durum sayfasında, yeni Microsoft bağlayıcı bağlantılarının başarısız olabileceğini ve bazı araçların beklendiği gibi çalışmayabileceğini bildirdi. Anthropic ise sorunun önce hizmet aldığı bir sağlayıcıdan kaynaklandığını bildirdi, ardından bunun Microsoft 365 kesintisi olduğunu doğruladı.
 
-Microsoft'tan Charles Lamanna, X'te kötü niyetli ya da siber saldırı kaynaklı olduğuna dair bir işaret olmadığını söyledi. Microsoft, sorun tamamen çözüldükten sonra ayrıntılı bir kök neden raporu yayımlayacağını açıkladı.
-
-Kesintinin başlangıç saatinin saat dilimi kaynaklarda net değil.
+Microsoft'tan Charles Lamanna, X'te kesintinin bir siber saldırıdan ya da kötü niyetli bir girişimden kaynaklandığına dair işaret olmadığını söyledi. Microsoft, sorun tamamen çözüldükten sonra ayrıntılı bir kök neden raporu yayımlayacağını açıkladı.

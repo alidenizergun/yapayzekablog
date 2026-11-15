@@ -1,6 +1,6 @@
 ---
 title: "Nvidia'da Jensen Huang'ın dönüşünü isteyen imza kampanyası 136 bini aştı"
-spot: "Jensen Huang'ın istifasının ardından başlatılan geri dönüş kampanyası SCMP'ye göre 136.000'den fazla imzaya ulaştı; rakamlar doğrulanmış değil. Megaspeed ise Alice Huang'ın Ağustos 2025'te ayrıldığını açıkladı."
+spot: "Jensen Huang'ın Nvidia'ya dönmesini isteyen imza kampanyası SCMP'ye göre 136.000'den fazla imzaya ulaştı. Çip kaçakçılığı iddialarının merkezindeki Singapurlu Megaspeed ise yöneticisi Alice Huang'ın şirketten Ağustos 2025'te ayrıldığını açıkladı."
 category: donanim
 popularity: 72
 tags: ["Nvidia", "JensenHuang", "Megaspeed", "YönetimKurulu"]
@@ -31,18 +31,16 @@ sources:
     publisher: "X"
 ---
 
-Nvidia CEO'su Jensen Huang'ın istifasının ardından, geri dönüşünü isteyen imza kampanyası büyümeyi sürdürüyor. South China Morning Post'un (SCMP) haberine göre kampanya, 15 Kasım Pazar günü saat 14.00 itibarıyla 136.000'den fazla imzaya ulaştı. Koreli Financial News de yaklaşık 136.000 katılımcıdan söz ediyor; önceki bir özette bu sayı yaklaşık 110.000 olarak verilmişti.
+Nvidia CEO'su Jensen Huang'ın istifasının ardından, geri dönüşünü isteyen imza kampanyası büyümeyi sürdürüyor. South China Morning Post'un (SCMP) haberine göre kampanya, 15 Kasım Pazar günü saat 14.00 itibarıyla 136.000'den fazla imzaya ulaştı. Güney Kore'den Financial News de yaklaşık 136.000 katılımcıdan söz ediyor.
 
-SCMP'ye göre imzacılar arasında 6.800'den fazla Nvidia çalışanı ve 73.000 hissedar olduğu iddia edilen kayıtlar ile Elon Musk da yer alıyor. İmzalar kampanya sayfasında kişilerin kendi beyanıyla toplandığı için bu rakamlar doğrulanmış değil.
+SCMP'ye göre imza verenler arasında kendini Nvidia çalışanı olarak tanıtan 6.800'den fazla kişi, hissedar olduğunu belirten 73.000 kişi ve Elon Musk da yer alıyor. İmzalar kişilerin kendi beyanıyla toplandığı için bu rakamlar doğrulanmış değil.
 
 ## Megaspeed'den açıklama
 
-Singapur merkezli Megaspeed International, Pazar günü bir açıklama yaptı. Açıklamaya göre tartışmanın merkezindeki Alice Huang şirketten Ağustos 2025'te ayrılmıştı. Açıklama, Huang'ın hissesi üzerinden şirketin kontrolünü elinde tutup tutmadığını belirtmiyor. Megaspeed ayrıca hukuka aykırı bir iş yapmadığını söyledi.
+Çinli şirketlere Nvidia çipi sağladığı iddia edilen Singapur merkezli Megaspeed International, Pazar günü bir açıklama yaptı. Şirkete göre tartışmanın merkezindeki yöneticisi Alice Huang, şirketten Ağustos 2025'te ayrıldı. Açıklamada Alice Huang'ın hisseleri üzerinden şirket üzerindeki kontrolünü sürdürüp sürdürmediğine değinilmedi. Megaspeed, yasa dışı bir faaliyette bulunmadığını da vurguladı.
 
 ## Arka plan ve yönetim kurulu
 
-Altimeter'dan Brad Gerstner ve Atreides'tan Gavin Baker, Cuma günü (13 Kasım) yönetim kuruluna gönderdikleri mektupta yavaş ve ölçülü bir CEO arayışı yürütülmesini, Huang'ın dönüşü ihtimalinin de bu sürece dahil edilmesini istemişti. Kurul ise arama firmasını henüz seçtiğini ve adaylarla resmi görüşme yapmadığını belirtti.
+Yatırım şirketleri Altimeter'dan Brad Gerstner ve Atreides'tan Gavin Baker, 13 Kasım Cuma günü yönetim kuruluna gönderdikleri mektupta yeni CEO arayışının aceleye getirilmemesini ve Huang'ın geri dönme ihtimalinin de değerlendirilmesini istemişti. Kurul ise CEO arayışı için bir danışmanlık şirketi seçtiğini, ancak adaylarla henüz resmi görüşme yapmadığını açıkladı.
 
-Bir Nvidia robotik mühendisi olan Darrell Dai da X'te şirketten ayrıldığını duyurdu. Dai, gerekçesinin Huang'ın ayrılığı olduğunu ve bu kararda mühendislerin görüşünün alınmadığını yazdı. Bu, tek bir çalışanın kişisel paylaşımı olarak değerlendirilmeli.
-
-Kaynaklarda istifa tarihi farklı veriliyor: CNBC 12 Kasım, TokenPost ise 11 Kasım diyor.
+Bir Nvidia robotik mühendisi olan Darrell Dai da X'te şirketten ayrıldığını duyurdu. Dai, ayrılma gerekçesinin Huang'ın gidişi olduğunu ve bu süreçte mühendislerin görüşüne başvurulmadığını yazdı.

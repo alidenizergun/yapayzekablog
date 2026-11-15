@@ -8,7 +8,7 @@ date: 2026-11-12T16:43:41+03:00
 image: girisim
 brand: anthropic
 imageQuery: "stock exchange trading floor"
-whyItMatters: "Yapay zekanın en büyük özel şirketlerinden birinin halka arzı, sektör değerlemeleri için bir ölçüt oluşturabilir. Fiyat aralığı daha önce duyurulduğu için bugünkü gelişmenin yeni kısmı sayfa duyurusu ve Japonya'daki kayıt."
+whyItMatters: "Yapay zekanın en büyük özel şirketlerinden birinin halka arzı, sektördeki diğer şirketlerin değerlemesi için bir ölçüt oluşturabilir."
 photo:
   id: "HpYTYo_jF2Y"
   url: "https://images.unsplash.com/photo-1761233138997-44d9b002a08f?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8MXx8c3RvY2slMjBleGNoYW5nZSUyMHRyYWRpbmclMjBmbG9vcnxlbnwxfDB8fHwxNzk0NzYxOTU0fDA&ixlib=rb-4.1.0"
@@ -31,12 +31,12 @@ sources:
     publisher: "SEC"
 ---
 
-Anthropic, resmi X hesabından 12 Kasım'da (11:30 UTC) "Our initial public offering" başlıklı bir gönderi paylaşarak ipo.anthropic.com adresindeki halka arz sayfasını duyurdu. Gönderide SEC'in yasal uyarı metni de yer alıyor. Aşağıdaki bilgiler şirketin dosyalarına ve haber kaynaklarına dayanıyor.
+Anthropic, 12 Kasım'da resmi X hesabından "Our initial public offering" (Halka arzımız) başlıklı bir gönderi paylaşarak ipo.anthropic.com adresindeki halka arz sayfasını duyurdu. Gönderide ABD Menkul Kıymetler ve Borsa Komisyonu'nun (SEC) zorunlu kıldığı yasal uyarı metni de yer alıyor.
 
-Anthropic'in 10 Kasım tarihli güncel dosyasına göre şirket 825 milyon A sınıfı hisseyi 70-78 dolar aralığında sunacak. Satıştan 57,75 ile 64,35 milyar dolar arasında kaynak sağlanması bekleniyor. Bu aralık, tam seyreltilmiş bazda 1,4 trilyon dolara kadar bir değerlemeye karşılık geliyor. Hisseler Nasdaq'ta "ANT" koduyla işlem görecek.
+Fiyat aralığı daha önce açıklanmıştı. Anthropic'in SEC'e sunduğu 10 Kasım tarihli güncel belgeye göre şirket 825 milyon A sınıfı hisseyi 70-78 dolar aralığında sunacak. Satıştan 57,75 ile 64,35 milyar dolar arasında kaynak sağlanması bekleniyor. Bu aralık, tam seyreltilmiş bazda 1,4 trilyon dolara kadar bir değerlemeye karşılık geliyor. Hisseler Nasdaq'ta "ANT" koduyla işlem görecek.
 
 Anthropic ayrıca 11 Kasım'da Japonya'da halka arz için Kanto Bölgesel Finans Bürosu'na değiştirilmiş bir menkul kıymet kaydı sundu.
 
-## Takvim teyitsiz
+## Takvim
 
-CNBC'ye dayanan habere göre fiyatlamanın 18 Kasım'da, işlem başlangıcının ise 19 Kasım'da olması bekleniyor. Bu tarihler şirket açıklaması değil, haber kaynaklarına dayanıyor.
+CNBC'nin haberine göre fiyatlamanın 18 Kasım'da yapılması, hisselerin ise 19 Kasım'da işlem görmeye başlaması bekleniyor. Şirket bu tarihleri henüz resmi olarak açıklamadı.

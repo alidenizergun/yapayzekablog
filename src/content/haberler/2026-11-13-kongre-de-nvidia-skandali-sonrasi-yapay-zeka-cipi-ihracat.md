@@ -1,6 +1,6 @@
 ---
 title: "Kongre'de Nvidia skandalı sonrası yapay zeka çipi ihracat kontrolleri için ivme"
-spot: "Semafor'a göre Meclis Başkanı Mike Johnson ve Hakeem Jeffries, Huang'ın iddia edilen casus ilişkisi sonrası çip ihracat kontrollerinin sıkılaştırılmasını destekliyor. Düzenleme yıl sonuna kadar yasalaşabilir."
+spot: "Semafor'a göre ABD Temsilciler Meclisi Başkanı Mike Johnson ve Demokrat lider Hakeem Jeffries, Jensen Huang'ın Çinli olduğu iddia edilen bir casusla ilişkisinin ortaya çıkmasının ardından çip ihracat kontrollerinin sıkılaştırılmasını destekliyor. Düzenleme yıl sonuna kadar yasalaşabilir."
 category: regulasyon
 popularity: 55
 tags: ["Nvidia", "IhracatKontrolleri", "Kongre", "NDAA"]
@@ -27,6 +27,6 @@ sources:
     publisher: "The Korea Times"
 ---
 
-Semafor'un haberine göre hem Meclis Başkanı Mike Johnson hem de azınlık lideri Hakeem Jeffries, Jensen Huang'ın iddia edilen Çinli casusla ilişkisi ortaya çıktıktan sonra çip ihracat kontrollerinin sıkılaştırılmasını destekliyor. Johnson, Kongre'de gelişen bir uzlaşı olduğunu söyledi.
+Semafor'un haberine göre hem ABD Temsilciler Meclisi Başkanı Mike Johnson hem de azınlık lideri Hakeem Jeffries, Nvidia CEO'su Jensen Huang'ın Çinli olduğu iddia edilen bir casusla ilişkisinin ortaya çıkmasının ardından yapay zeka çiplerine yönelik ihracat kontrollerinin sıkılaştırılmasını destekliyor. Johnson, Kongre'de bu konuda bir uzlaşının oluşmaya başladığını söyledi.
 
-Senato'nun savunma bütçesi (NDAA) versiyonunda Chip Security Act, AI Overwatch Act ve MATCH Act zaten yer alıyor. Semafor, düzenlemenin yıl sonuna kadar yasalaşabileceğini yazıyor. Nihai içerik konusunda ise henüz bir anlaşma bulunmuyor.
+Senato'nun hazırladığı savunma bütçesi yasası (NDAA) taslağında yapay zeka çiplerine ilişkin Chip Security Act, AI Overwatch Act ve MATCH Act zaten yer alıyor. Semafor, düzenlemenin yıl sonuna kadar yasalaşabileceğini yazıyor. Nihai içerik konusunda ise henüz bir anlaşma bulunmuyor.

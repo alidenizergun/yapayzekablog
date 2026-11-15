@@ -1,6 +1,6 @@
 ---
-title: "llama.cpp ve ggml 1.0.0 sürümüne ulaştı: kırıcı değişiklikler için açık sürümleme kuralları"
-spot: "Georgi Gerganov, llama.cpp ve ggml'nin ilk büyük sürümünü duyurdu. İki kütüphane de artık açık sürümleme kurallarıyla ilerleyecek; sürümle birlikte 35 kullanımdan kaldırılmış fonksiyon silindi."
+title: "llama.cpp ve ggml 1.0.0 sürümüne ulaştı: uyumluluk için net sürüm kuralları geldi"
+spot: "Georgi Gerganov, llama.cpp ve ggml'nin ilk ana sürümünü duyurdu. İki kütüphane artık hangi güncellemenin uyumluluğu bozacağını sürüm numarasından anlaşılır kılan kurallarla ilerleyecek; bu sürümle 35 eski fonksiyon kaldırıldı."
 category: araclar
 popularity: 30
 tags: ["llamacpp", "ggml", "HuggingFace", "AçıkKaynak", "YerelModeller"]
@@ -30,10 +30,8 @@ sources:
     publisher: "DEV Community"
 ---
 
-Georgi Gerganov, 13 Kasım'daki sürümün llama.cpp ve ggml'nin ilk büyük sürümü (1.0.0) olduğunu duyurdu. Hugging Face CEO'su Clément Delangue da X'te sürümü ilk büyük, tam kararlı sürüm olarak duyurdu.
+Georgi Gerganov, 13 Kasım'da yayımlanan 1.0.0 sürümünün llama.cpp ve ggml'nin ilk ana sürümü olduğunu duyurdu. Hugging Face CEO'su Clément Delangue da X'te sürümü projenin ilk kararlı sürümü olarak tanıttı.
 
-Her iki kütüphane de açık sürümleme kurallarına geçti: kırıcı C API değişiklikleri MAJOR, geriye dönük uyumlu eklemeler MINOR, hata düzeltmeleri ise PATCH artışı getirecek. Sürüm notları, 35 kullanımdan kaldırılmış fonksiyonun silindiğini belirtiyor.
+İki kütüphane de anlamsal sürümleme kurallarına geçti: C API'de geriye dönük uyumu bozan değişiklikler ilk hanedeki (MAJOR), uyumlu yeni özellikler ikinci hanedeki (MINOR), hata düzeltmeleri ise üçüncü hanedeki (PATCH) numarayı artıracak. Sürüm notlarına göre daha önce kullanımdan kaldırılacağı duyurulan 35 fonksiyon bu sürümde silindi.
 
 llama.cpp 150'den fazla mimari varyantını destekliyor. Gerganov'un ekibi Şubat 2026'da Hugging Face'e katılmıştı.
-
-Not: Hugging Face'in resmi blog yazısının adresi araştırmada yalnızca ikincil sayfaların metni içinde geçti; sayfanın kendisi görülemedi.

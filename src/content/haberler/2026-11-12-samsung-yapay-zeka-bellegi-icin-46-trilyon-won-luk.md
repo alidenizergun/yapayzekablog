@@ -31,8 +31,8 @@ sources:
     publisher: "Digitimes"
 ---
 
-Güney Kore'nin ana sanayi "megaproje" girişiminin ilk projesinin temeli Perşembe günü Samsung'un gelişmiş çip paketleme tesisinde atıldı. Cumhurbaşkanı Lee Jae Myung, Onyang'da 6 trilyon wonluk gelişmiş paketleme fabrikası kurulacağını, ardından aşamalı olarak 40 trilyon wonluk gelişmiş ekipman yatırımı yapılacağını söyledi. Toplam yatırım 46 trilyon won, yani yaklaşık 34 milyar dolar.
+Güney Kore'nin büyük sanayi yatırımlarını kapsayan "megaproje" programının ilk temeli Perşembe günü Samsung'un gelişmiş çip paketleme tesisinde atıldı. Cumhurbaşkanı Lee Jae Myung, Onyang'da 6 trilyon wonluk gelişmiş paketleme fabrikası kurulacağını, ardından aşamalı olarak 40 trilyon wonluk gelişmiş ekipman yatırımı yapılacağını söyledi. Toplam yatırım 46 trilyon won, yani yaklaşık 34 milyar dolar.
 
 Samsung, tesisin devreye girişini bir yıl öne çekerek Haziran 2028'e aldı. Şirket, yapay zeka sunucularında kullanılan yüksek bant genişlikli belleğin (HBM) seri üretimine Mayıs 2029'da başlamayı planlıyor.
 
-AJP'ye konuşan bir sektör kaynağı, takvimin hızlandırılmasının bağımsız olarak doğrulanmasının zor olduğunu belirtti. Yatırım programı Temmuz'da açıklanmıştı; yeni olan, temel atma töreni ve takvimin öne çekilmesi.
+Yatırım programı Temmuz'da açıklanmıştı; yeni olan, temel atma töreni ve takvimin öne çekilmesi. AJP'ye konuşan bir sektör kaynağı ise takvimin ne ölçüde hızlandırılabileceğini şimdiden kestirmenin zor olduğunu söyledi.

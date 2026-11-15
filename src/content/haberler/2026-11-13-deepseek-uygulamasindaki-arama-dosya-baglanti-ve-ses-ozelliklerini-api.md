@@ -31,12 +31,12 @@ sources:
     publisher: "Startup Fortune"
 ---
 
-DeepSeek, V4.1-Flash (deepseek-flash) modelinin uygulamadaki yeteneklerini Messages, Responses ve Chat Completions arayüzlerinde sunmaya başladı. Araç çağrıları ve bağlam derleme sunucu tarafında yapılıyor. Duyuru 13 Kasım'da yapıldı; şirketin X gönderisi 14:24 UTC'de paylaşıldı.
+DeepSeek, V4.1-Flash (deepseek-flash) modelinin uygulamadaki yeteneklerini Messages, Responses ve Chat Completions arayüzlerinde sunmaya başladı. 13 Kasım'da duyurulan değişiklikle araç çağrıları ve bağlamın hazırlanması DeepSeek'in sunucularında yapılıyor; geliştiricinin bu katmanları kendisinin kurmasına gerek kalmıyor.
 
-Özellikler arasında alıntılı web ve görsel arama, çok adımlı akıl yürütme sırasında derin arama ile PDF, Office dosyaları ve görsellerin sohbet bağlamına işlenmesi var. Resmi duyuru ayrıca bağlantı okuma ve güvenlik kontrollerini de sayıyor. Arama, Fetch, OCR, ASR ve TTS ayrıca bağımsız API'ler olarak da sunuluyor.
+Özellikler arasında kaynak gösteren web ve görsel arama, çok adımlı akıl yürütme sırasında derinlemesine arama ve PDF, Office dosyaları ile görsellerin sohbete eklenmesi var. Bağlantı okuma ve güvenlik kontrolleri de pakete dahil. Arama, sayfa okuma (Fetch), görselden metin çıkarma (OCR), konuşmayı metne çevirme (ASR) ve metni sese çevirme (TTS) ayrıca bağımsız API'ler olarak da sunuluyor.
 
 DeepSeek'in X gönderisine göre şirket, DeepSeek konuşma geçmişini içe aktarmayı destekleyen açık kaynaklı bir ön yüz demosu da yayımladı.
 
 ## Fiyatlandırma
 
-DeepSeek'in X gönderisine göre genişletilmiş yetenekler, standart token ücretine ek olarak bir araç kullanım ücreti getiriyor. Bir ikincil kaynak ise V4.1 Flash'ın temel token fiyatlarının değişmediğini yazıyor.
+DeepSeek'in X gönderisine göre genişletilmiş yetenekler, standart token ücretine ek olarak bir araç kullanım ücreti getiriyor. Bir başka habere göre ise modelin temel token fiyatları değişmedi.

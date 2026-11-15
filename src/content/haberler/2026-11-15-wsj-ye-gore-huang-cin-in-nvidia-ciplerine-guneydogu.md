@@ -1,6 +1,6 @@
 ---
 title: "WSJ'ye göre Huang, Çin'in Nvidia çiplerine Güneydoğu Asya'dan erişimi için ağ kurdu"
-spot: "Wall Street Journal'a göre Jensen Huang, Çinli şirketlerin gelişmiş Nvidia çiplerini Çin dışındaki veri merkezlerinden kullanmasını sağlayan bir ortak ağı kurdu. Haber, iddia edilen çip kaçakçılığı tartışmasına yeni ayrıntılar ekliyor."
+spot: "Wall Street Journal'a göre Jensen Huang, Çinli şirketlerin gelişmiş Nvidia çiplerini Çin dışındaki veri merkezleri üzerinden kullanmasını sağlayan bir ortaklar ağı kurdu. Haber, çip kaçakçılığı iddialarına yeni ayrıntılar ekliyor."
 category: donanim
 popularity: 76
 tags: ["Nvidia", "JensenHuang", "Çipİhracatı", "VeriMerkezi", "GüneydoğuAsya"]
@@ -15,7 +15,7 @@ photo:
   author: "İsmail Enes Ayhan"
   authorUrl: "https://unsplash.com/@ismailenesayhan"
   link: "https://unsplash.com/photos/server-room-aisle-with-metal-equipment-racks-lVZjvw-u9V8"
-whyItMatters: "Haber, ihracat kontrollerinin uzaktan bilgi işlem kiralamasıyla aşılabildiği tartışmasını belgelere dayandırarak yeniden gündeme getiriyor. Bu bilgiler henüz bağımsız olarak doğrulanmış değil ve iddia niteliğinde."
+whyItMatters: "Haber, ABD'nin ihracat kontrollerinin Çin dışındaki veri merkezlerinden bilgi işlem gücü kiralanarak aşılabildiği tartışmasını belgelere dayandırarak yeniden gündeme taşıyor."
 sources:
   - title: "WSJ: Huang personally built Asia route feeding Nvidia GPUs to China"
     url: "https://aiweekly.co/alerts/wsj-huang-personally-built-asia-route-feeding-nvidia-gpus-to-china"
@@ -31,14 +31,14 @@ sources:
     publisher: "Seoul Economic Daily"
 ---
 
-Wall Street Journal'ın haberine göre Nvidia CEO'su Jensen Huang, Çinli şirketlerin gelişmiş Nvidia çiplerini Çin dışında kullanabilmesini sağlayan Asyalı ortaklar yetiştirdi. Habere göre Güneydoğu Asya'daki veri merkezleri, ABD yaptırımlarındaki bir boşluktan yararlandı ve iddia edilen çip kaçakçılığına kılıf oluşturdu. Huang'ın bu yolun açık kalması için Washington'da lobi yaptığı da aktarılıyor.
+Wall Street Journal'ın haberine göre istifa eden Nvidia CEO'su Jensen Huang, Çinli şirketlerin gelişmiş Nvidia çiplerini Çin dışında kullanabilmesini sağlayan Asyalı iş ortaklarıyla yakın ilişkiler geliştirdi. Habere göre Güneydoğu Asya'daki veri merkezleri, ABD yaptırımlarındaki bir boşluktan yararlandı ve iddia edilen çip kaçakçılığına zemin hazırladı. Huang'ın bu yolun açık kalması için Washington'da lobi faaliyeti yürüttüğü de aktarılıyor.
 
-WSJ'nin incelediği belgelere göre Megaspeed, Mart 2024 ile Haziran 2025 arasında Çinli şirketlere yaklaşık 12 milyar dolarlık Nvidia çipi ayarladı. Kayıtlar ise bu donanımın ne kadarının fiilen teslim edildiğini göstermiyor.
+WSJ'nin incelediği belgelere göre Singapur merkezli Megaspeed, Mart 2024 ile Haziran 2025 arasında Çinli şirketler için yaklaşık 12 milyar dolarlık Nvidia çipi temin etti. Ancak kayıtlar, bu donanımın ne kadarının fiilen teslim edildiğini göstermiyor.
 
-Haberde Malezya'nın, Virginia'dan sonra dünyanın en büyük ikinci veri merkezi merkezi olma yolunda ilerlediği de belirtiliyor.
+Haberde Malezya'nın, ABD'nin Virginia eyaletinden sonra dünyanın en büyük ikinci veri merkezi üssü olma yolunda ilerlediği de belirtiliyor.
 
 ## Bloomberg'in ilgili haberi
 
-Ayrıca Bloomberg'in incelediği belgelere göre, Megaspeed yöneticisi Alice Huang'ın kurduğu Çinli bir şirket kaçak Nvidia çipleri edindi ve bunları Şanghay'daki bir veri merkezinde devreye aldı. Bloomberg'in bu haberi 13 Kasım'da yayımlandı ve Nvidia'nın Singapur'daki bulut ortağı Aperia ile ilgili.
+Bloomberg'in 13 Kasım'da yayımladığı ve incelediği belgelere dayanan habere göre ise Megaspeed yöneticisi Alice Huang'ın kurduğu Çinli bir şirket, yasa dışı yollarla Nvidia çipleri edinip bunları Şanghay'daki bir veri merkezinde kullanmaya başladı. Haber, Nvidia'nın Singapur'daki bulut ortağı Aperia ile de bağlantılı.
 
-Haberdeki bilgiler WSJ ve Bloomberg'in incelediği belgelere dayanıyor. Bu yazı kapsamında bağımsız olarak doğrulanmış değiller.
+İki haberdeki bilgiler de gazetelerin incelediği belgelere dayanıyor ve bağımsız olarak doğrulanmış değil.

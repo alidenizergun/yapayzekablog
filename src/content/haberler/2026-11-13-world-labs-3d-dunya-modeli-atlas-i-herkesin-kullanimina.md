@@ -27,8 +27,8 @@ sources:
     publisher: "Kingy AI"
 ---
 
-Fei-Fei Li, 12 Kasım'da X'te World Labs'in Atlas dünya modelinin artık herkese açık olduğunu duyurdu. World Labs, Atlas'ı 1 Eylül 2026'da duyurmuştu; o tarihte model seçili ortaklarla erken erişimdeydi. Şirketin resmi blog yazısı haberin hazırlandığı sırada bulunamadı, ayrıntılar ağırlıklı olarak ikincil kaynaklara dayanıyor.
+Fei-Fei Li, 12 Kasım'da X'te World Labs'in Atlas dünya modelinin artık herkese açık olduğunu duyurdu. World Labs, Atlas'ı 1 Eylül 2026'da duyurmuştu; o tarihte model seçili ortaklarla erken erişimdeydi.
 
-AlphaSignal'a göre model, kapalı ortak erişiminden genel, kendi kendine kullanılabilir erişime geçti. Lansmanda Viewfinder ve Chisel adlı iki tarayıcı uygulaması ile belgelenmiş bir API bulunuyor. Gerçek zamanlı bir sürüm ise araştırma önizlemesi olarak sunuluyor ve üretilen dünyaları bulut GPU'lardan tarayıcıya saniyede 15 kareye kadar aktarıyor. Atlas için ayrı bir fiyat sayfası yayımlanmadı.
+AlphaSignal'a göre model, yalnızca seçili ortakların kullanabildiği aşamadan çıktı; artık herkes kayıt olup doğrudan kullanabiliyor. Lansmanda Viewfinder ve Chisel adlı iki tarayıcı uygulaması ile belgelenmiş bir API bulunuyor. Gerçek zamanlı bir sürüm ise araştırma önizlemesi olarak sunuluyor ve üretilen dünyaları bulut GPU'lardan tarayıcıya saniyede 15 kareye kadar aktarıyor. Atlas için ayrı bir fiyat sayfası yayımlanmadı.
 
-World Labs, insan değerlendiricilerin Atlas'ı rakip video modellerine yüzde 75 ila 94 oranında tercih ettiğini bildiriyor. Ancak modelle ilgili bir makale ya da model kartı yok ve bu sonuçlar bağımsız olarak doğrulanmadı.
+World Labs'e göre insan değerlendiriciler karşılaştırmalarda Atlas'ı rakip video modellerine yüzde 75 ila 94 oranında tercih etti. Ancak şirket modelle ilgili bir makale ya da teknik belge (model kartı) yayımlamadı; bu sonuçlar bağımsız olarak doğrulanmış değil.

@@ -8,7 +8,7 @@ date: 2026-11-13T23:54:50+03:00
 image: pazarlama
 brand: openai
 imageQuery: "online shopping payment phone"
-whyItMatters: "Ajanların yalnızca araştırma yapmasından ödemeyi tamamlamasına geçiş, kart ağlarının jeton altyapısıyla ve her işlemde kullanıcı onayıyla yapılıyor."
+whyItMatters: "Yapay zeka ajanları ürün araştırmanın ötesine geçip ödemeyi de tamamlamaya başlıyor. OpenAI bu adımı kart bilgisini ajanla paylaşmayan bir altyapıyla ve her alımda kullanıcı onayı şartıyla atıyor."
 photo:
   id: "BKq_7oEvFN4"
   url: "https://images.unsplash.com/photo-1758524944006-ba8116008496?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8MXx8b25saW5lJTIwc2hvcHBpbmclMjBwYXltZW50JTIwcGhvbmV8ZW58MXwwfHx8MTc5NDc2MTgzN3ww&ixlib=rb-4.1.0"
@@ -31,10 +31,10 @@ sources:
     publisher: "9to5Mac"
 ---
 
-OpenAI, 13 Kasım Cuma günü “dots” adını verdiği yapay zeka ajanlarının kullanıcılar adına satın alma yapabilmesini sağlayan ChatGPT Wallet'ı duyurdu. Ürün American Express, Mastercard ve Visa ortaklığıyla geliştirildi. Greg Brockman da ürünü X'te duyurdu; ödeme ağlarıyla ortaklığı belirten gönderi 17:32 UTC'de paylaşıldı.
+OpenAI, 13 Kasım Cuma günü “dots” adını verdiği yapay zeka ajanlarının kullanıcılar adına satın alma yapabilmesini sağlayan ChatGPT Wallet'ı duyurdu. Ürün American Express, Mastercard ve Visa ile birlikte geliştirildi. OpenAI Başkanı Greg Brockman da ürünü ve ödeme ağlarıyla kurulan ortaklığı X hesabından duyurdu.
 
-Kullanım akışı şöyle: Kullanıcı kart bilgisini bir kez giriyor, dot'tan bir ürün bulmasını istiyor ve her alımı güvenlik kontrolüyle onaylıyor. OpenAI'a göre ajan kart bilgilerine hiç erişmiyor. Ödeme ağları, işleme özel bir “ödeme jetonu (payment token)” veriyor. Kart sahipleri mevcut ödül ve korumalarını koruyor.
+Sistem şöyle çalışıyor: Kullanıcı kart bilgisini bir kez giriyor, dot'tan bir ürün bulmasını istiyor ve her alımı bir güvenlik adımıyla onaylıyor. OpenAI'a göre ajan kart bilgilerini hiçbir zaman görmüyor; ödeme ağları her işlem için kartın yerine geçen tek kullanımlık bir kod (payment token) üretiyor. Kart sahipleri, kartlarının puan ve alışveriş güvencesi gibi mevcut avantajlarından yararlanmaya devam ediyor.
 
 Özellik başlangıçta yalnızca ABD'deki 18 yaş üstü Pro abonelerine açık. OpenAI lansmanda işlemlerden pay almıyor. Şirket, ileride kullanıcıların satın almaları belirli parametrelerle önceden onaylayıp tamamen ajana devredebileceğini söylüyor.
 
-Not: OpenAI'ın kendi duyuru sayfası araştırmada görülemedi; birincil kaynak olarak yalnızca Brockman'ın X gönderisi var. Ayrıntılar CNBC, TradingView ve 9to5Mac haberlerine dayanıyor.
+Haberdeki ayrıntılar Brockman'ın paylaşımına ve CNBC ile 9to5Mac'in haberlerine dayanıyor.

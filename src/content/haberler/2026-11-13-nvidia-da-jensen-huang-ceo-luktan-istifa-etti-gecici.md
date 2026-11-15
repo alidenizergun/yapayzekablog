@@ -9,7 +9,7 @@ image: altyapi
 brand: nvidia
 imageQuery: "computer graphics card hardware"
 featured: true
-whyItMatters: "Yapay zeka çip pazarının lideri, kurucu CEO'su olmadan ve kalıcı bir lider belirlenmeden bilanço dönemine giriyor. Bu durum, devam eden satın alma gibi stratejik işlerin seyrine dair soruları da gündeme getiriyor."
+whyItMatters: "Yapay zeka çip pazarının lideri, finansal sonuçlarını açıklamaya kurucu CEO'su olmadan ve kalıcı bir lider belirlenmeden hazırlanıyor. Bu durum, Hugging Face satın alması gibi süren stratejik işlerin akıbetini de soru işaretine çeviriyor."
 photo:
   id: "3GUW88tRmv8"
   url: "https://images.unsplash.com/photo-1555618254-84e2cf498b01?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8NHx8Y29tcHV0ZXIlMjBncmFwaGljcyUyMGNhcmQlMjBoYXJkd2FyZXxlbnwxfDB8fHwxNzk0NzYxOTUyfDA&ixlib=rb-4.1.0"
@@ -32,12 +32,12 @@ sources:
     publisher: "X (Clément Delangue)"
 ---
 
-Nvidia, Jensen Huang'ın başkan ve CEO görevinden istifa ettiğini Perşembe günü duyurdu. Şirket, yönetim kurulunun istifayı Çarşamba günü kabul ettiğini düzenleyici bildirimde belirtti. Huang, 33 yıl sonra CEO'luktan ayrılmış oldu.
+Nvidia, Jensen Huang'ın başkan ve CEO görevinden istifa ettiğini Perşembe günü duyurdu. Şirketin düzenleyici kurumlara yaptığı bildirime göre yönetim kurulu istifayı Çarşamba günü kabul etti. Böylece Huang, 33 yıl sürdürdüğü CEO'luk görevini bırakmış oldu.
 
-Kalıcı bir halef bulunana kadar CFO Colette Kress geçici CEO olarak görev yapacak ve CFO görevini de sürdürecek. Yönetim kurulu, kalıcı CEO için iç ve dış adayları değerlendiriyor. Harvey Jones'un da Nvidia'nın ilk yönetim kurulu başkanı olarak açıklandığı bildirildi. Nvidia'nın bilanço açıklaması Salı günü yapılacak ve şirketin o tarihte kalıcı bir CEO'su olmayacak.
+Kalıcı bir halef bulunana kadar CFO Colette Kress geçici CEO olarak görev yapacak ve CFO görevini de sürdürecek. Yönetim kurulu, kalıcı CEO için iç ve dış adayları değerlendiriyor. Harvey Jones'un Nvidia'nın yönetim kurulu başkanlığına getirildiği bildirildi; Huang başkanlık ile CEO'luğu birlikte yürütüyordu. Nvidia, finansal sonuçlarını Salı günü kalıcı bir CEO'su olmadan açıklayacak.
 
-Nvidia istifa için bir gerekçe vermedi. Medya, istifayı Huang'ın iddia edilen ilişkileriyle ilişkilendiriyor. TechCrunch, Huang'ın birkaç gün önce Çinli olduğu iddia edilen bir casusla ilişkisini kabul ettiğini yazıyor. Nvidia hisseleri sabah işlemlerinde yüzde 13'ten fazla düştü, ardından kayıpların bir kısmını geri aldı.
+Nvidia istifa için bir gerekçe açıklamadı. Basın ise istifayı Huang hakkındaki iddialarla ilişkilendiriyor. TechCrunch, Huang'ın birkaç gün önce Çinli olduğu iddia edilen bir casusla ilişkisini kabul ettiğini yazıyor. Nvidia hisseleri sabah işlemlerinde yüzde 13'ten fazla düştü, ardından kayıpların bir kısmını geri aldı.
 
-## Hugging Face cephesinde açıklama
+## Hugging Face satın alması
 
-Hugging Face CEO'su Clément Delangue ise X'te açık kaynaklı yapay zeka için mücadeleyi sürdüreceklerini yazdı. TechCrunch bu paylaşımı, Nvidia'nın 12,9 milyar dolarlık Hugging Face satın almasına dair sorularla birlikte aktarıyor. Satın almanın 2027'nin ilk yarısında kapanması planlanıyor.
+Hugging Face CEO'su Clément Delangue, X'te açık kaynaklı yapay zeka için çalışmayı sürdüreceklerini yazdı. TechCrunch bu paylaşımı, Nvidia'nın 12,9 milyar dolarlık Hugging Face satın almasının akıbetine dair sorularla birlikte aktarıyor. Satın almanın 2027'nin ilk yarısında kapanması planlanıyor.

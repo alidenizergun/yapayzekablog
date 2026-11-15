@@ -27,10 +27,10 @@ sources:
     publisher: "arXiv"
 ---
 
-Ethan Mollick, Wharton Generative AI Labs'in Primer'ı yayımladığını X'ten duyurdu. Mollick'e göre öğretmen dersi anlatıyor, karşılığında öğrencilerin oynayabileceği bir simülasyon alıyor. Ona göre makale, istem (prompt) ve kod açık.
+Ethan Mollick, Wharton Generative AI Labs'in Primer'ı yayımladığını X'ten duyurdu. Mollick'in anlatımına göre öğretmen sisteme dersini anlatıyor, karşılığında öğrencilerin deneyimleyebileceği bir simülasyon elde ediyor. Projenin makalesi, istemleri (prompt) ve kodu herkese açık.
 
-Arxiv makalesi Primer'ı, eğitimcilerin uyarlanabilir simülasyonlar oluşturmasına yardım eden, açık kaynaklı ve dil modelinden bağımsız bir sistem olarak tanımlıyor. Eğitimci kod yazmadan, yapay zekayla diyalog kurarak simülasyon hazırlıyor.
+arXiv'de yayımlanan makale Primer'ı, eğitimcilerin öğrenciye göre uyarlanabilen simülasyonlar oluşturmasına yardım eden, açık kaynaklı ve herhangi bir dil modeliyle çalışabilen bir sistem olarak tanımlıyor. Eğitimci kod yazmadan, yapay zekayla diyalog kurarak simülasyon hazırlıyor.
 
-Sistem iki aşamada çalışıyor. İlk aşama olan "yazım" aşamasında eğitimci ile ajan hattı simülasyonu birlikte tasarlıyor. İkinci aşama olan "çalışma" aşamasında ise öğrenci simülasyonu oynuyor.
+Sistem iki aşamada çalışıyor. "Hazırlama" aşamasında eğitimci, yapay zeka ajanlarıyla birlikte simülasyonu tasarlıyor. "Uygulama" aşamasında ise öğrenci simülasyonu deneyimliyor.
 
 Ekip, Primer'ın deneysel bir prototip olduğunu, sınıflarda denenmiş bir ürün olmadığını belirtiyor.

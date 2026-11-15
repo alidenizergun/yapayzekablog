@@ -1,6 +1,6 @@
 ---
 title: "Anthropic, yapay zeka güvenlik değerlendirmelerinin nasıl kurulacağına dair 10 öneri yayımladı"
-spot: "Anthropic, Mühendislik ekibinin imzasıyla yayımladığı yazıda güvenlik değerlendirmeleri için 10 öneri sundu. Yazı yapı geçerliliğinden ön kayda ve şeffaf raporlamaya uzanıyor."
+spot: "Anthropic, mühendislik ekibinin imzasıyla yayımladığı yazıda yapay zeka güvenlik testlerinin nasıl tasarlanması gerektiğine dair 10 öneri sundu. Öneriler, testin gerçekten ölçmek istediğini ölçmesinden sonuçların şeffaf raporlanmasına uzanıyor."
 category: guvenlik
 popularity: 30
 tags: ["Anthropic", "Claude", "YapayZekaGüvenliği", "Değerlendirme"]
@@ -31,8 +31,8 @@ sources:
     publisher: "Blockchain.News"
 ---
 
-Anthropic, 13 Kasım'da Mühendislik ekibinin imzasıyla “Building strong safety evaluations” başlıklı yazıyı yayımladı. Şirketin X gönderisi 19:00 UTC'de paylaşıldı.
+Anthropic, 13 Kasım'da mühendislik ekibinin imzasıyla “Building strong safety evaluations” (Güçlü güvenlik değerlendirmeleri oluşturmak) başlıklı bir yazı yayımladı.
 
-Yazı; yapı geçerliliği (construct validity), ön kayıt (preregistration), otomatik puanlamanın insanlarla doğrulanması, hassas talepler için çok turlu simülasyonlar, çok disiplinli ekipler, gerçek zamanlı izleme ve şeffaf raporlama konularını kapsıyor. Güvenlik değerlendirmelerinin internetsiz, korumalı ortamlarda ve gerçek zamanlı izlenerek yapılması öneriliyor.
+Yazıdaki öneriler şu başlıkları kapsıyor: testin ölçmek istediği özelliği gerçekten ölçmesi (yapı geçerliliği), test yönteminin sonuçlar görülmeden önce kayda geçirilmesi (ön kayıt), otomatik puanlamanın insan değerlendiricilerle doğrulanması, hassas talepler için çok turlu konuşma simülasyonları, farklı disiplinlerden ekipler, gerçek zamanlı izleme ve şeffaf raporlama. Güvenlik değerlendirmelerinin internetsiz, korumalı ortamlarda ve gerçek zamanlı izlenerek yapılması öneriliyor.
 
-Anthropic ayrıca API'sindeki tek turlu değerlendirmelerde güncel toplam zararsız yanıt oranlarının son modellerin hepsinde yüzde 94 ile 98 arasında olduğunu yazıyor.
+Anthropic ayrıca tek turlu testlerde son modellerinin tamamının zararsız yanıt oranının yüzde 94 ile 98 arasında olduğunu belirtiyor.

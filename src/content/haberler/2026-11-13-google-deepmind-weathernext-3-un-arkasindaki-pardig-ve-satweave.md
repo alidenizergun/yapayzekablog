@@ -31,8 +31,8 @@ sources:
     publisher: "TokenPost"
 ---
 
-Google DeepMind, 13 Kasım'da SatWeave ve PARDIG veri setlerini yayımladı. Veri setleri hava, hidroloji ve iklim uygulamaları geliştirenlere yönelik; ikisi de yakın zamanda çıkan WeatherNext 3 modelinin temelinde yer alıyor. DeepMind'ın X gönderisi 13:12 UTC'de paylaşıldı.
+Google DeepMind, 13 Kasım'da SatWeave ve PARDIG veri setlerini yayımladı. Veri setleri hava, hidroloji ve iklim uygulamaları geliştirenlere yönelik; ikisi de yakın zamanda çıkan WeatherNext 3 modelinin temelinde yer alıyor.
 
-PARDIG, küresel yağış tahminlerini 15 dakikalık aralıklarla ve yaklaşık 10 kilometre çözünürlükte veriyor. SatWeave ise saatlik güncelleniyor. Bu da WeatherNext 3'ün, altı saatte bir yenilenen analiz verisiyle başlatılan modellere kıyasla daha sık küresel tahmin üretmesini sağlıyor. DeepMind'ın X gönderisine göre PARDIG yağış tespit becerisini yüzde 30'dan fazla artırıyor.
+PARDIG, küresel yağış tahminlerini 15 dakikalık aralıklarla ve yaklaşık 10 kilometre çözünürlükte veriyor. SatWeave ise her saat güncelleniyor. Bu sayede WeatherNext 3, altı saatte bir yenilenen verilerle çalışan modellere göre küresel tahminleri çok daha sık güncelleyebiliyor. DeepMind'ın X gönderisine göre PARDIG yağış tespit becerisini yüzde 30'dan fazla artırıyor.
 
-Veriler Google Cloud Storage üzerinden erişilebilir; PARDIG'in tarihsel katalogları ayrıca Earth Engine'de de bulunuyor. arXiv ön baskısına göre PARDIG veri setleri CC BY 4.0 lisansıyla açık.
+Verilere Google Cloud Storage üzerinden erişilebiliyor; PARDIG'in tarihsel katalogları ayrıca Earth Engine'de de bulunuyor. arXiv ön baskısına göre PARDIG veri setleri CC BY 4.0 lisansıyla açık.

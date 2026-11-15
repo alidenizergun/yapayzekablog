@@ -8,7 +8,7 @@ date: 2026-11-12T16:44:41+03:00
 image: altyapi
 brand: nvidia
 imageQuery: "boardroom meeting table"
-whyItMatters: "Yapay zeka çiplerinin en büyük tedarikçisindeki liderlik belirsizliği, sektörün altyapı zincirini ve piyasa değerlemelerini doğrudan etkileyebilir. Kurulun kararı açıklanana kadar gelişme teyitsiz olarak değerlendirilmeli."
+whyItMatters: "Yapay zeka çiplerinin en büyük tedarikçisindeki liderlik belirsizliği, sektörün altyapı zincirini ve piyasa değerlemelerini doğrudan etkileyebilir."
 photo:
   id: "ULh0i2txBCY"
   url: "https://images.unsplash.com/photo-1503423571797-2d2bb372094a?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8NHx8Ym9hcmRyb29tJTIwbWVldGluZyUyMHRhYmxlfGVufDF8MHx8fDE3OTQ3NjE5NTN8MA&ixlib=rb-4.1.0"
@@ -33,10 +33,10 @@ sources:
 
 Nvidia hisseleri Çarşamba günü piyasa kapanışı sonrasında, yönetim kurulunun CEO Jensen Huang'ı görevden almayı değerlendirdiği haberlerinin ardından yüzde 8'den fazla değer kaybetti. Düşüş, Wall Street Journal'ın haberine dayanıyor. Reuters ise bir kaynağa dayanarak kurulun Çarşamba akşamı Huang'ın görevden alınıp alınmayacağını görüşmek üzere toplandığını bildirdi. Perşembe sabahı itibarıyla bir karar açıklanmamıştı.
 
-Haberler büyük yayın organlarına dayanıyor ancak teyit edilmiş bir karar bulunmuyor; bu nedenle gelişme resmi bir görevden alma değil, aktarılan bir değerlendirme süreci olarak okunmalı.
+Nvidia henüz bir karar açıklamadı; ortada resmi bir görevden alma değil, yönetim kurulunda yürütüldüğü bildirilen bir değerlendirme var.
 
 ## Kurulun yetkisi ve soruşturma
 
-Şirket bağlaylarına göre 11 üyeli kurulun çoğunluğu, Huang'ı "nedenli veya nedensiz" görevden alma yetkisine sahip. Kurul bir gün önce de Huang'ın yabancı bir istihbarat girişiminin hedefi olduğu yönündeki haberler üzerine bağımsız bir soruşturma başlatmıştı.
+Şirketin esas sözleşmesine göre 11 üyeli kurulun çoğunluğu, Huang'ı "nedenli veya nedensiz" görevden alma yetkisine sahip. Kurul bir gün önce de Huang'ın yabancı bir istihbarat girişiminin hedefi olduğu yönündeki haberler üzerine bağımsız bir soruşturma başlatmıştı.
 
 Haberlerde Huang'ın özel hayatına ilişkin iddialara da yer veriliyor; bunlar şirket tarafından doğrulanmadı. Bernstein ise Perşembe günü Nvidia için hedef fiyatını 400 dolardan 200 dolara indirdi.

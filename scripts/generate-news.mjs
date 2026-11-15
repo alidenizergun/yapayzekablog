@@ -341,6 +341,79 @@ ${notes}`,
   return JSON.parse(txt).articles ?? [];
 }
 
+// ---------------------------------------------------------------- editör adımı
+// Yazılan haberleri Türkçe yayın editörü gözüyle son kez okur: çeviri kokan ifadeler, anlam bütünlüğü,
+// tanıtılmamış isimler, iç notlar, tekrarlar. Yeni bilgi eklemez; rakamları değiştiren düzeltme reddedilir.
+const EDITOR_ON = !/^(0|false|no|hayir|hayır)$/i.test(process.env.EDITOR_PASS || 'true');
+const EDIT_SCHEMA = {
+  type: 'object', additionalProperties: false, required: ['articles'],
+  properties: { articles: { type: 'array', items: {
+    type: 'object', additionalProperties: false,
+    required: ['index', 'title', 'spot', 'body_markdown', 'why_it_matters', 'tweet', 'changes'],
+    properties: {
+      index: { type: 'integer' }, title: { type: 'string' }, spot: { type: 'string' }, body_markdown: { type: 'string' },
+      why_it_matters: { type: 'string' }, tweet: { type: 'string' },
+      changes: { type: 'array', items: { type: 'string' }, description: 'Yapılan düzeltmeler, her biri kısa' },
+    },
+  } } },
+};
+// Rakam kontrolü: editörden önce ve sonra metindeki sayılar aynı olmalı (yalnızca "17:32 UTC" gibi saat ayrıntıları silinebilir)
+const numbersOf = (s) => (String(s).replace(/\(?\d{1,2}[:.]\d{2}\s*UTC\)?/gi, '').match(/\d+(?:[.,]\d+)*/g) || []).map((n) => n.replace(/[.,]/g, '')).sort().join('|');
+
+async function editPass(anthropic, articles) {
+  if (!EDITOR_ON || !articles.length) return { articles, notes: [] };
+  const input = articles.map((a, index) => ({
+    index, title: a.title, spot: a.spot, body_markdown: a.body_markdown, why_it_matters: a.why_it_matters, tweet: a.tweet,
+    kaynaklar: a.sources.map((x) => `${x.publisher || ''} — ${x.title}`),
+  }));
+  const res = await anthropic.messages.create({
+    model: MODEL,
+    max_tokens: 32000,
+    system: `Sen YZ Gündemi'nin kıdemli Türkçe yayın editörüsün. Muhabirlerin İngilizce kaynaklardan derlediği haberleri yayından önce son kez okuyorsun.\n\n${GUIDELINES}`,
+    messages: [{ role: 'user', content: `Aşağıdaki haberleri "Türkçe editoryal kurallar" bölümüne göre düzelt.
+
+Kurallar:
+- Yeni bilgi EKLEME, bilgi ÇIKARMA (iç notlar ve okura bilgi vermeyen saat ayrıntıları hariç). Her rakam, tarih, isim ve iddia aynen kalmalı.
+- Rakamların yazımını değiştirme (1,5 milyar dolar → 1,5 milyar dolar kalır).
+- Kaynak linkleri ve Markdown ara başlıkları (##) korunabilir veya daha açıklayıcı hale getirilebilir.
+- Metin zaten iyiyse dokunma; gereksiz değişiklik yapma.
+- Her haber için yaptığın düzeltmeleri "changes" alanına kısaca yaz (yoksa boş liste).
+
+HABERLER (JSON):
+${JSON.stringify(input, null, 1)}` }],
+    output_config: { format: { type: 'json_schema', schema: EDIT_SCHEMA } },
+  });
+  track(res);
+  if (res.stop_reason !== 'end_turn') return { articles, notes: [`editör adımı tamamlanamadı (${res.stop_reason}); taslaklar korundu`] };
+  let edited;
+  try { edited = JSON.parse(res.content.filter((b) => b.type === 'text').map((b) => b.text).join('')).articles; }
+  catch { return { articles, notes: ['editör çıktısı okunamadı; taslaklar korundu'] }; }
+  const notes = [];
+  const out = articles.map((a, i) => {
+    const e = edited.find((x) => x.index === i);
+    if (!e) return a;
+    const before = [a.title, a.spot, a.body_markdown, a.why_it_matters].join(' ');
+    const after = [e.title, e.spot, e.body_markdown, e.why_it_matters].join(' ');
+    const ratio = after.length / Math.max(1, before.length);
+    const okTitle = e.title.length >= 20 && e.title.length <= 140;
+    const okSpot = e.spot.length >= 60 && e.spot.length <= 320;
+    if (numbersOf(before) !== numbersOf(after) || ratio < 0.6 || ratio > 1.5 || !okTitle || !okSpot) {
+      notes.push(`editör düzeltmesi reddedildi (rakam/uzunluk kontrolü): ${a.title}`);
+      return a;
+    }
+    if (e.changes?.length) notes.push(`editör: ${e.title} → ${e.changes.slice(0, 4).join('; ')}`);
+    return {
+      ...a,
+      title: e.title.replace(/<[^>]*>/g, '').trim(),
+      spot: e.spot.replace(/<[^>]*>/g, '').trim(),
+      body_markdown: sanitizeBody(e.body_markdown, a.sources.map((x) => x.url)),
+      why_it_matters: e.why_it_matters.replace(/<[^>]*>/g, '').trim(),
+      tweet: cleanTweet(e.tweet),
+    };
+  });
+  return { articles: out, notes };
+}
+
 // ---------------------------------------------------------------- doğrulama
 
 /** Güvenlik: haber metninden HTML'i ve kaynak listesinde olmayan linkleri temizler.
@@ -480,8 +553,18 @@ async function main() {
     articles = await write(anthropic, r.notes, seen);
   }
 
-  const { ok, rejected } = validate(articles, seen, existing);
+  const validated = validate(articles, seen, existing);
+  const rejected = validated.rejected;
   for (const r of rejected) log(`ELENDİ: ${r.title} → ${r.reasons.join(', ')}`);
+  let ok = validated.ok;
+  if (!DRY) {
+    try {
+      const ed = await editPass(await client(), ok);
+      ok = ed.articles;
+      editorNotes.push(...ed.notes);
+      for (const n of ed.notes) log(n);
+    } catch (err) { editorNotes.push(`editör adımı atlandı: ${err.message}`); log(editorNotes.at(-1)); }
+  }
 
   // Yeni haberlere Unsplash fotoğrafı bul (anahtar yoksa atlanır)
   const usedPhotos = usedPhotoIds(CONTENT_DIR);
@@ -523,6 +606,7 @@ async function main() {
   summary(written, rejected, searches);
 }
 const xQueue = [];
+const editorNotes = [];
 
 // ---------------------------------------------------------------- fotoğraf doldurma
 const photoNote = { added: 0, backfilled: 0, error: '' };
@@ -595,6 +679,8 @@ function summary(written, rejected, searches) {
     `## YZ Gündemi haber güncellemesi`,
     `- Yeni haber: **${written.length}**${REQUIRE_REVIEW ? ' (taslak, editör onayı bekliyor)' : ''}`,
     `- Elenen: ${rejected.length}`,
+    `- Editör adımı: ${EDITOR_ON ? (editorNotes.length ? editorNotes.length + ' not' : 'değişiklik yok') : 'kapalı'}`,
+    ...editorNotes.map((n) => `  - ${n}`),
     `- Web araması: ${searches}${IS_WEEKEND ? ' (hafta sonu sınırı: ' + MAX_SEARCHES + ')' : ''}`,
     `- ${xNote}`,
     `- Unsplash: ${process.env.UNSPLASH_ACCESS_KEY ? `${photoNote.added} yeni habere, ${photoNote.backfilled} eski habere fotoğraf eklendi${photoNote.error ? ' (hata: ' + photoNote.error + ')' : ''}` : 'kapalı (UNSPLASH_ACCESS_KEY yok)'}`,

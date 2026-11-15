@@ -47,6 +47,22 @@ Okur kitlesi: Türkiye'deki profesyoneller, girişimciler, pazarlamacılar, yaz�
 - Para birimleri kaynaktaki gibi verilir (örn. "500 milyon dolar").
 - Ünlem, emoji, "devrim niteliğinde", "inanılmaz" gibi abartılı ifadeler kullanılmaz.
 
+## Türkçe editoryal kurallar (editör adımı bu bölüme göre metni son kez okur)
+Haberler çoğunlukla İngilizce kaynaklardan derlenir. Metin çeviri gibi değil, baştan Türkçe yazılmış gibi okunmalıdır.
+- **Çeviri kokan ifadeler düzeltilir.** İngilizce kalıbın birebir karşılığı yerine Türkçede doğal olan söylenir.
+  Örnekler: "ortaklar yetiştirdi" (cultivated) → "ortaklarla yakın ilişkiler geliştirdi"; "kırıcı değişiklik" (breaking change) → "geriye dönük uyumu bozan değişiklik";
+  "halüsinasyon gördü" → "uydurma bilgi üretti"; "üst sağlayıcı" (upstream) → "hizmet aldığı sağlayıcı"; "roadshow" → "yatırımcı tanıtım turu";
+  "kendi kendine kullanılabilir" (self-serve) → "herkesin doğrudan kullanabildiği"; "-e göre" ve "olarak" tekrarları azaltılır.
+- **Anlam bütünlüğü.** Her paragraf bir öncekinin devamıdır; konu atlanmaz. Kişi, şirket ve kurum ilk geçtiği yerde kim/ne olduğu söylenerek tanıtılır (ör. "Singapur merkezli Megaspeed").
+  Metinde önce anlatılmamış bir şeye ("danışman görüşü", "bu karar") gönderme yapılmaz.
+- **Okura bilgi olmayan ayrıntı yazılmaz.** Gönderilerin UTC saati, "X gönderisi şu saatte paylaşıldı", sayfa başlığının İngilizce aslı gibi ayrıntılar yalnızca haberin özüyse yazılır.
+- **İç notlar asla metne girmez.** "Araştırmada görülemedi", "haberin hazırlandığı sırada bulunamadı", "önceki bir özette", "derleme siteleri yanlış yazdı", "bu yazı kapsamında" gibi
+  haber hazırlama sürecine ait notlar yayımlanmaz. Doğrulanmamış bilgi gazetecilik diliyle ve bir kez belirtilir: "… iddia ediliyor", "şirket bu rakamı doğrulamadı".
+- **Tekrar yok.** Aynı uyarı (teyit edilmedi, iddia niteliğinde) metin, spot ve "Bu ne anlama geliyor?" kutusunda tekrar tekrar yazılmaz.
+- **Yazım.** Aynı kelimenin art arda tekrarı ("veri merkezi merkezi"), yazım hataları ve eksik ekler düzeltilir. Ondalık ayracı virgüldür (1,5 milyar dolar); binlik ayracı noktadır (136.000).
+- **Terimler.** Yerleşik Türkçe karşılığı olan terim Türkçe yazılır; gerekirse ilk geçtiği yerde parantez içinde İngilizcesi verilir. Ürün ve şirket adları özgün yazılışıyla korunur.
+- **Editör yeni bilgi eklemez.** Rakam, tarih, isim ve iddia aynen korunur; yalnızca dil, akış ve açıklık düzeltilir.
+
 ## Okunma potansiyeli (popularity)
 Her habere 1–100 arası puan verilir: Türkiye'deki okurun bu haberi ne kadar tıklayıp okuyacağı. Ana sayfa manşeti ve X paylaşımları bu puana göre seçilir; puan şişirilmez, gerçekçi verilir.
 - 85–100: Herkesin konuşacağı gelişme. Dev şirketlerde liderlik değişimi veya skandal, ChatGPT/Gemini/Claude gibi milyonların kullandığı ürünlerde büyük değişiklik, rekor yatırım veya halka arz, Türkiye'yi doğrudan etkileyen büyük karar.

@@ -8,7 +8,7 @@ date: 2026-11-13T00:27:30+03:00
 image: girisim
 brand: anthropic
 imageQuery: "stock market chart screen"
-whyItMatters: "Talep rakamı, yapay zeka şirketlerine yönelik halka arz iştahının ve olası bir rekor listelemenin göstergesi. Rakamlar anonim kaynaklara dayandığından kesinleşmiş veri olarak değil, haberin aktardığı bir bilgi olarak okunmalı."
+whyItMatters: "Talep rakamı, yatırımcıların yapay zeka şirketlerine olan ilgisini ve halka arzın rekor kırma ihtimalini gösteriyor."
 photo:
   id: "x07ELaNFt34"
   url: "https://images.unsplash.com/photo-1651341050677-24dba59ce0fd?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8MXx8c3RvY2slMjBtYXJrZXQlMjBjaGFydCUyMHNjcmVlbnxlbnwxfDB8fHwxNzk0NzYxODQxfDA&ixlib=rb-4.1.0"
@@ -28,8 +28,8 @@ sources:
     publisher: "BusinessToday"
 ---
 
-Bloomberg, bilgi sahibi kişilere dayanarak Anthropic'in halka arzının sunulan hisselerin yaklaşık altı katı emir topladığını bildirdi. Bilgi anonim kaynaklara dayanıyor ve şirket tarafından teyit edilmiş değil. Bloomberg bir gün önce de talebin birkaç kat aşırı olduğunu yazmıştı; yeni bilgi altı kat rakamı.
+Bloomberg, konuya yakın kaynaklara dayanarak Anthropic'in halka arzının sunulan hisselerin yaklaşık altı katı emir topladığını bildirdi. Şirket bu rakamı doğrulamadı. Bloomberg bir gün önce talebin arzın birkaç katına ulaştığını yazmıştı.
 
-Anthropic ve kurucuları, halka arzda 64,4 milyar dolara, özel plasmanda ise 26 milyar dolara kadar kaynak yaratmayı hedefliyor. İki işlem birlikte değerlendirildiğinde SpaceX'in halka arzını geçerek tüm zamanların en büyük listelemesi olabilir.
+Anthropic ve kurucuları, halka arzdan 64,4 milyar dolara, eş zamanlı özel satıştan ise 26 milyar dolara kadar kaynak toplamayı hedefliyor. İki işlem birlikte düşünüldüğünde Anthropic'in halka arzı, SpaceX'i geride bırakarak tarihin en büyük halka arzı olabilir.
 
 Fiyatlamanın 18 Kasım civarında yapılması, işlemlerin ise 19 Kasım'da "ANT" koduyla Nasdaq'ta başlaması bekleniyor. Financial Times'a göre bankalar değerlemeyi 1,5 trilyon dolara çıkarmaya hazırlanıyor.

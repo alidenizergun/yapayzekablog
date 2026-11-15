@@ -28,10 +28,8 @@ sources:
     publisher: "KED Global"
 ---
 
-Naver, açıklanmayan bir ABD'li yapay zeka çıkarım (inference) şirketiyle 2 trilyon won (1,5 milyar dolar) tutarında bilgi işlem hizmeti sözleşmesi imzaladı. Haber, Naver'in üçüncü çeyrek bilanço toplantısında duyuruldu.
+Naver, açıklanmayan bir ABD'li yapay zeka çıkarım (inference) şirketiyle 2 trilyon won (1,5 milyar dolar) tutarında bilgi işlem hizmeti sözleşmesi imzaladı. Naver, anlaşmayı üçüncü çeyrek finansal sonuçlarını açıkladığı toplantıda duyurdu.
 
 Sözleşme yaklaşık 20 MW kapasiteyi dört ila beş yıl boyunca kapsıyor. Kapasite, NVIDIA B300 ve Vera Rubin GPU'larının karışımından oluşuyor.
 
-Brookfield ve Nvidia ortaklığındaki projenin 2027'nin ilk yarısında 55 MW ile başlaması ve 2028'e kadar 200 MW'a çıkması planlanıyor. Naver, kalan 180 MW için Asya dışından, aralarında büyük model geliştiricilerin de bulunduğu 10'dan fazla müşteriyle görüşüyor.
-
-Bazı derleme siteleri tutarı yanlışlıkla 14,5 veya 15 milyar dolar olarak yazdı. Korea Times, Korea Herald ve KED Global ise 1,5 milyar doları veriyor.
+Naver'in Brookfield ve Nvidia ile ortak yürüttüğü yapay zeka fabrikası projesinin 2027'nin ilk yarısında 55 MW ile başlaması ve 2028'e kadar 200 MW'a çıkması planlanıyor. Naver, kalan 180 MW için Asya dışından, aralarında büyük model geliştiricilerin de bulunduğu 10'dan fazla müşteriyle görüşüyor.

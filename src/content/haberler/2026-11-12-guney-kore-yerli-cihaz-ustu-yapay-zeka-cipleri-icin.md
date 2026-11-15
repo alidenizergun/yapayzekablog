@@ -31,6 +31,6 @@ MLex'in haberine göre Güney Kore Ticaret, Sanayi ve Kaynaklar Bakanlığı, "M
 
 Digital Today haberine göre yol haritası, Samsung'un dökümhane (foundry) iş birliğini de içeriyor.
 
-## Kaynaklar arasında çelişki var
+## Bütçe ve tarih net değil
 
-Projenin bütçesi konusunda kaynaklar farklı rakamlar veriyor: MLex 600 milyon dolarlık bir projeden söz ederken Digital Today 800,2 milyar wonluk bir projeden bahsediyor. Toplantının tarihi de net değil; Digital Today toplantıyı Çarşamba günü olarak verirken MLex ve Bytes Europe 12 Kasım diyor. Bu nedenle tutar ve tarih resmi açıklamayla teyit edilene kadar kesin kabul edilmemeli.
+Projenin bütçesi konusunda kaynaklar farklı rakamlar veriyor: MLex 600 milyon dolardan, Digital Today ise 800,2 milyar wondan söz ediyor. Toplantının tarihi de kaynaklarda farklı: Digital Today Çarşamba, MLex ve Bytes Europe 12 Kasım diyor. Bakanlık henüz rakamları içeren resmi bir açıklama yayımlamadı.
