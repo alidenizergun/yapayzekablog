@@ -25,6 +25,7 @@ const counts = new Map();
 for (const n of allNews) counts.set(n.data.category, (counts.get(n.data.category) ?? 0) + 1);
 const nav = NAV.filter((slug) => counts.get(slug));
 const footerCats = CATEGORIES.filter((c) => counts.get(c.slug));
+const year = new Intl.DateTimeFormat('tr-TR', { year: 'numeric', timeZone: SITE.timeZone }).format(new Date());
 // Bülten formu yalnızca bir bülten servisi bağlıysa gösterilir
 const newsletterOn = Boolean(import.meta.env.PUBLIC_NEWSLETTER_ACTION);
 // "Son dakika" yalnızca son 6 saatteki haber için; sayfadaki betik ziyaret anına göre günceller
@@ -104,24 +105,41 @@ const isBreaking = latest && Date.now() - latest.data.date.valueOf() < BREAKING_
 
   <main class="wrap"><slot /></main>
 
-  <footer class="site"><div class="wrap">
-    <div class="foot-about">
-      <a class="logo" href={url('/')} aria-label="YZ Gündemi ana sayfa"><span class="wm" aria-hidden="true"><span class="wm-badge">YZ</span><span class="wm-text"><span class="wm-sub">YAPAY ZEKA</span><span class="wm-main">Gündemi</span></span></span></a>
-      <p>{SITE.description}</p>
-      <p>Haberler yapay zeka desteğiyle, belirtilen kaynaklardan derlenir. Her haberde kaynak bağlantıları bulunur. <a href={url('/hakkimizda/')}>Nasıl çalışıyoruz?</a></p>
+  <footer class="site">
+    <div class="wrap foot-main">
+      <div class="foot-about">
+        <a class="logo" href={url('/')} aria-label="YZ Gündemi ana sayfa"><span class="wm" aria-hidden="true"><span class="wm-badge">YZ</span><span class="wm-text"><span class="wm-sub">YAPAY ZEKA</span><span class="wm-main">Gündemi</span></span></span></a>
+        <p>{SITE.description}</p>
+        <p class="foot-ai">Haberler yapay zeka desteğiyle, belirtilen kaynaklardan derlenir; her haberin altında kaynak bağlantıları yer alır. <a href={url('/hakkimizda/')}>Nasıl çalışıyoruz?</a></p>
+      </div>
+      <nav class="foot-col foot-cats" aria-labelledby="foot-cats">
+        <h2 id="foot-cats">Kategoriler</h2>
+        <ul>{footerCats.map((c) => <li><a href={catUrl(c.slug)}>{c.name}</a></li>)}</ul>
+      </nav>
+      <nav class="foot-col" aria-labelledby="foot-site">
+        <h2 id="foot-site">Kurumsal</h2>
+        <ul>
+          <li><a href={url('/hakkimizda/')}>Hakkımızda</a></li>
+          <li><a href={url('/hata-bildir/')}>Hata bildir</a></li>
+        </ul>
+      </nav>
+      <nav class="foot-col" aria-labelledby="foot-follow">
+        <h2 id="foot-follow">Takip et</h2>
+        <ul>
+          <li><a href={url('/rss.xml')}>RSS</a></li>
+          {newsletterOn && <li><a href={url('/#bulten')}>E-posta bülteni</a></li>}
+          {SITE.social?.x && <li><a href={`https://x.com/${SITE.social.x}`}>X</a></li>}
+          {SITE.social?.instagram && <li><a href={`https://www.instagram.com/${SITE.social.instagram}/`}>Instagram</a></li>}
+          {SITE.social?.linkedin && <li><a href={`https://www.linkedin.com/company/${SITE.social.linkedin}/`}>LinkedIn</a></li>}
+        </ul>
+      </nav>
     </div>
-    <nav class="foot-col" aria-labelledby="foot-cats">
-      <h2 id="foot-cats">Kategoriler</h2>
-      {footerCats.map((c) => <a href={catUrl(c.slug)}>{c.name}</a>)}
-    </nav>
-    <nav class="foot-col" aria-labelledby="foot-site">
-      <h2 id="foot-site">YZ Gündemi</h2>
-      <a href={url('/hakkimizda/')}>Hakkımızda</a>
-      <a href={url('/hata-bildir/')}>Hata bildir</a>
-      <a href={url('/rss.xml')}>RSS ile takip et</a>
-      <a href={url('/sitemap-index.xml')}>Site haritası</a>
-    </nav>
-  </div></footer>
+    <div class="foot-bottom"><div class="wrap">
+      <p>© {year} {SITE.name} · {SITE.domain}</p>
+      <p class="foot-credits">Fotoğraflar <a href="https://unsplash.com/?utm_source=yzgundemi&utm_medium=referral">Unsplash</a>, şirket logoları <a href="https://simpleicons.org/">Simple Icons</a> kaynaklıdır; logolar sahiplerinin markasıdır.</p>
+      <a class="foot-top" href="#">Başa dön <span aria-hidden="true">↑</span></a>
+    </div></div>
+  </footer>
 
   <script>
     // "Son dakika" etiketi: haber 6 saatten eskiyse ziyaret anında "Son haber"e döner

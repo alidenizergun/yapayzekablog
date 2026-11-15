@@ -9,6 +9,8 @@ export const SITE = {
   locale: 'tr-TR',
   timeZone: 'Europe/Istanbul',
   updatesPerDay: 2,
+  // Sosyal hesaplar: kullanıcı adı yazılırsa alt bilgide "Takip et" altında görünür (boşsa gizli)
+  social: { x: '', instagram: '', linkedin: '' },
 };
 
 export const CATEGORIES = [

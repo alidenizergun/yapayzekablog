@@ -171,11 +171,7 @@ figcaption { margin-top: 8px; font-size: 13px; color: var(--muted); }
 .breaking .t { font-weight: 600; }
 
 footer.site { background: var(--band); color: var(--band-muted); font-size: 14px; }
-footer.site .wrap { padding-block: 44px; display: flex; flex-wrap: wrap; gap: 24px 32px; justify-content: space-between; align-items: flex-start; }
-footer.site p { margin: 8px 0 0; max-width: 340px; }
-footer.site nav { display: flex; flex-wrap: wrap; gap: 12px 28px; }
-footer.site nav a { color: #fff; }
-footer.site nav a:hover { text-decoration: underline; }
+
 @media (prefers-reduced-motion: no-preference) { a .thumb { transition: opacity .2s; } a:hover .thumb { opacity: .88; } }
 
 /* Hata bildirim formu */
@@ -230,7 +226,6 @@ a.tag { display: inline-flex; align-items: center; gap: 4px; }
 @media (max-width: 760px) {
   .share .tag, .share button, a.tag { min-height: 44px; display: inline-flex; align-items: center; }
   .share button { height: auto; padding: 0 14px; }
-  footer.site nav a { min-height: 44px; display: inline-flex; align-items: center; }
   .crumb a { display: inline-flex; align-items: center; min-height: 44px; }
 }
 
@@ -280,13 +275,36 @@ figure .visual { height: min(420px, 56vw); }
 figcaption a { color: inherit; text-decoration: underline; text-underline-offset: 2px; }
 .lead .imgbox .badge { z-index: 1; }
 
-/* ---------------------------------------------------------------- alt bilgi */
-footer.site .wrap { display: grid; grid-template-columns: minmax(0, 2fr) repeat(2, minmax(0, 1fr)); gap: 32px 48px; }
-@media (max-width: 760px) { footer.site .wrap { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); } .foot-about { grid-column: 1 / -1; } }
-.foot-about p a { color: #fff; text-decoration: underline; text-underline-offset: 3px; }
-.foot-col { display: flex; flex-direction: column; gap: 4px; }
-.foot-col h2 { font-family: var(--body); font-size: 12px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--band-muted); margin-bottom: 8px; }
-footer.site .foot-col a { color: #fff; min-height: 32px; display: inline-flex; align-items: center; }
+/* ---------------------------------------------------------------- alt bilgi
+   Üstte: tanıtım | kategoriler (2 sütun) | kurumsal | takip et. Altta ince çizgiyle ayrılmış telif satırı. */
+footer.site .foot-main { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1.4fr) minmax(0, .8fr) minmax(0, .8fr); gap: 32px 48px; padding-block: 48px 40px; }
+footer.site .foot-about p { margin: 12px 0 0; max-width: 360px; line-height: 1.55; }
+footer.site .foot-about .foot-ai { font-size: 13px; }
+.foot-about p a, .foot-bottom a { color: #fff; text-decoration: underline; text-underline-offset: 3px; text-decoration-color: rgba(255,255,255,.4); }
+.foot-about p a:hover, .foot-bottom a:hover { text-decoration-color: currentColor; }
+.foot-col ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
+.foot-cats ul { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 24px; }
+.foot-col h2 { font-family: var(--body); font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--band-muted); margin: 0 0 10px; }
+footer.site .foot-col a { color: #fff; display: inline-flex; align-items: center; min-height: 34px; white-space: nowrap; }
+footer.site .foot-col a:hover { color: #FF7A62; }
+.foot-bottom { border-top: 1px solid rgba(255,255,255,.12); font-size: 13px; }
+.foot-bottom .wrap { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 24px; padding-block: 18px; }
+.foot-bottom p { margin: 0; }
+.foot-bottom .foot-credits { flex: 1 1 320px; }
+footer.site .foot-top { color: #fff; text-decoration: none; font-weight: 600; min-height: 44px; display: inline-flex; align-items: center; gap: 6px; }
+footer.site .foot-top:hover { color: #FF7A62; }
+@media (max-width: 1000px) {
+  footer.site .foot-main { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+  .foot-about, .foot-cats { grid-column: 1 / -1; }
+  .foot-cats ul { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+@media (max-width: 760px) {
+  footer.site .foot-main { padding-block: 40px 28px; gap: 28px 24px; }
+  .foot-cats ul { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  footer.site .foot-col a { min-height: 44px; }
+  .foot-bottom .wrap { flex-direction: column; align-items: flex-start; gap: 4px; padding-block: 16px 8px; }
+  .foot-bottom .foot-credits { flex: none; }
+}
 
 /* ---------------------------------------------------------------- ana sayfa hiyerarşisi */
 .sechead h1.page-h { font-size: 32px; }
@@ -316,11 +334,7 @@ footer.site .foot-col a { color: #fff; min-height: 32px; display: inline-flex; a
 a.card:hover h3, a.mini:hover h3 { color: var(--accent-text); }
 @media (max-width: 760px) {
   .more-link { min-height: 44px; display: inline-flex; align-items: center; }
-  footer.site .foot-col a { min-height: 44px; }
 }
-/* Alt bilgide kategoriler iki sütun */
-footer.site nav.foot-col:first-of-type { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 24px; align-content: start; }
-footer.site nav.foot-col:first-of-type h2 { grid-column: 1 / -1; }
 
 /* ---------------------------------------------------------------- logo
    [YZ] rozeti + üstte "YAPAY ZEKA", altta "Gündemi". "YAPAY ZEKA" harf aralığı,
