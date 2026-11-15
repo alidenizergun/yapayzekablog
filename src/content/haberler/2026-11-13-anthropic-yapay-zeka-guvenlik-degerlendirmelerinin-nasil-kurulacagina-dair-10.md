@@ -2,6 +2,7 @@
 title: "Anthropic, yapay zeka güvenlik değerlendirmelerinin nasıl kurulacağına dair 10 öneri yayımladı"
 spot: "Anthropic, Mühendislik ekibinin imzasıyla yayımladığı yazıda güvenlik değerlendirmeleri için 10 öneri sundu. Yazı yapı geçerliliğinden ön kayda ve şeffaf raporlamaya uzanıyor."
 category: guvenlik
+popularity: 30
 tags: ["Anthropic", "Claude", "YapayZekaGüvenliği", "Değerlendirme"]
 date: 2026-11-13T23:49:50+03:00
 image: guvenlik

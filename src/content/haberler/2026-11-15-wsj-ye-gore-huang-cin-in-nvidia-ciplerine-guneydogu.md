@@ -2,6 +2,7 @@
 title: "WSJ'ye göre Huang, Çin'in Nvidia çiplerine Güneydoğu Asya'dan erişimi için ağ kurdu"
 spot: "Wall Street Journal'a göre Jensen Huang, Çinli şirketlerin gelişmiş Nvidia çiplerini Çin dışındaki veri merkezlerinden kullanmasını sağlayan bir ortak ağı kurdu. Haber, iddia edilen çip kaçakçılığı tartışmasına yeni ayrıntılar ekliyor."
 category: donanim
+popularity: 76
 tags: ["Nvidia", "JensenHuang", "Çipİhracatı", "VeriMerkezi", "GüneydoğuAsya"]
 date: 2026-11-15T19:57:16+03:00
 image: altyapi

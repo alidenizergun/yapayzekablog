@@ -2,6 +2,7 @@
 title: "Kasım'da 8 şirketten 8 yeni model: dördü açık ağırlıklı"
 spot: "Kasım ayında takip edilen model lansmanları arasında Google'ın Gemini 4 Carbon'u, Deep Principle'ın Hydrogen-1.0'ı ve Soket Labs'in EKA-1'i öne çıkıyor. Yeni modellerin yarısı açık ağırlıklı."
 category: modeller
+popularity: 55
 tags: [Gemini4, AçıkKaynak, Modeller, Google]
 date: 2026-11-10T19:10:00+03:00
 image: modeller

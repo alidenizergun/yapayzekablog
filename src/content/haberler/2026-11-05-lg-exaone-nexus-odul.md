@@ -2,6 +2,7 @@
 title: "LG AI Research'ün uyum ajanı EXAONE Nexus'a telif teknolojisi ödülü"
 spot: "LG AI Research, uyum (compliance) ajanı EXAONE Nexus ile ICOTEC 2026 konferansındaki Copyright Technology Awards'ta ödül aldı."
 category: ajanlar
+popularity: 20
 tags: [LG, YapayZekaAjanları, Telif]
 date: 2026-11-05T12:00:00+03:00
 image: odul

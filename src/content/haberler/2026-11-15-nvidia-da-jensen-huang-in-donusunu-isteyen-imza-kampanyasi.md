@@ -2,6 +2,7 @@
 title: "Nvidia'da Jensen Huang'ın dönüşünü isteyen imza kampanyası 136 bini aştı"
 spot: "Jensen Huang'ın istifasının ardından başlatılan geri dönüş kampanyası SCMP'ye göre 136.000'den fazla imzaya ulaştı; rakamlar doğrulanmış değil. Megaspeed ise Alice Huang'ın Ağustos 2025'te ayrıldığını açıkladı."
 category: donanim
+popularity: 72
 tags: ["Nvidia", "JensenHuang", "Megaspeed", "YönetimKurulu"]
 date: 2026-11-15T19:04:47+03:00
 image: altyapi

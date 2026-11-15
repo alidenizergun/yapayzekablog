@@ -2,6 +2,7 @@
 title: "Anthropic halka arz sayfasını duyurdu: 825 milyon hisse, 70-78 dolar aralığı"
 spot: "Anthropic, X hesabından halka arz sayfasını duyurdu. Şirketin dosyasına göre 825 milyon A sınıfı hisse 70-78 dolar aralığında sunulacak ve değerleme tam seyreltilmiş bazda 1,4 trilyon dolara kadar çıkıyor."
 category: girisim-yatirim
+popularity: 82
 tags: ["Anthropic", "HalkaArz", "Nasdaq", "ANT"]
 date: 2026-11-12T16:43:41+03:00
 image: girisim

@@ -2,6 +2,7 @@
 title: "Kongre'de Nvidia skandalı sonrası yapay zeka çipi ihracat kontrolleri için ivme"
 spot: "Semafor'a göre Meclis Başkanı Mike Johnson ve Hakeem Jeffries, Huang'ın iddia edilen casus ilişkisi sonrası çip ihracat kontrollerinin sıkılaştırılmasını destekliyor. Düzenleme yıl sonuna kadar yasalaşabilir."
 category: regulasyon
+popularity: 55
 tags: ["Nvidia", "IhracatKontrolleri", "Kongre", "NDAA"]
 date: 2026-11-13T00:26:30+03:00
 image: regulasyon

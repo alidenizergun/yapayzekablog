@@ -2,6 +2,7 @@
 title: "Meta'nın yapay zeka ajanı Muse, ücretli kullanıcılar adına ABD'deki işletmeleri arıyor"
 spot: "Meta'nın tüketici yapay zeka ajanı Muse, Eylül'deki ilk testin ardından kullanıcılar adına ABD'deki işletmeleri aramaya başladı. Özellik yalnızca ücretli abonelere açık ve planlar aylık 20 dolardan başlıyor."
 category: ajanlar
+popularity: 65
 tags: ["Meta", "Muse", "YapayZekaAjanları", "Abonelik"]
 date: 2026-11-13T16:02:14+03:00
 image: arama

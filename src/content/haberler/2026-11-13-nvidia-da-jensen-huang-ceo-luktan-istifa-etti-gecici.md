@@ -2,6 +2,7 @@
 title: "Nvidia'da Jensen Huang CEO'luktan istifa etti, geçici CEO Colette Kress oldu"
 spot: "Nvidia, Jensen Huang'ın başkan ve CEO görevinden istifa ettiğini açıkladı. Kalıcı halef bulunana kadar CFO Colette Kress geçici CEO olarak görev yapacak. Hisse sabah işlemlerinde yüzde 13'ten fazla düştü."
 category: girisim-yatirim
+popularity: 95
 tags: ["Nvidia", "JensenHuang", "ColetteKress", "HuggingFace"]
 date: 2026-11-13T00:29:30+03:00
 image: altyapi

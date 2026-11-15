@@ -2,6 +2,7 @@
 title: "Güney Kore, yerli cihaz üstü yapay zeka çipleri için yol haritasını açıkladı"
 spot: "Güney Kore Ticaret, Sanayi ve Kaynaklar Bakanlığı, 2030'a kadar en az 10 tür yerli yapay zeka çipinin teknolojisini ve üretim kapasitesini sağlamayı hedefleyen yol haritasını duyurdu."
 category: donanim
+popularity: 25
 tags: ["GüneyKore", "CihazÜstüYapayZeka", "YapayZekaÇipleri", "Samsung"]
 date: 2026-11-12T16:41:41+03:00
 image: altyapi

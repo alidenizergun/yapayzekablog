@@ -5,15 +5,15 @@ import Sidebar from '../components/Sidebar.astro';
 import Time from '../components/Time.astro';
 import Visual from '../components/Visual.astro';
 import { CATEGORIES } from '../lib/site.js';
-import { getNews, getTags, tagSlug, newsUrl, spreadVisuals, catName, catUrl, tagUrl, url, HOME_MAIN } from '../lib/news.js';
+import { getNews, pickLead, getTags, tagSlug, newsUrl, spreadVisuals, catName, catUrl, tagUrl, url, HOME_MAIN } from '../lib/news.js';
 
 // Ana sayfa önem sırası:
 // 1. Manşet + 3 yan haber   2. Öne çıkanlar (3 kart)   3. Son haberler listesi + kenar çubuğu
 // 4. Kategori blokları (1 büyük + 3 küçük)
 const news = await getNews();
 
-const dayAgo = Date.now() - 86400e3;
-const lead = news.find((n) => n.data.featured && n.data.date.valueOf() > dayAgo) ?? news[0];
+// Manşet: son 36 saatin en çok okunma potansiyeli olan haberi (src/lib/news.js › pickLead)
+const lead = pickLead(news);
 const rest = news.filter((n) => n !== lead);
 const side = rest.slice(0, 3);
 const second = rest.slice(3, 6);

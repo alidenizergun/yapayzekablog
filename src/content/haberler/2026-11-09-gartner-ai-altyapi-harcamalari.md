@@ -2,6 +2,7 @@
 title: "Gartner: Yapay zeka odaklı altyapı harcamaları 2026'da yüzde 96 artacak"
 spot: "Gartner'ın öngörüsüne göre yapay zeka için optimize edilmiş altyapı harcamaları 2026'da yüzde 96 artacak. Artışın arkasında ajan tabanlı yapay zekanın yoğun çıkarım talebi var."
 category: girisim-yatirim
+popularity: 45
 tags: [VeriMerkezleri, Gartner, Altyapı]
 date: 2026-11-09T10:00:00+03:00
 image: altyapi

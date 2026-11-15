@@ -1,6 +1,6 @@
-// Yeni haberlerin en önemlilerini X'te paylaşır. Site yayınlandıktan sonra çalışır.
+// Yeni haberlerin okunma potansiyeli en yüksek olanlarını X'te paylaşır. Site yayınlandıktan sonra çalışır.
 //
-// Kuyruk:   data/x-kuyruk.json      (haber hattı yazar: slug, metin, önem puanı)
+// Kuyruk:   data/x-kuyruk.json      (haber hattı yazar: slug, metin, okunma potansiyeli)
 // Kayıt:    data/x-paylasilan.json  (paylaşılan her haber: tweet id ve zaman; aynı haber iki kez paylaşılmaz)
 // Anahtarlar (GitHub secrets, OAuth 1.0a, uygulama izni "Read and write"):
 //   X_API_KEY, X_API_SECRET, X_ACCESS_TOKEN, X_ACCESS_SECRET
@@ -100,7 +100,7 @@ async function main() {
 
   const fresh = queue.filter((q) => !posted[q.slug] && Date.now() - new Date(q.date).valueOf() < MAX_AGE_H * 3600e3);
   const picks = [...fresh]
-    .sort((a, b) => (b.featured - a.featured) || (b.importance - a.importance) || (new Date(b.date) - new Date(a.date)))
+    .sort((a, b) => (b.importance - a.importance) || (b.featured - a.featured) || (new Date(b.date) - new Date(a.date)))
     .slice(0, Math.max(0, PER_RUN));
 
   if (!queue.length) log('kuyruk boş, paylaşılacak yeni haber yok.');
@@ -114,14 +114,14 @@ async function main() {
     for (const item of picks) {
       const link = `${base}/haber/${item.slug}/`;
       const text = compose(item, link);
-      if (DRY) { log(`(deneme) paylaşılacaktı [önem ${item.importance}]:\n${text}\n`); continue; }
+      if (DRY) { log(`(deneme) paylaşılacaktı [okunma potansiyeli ${item.importance}]:\n${text}\n`); continue; }
       if (!(await isLive(link))) { notLive.push(item); log(`sayfa henüz yayında değil, sonraki çalışmaya kaldı: ${link}`); summary.push(`- ⏭️ yayında değil: ${item.title}`); continue; }
       try {
         const t = await postTweet(text, keys);
         posted[item.slug] = { id: t.id, at: new Date().toISOString() };
         sent++;
-        log(`PAYLAŞILDI [önem ${item.importance}]: ${item.title} → https://x.com/i/status/${t.id}`);
-        summary.push(`- ✅ [${item.title}](https://x.com/i/status/${t.id}) (önem ${item.importance})`);
+        log(`PAYLAŞILDI [okunma potansiyeli ${item.importance}]: ${item.title} → https://x.com/i/status/${t.id}`);
+        summary.push(`- ✅ [${item.title}](https://x.com/i/status/${t.id}) (okunma potansiyeli ${item.importance})`);
       } catch (err) {
         if (err.duplicate) { posted[item.slug] = { id: null, at: new Date().toISOString(), note: 'duplicate' }; continue; }
         log(`HATA: ${item.title} → ${err.message}`);

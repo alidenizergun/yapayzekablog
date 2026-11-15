@@ -2,6 +2,7 @@
 title: "llama.cpp ve ggml 1.0.0 sürümüne ulaştı: kırıcı değişiklikler için açık sürümleme kuralları"
 spot: "Georgi Gerganov, llama.cpp ve ggml'nin ilk büyük sürümünü duyurdu. İki kütüphane de artık açık sürümleme kurallarıyla ilerleyecek; sürümle birlikte 35 kullanımdan kaldırılmış fonksiyon silindi."
 category: araclar
+popularity: 30
 tags: ["llamacpp", "ggml", "HuggingFace", "AçıkKaynak", "YerelModeller"]
 date: 2026-11-13T23:51:50+03:00
 image: kod

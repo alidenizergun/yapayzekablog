@@ -47,8 +47,13 @@ Okur kitlesi: Türkiye'deki profesyoneller, girişimciler, pazarlamacılar, yaz�
 - Para birimleri kaynaktaki gibi verilir (örn. "500 milyon dolar").
 - Ünlem, emoji, "devrim niteliğinde", "inanılmaz" gibi abartılı ifadeler kullanılmaz.
 
-## Önem puanı (importance)
-Her habere 1–5 arası puan verilir: 5 sektörü etkileyen büyük gelişme, 4 önemli, 3 kayda değer, 2–1 küçük haber. Her çalışmada en yüksek puanlı haberler X'te paylaşılır; puanlar şişirilmez.
+## Okunma potansiyeli (popularity)
+Her habere 1–100 arası puan verilir: Türkiye'deki okurun bu haberi ne kadar tıklayıp okuyacağı. Ana sayfa manşeti ve X paylaşımları bu puana göre seçilir; puan şişirilmez, gerçekçi verilir.
+- 85–100: Herkesin konuşacağı gelişme. Dev şirketlerde liderlik değişimi veya skandal, ChatGPT/Gemini/Claude gibi milyonların kullandığı ürünlerde büyük değişiklik, rekor yatırım veya halka arz, Türkiye'yi doğrudan etkileyen büyük karar.
+- 65–84: Geniş kitleyi ilgilendiren önemli haber. Büyük bir model veya ürün lansmanı, tanınmış şirketlerden büyük para haberleri, tüketiciyi etkileyen yeni özellik, önemli bir Türkiye gelişmesi.
+- 40–64: Sektörü takip edenler için kayda değer. Orta ölçekli lansman, rapor ve araştırma bulguları, kesintiler, regülasyon tartışmaları.
+- 1–39: Niş. Teknik sürümler, akademik çalışmalar, az bilinen şirketler, bölgesel gelişmeler.
+Puanı artıran: tanınan marka ve kişi, para ve rakam, gündelik hayata etkisi, tartışma veya sürpriz, Türkiye bağlantısı. Puanı düşüren: teknik jargon, az bilinen isimler, sonuçsuz araştırma.
 
 ## X paylaşım metni (tweet)
 - En fazla 220 karakter, Türkçe, haberin özünü veren tek bir bilgi cümlesi; gerekirse ikinci kısa cümle.

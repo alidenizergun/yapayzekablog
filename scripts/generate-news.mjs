@@ -161,6 +161,7 @@ function toMarkdown(a, dateIso) {
     `image: ${a.image}`,
   ];
   if (a.featured) lines.push('featured: true');
+  if (a.popularity) lines.push(`popularity: ${a.popularity}`);
   if (REQUIRE_REVIEW) lines.push('draft: true');
   if (a.brand) lines.push(`brand: ${a.brand}`);
   if (a.image_query) lines.push(`imageQuery: ${yamlStr(a.image_query)}`);
@@ -270,7 +271,7 @@ const ARTICLE_SCHEMA = {
       items: {
         type: 'object',
         additionalProperties: false,
-        required: ['title', 'spot', 'category', 'tags', 'image', 'brand', 'image_query', 'body_markdown', 'why_it_matters', 'featured', 'importance', 'tweet', 'sources'],
+        required: ['title', 'spot', 'category', 'tags', 'image', 'brand', 'image_query', 'body_markdown', 'why_it_matters', 'featured', 'popularity', 'tweet', 'sources'],
         properties: {
           title: { type: 'string', description: 'Haber başlığı, 60-100 karakter' },
           spot: { type: 'string', description: 'Spot metni, 1-2 cümle, 140-280 karakter' },
@@ -282,7 +283,7 @@ const ARTICLE_SCHEMA = {
           body_markdown: { type: 'string', description: 'Haber gövdesi, Markdown, 3-6 paragraf, başlık tekrarı yok' },
           why_it_matters: { type: 'string', description: '"Bu ne anlama geliyor?" kutusu, 1-2 cümle' },
           featured: { type: 'boolean' },
-          importance: { type: 'integer', enum: [1, 2, 3, 4, 5], description: 'Okur için önem: 5 sektörü etkileyen büyük gelişme, 3 kayda değer, 1 küçük haber' },
+          popularity: { type: 'integer', description: 'Okunma potansiyeli, 1-100 (yayın kurallarındaki ölçüye göre)' },
           tweet: { type: 'string', description: 'X paylaşım metni, en fazla 220 karakter, link yazma (otomatik eklenir)' },
           sources: {
             type: 'array',
@@ -379,6 +380,7 @@ function validate(articles, seen, existing) {
       ...a,
       title,
       featured,
+      popularity: Math.min(100, Math.max(1, Math.round(Number(a.popularity) || 50))),
       tags: [...new Set((a.tags || []).map((t) => String(t).replace(/[#\s]+/g, '')).filter(Boolean))].slice(0, 6),
       sources,
       brand: BRANDS[a.brand] ? a.brand : '',
@@ -488,7 +490,7 @@ async function main() {
       fs.writeFileSync(out, toMarkdown(a, iso));
     }
     written.push({ slug, title: a.title, sources: a.sources.length });
-    xQueue.push({ slug, title: a.title, text: String(a.tweet || '').trim(), importance: Number(a.importance) || 3, featured: Boolean(a.featured), date: iso });
+    xQueue.push({ slug, title: a.title, text: String(a.tweet || '').trim(), importance: a.popularity, featured: Boolean(a.featured), date: iso });
     log(`YAZILDI: ${a.title} (${a.sources.length} kaynak${a.brand ? ', logo: ' + a.brand : ''}${a.photo ? ', fotoğraf: ' + a.photo.author : ''})`);
   });
   if (!DRY && !REQUIRE_REVIEW && xQueue.length) {

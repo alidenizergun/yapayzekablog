@@ -2,6 +2,7 @@
 title: "OpenAI, Daybreak güvenlik platformuna Red Team ve Defense Factory ürünlerini ekledi"
 spot: "OpenAI, siber güvenlik platformu Daybreak'e web uygulamalarına sızma testi yapan Red Team ile açıkları düzeltmeye odaklanan Defense Factory'yi ekledi. Red Team erken erişimde, Defense Factory önizlemede."
 category: guvenlik
+popularity: 45
 tags: ["OpenAI", "Daybreak", "SiberGüvenlik", "YapayZekaAjanları"]
 date: 2026-11-13T16:03:14+03:00
 image: guvenlik

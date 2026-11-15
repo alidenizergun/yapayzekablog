@@ -2,6 +2,7 @@
 title: "Pazarlamacıların dörtte üçü yapay zeka görünürlüğüne yatırımı artırmayı planlıyor"
 spot: "Tüketicilerin yapay zekaya güveni düşük olsa da pazarlamacıların dörtte üçü, markalarının yapay zeka asistanlarındaki görünürlüğüne yaptıkları yatırımı artırmayı planlıyor."
 category: pazarlama
+popularity: 40
 tags: [GEO, Pazarlama, AIArama]
 date: 2026-10-10T09:30:00+03:00
 image: pazarlama

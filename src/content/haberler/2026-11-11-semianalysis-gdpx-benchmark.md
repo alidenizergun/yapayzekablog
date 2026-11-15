@@ -2,6 +2,7 @@
 title: "SemiAnalysis'ten yeni benchmark: GDPx, modelleri 11 ekonomik alanda ajan görevleriyle ölçüyor"
 spot: "Araştırma şirketi SemiAnalysis, öncü yapay zeka modellerini ekonomik değeri yüksek 11 alandaki ajan görevleriyle değerlendiren GDPx adlı yeni bir benchmark duyurdu."
 category: arastirma
+popularity: 30
 tags: [Benchmark, YapayZekaAjanları, SemiAnalysis]
 date: 2026-11-11T11:05:00+03:00
 image: benchmark

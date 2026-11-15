@@ -2,6 +2,7 @@
 title: "DeepSeek, uygulamasındaki arama, dosya, bağlantı ve ses özelliklerini API'ye açtı"
 spot: "DeepSeek, V4.1-Flash modelinin uygulamadaki yeteneklerini API üzerinden geliştiricilere sundu. Arama, dosya okuma, bağlantı okuma ve güvenlik kontrolleri tek arayüzde toplanıyor."
 category: platformlar
+popularity: 45
 tags: ["DeepSeek", "API", "DeepSeekV4", "Geliştiriciler"]
 date: 2026-11-13T23:52:50+03:00
 image: kod

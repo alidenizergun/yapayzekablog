@@ -2,6 +2,7 @@
 title: "Nvidia yönetim kurulunun CEO Jensen Huang'ı görevden almayı görüştüğü bildirildi"
 spot: "Wall Street Journal ve Reuters'a dayanan haberlere göre Nvidia yönetim kurulu Jensen Huang'ın görevden alınmasını görüştü. Hisseler yüzde 8'den fazla düştü; Perşembe sabahı itibarıyla karar açıklanmamıştı."
 category: donanim
+popularity: 85
 tags: ["Nvidia", "JensenHuang", "YapayZekaÇipleri", "YönetimKurulu"]
 date: 2026-11-12T16:44:41+03:00
 image: altyapi

@@ -2,6 +2,7 @@
 title: "OpenAI, ChatGPT Wallet'ı duyurdu: dot ajanları kullanıcı adına alışveriş yapabilecek"
 spot: "OpenAI, “dots” yapay zeka ajanlarının kullanıcılar adına satın alma yapmasını sağlayan ChatGPT Wallet'ı duyurdu. Özellik başlangıçta ABD'deki 18 yaş üstü Pro abonelerine açık."
 category: ajanlar
+popularity: 80
 tags: ["OpenAI", "ChatGPT", "ChatGPTWallet", "YapayZekaAjanları", "Ödemeler"]
 date: 2026-11-13T23:54:50+03:00
 image: pazarlama

@@ -2,6 +2,7 @@
 title: "OpenAI: ChatGPT'deki arama hacmi Google'ın beşte birine ulaştı"
 spot: "OpenAI'ın paylaştığı veriye göre ChatGPT üzerinden yapılan arama hacmi, Google'daki arama hacminin yaklaşık beşte birine ulaştı. Avrupa'da ise yayıncılar yapay zeka yanıtlarının haberlerin yerini aldığını savunuyor."
 category: platformlar
+popularity: 78
 tags: [ChatGPT, OpenAI, AIArama, Yayıncılık]
 date: 2026-11-11T14:20:00+03:00
 image: arama

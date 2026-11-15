@@ -43,6 +43,8 @@ const haberler = defineCollection({
       )
       .min(1, 'Her haberde en az bir kaynak olmalı'),
     featured: z.boolean().default(false),
+    // Okunma potansiyeli (1-100): ana sayfa manşeti ve X paylaşımı buna göre seçilir
+    popularity: z.number().int().min(1).max(100).optional(),
     draft: z.boolean().default(false),
     author: z.string().default('YZ Gündemi Editör Masası'),
     generated: z.boolean().default(true),

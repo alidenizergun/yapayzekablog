@@ -2,6 +2,7 @@
 title: "Bloomberg: Anthropic'in halka arzına yaklaşık altı kat talep geldi"
 spot: "Bloomberg'in bilgi sahibi kişilere dayandırdığı habere göre Anthropic'in halka arzı, sunulan hisselerin yaklaşık altı katı emir topladı. Bir gün önce talebin birkaç kat aşırı olduğu bildirilmişti."
 category: girisim-yatirim
+popularity: 75
 tags: ["Anthropic", "HalkaArz", "Nasdaq", "Bloomberg"]
 date: 2026-11-13T00:27:30+03:00
 image: girisim

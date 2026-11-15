@@ -2,6 +2,7 @@
 title: "World Labs, 3D dünya modeli Atlas'ı herkesin kullanımına açtığını duyurdu"
 spot: "Fei-Fei Li, X'te World Labs'in Atlas dünya modelinin artık herkese açık olduğunu duyurdu. Model, eylülde seçili ortaklarla erken erişimde tanıtılmıştı."
 category: modeller
+popularity: 50
 tags: ["WorldLabs", "Atlas", "FeiFeiLi", "DünyaModeli"]
 date: 2026-11-13T00:24:30+03:00
 image: modeller

@@ -129,3 +129,16 @@ export async function getTags() {
 
 /** Ana sayfanın ana akışında gösterilen haber sayısı (manşet 1 + yan 3 + öne çıkan 3 + liste 8); sayfalama buradan sonra başlar */
 export const HOME_MAIN = 15;
+
+// Okunma potansiyeli: puanı olmayan eski haberlerde manşet işaretliyse 80, değilse 50
+export const popularityOf = (n) => n.data.popularity ?? (n.data.featured ? 80 : 50);
+
+/** Manşet: son 36 saatin en çok okunma potansiyeli olan haberi.
+ *  Her saat 0,5 puan düşer; böylece büyük bir haber bir sonraki güncellemede de manşette kalır,
+ *  ama ertesi gün daha yeni bir gelişmeye yer açar. Son 36 saatte haber yoksa en yeni haber. */
+export function pickLead(news, now = Date.now()) {
+  const pool = news.filter((n) => now - n.data.date.valueOf() < 36 * 3600e3);
+  if (!pool.length) return news[0];
+  const score = (n) => popularityOf(n) - ((now - n.data.date.valueOf()) / 3600e3) * 0.5;
+  return pool.reduce((best, n) => (score(n) > score(best) ? n : best));
+}

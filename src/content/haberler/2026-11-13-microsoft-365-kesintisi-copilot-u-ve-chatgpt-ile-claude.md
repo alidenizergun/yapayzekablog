@@ -2,6 +2,7 @@
 title: "Microsoft 365 kesintisi Copilot'u ve ChatGPT ile Claude'un Microsoft bağlayıcılarını etkiledi"
 spot: "Microsoft 365, Outlook ve Teams'i etkileyen kesinti, OpenAI ve Anthropic hizmetlerinin kullandığı Microsoft bağlayıcılarına da yansıdı. Sorun Cuma gününe sarktı, Microsoft kök neden raporu yayımlayacak."
 category: platformlar
+popularity: 55
 tags: ["Microsoft", "Copilot", "OpenAI", "Anthropic", "Kesinti"]
 date: 2026-11-13T16:01:14+03:00
 image: altyapi

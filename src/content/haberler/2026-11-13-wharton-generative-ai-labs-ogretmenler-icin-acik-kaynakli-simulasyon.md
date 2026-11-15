@@ -2,6 +2,7 @@
 title: "Wharton Generative AI Labs, öğretmenler için açık kaynaklı simülasyon sistemi Primer'ı yayımladı"
 spot: "Wharton Generative AI Labs, eğitimcilerin kod yazmadan yapay zekayla diyalog kurarak öğrencilere simülasyon hazırlamasını sağlayan açık kaynaklı Primer'ı yayımladı. Ekip, sistemin deneysel bir prototip olduğunu belirtiyor."
 category: arastirma
+popularity: 30
 tags: ["Wharton", "Primer", "Eğitim", "AçıkKaynak", "EthanMollick"]
 date: 2026-11-13T16:00:14+03:00
 image: kod

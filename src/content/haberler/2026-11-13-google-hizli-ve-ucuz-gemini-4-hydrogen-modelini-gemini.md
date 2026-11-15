@@ -2,6 +2,7 @@
 title: "Google, hızlı ve ucuz Gemini 4 Hydrogen modelini Gemini uygulaması ve Search'e getirdi"
 spot: "Google, hızlı kodlama ve ajan iş akışları için tasarlanan Gemini 4 Hydrogen'ı 12 Kasım'da duyurdu. Model, ücretsiz Gemini kullanıcılarına da ulaşan ilk Gemini 4 modeli oldu."
 category: modeller
+popularity: 70
 tags: ["Google", "Gemini4Hydrogen", "Gemini", "Antigravity"]
 date: 2026-11-13T00:28:30+03:00
 image: gemini
