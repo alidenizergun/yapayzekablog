@@ -211,14 +211,6 @@ a.tag { display: inline-flex; align-items: center; gap: 4px; }
   .ticker .wrap { flex-wrap: nowrap; }
   .ticker .tick-items a { min-height: 44px; line-height: 44px; }
   .ticker .wrap { padding-block: 0; }
-  header.site .wrap { flex-wrap: nowrap; justify-content: space-between; padding-block: 8px; gap: 12px; }
-  header.site nav.cats-desktop, header.site .btn-newsletter { display: none; }
-  .cats-mobile { display: block; border-bottom: 1px solid var(--line); background: var(--bg); }
-  .cats-mobile .wrap { display: flex; gap: 4px; overflow-x: auto; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
-  .cats-mobile .wrap::-webkit-scrollbar { display: none; }
-  .cats-mobile a { flex: 0 0 auto; min-height: 44px; display: inline-flex; align-items: center; padding: 0 10px; font-weight: 600; font-size: 15px; border-bottom: 2px solid transparent; white-space: nowrap; }
-  .cats-mobile a:first-child { padding-left: 0; }
-  .cats-mobile a[aria-current="page"] { border-color: var(--accent); color: var(--accent-text); }
   main { padding-block: 20px 48px; }
 }
 
@@ -370,3 +362,52 @@ footer.site .linkish { background: none; border: 0; padding: 0; color: #fff; fon
 .legal { max-width: 760px; }
 .legal .prose { font-family: var(--body); font-size: 17px; }
 .legal .prose h2 { font-size: 22px; margin-top: 36px; }
+
+/* ---------------------------------------------------------------- ana sayfa ızgarası
+   Bütün bölümler aynı 3 sütunlu ızgarayı paylaşır (32px boşluk): geniş alanlar 2 sütun, sağ alanlar 1 sütun.
+   Böylece manşet yan listesi, öne çıkanların 3. kartı, "Bu Hafta" ve kategori listeleri aynı dikey çizgide başlar. */
+.home { --gut: 32px; }
+.home .hero, .home .second, .home .cols, .home .catblock-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); column-gap: var(--gut); }
+.home .hero { row-gap: 28px; }
+.home .lead, .home .cols > .main, .home .catblock .card.big { grid-column: span 2; }
+.home .second { row-gap: 0; }
+.home .cols { row-gap: 48px; }
+/* Manşetin yan listesi manşetle aynı yükseklikte biter; kategori listeleri üstten hizalı, doğal yükseklikte */
+.home .side { align-self: stretch; }
+.home .side a:not(:first-child) { flex: 1 1 auto; }
+.home .catblock-list { align-self: start; }
+.home .catblock-list .mini:last-child { border-bottom: 0; padding-bottom: 0; }
+@media (max-width: 900px) {
+  .home .hero, .home .second, .home .cols, .home .catblock-grid { grid-template-columns: minmax(0, 1fr); }
+  .home .lead, .home .cols > .main, .home .catblock .card.big { grid-column: auto; }
+  .home .side a:not(:first-child) { flex: 0 0 auto; }
+  .home .catblock-list .mini:last-child { border-bottom: 1px solid var(--line); padding-bottom: 16px; }
+}
+@media (min-width: 601px) and (max-width: 900px) {
+  /* Tablet: manşet tam genişlik, yan haberler ve öne çıkanlar iki sütun */
+  .home .side { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: var(--gut); }
+  .home .side a:first-child { grid-column: 1 / -1; }
+}
+
+/* Başlık: menü tek satıra sığmadığında (1080px altı) kategoriler logonun altında kaydırılabilir şeritte; logo ve tema anahtarı aynı satırda */
+@media (max-width: 1080px) {
+  header.site .wrap { flex-wrap: nowrap; justify-content: space-between; gap: 12px; }
+  header.site .wrap { flex-wrap: nowrap; justify-content: space-between; gap: 12px; }
+  header.site nav.cats-desktop, header.site .btn-newsletter { display: none; }
+  .cats-mobile { display: block; border-bottom: 1px solid var(--line); background: var(--bg); }
+  .cats-mobile .wrap { display: flex; gap: 4px; overflow-x: auto; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
+  .cats-mobile .wrap::-webkit-scrollbar { display: none; }
+  .cats-mobile a { flex: 0 0 auto; min-height: 44px; display: inline-flex; align-items: center; padding: 0 10px; font-weight: 600; font-size: 15px; border-bottom: 2px solid transparent; white-space: nowrap; }
+  .cats-mobile a:first-child { padding-left: 0; }
+  .cats-mobile a[aria-current="page"] { border-color: var(--accent); color: var(--accent-text); }
+}
+@media (max-width: 760px) { header.site .wrap { padding-block: 8px; } }
+
+/* Tablet ana sayfa: öne çıkanlar üç sütun, yan haberlerin alt çizgileri simetrik */
+@media (min-width: 601px) and (max-width: 900px) {
+  .home .second { grid-template-columns: repeat(3, minmax(0, 1fr)); column-gap: 20px; }
+  .home .second .card { padding-block: 0; border-bottom: 0; }
+  .home .second .visual { height: 140px; }
+  .home .second h3 { font-size: 18px; }
+  .home .side a:not(:first-child) { border-bottom: 0; }
+}

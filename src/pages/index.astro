@@ -41,7 +41,7 @@ const listV = spreadVisuals(latest);
 ---
 <Base>
   {lead ? (
-    <>
+    <div class="home">
       <section class="hero" aria-label="Manşet">
         <a class="lead" href={newsUrl(lead)}>
           <div class="imgbox">
@@ -125,7 +125,7 @@ const listV = spreadVisuals(latest);
           </section>
         );
       })}
-    </>
+    </div>
   ) : (
     <p class="empty">Henüz haber yok. İlk otomatik güncellemeden sonra haberler burada görünecek.</p>
   )}
