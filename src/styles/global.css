@@ -6,12 +6,35 @@
   --body: Inter, system-ui, -apple-system, 'Segoe UI', sans-serif;
   color-scheme: light;
 }
+/* Karanlık tema: ziyaretçi seçim yapmadıysa cihaz ayarı, yaptıysa data-theme geçerli */
 @media (prefers-color-scheme: dark) {
-  :root {
+  :root:not([data-theme="light"]) {
     --bg: #121212; --fg: #F2F1EE; --muted: #A9A6A0; --soft: #1D1C1B; --line: #2E2D2B;
     --accent: #E5452A; --accent-text: #FF7A62; --band: #000000; --band-muted: #BDBDBD; --input: #1A1A1A;
     color-scheme: dark;
   }
+}
+:root[data-theme="dark"] {
+  --bg: #121212; --fg: #F2F1EE; --muted: #A9A6A0; --soft: #1D1C1B; --line: #2E2D2B;
+  --accent: #E5452A; --accent-text: #FF7A62; --band: #000000; --band-muted: #BDBDBD; --input: #1A1A1A;
+  color-scheme: dark;
+}
+
+/* Tema anahtarı */
+.theme-switch { height: 44px; padding: 0 6px 0 12px; display: inline-flex; align-items: center; gap: 10px; border: 1px solid var(--line); border-radius: 22px; background: var(--bg); color: var(--fg); font: inherit; font-size: 14px; font-weight: 600; cursor: pointer; }
+.theme-switch:hover { border-color: var(--fg); }
+.theme-switch .track { position: relative; width: 52px; height: 30px; border-radius: 15px; background: var(--soft); border: 1px solid var(--line); flex: 0 0 auto; }
+.theme-switch .knob { position: absolute; top: 2px; left: 2px; width: 24px; height: 24px; border-radius: 12px; background: var(--fg); color: var(--bg); display: flex; align-items: center; justify-content: center; transition: transform .2s ease; }
+.theme-switch[aria-checked="true"] .knob { transform: translateX(22px); }
+.theme-switch .knob svg { width: 14px; height: 14px; }
+.theme-switch .moon { display: none; }
+.theme-switch[aria-checked="true"] .moon { display: block; }
+.theme-switch[aria-checked="true"] .sun { display: none; }
+@media (prefers-reduced-motion: reduce) { .theme-switch .knob { transition: none; } }
+.head-actions { display: flex; align-items: center; gap: 10px; }
+@media (max-width: 560px) {
+  .theme-switch { padding: 0 6px; }
+  .theme-switch .label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 }
 *, *::before, *::after { box-sizing: border-box; }
 html { -webkit-text-size-adjust: 100%; }
