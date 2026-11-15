@@ -42,7 +42,8 @@ export default function securityHeaders() {
           });
           const csp = [
             "default-src 'self'",
-            `script-src 'self' ${ga.script} ${[...hashes].join(' ')}`.replace(/\s+/g, ' ').trim(),
+            // Arama sayfası: Pagefind arama motoru WebAssembly kullanır
+            `script-src 'self' ${/pagefind/.test(html) ? "'wasm-unsafe-eval'" : ''} ${ga.script} ${[...hashes].join(' ')}`.replace(/\s+/g, ' ').trim(),
             "style-src 'self' 'unsafe-inline'",
             `img-src 'self' https://images.unsplash.com data: ${ga.img}`.trim(),
             "font-src 'self'",

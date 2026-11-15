@@ -4,7 +4,7 @@ import Base from '../../layouts/Base.astro';
 import Sidebar from '../../components/Sidebar.astro';
 import Time from '../../components/Time.astro';
 import { IMAGES } from '../../lib/site.js';
-import { tagUrl, getNews, slugOf, newsUrl, spreadVisuals, defaultVisual, ogImageFor, withUtm, catName, catUrl, url, readingMinutes, hostOf, photoSrc } from '../../lib/news.js';
+import { tagUrl, getNews, slugOf, newsUrl, spreadVisuals, defaultVisual, ogImageFor, withUtm, catName, catUrl, url, readingMinutes, hostOf, photoSrc, formatDate } from '../../lib/news.js';
 import { brandOf } from '../../lib/brands.js';
 import Visual from '../../components/Visual.astro';
 
@@ -59,14 +59,14 @@ const crumbs = [{ name: 'Ana sayfa', path: '/' }, { name: catName(d.category), p
 <Base title={d.title} description={d.spot} ogImage={og} ogType="article" currentCat={d.category} jsonLd={jsonLd} breadcrumbs={crumbs}
   article={{ published: d.date, section: catName(d.category), tags: d.tags }}>
   <div class="cols" style="margin-top:0;gap:56px">
-    <article class="article">
-      <nav class="crumb" aria-label="Konum"><a href={url('/')}>Ana sayfa</a><span aria-hidden="true">/</span><a href={catUrl(d.category)}>{catName(d.category)}</a></nav>
-      <span class="badge">{catName(d.category)}</span>
-      <h1>{d.title}</h1>
+    <article class="article" data-pagefind-body data-pagefind-filter={`Kategori:${catName(d.category)}`} data-pagefind-meta={`date:${formatDate(d.date, false)}`}>
+      <nav class="crumb" aria-label="Konum" data-pagefind-ignore><a href={url('/')}>Ana sayfa</a><span aria-hidden="true">/</span><a href={catUrl(d.category)}>{catName(d.category)}</a></nav>
+      <span class="badge" data-pagefind-ignore>{catName(d.category)}</span>
+      <h1 data-pagefind-meta="title">{d.title}</h1>
       <p class="spot">{d.spot}</p>
       <div class="byline">
-        <span class="meta byline-meta"><Time date={d.date} /> · {readingMinutes(entry.body)} dk okuma</span>
-        <div class="share">
+        <span class="meta byline-meta" data-pagefind-ignore><Time date={d.date} /> · {readingMinutes(entry.body)} dk okuma</span>
+        <div class="share" data-pagefind-ignore>
           <a class="tag" href={`https://x.com/intent/post?text=${encodeURIComponent(d.title)}&url=${encodeURIComponent(pageUrl)}`} target="_blank" rel="noopener">X'te paylaş</a>
           <a class="tag" href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(pageUrl)}`} target="_blank" rel="noopener">LinkedIn</a>
           <a class="tag" href={`https://wa.me/?text=${encodeURIComponent(`${d.title} ${pageUrl}`)}`} target="_blank" rel="noopener">WhatsApp</a>
@@ -76,7 +76,7 @@ const crumbs = [{ name: 'Ana sayfa', path: '/' }, { name: catName(d.category), p
         </div>
       </div>
 
-      <figure>
+      <figure data-pagefind-ignore>
         <Visual entry={entry} choice={main} w={780} h={420} eager credit={false} />
         <figcaption>
           {main.kind === 'photo' && d.photo ? (
@@ -98,7 +98,7 @@ const crumbs = [{ name: 'Ana sayfa', path: '/' }, { name: catName(d.category), p
         </aside>
       )}
 
-      <section class="sources" aria-labelledby="src-h">
+      <section class="sources" aria-labelledby="src-h" data-pagefind-ignore>
         <h2 id="src-h">Kaynaklar</h2>
         <ol>
           {d.sources.map((s) => (
@@ -113,10 +113,10 @@ const crumbs = [{ name: 'Ana sayfa', path: '/' }, { name: catName(d.category), p
           : <p class="ai-note">Bir hata görürseniz <a href={`${url('/hata-bildir/')}?haber=${slugOf(entry)}`}>bize bildirin</a>.</p>}
       </section>
 
-      {d.tags.length > 0 && <div class="atags">{d.tags.map((t) => <a class="tag" href={tagUrl(t)}>#{t}</a>)}</div>}
+      {d.tags.length > 0 && <div class="atags" data-pagefind-ignore>{d.tags.map((t) => <a class="tag" href={tagUrl(t)}>#{t}</a>)}</div>}
 
       {related.length > 0 && (
-        <section class="related" aria-labelledby="rel-h">
+        <section class="related" aria-labelledby="rel-h" data-pagefind-ignore>
           <div class="sechead sm"><h2 id="rel-h">İlgili Haberler</h2></div>
           <div class="grid4">
             {related.map((n) => (

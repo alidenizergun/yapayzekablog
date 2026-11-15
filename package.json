@@ -9,7 +9,7 @@
   },
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build",
+    "build": "astro build && pagefind --site dist --silent",
     "preview": "astro preview",
     "news": "node scripts/generate-news.mjs",
     "news:dry": "node scripts/generate-news.mjs --dry-run"
@@ -22,5 +22,8 @@
     "@fontsource/schibsted-grotesk": "5.3.0",
     "@fontsource/source-serif-4": "5.3.1",
     "astro": "7.4.11"
+  },
+  "devDependencies": {
+    "pagefind": "1.6.0"
   }
 }

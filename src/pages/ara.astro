@@ -1,0 +1,71 @@
+---
+import Base from '../layouts/Base.astro';
+import { url } from '../lib/news.js';
+---
+<Base title="Haberlerde ara" description="YZ Gündemi'nde yayınlanan bütün yapay zeka haberlerinde arama yapın." noindex>
+  <section class="search-page">
+    <h1 class="page-h">Haberlerde ara</h1>
+    <form class="search-box" role="search" action={url('/ara/')} data-search-form>
+      <label for="q" class="sr-only">Aranacak kelime</label>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      <input id="q" name="q" type="search" placeholder="Örn. OpenAI, halka arz, Nvidia çip" autocomplete="off" enterkeyhint="search" />
+    </form>
+    <p class="search-status meta" role="status" aria-live="polite" data-search-status></p>
+    <ol class="search-results" data-search-results></ol>
+    <p class="search-empty" data-search-empty hidden>Sonuç bulunamadı. Farklı bir kelimeyle deneyin ya da <a href={url('/')}>son haberlere</a> göz atın.</p>
+  </section>
+</Base>
+
+<script>
+  // Pagefind: derlemede oluşturulan arama dizini (dist/pagefind). Sunucu yok; arama tarayıcıda yapılır.
+  const form = document.querySelector<HTMLFormElement>('[data-search-form]')!;
+  const input = form.querySelector<HTMLInputElement>('input')!;
+  const list = document.querySelector<HTMLOListElement>('[data-search-results]')!;
+  const status = document.querySelector<HTMLElement>('[data-search-status]')!;
+  const empty = document.querySelector<HTMLElement>('[data-search-empty]')!;
+  const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+  let pf: any = null;
+  const load = async () => {
+    if (!pf) {
+      pf = await import(/* @vite-ignore */ `${base}/pagefind/pagefind.js`);
+      await pf.options({ excerptLength: 26 });
+      pf.init();
+    }
+    return pf;
+  };
+  const esc = (s: string) => s.replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]!));
+  let seq = 0;
+  const run = async (q: string) => {
+    const my = ++seq;
+    q = q.trim();
+    const u = new URL(location.href);
+    if (q) u.searchParams.set('q', q); else u.searchParams.delete('q');
+    history.replaceState(null, '', u);
+    if (q.length < 2) { list.innerHTML = ''; status.textContent = ''; empty.hidden = true; return; }
+    status.textContent = 'Aranıyor…';
+    const p = await load();
+    const res = await p.debouncedSearch(q, {}, 200);
+    if (res === null || my !== seq) return;
+    const all = await Promise.all(res.results.slice(0, 40).map((r: any) => r.data()));
+    if (my !== seq) return;
+    // Yakın eşleşme süzgeci: yalnızca aranan kelimeyle en az 3 harf ortak başlangıcı olan vurgular sayılır
+    const norm = (t: string) => t.toLocaleLowerCase('tr').normalize('NFKD').replace(/[\u0300-\u036f]/g, '');
+    const words = norm(q).split(/[^\p{L}\p{N}]+/u).filter((x) => x.length >= 2);
+    const relevant = (d: any) => [...String(d.excerpt + ' ' + (d.meta.title ?? '')).matchAll(/<mark>([^<]+)<\/mark>/g)].map((m) => norm(m[1]))
+      .some((m) => words.some((w) => (m.length >= 3 || m === w) && (m.startsWith(w.slice(0, 3)) || w.startsWith(m.slice(0, 3)))))
+      || words.some((w) => norm(d.meta.title ?? '').includes(w));
+    const data = all.filter(relevant).slice(0, 20);
+    status.textContent = data.length ? `"${q}" için ${data.length} haber bulundu` : '';
+    empty.hidden = data.length > 0;
+    // Özet metni Pagefind'in kendi ürettiği <mark> etiketleri dışında kaçırılır
+    list.innerHTML = data.map((d: any) => {
+      const excerpt = esc(d.excerpt.replace(/<\/?mark>/g, '\u0001')).replace(/\u0001([^\u0001]*)\u0001/g, '<mark>$1</mark>');
+      return `<li><a href="${esc(d.url)}"><span class="cat">${esc(d.filters?.Kategori?.[0] ?? '')}</span><h2>${esc(d.meta.title ?? '')}</h2><p>${excerpt}</p><span class="meta">${esc(d.meta.date ?? '')}</span></a></li>`;
+    }).join('');
+  };
+  form.addEventListener('submit', (e) => { e.preventDefault(); run(input.value); });
+  input.addEventListener('input', () => run(input.value));
+  const initial = new URLSearchParams(location.search).get('q');
+  if (initial) { input.value = initial; run(initial); }
+  input.focus();
+</script>
