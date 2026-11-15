@@ -15,7 +15,7 @@ const rowV = spreadVisuals(items);
 <Base title={`${cat.name} haberleri`} description={`${cat.name} alanındaki en yeni yapay zeka haberleri.`} currentCat={cat.slug}>
   <div class="cols" style="margin-top:0">
     <section class="main" aria-labelledby="h">
-      <div class="sechead"><h2 id="h">{cat.name}</h2><span class="meta">{items.length} haber</span></div>
+      <div class="sechead"><h1 id="h" class="page-h">{cat.name}</h1><span class="meta">{items.length} haber</span></div>
       {items.length ? items.map((n) => <NewsRow item={n} choice={rowV.get(n.id)} />) : <p class="empty">Bu kategoride henüz haber yok. Yeni haberler otomatik güncellemelerle eklenecek.</p>}
     </section>
     <Sidebar exclude={items.map((n) => n.id)} />

@@ -21,7 +21,7 @@ const loading = eager ? 'eager' : 'lazy';
 ---
 <span class="visual">
   {brand ? (
-    <span class:list={['brandcard', { wordmark: !brand.path }]} style={`--bc:${brand.bg};--bf:${brand.fg}`} role="img" aria-label={`${brand.name} logosu`}>
+    <span class:list={['brandcard', { wordmark: !brand.path }]} style={`--bl:${brand.onLight};--bd:${brand.onDark}`} role="img" aria-label={`${brand.name} logosu`}>
       {brand.path && <svg viewBox="0 0 24 24" aria-hidden="true"><path d={brand.path} /></svg>}
       <span class="bn" aria-hidden="true">{brand.name}</span>
     </span>

@@ -2,14 +2,14 @@
 import Base from '../../layouts/Base.astro';
 import NewsRow from '../../components/NewsRow.astro';
 import Sidebar from '../../components/Sidebar.astro';
-import { spreadVisuals, getNews, url } from '../../lib/news.js';
+import { spreadVisuals, getNews, url, HOME_MAIN } from '../../lib/news.js';
 
 const PER_PAGE = 12;
-const OFFSET = 4 + PER_PAGE; // ana sayfada gösterilenler: manşet + 3 yan + 12 liste
+const OFFSET = HOME_MAIN; // ana sayfanın ana akışında gösterilenlerden sonrası
 
 export async function getStaticPaths() {
   const news = await getNews();
-  const rest = Math.max(0, news.length - (4 + 12));
+  const rest = Math.max(0, news.length - HOME_MAIN);
   const pages = Math.ceil(rest / 12);
   return Array.from({ length: pages }, (_, i) => ({ params: { page: String(i + 2) } }));
 }
@@ -25,7 +25,7 @@ const rowV = spreadVisuals(items);
 <Base title={`Haberler, sayfa ${page}`}>
   <div class="cols" style="margin-top:0">
     <section class="main" aria-labelledby="h">
-      <div class="sechead"><h2 id="h">Tüm Haberler</h2><span class="meta">Sayfa {page}</span></div>
+      <div class="sechead"><h1 id="h" class="page-h">Tüm Haberler</h1><span class="meta">Sayfa {page}</span></div>
       {items.map((n) => <NewsRow item={n} choice={rowV.get(n.id)} />)}
       <div class="pager">
         <a href={prev}>← Daha yeni</a>

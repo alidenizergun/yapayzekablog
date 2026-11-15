@@ -119,6 +119,14 @@ Maliyeti düşürmek için:
 
 GitHub Pages ve GitHub Actions, herkese açık repolarda ücretsizdir.
 
+## Tasarım
+
+Renkler, yazı tipleri ve bileşen kuralları `DESIGN.md` dosyasındadır.
+
+Paylaşım görselleri (`public/og/`) ve telefon ikonu `scripts/og-images.mjs` ile üretilir. Yeni bir şirket eklerseniz (`src/lib/brands.js`) bu betiği yeniden çalıştırın; nasıl çalıştırılacağı dosyanın başında yazıyor.
+
+**Bülten:** Bülten formu yalnızca bir bülten servisi bağlıysa görünür. Brevo, Mailchimp veya Substack gibi bir servisin form adresini repo değişkeni olarak `NEWSLETTER_ACTION` adıyla ekleyin.
+
 ## Elle haber ekleme veya düzeltme
 
 Her haber `src/content/haberler/` altında bir Markdown dosyasıdır. Dosyayı GitHub üzerinden düzenleyip kaydettiğinizde site birkaç dakika içinde güncellenir.

@@ -1,0 +1,27 @@
+---
+import Base from '../../layouts/Base.astro';
+import NewsRow from '../../components/NewsRow.astro';
+import Sidebar from '../../components/Sidebar.astro';
+import { getTags, spreadVisuals } from '../../lib/news.js';
+
+export async function getStaticPaths() {
+  const tags = await getTags();
+  return [...tags.values()].map((t) => ({ params: { tag: t.slug }, props: { tag: t } }));
+}
+const { tag } = Astro.props;
+const items = tag.items.slice(0, 60);
+const rowV = spreadVisuals(items);
+---
+<Base
+  title={`#${tag.name} haberleri`}
+  description={`${tag.name} ile ilgili yapay zeka haberleri.`}
+  noindex={items.length < 2}
+>
+  <div class="cols" style="margin-top:0">
+    <section class="main" aria-labelledby="h">
+      <div class="sechead"><h1 id="h" class="page-h">#{tag.name}</h1><span class="meta">{items.length} haber</span></div>
+      {items.map((n) => <NewsRow item={n} choice={rowV.get(n.id)} />)}
+    </section>
+    <Sidebar exclude={items.map((n) => n.id)} />
+  </div>
+</Base>

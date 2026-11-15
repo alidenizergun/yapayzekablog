@@ -24,16 +24,25 @@ export const withUtm = (u) => `${u}${u.includes('?') ? '&' : '?'}${UTM}`;
 export const photoSrc = (photo, w, h) =>
   `${photo.url}${photo.url.includes('?') ? '&' : '?'}w=${w}&h=${h}&fit=crop&crop=entropy&auto=format&q=70`;
 
-/** Bir haberin kendi (bağlamsız) görseli: haber sayfasında kullanılır */
-export function defaultVisual(entry) {
+/**
+ * Bir haberin kendi (bağlamsız) görseli.
+ * Büyük görsellerde (manşet, haber sayfası) fotoğraf önce gelir; küçüklerde logo.
+ */
+export function defaultVisual(entry, large = false) {
   const d = entry.data;
+  if (large && d.photo) return { kind: 'photo' };
   if (d.brand) return { kind: 'brand' };
   if (d.photo) return { kind: 'photo' };
   return { kind: 'illus', v: variantOf(entry) };
 }
 
-/** Sosyal medya paylaşım görseli (raster olmalı: fotoğraf varsa o, yoksa illüstrasyon) */
-export const ogImageFor = (entry) => (entry.data.photo ? photoSrc(entry.data.photo, 1200, 630) : imageFor(entry));
+/** Sosyal medya paylaşım görseli: 1200x630 PNG/JPG (SVG'yi sosyal ağlar göstermez) */
+export function ogImageFor(entry) {
+  const d = entry.data;
+  if (d.photo) return photoSrc(d.photo, 1200, 630);
+  if (d.brand) return url(`/og/marka/${d.brand}.png`);
+  return url(`/og/gorsel/${d.image}.png`);
+}
 
 /**
  * Aynı bölümde gösterilen haberler için görsel seçer; aynı logo, fotoğraf veya çizim
@@ -41,14 +50,17 @@ export const ogImageFor = (entry) => (entry.data.photo ? photoSrc(entry.data.pho
  * fotoğraf varsa fotoğraf gösterilir.
  * @returns {Map<string, {kind: 'brand'|'photo'|'illus', v?: number}>}
  */
-export function spreadVisuals(entries) {
+export function spreadVisuals(entries, { largeFirst = false } = {}) {
   const used = new Set();
   const out = new Map();
   let prev = null;
-  for (const e of entries) {
+  for (const [i, e] of entries.entries()) {
     const d = e.data;
     let choice = null;
-    if (d.brand && !used.has(`b:${d.brand}`)) choice = { kind: 'brand' };
+    // largeFirst: listenin ilk öğesi büyük gösterilir (manşet) -> fotoğraf önce
+    const photoFirst = largeFirst && i === 0;
+    if (photoFirst && d.photo && !used.has(`p:${d.photo.id}`)) choice = { kind: 'photo' };
+    else if (d.brand && !used.has(`b:${d.brand}`)) choice = { kind: 'brand' };
     else if (d.photo && !used.has(`p:${d.photo.id}`)) choice = { kind: 'photo' };
     if (!choice) {
       const key = d.image;
@@ -92,3 +104,28 @@ export function readingMinutes(text = '') {
 export function hostOf(u) {
   try { return new URL(u).hostname.replace(/^www\./, ''); } catch { return u; }
 }
+
+// ---------------------------------------------------------------- etiketler
+const TR = { ç: 'c', ğ: 'g', ı: 'i', İ: 'i', ö: 'o', ş: 's', ü: 'u', Ç: 'c', Ğ: 'g', Ö: 'o', Ş: 's', Ü: 'u' };
+export const tagSlug = (t) =>
+  String(t).replace(/[çğıİöşüÇĞÖŞÜ]/g, (c) => TR[c]).toLowerCase()
+    .normalize('NFKD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+export const tagUrl = (t) => url(`/etiket/${tagSlug(t)}/`);
+
+/** Etiket -> haberler (aynı etiketin farklı yazımları tek sayfada toplanır) */
+export async function getTags() {
+  const map = new Map();
+  for (const n of await getNews()) {
+    for (const t of n.data.tags) {
+      const slug = tagSlug(t);
+      if (!slug) continue;
+      if (!map.has(slug)) map.set(slug, { slug, name: t, items: [] });
+      const e = map.get(slug);
+      if (!e.items.includes(n)) e.items.push(n);
+    }
+  }
+  return map;
+}
+
+/** Ana sayfanın ana akışında gösterilen haber sayısı (manşet 1 + yan 3 + öne çıkan 3 + liste 8); sayfalama buradan sonra başlar */
+export const HOME_MAIN = 15;

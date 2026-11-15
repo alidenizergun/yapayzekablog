@@ -1,6 +1,6 @@
 ---
 import '../styles/global.css';
-import { SITE, NAV, categoryBySlug } from '../lib/site.js';
+import { SITE, NAV, CATEGORIES, categoryBySlug } from '../lib/site.js';
 import { getNews, newsUrl, catUrl, url } from '../lib/news.js';
 
 interface Props {
@@ -10,12 +10,24 @@ interface Props {
   ogType?: string;
   currentCat?: string;
   jsonLd?: object;
+  noindex?: boolean;
 }
-const { title, description = SITE.description, ogImage, ogType = 'website', currentCat, jsonLd } = Astro.props;
+const { title, description = SITE.description, ogImage, ogType = 'website', currentCat, jsonLd, noindex = false } = Astro.props;
 const fullTitle = title ? `${title} · Nöron` : SITE.title;
 const canonical = new URL(Astro.url.pathname, Astro.site);
-const latest = (await getNews())[0];
-const og = ogImage ? new URL(ogImage, Astro.site).href : new URL(url('/img/arama.svg'), Astro.site).href;
+const allNews = await getNews();
+const latest = allNews[0];
+const og = new URL(ogImage ?? url('/og/site.png'), Astro.site).href;
+// Menüde yalnızca haberi olan kategoriler görünür
+const counts = new Map();
+for (const n of allNews) counts.set(n.data.category, (counts.get(n.data.category) ?? 0) + 1);
+const nav = NAV.filter((slug) => counts.get(slug));
+const footerCats = CATEGORIES.filter((c) => counts.get(c.slug));
+// Bülten formu yalnızca bir bülten servisi bağlıysa gösterilir
+const newsletterOn = Boolean(import.meta.env.PUBLIC_NEWSLETTER_ACTION);
+// "Son dakika" yalnızca son 6 saatteki haber için; sayfadaki betik ziyaret anına göre günceller
+const BREAKING_MS = 6 * 3600e3;
+const isBreaking = latest && Date.now() - latest.data.date.valueOf() < BREAKING_MS;
 ---
 <!doctype html>
 <html lang="tr">
@@ -25,9 +37,11 @@ const og = ogImage ? new URL(ogImage, Astro.site).href : new URL(url('/img/arama
   <title>{fullTitle}</title>
   <meta name="description" content={description} />
   <link rel="canonical" href={canonical.href} />
+  {noindex && <meta name="robots" content="noindex, follow" />}
   <link rel="alternate" type="application/rss+xml" title={SITE.title} href={url('/rss.xml')} />
   <link rel="sitemap" href={url('/sitemap-index.xml')} />
   <link rel="icon" href={url('/favicon.svg')} type="image/svg+xml" />
+  <link rel="apple-touch-icon" href={url('/apple-touch-icon.png')} />
   <meta property="og:site_name" content="Nöron" />
   <meta property="og:locale" content="tr_TR" />
   <meta property="og:type" content={ogType} />
@@ -35,6 +49,8 @@ const og = ogImage ? new URL(ogImage, Astro.site).href : new URL(url('/img/arama
   <meta property="og:description" content={description} />
   <meta property="og:url" content={canonical.href} />
   <meta property="og:image" content={og} />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
   <meta name="twitter:card" content="summary_large_image" />
   <script is:inline>
     // Sayfa çizilmeden önce kayıtlı temayı uygula (beyaz yanıp sönmeyi önler)
@@ -42,13 +58,17 @@ const og = ogImage ? new URL(ogImage, Astro.site).href : new URL(url('/img/arama
   </script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Schibsted+Grotesk:wght@600;700;800&family=Source+Serif+4:ital,wght@0,400;0,600;1,400&display=swap" />
   {jsonLd && <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />}
 </head>
 <body>
   <div class="ticker"><div class="wrap">
-    <span class="badge">Son dakika</span>
-    {latest ? <a href={newsUrl(latest)}>{latest.data.title}</a> : <span>Yeni haberler yakında.</span>}
+    {latest ? (
+      <>
+        <span class="badge" data-breaking={latest.data.date.toISOString()}>{isBreaking ? 'Son dakika' : 'Son haber'}</span>
+        <a href={newsUrl(latest)}>{latest.data.title}</a>
+      </>
+    ) : <span>Yeni haberler yakında.</span>}
   </div></div>
 
   <header class="site"><div class="wrap">
@@ -57,7 +77,7 @@ const og = ogImage ? new URL(ogImage, Astro.site).href : new URL(url('/img/arama
       <span>nöron</span>
     </a>
     <nav class="cats cats-desktop" aria-label="Kategoriler">
-      {NAV.map((slug) => <a href={catUrl(slug)} aria-current={slug === currentCat ? 'page' : undefined}>{categoryBySlug(slug)?.name}</a>)}
+      {nav.map((slug) => <a href={catUrl(slug)} aria-current={slug === currentCat ? 'page' : undefined}>{categoryBySlug(slug)?.name}</a>)}
     </nav>
     <div class="head-actions">
       <button type="button" class="theme-switch" role="switch" aria-checked="false" data-theme-switch>
@@ -67,41 +87,42 @@ const og = ogImage ? new URL(ogImage, Astro.site).href : new URL(url('/img/arama
           <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></svg>
         </span></span>
       </button>
-      <a class="btn btn-newsletter" href="#bulten">Bültene abone ol</a>
+      {newsletterOn && <a class="btn btn-newsletter" href="#bulten">Bültene abone ol</a>}
     </div>
   </div></header>
   <!-- Telefonda kategoriler: tek satır, yana kaydırılır; başlıkla birlikte yapışkan değildir -->
   <nav class="cats-mobile" aria-label="Kategoriler">
     <div class="wrap">
-      {NAV.map((slug) => <a href={catUrl(slug)} aria-current={slug === currentCat ? 'page' : undefined}>{categoryBySlug(slug)?.name}</a>)}
+      {nav.map((slug) => <a href={catUrl(slug)} aria-current={slug === currentCat ? 'page' : undefined}>{categoryBySlug(slug)?.name}</a>)}
     </div>
   </nav>
 
   <main class="wrap"><slot /></main>
 
   <footer class="site"><div class="wrap">
-    <div>
+    <div class="foot-about">
       <a class="logo" href={url('/')}><span>nöron</span></a>
       <p>{SITE.description}</p>
-      <p>Haberler yapay zeka desteğiyle, belirtilen kaynaklardan derlenir.</p>
+      <p>Haberler yapay zeka desteğiyle, belirtilen kaynaklardan derlenir. Her haberde kaynak bağlantıları bulunur. <a href={url('/hakkimizda/')}>Nasıl çalışıyoruz?</a></p>
     </div>
-    <nav aria-label="Alt menü">
+    <nav class="foot-col" aria-labelledby="foot-cats">
+      <h2 id="foot-cats">Kategoriler</h2>
+      {footerCats.map((c) => <a href={catUrl(c.slug)}>{c.name}</a>)}
+    </nav>
+    <nav class="foot-col" aria-labelledby="foot-site">
+      <h2 id="foot-site">Nöron</h2>
       <a href={url('/hakkimizda/')}>Hakkımızda</a>
       <a href={url('/hata-bildir/')}>Hata bildir</a>
-      <a href={url('/rss.xml')}>RSS</a>
+      <a href={url('/rss.xml')}>RSS ile takip et</a>
       <a href={url('/sitemap-index.xml')}>Site haritası</a>
     </nav>
   </div></footer>
 
   <script>
-    document.querySelectorAll<HTMLFormElement>('form[data-news]').forEach((f) => {
-      f.addEventListener('submit', (e) => {
-        const action = f.getAttribute('action');
-        if (action && action !== '#') return; // gerçek bülten servisine gönder
-        e.preventDefault();
-        f.querySelector<HTMLElement>('.ok')!.hidden = false;
-        f.querySelector('input')!.value = '';
-      });
+    // "Son dakika" etiketi: haber 6 saatten eskiyse ziyaret anında "Son haber"e döner
+    document.querySelectorAll<HTMLElement>('[data-breaking]').forEach((b) => {
+      const age = Date.now() - new Date(b.dataset.breaking!).getTime();
+      b.textContent = age < 6 * 3600e3 ? 'Son dakika' : 'Son haber';
     });
     // Karanlık mod anahtarı: seçim tarayıcıda saklanır; seçim yoksa cihaz ayarı geçerli
     const root = document.documentElement;

@@ -198,6 +198,7 @@ async function research(anthropic, existing, xPosts = []) {
 Son ${LOOKBACK_HOURS} saat içinde yayınlanmış, yapay zeka alanındaki en önemli gelişmeleri bul. En fazla ${MAX_ARTICLES + 2} aday çıkar; önem sırasına koy.
 
 Arama önerileri: büyük yapay zeka şirketlerinin son duyuruları, "AI" + bugünün tarihi, yapay zeka yatırım/satın alma haberleri, yapay zeka regülasyonu, Türkiye yapay zeka haberleri. Mümkün olduğunda birincil kaynağı (resmi blog, duyuru, makale) da bul.
+TÜRKİYE: Aramalarının en az ikisini Türkçe yap ve Türkiye'deki yapay zeka gelişmelerine ayır (ör. "yapay zeka girişimi yatırım aldı", "yapay zeka Türkiye duyurdu", kamu kurumlarının yapay zeka duyuruları, Türk şirketlerinin yapay zeka ürünleri). Önemli bir Türkiye gelişmesi varsa adaylara mutlaka ekle ve kategorisini "turkiye" yap.
 
 Aşağıdaki haberler son 7 günde zaten yayınlandı. Bunları ve bunların yeni bilgi içermeyen tekrarlarını ATLA:
 ${covered}

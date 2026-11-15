@@ -3,39 +3,46 @@ import Base from '../layouts/Base.astro';
 import NewsRow from '../components/NewsRow.astro';
 import Sidebar from '../components/Sidebar.astro';
 import Time from '../components/Time.astro';
-import { IMAGES, SITE } from '../lib/site.js';
-import { getNews, newsUrl, spreadVisuals, catName, catUrl, url } from '../lib/news.js';
 import Visual from '../components/Visual.astro';
+import { CATEGORIES } from '../lib/site.js';
+import { getNews, getTags, tagSlug, newsUrl, spreadVisuals, catName, catUrl, tagUrl, url, HOME_MAIN } from '../lib/news.js';
 
-export const PER_PAGE = 12;
+// Ana sayfa önem sırası:
+// 1. Manşet + 3 yan haber   2. Öne çıkanlar (3 kart)   3. Son haberler listesi + kenar çubuğu
+// 4. Kategori blokları (1 büyük + 3 küçük)
 const news = await getNews();
-// Manşet: son 24 saatteki "featured" haber, yoksa en yeni haber
+
 const dayAgo = Date.now() - 86400e3;
 const lead = news.find((n) => n.data.featured && n.data.date.valueOf() > dayAgo) ?? news[0];
 const rest = news.filter((n) => n !== lead);
 const side = rest.slice(0, 3);
-const latest = rest.slice(3, 3 + PER_PAGE);
-const hasMore = rest.length > 3 + PER_PAGE;
+const second = rest.slice(3, 6);
+const latest = rest.slice(6, HOME_MAIN - 1);
+const hasMore = news.length > HOME_MAIN;
+const shown = new Set([lead, ...side, ...second, ...latest].filter(Boolean).map((n) => n.id));
 
-// Gündem: son 3 günün en sık geçen etiketleri
+// Gündem: son 3 günde birden fazla haberde geçen etiketler
+const tags = await getTags();
 const recent = news.filter((n) => n.data.date.valueOf() > Date.now() - 3 * 86400e3);
 const tagCount = new Map();
-for (const n of recent) for (const t of n.data.tags) tagCount.set(t, (tagCount.get(t) ?? 0) + 1);
-const trending = [...tagCount.entries()].sort((a, b) => b[1] - a[1]).slice(0, 8).map(([t]) => t);
+for (const n of recent) for (const s of new Set(n.data.tags.map(tagSlug))) if (s) tagCount.set(s, (tagCount.get(s) ?? 0) + 1);
+const trending = [...tagCount.entries()].filter(([, c]) => c > 1).sort((a, b) => b[1] - a[1]).slice(0, 8).map(([s]) => tags.get(s)).filter(Boolean);
 
-const invest = news.filter((n) => n.data.category === 'girisim-yatirim').slice(0, 4);
+// Kategori blokları: son 30 günde en az 3 gösterilmemiş haberi olan kategoriler (1 büyük + 2-3 küçük), en yeni haberine göre
+const monthAgo = Date.now() - 30 * 86400e3;
+const blocks = CATEGORIES.map((c) => ({
+  cat: c,
+  items: news.filter((n) => n.data.category === c.slug && n.data.date.valueOf() > monthAgo && !shown.has(n.id)).slice(0, 4),
+})).filter((b) => b.items.length >= 3).sort((a, b) => b.items[0].data.date - a.items[0].data.date).slice(0, 3);
 
-// Aynı çizim aynı bölümde tekrar etmesin
-const heroV = spreadVisuals([lead, ...side].filter(Boolean));
+const heroV = spreadVisuals([lead, ...side].filter(Boolean), { largeFirst: true });
+const secondV = spreadVisuals(second);
 const listV = spreadVisuals(latest);
-const investV = spreadVisuals(invest);
-// Kenar çubuğu, ana sayfada zaten görünen haberleri tekrar listelemesin
-const shown = [lead, ...side, ...latest].filter(Boolean).map((n) => n.id);
 ---
 <Base>
   {lead ? (
     <>
-      <section class="hero" aria-label="Öne çıkanlar">
+      <section class="hero" aria-label="Manşet">
         <a class="lead" href={newsUrl(lead)}>
           <div class="imgbox">
             <Visual entry={lead} choice={heroV.get(lead.id)} w={820} h={420} eager />
@@ -63,9 +70,24 @@ const shown = [lead, ...side, ...latest].filter(Boolean).map((n) => n.id);
       </section>
 
       {trending.length > 0 && (
-        <section class="tags" aria-label="Gündem">
+        <nav class="tags" aria-label="Gündemdeki konular">
           <strong>Gündemde:</strong>
-          {trending.map((t) => <span class="tag">#{t}</span>)}
+          {trending.map((t) => <a class="tag" href={tagUrl(t.name)}>#{t.name}</a>)}
+        </nav>
+      )}
+
+      {second.length > 0 && (
+        <section class="second" aria-labelledby="second-h">
+          <h2 id="second-h" class="sr-only">Öne çıkanlar</h2>
+          {second.map((n) => (
+            <a class="card" href={newsUrl(n)}>
+              <Visual entry={n} choice={secondV.get(n.id)} w={440} h={240} />
+              <span class="cat">{catName(n.data.category)}</span>
+              <h3>{n.data.title}</h3>
+              <p>{n.data.spot}</p>
+              <span class="meta"><Time date={n.data.date} /> · {n.data.sources.length} kaynak</span>
+            </a>
+          ))}
         </section>
       )}
 
@@ -75,23 +97,34 @@ const shown = [lead, ...side, ...latest].filter(Boolean).map((n) => n.id);
           {latest.length ? latest.map((n) => <NewsRow item={n} choice={listV.get(n.id)} />) : <p class="empty">Yeni haberler bir sonraki güncellemede burada olacak.</p>}
           {hasMore && <div class="pager"><span></span><a href={url('/sayfa/2/')}>Daha eski haberler →</a></div>}
         </section>
-        <Sidebar exclude={shown} />
+        <Sidebar exclude={[...shown]} />
       </div>
 
-      {invest.length > 0 && (
-        <section style="margin-top:64px" aria-labelledby="inv-h">
-          <div class="sechead"><h2 id="inv-h">Girişim &amp; Yatırım</h2><a class="meta" href={catUrl('girisim-yatirim')}>Tümü →</a></div>
-          <div class="grid4">
-            {invest.map((n) => (
-              <a href={newsUrl(n)}>
-                <Visual entry={n} choice={investV.get(n.id)} w={320} h={150} />
-                <h3>{n.data.title}</h3>
-                <span class="meta"><Time date={n.data.date} /></span>
+      {blocks.map((b) => {
+        const v = spreadVisuals(b.items, { largeFirst: true });
+        const [big, ...small] = b.items;
+        return (
+          <section class="catblock" aria-labelledby={`cb-${b.cat.slug}`}>
+            <div class="sechead"><h2 id={`cb-${b.cat.slug}`}>{b.cat.name}</h2><a class="meta more-link" href={catUrl(b.cat.slug)}>Tüm {b.cat.name} haberleri →</a></div>
+            <div class="catblock-grid">
+              <a class="card big" href={newsUrl(big)}>
+                <Visual entry={big} choice={v.get(big.id)} w={640} h={340} />
+                <h3>{big.data.title}</h3>
+                <p>{big.data.spot}</p>
+                <span class="meta"><Time date={big.data.date} /></span>
               </a>
-            ))}
-          </div>
-        </section>
-      )}
+              <div class="catblock-list">
+                {small.map((n) => (
+                  <a class="mini" href={newsUrl(n)}>
+                    <Visual entry={n} choice={v.get(n.id)} w={120} h={80} credit={false} />
+                    <div><h3>{n.data.title}</h3><span class="meta"><Time date={n.data.date} /></span></div>
+                  </a>
+                ))}
+              </div>
+            </div>
+          </section>
+        );
+      })}
     </>
   ) : (
     <p class="empty">Henüz haber yok. İlk otomatik güncellemeden sonra haberler burada görünecek.</p>
