@@ -5,6 +5,8 @@ category: donanim
 tags: ["Samsung", "HBM", "GüneyKore", "ÇipPaketleme"]
 date: 2026-11-12T16:42:41+03:00
 image: altyapi
+brand: samsung
+imageQuery: "semiconductor wafer factory"
 whyItMatters: "Yapay zeka sunucularındaki HBM talebi, gelişmiş paketleme kapasitesini önemli bir darboğaz haline getiriyor. Samsung'un yatırımı bu alandaki kapasite yarışının ölçeğini gösteriyor."
 sources:
   - title: "'Megaproject' breaks ground at Samsung HBM plant"

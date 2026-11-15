@@ -26,6 +26,8 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { CATEGORIES, IMAGES } from '../src/lib/site.js';
+import { BRANDS, BRAND_SLUGS } from '../src/lib/brands.js';
+import { findPhoto, usedPhotoIds, photoYaml, addPhotoToFile, CATEGORY_QUERIES } from './photos.mjs';
 import { fetchXPosts, formatPostsForPrompt } from './x-feed.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
@@ -160,6 +162,9 @@ function toMarkdown(a, dateIso) {
   ];
   if (a.featured) lines.push('featured: true');
   if (REQUIRE_REVIEW) lines.push('draft: true');
+  if (a.brand) lines.push(`brand: ${a.brand}`);
+  if (a.image_query) lines.push(`imageQuery: ${yamlStr(a.image_query)}`);
+  if (a.photo) lines.push(...photoYaml(a.photo));
   if (a.why_it_matters) lines.push(`whyItMatters: ${yamlStr(a.why_it_matters)}`);
   lines.push('sources:');
   for (const s of a.sources) {
@@ -264,13 +269,15 @@ const ARTICLE_SCHEMA = {
       items: {
         type: 'object',
         additionalProperties: false,
-        required: ['title', 'spot', 'category', 'tags', 'image', 'body_markdown', 'why_it_matters', 'featured', 'sources'],
+        required: ['title', 'spot', 'category', 'tags', 'image', 'brand', 'image_query', 'body_markdown', 'why_it_matters', 'featured', 'sources'],
         properties: {
           title: { type: 'string', description: 'Haber başlığı, 60-100 karakter' },
           spot: { type: 'string', description: 'Spot metni, 1-2 cümle, 140-280 karakter' },
           category: { type: 'string', enum: CATEGORIES.map((c) => c.slug) },
           tags: { type: 'array', items: { type: 'string', description: 'Boşluksuz etiket, örn. OpenAI, YapayZekaAjanları' } },
-          image: { type: 'string', enum: Object.keys(IMAGES), description: 'Konuya en uygun illüstrasyon' },
+          image: { type: 'string', enum: Object.keys(IMAGES), description: 'Konuya en uygun illüstrasyon (yedek görsel)' },
+          brand: { type: 'string', enum: ['', ...BRAND_SLUGS], description: 'Haberin ANA konusu tek bir şirketse o şirket; değilse boş' },
+          image_query: { type: 'string', description: 'Unsplash fotoğraf araması için 2-4 kelimelik İngilizce sorgu; somut bir nesne veya mekan (ör. "data center servers"). Kişi adı, şirket adı, logo yok.' },
           body_markdown: { type: 'string', description: 'Haber gövdesi, Markdown, 3-6 paragraf, başlık tekrarı yok' },
           why_it_matters: { type: 'string', description: '"Bu ne anlama geliyor?" kutusu, 1-2 cümle' },
           featured: { type: 'boolean' },
@@ -308,6 +315,8 @@ async function write(anthropic, notes, seen) {
 KAYNAK KURALI: "sources" alanına YALNIZCA aşağıdaki izinli adres listesindeki adresleri, birebir aynı yazarak koy. Her habere en az bir, en fazla dört kaynak ekle. Listede olmayan adres kullanan haber yayınlanmaz.
 
 Görseller (image alanı için anahtar: açıklama): ${imageList}
+Şirketler (brand alanı; haber tek bir şirketin duyurusu veya o şirketle ilgiliyse): ${Object.entries(BRANDS).map(([k, b]) => `${k} (${b.name})`).join(', ')}
+image_query: Haberi temsil edecek gerçek bir fotoğraf için İngilizce, somut bir sahne yaz (ör. "semiconductor wafer factory", "stock exchange trading floor"). Kişi adı, yüz, logo veya marka adı yazma.
 Kategoriler: ${CATEGORIES.map((c) => `${c.slug} (${c.name})`).join(', ')}
 
 Notlarda "YENİ GELİŞME YOK" yazıyorsa veya yazılabilecek haber yoksa boş bir "articles" listesi döndür.
@@ -369,6 +378,8 @@ function validate(articles, seen, existing) {
       featured,
       tags: [...new Set((a.tags || []).map((t) => String(t).replace(/[#\s]+/g, '')).filter(Boolean))].slice(0, 6),
       sources,
+      brand: BRANDS[a.brand] ? a.brand : '',
+      image_query: String(a.image_query || '').replace(/[^\p{L}\p{N} -]/gu, ' ').replace(/\s+/g, ' ').trim().slice(0, 60),
     });
   }
   return { ok, rejected };
@@ -432,7 +443,8 @@ async function main() {
     seen = r.seen;
     searches = r.searches;
     if (!r.notes || /YENİ GELİŞME YOK/i.test(r.notes) && r.notes.length < 200) {
-      log('yeni gelişme bulunamadı, çıkılıyor.');
+      log('yeni gelişme bulunamadı.');
+      await backfillPhotos();
       return summary([], [], searches);
     }
     articles = await write(anthropic, r.notes, seen);
@@ -440,6 +452,15 @@ async function main() {
 
   const { ok, rejected } = validate(articles, seen, existing);
   for (const r of rejected) log(`ELENDİ: ${r.title} → ${r.reasons.join(', ')}`);
+
+  // Yeni haberlere Unsplash fotoğrafı bul (anahtar yoksa atlanır)
+  const usedPhotos = usedPhotoIds(CONTENT_DIR);
+  for (const a of ok) {
+    try {
+      a.photo = await findPhoto(a.image_query || CATEGORY_QUERIES[a.category], usedPhotos);
+      if (a.photo) photoNote.added++;
+    } catch (err) { photoNote.error = err.message; break; }
+  }
 
   const written = [];
   const now = new Date();
@@ -457,9 +478,33 @@ async function main() {
       fs.writeFileSync(out, toMarkdown(a, iso));
     }
     written.push({ slug, title: a.title, sources: a.sources.length });
-    log(`YAZILDI: ${a.title} (${a.sources.length} kaynak)`);
+    log(`YAZILDI: ${a.title} (${a.sources.length} kaynak${a.brand ? ', logo: ' + a.brand : ''}${a.photo ? ', fotoğraf: ' + a.photo.author : ''})`);
   });
+  await backfillPhotos();
   summary(written, rejected, searches);
+}
+
+// ---------------------------------------------------------------- fotoğraf doldurma
+const photoNote = { added: 0, backfilled: 0, error: '' };
+const BACKFILL_LIMIT = Number(process.env.PHOTO_BACKFILL || 15);
+
+/** Fotoğrafı olmayan eski haberlere fotoğraf ekler (her çalışmada en fazla BACKFILL_LIMIT haber) */
+async function backfillPhotos() {
+  if (DRY || !process.env.UNSPLASH_ACCESS_KEY || photoNote.error) return;
+  const used = usedPhotoIds(CONTENT_DIR);
+  const files = fs.readdirSync(CONTENT_DIR).filter((f) => f.endsWith('.md')).sort().reverse();
+  for (const f of files) {
+    if (photoNote.backfilled >= BACKFILL_LIMIT) break;
+    const file = path.join(CONTENT_DIR, f);
+    const raw = fs.readFileSync(file, 'utf8');
+    const fm = raw.split(/^---$/m)[1] || '';
+    if (/^photo:/m.test(fm)) continue;
+    const query = (fm.match(/^imageQuery:\s*"?([^"\n]+)"?/m)?.[1] || CATEGORY_QUERIES[fm.match(/^category:\s*(\S+)/m)?.[1]] || '').trim();
+    try {
+      const photo = await findPhoto(query, used);
+      if (photo && addPhotoToFile(file, photo)) photoNote.backfilled++;
+    } catch (err) { photoNote.error = err.message; break; }
+  }
 }
 
 function costLines(searches, articleCount) {
@@ -512,13 +557,14 @@ function summary(written, rejected, searches) {
     `- Elenen: ${rejected.length}`,
     `- Web araması: ${searches}${IS_WEEKEND ? ' (hafta sonu sınırı: ' + MAX_SEARCHES + ')' : ''}`,
     `- ${xNote}`,
+    `- Unsplash: ${process.env.UNSPLASH_ACCESS_KEY ? `${photoNote.added} yeni habere, ${photoNote.backfilled} eski habere fotoğraf eklendi${photoNote.error ? ' (hata: ' + photoNote.error + ')' : ''}` : 'kapalı (UNSPLASH_ACCESS_KEY yok)'}`,
     ...written.map((w) => `  - ✅ ${w.title} (${w.sources} kaynak)`),
     ...rejected.map((r) => `  - ❌ ${r.title} — ${r.reasons.join(', ')}`),
     '',
     cost.md,
   ].join('\n');
   if (process.env.GITHUB_STEP_SUMMARY) fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY, md + '\n');
-  if (process.env.GITHUB_OUTPUT) fs.appendFileSync(process.env.GITHUB_OUTPUT, `count=${written.length}\n`);
+  if (process.env.GITHUB_OUTPUT) fs.appendFileSync(process.env.GITHUB_OUTPUT, `count=${written.length}\nchanged=${written.length + photoNote.backfilled}\n`);
 }
 
 main().catch((err) => {

@@ -5,6 +5,8 @@ category: modeller
 tags: ["Google", "Gemini4Hydrogen", "Gemini", "Antigravity"]
 date: 2026-11-13T00:28:30+03:00
 image: gemini
+brand: gemini
+imageQuery: "google search phone"
 whyItMatters: "Google, ucuz ve hızlı katmanda Flash serisinin yerine Gemini 4 neslini getiriyor. Hydrogen, ücretsiz kullanıcılara da ulaşan ilk Gemini 4 modeli. Benchmark rakamları şirketin kendi beyanı olduğundan bağımsız testlerle birlikte okunmalı."
 sources:
   - title: "Introducing Gemini 4 Hydrogen for Agentic Workflows"

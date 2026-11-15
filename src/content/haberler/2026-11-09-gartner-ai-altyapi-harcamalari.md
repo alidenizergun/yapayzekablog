@@ -5,6 +5,7 @@ category: girisim-yatirim
 tags: [VeriMerkezleri, Gartner, Altyapı]
 date: 2026-11-09T10:00:00+03:00
 image: altyapi
+imageQuery: "data center server racks"
 whyItMatters: "Yapay zeka maliyetlerinin ağırlığı model eğitiminden günlük kullanıma, yani çıkarıma kayıyor. Bu da bulut sağlayıcılarının ve şirketlerin altyapı planlarını değiştiriyor."
 sources:
   - title: "This Week in NLP"

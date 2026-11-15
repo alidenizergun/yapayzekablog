@@ -5,6 +5,8 @@ category: araclar
 tags: [Cursor, OpenAI, Geliştirici]
 date: 2026-11-10T15:30:00+03:00
 image: kod
+brand: cursor
+imageQuery: "developer coding laptop"
 whyItMatters: "Kodlama asistanlarında model erişimi artık sağlayıcılar arasındaki rekabetin bir parçası. Ekipler, tek bir model sağlayıcısına bağımlı iş akışlarını gözden geçirmek zorunda kalabilir."
 sources:
   - title: "Yapay Zeka Gündemi #61"

@@ -59,7 +59,18 @@ Takip edilen hesaplar `scripts/x-accounts.json` dosyasındadır. Listeye hesap e
 
 Her hesabın en son okunan gönderisi `data/x-state.json` dosyasında tutulur; aynı gönderi iki kez okunup ücretlendirilmez. `X_BEARER_TOKEN` tanımlı değilse X takibi atlanır, site yalnızca web aramasıyla çalışır.
 
-### 6. İlk çalıştırma
+### 6. Haber fotoğrafları (Unsplash, isteğe bağlı)
+Haber görselleri şu sırayla seçilir: haber bir şirketle ilgiliyse şirketin logo kartı, değilse Unsplash'ten konuya uygun bir fotoğraf, ikisi de yoksa illüstrasyon.
+
+1. [unsplash.com/developers](https://unsplash.com/developers) üzerinden bir uygulama oluşturun.
+2. Uygulamanın **Access Key** değerini repoda **Settings › Secrets and variables › Actions › Secrets** bölümüne `UNSPLASH_ACCESS_KEY` adıyla ekleyin. **Secret key gerekmez**, hiçbir yere eklemeyin.
+3. Bir sonraki haber güncellemesinde yeni haberlere fotoğraf eklenir; fotoğrafı olmayan eski haberlere de her çalışmada en fazla 15 tane olmak üzere fotoğraf eklenir (`PHOTO_BACKFILL` değişkeniyle değiştirilebilir).
+
+Unsplash kuralları gereği fotoğraflar Unsplash sunucusundan gösterilir, fotoğrafçının adı görselin üzerinde ve haber sayfasında bağlantısıyla yazılır, her kullanım Unsplash'e bildirilir. Yeni uygulamalar "demo" modunda saatte 50 istekle sınırlıdır; bu site için yeterlidir.
+
+Şirket logoları [Simple Icons](https://simpleicons.org) setinden (CC0) alınmıştır ve `src/lib/brands.js` dosyasındadır. Logosu bu sette olmayan şirketler (OpenAI, Microsoft, Amazon vb.) marka renginde adlarıyla gösterilir.
+
+### 7. İlk çalıştırma
 1. **Actions › Siteyi yayınla › Run workflow** ile siteyi yayınlayın.
 2. **Actions › Haber güncellemesi › Run workflow** ile ilk otomatik haberleri üretin. Çalışma özeti, yazılan ve elenen haberleri gerekçeleriyle gösterir.
 

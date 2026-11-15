@@ -5,6 +5,8 @@ category: girisim-yatirim
 tags: ["Nvidia", "JensenHuang", "ColetteKress", "HuggingFace"]
 date: 2026-11-13T00:29:30+03:00
 image: altyapi
+brand: nvidia
+imageQuery: "graphics card gpu"
 featured: true
 whyItMatters: "Yapay zeka çip pazarının lideri, kurucu CEO'su olmadan ve kalıcı bir lider belirlenmeden bilanço dönemine giriyor. Bu durum, devam eden satın alma gibi stratejik işlerin seyrine dair soruları da gündeme getiriyor."
 sources:

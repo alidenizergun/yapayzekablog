@@ -5,6 +5,8 @@ category: ajanlar
 tags: ["Meta", "Muse", "YapayZekaAjanları", "Abonelik"]
 date: 2026-11-13T16:02:14+03:00
 image: arama
+brand: meta
+imageQuery: "phone call small business"
 whyItMatters: "Tüketici ajanları metin üretmenin ötesinde, kullanıcı adına gerçek dünyada işlem yapmaya geçiyor. Ücretli abonelik modeli de özelliğin bir gelir kalemi olarak konumlandığını gösteriyor."
 sources:
   - title: "Muse can now place calls to US businesses — if you pay"

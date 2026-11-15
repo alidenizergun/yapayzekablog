@@ -5,6 +5,7 @@ category: regulasyon
 tags: ["Nvidia", "IhracatKontrolleri", "Kongre", "NDAA"]
 date: 2026-11-13T00:26:30+03:00
 image: regulasyon
+imageQuery: "us capitol building washington"
 whyItMatters: "İhracat kontrolleri Nvidia'nın Çin satışlarını doğrudan etkiliyor. Yasalaşma ihtimalinin artması, şirketin liderlik değişikliğiyle birlikte düzenleyici tarafta da belirsizlikle karşı karşıya olduğunu gösteriyor."
 sources:
   - title: "'A high probability': Congress pushes tighter export controls following Nvidia scandal"

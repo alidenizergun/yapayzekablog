@@ -5,6 +5,8 @@ category: platformlar
 tags: [ChatGPT, OpenAI, AIArama, Yayıncılık]
 date: 2026-11-11T14:20:00+03:00
 image: arama
+brand: openai
+imageQuery: "smartphone search typing"
 featured: true
 whyItMatters: "Markalar ve yayıncılar için arama motoru optimizasyonu tek başına yetmiyor. ChatGPT, Gemini ve Claude gibi asistanların yanıtlarında nasıl yer alındığı da ölçülmesi gereken bir metrik haline geliyor."
 sources:

@@ -5,6 +5,7 @@ category: modeller
 tags: [Gemini4, AçıkKaynak, Modeller, Google]
 date: 2026-11-10T19:10:00+03:00
 image: modeller
+imageQuery: "programmer code screen dark"
 whyItMatters: "Açık ağırlıklı modellerin payının artması, şirketlerin modelleri kendi altyapılarında çalıştırma ve özelleştirme seçeneklerini genişletiyor."
 sources:
   - title: "AF.net — Yapay zeka gelişmeleri akışı"

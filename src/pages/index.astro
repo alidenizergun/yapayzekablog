@@ -4,7 +4,8 @@ import NewsRow from '../components/NewsRow.astro';
 import Sidebar from '../components/Sidebar.astro';
 import Time from '../components/Time.astro';
 import { IMAGES, SITE } from '../lib/site.js';
-import { getNews, newsUrl, imageFor, spreadImages, catName, catUrl, url } from '../lib/news.js';
+import { getNews, newsUrl, spreadVisuals, catName, catUrl, url } from '../lib/news.js';
+import Visual from '../components/Visual.astro';
 
 export const PER_PAGE = 12;
 const news = await getNews();
@@ -25,9 +26,9 @@ const trending = [...tagCount.entries()].sort((a, b) => b[1] - a[1]).slice(0, 8)
 const invest = news.filter((n) => n.data.category === 'girisim-yatirim').slice(0, 4);
 
 // Aynı çizim aynı bölümde tekrar etmesin
-const heroV = spreadImages([lead, ...side].filter(Boolean));
-const listV = spreadImages(latest);
-const investV = spreadImages(invest);
+const heroV = spreadVisuals([lead, ...side].filter(Boolean));
+const listV = spreadVisuals(latest);
+const investV = spreadVisuals(invest);
 // Kenar çubuğu, ana sayfada zaten görünen haberleri tekrar listelemesin
 const shown = [lead, ...side, ...latest].filter(Boolean).map((n) => n.id);
 ---
@@ -37,7 +38,7 @@ const shown = [lead, ...side, ...latest].filter(Boolean).map((n) => n.id);
       <section class="hero" aria-label="Öne çıkanlar">
         <a class="lead" href={newsUrl(lead)}>
           <div class="imgbox">
-            <img class="thumb" src={imageFor(lead, heroV.get(lead.id))} alt={IMAGES[lead.data.image]} width="800" height="420" />
+            <Visual entry={lead} choice={heroV.get(lead.id)} w={820} h={420} eager />
             <span class="badge">{catName(lead.data.category)}</span>
           </div>
           <h1>{lead.data.title}</h1>
@@ -48,13 +49,13 @@ const shown = [lead, ...side, ...latest].filter(Boolean).map((n) => n.id);
           <div class="side">
             {side.map((n, i) => (
               <a href={newsUrl(n)}>
-                {i === 0 && <img class="thumb" src={imageFor(n, heroV.get(n.id))} alt={IMAGES[n.data.image]} loading="lazy" />}
+                {i === 0 && <Visual entry={n} choice={heroV.get(n.id)} w={420} h={170} />}
                 <div>
                   <span class="cat">{catName(n.data.category)}</span>
                   <h2>{n.data.title}</h2>
                   <span class="meta"><Time date={n.data.date} /></span>
                 </div>
-                {i > 0 && <img class="thumb" src={imageFor(n, heroV.get(n.id))} alt={IMAGES[n.data.image]} loading="lazy" />}
+                {i > 0 && <Visual entry={n} choice={heroV.get(n.id)} w={112} h={84} credit={false} />}
               </a>
             ))}
           </div>
@@ -71,7 +72,7 @@ const shown = [lead, ...side, ...latest].filter(Boolean).map((n) => n.id);
       <div class="cols">
         <section class="main" aria-labelledby="latest-h">
           <div class="sechead"><h2 id="latest-h">Son Haberler</h2></div>
-          {latest.length ? latest.map((n) => <NewsRow item={n} v={listV.get(n.id)} />) : <p class="empty">Yeni haberler bir sonraki güncellemede burada olacak.</p>}
+          {latest.length ? latest.map((n) => <NewsRow item={n} choice={listV.get(n.id)} />) : <p class="empty">Yeni haberler bir sonraki güncellemede burada olacak.</p>}
           {hasMore && <div class="pager"><span></span><a href={url('/sayfa/2/')}>Daha eski haberler →</a></div>}
         </section>
         <Sidebar exclude={shown} />
@@ -83,7 +84,7 @@ const shown = [lead, ...side, ...latest].filter(Boolean).map((n) => n.id);
           <div class="grid4">
             {invest.map((n) => (
               <a href={newsUrl(n)}>
-                <img class="thumb" src={imageFor(n, investV.get(n.id))} alt={IMAGES[n.data.image]} loading="lazy" />
+                <Visual entry={n} choice={investV.get(n.id)} w={320} h={150} />
                 <h3>{n.data.title}</h3>
                 <span class="meta"><Time date={n.data.date} /></span>
               </a>

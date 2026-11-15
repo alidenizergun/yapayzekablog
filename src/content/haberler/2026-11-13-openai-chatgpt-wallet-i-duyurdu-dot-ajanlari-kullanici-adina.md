@@ -5,6 +5,8 @@ category: ajanlar
 tags: ["OpenAI", "ChatGPT", "ChatGPTWallet", "YapayZekaAjanları", "Ödemeler"]
 date: 2026-11-13T23:54:50+03:00
 image: pazarlama
+brand: openai
+imageQuery: "online shopping payment phone"
 whyItMatters: "Ajanların yalnızca araştırma yapmasından ödemeyi tamamlamasına geçiş, kart ağlarının jeton altyapısıyla ve her işlemde kullanıcı onayıyla yapılıyor."
 sources:
   - title: "@gdb X gönderisi"

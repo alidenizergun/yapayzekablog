@@ -5,6 +5,8 @@ category: arastirma
 tags: ["GoogleDeepMind", "WeatherNext3", "PARDIG", "SatWeave", "HavaTahmini"]
 date: 2026-11-13T23:50:50+03:00
 image: modeller
+brand: deepmind
+imageQuery: "satellite earth clouds weather"
 whyItMatters: "Yer radarı olmayan bölgelerde sel uyarısı ve güneş enerjisi tahmini gibi uygulamalar için açık bir gözlem verisi sağlanıyor."
 sources:
   - title: "PARDIG & SatWeave: Foundational Datasets for Earth Science"

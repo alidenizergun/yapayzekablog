@@ -4,7 +4,9 @@ import Base from '../../layouts/Base.astro';
 import Sidebar from '../../components/Sidebar.astro';
 import Time from '../../components/Time.astro';
 import { IMAGES } from '../../lib/site.js';
-import { getNews, slugOf, newsUrl, imgUrl, imageFor, spreadImages, catName, catUrl, url, readingMinutes, hostOf } from '../../lib/news.js';
+import { getNews, slugOf, newsUrl, spreadVisuals, defaultVisual, ogImageFor, withUtm, catName, catUrl, url, readingMinutes, hostOf } from '../../lib/news.js';
+import { brandOf } from '../../lib/brands.js';
+import Visual from '../../components/Visual.astro';
 
 export async function getStaticPaths() {
   const news = await getNews();
@@ -24,7 +26,9 @@ const related = all
   .map((x) => x.n);
 
 // İlgili haberler: bu haberin kendi çizimiyle ve birbirleriyle aynı görünmesin
-const relV = spreadImages([entry, ...related]);
+const relV = spreadVisuals([entry, ...related]);
+const main = defaultVisual(entry);
+const og = ogImageFor(entry);
 const pageUrl = new URL(newsUrl(entry), Astro.site).href;
 const jsonLd = {
   '@context': 'https://schema.org',
@@ -34,7 +38,7 @@ const jsonLd = {
   datePublished: d.date.toISOString(),
   dateModified: d.date.toISOString(),
   inLanguage: 'tr-TR',
-  image: [new URL(imgUrl(d.image), Astro.site).href],
+  image: [new URL(og, Astro.site).href],
   author: { '@type': 'Organization', name: d.author },
   publisher: { '@type': 'Organization', name: 'Nöron' },
   mainEntityOfPage: pageUrl,
@@ -43,7 +47,7 @@ const jsonLd = {
   citation: d.sources.map((s) => ({ '@type': 'CreativeWork', name: s.title, url: s.url })),
 };
 ---
-<Base title={d.title} description={d.spot} ogImage={imgUrl(d.image)} ogType="article" currentCat={d.category} jsonLd={jsonLd}>
+<Base title={d.title} description={d.spot} ogImage={og} ogType="article" currentCat={d.category} jsonLd={jsonLd}>
   <div class="cols" style="margin-top:0;gap:56px">
     <article class="article">
       <nav class="crumb" aria-label="Konum"><a href={url('/')}>Ana sayfa</a><span aria-hidden="true">/</span><a href={catUrl(d.category)}>{catName(d.category)}</a></nav>
@@ -66,8 +70,16 @@ const jsonLd = {
       </div>
 
       <figure>
-        <img class="thumb" src={imageFor(entry)} alt={IMAGES[d.image]} width="800" height="420" />
-        <figcaption>İllüstrasyon: Nöron</figcaption>
+        <Visual entry={entry} choice={main} w={780} h={420} eager credit={false} />
+        <figcaption>
+          {main.kind === 'photo' && d.photo ? (
+            <>Fotoğraf: <a href={withUtm(d.photo.authorUrl)} target="_blank" rel="noopener">{d.photo.author}</a> / <a href={withUtm('https://unsplash.com/')} target="_blank" rel="noopener">Unsplash</a> · Temsili görseldir</>
+          ) : main.kind === 'brand' ? (
+            <>{brandOf(d.brand)?.name} logosu. Logolar sahiplerinin tescilli markalarıdır.</>
+          ) : (
+            <>İllüstrasyon: Nöron</>
+          )}
+        </figcaption>
       </figure>
 
       <div class="prose"><Content /></div>
@@ -102,7 +114,7 @@ const jsonLd = {
           <div class="grid4">
             {related.map((n) => (
               <a href={newsUrl(n)}>
-                <img class="thumb" src={imageFor(n, relV.get(n.id))} alt={IMAGES[n.data.image]} loading="lazy" />
+                <Visual entry={n} choice={relV.get(n.id)} w={300} h={130} />
                 <h3>{n.data.title}</h3>
               </a>
             ))}

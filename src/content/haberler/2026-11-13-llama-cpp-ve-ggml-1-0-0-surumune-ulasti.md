@@ -5,6 +5,7 @@ category: araclar
 tags: ["llamacpp", "ggml", "HuggingFace", "AçıkKaynak", "YerelModeller"]
 date: 2026-11-13T23:51:50+03:00
 image: kod
+imageQuery: "terminal code open source"
 whyItMatters: "Yerel (cihaz üstü) model çalıştırmanın en yaygın kütüphanesi, uygulama geliştiricilerine ilk kez resmi bir uyumluluk sözü veriyor."
 sources:
   - title: "Georgi Gerganov on X: llama.cpp v1.0.0 is now available"

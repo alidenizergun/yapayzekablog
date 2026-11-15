@@ -5,6 +5,8 @@ category: girisim-yatirim
 tags: ["Anthropic", "HalkaArz", "Nasdaq", "ANT"]
 date: 2026-11-12T16:43:41+03:00
 image: girisim
+brand: anthropic
+imageQuery: "stock exchange trading floor"
 whyItMatters: "Yapay zekanın en büyük özel şirketlerinden birinin halka arzı, sektör değerlemeleri için bir ölçüt oluşturabilir. Fiyat aralığı daha önce duyurulduğu için bugünkü gelişmenin yeni kısmı sayfa duyurusu ve Japonya'daki kayıt."
 sources:
   - title: "@AnthropicAI X gönderisi"

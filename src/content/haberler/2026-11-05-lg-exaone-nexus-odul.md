@@ -5,6 +5,8 @@ category: ajanlar
 tags: [LG, YapayZekaAjanları, Telif]
 date: 2026-11-05T12:00:00+03:00
 image: odul
+brand: lg
+imageQuery: "award ceremony trophy stage"
 sources:
   - title: "Veille IA du 4 novembre 2026"
     url: "https://www.actuia.com/veille/2026-11-04/"

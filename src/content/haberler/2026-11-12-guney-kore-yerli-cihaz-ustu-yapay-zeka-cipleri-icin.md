@@ -5,6 +5,7 @@ category: donanim
 tags: ["GüneyKore", "CihazÜstüYapayZeka", "YapayZekaÇipleri", "Samsung"]
 date: 2026-11-12T16:41:41+03:00
 image: altyapi
+imageQuery: "seoul skyline night"
 whyItMatters: "Ülkelerin yerli yapay zeka çipi üretme çabaları, Nvidia'ya bağımlılığı azaltma yarışının bir parçası. Güney Kore'nin hedefi bu yarışta cihaz üstü çiplere odaklanıyor."
 sources:
   - title: "South Korea unveils roadmap to develop homegrown on-device AI chips"

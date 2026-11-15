@@ -5,6 +5,8 @@ category: girisim-yatirim
 tags: ["Anthropic", "HalkaArz", "Nasdaq", "Bloomberg"]
 date: 2026-11-13T00:27:30+03:00
 image: girisim
+brand: anthropic
+imageQuery: "stock market chart screen"
 whyItMatters: "Talep rakamı, yapay zeka şirketlerine yönelik halka arz iştahının ve olası bir rekor listelemenin göstergesi. Rakamlar anonim kaynaklara dayandığından kesinleşmiş veri olarak değil, haberin aktardığı bir bilgi olarak okunmalı."
 sources:
   - title: "Anthropic's IPO Is Said to Be About Six Times Oversubscribed"

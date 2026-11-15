@@ -5,6 +5,8 @@ category: guvenlik
 tags: ["OpenAI", "Daybreak", "SiberGüvenlik", "YapayZekaAjanları"]
 date: 2026-11-13T16:03:14+03:00
 image: guvenlik
+brand: openai
+imageQuery: "cyber security hacker screen"
 whyItMatters: "OpenAI, siber güvenlik modellerini açık tespitinden yama önerisine uzanan ticari ürünlere dönüştürüyor. Ajan tabanlı güvenlik araçları kurumsal pazarda rekabet alanı olmaya başlıyor."
 sources:
   - title: "@gdb X gönderisi"

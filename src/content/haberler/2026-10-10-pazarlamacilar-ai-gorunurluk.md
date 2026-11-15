@@ -5,6 +5,7 @@ category: pazarlama
 tags: [GEO, Pazarlama, AIArama]
 date: 2026-10-10T09:30:00+03:00
 image: pazarlama
+imageQuery: "marketing team laptop meeting"
 whyItMatters: "Yapay zeka asistanlarında öneri olarak çıkmak, arama sonuçlarında üst sırada yer almak kadar önemli hale geliyor. Bu alan, generative engine optimization (GEO) olarak anılıyor."
 sources:
   - title: "AI Update, October 9, 2026: AI News and Views From the Past Week"

@@ -5,6 +5,8 @@ category: guvenlik
 tags: ["Anthropic", "Claude", "YapayZekaGüvenliği", "Değerlendirme"]
 date: 2026-11-13T23:49:50+03:00
 image: guvenlik
+brand: anthropic
+imageQuery: "cyber security lock computer"
 whyItMatters: "Halka arza hazırlanan bir şirket, “model güvenli” iddialarının dayandığı testlerin nasıl kurulması gerektiğine dair kendi standardını ortaya koyuyor."
 sources:
   - title: "Building strong safety evaluations"

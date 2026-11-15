@@ -5,6 +5,8 @@ category: platformlar
 tags: ["Microsoft", "Copilot", "OpenAI", "Anthropic", "Kesinti"]
 date: 2026-11-13T16:01:14+03:00
 image: altyapi
+brand: microsoft
+imageQuery: "office laptop error screen"
 whyItMatters: "Yapay zeka asistanları e-posta ve takvim erişimini üçüncü taraf bağlayıcılarla sağlıyor. Bu nedenle bir bulut kesintisi doğrudan yapay zeka hizmetlerine de yansıyor."
 sources:
   - title: "Microsoft Cloud Outage Hits Outlook, Teams, Copilot and AI Services"

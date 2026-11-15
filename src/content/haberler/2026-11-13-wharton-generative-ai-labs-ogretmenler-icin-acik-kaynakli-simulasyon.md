@@ -5,6 +5,7 @@ category: arastirma
 tags: ["Wharton", "Primer", "Eğitim", "AçıkKaynak", "EthanMollick"]
 date: 2026-11-13T16:00:14+03:00
 image: kod
+imageQuery: "teacher classroom laptop"
 whyItMatters: "Eğitimde genel amaçlı modeller yerine eğitimcinin kontrolünü ve pedagojik çerçeveyi öne çıkaran açık kaynaklı bir yaklaşım sunuluyor. Etkisi şimdilik prototip düzeyinde."
 sources:
   - title: "@emollick X gönderisi"

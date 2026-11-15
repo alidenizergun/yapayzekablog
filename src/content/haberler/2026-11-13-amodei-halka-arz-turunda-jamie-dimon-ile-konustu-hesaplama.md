@@ -5,6 +5,8 @@ category: girisim-yatirim
 tags: ["Anthropic", "DarioAmodei", "JPMorgan", "HalkaArz", "Claude"]
 date: 2026-11-13T23:53:50+03:00
 image: girisim
+brand: anthropic
+imageQuery: "wall street new york"
 whyItMatters: "Halka arz öncesinde şirketin kendi anlatısı, yani hesaplama maliyeti ve kamu yararı fonu, bu ayrıntıda ilk kez ortaya çıktı. Tırnak içindeki ifadeler tek bir ikincil kaynağa dayandığı için Bloomberg veya yayının kendisiyle teyit edilmesi gerekiyor."
 sources:
   - title: "@AnthropicAI X gönderisi"

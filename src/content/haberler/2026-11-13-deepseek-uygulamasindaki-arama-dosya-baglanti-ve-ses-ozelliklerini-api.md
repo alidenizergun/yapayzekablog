@@ -5,6 +5,8 @@ category: platformlar
 tags: ["DeepSeek", "API", "DeepSeekV4", "Geliştiriciler"]
 date: 2026-11-13T23:52:50+03:00
 image: kod
+brand: deepseek
+imageQuery: "smartphone app voice"
 whyItMatters: "Geliştiriciler arama, dosya okuma ve ses katmanlarını ayrı ayrı kurmak yerine tek bir API üzerinden alabilecek."
 sources:
   - title: "The full DeepSeek App experience, now via API"

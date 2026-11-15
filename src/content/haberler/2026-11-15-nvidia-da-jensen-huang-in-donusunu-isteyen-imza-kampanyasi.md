@@ -5,6 +5,8 @@ category: donanim
 tags: ["Nvidia", "JensenHuang", "Megaspeed", "YönetimKurulu"]
 date: 2026-11-15T19:04:47+03:00
 image: altyapi
+brand: nvidia
+imageQuery: "office building silicon valley"
 whyItMatters: "Yapay zeka çiplerinin en büyük tedarikçisinde liderlik boşluğu sürüyor ve yönetim kurulu üzerindeki baskı artıyor. Ancak imza sayıları kendi beyanına dayandığı için kurulun kararını ne ölçüde etkileyeceği belirsiz."
 sources:
   - title: "Could Jensen Huang make a comeback? Musk, other tech heavyweights pressure Nvidia board"

@@ -5,6 +5,7 @@ category: modeller
 tags: ["WorldLabs", "Atlas", "FeiFeiLi", "DünyaModeli"]
 date: 2026-11-13T00:24:30+03:00
 image: modeller
+imageQuery: "3d virtual world landscape render"
 whyItMatters: "Üç boyutlu dünya modelleri, oyun ve robotik gibi alanlarda geliştiricilerin doğrudan erişebildiği bir araca dönüşüyor. Performans iddiaları şirket beyanına dayandığından bağımsız değerlendirmeler beklenmeli."
 sources:
   - title: "@drfeifei X gönderisi"

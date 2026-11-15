@@ -5,6 +5,8 @@ category: donanim
 tags: ["Naver", "YapayZekaFabrikası", "Nvidia", "VeriMerkezi"]
 date: 2026-11-13T00:25:30+03:00
 image: altyapi
+brand: naver
+imageQuery: "data center server racks"
 whyItMatters: "Anlaşma, yapay zeka veri merkezi kapasitesine yönelik talebin somut bir göstergesi. Naver'in yapay zeka fabrikası işi için de ilk ticari doğrulama anlamına geliyor."
 sources:
   - title: "Naver clinches $1.5 bill. AI computing deal with US firm"

@@ -5,6 +5,8 @@ category: donanim
 tags: ["Nvidia", "JensenHuang", "YapayZekaÇipleri", "YönetimKurulu"]
 date: 2026-11-12T16:44:41+03:00
 image: altyapi
+brand: nvidia
+imageQuery: "boardroom meeting table"
 whyItMatters: "Yapay zeka çiplerinin en büyük tedarikçisindeki liderlik belirsizliği, sektörün altyapı zincirini ve piyasa değerlemelerini doğrudan etkileyebilir. Kurulun kararı açıklanana kadar gelişme teyitsiz olarak değerlendirilmeli."
 sources:
   - title: "Nvidia board meeting to decide CEO Jensen Huang's fate stretches into evening"

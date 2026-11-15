@@ -5,6 +5,7 @@ category: arastirma
 tags: [Benchmark, YapayZekaAjanları, SemiAnalysis]
 date: 2026-11-11T11:05:00+03:00
 image: benchmark
+imageQuery: "analytics charts dashboard screen"
 whyItMatters: "Klasik benchmark'lar modellerin bilgi ve muhakeme becerisini ölçerken, GDPx gibi testler modelin gerçek iş görevlerini ne kadar yerine getirebildiğine odaklanıyor. Kurumların model seçiminde bu tür ölçümler daha belirleyici olabilir."
 sources:
   - title: "AF.net — Yapay zeka gelişmeleri akışı"
