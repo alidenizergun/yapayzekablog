@@ -563,3 +563,23 @@ header.site .masthead { display: flex; align-items: center; justify-content: spa
 .story-band .cat { display: block; margin-bottom: 2px; }
 .story-band a.more { font-weight: 600; font-size: 14px; color: var(--accent-text); min-height: 44px; display: inline-flex; align-items: center; }
 .story-band a.more:hover { text-decoration: underline; }
+
+/* ---------------------------------------------------------------- yatırım takipçisi */
+.deals .spot { margin-top: 10px; max-width: 70ch; }
+.deal-stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin: 28px 0 0; max-width: 640px; }
+.deal-stats > div { padding: 16px; border-radius: 8px; background: var(--soft); }
+.deal-stats dt { font-size: 13px; color: var(--muted); }
+.deal-stats dd { margin: 4px 0 0; font-family: var(--display); font-weight: 800; font-size: 26px; }
+.deal-filters { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 28px; }
+.deal-filters button { min-height: 40px; padding: 0 14px; border-radius: 20px; border: 1px solid var(--line); background: var(--bg); color: var(--fg); font: inherit; font-size: 14px; font-weight: 600; cursor: pointer; }
+.deal-filters button[aria-pressed="true"] { background: var(--fg); color: var(--bg); border-color: var(--fg); }
+.deal-search { margin-top: 12px; width: 100%; max-width: 360px; height: 44px; padding: 0 14px; border: 1px solid var(--line); border-radius: 22px; background: var(--bg); color: var(--fg); font: inherit; font-size: 15px; }
+.deal-table-wrap { margin-top: 20px; overflow-x: auto; border: 1px solid var(--line); border-radius: 8px; }
+.deal-table { width: 100%; border-collapse: collapse; font-size: 15px; min-width: 760px; }
+.deal-table th { text-align: left; font-size: 12px; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; color: var(--muted); padding: 12px 14px; background: var(--soft); }
+.deal-table td { padding: 14px; border-top: 1px solid var(--line); vertical-align: top; }
+.deal-table a:hover strong { color: var(--accent-text); text-decoration: underline; }
+.deal-table .nowrap { white-space: nowrap; }
+.deal-type { font-weight: 600; }
+.deal-table tr[hidden] { display: none; }
+@media (max-width: 600px) { .deal-stats dd { font-size: 20px; } .deal-filters button { min-height: 44px; } }

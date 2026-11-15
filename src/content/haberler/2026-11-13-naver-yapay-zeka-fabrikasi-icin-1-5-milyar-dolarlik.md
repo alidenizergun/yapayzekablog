@@ -2,6 +2,13 @@
 title: "Naver, yapay zeka fabrikası için 1,5 milyar dolarlık ilk müşteri sözleşmesini imzaladı"
 spot: "Naver, ABD'li bir yapay zeka çıkarım şirketiyle 2 trilyon won (1,5 milyar dolar) tutarında bilgi işlem hizmeti sözleşmesi imzaladı. Anlaşma, şirketin yapay zeka fabrikası projesinin ilk müşteri sözleşmesi."
 category: donanim
+deal:
+  type: "Anlaşma"
+  company: "Naver"
+  counterparty: "Adı açıklanmayan ABD'li çıkarım şirketi"
+  amount: "2 trilyon won (1,5 milyar dolar)"
+  amountUsdM: 1500
+  country: "Güney Kore"
 popularity: 30
 tags: ["Naver", "YapayZekaFabrikası", "Nvidia", "VeriMerkezi"]
 date: 2026-11-13T00:25:30+03:00

@@ -1,0 +1,72 @@
+---
+import Base from '../layouts/Base.astro';
+import { getNews, newsUrl, formatDate, url } from '../lib/news.js';
+
+const deals = (await getNews()).filter((n) => n.data.deal).map((n) => ({ n, d: n.data.deal }));
+const types = [...new Set(deals.map((x) => x.d.type))];
+const countries = [...new Set(deals.map((x) => x.d.country).filter(Boolean))];
+const total = deals.reduce((a, x) => a + (x.d.amountUsdM || 0), 0);
+const fmtB = (m) => (m >= 1000 ? `${(m / 1000).toLocaleString('tr-TR', { maximumFractionDigits: 1 })} milyar $` : `${m.toLocaleString('tr-TR')} milyon $`);
+const pageUrl = new URL(url('/yatirimlar/'), Astro.site).href;
+const jsonLd = {
+  '@type': 'CollectionPage', name: 'Yapay zeka yatırımları ve satın almaları', inLanguage: 'tr-TR', url: pageUrl,
+  mainEntity: { '@type': 'ItemList', itemListElement: deals.map((x, i) => ({ '@type': 'ListItem', position: i + 1, url: new URL(newsUrl(x.n), Astro.site).href, name: `${x.d.company}${x.d.counterparty ? ' – ' + x.d.counterparty : ''}: ${x.d.type}` })) },
+};
+---
+<Base title="Yapay zeka yatırımları ve satın almaları" description="Yapay zeka şirketlerine yapılan yatırımlar, satın almalar, halka arzlar ve büyük anlaşmalar: şirket, tutar, tür ve ülkeye göre filtrelenebilir takip tablosu."
+  jsonLd={jsonLd} breadcrumbs={[{ name: 'Ana sayfa', path: '/' }, { name: 'Yatırım takipçisi', path: '/yatirimlar/' }]}>
+  <section class="deals">
+    <span class="cat">Takipçi</span>
+    <h1 class="page-h">Yapay zeka yatırımları ve satın almaları</h1>
+    <p class="spot">Yapay zeka şirketlerine yapılan yatırımlar, satın almalar, halka arzlar ve büyük anlaşmalar. Tablo, YZ Gündemi'nde yayınlanan haberlerden otomatik olarak güncellenir; her satır ilgili habere ve kaynaklarına bağlanır.</p>
+
+    <dl class="deal-stats">
+      <div><dt>Kayıtlı anlaşma</dt><dd>{deals.length}</dd></div>
+      <div><dt>Toplam büyüklük</dt><dd>{fmtB(total)}</dd></div>
+      <div><dt>Ülke</dt><dd>{countries.length}</dd></div>
+    </dl>
+
+    <div class="deal-filters" role="group" aria-label="Türe göre süz" data-deal-filters>
+      <button type="button" aria-pressed="true" data-type="">Tümü</button>
+      {types.map((t) => <button type="button" aria-pressed="false" data-type={t}>{t}</button>)}
+    </div>
+    <label class="sr-only" for="deal-q">Şirket ara</label>
+    <input id="deal-q" class="deal-search" type="search" placeholder="Şirket veya ülke ara" data-deal-q />
+
+    <div class="deal-table-wrap">
+      <table class="deal-table">
+        <thead><tr><th scope="col">Tarih</th><th scope="col">Şirket</th><th scope="col">Tür</th><th scope="col">Tutar</th><th scope="col">Karşı taraf / ayrıntı</th><th scope="col">Ülke</th></tr></thead>
+        <tbody>
+          {deals.map(({ n, d }) => (
+            <tr data-type={d.type} data-text={`${d.company} ${d.counterparty ?? ''} ${d.country ?? ''} ${(d.investors ?? []).join(' ')}`.toLocaleLowerCase('tr')}>
+              <td class="nowrap">{formatDate(n.data.date, false)}</td>
+              <td><a href={newsUrl(n)}><strong>{d.company}</strong></a></td>
+              <td><span class="deal-type">{d.type}</span>{d.round && <span class="meta"> · {d.round}</span>}</td>
+              <td class="nowrap">{d.amount ?? '—'}</td>
+              <td>{d.counterparty ?? ''}{d.investors?.length ? <span class="meta">{d.counterparty ? ' · ' : ''}Yatırımcılar: {d.investors.join(', ')}</span> : null}</td>
+              <td>{d.country ?? '—'}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+    <p class="empty" data-deal-empty hidden>Bu süzgece uyan anlaşma yok.</p>
+    <p class="ai-note">Tutarlar haberlerdeki ve kaynaklarındaki yazımla verilir; "toplam büyüklük" farklı türdeki anlaşmaları (halka arz, satın alma, tesis yatırımı) bir arada toplar ve yalnızca bir fikir vermek içindir.</p>
+  </section>
+</Base>
+
+<script>
+  const rows = [...document.querySelectorAll<HTMLTableRowElement>('.deal-table tbody tr')];
+  const btns = [...document.querySelectorAll<HTMLButtonElement>('[data-deal-filters] button')];
+  const q = document.querySelector<HTMLInputElement>('[data-deal-q]')!;
+  const empty = document.querySelector<HTMLElement>('[data-deal-empty]')!;
+  let type = '';
+  const apply = () => {
+    const term = q.value.trim().toLocaleLowerCase('tr');
+    let shown = 0;
+    rows.forEach((r) => { const ok = (!type || r.dataset.type === type) && (!term || r.dataset.text!.includes(term)); r.hidden = !ok; if (ok) shown++; });
+    empty.hidden = shown > 0;
+  };
+  btns.forEach((b) => b.addEventListener('click', () => { type = b.dataset.type!; btns.forEach((x) => x.setAttribute('aria-pressed', String(x === b))); apply(); }));
+  q.addEventListener('input', apply);
+</script>

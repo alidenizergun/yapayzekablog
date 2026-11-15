@@ -41,6 +41,17 @@ const haberler = defineCollection({
     turkeyAngle: z.string().optional(),
     // Gelişen hikâye (src/lib/stories.js): bu haber süren bir konunun devamıysa hikâyenin slug'ı
     story: z.string().optional(),
+    // Yatırım/satın alma takipçisi (/yatirimlar/): haber bir anlaşmayı duyuruyorsa
+    deal: z.object({
+      type: z.enum(['Yatırım turu', 'Satın alma', 'Halka arz', 'Anlaşma', 'Tesis yatırımı']),
+      company: z.string(),                       // yatırımı alan / satın alan / halka arz olan şirket
+      counterparty: z.string().optional(),        // satın alınan şirket, müşteri vb.
+      amount: z.string().optional(),              // kaynaktaki yazımıyla tutar
+      amountUsdM: z.number().optional(),          // sıralama için milyon dolar karşılığı (kaynakta varsa)
+      round: z.string().optional(),               // tur adı (Seri B vb.)
+      investors: z.array(z.string()).optional(),
+      country: z.string().optional(),
+    }).optional(),
     sources: z
       .array(
         z.object({

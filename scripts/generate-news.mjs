@@ -168,6 +168,17 @@ function toMarkdown(a, dateIso) {
   if (a.image_query) lines.push(`imageQuery: ${yamlStr(a.image_query)}`);
   if (a.photo) lines.push(...photoYaml(a.photo));
   if (a.why_it_matters) lines.push(`whyItMatters: ${yamlStr(a.why_it_matters)}`);
+  const dl = a.deal;
+  // Anlaşma: tutar haber metninde (spot/gövde) birebir geçmiyorsa kaydedilmez
+  if (dl?.type && dl.company && (!dl.amount || `${a.spot} ${a.body_markdown} ${a.title}`.includes(dl.amount.split(' (')[0]))) {
+    lines.push('deal:', `  type: ${yamlStr(dl.type)}`, `  company: ${yamlStr(dl.company)}`);
+    if (dl.counterparty) lines.push(`  counterparty: ${yamlStr(dl.counterparty)}`);
+    if (dl.amount) lines.push(`  amount: ${yamlStr(dl.amount)}`);
+    if (dl.amount_usd_millions > 0) lines.push(`  amountUsdM: ${Math.round(dl.amount_usd_millions)}`);
+    if (dl.round) lines.push(`  round: ${yamlStr(dl.round)}`);
+    if (dl.investors?.length) lines.push(`  investors: [${dl.investors.map(yamlStr).join(', ')}]`);
+    if (dl.country) lines.push(`  country: ${yamlStr(dl.country)}`);
+  }
   if (a.story && STORIES.some((s) => s.slug === a.story)) lines.push(`story: ${a.story}`);
   if (a.turkey_angle && !/^(yok|-|—)\.?$/i.test(a.turkey_angle)) lines.push(`turkeyAngle: ${yamlStr(a.turkey_angle)}`);
   lines.push('sources:');
@@ -275,7 +286,7 @@ const ARTICLE_SCHEMA = {
       items: {
         type: 'object',
         additionalProperties: false,
-        required: ['title', 'spot', 'category', 'tags', 'image', 'brand', 'image_query', 'body_markdown', 'why_it_matters', 'turkey_angle', 'story', 'featured', 'popularity', 'tweet', 'sources'],
+        required: ['title', 'spot', 'category', 'tags', 'image', 'brand', 'image_query', 'body_markdown', 'why_it_matters', 'turkey_angle', 'story', 'deal', 'featured', 'popularity', 'tweet', 'sources'],
         properties: {
           title: { type: 'string', description: 'Haber başlığı, 60-100 karakter' },
           spot: { type: 'string', description: 'Spot metni, 1-2 cümle, 140-280 karakter' },
@@ -286,6 +297,17 @@ const ARTICLE_SCHEMA = {
           image_query: { type: 'string', description: 'Unsplash fotoğraf araması için 2-4 kelimelik İngilizce sorgu; somut bir nesne veya mekan (ör. "data center servers"). Kişi adı, şirket adı, logo yok.' },
           body_markdown: { type: 'string', description: 'Haber gövdesi, Markdown, 3-6 paragraf, başlık tekrarı yok' },
           why_it_matters: { type: 'string', description: '"Bu ne anlama geliyor?" kutusu, 1-2 cümle' },
+          deal: {
+            type: 'object', additionalProperties: false,
+            required: ['type', 'company', 'counterparty', 'amount', 'amount_usd_millions', 'round', 'investors', 'country'],
+            description: 'Haber bir yatırım turu, satın alma, halka arz, büyük ticari anlaşma veya tesis yatırımı duyuruyorsa doldur; değilse type boş. Tutarlar haber metnindeki yazımıyla.',
+            properties: {
+              type: { type: 'string', enum: ['', 'Yatırım turu', 'Satın alma', 'Halka arz', 'Anlaşma', 'Tesis yatırımı'] },
+              company: { type: 'string' }, counterparty: { type: 'string' }, amount: { type: 'string' },
+              amount_usd_millions: { type: 'number', description: 'Tutarın milyon dolar karşılığı (kaynakta dolar karşılığı yoksa 0)' },
+              round: { type: 'string' }, investors: { type: 'array', items: { type: 'string' } }, country: { type: 'string' },
+            },
+          },
           story: { type: 'string', enum: ['', ...STORIES.map((s) => s.slug)], description: 'Haber aşağıdaki süren hikâyelerden birinin devamıysa onun slug\'ı; değilse boş' },
           turkey_angle: { type: 'string', description: '"Türkiye açısından" notu, tek cümle; yalnızca notlarda somut Türkiye bağlantısı varsa, yoksa boş' },
           featured: { type: 'boolean' },

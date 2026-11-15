@@ -2,6 +2,13 @@
 title: "Samsung, yapay zeka belleği için 46 trilyon won'luk HBM paketleme merkezinin temelini attı"
 spot: "Güney Kore'de Samsung'un Onyang tesisinde gelişmiş HBM paketleme merkezinin temeli atıldı. Toplam yatırım 46 trilyon won (34 milyar dolar); tesisin devreye girişi Haziran 2028'e çekildi."
 category: donanim
+deal:
+  type: "Tesis yatırımı"
+  company: "Samsung"
+  counterparty: "Onyang HBM paketleme merkezi"
+  amount: "46 trilyon won (yaklaşık 34 milyar dolar)"
+  amountUsdM: 34000
+  country: "Güney Kore"
 popularity: 40
 tags: ["Samsung", "HBM", "GüneyKore", "ÇipPaketleme"]
 date: 2026-11-12T16:42:41+03:00
