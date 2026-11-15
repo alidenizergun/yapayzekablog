@@ -41,6 +41,7 @@ jobs:
           SITE_URL: ${{ vars.SITE_URL }}
           BASE_PATH: ${{ vars.BASE_PATH }}
           PUBLIC_NEWSLETTER_ACTION: ${{ vars.NEWSLETTER_ACTION }}
+          PUBLIC_REPORT_FORM_ACTION: ${{ vars.REPORT_FORM_ACTION }}
         run: npm run build
 
       - name: Özel domain dosyası
