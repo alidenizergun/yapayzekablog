@@ -74,11 +74,13 @@ export default function glossaryLinks() {
       'astro:build:done': ({ dir, logger }) => {
         const root = fileURLToPath(dir);
         const base = (process.env.BASE_PATH || '').replace(/\/$/, '');
-        const hdir = path.join(root, 'haber');
-        if (!fs.existsSync(hdir)) return;
         let pages = 0, links = 0;
-        for (const slug of fs.readdirSync(hdir)) {
-          const f = path.join(hdir, slug, 'index.html');
+        // Haberler ve rehberler
+        const files = ['haber', 'rehber'].flatMap((d) => {
+          const hdir = path.join(root, d);
+          return fs.existsSync(hdir) ? fs.readdirSync(hdir).map((slug) => path.join(hdir, slug, 'index.html')) : [];
+        });
+        for (const f of files) {
           if (!fs.existsSync(f)) continue;
           const r = linkGlossary(fs.readFileSync(f, 'utf8'), base);
           if (r.n) { fs.writeFileSync(f, r.html); pages++; links += r.n; }

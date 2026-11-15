@@ -1,0 +1,60 @@
+---
+import Base from '../../layouts/Base.astro';
+import Sidebar from '../../components/Sidebar.astro';
+import { getCollection, render } from 'astro:content';
+import { GLOSSARY } from '../../lib/glossary.js';
+import { url, formatDate } from '../../lib/news.js';
+
+export async function getStaticPaths() {
+  const guides = await getCollection('rehberler', (g) => !g.data.draft);
+  return guides.map((g) => ({ params: { slug: g.id }, props: { g, all: guides } }));
+}
+const { g, all } = Astro.props;
+const { Content } = await render(g);
+const d = g.data;
+const pageUrl = new URL(url(`/rehber/${g.id}/`), Astro.site).href;
+const terms = d.terms.map((s) => GLOSSARY.find((t) => t.slug === s)).filter(Boolean);
+const others = all.filter((x) => x.id !== g.id);
+// "## 1. Başlık" biçimindeki bölümler adım sayılır → HowTo
+const steps = [...(g.body || '').matchAll(/^##\s+\d+\.\s+(.+)\n+([\s\S]*?)(?=\n##\s|$)/gm)]
+  .map(([, name, text]) => ({ name: name.trim(), text: text.replace(/[*_`#>]/g, '').replace(/\[([^\]]+)\]\([^)]*\)/g, '$1').replace(/\s+/g, ' ').trim().slice(0, 500) }));
+const iso = (x) => x.toISOString().slice(0, 10);
+const jsonLd = [
+  { '@type': 'Article', headline: d.title, description: d.description, inLanguage: 'tr-TR', url: pageUrl, mainEntityOfPage: pageUrl,
+    datePublished: iso(d.date), dateModified: iso(d.updated || d.date),
+    author: { '@type': 'Organization', name: 'YZ Gündemi' }, publisher: { '@id': new URL(url('/#organization'), Astro.site).href } },
+  ...(steps.length >= 3 ? [{ '@type': 'HowTo', name: d.title, description: d.description, inLanguage: 'tr-TR',
+    step: steps.map((s, i) => ({ '@type': 'HowToStep', position: i + 1, name: s.name, text: s.text })) }] : []),
+];
+---
+<Base title={d.title} description={d.description} jsonLd={jsonLd} ogType="article"
+  article={{ published: d.date, modified: d.updated || d.date, section: 'Rehberler', tags: [] }}
+  breadcrumbs={[{ name: 'Ana sayfa', path: '/' }, { name: 'Rehberler', path: '/rehber/' }, { name: d.title, path: `/rehber/${g.id}/` }]}>
+  <div class="cols" style="margin-top:0">
+    <article class="article term guide" data-pagefind-body data-pagefind-meta="date:Rehber">
+      <nav class="crumb" aria-label="Konum" data-pagefind-ignore><a href={url('/')}>Ana sayfa</a><span aria-hidden="true">/</span><a href={url('/rehber/')}>Rehberler</a></nav>
+      <span class="badge" data-pagefind-ignore>Rehber · {d.level}</span>
+      <h1 data-pagefind-meta="title">{d.title}</h1>
+      <p class="spot">{d.description}</p>
+      <p class="byline" data-pagefind-ignore>{d.updated ? `Güncellendi: ${formatDate(d.updated, false)}` : formatDate(d.date, false)}</p>
+      <aside class="why guide-summary" aria-label="Kısaca">
+        <strong>Kısaca</strong>
+        <ul>{d.summary.map((s) => <li>{s}</li>)}</ul>
+      </aside>
+      <div class="prose"><Content /></div>
+      {terms.length > 0 && (
+        <nav class="entity-links" aria-label="İlgili terimler" data-pagefind-ignore>
+          <strong>İlgili terimler:</strong>
+          {terms.map((t) => <a class="tag" href={url(`/sozluk/${t.slug}/`)}>{t.term}</a>)}
+        </nav>
+      )}
+      {others.length > 0 && (
+        <section class="guide-more" aria-labelledby="gm-h" data-pagefind-ignore>
+          <h2 id="gm-h">Diğer rehberler</h2>
+          <ul>{others.map((o) => <li><a href={url(`/rehber/${o.id}/`)}>{o.data.title}</a></li>)}</ul>
+        </section>
+      )}
+    </article>
+    <Sidebar />
+  </div>
+</Base>

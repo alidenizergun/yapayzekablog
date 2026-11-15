@@ -84,4 +84,19 @@ const ozetler = defineCollection({
   }),
 });
 
-export const collections = { haberler, ozetler };
+// Rehberler: her zaman okunan "nasıl yapılır" içerikleri (/rehber/)
+const rehberler = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/rehberler' }),
+  schema: z.object({
+    title: z.string().min(10).max(140),
+    description: z.string().min(60).max(320),
+    date: z.coerce.date(),
+    updated: z.coerce.date().optional(),
+    summary: z.array(z.string()).min(2).max(6),   // "Kısaca" kutusu
+    level: z.enum(['Başlangıç', 'Orta', 'İleri']).default('Başlangıç'),
+    terms: z.array(z.string()).default([]),       // ilgili sözlük terimleri (slug)
+    draft: z.boolean().default(false),
+  }),
+});
+
+export const collections = { haberler, ozetler, rehberler };
