@@ -270,7 +270,7 @@ const ARTICLE_SCHEMA = {
       items: {
         type: 'object',
         additionalProperties: false,
-        required: ['title', 'spot', 'category', 'tags', 'image', 'brand', 'image_query', 'body_markdown', 'why_it_matters', 'featured', 'sources'],
+        required: ['title', 'spot', 'category', 'tags', 'image', 'brand', 'image_query', 'body_markdown', 'why_it_matters', 'featured', 'importance', 'tweet', 'sources'],
         properties: {
           title: { type: 'string', description: 'Haber başlığı, 60-100 karakter' },
           spot: { type: 'string', description: 'Spot metni, 1-2 cümle, 140-280 karakter' },
@@ -282,6 +282,8 @@ const ARTICLE_SCHEMA = {
           body_markdown: { type: 'string', description: 'Haber gövdesi, Markdown, 3-6 paragraf, başlık tekrarı yok' },
           why_it_matters: { type: 'string', description: '"Bu ne anlama geliyor?" kutusu, 1-2 cümle' },
           featured: { type: 'boolean' },
+          importance: { type: 'integer', enum: [1, 2, 3, 4, 5], description: 'Okur için önem: 5 sektörü etkileyen büyük gelişme, 3 kayda değer, 1 küçük haber' },
+          tweet: { type: 'string', description: 'X paylaşım metni, en fazla 220 karakter, link yazma (otomatik eklenir)' },
           sources: {
             type: 'array',
             items: {
@@ -486,11 +488,21 @@ async function main() {
       fs.writeFileSync(out, toMarkdown(a, iso));
     }
     written.push({ slug, title: a.title, sources: a.sources.length });
+    xQueue.push({ slug, title: a.title, text: String(a.tweet || '').trim(), importance: Number(a.importance) || 3, featured: Boolean(a.featured), date: iso });
     log(`YAZILDI: ${a.title} (${a.sources.length} kaynak${a.brand ? ', logo: ' + a.brand : ''}${a.photo ? ', fotoğraf: ' + a.photo.author : ''})`);
   });
+  if (!DRY && !REQUIRE_REVIEW && xQueue.length) {
+    // X paylaşım kuyruğu: yayından sonra scripts/x-post.mjs en önemlilerini paylaşır
+    const qFile = path.join(ROOT, 'data/x-kuyruk.json');
+    let q = [];
+    try { q = JSON.parse(fs.readFileSync(qFile, 'utf8')); } catch {}
+    fs.mkdirSync(path.dirname(qFile), { recursive: true });
+    fs.writeFileSync(qFile, JSON.stringify([...q, ...xQueue], null, 2) + '\n');
+  }
   await backfillPhotos();
   summary(written, rejected, searches);
 }
+const xQueue = [];
 
 // ---------------------------------------------------------------- fotoğraf doldurma
 const photoNote = { added: 0, backfilled: 0, error: '' };

@@ -74,6 +74,20 @@ Takip edilen hesaplar `scripts/x-accounts.json` dosyasındadır. Listeye hesap e
 
 Her hesabın en son okunan gönderisi `data/x-state.json` dosyasında tutulur; aynı gönderi iki kez okunup ücretlendirilmez. `X_BEARER_TOKEN` tanımlı değilse X takibi atlanır, site yalnızca web aramasıyla çalışır.
 
+## X'te otomatik paylaşım
+
+Her haber güncellemesinden sonra, site yayına girince en önemli **2 haber** linkiyle X'te paylaşılır; diğerleri paylaşılmaz. Haber hattı her habere 1–5 arası önem puanı ve kısa bir paylaşım metni yazar (kurallar `scripts/editorial-guidelines.md`). Manşet haber her zaman önce gelir.
+
+Kurulum:
+1. developer.x.com › uygulamanız › **User authentication settings**: App permissions = **Read and write**, Type = Web App/Automated App, Callback ve Website = `https://yzgundemi.com`.
+2. **Keys and tokens** sekmesinde *API Key and Secret* ile *Access Token and Secret* üretin (izni değiştirdiyseniz Access Token'ı yeniden üretin; eski token salt okunur kalır).
+3. Repoda **Settings › Secrets and variables › Actions › Secrets** bölümüne dört anahtarı ekleyin: `X_API_KEY`, `X_API_SECRET`, `X_ACCESS_TOKEN`, `X_ACCESS_SECRET`.
+4. X hesabının ayarlarında **Hesabınız › Otomasyon** bölümünden hesabı "otomatik hesap" olarak işaretleyin.
+
+Ayarlar: `X_POSTS_PER_RUN` değişkeni çalışma başına paylaşım sayısıdır (varsayılan 2, `0` kapatır). Paylaşılan haberler `data/x-paylasilan.json` dosyasında tutulur; aynı haber iki kez paylaşılmaz. Anahtarlar yoksa paylaşım adımı sessizce atlanır.
+
+Maliyet: X link içeren her gönderiden yaklaşık 0,20 $ alıyor; günde 4 gönderi ≈ ayda 24 $. Denemek için: `node scripts/x-post.mjs --dry-run`.
+
 ### 6. Haber fotoğrafları (Unsplash, isteğe bağlı)
 Haber görselleri şu sırayla seçilir: haber bir şirketle ilgiliyse şirketin logo kartı, değilse Unsplash'ten konuya uygun bir fotoğraf, ikisi de yoksa illüstrasyon.
 
@@ -168,6 +182,7 @@ scripts/generate-news.mjs      Haber üretim hattı
 scripts/editorial-guidelines.md  Yayın kuralları
 scripts/x-feed.mjs             X takibi (resmi X API)
 scripts/x-accounts.json        X takip listesi
+scripts/x-post.mjs             X'te otomatik paylaşım
 data/x-state.json              X takip durumu (otomatik oluşur)
 .github/workflows/news.yml     Günde 2 kez çalışan otomasyon
 .github/workflows/deploy.yml   Siteyi GitHub Pages'e yayınlar

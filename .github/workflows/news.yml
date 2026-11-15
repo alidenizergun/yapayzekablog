@@ -91,3 +91,42 @@ jobs:
     uses: ./.github/workflows/deploy.yml
     with:
       ref: ${{ github.ref_name }}
+
+  # Site yayınlandıktan sonra en önemli haberleri X'te paylaşır (anahtarlar yoksa sessizce atlar).
+  tweet:
+    needs: [generate, deploy]
+    if: needs.deploy.result == 'success' && needs.generate.outputs.count != '0'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: X'te paylaş
+        env:
+          X_API_KEY: ${{ secrets.X_API_KEY }}
+          X_API_SECRET: ${{ secrets.X_API_SECRET }}
+          X_ACCESS_TOKEN: ${{ secrets.X_ACCESS_TOKEN }}
+          X_ACCESS_SECRET: ${{ secrets.X_ACCESS_SECRET }}
+          X_POSTS_PER_RUN: ${{ vars.X_POSTS_PER_RUN || '2' }}
+          SITE_URL: ${{ vars.SITE_URL }}
+          BASE_PATH: ${{ vars.BASE_PATH }}
+        run: node scripts/x-post.mjs
+
+      - name: Kaydet
+        if: always()
+        run: |
+          git config user.name "yzgundemi-bot"
+          git config user.email "yzgundemi-bot@users.noreply.github.com"
+          git add data
+          git diff --cached --quiet && exit 0
+          git commit -m "X paylaşım kaydı güncellendi"
+          git pull --rebase origin ${{ github.ref_name }}
+          git push

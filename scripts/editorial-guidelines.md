@@ -47,5 +47,14 @@ Okur kitlesi: Türkiye'deki profesyoneller, girişimciler, pazarlamacılar, yaz�
 - Para birimleri kaynaktaki gibi verilir (örn. "500 milyon dolar").
 - Ünlem, emoji, "devrim niteliğinde", "inanılmaz" gibi abartılı ifadeler kullanılmaz.
 
+## Önem puanı (importance)
+Her habere 1–5 arası puan verilir: 5 sektörü etkileyen büyük gelişme, 4 önemli, 3 kayda değer, 2–1 küçük haber. Her çalışmada en yüksek puanlı haberler X'te paylaşılır; puanlar şişirilmez.
+
+## X paylaşım metni (tweet)
+- En fazla 220 karakter, Türkçe, haberin özünü veren tek bir bilgi cümlesi; gerekirse ikinci kısa cümle.
+- Link yazılmaz (otomatik eklenir). Ünlem, emoji, "flaş", "son dakika", tık tuzağı yok.
+- En fazla iki hashtag, yalnızca doğal olduğunda (#OpenAI gibi). Kişi etiketlenmez (@ kullanılmaz).
+- Rakam ve iddialar haberle birebir aynıdır.
+
 ## Manşet (featured)
 Bir güncellemede en fazla bir haber manşet olarak işaretlenir: yalnızca gerçekten büyük bir gelişme olduğunda (büyük bir model lansmanı, çok büyük yatırım veya satın alma, önemli bir regülasyon kararı).
