@@ -69,8 +69,29 @@ async function postTweet(text, keys) {
 
 // ------------------------------------------------------------ metin
 // X'te her link 23 karakter sayılır; sınır 280.
+// Güvenlik (LLM01/LLM06): tweet metni webden derlenen içerikten üretildiği için, bir kaynağa gizlenmiş talimat
+// metni değiştirmiş olabilir. Metin haberin başlığıyla konu olarak örtüşmüyorsa veya şüpheli öğe içeriyorsa
+// tweet yerine haberin (yayın kurallarından geçmiş) başlığı paylaşılır.
+const TR = { ç: 'c', ğ: 'g', ı: 'i', İ: 'i', ö: 'o', ş: 's', ü: 'u' };
+const norm = (s) => String(s).toLocaleLowerCase('tr').replace(/[çğıİöşü]/g, (c) => TR[c] || c);
+const STOP = new Set('ve ile bir bu da de için olarak yeni icin daha en cok gibi olan oldu ise ama the a of to in for on and'.split(' '));
+const words = (s) => new Set(norm(s).split(/[^a-z0-9]+/).filter((w) => w.length > 2 && !STOP.has(w)));
+export function safeTweetText(item) {
+  const title = String(item.title || '').trim();
+  const text = String(item.text || '').replace(/https?:\/\/\S+/g, '').replace(/\s+/g, ' ').trim();
+  if (!text) return { text: title, reason: 'metin yok' };
+  const suspicious = /(@\w|www\.|\.(com|net|org|io|ru|xyz)\b|[<>{}]|ignore|talimat|instruction|bitcoin|kripto airdrop|giveaway|çekiliş|tıkla|dm at)/i;
+  if (suspicious.test(text)) return { text: title, reason: 'şüpheli öğe' };
+  const t = words(title), w = [...words(text)];
+  const shared = w.filter((x) => t.has(x)).length;
+  if (shared < Math.min(2, t.size)) return { text: title, reason: 'başlıkla örtüşmüyor' };
+  return { text, reason: '' };
+}
+
 function compose(item, link) {
-  let text = (item.text || item.title).replace(/https?:\/\/\S+/g, '').replace(/\s+/g, ' ').trim();
+  const safe = safeTweetText(item);
+  if (safe.reason) log(`tweet metni yerine başlık kullanıldı (${safe.reason}): ${item.title}`);
+  let text = safe.text;
   const room = 280 - 2 - 23;
   if ([...text].length > room) text = [...text].slice(0, room - 1).join('').replace(/\s+\S*$/, '') + '…';
   return `${text}\n\n${link}`;

@@ -53,13 +53,17 @@ const index = Object.fromEntries(news.map((n) => [slugOf(n), { t: n.data.title, 
           <p class="error" id="r-source-err" hidden>Bağlantı https:// ile başlamalı.</p>
         </div>
 
-        <div class="field">
-          <label for="r-email">E-posta adresiniz <span class="opt">(isteğe bağlı, size dönüş yapabilmemiz için)</span></label>
-          <input id="r-email" name="email" type="email" autocomplete="email" placeholder="ad@ornek.com" />
-        </div>
+        {formAction && (
+          <div class="field">
+            <label for="r-email">E-posta adresiniz <span class="opt">(isteğe bağlı, size dönüş yapabilmemiz için)</span></label>
+            <input id="r-email" name="email" type="email" autocomplete="email" placeholder="ad@ornek.com" />
+          </div>
+        )}
+        {/* Bal küpü: insanlar görmez, botlar doldurur; doluysa form servisi bildirimi spam sayar */}
+        {formAction && <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" class="hp" />}
 
         {!formAction && (
-          <p class="hint">Gönder'e bastığınızda bildiriminiz GitHub'da hazır doldurulmuş olarak açılır. Göndermek için ücretsiz bir GitHub hesabıyla oturum açmanız gerekir.</p>
+          <p class="hint">Gönder'e bastığınızda bildiriminiz GitHub'da hazır doldurulmuş olarak açılır. Göndermek için ücretsiz bir GitHub hesabıyla oturum açmanız gerekir. GitHub bildirimleri herkese açıktır; kişisel bilgi eklemeyin.</p>
         )}
         <button type="submit" class="btn report-submit">{formAction ? 'Bildirimi gönder' : "GitHub'da bildirimi aç"}</button>
 
@@ -130,6 +134,7 @@ const index = Object.fromEntries(news.map((n) => [slugOf(n), { t: n.data.title, 
       const action = form.dataset.action;
 
       if (action) {
+        if (String(fd.get('_gotcha') || '')) return; // bot
         fd.set('haber', n ? `${n.t} — ${n.u}` : 'Genel bildirim');
         fd.set('_subject', `Hata bildirimi: ${tur}${n ? ' — ' + n.t : ''}`);
         const btn = form.querySelector('button[type=submit]') as HTMLButtonElement;
@@ -156,9 +161,8 @@ const index = Object.fromEntries(news.map((n) => [slugOf(n), { t: n.data.title, 
         desc.value.trim(),
         '',
         `**Doğru bilginin kaynağı:** ${src.value.trim() || '-'}`,
-        `**İletişim:** ${String(fd.get('email') || '').trim() || '-'}`,
         '',
-        '_Bu bildirim sitedeki "Hata bildir" formundan oluşturuldu._',
+        '_Bu bildirim sitedeki "Hata bildir" formundan oluşturuldu. GitHub bildirimleri herkese açıktır; kişisel bilgi eklemeyin._',
       ].join('\n');
       const title = `[Hata bildirimi] ${tur}${n ? ': ' + n.t : ''}`.slice(0, 200);
       const ghUrl = `https://github.com/${form.dataset.repo}/issues/new?title=${encodeURIComponent(title)}&body=${encodeURIComponent(body)}`;

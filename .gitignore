@@ -4,3 +4,6 @@ dist/
 .env
 .DS_Store
 src/content/haberler/_deneme-*
+
+# Güvenlik denetimi kayıtları (herkese açık repoda paylaşılmaz)
+.security-audit/

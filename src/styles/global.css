@@ -352,3 +352,6 @@ footer.site .wm-sub { color: #FF7A62; }
 /* Kolonlu sayfalarda bölüm başlıklarının alt çizgileri aynı hizada (Son Haberler / Bu Hafta) */
 .cols .sechead { min-height: 58px; align-items: flex-end; box-sizing: border-box; }
 .cols .sechead > * { line-height: 1.25; }
+
+/* Bal küpü alanı (hata bildir formu): ekranda ve ekran okuyucuda görünmez */
+.hp { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }

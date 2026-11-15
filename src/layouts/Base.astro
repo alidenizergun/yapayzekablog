@@ -117,6 +117,9 @@ const isBreaking = latest && Date.now() - latest.data.date.valueOf() < BREAKING_
   <script is:inline>
     // Sayfa çizilmeden önce kayıtlı temayı uygula (beyaz yanıp sönmeyi önler)
     try { var t = localStorage.getItem('theme'); if (t === 'dark' || t === 'light') document.documentElement.dataset.theme = t; } catch (e) {}
+    // Çerçeveleme koruması: site başka bir sitenin çerçevesinde açılırsa içerik gizlenir ve kendi penceresine taşınmaya çalışılır
+    // (GitHub Pages frame-ancestors / X-Frame-Options başlığı ayarlatmadığı için)
+    if (window.top !== window.self) { document.documentElement.style.visibility = 'hidden'; try { window.top.location.replace(window.self.location.href); } catch (e) {} }
   </script>
   <script type="application/ld+json" set:html={JSON.stringify(ldGraph)} />
 </head>
