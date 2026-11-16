@@ -40,7 +40,7 @@ const jsonLd = { '@type': 'FAQPage', mainEntity: faq.map(([q, ans]) => ({ '@type
 
     <div class="deal-table-wrap">
       <table class="deal-table compare-table">
-        <thead><tr><th scope="col"></th>{both.map((t) => <th scope="col"><a href={url(toolUrl(t.slug))}>{t.name}</a></th>)}</tr></thead>
+        <thead><tr><th scope="col"><span class="sr-only">{T('Özellik', 'Feature')}</span></th>{both.map((t) => <th scope="col"><a href={url(toolUrl(t.slug))}>{t.name}</a></th>)}</tr></thead>
         <tbody>{rows.map(([label, f]) => <tr><th scope="row">{label}</th>{both.map((t) => <td>{f(t)}</td>)}</tr>)}</tbody>
       </table>
     </div>

@@ -71,8 +71,8 @@ export const BRANDS = {
     "name": "Microsoft",
     "bg": "#0078D4",
     "fg": "#FFFFFF",
-    "onLight": "#0078D4",
-    "onDark": "#0078D4",
+    "onLight": "#0067B8",
+    "onDark": "#4FA3E6",
     "path": null
   },
   "apple": {

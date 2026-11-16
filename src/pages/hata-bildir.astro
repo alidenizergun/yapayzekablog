@@ -46,13 +46,13 @@ const index = Object.fromEntries(news.map((n) => [slugOf(n), { t: n.data.title, 
 
         <div class="field">
           <label for="r-desc">{T('Hata nedir?', 'What’s wrong?')}</label>
-          <textarea id="r-desc" name="aciklama" rows="6" required minlength="15" maxlength="3000" placeholder={T('Örnek: Haberde yatırım tutarı 500 milyon dolar yazıyor, kaynakta 50 milyon dolar geçiyor.', 'Example: The story says the round was $500 million, but the source says $50 million.')}></textarea>
+          <textarea id="r-desc" name="aciklama" aria-describedby="r-desc-err" rows="6" required minlength="15" maxlength="3000" placeholder={T('Örnek: Haberde yatırım tutarı 500 milyon dolar yazıyor, kaynakta 50 milyon dolar geçiyor.', 'Example: The story says the round was $500 million, but the source says $50 million.')}></textarea>
           <p class="error" id="r-desc-err" hidden>{T('Lütfen hatayı en az birkaç kelimeyle açıklayın.', 'Please describe the error in at least a few words.')}</p>
         </div>
 
         <div class="field">
           <label for="r-source">{T('Doğru bilginin kaynağı', 'Source for the correct information')} <span class="opt">{T('(isteğe bağlı)', '(optional)')}</span></label>
-          <input id="r-source" name="kaynak" type="url" inputmode="url" placeholder="https://" />
+          <input id="r-source" name="kaynak" type="url" aria-describedby="r-source-err" autocomplete="url" inputmode="url" placeholder="https://" />
           <p class="error" id="r-source-err" hidden>{T('Bağlantı https:// ile başlamalı.', 'The link must start with https://.')}</p>
         </div>
 

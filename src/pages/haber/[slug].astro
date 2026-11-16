@@ -82,6 +82,7 @@ const crumbs = [{ name: 'Ana sayfa', path: '/' }, { name: cat, path: `/kategori/
       <div class="byline">
         <span class="meta byline-meta" data-pagefind-ignore><Time date={d.date} /> · {readingMinutes(entry.body)} {T('dk okuma', 'min read')}</span>
         <div class="share" data-pagefind-ignore>
+          <button type="button" class="share-native" data-share-native data-title={d.title} hidden>{T('Paylaş', 'Share')}</button>
           <a class="tag" href={`https://x.com/intent/post?text=${encodeURIComponent(d.title)}&url=${encodeURIComponent(pageUrl)}`} target="_blank" rel="noopener">{T("X'te paylaş", 'Share on X')}</a>
           <a class="tag" href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(pageUrl)}`} target="_blank" rel="noopener">LinkedIn</a>
           <a class="tag" href={`https://wa.me/?text=${encodeURIComponent(`${d.title} ${pageUrl}`)}`} target="_blank" rel="noopener">WhatsApp</a>

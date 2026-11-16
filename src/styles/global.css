@@ -120,7 +120,7 @@ aside.side-col { flex: 1 1 300px; min-width: 0; display: flex; flex-direction: c
 .news h2 { font-size: 23px; line-height: 1.2; margin-bottom: 8px; }
 .news p { margin: 0 0 16px; font-size: 15px; color: var(--band-muted); }
 .news label { display: block; font-size: 13px; color: var(--band-muted); margin-bottom: 6px; }
-.news input { width: 100%; height: 46px; border-radius: 6px; border: 1px solid #444; background: var(--input); color: #fff; padding: 0 14px; font-size: 15px; font-family: inherit; }
+.news input { width: 100%; height: 46px; border-radius: 6px; border: 1px solid #444; background: var(--input); color: #fff; padding: 0 14px; font-size: 16px; font-family: inherit; }
 .news button { margin-top: 10px; width: 100%; height: 46px; border: 0; border-radius: 6px; background: var(--accent-fill); color: #fff; font-weight: 700; font-size: 15px; cursor: pointer; font-family: inherit; }
 .news .ok { margin: 10px 0 0; font-size: 14px; color: #9FE0B8; }
 .week { border: 1px solid var(--line); border-radius: 8px; padding: 24px; }
@@ -828,3 +828,55 @@ header.site .masthead { display: flex; align-items: center; justify-content: spa
   .river-filters::-webkit-scrollbar { display: none; }
   .river-filters button { flex: 0 0 auto; }
 }
+
+/* ---------------------------------------------------------------- UX/UI iyileştirmeleri (erişilebilirlik ve dokunma)
+   İçeriğe geç bağlantısı: yalnızca klavyeyle odaklanınca görünür */
+.skip-link { position: absolute; left: 12px; top: -60px; z-index: 100; padding: 12px 18px; background: var(--fg); color: var(--bg); font-weight: 700; border-radius: 0 0 8px 8px; transition: top .15s ease; }
+.skip-link:focus { top: 0; outline: 3px solid var(--accent); outline-offset: 2px; }
+main:focus { outline: none; }
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+a, button, summary, label, input, select { touch-action: manipulation; }
+p, li, dd { text-wrap: pretty; }
+/* Yüklenemeyen görselde ham alt metni yerleşimi bozmasın (ekran okuyucu yine okur) */
+img.thumb { color: transparent; font-size: 0; }
+/* Metin içindeki bağlantılar renk dışında altı çizili de olsun (WCAG 1.4.1) */
+.price-src a, .method a, .best .why a, .why a, .spot a, .models-faq p a, .guide-faq p a, .yerli p a, .legal .prose a, .search-empty a, .empty a, .cat-intro a { text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; }
+.price-src a:hover, .method a:hover, .why a:hover, .spot a:hover { text-decoration-thickness: 2px; }
+/* Dokunma alanları: en az 24px (masaüstü), telefonda 44px */
+.tag { display: inline-flex; align-items: center; min-height: 32px; }
+.river-chip { display: inline-flex; align-items: center; min-height: 28px; padding: 2px 10px; border-radius: 14px; }
+.river-kp summary { display: inline-flex; align-items: center; min-height: 32px; }
+.glossary-more { padding-block: 4px; }
+.ticker .tick-items a { padding-block: 2px; }
+.foot-top { display: inline-flex; align-items: center; gap: 6px; min-height: 44px; }
+.crumb a { display: inline-flex; align-items: center; min-height: 28px; }
+@media (max-width: 760px) {
+  .tag, .task-chips a { min-height: 44px; }
+  .river-chip { min-height: 36px; padding: 4px 12px; border-radius: 18px; }
+  .river-kp summary { min-height: 44px; }
+  .glossary-more { display: inline-flex; align-items: center; min-height: 44px; padding-block: 0; }
+  .crumb a { min-height: 44px; }
+}
+/* Yazdırma: yalnızca yazı */
+@media print {
+  .ticker, header.site, .catbar, footer.site, .side-col, aside.side, .share, .related, .consent, .skip-link, .lang-switch, .theme-btn, .entity-links, .atags, .newsletter, nav.crumb, .story-band { display: none !important; }
+  body { background: #fff; color: #000; font-size: 12pt; }
+  .cols { display: block !important; }
+  .article { max-width: none !important; }
+  .prose a::after { content: " (" attr(href) ")"; font-size: 9pt; color: #555; word-break: break-all; }
+  img { break-inside: avoid; }
+  h1, h2, h3 { break-after: avoid; }
+}
+@media (prefers-reduced-motion: reduce) { .skip-link { transition: none; } .ticker .tick-items a:not([hidden]) { animation: none; } }
+.share .share-native { background: var(--fg); color: var(--bg); border-color: var(--fg); font-weight: 600; }
+.share .share-native[hidden] { display: none; }
+/* Araç kartının tamamı tıklanabilir (başlık bağlantısı kartı kaplar) */
+.tool-card { position: relative; }
+.tool-card h3 a::after { content: ""; position: absolute; inset: 0; border-radius: inherit; }
+.tool-card:hover h3 a { color: var(--accent-text); }
+.tool-card:has(h3 a:focus-visible) { outline: 3px solid var(--accent); outline-offset: 2px; }
+.tool-card h3 a:focus-visible { outline: none; }
+.ev .meta a, .river-status a, .picked a { text-decoration: underline; text-underline-offset: 3px; }
+.more-link, .foot-links a, .foot-links .linkish, .week > a { display: inline-flex; align-items: center; min-height: 24px; }
+@media (max-width: 760px) { .foot-links a, .foot-links .linkish, .week > a, .more-link { min-height: 44px; } }
+.by-numbers dd a { text-decoration: underline; text-underline-offset: 3px; }

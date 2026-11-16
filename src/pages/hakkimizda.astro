@@ -35,7 +35,7 @@ const xCount = byHost.get('x.com')?.n ?? 0;
         <div><dt>{T('Kaynak bağlantısı', 'Source links')}</dt><dd>{fmt(sources.length)}</dd></div>
         <div><dt>{T('Haber başına kaynak', 'Sources per story')}</dt><dd>{avg}</dd></div>
         <div><dt>{T('Farklı kaynak sitesi', 'Distinct source sites')}</dt><dd>{fmt(publishers.length)}</dd></div>
-        <p class="facts-note">{T('Rakamlar sitedeki haberlerden otomatik hesaplanır.', 'Figures are calculated automatically from the stories on the site.')}</p>
+        <div class="facts-note"><dt class="sr-only">{T('Not', 'Note')}</dt><dd>{T('Rakamlar sitedeki haberlerden otomatik hesaplanır.', 'Figures are calculated automatically from the stories on the site.')}</dd></div>
       </dl>
     </header>
 
@@ -113,7 +113,8 @@ const xCount = byHost.get('x.com')?.n ?? 0;
   .about-facts > div { background: var(--bg); padding: 18px 20px; display: flex; flex-direction: column-reverse; gap: 4px; }
   .about-facts dt { font-size: 13px; color: var(--muted); }
   .about-facts dd { margin: 0; font-family: var(--display); font-size: 40px; font-weight: 800; letter-spacing: -0.03em; line-height: 1; font-variant-numeric: tabular-nums; }
-  .facts-note { grid-column: 1 / -1; margin: 0; padding: 10px 20px; background: var(--soft); font-size: 12px; color: var(--muted); }
+  .about-facts > .facts-note { grid-column: 1 / -1; margin: 0; padding: 10px 20px; background: var(--soft); flex-direction: row; }
+  .about-facts .facts-note dd { font-family: var(--body); font-size: 12px; font-weight: 400; letter-spacing: 0; color: var(--muted); line-height: 1.4; }
 
   .about-sec .sechead { margin-bottom: 24px; }
   .steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 28px; counter-reset: none; }

@@ -25,7 +25,7 @@ const rowV = spreadVisuals(items);
     <section class="main" aria-labelledby="h">
       <div class="sechead"><h1 id="h" class="page-h">{name}</h1><span class="meta">{items.length} {T('haber', items.length === 1 ? 'story' : 'stories')}</span></div>
       {intro && <p class="cat-intro">{intro}{cat.links?.length > 0 && <> {cat.links.map((l, i) => <>{i > 0 && ' · '}<a href={url(l.href)}>{S(`cat.${cat.slug}.link.${i}`, l.label)}</a></>)}</>}</p>}
-      {items.length ? items.map((n) => <NewsRow item={n} choice={rowV.get(n.id)} />) : <p class="empty">{T('Bu kategoride henüz haber yok. Yeni haberler otomatik güncellemelerle eklenecek.', 'No stories in this section yet.')}</p>}
+      {items.length ? items.map((n) => <NewsRow item={n} choice={rowV.get(n.id)} level={2} />) : <p class="empty">{T('Bu kategoride henüz haber yok. Yeni haberler otomatik güncellemelerle eklenecek.', 'No stories in this section yet.')}</p>}
     </section>
     <Sidebar exclude={items.map((n) => n.id)} />
   </div>

@@ -134,6 +134,9 @@ const isBreaking = latest && Date.now() - latest.data.date.valueOf() < BREAKING_
   <link rel="canonical" href={canonical.href} />
   <meta name="robots" content={robots} />
   <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <meta name="theme-color" content="#FFFFFF" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#121212" media="(prefers-color-scheme: dark)" />
+  <meta name="format-detection" content="telephone=no" />
   <link rel="alternate" type="application/rss+xml" title={SITE_TITLE} href={L.u('/rss.xml')} />
   {altTr && altEn && <link rel="alternate" hreflang="tr" href={altTr} />}
   {altTr && altEn && <link rel="alternate" hreflang="en" href={altEn} />}
@@ -196,7 +199,8 @@ const isBreaking = latest && Date.now() - latest.data.date.valueOf() < BREAKING_
   <script type="application/ld+json" set:html={JSON.stringify(ldGraph)} />
 </head>
 <body>
-  <div class="ticker"><div class="wrap">
+  <a class="skip-link" href="#icerik">{T('İçeriğe geç', 'Skip to content')}</a>
+  <aside class="ticker" aria-label={T('Son haber', 'Latest story')}><div class="wrap">
     {latest ? (
       <>
         <span class="badge" data-breaking={latest.data.date.toISOString()}>{isBreaking ? T('Son dakika', 'Breaking') : T('Son haber', 'Latest')}</span>
@@ -207,7 +211,7 @@ const isBreaking = latest && Date.now() - latest.data.date.valueOf() < BREAKING_
         </div>
       </>
     ) : <span>{T('Yeni haberler yakında.', 'News coming soon.')}</span>}
-  </div></div>
+  </div></aside>
 
   <header class="site">
     <div class="wrap masthead">
@@ -218,7 +222,7 @@ const isBreaking = latest && Date.now() - latest.data.date.valueOf() < BREAKING_
     </div>
   </header>
   <!-- Bölüm çubuğu: her ekranda tek menü; sayfa kaydırılınca üstte kalır, sığmazsa yana kayar -->
-  <nav class="catbar" aria-label={T('Bölümler', 'Sections')} data-catbar>
+  <nav class="catbar" aria-label={T('Ana menü', 'Main menu')} data-catbar>
     <div class="wrap">
       <a class="catbar-logo" href={L.u('/')} aria-label={T('YZ Gündemi ana sayfa', 'YZ Gündemi home')} tabindex="-1"><span class="wm-badge" aria-hidden="true">YZ</span></a>
       <ul class="nav-main" data-nav>
@@ -262,7 +266,7 @@ const isBreaking = latest && Date.now() - latest.data.date.valueOf() < BREAKING_
     </div>
   </nav>
 
-  <main class="wrap"><slot /></main>
+  <main class="wrap" id="icerik" tabindex="-1"><slot /></main>
 
   <footer class="site">
     <div class="wrap foot-main">
@@ -305,6 +309,9 @@ const isBreaking = latest && Date.now() - latest.data.date.valueOf() < BREAKING_
         <h2 id="foot-follow">{T('Takip et', 'Follow')}</h2>
         <ul>
           <li><a href={L.u('/rss.xml')}>RSS</a></li>
+          <li><a href={L.u('/akis/')}>{T('Canlı akış', 'Live feed')}</a></li>
+          <li><a href={L.u('/haftalik/')}>{T('Haftalık özet', 'Weekly roundup')}</a></li>
+          <li><a href={switchHref} hreflang={lang === 'en' ? 'tr' : 'en'} lang={lang === 'en' ? 'tr' : 'en'}>{lang === 'en' ? 'Türkçe' : 'English'}</a></li>
           {newsletterOn && <li><a href={L.u('/') + '#bulten'}>{T('E-posta bülteni', 'Newsletter')}</a></li>}
           {SITE.social?.x && <li><a href={`https://x.com/${SITE.social.x}`}>X</a></li>}
           {SITE.social?.instagram && <li><a href={`https://www.instagram.com/${SITE.social.instagram}/`}>Instagram</a></li>}
@@ -316,7 +323,7 @@ const isBreaking = latest && Date.now() - latest.data.date.valueOf() < BREAKING_
       <p>© {year} {SITE.name} · {SITE.domain}</p>
       <p class="foot-credits">{T('Fotoğraflar', 'Photos from')} <a href="https://unsplash.com/?utm_source=yzgundemi&utm_medium=referral">Unsplash</a>{T(', şirket logoları ', ', company logos from ')}<a href="https://simpleicons.org/">Simple Icons</a>{T(' kaynaklıdır; logolar sahiplerinin markasıdır.', '; logos are trademarks of their owners.')}</p>
       <span class="foot-links"><a href={L.u('/gizlilik/')}>{T('Gizlilik ve çerezler', 'Privacy and cookies')}</a>{SITE.analytics?.ga4 && <button type="button" class="linkish" data-consent-open>{T('Çerez tercihleri', 'Cookie settings')}</button>}</span>
-      <a class="foot-top" href="#">{T('Başa dön', 'Back to top')} <span aria-hidden="true">↑</span></a>
+      <a class="foot-top" href="#icerik">{T('Başa dön', 'Back to top')} <span aria-hidden="true">↑</span></a>
     </div></div>
   </footer>
 
@@ -437,6 +444,12 @@ const isBreaking = latest && Date.now() - latest.data.date.valueOf() < BREAKING_
     media.addEventListener('change', sync);
     sync();
 
+    // Cihazın kendi paylaş menüsü (telefonlarda): destekleniyorsa görünür
+    document.querySelectorAll<HTMLButtonElement>('[data-share-native]').forEach((b) => {
+      if (!navigator.share || !matchMedia('(pointer: coarse)').matches) return;
+      b.hidden = false;
+      b.addEventListener('click', async () => { try { await navigator.share({ title: b.dataset.title, url: location.href }); } catch {} });
+    });
     document.querySelectorAll<HTMLButtonElement>('[data-copy]').forEach((b) => {
       b.addEventListener('click', async () => {
         try { await navigator.clipboard.writeText(location.href); b.textContent = EN ? 'Copied' : 'Kopyalandı'; }
