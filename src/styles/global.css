@@ -764,3 +764,20 @@ header.site .masthead { display: flex; align-items: center; justify-content: spa
 .more-link { display: inline-block; margin-top: 12px; color: var(--accent-text); font-weight: 600; }
 .guide-more-list { margin: 10px 0 0; padding-left: 20px; }
 .guide-more-list a { color: var(--accent-text); font-weight: 600; }
+
+/* ---------- Bölüm çubuğu: Daha fazla menüsü ---------- */
+.catbar .wrap { position: relative; }
+.catbar-more { flex: 0 0 auto; margin-left: 20px; align-self: stretch; display: flex; }
+.catbar-more summary { list-style: none; display: inline-flex; align-items: center; gap: 4px; min-height: 48px; font-weight: 600; font-size: 15px; white-space: nowrap; cursor: pointer; color: var(--fg); }
+.catbar-more summary::-webkit-details-marker { display: none; }
+.catbar-more summary svg { width: 16px; height: 16px; transition: transform .15s ease; }
+.catbar-more[open] summary svg { transform: rotate(180deg); }
+.catbar-more summary:hover, .catbar-more.has-current summary { color: var(--accent-text); }
+.catbar-more summary:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
+.more-panel { position: absolute; right: max(16px, env(safe-area-inset-right, 0px)); top: 100%; z-index: 7; width: min(320px, calc(100vw - 32px)); padding: 8px; background: var(--bg); border: 1px solid var(--line); border-radius: 10px; box-shadow: 0 12px 32px rgba(0,0,0,.14); }
+.more-panel ul { list-style: none; margin: 0; padding: 0; }
+.more-cats { padding-bottom: 8px !important; margin-bottom: 8px !important; border-bottom: 1px solid var(--line) !important; }
+.more-panel a { display: flex; align-items: center; min-height: 40px; padding: 0 12px; border-radius: 6px; font-weight: 600; font-size: 15px; color: var(--fg); box-shadow: none !important; }
+.more-panel a:hover { background: var(--soft); color: var(--accent-text); }
+.more-panel a[aria-current="page"] { color: var(--accent-text); }
+@media (max-width: 760px) { .catbar-more { margin-left: 12px; } .catbar-more summary { font-size: 0; gap: 0; } .catbar-more summary svg { width: 20px; height: 20px; } .catbar-more summary::before { content: "Daha"; font-size: 15px; } }

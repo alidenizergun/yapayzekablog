@@ -183,6 +183,20 @@ const isBreaking = latest && Date.now() - latest.data.date.valueOf() < BREAKING_
         <a href={url('/haftalik/')} aria-current={Astro.url.pathname.startsWith(url('/haftalik')) ? 'page' : undefined}>Haftalık</a>
         {nav.map((slug) => <a href={catUrl(slug)} aria-current={slug === currentCat ? 'page' : undefined}>{categoryBySlug(slug)?.name}</a>)}
       </div>
+      <details class="catbar-more" data-catbar-more>
+        <summary>Daha fazla<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
+        <div class="more-panel">
+          <ul class="more-cats" data-more-cats aria-label="Diğer bölümler"></ul>
+          <ul class="more-sections" aria-label="Rehber ve araçlar">
+            <li><a href={url('/turkiye-yapay-zeka/')}>Türkiye'de yapay zeka</a></li>
+            <li><a href={url('/arac/')}>Yapay zeka araçları</a></li>
+            <li><a href={url('/rehber/')}>Rehberler</a></li>
+            <li><a href={url('/sozluk/')}>Sözlük</a></li>
+            <li><a href={url('/yatirimlar/')}>Yatırım takipçisi</a></li>
+            <li><a href={url('/etkinlikler/')}>Etkinlikler</a></li>
+          </ul>
+        </div>
+      </details>
       <a class="catbar-search" href={url('/ara/')} aria-label="Haberlerde ara" title="Haberlerde ara" aria-current={Astro.url.pathname.startsWith(url('/ara')) ? 'page' : undefined}>
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
       </a>
@@ -331,6 +345,34 @@ const isBreaking = latest && Date.now() - latest.data.date.valueOf() < BREAKING_
         setTimeout(showCurrent, 220); // küçük logonun açılma süresinden sonra
       }).observe(masthead);
     }
+    // Masaüstünde sığmayan bölümler "Daha fazla" menüsüne taşınır (telefonda liste yana kayar)
+    const more = document.querySelector<HTMLDetailsElement>('[data-catbar-more]');
+    const moreCats = document.querySelector<HTMLElement>('[data-more-cats]');
+    const fit = () => {
+      if (!scroller || !more || !moreCats) return;
+      // Önce hepsini geri al
+      moreCats.querySelectorAll('a').forEach((a) => { scroller.appendChild(a); });
+      moreCats.replaceChildren();
+      if (window.innerWidth > 760) {
+        const links = [...scroller.querySelectorAll<HTMLAnchorElement>('a')];
+        const moved: HTMLAnchorElement[] = [];
+        while (scroller.scrollWidth > scroller.clientWidth + 1 && links.length > 3) {
+          const a = links.pop()!;
+          moved.unshift(a);
+          a.remove();
+        }
+        moved.forEach((a) => { const li = document.createElement('li'); li.appendChild(a); moreCats.appendChild(li); });
+      }
+      moreCats.hidden = !moreCats.children.length;
+      more.classList.toggle('has-current', !!moreCats.querySelector('[aria-current="page"]'));
+      scroller.dispatchEvent(new Event('scroll'));
+    };
+    fit();
+    let fitT: number | undefined;
+    window.addEventListener('resize', () => { clearTimeout(fitT); fitT = window.setTimeout(fit, 120); });
+    if (catbar) new MutationObserver(() => setTimeout(fit, 230)).observe(catbar, { attributes: true, attributeFilter: ['class'] });
+    document.addEventListener('click', (e) => { if (more?.open && !more.contains(e.target as Node)) more.open = false; });
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && more?.open) { more.open = false; more.querySelector('summary')?.focus(); } });
     if (scroller) {
       const edges = () => {
         const max = scroller.scrollWidth - scroller.clientWidth;
