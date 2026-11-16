@@ -25,7 +25,8 @@ const others = [sorted[i - 1], sorted[i + 1], ...sorted.filter((x) => x.slug !==
 const name = t.term;
 // Aynı gruptaki terimler ilgili terimlere eklenir
 const sameCat = sorted.filter((x) => x.slug !== t.slug && x.cat && x.cat === t.cat && !others.some((o) => o.slug === x.slug));
-others.push(...sameCat.slice(0, Math.max(0, 8 - others.length)));
+others.unshift(...sameCat.slice(0, 4)); // önce aynı konu grubundan terimler
+others.splice(8);
 const guides = (await getCollection('rehberler', (g) => !g.data.draft)).filter((g) => g.data.terms.includes(t.slug)).slice(0, 5);
 const faq = long?.faq ?? [];
 const pageUrl = new URL(url(`/sozluk/${t.slug}/`), Astro.site).href;
