@@ -1,1 +1,34 @@
-[]
+[
+  {
+    "slug": "abd-hazine-bakani-bessent-nvidia-dan-10-gun-icinde",
+    "title": "ABD Hazine Bakanı Bessent, Nvidia'dan 10 gün içinde yanıt ve dışarıdan CEO istedi",
+    "text": "ABD Hazine Bakanı Bessent, Nvidia yönetim kurulundan Çin çip satışlarına ilişkin 10 gün içinde yanıt istedi ve bir sonraki CEO'nun şirket dışından seçilmesini önerdi. #Nvidia",
+    "importance": 82,
+    "featured": true,
+    "date": "2026-11-16T08:49:03+03:00"
+  },
+  {
+    "slug": "alibaba-qwen4-max-i-resmen-kullanima-acti-1-milyon",
+    "title": "Alibaba, Qwen4-Max'i resmen kullanıma açtı: 1 milyon token bağlam, ağırlıklar kapalı",
+    "text": "Alibaba, Qwen4-Max'i resmen duyurdu: 2,4 trilyon parametre, 1 milyon token bağlam, milyon token başına 1,5 dolar girdi fiyatı. Modelin ağırlıkları açılmadı. #Qwen",
+    "importance": 66,
+    "featured": false,
+    "date": "2026-11-16T08:48:03+03:00"
+  },
+  {
+    "slug": "openai-in-yeni-bilim-blogu-gpt-6-astra-standart",
+    "title": "OpenAI'ın yeni bilim blogu: GPT-6 Astra, Standart Model için aday kafes tanımına katkı verdi",
+    "text": "OpenAI, yeni bilim blogunun ilk yazısında GPT-6 Astra'nın Standart Model için aday bir kafes tanımının ispatında başı çektiğini öne sürdü. Sonuç aday bir tanım; kesin çözüm değil. #OpenAI",
+    "importance": 52,
+    "featured": false,
+    "date": "2026-11-16T08:47:03+03:00"
+  },
+  {
+    "slug": "abd-ve-ortaklari-yapay-zeka-tedarik-zincirini-korumak-icin",
+    "title": "ABD ve ortakları yapay zeka tedarik zincirini korumak için San Francisco Bildirgesi'ni imzaladı",
+    "text": "ABD ve ortakları, Pax Silica girişimi kapsamında San Francisco Bildirgesi'ni imzaladı. İmzacılar, korunacak kritik yapay zeka teknolojileri ve tedarik zincirleri için ortak bir liste oluşturacak.",
+    "importance": 48,
+    "featured": false,
+    "date": "2026-11-16T08:46:03+03:00"
+  }
+]
