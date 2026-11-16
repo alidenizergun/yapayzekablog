@@ -49,7 +49,7 @@ const LOOKBACK_HOURS = Number(process.env.LOOKBACK_HOURS || 26);
 // WEEKEND_SEARCHES ile değiştirilebilir.
 const IST_DAY = new Date(Date.now() + 3 * 3600e3).getUTCDay(); // 0 = Pazar, 6 = Cumartesi
 const IS_WEEKEND = IST_DAY === 0 || IST_DAY === 6;
-// Öğle turu (NEWS_MODE=ogle): yalnızca sabahtan beri çıkan çok önemli gelişmeler, kısa not biçiminde
+// Ara tur (NEWS_MODE=ogle; günde 3 kez): son saatlerin kayda değer gelişmeleri, kısa not biçiminde
 const MIDDAY = (process.env.NEWS_MODE || '').toLowerCase() === 'ogle';
 const WEEKDAY_SEARCHES = Number(process.env.MAX_SEARCHES || 12);
 const MAX_SEARCHES = IS_WEEKEND
@@ -224,7 +224,7 @@ async function research(anthropic, existing, xPosts = []) {
   const seen = new Map(); // normalizeUrl -> { url, title }
   // X API'den gelen gönderi adresleri gerçek olduğu için izinli kaynaklara eklenir
   for (const p of xPosts) seen.set(normalizeUrl(p.url), { url: p.url, title: `@${p.username} X gönderisi` });
-  // Öğle turu tek istek; tam tur konulara bölünür (arama bütçesi konulara paylaştırılır)
+  // Ara tur tek istek; tam tur konulara bölünür (arama bütçesi konulara paylaştırılır)
   const plan = MIDDAY
     ? [{ id: 'ogle', title: 'tüm alanlar', hint: 'büyük şirketlerin duyuruları, yatırımlar, regülasyon, Türkiye', x: true, uses: MAX_SEARCHES }]
     : TOPICS.map((t) => ({ ...t, uses: Math.max(t.min ?? 1, Math.round(MAX_SEARCHES / TOPICS.length)) }));
@@ -250,7 +250,7 @@ async function researchTopic(anthropic, existing, xPosts, topic, seen) {
 
 ${focus}
 
-Son ${LOOKBACK_HOURS} saat içinde yayınlanmış, yapay zeka alanındaki en önemli gelişmeleri bul; önem sırasına koy.${MIDDAY ? '\nÖĞLE TURU: Bu ara güncellemedir. Yalnızca son ' + LOOKBACK_HOURS + ' saatte çıkan, ertesi sabahı bekleyemeyecek kadar önemli gelişmeleri (büyük lansman, satın alma, resmi karar, önemli kriz) aday yap; sıradan haberleri gece turuna bırak. Böyle bir gelişme yoksa yalnızca "YENİ GELİŞME YOK" yaz.' : ''}
+Son ${LOOKBACK_HOURS} saat içinde yayınlanmış, yapay zeka alanındaki en önemli gelişmeleri bul; önem sırasına koy.${MIDDAY ? '\nARA TUR: Gün içi güncellemedir (günde 3 kez). Son ' + LOOKBACK_HOURS + ' saatte çıkan, geniş okur kitlesini ilgilendiren kayda değer gelişmeleri (lansman, yatırım, resmi karar, önemli açıklama, Türkiye gelişmesi) aday yap; niş ve teknik ayrıntıları gece turuna bırak. Böyle bir gelişme yoksa yalnızca "YENİ GELİŞME YOK" yaz.' : ''}
 
 Her aday için birincil kaynağı (resmi blog, duyuru, makale) veya tanınmış bir haber kuruluşunu bul. Yalnızca haber bülteni, derleme sitesi (ör. "AI'da bugün olan her şey"), Substack/Medium yazısı veya yatırım veri tabanında geçen adayı ELE; bunlar tek başına kaynak sayılmaz. Aynı konuyu farklı kelimelerle tekrar tekrar arama.
 
@@ -431,7 +431,7 @@ image_query: Haberi temsil edecek gerçek bir fotoğraf için İngilizce, somut 
 Kategoriler: ${CATEGORIES.map((c) => `${c.slug} (${c.name})`).join(', ')}
 Süren hikâyeler (story alanı; haber bunlardan birinin yeni gelişmesiyse): ${STORIES.map((s) => `${s.slug} (${s.title})`).join(', ') || 'yok'}
 
-${MIDDAY ? 'ÖĞLE TURU: Haberleri "kisa" biçiminde yaz: gövde 2-3 kısa paragraf, 80-150 kelime; yalnızca olgular. by_numbers boş kalabilir.\n\n' : 'Biçim: normal haberlerde format "haber"; yalnızca tek bir olguyu duyuran çok kısa gelişmelerde "kisa".\n\n'}Notlarda "YENİ GELİŞME YOK" yazıyorsa veya yazılabilecek haber yoksa boş bir "articles" listesi döndür.
+${MIDDAY ? 'ARA TUR: Haberleri "kisa" biçiminde yaz: gövde 2-3 kısa paragraf, 80-150 kelime; yalnızca olgular. by_numbers boş kalabilir.\n\n' : 'Biçim: normal haberlerde format "haber"; yalnızca tek bir olguyu duyuran çok kısa gelişmelerde "kisa".\n\n'}Notlarda "YENİ GELİŞME YOK" yazıyorsa veya yazılabilecek haber yoksa boş bir "articles" listesi döndür.
 
 İZİNLİ KAYNAK ADRESLERİ:
 ${allowed || '(yok)'}
@@ -440,7 +440,7 @@ ARAŞTIRMA NOTLARI:
 ${notes}`,
     }],
     output_config: { format: { type: 'json_schema', schema: ARTICLE_SCHEMA } },
-  }, { batch: USE_BATCH && !MIDDAY });
+  }, { batch: USE_BATCH });
   if (res.stop_reason === 'refusal' || res.stop_reason === 'max_tokens') {
     throw new Error(`Yazım adımı tamamlanamadı (stop_reason: ${res.stop_reason}).`);
   }
@@ -490,7 +490,7 @@ Kurallar:
 HABERLER (JSON):
 ${JSON.stringify(input, null, 1)}` }],
     output_config: { format: { type: 'json_schema', schema: EDIT_SCHEMA } },
-  }, { batch: USE_BATCH && !MIDDAY });
+  }, { batch: USE_BATCH });
   if (res.stop_reason !== 'end_turn') return { articles, notes: [`editör adımı tamamlanamadı (${res.stop_reason}); taslaklar korundu`] };
   let edited;
   try { edited = JSON.parse(res.content.filter((b) => b.type === 'text').map((b) => b.text).join('')).articles; }
@@ -665,7 +665,7 @@ async function main() {
     log(`fotoğraf eklenen eski haber: ${photoNote.backfilled}${photoNote.error ? ' (hata: ' + photoNote.error + ')' : ''}`);
     return summary([], [], 0);
   }
-  log(`model: araştırma ${RESEARCH_MODEL}, yazım ${MODEL}${USE_BATCH && !MIDDAY ? ' (Batch API)' : ''} · mevcut haber: ${existing.length} · en fazla ${MAX_ARTICLES} yeni haber · en fazla ${MAX_SEARCHES} arama${IS_WEEKEND ? ' (hafta sonu)' : ''} · ${REQUIRE_REVIEW ? 'editör onayı AÇIK (taslak)' : 'otomatik yayın'}`);
+  log(`model: araştırma ${RESEARCH_MODEL}, yazım ${MODEL}${USE_BATCH ? ' (Batch API)' : ''} · mevcut haber: ${existing.length} · en fazla ${MAX_ARTICLES} yeni haber · en fazla ${MAX_SEARCHES} arama${IS_WEEKEND ? ' (hafta sonu)' : ''} · ${REQUIRE_REVIEW ? 'editör onayı AÇIK (taslak)' : 'otomatik yayın'}`);
 
   let articles, seen, searches = 0;
   if (DRY) {

@@ -101,4 +101,4 @@ Bir güncellemede en fazla bir haber manşet olarak işaretlenir: yalnızca ger�
 - by_numbers: Haberin anlaşılması için en önemli 2-4 rakam (tutar, kullanıcı sayısı, oran, tarih). Rakamı metindeki yazımıyla aynen yaz; etiketi kısa tut. Rakam yoksa boş bırak.
 
 ## format: kisa (kısa not)
-- Tek bir olguyu duyuran gelişmeler ve öğle turu haberleri için. Gövde 2-3 kısa paragraf, 80-150 kelime; arka plan en fazla bir cümle.
+- Tek bir olguyu duyuran gelişmeler ve gün içi ara tur haberleri için. Gövde 2-3 kısa paragraf, 80-150 kelime; arka plan en fazla bir cümle.
