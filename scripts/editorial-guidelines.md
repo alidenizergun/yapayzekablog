@@ -94,3 +94,10 @@ Bir güncellemede en fazla bir haber manşet olarak işaretlenir: yalnızca ger�
 ## new_tool (yeni araç radarı)
 - Yalnızca haber, herkesin kullanabileceği YENİ bir yapay zeka aracının veya uygulamasının çıkışını duyuruyorsa doldur. Mevcut bir modelin yeni sürümü, araştırma makalesi, iç test ve yalnızca kurumsal sözleşmeyle sunulan ürünler yeni araç değildir.
 - url aracın resmi adresidir ve kaynaklarda geçmelidir. Emin değilsen boş bırak.
+
+## whats_next ("Sırada ne var?") ve by_numbers ("Rakamlarla")
+- whats_next: Kaynaklarda yazan somut bir sonraki adım: açıklanan tarih, beklenen karar, son başvuru günü, planlanan lansman. Tahmin, yorum ve "gelişmeler takip edilecek" gibi boş cümleler yazma; yoksa boş bırak.
+- by_numbers: Haberin anlaşılması için en önemli 2-4 rakam (tutar, kullanıcı sayısı, oran, tarih). Rakamı metindeki yazımıyla aynen yaz; etiketi kısa tut. Rakam yoksa boş bırak.
+
+## format: kisa (kısa not)
+- Tek bir olguyu duyuran gelişmeler ve öğle turu haberleri için. Gövde 2-3 kısa paragraf, 80-150 kelime; arka plan en fazla bir cümle.

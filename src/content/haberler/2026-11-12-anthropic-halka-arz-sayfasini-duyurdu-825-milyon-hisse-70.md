@@ -23,6 +23,14 @@ photo:
   author: "Maxim Klimashin"
   authorUrl: "https://unsplash.com/@maxim_klimashin"
   link: "https://unsplash.com/photos/new-york-stock-exchange-building-with-american-flags-HpYTYo_jF2Y"
+whatsNext: "CNBC'ye göre fiyatlamanın 18 Kasım'da yapılması, hisselerin 19 Kasım'da Nasdaq'ta \"ANT\" koduyla işlem görmeye başlaması bekleniyor; şirket tarihleri resmi olarak açıklamadı."
+byNumbers:
+  - value: "825 milyon"
+    label: "Satışa sunulacak A sınıfı hisse"
+  - value: "70-78 dolar"
+    label: "Hisse başına fiyat aralığı"
+  - value: "1,4 trilyon dolar"
+    label: "Aralığın üst ucundaki değerleme"
 sources:
   - title: "@AnthropicAI X gönderisi"
     url: "https://x.com/AnthropicAI/status/2120841731302154708"

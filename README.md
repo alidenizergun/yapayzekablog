@@ -5,7 +5,7 @@ Webrazzi tarzı, Türkçe yapay zeka haber sitesi. Her sabah en fazla 10 haber o
 - **Site:** [Astro](https://astro.build) ile üretilen hızlı, statik bir site. Ana sayfa, haber, kategori ve sayfalama sayfaları, RSS, site haritası ve Google için NewsArticle yapılandırılmış verisi hazır.
 - **Haberler:** [Claude API](https://platform.claude.com) web aramasıyla gelişmeleri bulur, yayın kurallarına göre Türkçe yazar.
 - **X takibi:** Yapay zeka alanındaki önemli kişilerin ve şirketlerin X gönderileri resmi X API ile taranır; haber değeri taşıyanlar habere dönüşür.
-- **Otomasyon:** GitHub Actions her gece İstanbul saatiyle 04:53'te çalışır (son 26 saatin gelişmelerini tarar).
+- **Otomasyon:** GitHub Actions her gece İstanbul saatiyle 04:53'te (tam tur) ve 13:23'te (öğle turu: yalnızca çok önemli gelişmeler, kısa not) çalışır (son 26 saatin gelişmelerini tarar).
 - **Yayın:** GitHub Pages (ücretsiz) + **yzgundemi.com**. Alan adı bağlanana kadar site https://alidenizergun.github.io/yapayzekablog/ adresinde yayındadır.
 
 ## Kaynak güvencesi

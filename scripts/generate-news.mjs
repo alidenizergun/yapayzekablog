@@ -17,7 +17,8 @@
  * Ortam değişkenleri (hepsi isteğe bağlı, ANTHROPIC_API_KEY hariç):
  *   NEWS_MODEL        varsayılan: claude-sonnet-5-5
  *   MAX_ARTICLES      bir çalışmada en fazla kaç haber (varsayılan 10)
- *   LOOKBACK_HOURS    kaç saat geriye bakılsın (varsayılan 15)
+ *   LOOKBACK_HOURS    kaç saat geriye bakılsın (varsayılan 26)
+ *   NEWS_MODE         ogle: öğle ara turu (yalnızca çok önemli gelişmeler, kısa not biçiminde)
  *   MAX_SEARCHES      bir çalışmada en fazla kaç web araması (varsayılan 20)
  *   REQUIRE_REVIEW    "true" ise haberler taslak (draft) olarak kaydedilir, siteye çıkmaz
  *   X_BEARER_TOKEN    tanımlıysa X'teki takip listesi (scripts/x-accounts.json) de taranır
@@ -43,6 +44,8 @@ const LOOKBACK_HOURS = Number(process.env.LOOKBACK_HOURS || 26);
 // WEEKEND_SEARCHES ile değiştirilebilir.
 const IST_DAY = new Date(Date.now() + 3 * 3600e3).getUTCDay(); // 0 = Pazar, 6 = Cumartesi
 const IS_WEEKEND = IST_DAY === 0 || IST_DAY === 6;
+// Öğle turu (NEWS_MODE=ogle): yalnızca sabahtan beri çıkan çok önemli gelişmeler, kısa not biçiminde
+const MIDDAY = (process.env.NEWS_MODE || '').toLowerCase() === 'ogle';
 const WEEKDAY_SEARCHES = Number(process.env.MAX_SEARCHES || 20);
 const MAX_SEARCHES = IS_WEEKEND
   ? Number(process.env.WEEKEND_SEARCHES || Math.max(5, Math.round(WEEKDAY_SEARCHES / 2)))
@@ -182,6 +185,9 @@ function toMarkdown(a, dateIso) {
   if (a.story && STORIES.some((s) => s.slug === a.story)) lines.push(`story: ${a.story}`);
   if (a.turkey_angle && !/^(yok|-|—)\.?$/i.test(a.turkey_angle)) lines.push(`turkeyAngle: ${yamlStr(a.turkey_angle)}`);
   if (a.key_points?.length >= 2) lines.push('keyPoints:', ...a.key_points.map((k) => `  - ${yamlStr(k)}`));
+  if (a.format === 'kisa') lines.push('format: kisa');
+  if (a.whats_next) lines.push(`whatsNext: ${yamlStr(a.whats_next)}`);
+  if (a.by_numbers?.length >= 2) lines.push('byNumbers:', ...a.by_numbers.flatMap((b) => [`  - value: ${yamlStr(b.value)}`, `    label: ${yamlStr(b.label)}`]));
   if (a.new_tool) lines.push('newTool:', `  name: ${yamlStr(a.new_tool.name)}`, `  url: ${yamlStr(a.new_tool.url)}`, ...(a.new_tool.what ? [`  what: ${yamlStr(a.new_tool.what)}`] : []));
   lines.push('sources:');
   for (const s of a.sources) {
@@ -212,7 +218,7 @@ async function research(anthropic, existing, xPosts = []) {
   const system = `Sen YZ Gündemi adlı Türkçe yapay zeka haber sitesinin araştırma editörüsün. Görevin, haber olmaya değer YENİ gelişmeleri web aramasıyla bulmak ve her biri için doğrulanmış bilgi notu çıkarmak.\n\n${GUIDELINES}`;
   const user = `Şu an: ${now} (İstanbul).
 
-Son ${LOOKBACK_HOURS} saat içinde yayınlanmış, yapay zeka alanındaki en önemli gelişmeleri bul. En fazla ${MAX_ARTICLES + 2} aday çıkar; önem sırasına koy.
+Son ${LOOKBACK_HOURS} saat içinde yayınlanmış, yapay zeka alanındaki en önemli gelişmeleri bul. En fazla ${MAX_ARTICLES + 2} aday çıkar; önem sırasına koy.${MIDDAY ? '\nÖĞLE TURU: Bu ara güncellemedir. Yalnızca son ' + LOOKBACK_HOURS + ' saatte çıkan, ertesi sabahı bekleyemeyecek kadar önemli gelişmeleri (büyük lansman, satın alma, resmi karar, önemli kriz) aday yap; sıradan haberleri gece turuna bırak. Böyle bir gelişme yoksa yalnızca "YENİ GELİŞME YOK" yaz.' : ''}
 
 Arama önerileri: büyük yapay zeka şirketlerinin son duyuruları, "AI" + bugünün tarihi, yapay zeka yatırım/satın alma haberleri, yapay zeka regülasyonu, Türkiye yapay zeka haberleri. Mümkün olduğunda birincil kaynağı (resmi blog, duyuru, makale) da bul.
 TÜRKİYE: Aramalarının en az ikisini Türkçe yap ve Türkiye'deki yapay zeka gelişmelerine ayır (ör. "yapay zeka girişimi yatırım aldı", "yapay zeka Türkiye duyurdu", kamu kurumlarının yapay zeka duyuruları, Türk şirketlerinin yapay zeka ürünleri). Önemli bir Türkiye gelişmesi varsa adaylara mutlaka ekle ve kategorisini "turkiye" yap.
@@ -288,7 +294,7 @@ const ARTICLE_SCHEMA = {
       items: {
         type: 'object',
         additionalProperties: false,
-        required: ['title', 'spot', 'category', 'tags', 'image', 'brand', 'image_query', 'body_markdown', 'why_it_matters', 'key_points', 'turkey_angle', 'story', 'deal', 'new_tool', 'featured', 'popularity', 'tweet', 'sources'],
+        required: ['title', 'spot', 'category', 'tags', 'image', 'brand', 'image_query', 'body_markdown', 'why_it_matters', 'key_points', 'whats_next', 'by_numbers', 'format', 'turkey_angle', 'story', 'deal', 'new_tool', 'featured', 'popularity', 'tweet', 'sources'],
         properties: {
           title: { type: 'string', description: 'Haber başlığı, 60-100 karakter' },
           spot: { type: 'string', description: 'Spot metni, 1-2 cümle, 140-280 karakter' },
@@ -317,6 +323,9 @@ const ARTICLE_SCHEMA = {
           },
           story: { type: 'string', enum: ['', ...STORIES.map((s) => s.slug)], description: 'Haber aşağıdaki süren hikâyelerden birinin devamıysa onun slug\'ı; değilse boş' },
           key_points: { type: 'array', items: { type: 'string' }, description: '"Kısaca" kutusu: haberin en önemli 3 noktası, her biri tek kısa cümle (en fazla 140 karakter); yalnızca metinde yazan bilgiler' },
+          whats_next: { type: 'string', description: '"Sırada ne var?" kutusu: notlarda yazan somut bir sonraki adım (tarih, karar, lansman, son gün), tek cümle. Notlarda yoksa boş; tahmin yazma.' },
+          by_numbers: { type: 'array', items: { type: 'object', additionalProperties: false, required: ['value', 'label'], properties: { value: { type: 'string', description: 'Rakam, metindeki yazımıyla (ör. "12,9 milyar dolar")' }, label: { type: 'string', description: 'Rakamın ne olduğu, en fazla 60 karakter' } } }, description: '"Rakamlarla" kutusu: haberdeki en önemli 2-4 rakam; yalnızca gövdede geçen rakamlar. Rakam yoksa boş liste.' },
+          format: { type: 'string', enum: ['haber', 'kisa'], description: 'haber: normal haber; kisa: tek olguyu duyuran kısa not (gövde 80-150 kelime)' },
           turkey_angle: { type: 'string', description: '"Türkiye açısından" notu, tek cümle; yalnızca notlarda somut Türkiye bağlantısı varsa, yoksa boş' },
           featured: { type: 'boolean' },
           popularity: { type: 'integer', description: 'Okunma potansiyeli, 1-100 (yayın kurallarındaki ölçüye göre)' },
@@ -360,7 +369,7 @@ image_query: Haberi temsil edecek gerçek bir fotoğraf için İngilizce, somut 
 Kategoriler: ${CATEGORIES.map((c) => `${c.slug} (${c.name})`).join(', ')}
 Süren hikâyeler (story alanı; haber bunlardan birinin yeni gelişmesiyse): ${STORIES.map((s) => `${s.slug} (${s.title})`).join(', ') || 'yok'}
 
-Notlarda "YENİ GELİŞME YOK" yazıyorsa veya yazılabilecek haber yoksa boş bir "articles" listesi döndür.
+${MIDDAY ? 'ÖĞLE TURU: Haberleri "kisa" biçiminde yaz: gövde 2-3 kısa paragraf, 80-150 kelime; yalnızca olgular. by_numbers boş kalabilir.\n\n' : 'Biçim: normal haberlerde format "haber"; yalnızca tek bir olguyu duyuran çok kısa gelişmelerde "kisa".\n\n'}Notlarda "YENİ GELİŞME YOK" yazıyorsa veya yazılabilecek haber yoksa boş bir "articles" listesi döndür.
 
 İZİNLİ KAYNAK ADRESLERİ:
 ${allowed || '(yok)'}
@@ -488,7 +497,7 @@ function validate(articles, seen, existing) {
 
     if (title.length < 20 || title.length > 140) reasons.push('başlık uzunluğu');
     if ((a.spot || '').length < 60 || (a.spot || '').length > 320) reasons.push('spot uzunluğu');
-    if ((a.body_markdown || '').split(/\s+/).length < 60) reasons.push('gövde çok kısa');
+    if ((a.body_markdown || '').split(/\s+/).length < (a.format === 'kisa' ? 45 : 60)) reasons.push('gövde çok kısa');
     if (!CATEGORIES.some((c) => c.slug === a.category)) reasons.push('kategori');
     if (!IMAGES[a.image]) reasons.push('görsel');
     if (sources.length === 0) reasons.push('doğrulanmış kaynak yok');
@@ -515,6 +524,17 @@ function validate(articles, seen, existing) {
         .map((k) => String(k).replace(/<[^>]*>/g, '').replace(/\s+/g, ' ').trim().slice(0, 180)).filter(Boolean)
         .filter((k) => (k.match(/\d+(?:[.,]\d+)*/g) || []).every((n) => `${a.title} ${a.spot} ${a.body_markdown}`.includes(n)))
         .slice(0, 3),
+      format: a.format === 'kisa' || MIDDAY ? 'kisa' : 'haber',
+      // Sırada ne var / Rakamlarla: rakamlar haber metninde geçmeli (uydurma tarih/rakam engeli)
+      whats_next: (() => {
+        const w = String(a.whats_next || '').replace(/<[^>]*>/g, '').replace(/\s+/g, ' ').trim().slice(0, 240);
+        const text = `${a.title} ${a.spot} ${a.body_markdown}`;
+        return w && (w.match(/\d+(?:[.,]\d+)*/g) || []).every((n) => text.includes(n)) ? w : '';
+      })(),
+      by_numbers: (Array.isArray(a.by_numbers) ? a.by_numbers : [])
+        .map((b) => ({ value: String(b.value || '').replace(/<[^>]*>/g, '').trim().slice(0, 40), label: String(b.label || '').replace(/<[^>]*>/g, '').trim().slice(0, 80) }))
+        .filter((b) => b.value && b.label && /\d/.test(b.value) && (b.value.match(/\d+(?:[.,]\d+)*/g) || []).every((n) => `${a.title} ${a.spot} ${a.body_markdown}`.includes(n)))
+        .slice(0, 4),
       new_tool: (() => {
         // Yeni araç: ad metinde geçmeli; adres http(s) olmalı ve alan adı kaynaklardan birinde ya da metinde geçmeli
         const nt = a.new_tool || {};

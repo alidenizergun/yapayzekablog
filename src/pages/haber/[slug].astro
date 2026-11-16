@@ -66,7 +66,7 @@ const crumbs = [{ name: 'Ana sayfa', path: '/' }, { name: catName(d.category), p
   <div class="cols" style="margin-top:0;gap:56px">
     <article class="article" data-pagefind-body data-pagefind-filter={`Kategori:${catName(d.category)}`} data-pagefind-meta={`date:${formatDate(d.date, false)}`}>
       <nav class="crumb" aria-label="Konum" data-pagefind-ignore><a href={url('/')}>Ana sayfa</a><span aria-hidden="true">/</span><a href={catUrl(d.category)}>{catName(d.category)}</a></nav>
-      <span class="badge" data-pagefind-ignore>{catName(d.category)}</span>
+      <span class="badge" data-pagefind-ignore>{catName(d.category)}</span>{d.format === 'kisa' && <span class="badge badge-short" data-pagefind-ignore>Kısa not</span>}
       <h1 data-pagefind-meta="title">{d.title}</h1>
       <p class="spot">{d.spot}</p>
       {story && storyItems.length >= 2 && (
@@ -107,6 +107,13 @@ const crumbs = [{ name: 'Ana sayfa', path: '/' }, { name: catName(d.category), p
         </aside>
       )}
 
+      {d.byNumbers && d.byNumbers.length >= 2 && (
+        <aside class="by-numbers" aria-label="Rakamlarla">
+          <span class="cat">Rakamlarla</span>
+          <dl>{d.byNumbers.map((b) => <div><dt>{b.value}</dt><dd>{b.label}</dd></div>)}</dl>
+        </aside>
+      )}
+
       <div class="prose"><Content /></div>
       {d.newTool && (
         <aside class="why new-tool" aria-label="Yeni araç">
@@ -116,10 +123,16 @@ const crumbs = [{ name: 'Ana sayfa', path: '/' }, { name: catName(d.category), p
         </aside>
       )}
 
-      {(d.whyItMatters || d.turkeyAngle) && (
+      {(d.whyItMatters || d.turkeyAngle || d.whatsNext) && (
         <aside class="why" aria-label="Bu ne anlama geliyor">
           <span class="cat">Bu ne anlama geliyor?</span>
           {d.whyItMatters && <p>{d.whyItMatters}</p>}
+          {d.whatsNext && (
+            <div class="why-tr why-next">
+              <span class="why-tr-label">Sırada ne var?</span>
+              <p>{d.whatsNext}</p>
+            </div>
+          )}
           {d.turkeyAngle && (
             <div class="why-tr">
               <span class="why-tr-label">Türkiye açısından</span>

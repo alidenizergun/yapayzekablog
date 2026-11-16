@@ -1,0 +1,47 @@
+---
+// Akış: tüm haberler ve kısa notlar, en yeniden eskiye, saatleriyle (The Verge "Quick Posts" / Techmeme "River" benzeri)
+import Base from '../layouts/Base.astro';
+import { getNews, newsUrl, catName, catUrl, url } from '../lib/news.js';
+import { render } from 'astro:content';
+
+const all = (await getNews()).slice(0, 60);
+const IST = 3 * 3600e3;
+const dayKey = (d) => new Date(d.valueOf() + IST).toISOString().slice(0, 10);
+const hm = (d) => new Date(d.valueOf() + IST).toISOString().slice(11, 16);
+const MONTHS = ['Ocak', 'Şubat', 'Mart', 'Nisan', 'Mayıs', 'Haziran', 'Temmuz', 'Ağustos', 'Eylül', 'Ekim', 'Kasım', 'Aralık'];
+const today = dayKey(new Date()), yesterday = dayKey(new Date(Date.now() - 86400e3));
+const dayName = (k) => (k === today ? 'Bugün' : k === yesterday ? 'Dün' : `${Number(k.slice(8))} ${MONTHS[Number(k.slice(5, 7)) - 1]} ${k.slice(0, 4)}`);
+const days = [];
+for (const n of all) {
+  const k = dayKey(n.data.date);
+  let g = days.find((x) => x.k === k);
+  if (!g) days.push((g = { k, items: [] }));
+  g.items.push({ n, Content: n.data.format === 'kisa' ? (await render(n)).Content : null });
+}
+---
+<Base title="Akış: yapay zeka gündemi dakika dakika" description="YZ Gündemi'nde yayımlanan tüm yapay zeka haberleri ve kısa notlar, en yeniden eskiye, saatleriyle."
+  breadcrumbs={[{ name: 'Ana sayfa', path: '/' }, { name: 'Akış', path: '/akis/' }]}>
+  <section class="glossary river">
+    <span class="cat">Akış</span>
+    <h1 class="page-h">Yapay zeka gündemi: akış</h1>
+    <p class="spot">Yayımladığımız tüm haberler ve kısa notlar, en yeniden eskiye. Gece turunda günün haberleri, öğle turunda yalnızca önemli gelişmeler eklenir.</p>
+    {days.map((g) => (
+      <section aria-labelledby={`d-${g.k}`}>
+        <h2 id={`d-${g.k}`} class="ev-h">{dayName(g.k)} <span class="meta">· {g.items.length} haber</span></h2>
+        <ol class="river-list">
+          {g.items.map(({ n, Content }) => (
+            <li class={`river-item${Content ? ' is-short' : ''}`}>
+              <time datetime={n.data.date.toISOString()}>{hm(n.data.date)}</time>
+              <div>
+                <a class="cat" href={catUrl(n.data.category)}>{catName(n.data.category)}</a>{Content && <span class="river-kind">Kısa not</span>}
+                <h3><a href={newsUrl(n)}>{n.data.title}</a></h3>
+                {Content ? <div class="river-body"><Content /></div> : <p>{n.data.spot}</p>}
+              </div>
+            </li>
+          ))}
+        </ol>
+      </section>
+    ))}
+    <p class="ai-note">Daha eski haberler için <a href={url('/sayfa/2/')}>arşive</a> veya <a href={url('/haftalik/')}>haftalık özetlere</a> bakın.</p>
+  </section>
+</Base>

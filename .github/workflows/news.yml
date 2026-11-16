@@ -1,17 +1,22 @@
 # Her sabah yeni yapay zeka haberlerini üretir, siteyi derleyip yayınlar.
-# Saatler UTC'dir: 01:53 UTC = İstanbul 04:53 (tam saat başı GitHub'da en yoğun an; gecikme ve atlanma riskini azaltmak için)
+# Saatler UTC'dir: 01:53 UTC = İstanbul 04:53 (gece turu), 10:23 UTC = 13:23 (öğle turu) (tam saat başı GitHub'da en yoğun an; gecikme ve atlanma riskini azaltmak için)
 # Not: GitHub zamanlanmış işleri yoğunluğa göre birkaç dakika gecikmeli başlatabilir.
 name: Haber güncellemesi
 
 on:
   schedule:
-    - cron: '53 1 * * *'
+    - cron: '53 1 * * *'    # gece turu: 04:53 İstanbul, tam haber
+    - cron: '23 10 * * *'   # öğle turu: 13:23 İstanbul, yalnızca çok önemli gelişmeler (kısa not)
   workflow_dispatch:
     inputs:
       max_articles:
         description: 'Bu çalışmada en fazla kaç haber?'
         required: false
         default: '10'
+      mode:
+        description: 'Tur: boş = tam haber turu, ogle = öğle ara turu (kısa not)'
+        required: false
+        default: ''
       only_photos:
         description: 'Yalnızca eksik fotoğrafları doldur (haber üretme, Claude kullanma)'
         type: boolean
@@ -51,9 +56,10 @@ jobs:
           X_BEARER_TOKEN: ${{ secrets.X_BEARER_TOKEN }}
           UNSPLASH_ACCESS_KEY: ${{ secrets.UNSPLASH_ACCESS_KEY }}
           NEWS_MODEL: ${{ vars.NEWS_MODEL }}
-          MAX_ARTICLES: ${{ inputs.max_articles || vars.MAX_ARTICLES || '10' }}
-          LOOKBACK_HOURS: ${{ vars.LOOKBACK_HOURS || '26' }}
-          MAX_SEARCHES: ${{ vars.MAX_SEARCHES || '20' }}
+          NEWS_MODE: ${{ github.event.schedule == '23 10 * * *' && 'ogle' || inputs.mode || '' }}
+          MAX_ARTICLES: ${{ github.event.schedule == '23 10 * * *' && (vars.MIDDAY_ARTICLES || '3') || inputs.max_articles || vars.MAX_ARTICLES || '10' }}
+          LOOKBACK_HOURS: ${{ github.event.schedule == '23 10 * * *' && '10' || vars.LOOKBACK_HOURS || '26' }}
+          MAX_SEARCHES: ${{ github.event.schedule == '23 10 * * *' && '8' || vars.MAX_SEARCHES || '20' }}
           WEEKEND_SEARCHES: ${{ vars.WEEKEND_SEARCHES }}
           REQUIRE_REVIEW: ${{ vars.REQUIRE_REVIEW || 'false' }}
           PHOTOS_ONLY: ${{ inputs.only_photos || 'false' }}

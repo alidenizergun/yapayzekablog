@@ -39,6 +39,9 @@ const haberler = defineCollection({
     whyItMatters: z.string().optional(),
     // "Türkiye açısından" notu: yalnızca kaynaklarda somut bir Türkiye bağlantısı varsa (boşsa gösterilmez)
     turkeyAngle: z.string().optional(),
+    format: z.enum(['haber', 'kisa']).default('haber'),       // kisa: gün içi kısa not
+    whatsNext: z.string().max(300).optional(),                 // "Sırada ne var?" kutusu
+    byNumbers: z.array(z.object({ value: z.string(), label: z.string() })).max(4).optional(), // "Rakamlarla" kutusu
     newTool: z.object({ name: z.string(), url: httpUrl, what: z.string().optional() }).optional(), // yeni araç radarı (/yeni-araclar/)
     keyPoints: z.array(z.string().max(200)).max(3).optional(), // "Kısaca" kutusu
     // Gelişen hikâye (src/lib/stories.js): bu haber süren bir konunun devamıysa hikâyenin slug'ı

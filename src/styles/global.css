@@ -726,3 +726,25 @@ header.site .masthead { display: flex; align-items: center; justify-content: spa
 .new-tool p { margin: 6px 0 0; }
 .new-tool a { color: var(--accent-text); font-weight: 600; }
 @media (max-width: 560px) { .compare-table th[scope="row"] { white-space: normal; word-break: break-word; } }
+
+/* ---------- Rakamlarla / Kısa not ---------- */
+.badge-short { margin-left: 8px; background: var(--soft); color: var(--fg); }
+.by-numbers { margin: 28px 0 0; padding: 18px 20px; border: 1px solid var(--line); border-radius: 10px; max-width: 68ch; }
+.by-numbers dl { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 150px), 1fr)); gap: 16px 24px; margin: 10px 0 0; }
+.by-numbers dt { font-family: var(--display); font-weight: 800; font-size: 24px; line-height: 1.15; color: var(--accent-text); }
+.by-numbers dd { margin: 4px 0 0; font-size: 14px; color: var(--muted); line-height: 1.4; }
+.why-next + .why-tr { margin-top: 12px; }
+
+/* ---------- Akış ---------- */
+.river-list { list-style: none; margin: 8px 0 0; padding: 0; max-width: 860px; border-left: 2px solid var(--line); }
+.river-item { display: grid; grid-template-columns: 64px minmax(0, 1fr); gap: 12px; padding: 16px 0 16px 18px; position: relative; }
+.river-item::before { content: ""; position: absolute; left: -6px; top: 22px; width: 10px; height: 10px; border-radius: 50%; background: var(--bg); border: 2px solid var(--muted); }
+.river-item.is-short::before { border-color: var(--accent-text); background: var(--accent-text); }
+.river-item time { font-variant-numeric: tabular-nums; font-weight: 700; color: var(--muted); padding-top: 2px; }
+.river-item h3 { margin: 4px 0 0; font-size: 19px; line-height: 1.3; text-wrap: balance; }
+.river-item h3 a:hover { color: var(--accent-text); text-decoration: underline; }
+.river-item p { margin: 6px 0 0; color: var(--muted); line-height: 1.55; }
+.river-kind { margin-left: 8px; font-size: 12px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--fg); }
+.river-body { margin-top: 8px; line-height: 1.6; font-size: 16px; }
+.river-body p { color: var(--fg); }
+@media (max-width: 560px) { .river-item { grid-template-columns: 1fr; gap: 2px; } }

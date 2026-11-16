@@ -22,6 +22,7 @@ keyPoints:
   - "Bessent, Nvidia yönetim kurulundan 10 gün içinde yanıt istedi."
   - "Bakan, bir sonraki CEO'nun şirket dışından seçilmesi gerektiğini söyledi."
   - "Nvidia, Salı günü açıklayacağı bilançoyla ilk önemli kamuoyu açıklamasını yapacak."
+whatsNext: "Bessent, Nvidia yönetim kurulundan 10 gün içinde yanıt bekliyor; Nvidia ilk önemli kamuoyu açıklamasını Salı günü açıklayacağı bilançoyla yapacak."
 sources:
   - title: "Bessent questions did Nvidia \"goose\" earnings with suspect China chip sales"
     url: "https://www.axios.com/2026/11/15/bessent-nvidia-earnings-china-chip-sales-ceo"
