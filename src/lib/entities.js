@@ -3,7 +3,7 @@
 // etiketlerinden biri konunun adlarından biriyse ya da başlık/spot metninde adı geçiyorsa.
 // Yeni bir şirket veya kişi eklemek için listeye bir satır eklemek yeterli; sayfa, en az bir haberi varsa oluşur.
 
-import { tagSlug } from './news.js';
+import { tagSlug } from './slug.js';
 
 export const ENTITIES = [
   // ------------------------------------------------------------ şirketler
