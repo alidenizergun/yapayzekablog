@@ -94,5 +94,29 @@
     "importance": 30,
     "featured": false,
     "date": "2026-11-16T17:44:59+03:00"
+  },
+  {
+    "slug": "openai-akademisyenlere-ucretsiz-erisim-programini-200-bin-arastirmaciya-genislet",
+    "title": "OpenAI, akademisyenlere ücretsiz erişim programını 200 bin araştırmacıya genişletiyor",
+    "text": "OpenAI, ChatGPT for Academic Researchers programını 200 bin araştırmacıya ulaşacak şekilde genişletti. 50 bin yeni hibe 23 Kasım'da açılacak. #OpenAI",
+    "importance": 52,
+    "featured": false,
+    "date": "2026-11-16T23:36:24+03:00"
+  },
+  {
+    "slug": "openai-guvenlik-testleri-icin-dis-uzmanlara-ic-modellerine-derin",
+    "title": "OpenAI, güvenlik testleri için dış uzmanlara iç modellerine derin erişim veriyor",
+    "text": "OpenAI, Apollo Research, METR, Transluce ve Goodfire ile gömülü değerlendirme çalışmalarına başladı. Dış uzmanlar iç modellere derin erişimle güvenlik önlemlerini test edecek. #OpenAI",
+    "importance": 48,
+    "featured": false,
+    "date": "2026-11-16T23:35:24+03:00"
+  },
+  {
+    "slug": "chatgpt-for-healthcare-e-daha-yetenekli-ajanlar-ve-20",
+    "title": "ChatGPT for Healthcare'e daha yetenekli ajanlar ve 20'den fazla sağlık eklentisi geliyor",
+    "text": "OpenAI, ChatGPT for Healthcare'i daha yetenekli ajanlar, daha güçlü klinik yanıtlar ve 20'den fazla yeni sağlık eklentisiyle genişletti. #OpenAI",
+    "importance": 42,
+    "featured": false,
+    "date": "2026-11-16T23:34:24+03:00"
   }
 ]
