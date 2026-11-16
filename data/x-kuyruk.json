@@ -30,5 +30,61 @@
     "importance": 48,
     "featured": false,
     "date": "2026-11-16T08:46:03+03:00"
+  },
+  {
+    "slug": "abd-yonetimi-24-ten-fazla-yapay-zeka-sirketini-ulusal",
+    "title": "ABD yönetimi 24'ten fazla yapay zeka şirketini \"ulusal şampiyon\" ilan etmeye hazırlanıyor",
+    "text": "WSJ'ye göre Trump yönetimi, aralarında Nvidia, OpenAI ve Anthropic'in bulunduğu 24'ten fazla yapay zeka şirketini \"ulusal şampiyon\" ilan etmeye hazırlanıyor. Resmî açıklama henüz yok.",
+    "importance": 72,
+    "featured": false,
+    "date": "2026-11-16T17:30:51+03:00"
+  },
+  {
+    "slug": "imf-genel-muduru-yapay-zeka-sirketleri-arasindaki-dongusel-finansman",
+    "title": "IMF Genel Müdürü: Yapay zeka şirketleri arasındaki döngüsel finansman 1 trilyon doları aştı",
+    "text": "IMF Genel Müdürü Georgieva, yapay zeka şirketleri arasındaki döngüsel finansmanın 1 trilyon doları aştığını ve üçte ikisinin borçla finanse edildiğini söyledi.",
+    "importance": 66,
+    "featured": false,
+    "date": "2026-11-16T17:29:51+03:00"
+  },
+  {
+    "slug": "fed-den-barr-yapay-zeka-ajanlari-banka-kacislarini-hizlandirabilir",
+    "title": "Fed'den Barr: Yapay zeka ajanları banka kaçışlarını hızlandırabilir",
+    "text": "Fed Yönetim Kurulu Üyesi Michael Barr, otonom yapay zeka ajanlarının mevduatı hızla kaydırarak banka kaçışlarını hızlandırabileceği uyarısında bulundu.",
+    "importance": 48,
+    "featured": false,
+    "date": "2026-11-16T17:28:51+03:00"
+  },
+  {
+    "slug": "tencent-gunluk-is-gorevleri-icin-dusuk-maliyetli-hy4-flash",
+    "title": "Tencent, günlük iş görevleri için düşük maliyetli Hy4 flash modelini duyurdu",
+    "text": "Tencent, 224 milyar parametreli düşük maliyetli Hy4 flash modelini duyurdu. Girdi fiyatı milyon token başına 0,07 dolar; şirket maliyet avantajının iç testlere dayandığını belirtiyor.",
+    "importance": 45,
+    "featured": false,
+    "date": "2026-11-16T17:27:51+03:00"
+  },
+  {
+    "slug": "bakan-kacir-antalya-yapay-zeka-taahhudu-80-destek-beyani",
+    "title": "Bakan Kacır: Antalya Yapay Zeka Taahhüdü 80 destek beyanı ve 271 somut taahhüt aldı",
+    "text": "Bakan Kacır, Antalya Yapay Zeka Taahhüdü'nün 80 destek beyanı ve 271 somut taahhüt aldığını açıkladı. Taahhüt, COP31 Başkanlığı ve ITU iş birliğiyle başlatılmıştı.",
+    "importance": 55,
+    "featured": false,
+    "date": "2026-11-16T17:26:51+03:00"
+  },
+  {
+    "slug": "avustralya-oncu-yapay-zeka-sirketleri-icin-zorunlu-guvenlik-yukumlulukleri",
+    "title": "Avustralya, öncü yapay zeka şirketleri için zorunlu güvenlik yükümlülükleri getirecek",
+    "text": "IT Brief'e göre Avustralya, bir yapay zeka ajanının Medicare portalına sızmasının ardından öncü yapay zeka şirketlerine zorunlu güvenlik yükümlülükleri getirecek. Ayrıntılar 2027'de bekleniyor.",
+    "importance": 35,
+    "featured": false,
+    "date": "2026-11-16T17:25:51+03:00"
+  },
+  {
+    "slug": "abd-ve-rusya-nin-bm-toplantisinda-otonom-silahlara-baglayici",
+    "title": "ABD ve Rusya'nın BM toplantısında otonom silahlara bağlayıcı kurala karşı çıkması bekleniyor",
+    "text": "Reuters'a göre ABD ve Rusya'nın, Cenevre'deki BM toplantısında otonom silahlara yönelik bağlayıcı kurallar için müzakere başlatılmasına karşı çıkması bekleniyor.",
+    "importance": 45,
+    "featured": false,
+    "date": "2026-11-16T17:24:51+03:00"
   }
 ]
