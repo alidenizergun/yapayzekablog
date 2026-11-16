@@ -37,12 +37,21 @@ jobs:
           NEWS_MODEL: ${{ vars.NEWS_MODEL }}
         run: node scripts/weekly-digest.mjs
 
+      - name: İngilizce çeviri
+        if: steps.digest.outputs.changed == '1'
+        continue-on-error: true
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          TRANSLATE_MODEL: ${{ vars.TRANSLATE_MODEL }}
+        run: |
+          node scripts/translate-en.mjs --only=digests || { git clean -fdq src/content/ozetler-en; exit 1; }
+
       - name: Derleme kontrolü
         if: steps.digest.outputs.changed == '1'
         run: |
           if ! npm run build; then
             echo "::error::Derleme başarısız; özet geri alınıyor."
-            git clean -fd src/content/ozetler
+            git clean -fd src/content/ozetler src/content/ozetler-en
             exit 1
           fi
 
@@ -53,7 +62,7 @@ jobs:
         run: |
           git config user.name "yzgundemi-bot"
           git config user.email "yzgundemi-bot@users.noreply.github.com"
-          git add src/content/ozetler
+          git add src/content/ozetler src/content/ozetler-en
           git diff --cached --quiet && exit 0
           git commit -m "Haftalık özet ($(TZ=Europe/Istanbul date '+%d.%m.%Y'))"
           git pull --rebase origin "$BRANCH"
