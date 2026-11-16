@@ -1,7 +1,7 @@
 ---
 ref: "2026-11-16-ls-electric-yapay-zeka-veri-merkezi-icin-94-milyon"
 slug: "ls-electric-signs-93-83-million-power-equipment-deal"
-title: "LS Electric Signs $93.83 Million Power Equipment Deal for AI Data Center"
+title: "LS Electric signs $93.83 million power equipment deal for AI data center"
 spot: "LS Electric said it has signed a contract worth about $93.83 million to supply power systems for a hyperscale data center operated by a global technology company."
 whyItMatters: "As AI use grows, the time it takes for a data center to connect to electricity, known as time to power, is becoming a decisive factor in competition."
 keyPoints:

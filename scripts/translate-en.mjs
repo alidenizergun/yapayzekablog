@@ -134,7 +134,7 @@ async function translateNews() {
       deal_counterparty: (fm.match(/^deal:\n(?:  .*\n)*?  counterparty:\s*(.*)$/m) || [])[1]?.replace(/^"|"$/g, '') || '', deal_amount: (fm.match(/^deal:\n(?:  .*\n)*?  amount:\s*(.*)$/m) || [])[1]?.replace(/^"|"$/g, '') || '', body_markdown: body };
     if (DRY) { log('(deneme)', f); continue; }
     try {
-      const en = await ask(`Translate this Turkish news article (JSON fields) into English. Empty fields stay empty. Keep the headline under 110 characters. photo_alt is an English image description; if it is already English, keep it.\n\n${JSON.stringify(tr, null, 1)}`, NEWS_SCHEMA);
+      const en = await ask(`Translate this Turkish news article (JSON fields) into English. Empty fields stay empty. Keep the headline under 110 characters and write it in sentence case (capitalize only the first word and proper nouns), like the site's other headlines. photo_alt is an English image description; if it is already English, keep it.\n\n${JSON.stringify(tr, null, 1)}`, NEWS_SCHEMA);
       const lost = numbersKept(`${tr.title} ${tr.spot} ${tr.body_markdown}`, `${en.title} ${en.spot} ${en.body_markdown}`);
       if (lost.length) log(`uyarı (rakam) ${f}: ${lost.join(', ')}`);
       const slug = uniqueSlug(titleSlug(en.title), used);
