@@ -328,3 +328,19 @@ export function priceShort(t) {
 }
 /** Haberin bu araçla ilgili olup olmadığı */
 export const newsAbout = (t, n) => t.match.test(`${n.data.title} ${n.data.spot}`);
+
+// Türkçe ekler araç adının okunuşuna göre: soru eki (mi/mı/mu/mü) ve iyelik eki ('in/'ın/'un, 'nin/'nın/'nun)
+const SUFFIX = {
+  chatgpt: ['mi', 'nin'], claude: ['mu', 'un'], gemini: ['mi', 'nin'], 'microsoft-copilot': ['mu', 'un'], perplexity: ['mi', 'nin'],
+  deepseek: ['mi', 'in'], grok: ['mu', 'un'], midjourney: ['mi', 'nin'], canva: ['mı', 'nın'], 'adobe-firefly': ['mı', 'ın'],
+  ideogram: ['mı', 'ın'], runway: ['mi', 'in'], kling: ['mi', 'in'], heygen: ['mi', 'in'], synthesia: ['mı', 'nın'],
+  elevenlabs: ['mi', 'in'], suno: ['mu', 'nun'], cursor: ['mı', 'ın'], 'github-copilot': ['mu', 'un'], gamma: ['mı', 'nın'],
+  deepl: ['mi', 'in'], 'google-translate': ['mi', 'nin'], otter: ['mı', 'ın'], fireflies: ['mı', 'ın'], notebooklm: ['mi', 'in'],
+  gptzero: ['mu', 'nun'], kickresume: ['mi', 'nin'],
+};
+/** "Claude mu" */
+export const withQ = (t) => `${t.name} ${SUFFIX[t.slug]?.[0] ?? 'mi'}`;
+/** "Claude'un" */
+export const withGen = (t) => `${t.name}'${SUFFIX[t.slug]?.[1] ?? 'in'}`;
+/** "ChatGPT mi Claude mu?" */
+export const vsTr = (a, b) => `${withQ(a)} ${withQ(b)}?`;

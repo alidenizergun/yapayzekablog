@@ -172,7 +172,7 @@ const crumbs = [{ name: 'Ana sayfa', path: '/' }, { name: cat, path: `/kategori/
 
       {related.length > 0 && (
         <section class="related" aria-labelledby="rel-h" data-pagefind-ignore>
-          <div class="sechead sm"><h2 id="rel-h">{T('İlgili Haberler', 'Related News')}</h2></div>
+          <div class="sechead sm"><h2 id="rel-h">{T('İlgili haberler', 'Related news')}</h2></div>
           <div class="grid4">
             {related.map((n) => (
               <a href={u(`/haber/${slugOf(n)}/`)}>

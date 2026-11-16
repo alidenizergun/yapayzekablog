@@ -27,8 +27,9 @@ const jsonLd = [
 ];
 ---
 <Base title={T('Yerli yapay zeka modelleri: hangisi kullanılabiliyor?', 'Turkish AI models: which ones can you use?')} description={T("EVREN, Kumru, Trendyol LLM, COSMOS, Turkcell LLM, HAVELSAN MAIN, T3 AI ve BİLGE: Türkiye'de geliştirilen yapay zeka modellerinin durumu, erişim yolu ve kaynakları.", 'EVREN, Kumru, Trendyol LLM, COSMOS, Turkcell LLM, HAVELSAN MAIN, T3 AI and BİLGE: status, access and sources for AI models built in Turkey.')}
-  jsonLd={jsonLd} breadcrumbs={[{ name: 'Ana sayfa', path: '/' }, { name: T("Türkiye'de yapay zeka", 'AI in Turkey'), path: '/turkiye-yapay-zeka/' }, { name: T('Yerli modeller', 'Turkish models'), path: '/yerli-yapay-zeka/' }]}>
+  jsonLd={jsonLd} breadcrumbs={[{ name: 'Ana sayfa', path: '/' }, { name: T("Türkiye'de yapay zeka", 'AI in Turkey'), path: '/turkiye-yapay-zeka/' }, { name: T('Yerli modeller', 'Turkish AI models'), path: '/yerli-yapay-zeka/' }]}>
   <section class="deals" data-pagefind-body>
+    <nav class="crumb" aria-label={T('Konum', 'Breadcrumb')} data-pagefind-ignore><a href={url('/')}>{T('Ana sayfa', 'Home')}</a><span aria-hidden="true">/</span><a href={url('/turkiye-yapay-zeka/')}>{T("Türkiye'de yapay zeka", 'AI in Turkey')}</a></nav>
     <span class="cat">{T('Türkiye', 'Turkey')}</span>
     <h1 class="page-h">{T('Yerli yapay zeka modelleri', 'Turkish AI models')}</h1>
     <p class="spot">{T("Türkiye'de geliştirilen büyük dil modelleri ve yapay zeka platformları: kim geliştirdi, bugün nasıl erişiliyor, kullanıma açık mı? Her bilgi resmi kaynağa veya haberine bağlıdır.", 'Large language models and AI platforms built in Turkey: who made them, how to access them today and whether they’re open to the public. Everything links to an official source or news report.')}</p>

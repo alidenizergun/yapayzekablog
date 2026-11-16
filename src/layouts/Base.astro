@@ -106,12 +106,12 @@ const navGroups = [
     item(T("Türkiye'de yapay zeka", 'AI in Turkey'), '/turkiye-yapay-zeka/', T('Ekosistem, düzenlemeler, yatırımlar', 'Ecosystem, regulation, funding')),
     item(T('Yerli modeller', 'Turkish AI models'), '/yerli-yapay-zeka/'),
     ...(counts.get('turkiye') ? [item(T('Türkiye haberleri', 'Turkey news'), '/kategori/turkiye/')] : []),
-    item(T('Etkinlik takvimi', 'Events calendar'), '/etkinlikler/'),
+    item(T('Etkinlik takvimi', 'Events'), '/etkinlikler/'),
   ] },
   { label: T('Takip', 'Trackers'), right: true, items: [
-    item(T('Haftalık özet', 'Weekly digest'), '/haftalik/', T('Haftanın en önemli gelişmeleri', 'The week’s biggest stories')),
+    item(T('Haftalık özet', 'Weekly roundup'), '/haftalik/', T('Haftanın en önemli gelişmeleri', 'The week’s biggest stories')),
     item(T('Gelişen hikâyeler', 'Developing stories'), '/gelisme/', T('Süren olayların zaman çizelgesi', 'Timelines of ongoing stories')),
-    item(T('Yatırım takipçisi', 'AI funding tracker'), '/yatirimlar/'),
+    item(T('Yatırım takipçisi', 'Funding tracker'), '/yatirimlar/'),
     item(T('Şirketler ve kişiler', 'Companies and people'), '/konular/'),
   ] },
 ];
@@ -276,41 +276,24 @@ const isBreaking = latest && Date.now() - latest.data.date.valueOf() < BREAKING_
         <p class="foot-ai">{T('Haberler yapay zeka desteğiyle, belirtilen kaynaklardan derlenir; her haberin altında kaynak bağlantıları yer alır.', 'Stories are compiled with AI assistance from the cited sources; every article links to its sources.')} <a href={L.u('/hakkimizda/')}>{T('Nasıl çalışıyoruz?', 'How we work')}</a></p>
       </div>
       <nav class="foot-col foot-cats" aria-labelledby="foot-cats">
-        <h2 id="foot-cats">{T('Kategoriler', 'Sections')}</h2>
+        <h2 id="foot-cats">{T('Haberler', 'News')}</h2>
         <ul>{footerCats.map((c) => <li><a href={L.u(`/kategori/${c.slug}/`)}>{S(`cat.${c.slug}.name`, c.name)}</a></li>)}</ul>
       </nav>
       <nav class="foot-col" aria-labelledby="foot-tools">
-        <h2 id="foot-tools">{T('Araçlar', 'AI tools')}</h2>
-        <ul>
-          <li><a href={L.u('/arac/')}>{T('Yapay zeka araçları', 'AI tools directory')}</a></li>
-          <li><a href={L.u('/arac-secici/')}>{T('Araç seçici', 'Tool finder')}</a></li>
-          <li><a href={L.u('/en-iyi/')}>{T('İşe göre en iyiler', 'Best tools by task')}</a></li>
-          <li><a href={L.u('/karsilastir/')}>{T('Karşılaştırmalar', 'Comparisons')}</a></li>
-          <li><a href={L.u('/ucretsiz-yapay-zeka-araclari/')}>{T('Ücretsiz araçlar', 'Free AI tools')}</a></li>
-          <li><a href={L.u('/yeni-araclar/')}>{T('Yeni araçlar', 'New AI tools')}</a></li>
-          <li><a href={L.u('/modeller-karsilastirma/')}>{T('Model fiyatları', 'Model pricing')}</a></li>
-        </ul>
+        <h2 id="foot-tools">{T('Araç rehberi', 'AI tools')}</h2>
+        <ul>{navGroups[1].items.map((i) => <li><a href={i.href}>{i.label}</a></li>)}</ul>
+      </nav>
+      <nav class="foot-col foot-cats foot-explore" aria-labelledby="foot-explore">
+        <h2 id="foot-explore">{T('Keşfet', 'Explore')}</h2>
+        <ul>{[...navGroups[2].items.filter((i) => !i.href.includes('/sozluk/yapay-zeka')), ...navGroups[3].items.filter((i) => !i.href.includes('/kategori/')), ...navGroups[4].items].map((i) => <li><a href={i.href}>{i.label}</a></li>)}</ul>
       </nav>
       <nav class="foot-col" aria-labelledby="foot-site">
-        <h2 id="foot-site">{T('Kurumsal', 'About')}</h2>
+        <h2 id="foot-site">YZ Gündemi</h2>
         <ul>
-          <li><a href={L.u('/turkiye-yapay-zeka/')}>{T("Türkiye'de yapay zeka", 'AI in Turkey')}</a></li>
-          <li><a href={L.u('/konular/')}>{T('Şirketler ve kişiler', 'Companies and people')}</a></li>
-          <li><a href={L.u('/gelisme/')}>{T('Gelişen hikâyeler', 'Developing stories')}</a></li>
-          <li><a href={L.u('/yatirimlar/')}>{T('Yatırım takipçisi', 'Funding tracker')}</a></li>
-          <li><a href={L.u('/etkinlikler/')}>{T('Etkinlik takvimi', 'Events calendar')}</a></li>
-          <li><a href={L.u('/sozluk/')}>{T('Terimler sözlüğü', 'AI glossary')}</a></li>
-          <li><a href={L.u('/rehber/')}>{T('Rehberler', 'Guides')}</a></li>
           <li><a href={L.u('/hakkimizda/')}>{T('Hakkımızda', 'About us')}</a></li>
           <li><a href={L.u('/hata-bildir/')}>{T('Hata bildir', 'Report an error')}</a></li>
-        </ul>
-      </nav>
-      <nav class="foot-col" aria-labelledby="foot-follow">
-        <h2 id="foot-follow">{T('Takip et', 'Follow')}</h2>
-        <ul>
-          <li><a href={L.u('/rss.xml')}>RSS</a></li>
           <li><a href={L.u('/akis/')}>{T('Canlı akış', 'Live feed')}</a></li>
-          <li><a href={L.u('/haftalik/')}>{T('Haftalık özet', 'Weekly roundup')}</a></li>
+          <li><a href={L.u('/rss.xml')}>RSS</a></li>
           <li><a href={switchHref} hreflang={lang === 'en' ? 'tr' : 'en'} lang={lang === 'en' ? 'tr' : 'en'}>{lang === 'en' ? 'Türkçe' : 'English'}</a></li>
           {newsletterOn && <li><a href={L.u('/') + '#bulten'}>{T('E-posta bülteni', 'Newsletter')}</a></li>}
           {SITE.social?.x && <li><a href={`https://x.com/${SITE.social.x}`}>X</a></li>}

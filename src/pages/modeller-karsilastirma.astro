@@ -1,5 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
+import NewsRow from '../components/NewsRow.astro';
 import { MODELS, MODELS_CHECKED, priceClass } from '../lib/models.js';
 import { getNews, newsUrl, formatDate, url } from '../lib/news.js';
 import { i18n, locNewsList } from '../i18n/index.js';
@@ -11,7 +12,9 @@ const pcl = (m) => (EN ? PC_EN[priceClass(m)] ?? priceClass(m) : priceClass(m));
 
 const rows = MODELS.map((m, i) => ({ ...m, note: m.note && S(`model.${i}.note`, m.note) })).sort((a, b) => b.output - a.output || b.input - a.input);
 const companies = [...new Set(rows.map((m) => m.company))];
-const usd = (n) => '$' + n.toLocaleString(L.locale, { minimumFractionDigits: Number.isInteger(n) ? 0 : 2, maximumFractionDigits: 2 });
+const num = (n) => n.toLocaleString(L.locale, { minimumFractionDigits: Number.isInteger(n) ? 0 : 2, maximumFractionDigits: 2 });
+// Site geneli: Türkçede "20 $", İngilizcede "$20"
+const usd = (n) => (EN ? `$${num(n)}` : `${num(n)} $`);
 const checked = formatDate(new Date(`${MODELS_CHECKED}T12:00:00+03:00`), false, L.locale);
 const modelNews = locNewsList((await getNews()).filter((n) => n.data.category === 'modeller'), lang, L.m).slice(0, 5);
 const pageUrl = new URL(url('/modeller-karsilastirma/'), Astro.site).href;
@@ -37,7 +40,7 @@ const jsonLd = [
 ];
 ---
 <Base title={T('Yapay zeka modelleri karşılaştırma: API fiyatları ve bağlam pencereleri', 'AI model pricing comparison: API prices and context windows')} description={T(`ChatGPT (OpenAI), Claude, Gemini ve DeepSeek modellerinin milyon token başına API fiyatları, bağlam pencereleri ve aylık maliyet hesaplayıcı. Son kontrol: ${checked}.`, `API prices per million tokens, context windows and a monthly cost calculator for OpenAI, Claude, Gemini and DeepSeek models. Last checked: ${checked}.`)}
-  jsonLd={jsonLd} breadcrumbs={[{ name: 'Ana sayfa', path: '/' }, { name: T('Model karşılaştırma', 'Model pricing'), path: '/modeller-karsilastirma/' }]}>
+  jsonLd={jsonLd} breadcrumbs={[{ name: 'Ana sayfa', path: '/' }, { name: T('Model API fiyatları', 'AI model API pricing'), path: '/modeller-karsilastirma/' }]}>
   <section class="deals models">
     <span class="cat">{T('Karşılaştırma', 'Comparison')}</span>
     <h1 class="page-h">{T('Yapay zeka modelleri karşılaştırma tablosu', 'AI model pricing comparison')}</h1>
@@ -90,8 +93,8 @@ const jsonLd = [
 
     {modelNews.length > 0 && (
       <section class="models-news" aria-labelledby="mn-h">
-        <h2 id="mn-h">{T('Son model haberleri', 'Latest model news')}</h2>
-        <ul>{modelNews.map((n) => <li><a href={newsUrl(n)}>{n.data.title}</a> <span class="meta">{formatDate(n.data.date, false, L.locale)}</span></li>)}</ul>
+        <div class="sechead"><h2 id="mn-h">{T('Son model haberleri', 'Latest model news')}</h2><a class="more-link" href={url('/kategori/modeller/')}>{T('Tümü →', 'All →')}</a></div>
+        {modelNews.map((n) => <NewsRow item={n} />)}
       </section>
     )}
   </section>
@@ -107,7 +110,9 @@ const jsonLd = [
   const inEl = document.querySelector<HTMLInputElement>('[data-in]')!;
   const outEl = document.querySelector<HTMLInputElement>('[data-out]')!;
   const list = document.querySelector<HTMLOListElement>('[data-results]')!;
-  const fmt = new Intl.NumberFormat(document.documentElement.lang === 'en' ? 'en-US' : 'tr-TR', { style: 'currency', currency: 'USD', maximumFractionDigits: 2 });
+  const EN = document.documentElement.lang === 'en';
+  const nf = new Intl.NumberFormat(EN ? 'en-US' : 'tr-TR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  const fmt = { format: (c: number) => (EN ? `$${nf.format(c)}` : `${nf.format(c)} $`) };
   const calc = () => {
     const i = Math.max(0, Number(inEl.value) || 0), o = Math.max(0, Number(outEl.value) || 0);
     const items = [...list.children] as HTMLLIElement[];

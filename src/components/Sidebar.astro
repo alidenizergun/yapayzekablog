@@ -23,7 +23,7 @@ const counts = CATEGORIES.map((c) => ({ ...c, n: news.filter((x) => x.data.categ
 <aside class="side-col">
   {picks.length > 0 && (
     <section class="pop" aria-labelledby={`pop-h-${id}`}>
-      <div class="sechead sm"><h2 id={`pop-h-${id}`}>{T('Bu Hafta', 'This Week')}</h2></div>
+      <div class="sechead sm"><h2 id={`pop-h-${id}`}>{T('Bu hafta', 'This week')}</h2></div>
       {picks.map((n) => (
         <a href={newsUrl(n)}>
           <span class="cat">{S(`cat.${n.data.category}.name`, catName(n.data.category))}</span>
@@ -34,7 +34,7 @@ const counts = CATEGORIES.map((c) => ({ ...c, n: news.filter((x) => x.data.categ
   )}
   {digest && (
     <a class="digest-card" href={digestUrl(digest)}>
-      <span class="cat">{T('Haftalık özet', 'Weekly digest')} · {weekRange(digest.data.weekStart, digest.data.weekEnd, lang)}</span>
+      <span class="cat">{T('Haftalık özet', 'Weekly roundup')} · {weekRange(digest.data.weekStart, digest.data.weekEnd, lang)}</span>
       <h3>{digest.data.title}</h3>
       <span class="meta">{digest.data.items.length} {T('gelişme tek sayfada →', 'stories on one page →')}</span>
     </a>
@@ -49,7 +49,7 @@ const counts = CATEGORIES.map((c) => ({ ...c, n: news.filter((x) => x.data.categ
   </section>
   {recent.length > 0 && (
     <section class="breaking" aria-labelledby={`recent-h-${id}`}>
-      <div class="sechead sm"><h2 id={`recent-h-${id}`}>{T('Son Haberler', 'Latest News')}</h2></div>
+      <div class="sechead sm"><h2 id={`recent-h-${id}`}>{T('Son haberler', 'Latest news')}</h2></div>
       {recent.map((n) => (
         <a href={newsUrl(n)}><span class="when"><Time date={n.data.date} /></span><span class="t">{n.data.title}</span></a>
       ))}

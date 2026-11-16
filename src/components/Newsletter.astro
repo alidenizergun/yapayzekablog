@@ -9,10 +9,10 @@ const EN = langOf(Astro.url) === 'en';
 ---
 {action && (
   <section class="news" id="bulten" aria-labelledby={`${id}-h`}>
-    <h2 id={`${id}-h`}>{EN ? 'AI news in your inbox every morning' : 'Yapay zeka gündemi, her sabah e-postanda'}</h2>
+    <h2 id={`${id}-h`}>{EN ? 'AI news in your inbox every morning' : 'Yapay zeka gündemi her sabah e-postanızda'}</h2>
     <p>{EN ? 'The day’s top stories in a 3-minute read.' : 'Günün en önemli gelişmeleri, 3 dakikada okunur.'}</p>
     <form method="post" action={action} target="_blank">
-      <label for={id}>{EN ? 'Your email' : 'E-posta adresin'}</label>
+      <label for={id}>{EN ? 'Your email' : 'E-posta adresiniz'}</label>
       <input id={id} name="email" type="email" required placeholder={EN ? 'name@company.com' : 'ad@sirket.com'} autocomplete="email" />
       <button type="submit">{EN ? 'Subscribe' : 'Abone ol'}</button>
     </form>

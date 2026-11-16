@@ -74,7 +74,7 @@ const nextEvents = EVENTS.map((e, i) => ({ ...e, name: S(`event.${i}.name`, e.na
 
     {news.length > 0 && (
       <section class="term-news" aria-labelledby="trn-h">
-        <div class="sechead"><h2 id="trn-h">{T('Türkiye ile ilgili son haberler', 'Latest Turkey news')}</h2><a class="more" href={url('/kategori/turkiye/')}>{T('Tümü →', 'All →')}</a></div>
+        <div class="sechead"><h2 id="trn-h">{T('Türkiye ile ilgili son haberler', 'Latest Turkey news')}</h2><a class="more-link" href={url('/kategori/turkiye/')}>{T('Tümü →', 'All →')}</a></div>
         {news.map((n) => <NewsRow item={n} choice={rowV.get(n.id)} />)}
       </section>
     )}

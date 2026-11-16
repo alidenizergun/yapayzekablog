@@ -1,6 +1,6 @@
 ---
 import Base from '../../layouts/Base.astro';
-import { COMPARISONS, toolBySlug, compareSlug, freeLabel, trDate, toolUrl, catName } from '../../lib/tools.js';
+import { COMPARISONS, toolBySlug, compareSlug, freeLabel, trDate, toolUrl, catName, vsTr, withQ } from '../../lib/tools.js';
 import { usdTry, fmtUsd, fmtTry } from '../../lib/fx.js';
 import { url } from '../../lib/news.js';
 import { i18n, locTool, toolCat, freeL, dateL, usdL, tryL } from '../../i18n/index.js';
@@ -12,7 +12,7 @@ const L = await i18n(Astro);
 const { lang, T, S } = L;
 const a = locTool(Astro.props.a, lang), b = locTool(Astro.props.b, lang);
 const answer = S(`cmp.${a.slug}-vs-${b.slug}`, Astro.props.answer);
-const vs = (x, y) => T(`${x} mi ${y} mi?`, `${x} vs ${y}`);
+const vs = (x, y) => T(vsTr(x, y), `${x.name} vs ${y.name}`);
 const fx = await usdTry();
 const both = [a, b];
 const priceCell = (t) => t.price?.from ? `${t.price.plan}: ${usdL(t.price.from, lang)}/${T('ay', 'mo')}${fx ? ` (${tryL(t.price.from, fx, lang)})` : ''}` : T('Resmi sayfada', 'See official site');
@@ -26,16 +26,17 @@ const rows = [
 ];
 const others = COMPARISONS.filter(([x, y]) => compareSlug(x, y) !== compareSlug(a.slug, b.slug)).slice(0, 8);
 const faq = [
-  [T(`${a.name} mi ${b.name} mi daha iyi?`, `Which is better, ${a.name} or ${b.name}?`), answer],
+  [T(`${withQ(a)} ${withQ(b)} daha iyi?`, `Which is better, ${a.name} or ${b.name}?`), answer],
   [T(`${a.name} ve ${b.name} ücretsiz mi?`, `Are ${a.name} and ${b.name} free?`), both.map((t) => `${t.name}: ${t.free ? freeL(t.free, lang).toLocaleLowerCase(lang) : T('doğrulanmadı', 'not verified')}`).join('. ') + '.'],
 ];
 const jsonLd = { '@type': 'FAQPage', mainEntity: faq.map(([q, ans]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: ans } })) };
 ---
-<Base title={T(`${a.name} mi ${b.name} mi? Fiyat, özellik ve kullanım karşılaştırması`, `${a.name} vs ${b.name}: pricing, features and which to choose`)} description={T(`${a.name} ve ${b.name} karşılaştırması: fiyatlar, ücretsiz planlar, Türkçe desteği, güçlü yanlar ve hangisinin kimin için uygun olduğu.`, `${a.name} vs ${b.name}: pricing, free plans, strengths and who each one is for.`)}
-  jsonLd={jsonLd} breadcrumbs={[{ name: 'Ana sayfa', path: '/' }, { name: T('Yapay zeka araçları', 'AI tools'), path: '/arac/' }, { name: vs(a.name, b.name), path: `/karsilastir/${compareSlug(a.slug, b.slug)}/` }]}>
+<Base title={T(`${vsTr(a, b)} Fiyat, özellik ve kullanım karşılaştırması`, `${a.name} vs ${b.name}: pricing, features and which to choose`)} description={T(`${a.name} ve ${b.name} karşılaştırması: fiyatlar, ücretsiz planlar, Türkçe desteği, güçlü yanlar ve hangisinin kimin için uygun olduğu.`, `${a.name} vs ${b.name}: pricing, free plans, strengths and who each one is for.`)}
+  jsonLd={jsonLd} breadcrumbs={[{ name: 'Ana sayfa', path: '/' }, { name: T('Yapay zeka araçları', 'AI tools'), path: '/arac/' }, { name: T('Karşılaştırmalar', 'Comparisons'), path: '/karsilastir/' }, { name: vs(a, b), path: `/karsilastir/${compareSlug(a.slug, b.slug)}/` }]}>
   <section class="deals compare" data-pagefind-body>
+    <nav class="crumb" aria-label={T('Konum', 'Breadcrumb')} data-pagefind-ignore><a href={url('/')}>{T('Ana sayfa', 'Home')}</a><span aria-hidden="true">/</span><a href={url('/arac/')}>{T('Yapay zeka araçları', 'AI tools')}</a><span aria-hidden="true">/</span><a href={url('/karsilastir/')}>{T('Karşılaştırmalar', 'Comparisons')}</a></nav>
     <span class="cat">{T('Karşılaştırma', 'Comparison')}</span>
-    <h1 class="page-h">{vs(a.name, b.name)}</h1>
+    <h1 class="page-h">{vs(a, b)}</h1>
     <aside class="why guide-summary" aria-label={T('Kısa cevap', 'Short answer')}><strong>{T('Kısa cevap', 'Short answer')}</strong><p>{answer}</p></aside>
 
     <div class="deal-table-wrap">
@@ -65,6 +66,6 @@ const jsonLd = { '@type': 'FAQPage', mainEntity: faq.map(([q, ans]) => ({ '@type
     </section>
 
     <h2 class="ev-h">{T('Diğer karşılaştırmalar', 'More comparisons')}</h2>
-    <ul class="task-chips">{others.map(([x, y]) => <li><a href={url(`/karsilastir/${compareSlug(x, y)}/`)}>{vs(toolBySlug(x).name, toolBySlug(y).name)}</a></li>)}</ul>
+    <ul class="task-chips">{others.map(([x, y]) => <li><a href={url(`/karsilastir/${compareSlug(x, y)}/`)}>{vs(toolBySlug(x), toolBySlug(y))}</a></li>)}</ul>
   </section>
 </Base>

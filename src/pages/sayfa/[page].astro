@@ -28,7 +28,7 @@ const rowV = spreadVisuals(items);
 <Base title={T(`Haberler, sayfa ${page}`, `News, page ${page}`)} description={T(`YZ Gündemi yapay zeka haber arşivi, sayfa ${page}: modeller, yatırımlar, regülasyon ve araştırmalar.`, `YZ Gündemi AI news archive, page ${page}: models, funding, regulation and research.`)}>
   <div class="cols" style="margin-top:0">
     <section class="main" aria-labelledby="h">
-      <div class="sechead"><h1 id="h" class="page-h">{T('Tüm Haberler', 'All News')}</h1><span class="meta">{T('Sayfa', 'Page')} {page}</span></div>
+      <div class="sechead"><h1 id="h" class="page-h">{T('Tüm haberler', 'All news')}</h1><span class="meta">{T('Sayfa', 'Page')} {page}</span></div>
       {items.map((n) => <NewsRow item={n} choice={rowV.get(n.id)} level={2} />)}
       <div class="pager">
         <a href={prev}>{T('← Daha yeni', '← Newer')}</a>

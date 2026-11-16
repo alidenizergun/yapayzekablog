@@ -1,7 +1,7 @@
 ---
 import Base from '../../layouts/Base.astro';
 import ToolCard from '../../components/ToolCard.astro';
-import { TOOLS, TOOL_CATS, TASKS, COMPARISONS, TOOLS_CHECKED, toolBySlug, compareSlug, trDate, toolUrl } from '../../lib/tools.js';
+import { TOOLS, TOOL_CATS, TASKS, COMPARISONS, TOOLS_CHECKED, toolBySlug, compareSlug, trDate, toolUrl, vsTr, withGen } from '../../lib/tools.js';
 import { url } from '../../lib/news.js';
 import { i18n, locTask, toolCat, dateL } from '../../i18n/index.js';
 const L = await i18n(Astro);
@@ -36,7 +36,7 @@ const jsonLd = { '@type': 'CollectionPage', name: T('Yapay zeka araçları', 'AI
     ))}
 
     <h2 class="ev-h">{T('Karşılaştırmalar', 'Comparisons')}</h2>
-    <ul class="task-chips">{COMPARISONS.map(([a, b]) => <li><a href={url(`/karsilastir/${compareSlug(a, b)}/`)}>{T(`${toolBySlug(a).name} mi ${toolBySlug(b).name} mi?`, `${toolBySlug(a).name} vs ${toolBySlug(b).name}`)}</a></li>)}</ul>
+    <ul class="task-chips">{COMPARISONS.map(([a, b]) => <li><a href={url(`/karsilastir/${compareSlug(a, b)}/`)}>{T(vsTr(toolBySlug(a), toolBySlug(b)), `${toolBySlug(a).name} vs ${toolBySlug(b).name}`)}</a></li>)}</ul>
 
     {lang === 'en' ? (
     <section class="method" id="yontem" aria-labelledby="ym-h">

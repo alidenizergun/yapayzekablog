@@ -17,10 +17,10 @@ const intro = S(`cat.${cat.slug}.intro`, cat.intro);
 const items = locNewsList(await getNews(), lang, L.m).filter((n) => n.data.category === cat.slug).slice(0, 60);
 const rowV = spreadVisuals(items);
 ---
-<Base title={T(`${cat.name} haberleri`, `AI ${name} news`)} description={intro || T(`${cat.name} alanındaki en yeni yapay zeka haberleri.`, `The latest AI news in ${name}.`)} currentCat={cat.slug}
+<Base title={T(`${cat.name}: son yapay zeka haberleri`, `AI ${name} news`)} description={intro || T(`${cat.name} alanındaki en yeni yapay zeka haberleri.`, `The latest AI news in ${name}.`)} currentCat={cat.slug}
   noindex={items.length === 0}
   breadcrumbs={[{ name: 'Ana sayfa', path: '/' }, { name, path: `/kategori/${cat.slug}/` }]}
-  jsonLd={{ '@type': 'CollectionPage', name: T(`${cat.name} haberleri`, `AI ${name} news`), inLanguage: L.locale }}>
+  jsonLd={{ '@type': 'CollectionPage', name: T(`${cat.name}: yapay zeka haberleri`, `AI ${name} news`), inLanguage: L.locale }}>
   <div class="cols" style="margin-top:0">
     <section class="main" aria-labelledby="h">
       <div class="sechead"><h1 id="h" class="page-h">{name}</h1><span class="meta">{items.length} {T('haber', items.length === 1 ? 'story' : 'stories')}</span></div>

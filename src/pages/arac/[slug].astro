@@ -3,7 +3,7 @@ import Base from '../../layouts/Base.astro';
 import Sidebar from '../../components/Sidebar.astro';
 import NewsRow from '../../components/NewsRow.astro';
 import ToolCard from '../../components/ToolCard.astro';
-import { TOOLS, TASKS, COMPARISONS, freeLabel, toolBySlug, toolUrl, trDate, catName, newsAbout, compareSlug } from '../../lib/tools.js';
+import { TOOLS, TASKS, COMPARISONS, freeLabel, toolBySlug, toolUrl, trDate, catName, newsAbout, compareSlug, vsTr, withGen } from '../../lib/tools.js';
 import { usdTry, fmtUsd, fmtTry } from '../../lib/fx.js';
 import { ENTITIES } from '../../lib/entities.js';
 import { getNews, spreadVisuals, url } from '../../lib/news.js';
@@ -37,11 +37,11 @@ const faqEn = [
   ...(alts.length ? [[`What are the alternatives to ${t.name}?`, `For similar work you can use ${alts.map((a) => a.name).join(', ')}.`]] : []),
 ];
 const faqTr = [
-  [`${t.name} ücretsiz mi?`, t.free === 'var' ? `Evet, ${t.name}'in ücretsiz bir planı var; ücretli planlar daha yüksek kullanım sınırları ve ek özellikler sunuyor.`
+  [`${t.name} ücretsiz mi?`, t.free === 'var' ? `Evet, ${withGen(t)} ücretsiz bir planı var; ücretli planlar daha yüksek kullanım sınırları ve ek özellikler sunuyor.`
     : t.free === 'deneme' ? `${t.name} ücretsiz deneme veya sınırlı ücretsiz kredi sunuyor; düzenli kullanım için ücretli plan gerekiyor.`
-    : t.free === 'yok' ? `Hayır, ${t.name}'in kalıcı ücretsiz planı yok.` : `Güncel durumu ${t.name}'in resmi fiyat sayfasından kontrol edin.`],
+    : t.free === 'yok' ? `Hayır, ${withGen(t)} kalıcı ücretsiz planı yok.` : `Güncel durumu ${withGen(t)} resmi fiyat sayfasından kontrol edin.`],
   ...(p?.from ? [[`${t.name} fiyatı ne kadar?`, `Ücretli planlar ${p.plan} planıyla aylık ${fmtUsd(p.from)}'dan başlıyor${fx ? ` (${fmtTry(p.from, fx)}, TCMB kuruyla; vergiler ve yerel fiyatlandırma nedeniyle ödenen tutar farklı olabilir)` : ''}. Kaynak: ${p.source.label}, ${trDate(p.source.checked)}.`]] : []),
-  [`${t.name} Türkçe biliyor mu?`, t.turkish ? `Evet, ${t.name} Türkçe kullanılabiliyor. Yine de yazım ve terim tercihlerini kontrol etmek iyi olur.` : `${t.name}'in Türkçe desteğini doğrulayamadık; kullanmadan önce resmi sitesinden dil desteğini kontrol edin.`],
+  [`${t.name} Türkçe biliyor mu?`, t.turkish ? `Evet, ${t.name} Türkçe kullanılabiliyor. Yine de yazım ve terim tercihlerini kontrol etmek iyi olur.` : `${withGen(t)} Türkçe desteğini doğrulayamadık; kullanmadan önce resmi sitesinden dil desteğini kontrol edin.`],
   ...(alts.length ? [[`${t.name} alternatifleri neler?`, `Benzer işler için ${alts.map((a) => a.name).join(', ')} kullanılabilir.`]] : []),
 ];
 const faq = EN ? faqEn : faqTr;
@@ -95,7 +95,7 @@ const title = T(`${t.name} nedir, ücretsiz mi, fiyatı ne kadar? Özellikler ve
         <section class="guide-more" aria-labelledby="tl-h" data-pagefind-ignore>
           <h2 id="tl-h">{T('İlgili sayfalar', 'Related pages')}</h2>
           <ul>
-            {comps.map(([a, b]) => <li><a href={url(`/karsilastir/${compareSlug(a, b)}/`)}>{T(`${toolBySlug(a).name} mi ${toolBySlug(b).name} mi?`, `${toolBySlug(a).name} vs ${toolBySlug(b).name}`)}</a></li>)}
+            {comps.map(([a, b]) => <li><a href={url(`/karsilastir/${compareSlug(a, b)}/`)}>{T(vsTr(toolBySlug(a), toolBySlug(b)), `${toolBySlug(a).name} vs ${toolBySlug(b).name}`)}</a></li>)}
             {tasks.map((k) => <li><a href={url(`/en-iyi/${k.slug}/`)}>{k.title}</a></li>)}
             {guides.map((g) => <li><a href={url(`/rehber/${g.id}/`)}>{g.data.title}</a></li>)}
           </ul>
@@ -116,7 +116,7 @@ const title = T(`${t.name} nedir, ücretsiz mi, fiyatı ne kadar? Özellikler ve
 
       {related.length > 0 && (
         <section class="term-news" aria-labelledby="tn-h" data-pagefind-ignore>
-          <div class="sechead"><h2 id="tn-h">{T(`${t.name} ile ilgili haberler`, `${t.name} news`)}</h2></div>
+          <div class="sechead"><h2 id="tn-h">{T(`${t.name} haberleri`, `${t.name} news`)}</h2></div>
           {related.map((n) => <NewsRow item={n} choice={rowV.get(n.id)} />)}
         </section>
       )}

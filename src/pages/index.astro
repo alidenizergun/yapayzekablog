@@ -97,7 +97,7 @@ const listV = spreadVisuals(latest);
 
       <div class="cols">
         <section class="main" aria-labelledby="latest-h">
-          <div class="sechead"><h2 id="latest-h">{T('Son Haberler', 'Latest News')}</h2></div>
+          <div class="sechead"><h2 id="latest-h">{T('Son haberler', 'Latest news')}</h2></div>
           {latest.length ? latest.map((n) => <NewsRow item={n} choice={listV.get(n.id)} />) : <p class="empty">{T('Yeni haberler bir sonraki güncellemede burada olacak.', 'New stories will appear here after the next update.')}</p>}
           {hasMore && <div class="pager"><span></span><a href={url('/sayfa/2/')}>{T('Daha eski haberler →', 'Older news →')}</a></div>}
         </section>
@@ -109,7 +109,7 @@ const listV = spreadVisuals(latest);
         const [big, ...small] = b.items;
         return (
           <section class="catblock" aria-labelledby={`cb-${b.cat.slug}`}>
-            <div class="sechead"><h2 id={`cb-${b.cat.slug}`}>{cn(b.cat.slug)}</h2><a class="meta more-link" href={catUrl(b.cat.slug)}>{T(`Tüm ${b.cat.name} haberleri →`, `All ${cn(b.cat.slug)} news →`)}</a></div>
+            <div class="sechead"><h2 id={`cb-${b.cat.slug}`}>{cn(b.cat.slug)}</h2><a class="more-link" href={catUrl(b.cat.slug)} aria-label={T(`Tüm ${cn(b.cat.slug)} haberleri`, `All ${cn(b.cat.slug)} news`)}>{T('Tümü →', 'All →')}</a></div>
             <div class="catblock-grid">
               <a class="card big" href={newsUrl(big)}>
                 <Visual entry={big} choice={v.get(big.id)} w={640} h={340} />

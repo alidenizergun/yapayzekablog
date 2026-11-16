@@ -20,6 +20,6 @@ sources:
     url: "https://af.net/realtime/page/201/?news_page=12"
     publisher: AF.net
 ---
-Kasım 2026'da model takip kayıtlarına göre 8 farklı şirketten 8 yeni model yayınlandı. Bu modellerden 4'ü açık ağırlıklı olarak sunuldu.
+Kasım 2026'da model takip kayıtlarına göre 8 farklı şirketten 8 yeni model yayımlandı. Bu modellerden 4'ü açık ağırlıklı olarak sunuldu.
 
 Ayın dikkat çeken lansmanları arasında Google'ın Gemini 4 Carbon modeli, Deep Principle'ın Hydrogen-1.0 modeli ve Soket Labs'in EKA-1 modeli yer alıyor.
