@@ -33,7 +33,7 @@ concurrency:
 jobs:
   generate:
     runs-on: ubuntu-latest
-    timeout-minutes: 40
+    timeout-minutes: 60
     permissions:
       contents: write
     outputs:
@@ -59,7 +59,10 @@ jobs:
           NEWS_MODE: ${{ github.event.schedule == '23 10 * * *' && 'ogle' || inputs.mode || '' }}
           MAX_ARTICLES: ${{ github.event.schedule == '23 10 * * *' && (vars.MIDDAY_ARTICLES || '3') || inputs.max_articles || vars.MAX_ARTICLES || '10' }}
           LOOKBACK_HOURS: ${{ github.event.schedule == '23 10 * * *' && '10' || vars.LOOKBACK_HOURS || '26' }}
-          MAX_SEARCHES: ${{ github.event.schedule == '23 10 * * *' && '8' || vars.MAX_SEARCHES || '20' }}
+          MAX_SEARCHES: ${{ github.event.schedule == '23 10 * * *' && '4' || vars.MAX_SEARCHES || '12' }}
+          RESEARCH_MODEL: ${{ vars.RESEARCH_MODEL }}
+          NEWS_BATCH: ${{ vars.NEWS_BATCH || 'true' }}
+          EDITOR_PASS: ${{ vars.EDITOR_PASS || 'false' }}
           WEEKEND_SEARCHES: ${{ vars.WEEKEND_SEARCHES }}
           REQUIRE_REVIEW: ${{ vars.REQUIRE_REVIEW || 'false' }}
           PHOTOS_ONLY: ${{ inputs.only_photos || 'false' }}

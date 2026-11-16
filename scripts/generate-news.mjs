@@ -37,7 +37,12 @@ const CONTENT_DIR = path.join(ROOT, 'src/content/haberler');
 const GUIDELINES = fs.readFileSync(path.join(ROOT, 'scripts/editorial-guidelines.md'), 'utf8');
 
 const DRY = process.argv.includes('--dry-run');
-const MODEL = process.env.NEWS_MODEL || 'claude-sonnet-5-5';
+// Maliyet düzeni: araştırma (web araması + sayfa okuma, maliyetin büyük kısmı) ucuz modelde,
+// Türkçe yazım kaliteli modelde ve gece turunda Batch API ile (yüzde 50 indirim).
+const MODEL = process.env.NEWS_MODEL || 'claude-sonnet-5-5'; // yazım modeli
+const RESEARCH_MODEL = process.env.RESEARCH_MODEL || 'claude-haiku-5-5';
+const USE_BATCH = !/^(0|false|no|hayir|hayır)$/i.test(process.env.NEWS_BATCH || 'true');
+const BATCH_WAIT_MIN = Number(process.env.BATCH_WAIT_MIN || 25);
 const MAX_ARTICLES = Number(process.env.MAX_ARTICLES || 10);
 const LOOKBACK_HOURS = Number(process.env.LOOKBACK_HOURS || 26);
 // Hafta sonu (İstanbul saatiyle Cumartesi/Pazar) gelişme az olduğu için arama sayısı yarıya iner.
@@ -46,7 +51,7 @@ const IST_DAY = new Date(Date.now() + 3 * 3600e3).getUTCDay(); // 0 = Pazar, 6 =
 const IS_WEEKEND = IST_DAY === 0 || IST_DAY === 6;
 // Öğle turu (NEWS_MODE=ogle): yalnızca sabahtan beri çıkan çok önemli gelişmeler, kısa not biçiminde
 const MIDDAY = (process.env.NEWS_MODE || '').toLowerCase() === 'ogle';
-const WEEKDAY_SEARCHES = Number(process.env.MAX_SEARCHES || 20);
+const WEEKDAY_SEARCHES = Number(process.env.MAX_SEARCHES || 12);
 const MAX_SEARCHES = IS_WEEKEND
   ? Number(process.env.WEEKEND_SEARCHES || Math.max(5, Math.round(WEEKDAY_SEARCHES / 2)))
   : WEEKDAY_SEARCHES;
@@ -63,7 +68,7 @@ const SEARCH_PRICE = 10 / 1000; // arama başına dolar
 const X_POST_PRICE = 0.005; // okunan X gönderisi başına yaklaşık dolar
 const usage = { requests: 0, input: 0, output: 0, cacheWrite: 0, cacheRead: 0, tokenCost: 0, priced: true };
 
-function track(res) {
+function track(res, model = MODEL, batch = false) {
   const u = res?.usage;
   if (!u) return;
   const input = u.input_tokens ?? 0;
@@ -75,10 +80,10 @@ function track(res) {
   usage.output += output;
   usage.cacheWrite += cacheWrite;
   usage.cacheRead += cacheRead;
-  const p = PRICES[MODEL];
+  const p = PRICES[model];
   if (!p) { usage.priced = false; return; }
   const long = p.longAbove && input + cacheWrite + cacheRead > p.longAbove;
-  usage.tokenCost += (
+  usage.tokenCost += (batch ? 0.5 : 1) * (
     input * (long ? p.longIn : p.in) +
     output * (long ? p.longOut : p.out) +
     cacheWrite * (long ? p.longCacheWrite : p.cacheWrite) +
@@ -206,8 +211,32 @@ async function client() {
   return new Anthropic({ maxRetries: 4, timeout: 10 * 60 * 1000 });
 }
 
-/** Araştırma adımı: web araması yapar, bulunan gelişmeleri ve görülen tüm adresleri döndürür. */
+// Araştırma konuları: her biri ayrı ve küçük bir istek (ucuz modelin uzun bağlam ücretine girmemek için)
+const TOPICS = [
+  { id: 'sirketler', title: 'şirket ve ürün duyuruları', hint: 'OpenAI, Anthropic, Google/DeepMind, Meta, Microsoft, xAI, Apple, Amazon, Nvidia ve Çinli şirketlerin (DeepSeek, Alibaba, Tencent vb.) yeni modelleri, ürünleri, özellikleri ve resmi duyuruları', x: true },
+  { id: 'para', title: 'yatırım, iş dünyası ve donanım', hint: 'yapay zeka yatırım turları, satın almalar, halka arzlar, büyük ticari anlaşmalar, çipler, veri merkezleri, şirket yönetimi değişiklikleri' },
+  { id: 'politika', title: 'regülasyon, güvenlik ve araştırma', hint: 'yapay zeka yasaları ve düzenlemeleri, hükümet kararları, güvenlik olayları, önemli araştırmalar ve raporlar' },
+  { id: 'turkiye', title: 'Türkiye', hint: "Türkiye'deki yapay zeka gelişmeleri; aramaları TÜRKÇE yap (ör. \"yapay zeka girişimi yatırım aldı\", kamu kurumlarının yapay zeka duyuruları, Türk şirketlerinin yapay zeka ürünleri). Önemli bir gelişme varsa kategorisini \"turkiye\" yap", min: 2 },
+];
+
+/** Araştırma adımı: konulara bölünmüş web aramaları; bulunan gelişmeleri ve görülen tüm adresleri döndürür. */
 async function research(anthropic, existing, xPosts = []) {
+  const seen = new Map(); // normalizeUrl -> { url, title }
+  // X API'den gelen gönderi adresleri gerçek olduğu için izinli kaynaklara eklenir
+  for (const p of xPosts) seen.set(normalizeUrl(p.url), { url: p.url, title: `@${p.username} X gönderisi` });
+  // Öğle turu tek istek; tam tur konulara bölünür (arama bütçesi konulara paylaştırılır)
+  const plan = MIDDAY
+    ? [{ id: 'ogle', title: 'tüm alanlar', hint: 'büyük şirketlerin duyuruları, yatırımlar, regülasyon, Türkiye', x: true, uses: MAX_SEARCHES }]
+    : TOPICS.map((t) => ({ ...t, uses: Math.max(t.min ?? 1, Math.round(MAX_SEARCHES / TOPICS.length)) }));
+  const results = await Promise.all(plan.map((t) => researchTopic(anthropic, existing, t.x ? xPosts : [], t, seen)));
+  const searches = results.reduce((n, r) => n + r.searches, 0);
+  lastSearches = searches;
+  const notes = results.map((r, i) => (r.text && !/^\s*YENİ GELİŞME YOK\s*$/i.test(r.text) ? `## Araştırma: ${plan[i].title}\n${r.text}` : '')).filter(Boolean).join('\n\n');
+  log(`araştırma (${RESEARCH_MODEL}, ${plan.length} konu): ${searches} arama, ${seen.size} farklı kaynak görüldü`);
+  return { notes: notes || 'YENİ GELİŞME YOK', seen, searches };
+}
+
+async function researchTopic(anthropic, existing, xPosts, topic, seen) {
   const recent = existing
     .filter((e) => e.date.valueOf() > Date.now() - 7 * 86400e3)
     .sort((a, b) => b.date - a.date)
@@ -216,12 +245,14 @@ async function research(anthropic, existing, xPosts = []) {
   const now = istanbulIso();
 
   const system = `Sen YZ Gündemi adlı Türkçe yapay zeka haber sitesinin araştırma editörüsün. Görevin, haber olmaya değer YENİ gelişmeleri web aramasıyla bulmak ve her biri için doğrulanmış bilgi notu çıkarmak.\n\n${GUIDELINES}`;
+  const focus = `BU ARAŞTIRMANIN KONUSU: ${topic.title} (${topic.hint}). Yalnızca bu konuya odaklan; en fazla ${topic.uses} arama yap ve en fazla ${MIDDAY ? MAX_ARTICLES + 1 : 5} aday çıkar.`;
   const user = `Şu an: ${now} (İstanbul).
 
-Son ${LOOKBACK_HOURS} saat içinde yayınlanmış, yapay zeka alanındaki en önemli gelişmeleri bul. En fazla ${MAX_ARTICLES + 2} aday çıkar; önem sırasına koy.${MIDDAY ? '\nÖĞLE TURU: Bu ara güncellemedir. Yalnızca son ' + LOOKBACK_HOURS + ' saatte çıkan, ertesi sabahı bekleyemeyecek kadar önemli gelişmeleri (büyük lansman, satın alma, resmi karar, önemli kriz) aday yap; sıradan haberleri gece turuna bırak. Böyle bir gelişme yoksa yalnızca "YENİ GELİŞME YOK" yaz.' : ''}
+${focus}
 
-Arama önerileri: büyük yapay zeka şirketlerinin son duyuruları, "AI" + bugünün tarihi, yapay zeka yatırım/satın alma haberleri, yapay zeka regülasyonu, Türkiye yapay zeka haberleri. Mümkün olduğunda birincil kaynağı (resmi blog, duyuru, makale) da bul.
-TÜRKİYE: Aramalarının en az ikisini Türkçe yap ve Türkiye'deki yapay zeka gelişmelerine ayır (ör. "yapay zeka girişimi yatırım aldı", "yapay zeka Türkiye duyurdu", kamu kurumlarının yapay zeka duyuruları, Türk şirketlerinin yapay zeka ürünleri). Önemli bir Türkiye gelişmesi varsa adaylara mutlaka ekle ve kategorisini "turkiye" yap.
+Son ${LOOKBACK_HOURS} saat içinde yayınlanmış, yapay zeka alanındaki en önemli gelişmeleri bul; önem sırasına koy.${MIDDAY ? '\nÖĞLE TURU: Bu ara güncellemedir. Yalnızca son ' + LOOKBACK_HOURS + ' saatte çıkan, ertesi sabahı bekleyemeyecek kadar önemli gelişmeleri (büyük lansman, satın alma, resmi karar, önemli kriz) aday yap; sıradan haberleri gece turuna bırak. Böyle bir gelişme yoksa yalnızca "YENİ GELİŞME YOK" yaz.' : ''}
+
+Mümkün olduğunda birincil kaynağı (resmi blog, duyuru, makale) da bul. Aynı konuyu farklı kelimelerle tekrar tekrar arama.
 
 Aşağıdaki haberler son 7 günde zaten yayınlandı. Bunları ve bunların yeni bilgi içermeyen tekrarlarını ATLA:
 ${covered}
@@ -242,23 +273,19 @@ Her aday için şu biçimde not yaz:
 Kurallar: Yalnızca arama sonuçlarında gördüğün bilgileri yaz. Tarihi ${LOOKBACK_HOURS} saatten eskiyse veya belirsizse adayı ele. Yeterince önemli yeni gelişme yoksa daha az aday yaz; hiç yoksa yalnızca "YENİ GELİŞME YOK" yaz.`;
 
   const messages = [{ role: 'user', content: user }];
-  const seen = new Map(); // normalizeUrl -> { url, title }
-  // X API'den gelen gönderi adresleri gerçek olduğu için izinli kaynaklara eklenir
-  for (const p of xPosts) seen.set(normalizeUrl(p.url), { url: p.url, title: `@${p.username} X gönderisi` });
   let text = '';
   let searches = 0;
 
-  for (let i = 0; i < 6; i++) {
+  for (let i = 0; i < 4; i++) {
     const res = await anthropic.messages.create({
-      model: MODEL,
-      max_tokens: 24000,
+      model: RESEARCH_MODEL,
+      max_tokens: 8000,
       system,
       messages,
-      tools: [{ type: 'web_search_20250305', name: 'web_search', max_uses: MAX_SEARCHES }],
+      tools: [{ type: 'web_search_20250305', name: 'web_search', max_uses: topic.uses }],
     });
-    track(res);
+    track(res, RESEARCH_MODEL);
     searches += res.usage?.server_tool_use?.web_search_requests ?? 0;
-    lastSearches = searches;
     for (const block of res.content) {
       if (block.type === 'web_search_tool_result' && Array.isArray(block.content)) {
         for (const r of block.content) {
@@ -280,8 +307,41 @@ Kurallar: Yalnızca arama sonuçlarında gördüğün bilgileri yaz. Tarihi ${LO
     }
     break;
   }
-  log(`araştırma: ${searches} arama, ${seen.size} farklı kaynak görüldü`);
-  return { notes: text.trim(), seen, searches };
+  return { text: text.trim(), searches };
+}
+
+/** Batch API ile tek istek (yüzde 50 ucuz). Süre aşılırsa veya hata olursa normal isteğe döner. */
+async function createCheap(anthropic, params, { batch = false } = {}) {
+  if (batch) {
+    try {
+      const b = await anthropic.messages.batches.create({ requests: [{ custom_id: 'r', params }] });
+      log(`Batch API: ${b.id} gönderildi, sonuç bekleniyor (en fazla ${BATCH_WAIT_MIN} dk)`);
+      const until = Date.now() + BATCH_WAIT_MIN * 60e3;
+      let st = b;
+      while (st.processing_status !== 'ended' && Date.now() < until) {
+        await new Promise((r) => setTimeout(r, 15e3));
+        st = await anthropic.messages.batches.retrieve(b.id);
+      }
+      if (st.processing_status === 'ended') {
+        for await (const item of await anthropic.messages.batches.results(b.id)) {
+          if (item.custom_id === 'r' && item.result?.type === 'succeeded') {
+            track(item.result.message, params.model, true);
+            log(`Batch API: tamamlandı (${Math.round((Date.now() - (until - BATCH_WAIT_MIN * 60e3)) / 1000)} sn)`);
+            return item.result.message;
+          }
+          if (item.custom_id === 'r') log(`Batch API sonucu: ${item.result?.type}; normal isteğe dönülüyor`);
+        }
+      } else {
+        log('Batch API süre sınırını aştı; iptal edilip normal istek yapılıyor');
+        await anthropic.messages.batches.cancel(b.id).catch(() => {});
+      }
+    } catch (err) {
+      log(`Batch API kullanılamadı (${err.message}); normal istek yapılıyor`);
+    }
+  }
+  const res = await anthropic.messages.create(params);
+  track(res, params.model);
+  return res;
 }
 
 const ARTICLE_SCHEMA = {
@@ -353,13 +413,15 @@ const ARTICLE_SCHEMA = {
 async function write(anthropic, notes, seen) {
   const allowed = [...seen.values()].map((s) => `- ${s.url}${s.title ? ` — ${s.title}` : ''}`).join('\n');
   const imageList = Object.entries(IMAGES).map(([k, v]) => `${k}: ${v}`).join('; ');
-  const res = await anthropic.messages.create({
+  const res = await createCheap(anthropic, {
     model: MODEL,
     max_tokens: 32000,
     system: `Sen YZ Gündemi adlı Türkçe yapay zeka haber sitesinin haber editörüsün.\n\n${GUIDELINES}`,
     messages: [{
       role: 'user',
       content: `Aşağıdaki araştırma notlarından en fazla ${MAX_ARTICLES} haber yaz. Notlarda olmayan hiçbir bilgiyi ekleme.
+Notlar konulara bölünmüş ayrı araştırmalardan geliyor: aynı gelişme birden fazla yerde geçiyorsa TEK haberde birleştir; en önemli gelişmeleri seç.
+Yazdıktan sonra her haberi "Türkçe editoryal kurallar" bölümüne göre son kez kendin oku ve düzelt (çeviri kokan ifade, tanıtılmamış isim, iç not, tekrar, yazım tutarlılığı); ayrı bir editör adımı yok.
 
 KAYNAK KURALI: "sources" alanına YALNIZCA aşağıdaki izinli adres listesindeki adresleri, birebir aynı yazarak koy. Her habere en az bir, en fazla dört kaynak ekle. Listede olmayan adres kullanan haber yayınlanmaz.
 
@@ -378,8 +440,7 @@ ARAŞTIRMA NOTLARI:
 ${notes}`,
     }],
     output_config: { format: { type: 'json_schema', schema: ARTICLE_SCHEMA } },
-  });
-  track(res);
+  }, { batch: USE_BATCH && !MIDDAY });
   if (res.stop_reason === 'refusal' || res.stop_reason === 'max_tokens') {
     throw new Error(`Yazım adımı tamamlanamadı (stop_reason: ${res.stop_reason}).`);
   }
@@ -390,7 +451,8 @@ ${notes}`,
 // ---------------------------------------------------------------- editör adımı
 // Yazılan haberleri Türkçe yayın editörü gözüyle son kez okur: çeviri kokan ifadeler, anlam bütünlüğü,
 // tanıtılmamış isimler, iç notlar, tekrarlar. Yeni bilgi eklemez; rakamları değiştiren düzeltme reddedilir.
-const EDITOR_ON = !/^(0|false|no|hayir|hayır)$/i.test(process.env.EDITOR_PASS || 'true');
+// Varsayılan kapalı (maliyet): yazım adımı kuralları kendisi uygular. Açmak için repo değişkeni EDITOR_PASS=true.
+const EDITOR_ON = /^(1|true|yes|evet)$/i.test(process.env.EDITOR_PASS || 'false');
 const EDIT_SCHEMA = {
   type: 'object', additionalProperties: false, required: ['articles'],
   properties: { articles: { type: 'array', items: {
@@ -412,7 +474,7 @@ async function editPass(anthropic, articles) {
     index, title: a.title, spot: a.spot, body_markdown: a.body_markdown, why_it_matters: a.why_it_matters, turkey_angle: a.turkey_angle, tweet: a.tweet,
     kaynaklar: a.sources.map((x) => `${x.publisher || ''} — ${x.title}`),
   }));
-  const res = await anthropic.messages.create({
+  const res = await createCheap(anthropic, {
     model: MODEL,
     max_tokens: 32000,
     system: `Sen YZ Gündemi'nin kıdemli Türkçe yayın editörüsün. Muhabirlerin İngilizce kaynaklardan derlediği haberleri yayından önce son kez okuyorsun.\n\n${GUIDELINES}`,
@@ -428,8 +490,7 @@ Kurallar:
 HABERLER (JSON):
 ${JSON.stringify(input, null, 1)}` }],
     output_config: { format: { type: 'json_schema', schema: EDIT_SCHEMA } },
-  });
-  track(res);
+  }, { batch: USE_BATCH && !MIDDAY });
   if (res.stop_reason !== 'end_turn') return { articles, notes: [`editör adımı tamamlanamadı (${res.stop_reason}); taslaklar korundu`] };
   let edited;
   try { edited = JSON.parse(res.content.filter((b) => b.type === 'text').map((b) => b.text).join('')).articles; }
@@ -598,7 +659,7 @@ async function main() {
     log(`fotoğraf eklenen eski haber: ${photoNote.backfilled}${photoNote.error ? ' (hata: ' + photoNote.error + ')' : ''}`);
     return summary([], [], 0);
   }
-  log(`model: ${MODEL} · mevcut haber: ${existing.length} · en fazla ${MAX_ARTICLES} yeni haber · en fazla ${MAX_SEARCHES} arama${IS_WEEKEND ? ' (hafta sonu)' : ''} · ${REQUIRE_REVIEW ? 'editör onayı AÇIK (taslak)' : 'otomatik yayın'}`);
+  log(`model: araştırma ${RESEARCH_MODEL}, yazım ${MODEL}${USE_BATCH && !MIDDAY ? ' (Batch API)' : ''} · mevcut haber: ${existing.length} · en fazla ${MAX_ARTICLES} yeni haber · en fazla ${MAX_SEARCHES} arama${IS_WEEKEND ? ' (hafta sonu)' : ''} · ${REQUIRE_REVIEW ? 'editör onayı AÇIK (taslak)' : 'otomatik yayın'}`);
 
   let articles, seen, searches = 0;
   if (DRY) {
@@ -736,7 +797,7 @@ function appendCostCsv(searches, articleCount, status) {
     fs.writeFileSync(file, 'tarih,model,durum,haber,arama,x_gonderi,giris_token,cikis_token,claude_usd,x_usd,toplam_usd\n');
   }
   const row = [
-    istanbulIso(), MODEL, status, articleCount, searches, xPostCount,
+    istanbulIso(), `${RESEARCH_MODEL}+${MODEL}`, status, articleCount, searches, xPostCount,
     usage.input + usage.cacheWrite + usage.cacheRead, usage.output,
     c.claude.toFixed(4), c.xCost.toFixed(4), c.total.toFixed(4),
   ].join(',');

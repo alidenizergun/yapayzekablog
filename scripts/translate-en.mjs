@@ -13,7 +13,9 @@ import { sourceStrings } from '../src/i18n/sources.js';
 import { titleSlug } from '../src/lib/slug.js';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-const MODEL = process.env.TRANSLATE_MODEL || process.env.NEWS_MODEL || 'claude-sonnet-5-5';
+// Çeviri ucuz modelle (Haiku 5.5: Sonnet'in yaklaşık 20'de 1'i); TRANSLATE_MODEL ile değiştirilebilir
+const MODEL = process.env.TRANSLATE_MODEL || 'claude-haiku-5-5';
+const PRICE = { 'claude-haiku-5-5': [0.1, 0.5], 'claude-sonnet-5-5': [2, 10], 'claude-opus-5-5': [4, 20] }[MODEL] ?? [2, 10];
 const args = Object.fromEntries(process.argv.slice(2).map((a) => a.replace(/^--/, '').split('=')).map(([k, v]) => [k, v ?? true]));
 const ONLY = args.only ? String(args.only).split(',') : ['strings', 'news', 'guides', 'digests'];
 const LIMIT = Number(args.limit || 1e9);
@@ -213,7 +215,7 @@ async function main() {
   if (ONLY.includes('digests')) await translateDigests();
   if (ONLY.includes('news')) await translateNews();
   // Sonnet fiyatı (model tablosu): girdi 2 $, çıktı 10 $ / milyon token
-  const cost = (usage.in * 2 + usage.out * 10) / 1e6;
+  const cost = (usage.in * PRICE[0] + usage.out * PRICE[1]) / 1e6;
   log(`token: girdi ${usage.in}, çıktı ${usage.out} · tahmini maliyet ~${cost.toFixed(2)} $`);
   if (process.env.GITHUB_STEP_SUMMARY) fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY, `## İngilizce çeviri\n- Token: girdi ${usage.in}, çıktı ${usage.out}\n- Tahmini maliyet: ~${cost.toFixed(2)} $\n`);
 }

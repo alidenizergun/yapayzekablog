@@ -40,7 +40,7 @@ jobs:
       - name: Çevir
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
-          NEWS_MODEL: ${{ vars.NEWS_MODEL }}
+          TRANSLATE_MODEL: ${{ vars.TRANSLATE_MODEL }}
           ONLY: ${{ inputs.only }}
           LIMIT: ${{ inputs.limit }}
         run: node scripts/translate-en.mjs --only="${ONLY:-strings,news,guides,digests}" ${LIMIT:+--limit="$LIMIT"}
