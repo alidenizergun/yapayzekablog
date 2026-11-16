@@ -1,11 +1,11 @@
 # Her sabah yeni yapay zeka haberlerini üretir, siteyi derleyip yayınlar.
-# Saatler UTC'dir: 05:00 UTC = İstanbul 08:00
+# Saatler UTC'dir: 01:53 UTC = İstanbul 04:53 (tam saat başı GitHub'da en yoğun an; gecikme ve atlanma riskini azaltmak için)
 # Not: GitHub zamanlanmış işleri yoğunluğa göre birkaç dakika gecikmeli başlatabilir.
 name: Haber güncellemesi
 
 on:
   schedule:
-    - cron: '0 5 * * *'
+    - cron: '53 1 * * *'
   workflow_dispatch:
     inputs:
       max_articles:
