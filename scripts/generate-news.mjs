@@ -656,8 +656,30 @@ function dryRunData() {
 
 let xNote = 'X takibi kapalı';
 
+// Aynı tur iki kez tetiklenirse (GitHub zamanlayıcısı + dış zamanlayıcı) ikincisi ücret çıkarmadan atlanır
+const LAST_RUN_FILE = path.join(ROOT, 'data/son-tur.json');
+const MIN_GAP_MIN = Number(process.env.MIN_GAP_MIN ?? 90);
+function recentRun() {
+  try {
+    const last = JSON.parse(fs.readFileSync(LAST_RUN_FILE, 'utf8'));
+    const ago = (Date.now() - new Date(last.at).valueOf()) / 60e3;
+    return MIN_GAP_MIN > 0 && ago >= 0 && ago < MIN_GAP_MIN ? Math.round(ago) : null;
+  } catch { return null; }
+}
+function markRun() {
+  if (DRY) return;
+  fs.mkdirSync(path.dirname(LAST_RUN_FILE), { recursive: true });
+  fs.writeFileSync(LAST_RUN_FILE, JSON.stringify({ at: new Date().toISOString(), mode: MIDDAY ? 'ara' : 'gece' }) + '\n');
+}
+
 async function main() {
   const existing = loadExisting();
+  const ago = /^(1|true)$/i.test(process.env.PHOTOS_ONLY || '') ? null : recentRun();
+  if (ago !== null) {
+    log(`son tur ${ago} dakika önce çalıştı (sınır ${MIN_GAP_MIN} dk); bu tetikleme atlandı, ücret yok`);
+    if (process.env.GITHUB_OUTPUT) fs.appendFileSync(process.env.GITHUB_OUTPUT, 'count=0\nchanged=0\n');
+    return;
+  }
   // Yalnızca fotoğraf doldurma: Claude çağrılmaz, ücret yalnızca Unsplash (ücretsiz)
   if (/^(1|true)$/i.test(process.env.PHOTOS_ONLY || '')) {
     log('yalnızca fotoğraf doldurma modu');
@@ -672,6 +694,7 @@ async function main() {
     ({ articles, seen } = dryRunData());
     log('deneme modu: API çağrılmıyor');
   } else {
+    markRun();
     const anthropic = await client();
     let xPosts = [];
     try {

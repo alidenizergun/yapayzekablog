@@ -19,9 +19,13 @@ on:
         required: false
         default: '10'
       mode:
-        description: 'Tur: boş = tam haber turu, ogle = öğle ara turu (kısa not)'
+        description: 'Tur: boş = gece tam turu, ogle = gün içi ara tur (kısa not)'
         required: false
         default: ''
+      force:
+        description: 'Son turun üzerinden 90 dakika geçmemiş olsa da çalıştır'
+        type: boolean
+        default: false
       only_photos:
         description: 'Yalnızca eksik fotoğrafları doldur (haber üretme, Claude kullanma)'
         type: boolean
@@ -61,13 +65,14 @@ jobs:
           X_BEARER_TOKEN: ${{ secrets.X_BEARER_TOKEN }}
           UNSPLASH_ACCESS_KEY: ${{ secrets.UNSPLASH_ACCESS_KEY }}
           NEWS_MODEL: ${{ vars.NEWS_MODEL }}
-          NEWS_MODE: ${{ (github.event_name == 'schedule' && github.event.schedule != '53 1 * * *') && 'ogle' || inputs.mode || '' }}
-          MAX_ARTICLES: ${{ (github.event_name == 'schedule' && github.event.schedule != '53 1 * * *') && (vars.MIDDAY_ARTICLES || '3') || inputs.max_articles || vars.MAX_ARTICLES || '10' }}
-          LOOKBACK_HOURS: ${{ (github.event_name == 'schedule' && github.event.schedule != '53 1 * * *') && '8' || vars.LOOKBACK_HOURS || '26' }}
-          MAX_SEARCHES: ${{ (github.event_name == 'schedule' && github.event.schedule != '53 1 * * *') && '4' || vars.MAX_SEARCHES || '12' }}
+          NEWS_MODE: ${{ ((github.event_name == 'schedule' && github.event.schedule != '53 1 * * *') || inputs.mode == 'ogle') && 'ogle' || '' }}
+          MAX_ARTICLES: ${{ ((github.event_name == 'schedule' && github.event.schedule != '53 1 * * *') || inputs.mode == 'ogle') && (vars.MIDDAY_ARTICLES || '3') || inputs.max_articles || vars.MAX_ARTICLES || '10' }}
+          LOOKBACK_HOURS: ${{ ((github.event_name == 'schedule' && github.event.schedule != '53 1 * * *') || inputs.mode == 'ogle') && '8' || vars.LOOKBACK_HOURS || '26' }}
+          MAX_SEARCHES: ${{ ((github.event_name == 'schedule' && github.event.schedule != '53 1 * * *') || inputs.mode == 'ogle') && '4' || vars.MAX_SEARCHES || '12' }}
           RESEARCH_MODEL: ${{ vars.RESEARCH_MODEL }}
           NEWS_BATCH: ${{ vars.NEWS_BATCH || 'true' }}
           EDITOR_PASS: ${{ vars.EDITOR_PASS || 'false' }}
+          MIN_GAP_MIN: ${{ inputs.force && '0' || vars.MIN_GAP_MIN || '90' }}
           WEEKEND_SEARCHES: ${{ vars.WEEKEND_SEARCHES }}
           REQUIRE_REVIEW: ${{ vars.REQUIRE_REVIEW || 'false' }}
           PHOTOS_ONLY: ${{ inputs.only_photos || 'false' }}
