@@ -8,6 +8,14 @@ summary:
   - "İlk yanıt nadiren mükemmeldir; düzeltmeyi istemi değiştirerek yapın."
 level: Başlangıç
 terms: [istem, buyuk-dil-modeli, halusinasyon, baglam-penceresi]
+topic: Temel kullanım
+faq:
+  - q: "Prompt ile istem aynı şey mi?"
+    a: "Evet. Prompt İngilizce karşılıktır; Türkçede istem olarak kullanılır ve yapay zekaya verilen talimat ya da soruyu anlatır."
+  - q: "İstem Türkçe mi İngilizce mi yazılmalı?"
+    a: "Güncel modellerin çoğu Türkçe istemleri iyi anlar. Çıktıyı hangi dilde istiyorsanız istemi o dilde yazmak genellikle en tutarlı sonucu verir."
+  - q: "Uzun istem mi kısa istem mi daha iyi?"
+    a: "Gereken bağlamı veren ama gereksiz tekrar içermeyen istem en iyisidir. Karmaşık görevlerde uzun ve ayrıntılı istemler genellikle daha iyi sonuç verir."
 ---
 
 Yapay zeka asistanlarından aldığınız yanıtın kalitesi büyük ölçüde onlara ne sorduğunuza bağlıdır. Aynı model, "bunu özetle" dendiğinde sıradan bir özet, ne istendiği iyi anlatıldığında ise doğrudan kullanılabilir bir metin üretir. Aşağıdaki yedi adım ChatGPT, Claude, Gemini ve benzeri bütün sohbet asistanlarında işe yarar.

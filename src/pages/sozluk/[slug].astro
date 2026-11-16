@@ -6,6 +6,7 @@ import { GLOSSARY } from '../../lib/glossary.js';
 import { LONG } from '../../lib/glossary-long.js';
 import { getNews, spreadVisuals, url } from '../../lib/news.js';
 import { find } from '../../../scripts/glossary-integration.mjs';
+import { getCollection } from 'astro:content';
 
 export function getStaticPaths() {
   return GLOSSARY.map((t) => ({ params: { slug: t.slug }, props: { t } }));
@@ -22,12 +23,18 @@ const i = sorted.findIndex((x) => x.slug === t.slug);
 const others = [sorted[i - 1], sorted[i + 1], ...sorted.filter((x) => x.slug !== t.slug && related.some((n) => find(n.body, x)))]
   .filter(Boolean).filter((x, k, arr) => arr.findIndex((y) => y.slug === x.slug) === k).slice(0, 6);
 const name = t.term;
+// Aynı gruptaki terimler ilgili terimlere eklenir
+const sameCat = sorted.filter((x) => x.slug !== t.slug && x.cat && x.cat === t.cat && !others.some((o) => o.slug === x.slug));
+others.push(...sameCat.slice(0, Math.max(0, 8 - others.length)));
+const guides = (await getCollection('rehberler', (g) => !g.data.draft)).filter((g) => g.data.terms.includes(t.slug)).slice(0, 5);
+const faq = long?.faq ?? [];
 const pageUrl = new URL(url(`/sozluk/${t.slug}/`), Astro.site).href;
 const jsonLd = [
   { '@type': 'DefinedTerm', '@id': `${pageUrl}#terim`, name: t.term, alternateName: t.en, description: t.def, url: pageUrl,
     inDefinedTermSet: { '@type': 'DefinedTermSet', name: 'Yapay zeka terimleri sözlüğü', url: new URL(url('/sozluk/'), Astro.site).href } },
   { '@type': 'Article', headline: `${name} nedir?`, description: t.def, inLanguage: 'tr-TR', url: pageUrl, mainEntityOfPage: pageUrl,
     about: { '@id': `${pageUrl}#terim` }, author: { '@type': 'Organization', name: 'YZ Gündemi' }, publisher: { '@id': new URL(url('/#organization'), Astro.site).href } },
+  ...(faq.length ? [{ '@type': 'FAQPage', mainEntity: faq.map(([q, a]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a } })) }] : []),
 ];
 ---
 <Base title={`${name} nedir? Yapay zekada ${t.en} ne demek`} description={t.def} jsonLd={jsonLd}
@@ -37,7 +44,7 @@ const jsonLd = [
       <nav class="crumb" aria-label="Konum" data-pagefind-ignore><a href={url('/')}>Ana sayfa</a><span aria-hidden="true">/</span><a href={url('/sozluk/')}>Terimler sözlüğü</a></nav>
       <span class="badge" data-pagefind-ignore>Sözlük</span>
       <h1 data-pagefind-meta="title">{name} nedir?</h1>
-      <p class="term-en" data-pagefind-ignore>İngilizcesi: <span lang="en">{t.en}</span></p>
+      <p class="term-en" data-pagefind-ignore>İngilizcesi: <span lang="en">{t.en}</span>{t.cat && <> · Konu: {t.cat}</>}</p>
       <p class="spot term-def">{t.def}</p>
       {long && (
         <div class="prose">
@@ -48,6 +55,18 @@ const jsonLd = [
           <h2>Örnek</h2>
           <p>{long.example}</p>
         </div>
+      )}
+      {faq.length > 0 && (
+        <section class="models-faq guide-faq" aria-labelledby="tf-h">
+          <h2 id="tf-h">Sık sorulanlar</h2>
+          {faq.map(([q, a]) => <details><summary>{q}</summary><p>{a}</p></details>)}
+        </section>
+      )}
+      {guides.length > 0 && (
+        <section class="guide-more" aria-labelledby="tg-h" data-pagefind-ignore>
+          <h2 id="tg-h">İlgili rehberler</h2>
+          <ul>{guides.map((g) => <li><a href={url(`/rehber/${g.id}/`)}>{g.data.title}</a></li>)}</ul>
+        </section>
       )}
       {others.length > 0 && (
         <nav class="entity-links" aria-label="İlgili terimler" data-pagefind-ignore>

@@ -8,6 +8,14 @@ summary:
   - "Şirketler, yapay zeka kullanımı için yazılı bir politika ve onaylı araç listesi belirlemeli."
 level: Başlangıç
 terms: [buyuk-dil-modeli, acik-agirlikli-model, cihaz-ustu-yapay-zeka, api]
+topic: Güvenlik ve gizlilik
+faq:
+  - q: "ChatGPT'ye yazdıklarım saklanıyor mu?"
+    a: "Hizmete ve hesap ayarlarına göre değişir. Konuşma geçmişi ve eğitimde kullanım ayarlarını gizlilik ayarlarından kontrol edebilirsiniz."
+  - q: "Yapay zeka araçlarını kullanmak KVKK'ya aykırı mı?"
+    a: "Araç kullanmak tek başına aykırı değildir; kişisel verilerin hangi amaçla, hangi hukuki dayanakla ve nereye aktarıldığı önemlidir. Kurumsal kullanımda hukuk biriminin değerlendirmesi gerekir."
+  - q: "Şirket verilerini güvenle kullanmanın yolu nedir?"
+    a: "Veri koruma koşulları incelenmiş kurumsal hesaplar kullanmak, hassas bilgileri istemlerden çıkarmak ve yazılı bir kullanım politikası belirlemek temel adımlardır."
 ---
 
 Yapay zeka asistanları iş hayatında hızla yaygınlaşıyor; e-posta yazmaktan sözleşme incelemeye kadar pek çok işte kullanılıyor. Ancak bu araçlara yazılan her bilgi, aracı sunan şirketin sunucularına gönderiliyor. Bu rehber, kişisel verileri ve şirket bilgilerini korumak için uygulanabilecek temel kuralları anlatıyor. Hukuki bir görüş değildir; şirketinizin özel durumu için hukuk biriminize danışın.

@@ -5,7 +5,7 @@
 // "not": bu köklerle başlayan kelimeler eşleşmez (örn. "ajan" ararken "ajans").
 // "skipIf": eşleşmenin hemen çevresinde bu ifadelerden biri varsa atlanır (örn. "payment token" bir dil modeli token'ı değildir).
 
-export const GLOSSARY = [
+const RAW = [
   { slug: 'acik-agirlikli-model', term: 'Açık ağırlıklı model', en: 'open-weight model', match: ['açık ağırlıklı'],
     def: "Eğitilmiş parametreleri (ağırlıkları) herkesin indirip kendi bilgisayarında veya sunucusunda çalıştırabileceği şekilde yayımlanan model. Eğitim verisi ve kodu her zaman açık olmayabilir; bu yüzden \"açık kaynak\"tan farklıdır." },
   { slug: 'acik-kaynak', term: 'Açık kaynak', en: 'open source', match: ['açık kaynak'],
@@ -60,6 +60,80 @@ export const GLOSSARY = [
     def: "Binlerce sunucunun, depolama ve ağ ekipmanının bir arada çalıştığı tesis. Yapay zeka modelleri bu tesislerdeki GPU'larda eğitilir ve çalıştırılır." },
   { slug: 'yapay-zeka-ajani', term: 'Yapay zeka ajanı', en: 'AI agent', match: ['ajan'], not: ['ajans'],
     def: "Kendisine verilen bir hedefi, adımları kendisi planlayarak ve araçlar kullanarak (web'de arama, form doldurma, kod çalıştırma gibi) yerine getiren yapay zeka sistemi." },
+
+  // ------------------------------------------------------------ 2026-11 eklenen terimler
+  { slug: 'yapay-zeka', term: 'Yapay zeka', en: 'artificial intelligence (AI)', match: [],
+    def: "Bilgisayarların öğrenme, akıl yürütme, dil anlama, görme ve karar verme gibi normalde insan zekası gerektiren işleri yapabilmesini sağlayan teknolojilerin genel adı." },
+  { slug: 'makine-ogrenmesi', term: 'Makine öğrenmesi', en: 'machine learning', match: ['makine öğrenme'],
+    def: "Bilgisayarın kurallar tek tek yazılmadan, örnek verilerdeki örüntüleri kendi kendine öğrenerek tahmin veya karar üretmesini sağlayan yapay zeka dalı." },
+  { slug: 'derin-ogrenme', term: 'Derin öğrenme', en: 'deep learning', match: ['derin öğrenme'],
+    def: "Çok katmanlı yapay sinir ağlarıyla büyük miktarda veriden öğrenen makine öğrenmesi yöntemi. Bugünkü dil, görüntü ve ses modellerinin temelidir." },
+  { slug: 'yapay-sinir-agi', term: 'Yapay sinir ağı', en: 'artificial neural network', match: ['sinir ağ'],
+    def: "Beyindeki sinir hücrelerinden esinlenen, birbirine bağlı katmanlardaki çok sayıda basit hesaplama biriminden oluşan ve verilerden öğrenen matematiksel model." },
+  { slug: 'uretken-yapay-zeka', term: 'Üretken yapay zeka', en: 'generative AI', match: ['üretken yapay zeka'],
+    def: "Öğrendiği örneklerden yola çıkarak yeni metin, görsel, ses, video veya kod üretebilen yapay zeka. ChatGPT ve görsel üreten modeller bu gruba girer." },
+  { slug: 'dogal-dil-isleme', term: 'Doğal dil işleme (NLP)', en: 'natural language processing', match: ['doğal dil işleme', '=nlp'],
+    def: "Bilgisayarların insan dilini anlaması, yorumlaması ve üretmesi üzerine çalışan yapay zeka alanı. Çeviri, özetleme, duygu analizi ve sohbet botları bu alanın uygulamalarıdır." },
+  { slug: 'transformer', term: 'Transformer mimarisi', en: 'transformer', match: ['transformer'],
+    def: "2017'de tanıtılan ve \"dikkat\" (attention) mekanizmasıyla bir metindeki tüm kelimelerin birbiriyle ilişkisini aynı anda değerlendiren sinir ağı mimarisi. Büyük dil modellerinin neredeyse tamamı bu mimariye dayanır." },
+  { slug: 'sohbet-botu', term: 'Sohbet botu (chatbot)', en: 'chatbot', match: ['sohbet bot', 'chatbot'],
+    def: "Kullanıcıyla yazılı veya sesli olarak doğal dilde konuşabilen yazılım. Güncel sohbet botları büyük dil modellerine dayanır." },
+  { slug: 'bilgisayarli-goru', term: 'Bilgisayarlı görü', en: 'computer vision', match: ['bilgisayarlı görü'],
+    def: "Bilgisayarların fotoğraf ve videolardaki nesneleri, yüzleri, yazıları ve hareketleri tanıyıp yorumlamasını sağlayan yapay zeka alanı." },
+  { slug: 'pekistirmeli-ogrenme', term: 'Pekiştirmeli öğrenme', en: 'reinforcement learning', match: ['pekiştirmeli öğrenme'],
+    def: "Bir modelin deneme yanılma yoluyla, doğru davranışlarda ödül, yanlışlarda ceza alarak öğrendiği makine öğrenmesi yöntemi." },
+  { slug: 'denetimli-ogrenme', term: 'Denetimli ve denetimsiz öğrenme', en: 'supervised and unsupervised learning', match: ['denetimli öğrenme', 'denetimsiz öğrenme'],
+    def: "Denetimli öğrenmede model, doğru cevabı belli (etiketli) örneklerden öğrenir; denetimsiz öğrenmede ise etiket olmadan verideki grupları ve örüntüleri kendisi bulur." },
+  { slug: 'egitim-verisi', term: 'Eğitim verisi', en: 'training data', match: ['eğitim veri'],
+    def: "Bir yapay zeka modelinin öğrenmesi için kullanılan metin, görsel, ses veya sayısal veri topluluğu. Modelin bilgisi ve hataları büyük ölçüde bu veriden gelir." },
+  { slug: 'gomme', term: 'Gömme (embedding)', en: 'embedding', match: ['=embedding', '=embeddings', 'vektör temsil'],
+    def: "Bir kelimenin, cümlenin veya görselin anlamını sayı dizisi (vektör) olarak ifade etme yöntemi. Anlamca yakın içerikler birbirine yakın vektörlerle temsil edilir." },
+  { slug: 'vektor-veritabani', term: 'Vektör veritabanı', en: 'vector database', match: ['vektör veritaban'],
+    def: "Gömme (embedding) vektörlerini saklayan ve anlamca en benzer içerikleri hızla bulmayı sağlayan veritabanı. Belge arama ve RAG sistemlerinde kullanılır." },
+  { slug: 'difuzyon-modeli', term: 'Difüzyon modeli', en: 'diffusion model', match: ['difüzyon model'],
+    def: "Rastgele gürültüden başlayıp onu adım adım temizleyerek görsel, video veya ses üreten model türü. Metinden görsel üreten araçların çoğu bu yöntemi kullanır." },
+  { slug: 'deepfake', term: 'Deepfake (derin sahte)', en: 'deepfake', match: ['deepfake', 'derin sahte'],
+    def: "Yapay zekayla üretilen ve gerçek bir kişiyi söylemediği bir şeyi söylüyor ya da yapmadığı bir şeyi yapıyor gibi gösteren sahte video, ses veya görsel." },
+  { slug: 'sentetik-veri', term: 'Sentetik veri', en: 'synthetic data', match: ['sentetik veri'],
+    def: "Gerçek dünyadan toplanmak yerine bilgisayar veya yapay zeka tarafından üretilen, gerçek verinin özelliklerini taklit eden veri." },
+  { slug: 'yapay-zeka-onyargisi', term: 'Yapay zeka önyargısı', en: 'AI bias', match: ['algoritmik önyargı', 'yapay zeka önyargı', 'model önyargı'],
+    def: "Bir yapay zeka sisteminin belirli kişi veya gruplar aleyhine sistematik olarak hatalı ya da adaletsiz sonuçlar üretmesi. Çoğunlukla eğitim verisindeki dengesizliklerden kaynaklanır." },
+  { slug: 'aciklanabilir-yapay-zeka', term: 'Açıklanabilir yapay zeka', en: 'explainable AI', match: ['açıklanabilir yapay zeka', 'açıklanabilirlik'],
+    def: "Bir yapay zeka sisteminin verdiği kararın veya ürettiği sonucun nedenini insanların anlayabileceği biçimde ortaya koymayı amaçlayan yöntemler." },
+  { slug: 'mcp', term: 'MCP (Model Context Protocol)', en: 'Model Context Protocol', match: ['=mcp', 'model context protocol'],
+    def: "Yapay zeka asistanlarının dosyalar, uygulamalar ve veritabanları gibi dış araç ve veri kaynaklarına standart bir yolla bağlanmasını sağlayan açık protokol. Anthropic tarafından 2024'te tanıtıldı." },
+  { slug: 'istem-muhendisligi', term: 'İstem mühendisliği', en: 'prompt engineering', match: ['istem mühendisliği', 'prompt mühendisliği', 'prompt engineering'],
+    def: "Bir yapay zeka modelinden istenen sonucu almak için talimatları (istemleri) bilinçli olarak tasarlama, deneme ve iyileştirme işi." },
+  { slug: 'zincirleme-dusunce', term: 'Zincirleme düşünce', en: 'chain of thought', match: ['zincirleme düşünce', 'chain of thought', 'chain-of-thought'],
+    def: "Modelin bir sonuca doğrudan atlamak yerine ara adımları sırayla yazarak düşünmesi. Matematik ve mantık sorularında doğruluğu artırır." },
+  { slug: 'sifir-atisli-ogrenme', term: 'Sıfır atışlı ve az örnekli öğrenme', en: 'zero-shot and few-shot learning', match: ['sıfır atış', 'az örnekli', 'zero-shot', 'few-shot'],
+    def: "Modelin bir görevi hiç örnek görmeden (sıfır atışlı) ya da istemde verilen birkaç örnekten (az örnekli) yola çıkarak yapabilmesi." },
+  { slug: 'turing-testi', term: 'Turing testi', en: 'Turing test', match: ['turing test'],
+    def: "Alan Turing'in 1950'de önerdiği, bir makinenin yazılı konuşmada insandan ayırt edilemeyecek kadar insan gibi davranıp davranamadığını ölçen düşünce deneyi." },
+  { slug: 'jailbreak', term: 'Jailbreak (model kırma)', en: 'jailbreak', match: ['jailbreak'],
+    def: "Özel hazırlanmış istemlerle bir yapay zeka modelinin güvenlik kurallarını aşmaya ve normalde reddedeceği bir yanıtı vermeye zorlamak." },
+  { slug: 'istem-enjeksiyonu', term: 'İstem enjeksiyonu', en: 'prompt injection', match: ['istem enjeksiyon', 'prompt injection', 'prompt enjeksiyon'],
+    def: "Bir web sayfasına, belgeye veya e-postaya gizlenmiş talimatlarla, o içeriği okuyan yapay zeka sisteminin kullanıcı yerine saldırganın isteğini yerine getirmesini sağlama saldırısı." },
+  { slug: 'tpu-npu', term: 'TPU ve NPU', en: 'tensor processing unit / neural processing unit', match: ['=tpu', '=tpu\'lar', '=tpu\'ları', '=npu'],
+    def: "Yapay zeka hesaplamaları için özel tasarlanmış işlemciler. TPU, Google'ın veri merkezlerinde kullandığı çiptir; NPU ise telefon ve bilgisayarlarda yapay zeka işlerini yürüten birimdir." },
+  { slug: 'kuantizasyon', term: 'Kuantizasyon', en: 'quantization', match: ['kuantizasyon', 'kuantize'],
+    def: "Bir modelin sayılarını daha az bitle saklayarak boyutunu küçültme ve daha hızlı çalışmasını sağlama yöntemi. Kalitede bir miktar kayıpla daha zayıf donanımda çalıştırmayı mümkün kılar." },
+  { slug: 'uzmanlar-karisimi', term: 'Uzmanlar karışımı (MoE)', en: 'mixture of experts', match: ['uzmanlar karışım', 'mixture of experts', 'mixture-of-experts', '=moe'],
+    def: "Modelin birçok alt ağdan (uzmandan) oluştuğu ve her girdide bunlardan yalnızca birkaçının çalıştığı mimari. Büyük modelleri daha düşük işlem maliyetiyle çalıştırmayı sağlar." },
+  { slug: 'asiri-ogrenme', term: 'Aşırı öğrenme (overfitting)', en: 'overfitting', match: ['aşırı öğrenme', 'overfitting', 'aşırı uyum'],
+    def: "Bir modelin eğitim verisini ezberleyip genel kuralları öğrenememesi; bu yüzden eğitimde başarılı görünüp yeni verilerde kötü sonuç vermesi." },
 ];
+
+// Konu grupları (sözlük sayfasında gruplama ve ilgili terimler için)
+export const GLOSSARY_CATS = ['Temel kavramlar', 'Modeller ve eğitim', 'Kullanım ve araçlar', 'Donanım ve altyapı', 'Güvenlik ve etik'];
+const CAT = {
+  'Temel kavramlar': ['yapay-zeka', 'makine-ogrenmesi', 'derin-ogrenme', 'yapay-sinir-agi', 'uretken-yapay-zeka', 'dogal-dil-isleme', 'bilgisayarli-goru', 'buyuk-dil-modeli', 'agi', 'turing-testi', 'cok-modlu', 'dunya-modeli', 'acik-kaynak', 'acik-agirlikli-model'],
+  'Modeller ve eğitim': ['transformer', 'pekistirmeli-ogrenme', 'denetimli-ogrenme', 'egitim-verisi', 'gomme', 'difuzyon-modeli', 'sentetik-veri', 'kuantizasyon', 'uzmanlar-karisimi', 'asiri-ogrenme', 'egitim', 'ince-ayar', 'damitma', 'parametre', 'token', 'akil-yurutme-modeli', 'benchmark', 'cikarim', 'baglam-penceresi'],
+  'Kullanım ve araçlar': ['sohbet-botu', 'istem', 'istem-muhendisligi', 'zincirleme-dusunce', 'sifir-atisli-ogrenme', 'rag', 'vektor-veritabani', 'mcp', 'api', 'yapay-zeka-ajani'],
+  'Donanım ve altyapı': ['gpu', 'tpu-npu', 'hbm', 'veri-merkezi', 'cihaz-ustu-yapay-zeka'],
+  'Güvenlik ve etik': ['halusinasyon', 'deepfake', 'yapay-zeka-onyargisi', 'aciklanabilir-yapay-zeka', 'hizalama', 'jailbreak', 'istem-enjeksiyonu', 'kirmizi-takim', 'sizma-testi'],
+};
+const catOf = Object.fromEntries(Object.entries(CAT).flatMap(([c, slugs]) => slugs.map((sl) => [sl, c])));
+export const GLOSSARY = RAW.map((t) => ({ ...t, cat: catOf[t.slug] }));
 
 export const glossaryUrl = (slug) => `/sozluk/${slug}/`;

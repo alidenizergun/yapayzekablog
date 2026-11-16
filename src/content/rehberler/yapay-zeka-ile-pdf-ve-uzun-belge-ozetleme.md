@@ -8,6 +8,14 @@ summary:
   - "Rakamları ve kritik ifadeleri belgenin aslıyla mutlaka karşılaştırın."
 level: Başlangıç
 terms: [baglam-penceresi, cok-modlu, halusinasyon, token, rag]
+topic: Yazı ve içerik
+faq:
+  - q: "Yapay zeka çok uzun PDF'leri okuyabilir mi?"
+    a: "Modelin bağlam penceresine sığan belgeleri bütün olarak okuyabilir. Çok uzun belgelerde bölüm bölüm çalışmak daha güvenilir sonuç verir."
+  - q: "Taranmış PDF yapay zekaya özetletilebilir mi?"
+    a: "Görselleri okuyabilen çok modlu modeller taranmış sayfaları da okuyabilir; ancak düşük kaliteli taramalarda hata olasılığı artar."
+  - q: "Yapay zeka özeti hukuki belgeler için yeterli mi?"
+    a: "Hayır. Hızlı bir genel bakış için faydalıdır, ama hukuki ve mali kararlar için belgenin aslı okunmalı ve uzman görüşü alınmalıdır."
 ---
 
 Uzun raporları, sözleşmeleri, akademik makaleleri ya da toplantı dökümlerini okumak saatler alabilir. ChatGPT, Claude ve Gemini gibi asistanlar bu belgeleri dakikalar içinde özetleyebilir; ama iyi bir sonuç almak için doğru yöntemi izlemek gerekir. Menülerin yeri ve adı uygulamadan uygulamaya ve zamanla değişebilir; aşağıdaki adımlar hepsinde aynı şekilde uygulanır.

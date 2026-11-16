@@ -51,7 +51,8 @@ export function linkGlossary(html, base = '') {
     if (skip || !p.trim() || n >= MAX_PER_PAGE) continue;
     let text = p;
     // Bu metin parçasında henüz bağlanmamış terimleri, metindeki sırasına göre bağla
-    const hits = GLOSSARY.filter((g) => !used.has(g.slug)).map((g) => ({ g, at: find(text, g) })).filter((h) => h.at).sort((a, b) => a.at[0] - b.at[0]);
+    const hits = GLOSSARY.filter((g) => !used.has(g.slug)).map((g) => ({ g, at: find(text, g) })).filter((h) => h.at)
+      .sort((a, b) => a.at[0] - b.at[0] || b.at[1] - a.at[1]); // aynı yerde başlayanlardan uzun olan (örn. "istem enjeksiyonu" > "istem")
     let out = '', cursor = 0;
     for (const { g, at } of hits) {
       if (n >= MAX_PER_PAGE || at[0] < cursor) continue;

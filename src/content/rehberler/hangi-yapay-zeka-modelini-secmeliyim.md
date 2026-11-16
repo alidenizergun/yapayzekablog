@@ -8,6 +8,14 @@ summary:
   - "Seçimden önce kendi örnek işlerinizle iki üç modeli yan yana deneyin."
 level: Başlangıç
 terms: [buyuk-dil-modeli, akil-yurutme-modeli, acik-agirlikli-model, benchmark, token, api]
+topic: Temel kullanım
+faq:
+  - q: "En iyi yapay zeka modeli hangisi?"
+    a: "Tek bir en iyi model yoktur. Kodlama, yazı, analiz ve görsel gibi görevlerde farklı modeller öne çıkabilir; kendi işlerinizle karşılaştırmak en doğru yöntemdir."
+  - q: "Ücretsiz yapay zeka modelleri yeterli mi?"
+    a: "Günlük yazışma, özet ve fikir üretme gibi işler için ücretsiz sürümler çoğu zaman yeterlidir. Yoğun kullanım, uzun belgeler ve en güçlü modeller için genellikle ücretli plan gerekir."
+  - q: "Model fiyatları nereden karşılaştırılır?"
+    a: "API fiyatlarını şirketlerin resmi sayfalarından kontrol ettiğimiz model karşılaştırma tablomuzda bulabilirsiniz."
 ---
 
 Yapay zeka şirketleri her ay yeni modeller duyuruyor ve her biri bir testte birinci olduğunu açıklıyor. Bu karmaşada doğru modeli seçmenin yolu, benchmark tablolarından çok kendi ihtiyacınızdan başlamaktır. Aşağıdaki ölçütler hem bireysel kullanıcılar hem de şirketler için geçerlidir.

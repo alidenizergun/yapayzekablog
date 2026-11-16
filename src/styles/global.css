@@ -647,3 +647,21 @@ header.site .masthead { display: flex; align-items: center; justify-content: spa
 .cat-intro { margin: 12px 0 8px; max-width: 70ch; color: var(--muted); font-size: 16px; line-height: 1.55; }
 .cat-intro a { color: var(--accent-text); font-weight: 600; white-space: nowrap; }
 .cat-intro a:hover { text-decoration: underline; }
+.guide-item h3 { margin: 6px 0 0; font-size: 21px; line-height: 1.3; text-wrap: balance; }
+.guide-item h3 a:hover { color: var(--accent-text); }
+.guide-topics a { width: auto; padding-inline: 14px; gap: 6px; font-size: 14px; }
+.guide-group { scroll-margin-top: 72px; }
+.guide-toc { margin-top: 24px; padding: 18px 22px; border: 1px solid var(--line); border-radius: 8px; max-width: 68ch; }
+.guide-toc ol { margin: 8px 0 0; padding-left: 22px; }
+.guide-toc li + li { margin-top: 4px; }
+.guide-toc a { color: var(--accent-text); }
+.guide-toc a:hover { text-decoration: underline; }
+.prose h2 { scroll-margin-top: 72px; }
+.guide-faq { margin-top: 36px; }
+.term-group { margin: 6px 0 0; font-size: 14px; color: var(--muted); }
+.glossary-cats { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+
+.glossary-cat { margin-top: 16px; }
+.glossary-cat h3 { margin: 0; font-size: 15px; letter-spacing: .04em; text-transform: uppercase; color: var(--accent-text); }
+.glossary-cat p { margin: 6px 0 0; line-height: 1.8; font-size: 16px; }
+.glossary-cat a:hover { color: var(--accent-text); text-decoration: underline; }

@@ -3,27 +3,37 @@ import Base from '../../layouts/Base.astro';
 import { getCollection } from 'astro:content';
 import { url } from '../../lib/news.js';
 
+const TOPICS = ['Temel kullanım', 'Yazı ve içerik', 'İş ve kariyer', 'Eğitim ve öğrenme', 'Güvenlik ve gizlilik', 'Teknik'];
 const guides = (await getCollection('rehberler', (g) => !g.data.draft)).sort((a, b) => a.data.title.localeCompare(b.data.title, 'tr'));
+const groups = TOPICS.map((t, i) => ({ t, id: `konu-${i + 1}`, items: guides.filter((g) => g.data.topic === t) })).filter((x) => x.items.length);
 const pageUrl = new URL(url('/rehber/'), Astro.site).href;
 const jsonLd = {
   '@type': 'CollectionPage', name: 'Yapay zeka rehberleri', url: pageUrl, inLanguage: 'tr-TR',
   mainEntity: { '@type': 'ItemList', itemListElement: guides.map((g, i) => ({ '@type': 'ListItem', position: i + 1, url: new URL(url(`/rehber/${g.id}/`), Astro.site).href, name: g.data.title })) },
 };
 ---
-<Base title="Yapay zeka rehberleri: adım adım Türkçe kullanım kılavuzları" description="ChatGPT, Claude ve Gemini gibi yapay zeka araçlarını işte ve günlük hayatta doğru kullanmak için adım adım Türkçe rehberler: istem yazma, belge özetleme, model seçimi, veri güvenliği."
+<Base title="Yapay zeka rehberleri: adım adım Türkçe kullanım kılavuzları" description="ChatGPT, Claude ve Gemini gibi yapay zeka araçlarını işte, okulda ve günlük hayatta doğru kullanmak için adım adım Türkçe rehberler: istem yazma, CV, sunum, görsel üretme, güvenlik ve daha fazlası."
   jsonLd={jsonLd} breadcrumbs={[{ name: 'Ana sayfa', path: '/' }, { name: 'Rehberler', path: '/rehber/' }]}>
   <section class="glossary guides">
     <span class="cat">Rehberler</span>
     <h1 class="page-h">Yapay zeka rehberleri</h1>
-    <p class="spot">Yapay zeka araçlarını doğru, verimli ve güvenli kullanmak için adım adım Türkçe kılavuzlar. Rehberler, belirli bir uygulamanın menülerine değil her araçta geçerli yöntemlere odaklanır.</p>
-    <ul class="guide-list">
-      {guides.map((g) => (
-        <li class="guide-item">
-          <span class="guide-level">{g.data.level}</span>
-          <h2><a href={url(`/rehber/${g.id}/`)}>{g.data.title}</a></h2>
-          <p>{g.data.description}</p>
-        </li>
-      ))}
-    </ul>
+    <p class="spot">Yapay zeka araçlarını doğru, verimli ve güvenli kullanmak için adım adım Türkçe kılavuzlar. Rehberler, belirli bir uygulamanın menülerine değil her araçta geçerli yöntemlere odaklanır. Terimlerin anlamı için <a href={url('/sozluk/')}>yapay zeka sözlüğüne</a> bakabilirsiniz.</p>
+    <nav class="glossary-az guide-topics" aria-label="Konular">
+      {groups.map((g) => <a href={`#${g.id}`}>{g.t} <span class="meta">{g.items.length}</span></a>)}
+    </nav>
+    {groups.map((grp) => (
+      <section class="guide-group" id={grp.id} aria-labelledby={`${grp.id}-h`}>
+        <h2 id={`${grp.id}-h`} class="ev-h">{grp.t}</h2>
+        <ul class="guide-list">
+          {grp.items.map((g) => (
+            <li class="guide-item">
+              <span class="guide-level">{g.data.level}</span>
+              <h3><a href={url(`/rehber/${g.id}/`)}>{g.data.title}</a></h3>
+              <p>{g.data.description}</p>
+            </li>
+          ))}
+        </ul>
+      </section>
+    ))}
   </section>
 </Base>

@@ -96,6 +96,8 @@ const rehberler = defineCollection({
     summary: z.array(z.string()).min(2).max(6),   // "Kısaca" kutusu
     level: z.enum(['Başlangıç', 'Orta', 'İleri']).default('Başlangıç'),
     terms: z.array(z.string()).default([]),       // ilgili sözlük terimleri (slug)
+    topic: z.enum(['Temel kullanım', 'Yazı ve içerik', 'İş ve kariyer', 'Eğitim ve öğrenme', 'Güvenlik ve gizlilik', 'Teknik']).default('Temel kullanım'),
+    faq: z.array(z.object({ q: z.string(), a: z.string() })).default([]),  // Sık sorulanlar (FAQPage)
     draft: z.boolean().default(false),
   }),
 });
