@@ -252,7 +252,7 @@ ${focus}
 
 Son ${LOOKBACK_HOURS} saat içinde yayınlanmış, yapay zeka alanındaki en önemli gelişmeleri bul; önem sırasına koy.${MIDDAY ? '\nÖĞLE TURU: Bu ara güncellemedir. Yalnızca son ' + LOOKBACK_HOURS + ' saatte çıkan, ertesi sabahı bekleyemeyecek kadar önemli gelişmeleri (büyük lansman, satın alma, resmi karar, önemli kriz) aday yap; sıradan haberleri gece turuna bırak. Böyle bir gelişme yoksa yalnızca "YENİ GELİŞME YOK" yaz.' : ''}
 
-Mümkün olduğunda birincil kaynağı (resmi blog, duyuru, makale) da bul. Aynı konuyu farklı kelimelerle tekrar tekrar arama.
+Her aday için birincil kaynağı (resmi blog, duyuru, makale) veya tanınmış bir haber kuruluşunu bul. Yalnızca haber bülteni, derleme sitesi (ör. "AI'da bugün olan her şey"), Substack/Medium yazısı veya yatırım veri tabanında geçen adayı ELE; bunlar tek başına kaynak sayılmaz. Aynı konuyu farklı kelimelerle tekrar tekrar arama.
 
 Aşağıdaki haberler son 7 günde zaten yayınlandı. Bunları ve bunların yeni bilgi içermeyen tekrarlarını ATLA:
 ${covered}
@@ -524,6 +524,10 @@ ${JSON.stringify(input, null, 1)}` }],
 
 // ---------------------------------------------------------------- doğrulama
 
+// Tek başına yeterli sayılmayan kaynaklar: haber bültenleri, derleme siteleri, kişisel bloglar, veri tabanı kayıtları
+const WEAK_SOURCE = /(substack\.com|beehiiv\.com|medium\.com|ghost\.io|theneuron\.ai|therundown\.ai|bensbites|tldr\.tech|superhuman\.ai|fundz\.net|crunchbase\.com\/(organization|funding_round)|linkedin\.com\/pulse|news\.ycombinator\.com|reddit\.com|\/digest\/|\/newsletter\/|aggregat|daily-ai|ai-news-today)/i;
+const isWeakSource = (u) => WEAK_SOURCE.test(String(u));
+
 /** Güvenlik: haber metninden HTML'i ve kaynak listesinde olmayan linkleri temizler.
  *  Web sayfalarına gizlenmiş talimatlar (prompt injection) metne zararlı kod veya link sokmaya çalışabilir. */
 function sanitizeBody(md, sourceUrls) {
@@ -562,6 +566,8 @@ function validate(articles, seen, existing) {
     if (!CATEGORIES.some((c) => c.slug === a.category)) reasons.push('kategori');
     if (!IMAGES[a.image]) reasons.push('görsel');
     if (sources.length === 0) reasons.push('doğrulanmış kaynak yok');
+    // Yalnızca bülten, derleme veya kişisel blog kaynağına dayanan haber yayınlanmaz (birincil kaynak ya da haber kuruluşu gerekir)
+    if (sources.length && sources.every((s) => isWeakSource(s.url))) reasons.push('yalnızca ikincil derleme/bülten kaynağı');
     if (sources.length && sources.every((s) => existingUrls.has(normalizeUrl(s.url)))) reasons.push('kaynak daha önce kullanılmış');
     const dup = [...recent, ...ok.map((o) => ({ title: o.title }))].find((e) => similarity(e.title, title) >= 0.6);
     if (dup) reasons.push(`benzer haber var: "${dup.title}"`);
