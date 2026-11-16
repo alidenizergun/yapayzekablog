@@ -26,7 +26,7 @@ export const CATEGORIES = [
   { slug: 'pazarlama', name: 'Pazarlama', images: ['pazarlama', 'arama'], intro: 'Yapay zeka ve pazarlama: reklam, içerik üretimi, arama motoru görünürlüğü ve markaların yapay zeka kullanımındaki gelişmeler.', links: [{ href: '/rehber/iyi-istem-nasil-yazilir/', label: 'İyi istem nasıl yazılır?' }] },
   { slug: 'donanim', name: 'Donanım', images: ['gozluk', 'altyapi'], intro: "Yapay zeka donanımı haberleri: GPU'lar, yapay zeka çipleri, bellek, veri merkezleri ve yapay zeka destekli cihazlar.", links: [{ href: '/sozluk/gpu/', label: 'GPU nedir?' }, { href: '/sozluk/veri-merkezi/', label: 'Veri merkezi nedir?' }] },
   { slug: 'guvenlik', name: 'Güvenlik', images: ['guvenlik'], intro: 'Yapay zeka güvenliği haberleri: siber saldırılarda yapay zeka kullanımı, model güvenlik açıkları, kırmızı takım çalışmaları ve güvenlik araştırmaları.', links: [{ href: '/sozluk/kirmizi-takim/', label: 'Kırmızı takım nedir?' }] },
-  { slug: 'turkiye', name: 'Türkiye', images: ['girisim'], intro: "Türkiye'de yapay zeka: yerli girişimler, kamu politikaları, yatırımlar, etkinlikler ve Türkçe yapay zeka çalışmaları.", links: [{ href: '/etkinlikler/', label: 'Etkinlik takvimi' }] },
+  { slug: 'turkiye', name: 'Türkiye', images: ['girisim'], intro: "Türkiye'de yapay zeka: yerli girişimler, kamu politikaları, yatırımlar, etkinlikler ve Türkçe yapay zeka çalışmaları.", links: [{ href: '/turkiye-yapay-zeka/', label: 'Türkiye masası' }, { href: '/yerli-yapay-zeka/', label: 'Yerli modeller' }, { href: '/etkinlikler/', label: 'Etkinlik takvimi' }] },
 ];
 
 // Menüde görünecek kategoriler (sırayla)

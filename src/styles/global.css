@@ -748,3 +748,19 @@ header.site .masthead { display: flex; align-items: center; justify-content: spa
 .river-body { margin-top: 8px; line-height: 1.6; font-size: 16px; }
 .river-body p { color: var(--fg); }
 @media (max-width: 560px) { .river-item { grid-template-columns: 1fr; gap: 2px; } }
+/* ---------- Türkiye masası ---------- */
+.st-acik { color: #0a7d3b; }
+.st-sinirli { color: var(--fg); }
+.st-kapali { color: var(--muted); }
+:root[data-theme="dark"] .st-acik { color: #5ed08a; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .st-acik { color: #5ed08a; } }
+.yerli-list { display: grid; gap: 0; margin-top: 28px; max-width: 860px; border-top: 1px solid var(--line); }
+.yerli { padding-block: 20px; border-bottom: 1px solid var(--line); scroll-margin-top: 72px; }
+.yerli h2 { margin: 0; font-size: 21px; display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
+.yerli p { margin: 8px 0 0; line-height: 1.6; }
+.yerli .meta a, .tr-desk .meta a, .tr-desk .by-numbers a { color: var(--accent-text); }
+.tr-desk .by-numbers { max-width: 860px; }
+.tr-desk .by-numbers > .meta { margin: 12px 0 0; font-size: 13px; }
+.more-link { display: inline-block; margin-top: 12px; color: var(--accent-text); font-weight: 600; }
+.guide-more-list { margin: 10px 0 0; padding-left: 20px; }
+.guide-more-list a { color: var(--accent-text); font-weight: 600; }
