@@ -1,47 +1,153 @@
 ---
-// Akış: tüm haberler ve kısa notlar, en yeniden eskiye, saatleriyle (The Verge "Quick Posts" / Techmeme "River" benzeri)
+// Akış: tüm haberler ve kısa notlar, en yeniden eskiye, saatleriyle (The Verge "Quick Posts" / Techmeme "River" benzeri).
+// Kategori ve tür süzgeci, son ziyaretten beri yeni haber işareti, açılır "Kısaca", kalıcı bağlantılar ve sonraki güncelleme saati.
 import Base from '../layouts/Base.astro';
-import { getNews, newsUrl, catName, catUrl, url } from '../lib/news.js';
+import { getNews, newsUrl, catName, slugOf, url } from '../lib/news.js';
+import { storyOf } from '../lib/stories.js';
 import { render } from 'astro:content';
 
-const all = (await getNews()).slice(0, 60);
+const all = (await getNews()).slice(0, 120);
 const IST = 3 * 3600e3;
 const dayKey = (d) => new Date(d.valueOf() + IST).toISOString().slice(0, 10);
 const hm = (d) => new Date(d.valueOf() + IST).toISOString().slice(11, 16);
 const MONTHS = ['Ocak', 'Şubat', 'Mart', 'Nisan', 'Mayıs', 'Haziran', 'Temmuz', 'Ağustos', 'Eylül', 'Ekim', 'Kasım', 'Aralık'];
-const today = dayKey(new Date()), yesterday = dayKey(new Date(Date.now() - 86400e3));
-const dayName = (k) => (k === today ? 'Bugün' : k === yesterday ? 'Dün' : `${Number(k.slice(8))} ${MONTHS[Number(k.slice(5, 7)) - 1]} ${k.slice(0, 4)}`);
+const DAYS = ['Pazar', 'Pazartesi', 'Salı', 'Çarşamba', 'Perşembe', 'Cuma', 'Cumartesi'];
+const dayLabel = (k) => { const d = new Date(`${k}T12:00:00Z`); return `${Number(k.slice(8))} ${MONTHS[d.getUTCMonth()]} ${DAYS[d.getUTCDay()]}`; };
 const days = [];
 for (const n of all) {
   const k = dayKey(n.data.date);
   let g = days.find((x) => x.k === k);
   if (!g) days.push((g = { k, items: [] }));
-  g.items.push({ n, Content: n.data.format === 'kisa' ? (await render(n)).Content : null });
+  g.items.push({ n, story: storyOf(n), Content: n.data.format === 'kisa' ? (await render(n)).Content : null });
 }
+const cats = [...new Set(all.map((n) => n.data.category))].map((c) => ({ c, name: catName(c), count: all.filter((n) => n.data.category === c).length })).sort((a, b) => b.count - a.count);
+const shortCount = all.filter((n) => n.data.format === 'kisa').length;
+const latest = all[0]?.data.date;
 ---
-<Base title="Akış: yapay zeka gündemi dakika dakika" description="YZ Gündemi'nde yayımlanan tüm yapay zeka haberleri ve kısa notlar, en yeniden eskiye, saatleriyle."
+<Base title="Akış: yapay zeka gündemi dakika dakika" description="YZ Gündemi'nde yayımlanan tüm yapay zeka haberleri ve kısa notlar, en yeniden eskiye, saatleriyle; kategoriye göre süzülebilir."
   breadcrumbs={[{ name: 'Ana sayfa', path: '/' }, { name: 'Akış', path: '/akis/' }]}>
-  <section class="glossary river">
+  <section class="glossary river" data-river>
     <span class="cat">Akış</span>
     <h1 class="page-h">Yapay zeka gündemi: akış</h1>
     <p class="spot">Yayımladığımız tüm haberler ve kısa notlar, en yeniden eskiye. Gece turunda günün haberleri, öğle turunda yalnızca önemli gelişmeler eklenir.</p>
+
+    <div class="river-status" aria-live="polite">
+      {latest && <span>Son güncelleme: <time datetime={latest.toISOString()}>{dayLabel(dayKey(latest))}, {hm(latest)}</time></span>}
+      <span data-next-run>Güncellemeler her gün 04:53 ve 13:23'te</span>
+      <span class="river-new" data-new-count hidden></span>
+      <a href={url('/rss.xml')}>RSS</a>
+    </div>
+
+    <div class="deal-filters river-filters" role="group" aria-label="Süz" data-river-filters>
+      <button type="button" aria-pressed="true" data-f="">Tümü <span class="meta">{all.length}</span></button>
+      {shortCount > 0 && <button type="button" aria-pressed="false" data-f="kisa">Kısa notlar <span class="meta">{shortCount}</span></button>}
+      {cats.map((c) => <button type="button" aria-pressed="false" data-f={`c:${c.c}`}>{c.name} <span class="meta">{c.count}</span></button>)}
+    </div>
+
     {days.map((g) => (
-      <section aria-labelledby={`d-${g.k}`}>
-        <h2 id={`d-${g.k}`} class="ev-h">{dayName(g.k)} <span class="meta">· {g.items.length} haber</span></h2>
+      <section class="river-day" data-day aria-labelledby={`d-${g.k}`}>
+        <h2 id={`d-${g.k}`} class="river-dayh"><span data-day-label={g.k}>{dayLabel(g.k)}</span> <span class="meta">· <span data-day-count>{g.items.length}</span> haber</span></h2>
         <ol class="river-list">
-          {g.items.map(({ n, Content }) => (
-            <li class={`river-item${Content ? ' is-short' : ''}`}>
-              <time datetime={n.data.date.toISOString()}>{hm(n.data.date)}</time>
-              <div>
-                <a class="cat" href={catUrl(n.data.category)}>{catName(n.data.category)}</a>{Content && <span class="river-kind">Kısa not</span>}
-                <h3><a href={newsUrl(n)}>{n.data.title}</a></h3>
-                {Content ? <div class="river-body"><Content /></div> : <p>{n.data.spot}</p>}
-              </div>
-            </li>
-          ))}
+          {g.items.map(({ n, story, Content }) => {
+            const d = n.data;
+            const id = slugOf(n);
+            return (
+              <li class={`river-item${Content ? ' is-short' : ''}`} id={id} data-item data-cat={d.category} data-kind={Content ? 'kisa' : 'haber'} data-ts={d.date.valueOf()}>
+                <a class="river-time" href={`#${id}`} title="Bu habere bağlantı"><time datetime={d.date.toISOString()}>{hm(d.date)}</time></a>
+                <div class="river-main">
+                  <p class="river-tags">
+                    <span class="cat">{catName(d.category)}</span>
+                    {Content && <span class="river-kind">Kısa not</span>}
+                    {story && <a class="river-chip" href={url(`/gelisme/${story.slug}/`)}>Gelişen hikâye</a>}
+                    {d.deal && <a class="river-chip" href={url('/yatirimlar/')}>{d.deal.type}</a>}
+                    {d.newTool && <a class="river-chip" href={url('/yeni-araclar/')}>Yeni araç</a>}
+                    <span class="river-newdot" hidden data-newdot>Yeni</span>
+                  </p>
+                  <h3><a href={newsUrl(n)}>{d.title}</a></h3>
+                  {Content ? <div class="river-body"><Content /></div> : <p>{d.spot}</p>}
+                  {!Content && d.keyPoints && d.keyPoints.length >= 2 && (
+                    <details class="river-kp"><summary>Kısaca</summary><ul>{d.keyPoints.map((k) => <li>{k}</li>)}</ul></details>
+                  )}
+                </div>
+              </li>
+            );
+          })}
         </ol>
       </section>
     ))}
+    <p class="river-more"><button type="button" class="btn btn-ghost" data-more hidden>Daha fazla göster</button></p>
+    <p class="empty" data-empty hidden>Bu süzgece uyan haber yok.</p>
     <p class="ai-note">Daha eski haberler için <a href={url('/sayfa/2/')}>arşive</a> veya <a href={url('/haftalik/')}>haftalık özetlere</a> bakın.</p>
   </section>
 </Base>
+
+<script>
+  const root = document.querySelector<HTMLElement>('[data-river]');
+  if (root) {
+    const PAGE = 30;
+    const items = [...root.querySelectorAll<HTMLElement>('[data-item]')];
+    const daysEls = [...root.querySelectorAll<HTMLElement>('[data-day]')];
+    const btns = [...root.querySelectorAll<HTMLButtonElement>('[data-river-filters] button')];
+    const moreBtn = root.querySelector<HTMLButtonElement>('[data-more]')!;
+    const empty = root.querySelector<HTMLElement>('[data-empty]')!;
+    let filter = '', limit = PAGE;
+
+    // Gün başlıkları: bugün / dün (ziyaret anına göre)
+    const ist = (t: number) => new Date(t + 3 * 3600e3).toISOString().slice(0, 10);
+    const today = ist(Date.now()), yest = ist(Date.now() - 86400e3);
+    root.querySelectorAll<HTMLElement>('[data-day-label]').forEach((el) => {
+      const k = el.dataset.dayLabel!;
+      if (k === today) el.textContent = `Bugün · ${el.textContent}`;
+      else if (k === yest) el.textContent = `Dün · ${el.textContent}`;
+    });
+
+    // Son ziyaretten beri yeni haberler
+    let last = 0;
+    try { last = Number(localStorage.getItem('yz-akis-son') || 0); localStorage.setItem('yz-akis-son', String(Date.now())); } catch {}
+    if (last) {
+      const fresh = items.filter((li) => Number(li.dataset.ts) > last);
+      fresh.forEach((li) => { li.classList.add('is-new'); li.querySelector<HTMLElement>('[data-newdot]')!.hidden = false; });
+      const nc = root.querySelector<HTMLElement>('[data-new-count]')!;
+      if (fresh.length) { nc.hidden = false; nc.textContent = `Son ziyaretinizden beri ${fresh.length} yeni haber`; }
+    }
+
+    // Sonraki güncelleme (04:53 ve 13:23, İstanbul)
+    const next = root.querySelector<HTMLElement>('[data-next-run]');
+    if (next) {
+      const nowIst = new Date(Date.now() + 3 * 3600e3);
+      const mins = nowIst.getUTCHours() * 60 + nowIst.getUTCMinutes();
+      const slots = [4 * 60 + 53, 13 * 60 + 23];
+      const n = slots.find((s) => s > mins);
+      next.textContent = `Sonraki güncelleme: ${n === undefined ? 'yarın 04:53' : n === slots[0] ? '04:53' : '13:23'}`;
+    }
+
+    const apply = () => {
+      let shown = 0, matched = 0;
+      items.forEach((li) => {
+        const ok = !filter || (filter === 'kisa' ? li.dataset.kind === 'kisa' : `c:${li.dataset.cat}` === filter);
+        if (ok) matched++;
+        const vis = ok && matched <= limit;
+        li.hidden = !vis;
+        if (vis) shown++;
+      });
+      daysEls.forEach((d) => {
+        const vis = d.querySelectorAll('[data-item]:not([hidden])').length;
+        d.hidden = vis === 0;
+        const c = d.querySelector('[data-day-count]'); if (c) c.textContent = String(vis);
+      });
+      moreBtn.hidden = matched <= limit;
+      empty.hidden = matched > 0;
+    };
+    btns.forEach((b) => b.addEventListener('click', () => {
+      btns.forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
+      filter = b.dataset.f || ''; limit = PAGE; apply();
+    }));
+    moreBtn.addEventListener('click', () => { limit += PAGE; apply(); });
+
+    // Kalıcı bağlantıyla gelindiyse o haberi göster
+    const target = location.hash ? root.querySelector<HTMLElement>(location.hash.replace(/[^#\w-]/g, '')) : null;
+    if (target) { limit = items.indexOf(target) + PAGE; }
+    apply();
+    if (target) { target.classList.add('is-target'); target.scrollIntoView({ block: 'center' }); }
+  }
+</script>
