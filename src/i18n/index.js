@@ -1,9 +1,6 @@
 // İki dilli site: Türkçe (kök) ve İngilizce (/en/). Adres eşlemesi, arayüz metinleri ve içerik yerelleştirmesi.
 // Sayfalar Türkçe adresle düşünür; u('/haber/x/') İngilizce sayfada otomatik olarak '/en/news/<ingilizce-ad>/' olur.
 import { getCollection } from 'astro:content';
-import { GLOSSARY } from '../lib/glossary.js';
-import { TASKS } from '../lib/tools.js';
-import { tagSlug } from '../lib/slug.js';
 
 const BASE = import.meta.env.BASE_URL.replace(/\/$/, '');
 const strMods = import.meta.glob('./en/strings.json', { eager: true });
@@ -14,23 +11,8 @@ export const langOf = (u) => (String(u?.pathname ?? u).slice(BASE.length).starts
 export const LOCALE = { tr: 'tr-TR', en: 'en-US' };
 export const OG_LOCALE = { tr: 'tr_TR', en: 'en_US' };
 
-// ---------------------------------------------------------------- adres eşlemesi
-// Türkçe ilk parça -> İngilizce ilk parça. Listede olmayan bölümlerin (etiket) İngilizcesi yoktur.
-export const SEG = {
-  haber: 'news', kategori: 'category', sozluk: 'glossary', rehber: 'guides', arac: 'tools', 'arac-secici': 'tool-finder',
-  'en-iyi': 'best', karsilastir: 'compare', 'ucretsiz-yapay-zeka-araclari': 'free-ai-tools', 'en-iyi-yapay-zeka-uygulamalari': 'best-ai-apps',
-  'yeni-araclar': 'new-ai-tools', 'modeller-karsilastirma': 'ai-model-pricing', akis: 'latest', haftalik: 'weekly', gelisme: 'stories',
-  yatirimlar: 'funding-tracker', etkinlikler: 'events', 'turkiye-yapay-zeka': 'ai-in-turkey', 'yerli-yapay-zeka': 'turkish-ai-models',
-  hakkimizda: 'about', gizlilik: 'privacy', 'hata-bildir': 'report-error', ara: 'search', sayfa: 'page', konu: 'topic', konular: 'topics',
-  'rss.xml': 'rss.xml',
-};
-export const CAT_EN = { modeller: 'models', ajanlar: 'agents', araclar: 'tools', 'girisim-yatirim': 'startups-funding', regulasyon: 'regulation',
-  arastirma: 'research', platformlar: 'platforms', pazarlama: 'marketing', donanim: 'hardware', guvenlik: 'security', turkiye: 'turkey' };
-const GL_OVERRIDE = { gpu: 'gpu', api: 'api', 'tpu-npu': 'tpu-and-npu', hbm: 'hbm', rag: 'rag', mcp: 'mcp' };
-export const GL_EN = Object.fromEntries(GLOSSARY.map((g) => [g.slug, GL_OVERRIDE[g.slug] || tagSlug(g.en.replace(/\(.*?\)/g, ''))]));
-export const TASK_EN = { sohbet: 'ai-chatbots', 'cv-hazirlama': 'resume-writing', 'gorsel-olusturma': 'image-generation', 'video-olusturma': 'video-generation',
-  'muzik-yapma': 'music-generation', seslendirme: 'voice-generation', 'logo-tasarim': 'logo-design', 'sunum-hazirlama': 'presentations',
-  'kod-yazma': 'coding', ceviri: 'translation', 'ozet-cikarma': 'summarization', 'toplanti-notu': 'meeting-notes', 'yapay-zeka-dedektoru': 'ai-detectors' };
+import { SEG, CAT_EN, GL_EN, TASK_EN, toEn, toTr } from './paths.js';
+export { SEG, CAT_EN, GL_EN, TASK_EN, toEn, toTr };
 
 const trSlugOf = (id) => id.replace(/\.md$/, '').replace(/^\d{4}-\d{2}-\d{2}-/, '');
 let mapsP;
@@ -48,46 +30,6 @@ export function maps() {
     };
   })();
   return mapsP;
-}
-
-const SLUG_MAPS = (m) => ({
-  haber: m.news, rehber: m.guides, haftalik: m.digests,
-  kategori: new Map(Object.entries(CAT_EN)), sozluk: new Map(Object.entries(GL_EN)), 'en-iyi': new Map(Object.entries(TASK_EN)),
-});
-const invert = (map) => new Map([...map].map(([k, v]) => [v, k]));
-
-/** Türkçe yol -> İngilizce yol (karşılığı yoksa null). Yol BASE içermez. */
-export function toEn(trPath, m) {
-  const [p, hash = ''] = trPath.split('#');
-  const segs = p.split('/').filter(Boolean);
-  if (!segs.length) return '/en/' + (hash ? `#${hash}` : '');
-  const s0 = SEG[segs[0]];
-  if (!s0) return null;
-  const out = [s0];
-  if (segs[1] !== undefined) {
-    const sm = SLUG_MAPS(m)[segs[0]];
-    if (sm) { const v = sm.get(segs[1]); if (!v) return null; out.push(v); } else out.push(segs[1]);
-  }
-  out.push(...segs.slice(2));
-  const tail = p.endsWith('/') || !/\.\w+$/.test(p) ? '/' : '';
-  return `/en/${out.join('/')}${tail}`.replace(/\/{2,}/g, '/') + (hash ? `#${hash}` : '');
-}
-/** İngilizce yol -> Türkçe yol */
-export function toTr(enPath, m) {
-  const [p, hash = ''] = enPath.split('#');
-  const segs = p.split('/').filter(Boolean).slice(1);
-  if (!segs.length) return '/' + (hash ? `#${hash}` : '');
-  const rev = invert(new Map(Object.entries(SEG)));
-  const s0 = rev.get(segs[0]);
-  if (!s0) return null;
-  const out = [s0];
-  if (segs[1] !== undefined) {
-    const sm = SLUG_MAPS(m)[s0];
-    if (sm) { const v = invert(sm).get(segs[1]); if (!v) return null; out.push(v); } else out.push(segs[1]);
-  }
-  out.push(...segs.slice(2));
-  const tail = !/\.\w+$/.test(p) ? '/' : '';
-  return `/${out.join('/')}${tail}`.replace(/\/{2,}/g, '/') + (hash ? `#${hash}` : '');
 }
 
 // ---------------------------------------------------------------- arayüz ve veri metinleri
@@ -112,7 +54,7 @@ export async function i18n(Astro) {
 // ---------------------------------------------------------------- içerik yerelleştirmesi
 /** Türkçe haber girdisini İngilizce alanlarla birleştirir; çevirisi yoksa null */
 export function locNews(entry, lang, m) {
-  if (lang !== 'en') return entry;
+  if (lang !== 'en' || entry.en) return entry;
   const en = m.newsByRef.get(entry.id.replace(/\.md$/, ''));
   if (!en) return null;
   const e = en.data;
@@ -121,22 +63,78 @@ export function locNews(entry, lang, m) {
     ...entry, en, body: en.body,
     data: { ...d, title: e.title, spot: e.spot, whyItMatters: e.whyItMatters, turkeyAngle: e.turkeyAngle, keyPoints: e.keyPoints,
       whatsNext: e.whatsNext, byNumbers: e.byNumbers, newTool: d.newTool ? { ...d.newTool, what: e.newToolWhat || d.newTool.what } : undefined,
-      photo: d.photo ? { ...d.photo, alt: e.photoAlt || d.photo.alt } : undefined },
+      photo: d.photo ? { ...d.photo, alt: e.photoAlt || d.photo.alt } : undefined,
+      deal: d.deal ? { ...d.deal, type: DEAL_TYPE_EN[d.deal.type] ?? d.deal.type, country: COUNTRY_EN[d.deal.country] ?? d.deal.country, counterparty: e.dealCounterparty ?? d.deal.counterparty, amount: e.dealAmount ?? d.deal.amount } : undefined },
   };
 }
 export const locNewsList = (list, lang, m) => (lang === 'en' ? list.map((n) => locNews(n, lang, m)).filter(Boolean) : list);
 
 export function locGuide(entry, lang, m) {
-  if (lang !== 'en') return entry;
+  if (lang !== 'en' || entry.en) return entry;
   const en = m.guidesByRef.get(entry.id);
   if (!en) return null;
   const e = en.data;
   return { ...entry, en, body: en.body, data: { ...entry.data, title: e.title, description: e.description, summary: e.summary, faq: e.faq ?? [] } };
 }
 export function locDigest(entry, lang, m) {
-  if (lang !== 'en') return entry;
+  if (lang !== 'en' || entry.en) return entry;
   const en = m.digestsByRef.get(entry.id);
   if (!en) return null;
   const e = en.data;
   return { ...entry, en, body: en.body, data: { ...entry.data, title: e.title, spot: e.spot, items: e.items } };
 }
+
+// ---------------------------------------------------------------- veri yerelleştirmesi
+export const GL_CAT_EN = { 'Temel kavramlar': 'Core concepts', 'Modeller ve eğitim': 'Models and training', 'Kullanım ve araçlar': 'Using AI', 'Donanım ve altyapı': 'Hardware and infrastructure', 'Güvenlik ve etik': 'Safety and ethics' };
+/** Sözlük terimi: { term, def, how, why, example, faq, catName } */
+export function locTerm(t, long, lang) {
+  const k = (f) => `gl.${t.slug}.${f}`;
+  return {
+    ...t,
+    term: s(lang, k('term'), t.term), def: s(lang, k('def'), t.def),
+    how: long && s(lang, k('how'), long.how), why: long && s(lang, k('why'), long.why), example: long && s(lang, k('example'), long.example),
+    faq: (long?.faq ?? []).map(([q, a], i) => [s(lang, `${k('faq')}.${i}.q`, q), s(lang, `${k('faq')}.${i}.a`, a)]),
+    catName: lang === 'en' ? GL_CAT_EN[t.cat] ?? t.cat : t.cat,
+  };
+}
+/** Araç: açıklama ve listeler */
+export function locTool(t, lang) {
+  if (lang !== 'en') return t;
+  const k = (f) => `tool.${t.slug}.${f}`;
+  return {
+    ...t, desc: s(lang, k('desc'), t.desc), priceNote: t.priceNote && s(lang, k('priceNote'), t.priceNote),
+    good: t.good.map((x, i) => s(lang, `${k('good')}.${i}`, x)), notFor: t.notFor.map((x, i) => s(lang, `${k('notFor')}.${i}`, x)),
+    price: t.price ? { ...t.price, plans: t.price.plans.map(([n, v, note], i) => [n, v, note && s(lang, `${k('plan')}.${i}.note`, note)]) } : t.price,
+  };
+}
+export function locTask(k, lang) {
+  if (lang !== 'en') return k;
+  const key = (f) => `task.${k.slug}.${f}`;
+  return { ...k, title: s(lang, key('title'), k.title), short: s(lang, key('short'), k.short), intro: s(lang, key('intro'), k.intro), q: s(lang, key('q'), k.q),
+    picks: k.picks.map(([sl, note]) => [sl, s(lang, `${key('pick')}.${sl}`, note)]) };
+}
+export const FREE_LABEL_EN = { var: 'Free plan available', deneme: 'Free trial or credits', yok: 'No free plan' };
+
+// Rehber konu grupları ve seviyeler
+export const TOPIC_EN = { 'Temel kullanım': 'Getting started', 'Yazı ve içerik': 'Writing and content', 'İş ve kariyer': 'Work and careers', 'Eğitim ve öğrenme': 'Education and learning', 'Güvenlik ve gizlilik': 'Safety and privacy', 'Teknik': 'Technical' };
+export const LEVEL_EN = { 'Başlangıç': 'Beginner', 'Orta': 'Intermediate', 'İleri': 'Advanced' };
+
+// Araç sayfaları yardımcıları
+import { catName as toolCatTr, freeLabel as FREE_TR, trDate } from '../lib/tools.js';
+import { fmtUsd, fmtTry } from '../lib/fx.js';
+export const toolCat = (slug, lang) => s(lang, `toolcat.${slug}`, toolCatTr(slug));
+export const freeL = (f, lang) => (lang === 'en' ? FREE_LABEL_EN[f] : FREE_TR[f]);
+export const dateL = (iso, lang) => (lang === 'en' ? new Date(`${iso}T12:00:00Z`).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' }) : trDate(iso));
+export const usdL = (n, lang) => (lang === 'en' ? `$${Number.isInteger(n) ? n : n.toFixed(2)}` : fmtUsd(n));
+export const tryL = (n, fx, lang) => (lang === 'en' ? (fx ? `≈ TRY ${Math.round(n * fx.rate).toLocaleString('en-US')}` : '') : fmtTry(n, fx));
+export function priceShortL(t, lang) {
+  const f = t.free ? freeL(t.free, lang) : '';
+  if (lang !== 'en') { const p = t.price?.from ? `${Number.isInteger(t.price.from) ? t.price.from : t.price.from.toLocaleString('tr-TR')} $/ay'dan` : ''; return [f, p].filter(Boolean).join(' · ') || 'Fiyat: resmi sayfada'; }
+  const p = t.price?.from ? `from ${usdL(t.price.from, 'en')}/mo` : '';
+  return [f, p].filter(Boolean).join(' · ') || 'Price: see official site';
+}
+
+export const DEAL_TYPE_EN = { 'Yatırım': 'Funding round', 'Yatırım turu': 'Funding round', 'Satın alma': 'Acquisition', 'Birleşme': 'Merger', 'Halka arz': 'IPO', 'Anlaşma': 'Deal', 'Tesis yatırımı': 'Facility investment', 'Ortaklık': 'Partnership' };
+export const COUNTRY_EN = { 'ABD': 'US', 'Güney Kore': 'South Korea', 'Çin': 'China', 'Japonya': 'Japan', 'Almanya': 'Germany', 'Fransa': 'France', 'İngiltere': 'UK', 'Birleşik Krallık': 'UK', 'Türkiye': 'Turkey', 'Hindistan': 'India', 'Kanada': 'Canada', 'İsrail': 'Israel', 'Tayvan': 'Taiwan', 'Singapur': 'Singapore', 'BAE': 'UAE', 'Suudi Arabistan': 'Saudi Arabia', 'Hollanda': 'Netherlands', 'İsveç': 'Sweden', 'İsviçre': 'Switzerland', 'İspanya': 'Spain', 'İtalya': 'Italy', 'Avustralya': 'Australia', 'Brezilya': 'Brazil' };
+
+export const SITE_DESC_EN = 'Fast, sourced coverage of AI news from Turkey and around the world, translated from the Turkish edition of YZ Gündemi.';

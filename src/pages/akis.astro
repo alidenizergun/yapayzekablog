@@ -5,42 +5,46 @@ import Base from '../layouts/Base.astro';
 import { getNews, newsUrl, catName, slugOf, url } from '../lib/news.js';
 import { storyOf } from '../lib/stories.js';
 import { render } from 'astro:content';
+import { i18n, locNewsList } from '../i18n/index.js';
+const L = await i18n(Astro);
+const { lang, T, S } = L;
+const EN = lang === 'en';
 
-const all = (await getNews()).slice(0, 120);
+const all = locNewsList(await getNews(), lang, L.m).slice(0, 120);
 const IST = 3 * 3600e3;
 const dayKey = (d) => new Date(d.valueOf() + IST).toISOString().slice(0, 10);
 const hm = (d) => new Date(d.valueOf() + IST).toISOString().slice(11, 16);
 const MONTHS = ['Ocak', 'Şubat', 'Mart', 'Nisan', 'Mayıs', 'Haziran', 'Temmuz', 'Ağustos', 'Eylül', 'Ekim', 'Kasım', 'Aralık'];
 const DAYS = ['Pazar', 'Pazartesi', 'Salı', 'Çarşamba', 'Perşembe', 'Cuma', 'Cumartesi'];
-const dayLabel = (k) => { const d = new Date(`${k}T12:00:00Z`); return `${Number(k.slice(8))} ${MONTHS[d.getUTCMonth()]} ${DAYS[d.getUTCDay()]}`; };
+const dayLabel = (k) => { const d = new Date(`${k}T12:00:00Z`); return EN ? new Intl.DateTimeFormat('en-US', { weekday: 'long', month: 'long', day: 'numeric', timeZone: 'UTC' }).format(d) : `${Number(k.slice(8))} ${MONTHS[d.getUTCMonth()]} ${DAYS[d.getUTCDay()]}`; };
 const days = [];
 for (const n of all) {
   const k = dayKey(n.data.date);
   let g = days.find((x) => x.k === k);
   if (!g) days.push((g = { k, items: [] }));
-  g.items.push({ n, story: storyOf(n), Content: n.data.format === 'kisa' ? (await render(n)).Content : null });
+  g.items.push({ n, story: storyOf(n), Content: n.data.format === 'kisa' ? (await render(n.en ?? n)).Content : null });
 }
-const cats = [...new Set(all.map((n) => n.data.category))].map((c) => ({ c, name: catName(c), count: all.filter((n) => n.data.category === c).length })).sort((a, b) => b.count - a.count);
+const cats = [...new Set(all.map((n) => n.data.category))].map((c) => ({ c, name: S(`cat.${c}.name`, catName(c)), count: all.filter((n) => n.data.category === c).length })).sort((a, b) => b.count - a.count);
 const shortCount = all.filter((n) => n.data.format === 'kisa').length;
 const latest = all[0]?.data.date;
 ---
-<Base title="Akış: yapay zeka gündemi dakika dakika" description="YZ Gündemi'nde yayımlanan tüm yapay zeka haberleri ve kısa notlar, en yeniden eskiye, saatleriyle; kategoriye göre süzülebilir."
-  breadcrumbs={[{ name: 'Ana sayfa', path: '/' }, { name: 'Akış', path: '/akis/' }]}>
+<Base title={T('Akış: yapay zeka gündemi dakika dakika', 'Latest AI news, as it happens')} description={T("YZ Gündemi'nde yayımlanan tüm yapay zeka haberleri ve kısa notlar, en yeniden eskiye, saatleriyle; kategoriye göre süzülebilir.", 'Every AI story and brief we publish, newest first, with times; filter by section.')}
+  breadcrumbs={[{ name: 'Ana sayfa', path: '/' }, { name: T('Akış', 'Latest'), path: '/akis/' }]}>
   <section class="glossary river" data-river>
-    <span class="cat">Akış</span>
-    <h1 class="page-h">Yapay zeka gündemi: akış</h1>
-    <p class="spot">Yayımladığımız tüm haberler ve kısa notlar, en yeniden eskiye. Gece turunda günün haberleri, öğle turunda yalnızca önemli gelişmeler eklenir.</p>
+    <span class="cat">{T('Akış', 'Latest')}</span>
+    <h1 class="page-h">{T('Yapay zeka gündemi: akış', 'AI news: the latest')}</h1>
+    <p class="spot">{T('Yayımladığımız tüm haberler ve kısa notlar, en yeniden eskiye. Gece turunda günün haberleri, öğle turunda yalnızca önemli gelişmeler eklenir.', 'Every story and brief we publish, newest first.')}</p>
 
     <div class="river-status" aria-live="polite">
-      {latest && <span>Son güncelleme: <time datetime={latest.toISOString()}>{dayLabel(dayKey(latest))}, {hm(latest)}</time></span>}
-      <span data-next-run>Güncellemeler her gün 04:53 ve 13:23'te</span>
+      {latest && <span>{T('Son güncelleme', 'Last updated')}: <time datetime={latest.toISOString()}>{dayLabel(dayKey(latest))}, {hm(latest)}</time></span>}
+      <span data-next-run>{T("Güncellemeler her gün 04:53 ve 13:23'te", 'Updated daily')}</span>
       <span class="river-new" data-new-count hidden></span>
       <a href={url('/rss.xml')}>RSS</a>
     </div>
 
-    <div class="deal-filters river-filters" role="group" aria-label="Süz" data-river-filters>
-      <button type="button" aria-pressed="true" data-f="">Tümü <span class="meta">{all.length}</span></button>
-      {shortCount > 0 && <button type="button" aria-pressed="false" data-f="kisa">Kısa notlar <span class="meta">{shortCount}</span></button>}
+    <div class="deal-filters river-filters" role="group" aria-label={T('Süz', 'Filter')} data-river-filters>
+      <button type="button" aria-pressed="true" data-f="">{T('Tümü', 'All')} <span class="meta">{all.length}</span></button>
+      {shortCount > 0 && <button type="button" aria-pressed="false" data-f="kisa">{T('Kısa notlar', 'Briefs')} <span class="meta">{shortCount}</span></button>}
       {cats.map((c) => <button type="button" aria-pressed="false" data-f={`c:${c.c}`}>{c.name} <span class="meta">{c.count}</span></button>)}
     </div>
 
@@ -53,20 +57,20 @@ const latest = all[0]?.data.date;
             const id = slugOf(n);
             return (
               <li class={`river-item${Content ? ' is-short' : ''}`} id={id} data-item data-cat={d.category} data-kind={Content ? 'kisa' : 'haber'} data-ts={d.date.valueOf()}>
-                <a class="river-time" href={`#${id}`} title="Bu habere bağlantı"><time datetime={d.date.toISOString()}>{hm(d.date)}</time></a>
+                <a class="river-time" href={`#${id}`} title={T('Bu habere bağlantı', 'Link to this story')}><time datetime={d.date.toISOString()}>{hm(d.date)}</time></a>
                 <div class="river-main">
                   <p class="river-tags">
-                    <span class="cat">{catName(d.category)}</span>
-                    {Content && <span class="river-kind">Kısa not</span>}
-                    {story && <a class="river-chip" href={url(`/gelisme/${story.slug}/`)}>Gelişen hikâye</a>}
-                    {d.deal && <a class="river-chip" href={url('/yatirimlar/')}>{d.deal.type}</a>}
-                    {d.newTool && <a class="river-chip" href={url('/yeni-araclar/')}>Yeni araç</a>}
-                    <span class="river-newdot" hidden data-newdot>Yeni</span>
+                    <span class="cat">{S(`cat.${d.category}.name`, catName(d.category))}</span>
+                    {Content && <span class="river-kind">{T('Kısa not', 'Brief')}</span>}
+                    {story && <a class="river-chip" href={url(`/gelisme/${story.slug}/`)}>{T('Gelişen hikâye', 'Developing story')}</a>}
+                    {d.deal && <a class="river-chip" href={url('/yatirimlar/')}>{T(d.deal.type, ({ 'Yatırım turu': 'Funding round', 'Satın alma': 'Acquisition', 'Halka arz': 'IPO', 'Anlaşma': 'Deal', 'Tesis yatırımı': 'Facility investment' })[d.deal.type] ?? d.deal.type)}</a>}
+                    {d.newTool && <a class="river-chip" href={url('/yeni-araclar/')}>{T('Yeni araç', 'New tool')}</a>}
+                    <span class="river-newdot" hidden data-newdot>{T('Yeni', 'New')}</span>
                   </p>
                   <h3><a href={newsUrl(n)}>{d.title}</a></h3>
                   {Content ? <div class="river-body"><Content /></div> : <p>{d.spot}</p>}
                   {!Content && d.keyPoints && d.keyPoints.length >= 2 && (
-                    <details class="river-kp"><summary>Kısaca</summary><ul>{d.keyPoints.map((k) => <li>{k}</li>)}</ul></details>
+                    <details class="river-kp"><summary>{T('Kısaca', 'Key points')}</summary><ul>{d.keyPoints.map((k) => <li>{k}</li>)}</ul></details>
                   )}
                 </div>
               </li>
@@ -75,9 +79,9 @@ const latest = all[0]?.data.date;
         </ol>
       </section>
     ))}
-    <p class="river-more"><button type="button" class="btn btn-ghost" data-more hidden>Daha fazla göster</button></p>
-    <p class="empty" data-empty hidden>Bu süzgece uyan haber yok.</p>
-    <p class="ai-note">Daha eski haberler için <a href={url('/sayfa/2/')}>arşive</a> veya <a href={url('/haftalik/')}>haftalık özetlere</a> bakın.</p>
+    <p class="river-more"><button type="button" class="btn btn-ghost" data-more hidden>{T('Daha fazla göster', 'Show more')}</button></p>
+    <p class="empty" data-empty hidden>{T('Bu süzgece uyan haber yok.', 'No stories match this filter.')}</p>
+    <p class="ai-note">{T('Daha eski haberler için', 'For older stories, see the')} <a href={url('/sayfa/2/')}>{T('arşive', 'archive')}</a> {T('veya', 'or the')} <a href={url('/haftalik/')}>{T('haftalık özetlere', 'weekly digests')}</a>{T(' bakın.', '.')}</p>
   </section>
 </Base>
 
@@ -97,8 +101,9 @@ const latest = all[0]?.data.date;
     const today = ist(Date.now()), yest = ist(Date.now() - 86400e3);
     root.querySelectorAll<HTMLElement>('[data-day-label]').forEach((el) => {
       const k = el.dataset.dayLabel!;
-      if (k === today) el.textContent = `Bugün · ${el.textContent}`;
-      else if (k === yest) el.textContent = `Dün · ${el.textContent}`;
+      const EN = document.documentElement.lang === 'en';
+      if (k === today) el.textContent = `${EN ? 'Today' : 'Bugün'} · ${el.textContent}`;
+      else if (k === yest) el.textContent = `${EN ? 'Yesterday' : 'Dün'} · ${el.textContent}`;
     });
 
     // Son ziyaretten beri yeni haberler
@@ -108,7 +113,7 @@ const latest = all[0]?.data.date;
       const fresh = items.filter((li) => Number(li.dataset.ts) > last);
       fresh.forEach((li) => { li.classList.add('is-new'); li.querySelector<HTMLElement>('[data-newdot]')!.hidden = false; });
       const nc = root.querySelector<HTMLElement>('[data-new-count]')!;
-      if (fresh.length) { nc.hidden = false; nc.textContent = `Son ziyaretinizden beri ${fresh.length} yeni haber`; }
+      if (fresh.length) { nc.hidden = false; nc.textContent = document.documentElement.lang === 'en' ? `${fresh.length} new since your last visit` : `Son ziyaretinizden beri ${fresh.length} yeni haber`; }
     }
 
     // Sonraki güncelleme (04:53 ve 13:23, İstanbul)
@@ -118,7 +123,8 @@ const latest = all[0]?.data.date;
       const mins = nowIst.getUTCHours() * 60 + nowIst.getUTCMinutes();
       const slots = [4 * 60 + 53, 13 * 60 + 23];
       const n = slots.find((s) => s > mins);
-      next.textContent = `Sonraki güncelleme: ${n === undefined ? 'yarın 04:53' : n === slots[0] ? '04:53' : '13:23'}`;
+      const t = n === undefined ? '04:53' : n === slots[0] ? '04:53' : '13:23';
+      next.textContent = document.documentElement.lang === 'en' ? `Next update: ${n === undefined ? 'tomorrow ' : ''}${t} (Istanbul time, UTC+3)` : `Sonraki güncelleme: ${n === undefined ? 'yarın ' : ''}${t}`;
     }
 
     const apply = () => {

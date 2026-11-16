@@ -8,23 +8,35 @@ import { usdTry, fmtUsd, fmtTry } from '../../lib/fx.js';
 import { ENTITIES } from '../../lib/entities.js';
 import { getNews, spreadVisuals, url } from '../../lib/news.js';
 import { getCollection } from 'astro:content';
+import { i18n, locTool, locTask, locGuide, locNewsList, toolCat, freeL, dateL, usdL, tryL } from '../../i18n/index.js';
 
 export function getStaticPaths() {
   return TOOLS.map((t) => ({ params: { slug: t.slug }, props: { t } }));
 }
-const { t } = Astro.props;
+const L = await i18n(Astro);
+const { lang, T } = L;
+const EN = lang === 'en';
+const t = locTool(Astro.props.t, lang);
 const fx = await usdTry();
 const pageUrl = new URL(url(toolUrl(t.slug)), Astro.site).href;
 const entity = t.entity && ENTITIES.find((e) => e.slug === t.entity);
 const alts = t.alts.map(toolBySlug).filter(Boolean);
-const tasks = TASKS.filter((k) => k.picks.some(([p]) => p === t.slug)).slice(0, 5);
+const tasks = TASKS.filter((k) => k.picks.some(([p]) => p === t.slug)).slice(0, 5).map((k) => locTask(k, lang));
 const comps = COMPARISONS.filter(([a, b]) => a === t.slug || b === t.slug);
-const guides = (await getCollection('rehberler', (g) => !g.data.draft)).filter((g) => tasks.some((k) => k.guide === g.id)).slice(0, 3);
-const related = (await getNews()).filter((n) => newsAbout(t, n)).slice(0, 5);
+const guides = (await getCollection('rehberler', (g) => !g.data.draft)).filter((g) => tasks.some((k) => k.guide === g.id)).map((g) => locGuide(g, lang, L.m)).filter(Boolean).slice(0, 3);
+const related = locNewsList((await getNews()).filter((n) => newsAbout(t, n)), lang, L.m).slice(0, 5);
 const rowV = spreadVisuals(related);
 const p = t.price;
 
-const faq = [
+const faqEn = [
+  [`Is ${t.name} free?`, t.free === 'var' ? `Yes, ${t.name} has a free plan; paid plans add higher usage limits and extra features.`
+    : t.free === 'deneme' ? `${t.name} offers a free trial or limited free credits; regular use requires a paid plan.`
+    : t.free === 'yok' ? `No, ${t.name} has no permanent free plan.` : `Check ${t.name}'s official pricing page for the latest.`],
+  ...(p?.from ? [[`How much does ${t.name} cost?`, `Paid plans start at ${usdL(p.from, 'en')} a month with the ${p.plan} plan${fx ? ` (${tryL(p.from, fx, 'en')} at the TCMB rate; taxes and local pricing may change what you pay)` : ''}. Source: ${p.source.label}, ${dateL(p.source.checked, 'en')}.`]] : []),
+  [`Does ${t.name} work in Turkish?`, t.turkish ? `Yes, ${t.name} can be used in Turkish, though it's worth checking spelling and terminology.` : `We couldn't verify ${t.name}'s Turkish support; check its official site before relying on it.`],
+  ...(alts.length ? [[`What are the alternatives to ${t.name}?`, `For similar work you can use ${alts.map((a) => a.name).join(', ')}.`]] : []),
+];
+const faqTr = [
   [`${t.name} ücretsiz mi?`, t.free === 'var' ? `Evet, ${t.name}'in ücretsiz bir planı var; ücretli planlar daha yüksek kullanım sınırları ve ek özellikler sunuyor.`
     : t.free === 'deneme' ? `${t.name} ücretsiz deneme veya sınırlı ücretsiz kredi sunuyor; düzenli kullanım için ücretli plan gerekiyor.`
     : t.free === 'yok' ? `Hayır, ${t.name}'in kalıcı ücretsiz planı yok.` : `Güncel durumu ${t.name}'in resmi fiyat sayfasından kontrol edin.`],
@@ -32,57 +44,58 @@ const faq = [
   [`${t.name} Türkçe biliyor mu?`, t.turkish ? `Evet, ${t.name} Türkçe kullanılabiliyor. Yine de yazım ve terim tercihlerini kontrol etmek iyi olur.` : `${t.name}'in Türkçe desteğini doğrulayamadık; kullanmadan önce resmi sitesinden dil desteğini kontrol edin.`],
   ...(alts.length ? [[`${t.name} alternatifleri neler?`, `Benzer işler için ${alts.map((a) => a.name).join(', ')} kullanılabilir.`]] : []),
 ];
+const faq = EN ? faqEn : faqTr;
 const jsonLd = [
   { '@type': 'SoftwareApplication', name: t.name, applicationCategory: 'BusinessApplication', operatingSystem: t.platforms.join(', '), url: t.url,
     description: t.desc, publisher: { '@type': 'Organization', name: t.company },
-    ...(p ? { offers: { '@type': 'Offer', price: String(p.from), priceCurrency: 'USD', description: `${p.plan} planı, aylık` } } : {}) },
+    ...(p ? { offers: { '@type': 'Offer', price: String(p.from), priceCurrency: 'USD', description: T(`${p.plan} planı, aylık`, `${p.plan} plan, monthly`) } } : {}) },
   { '@type': 'FAQPage', mainEntity: faq.map(([q, a]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a } })) },
 ];
-const title = `${t.name} nedir, ücretsiz mi, fiyatı ne kadar? Özellikler ve alternatifler`;
+const title = T(`${t.name} nedir, ücretsiz mi, fiyatı ne kadar? Özellikler ve alternatifler`, `${t.name}: pricing, free plan, features and alternatives`);
 ---
-<Base title={title} description={`${t.desc.split('. ')[0]}. ${t.name} fiyatları, ücretsiz planı, Türkçe desteği, kimler için uygun olduğu ve alternatifleri.`.slice(0, 300)}
-  jsonLd={jsonLd} breadcrumbs={[{ name: 'Ana sayfa', path: '/' }, { name: 'Yapay zeka araçları', path: '/arac/' }, { name: t.name, path: toolUrl(t.slug) }]}>
+<Base title={title} description={T(`${t.desc.split('. ')[0]}. ${t.name} fiyatları, ücretsiz planı, Türkçe desteği, kimler için uygun olduğu ve alternatifleri.`, `${t.desc.split('. ')[0]}. ${t.name} pricing, free plan, who it's for and alternatives.`).slice(0, 300)}
+  jsonLd={jsonLd} breadcrumbs={[{ name: 'Ana sayfa', path: '/' }, { name: T('Yapay zeka araçları', 'AI tools'), path: '/arac/' }, { name: t.name, path: toolUrl(t.slug) }]}>
   <div class="cols" style="margin-top:0">
-    <article class="article term tool-page" data-pagefind-body data-pagefind-meta="date:Araç">
-      <nav class="crumb" aria-label="Konum" data-pagefind-ignore><a href={url('/')}>Ana sayfa</a><span aria-hidden="true">/</span><a href={url('/arac/')}>Yapay zeka araçları</a></nav>
-      <span class="badge" data-pagefind-ignore>{t.cats.map(catName).join(' · ')}</span>
+    <article class="article term tool-page" data-pagefind-body data-pagefind-meta={`date:${T('Araç', 'Tool')}`}>
+      <nav class="crumb" aria-label={T('Konum', 'Breadcrumb')} data-pagefind-ignore><a href={url('/')}>{T('Ana sayfa', 'Home')}</a><span aria-hidden="true">/</span><a href={url('/arac/')}>{T('Yapay zeka araçları', 'AI tools')}</a></nav>
+      <span class="badge" data-pagefind-ignore>{t.cats.map((c) => toolCat(c, lang)).join(' · ')}</span>
       <h1 data-pagefind-meta="title">{t.name}</h1>
       <p class="spot">{t.desc}</p>
-      <ul class="tool-badges" aria-label="Özet bilgiler">
+      <ul class="tool-badges" aria-label={T('Özet bilgiler', 'At a glance')}>
         <li>{t.company}</li>
-        {t.free && <li>{freeLabel[t.free]}</li>}
-        <li>{t.turkish ? 'Türkçe kullanılabiliyor' : 'Türkçe desteği doğrulanmadı'}</li>
+        {t.free && <li>{freeL(t.free, lang)}</li>}
+        <li>{t.turkish ? T('Türkçe kullanılabiliyor', 'Works in Turkish') : T('Türkçe desteği doğrulanmadı', 'Turkish support not verified')}</li>
         <li>{t.platforms.join(', ')}</li>
       </ul>
-      <p class="tool-cta"><a class="btn" href={t.url} rel="noopener">{t.name} sitesine git ↗</a>{entity && <a href={url(`/konu/${entity.slug}/`)}>{entity.name} haberleri →</a>}</p>
+      <p class="tool-cta"><a class="btn" href={t.url} rel="noopener">{T(`${t.name} sitesine git ↗`, `Visit ${t.name} ↗`)}</a>{entity && <a href={url(`/konu/${entity.slug}/`)}>{T(`${entity.name} haberleri →`, `${entity.name} news →`)}</a>}</p>
 
-      <h2>Fiyatlar</h2>
+      <h2>{T('Fiyatlar', 'Pricing')}</h2>
       {p ? (
         <>
           <div class="deal-table-wrap">
             <table class="deal-table tool-prices">
-              <thead><tr><th scope="col">Plan</th><th scope="col" class="num">Aylık</th>{fx && <th scope="col" class="num">TL karşılığı</th>}<th scope="col">Not</th></tr></thead>
+              <thead><tr><th scope="col">Plan</th><th scope="col" class="num">{T('Aylık', 'Monthly')}</th>{fx && <th scope="col" class="num">{T('TL karşılığı', 'In lira')}</th>}<th scope="col">{T('Not', 'Note')}</th></tr></thead>
               <tbody>{p.plans.map(([name, usd, note]) => (
-                <tr><td><strong>{name}</strong></td><td class="num">{usd === 0 ? 'Ücretsiz' : usd == null ? '—' : fmtUsd(usd)}</td>{fx && <td class="num">{usd ? fmtTry(usd, fx) : '—'}</td>}<td class="meta">{note || ''}</td></tr>
+                <tr><td><strong>{name}</strong></td><td class="num">{usd === 0 ? T('Ücretsiz', 'Free') : usd == null ? '—' : usdL(usd, lang)}</td>{fx && <td class="num">{usd ? tryL(usd, fx, lang) : '—'}</td>}<td class="meta">{note || ''}</td></tr>
               ))}</tbody>
             </table>
           </div>
-          <p class="price-src">Kaynak: <a href={p.source.url} rel="noopener">{p.source.label}</a> · kontrol: {trDate(p.source.checked)}{!p.source.official && ' · ikincil kaynak'}. {fx && `TL karşılığı TCMB döviz satış kuruyla (${fx.date}) hesaplanmıştır; vergiler ve yerel fiyatlandırma nedeniyle ödenen tutar farklı olabilir. `}Satın almadan önce <a href={p.pricingUrl} rel="noopener">resmi fiyat sayfasını</a> kontrol edin.</p>
+          {EN ? <p class="price-src">Source: <a href={p.source.url} rel="noopener">{p.source.label}</a> · checked {dateL(p.source.checked, 'en')}{!p.source.official && ' · secondary source'}. {fx && `Lira amounts use the TCMB selling rate (${fx.date}); taxes and local pricing may change what you pay. `}Check the <a href={p.pricingUrl} rel="noopener">official pricing page</a> before you buy.</p> : <p class="price-src">Kaynak: <a href={p.source.url} rel="noopener">{p.source.label}</a> · kontrol: {trDate(p.source.checked)}{!p.source.official && ' · ikincil kaynak'}. {fx && `TL karşılığı TCMB döviz satış kuruyla (${fx.date}) hesaplanmıştır; vergiler ve yerel fiyatlandırma nedeniyle ödenen tutar farklı olabilir. `}Satın almadan önce <a href={p.pricingUrl} rel="noopener">resmi fiyat sayfasını</a> kontrol edin.</p>}
         </>
       ) : (
-        <p>{t.priceNote || 'Bu aracın güncel fiyatlarını doğrulayamadık.'} <a href={t.pricingUrl} rel="noopener">Resmi fiyat sayfası ↗</a></p>
+        <p>{t.priceNote || T('Bu aracın güncel fiyatlarını doğrulayamadık.', 'We couldn’t verify this tool’s current pricing.')} <a href={t.pricingUrl} rel="noopener">{T('Resmi fiyat sayfası ↗', 'Official pricing page ↗')}</a></p>
       )}
 
-      <h2>Kimler için uygun?</h2>
+      <h2>{T('Kimler için uygun?', 'Who it’s for')}</h2>
       <ul class="tool-list tool-good">{t.good.map((g) => <li>{g}</li>)}</ul>
-      <h2>Ne zaman uygun değil?</h2>
+      <h2>{T('Ne zaman uygun değil?', 'When to skip it')}</h2>
       <ul class="tool-list tool-bad">{t.notFor.map((g) => <li>{g}</li>)}</ul>
 
       {(tasks.length > 0 || comps.length > 0 || guides.length > 0) && (
         <section class="guide-more" aria-labelledby="tl-h" data-pagefind-ignore>
-          <h2 id="tl-h">İlgili sayfalar</h2>
+          <h2 id="tl-h">{T('İlgili sayfalar', 'Related pages')}</h2>
           <ul>
-            {comps.map(([a, b]) => <li><a href={url(`/karsilastir/${compareSlug(a, b)}/`)}>{toolBySlug(a).name} mi {toolBySlug(b).name} mi?</a></li>)}
+            {comps.map(([a, b]) => <li><a href={url(`/karsilastir/${compareSlug(a, b)}/`)}>{T(`${toolBySlug(a).name} mi ${toolBySlug(b).name} mi?`, `${toolBySlug(a).name} vs ${toolBySlug(b).name}`)}</a></li>)}
             {tasks.map((k) => <li><a href={url(`/en-iyi/${k.slug}/`)}>{k.title}</a></li>)}
             {guides.map((g) => <li><a href={url(`/rehber/${g.id}/`)}>{g.data.title}</a></li>)}
           </ul>
@@ -90,24 +103,24 @@ const title = `${t.name} nedir, ücretsiz mi, fiyatı ne kadar? Özellikler ve a
       )}
 
       <section class="models-faq guide-faq" aria-labelledby="tf-h">
-        <h2 id="tf-h">Sık sorulanlar</h2>
+        <h2 id="tf-h">{T('Sık sorulanlar', 'FAQ')}</h2>
         {faq.map(([q, a]) => <details><summary>{q}</summary><p>{a}</p></details>)}
       </section>
 
       {alts.length > 0 && (
         <section class="tool-alts" aria-labelledby="ta-h" data-pagefind-ignore>
-          <h2 id="ta-h">{t.name} alternatifleri</h2>
+          <h2 id="ta-h">{T(`${t.name} alternatifleri`, `${t.name} alternatives`)}</h2>
           <div class="tool-grid">{alts.map((a) => <ToolCard tool={a} />)}</div>
         </section>
       )}
 
       {related.length > 0 && (
         <section class="term-news" aria-labelledby="tn-h" data-pagefind-ignore>
-          <div class="sechead"><h2 id="tn-h">{t.name} ile ilgili haberler</h2></div>
+          <div class="sechead"><h2 id="tn-h">{T(`${t.name} ile ilgili haberler`, `${t.name} news`)}</h2></div>
           {related.map((n) => <NewsRow item={n} choice={rowV.get(n.id)} />)}
         </section>
       )}
-      <p class="ai-note">Bu sayfadaki bilgiler aracın resmi sitesinden ve belirtilen kaynaklardan derlenmiştir; puanlama yapmıyoruz. Yanlış veya eski bir bilgi görürseniz <a href={url('/hata-bildir/')}>bize bildirin</a>. Nasıl derlediğimizi <a href={url('/arac/#yontem')}>yöntem notumuzda</a> okuyabilirsiniz.</p>
+      {EN ? <p class="ai-note">This page is compiled from the tool's official site and the sources cited; we don't score tools. Spotted something wrong or outdated? <a href={url('/hata-bildir/')}>Let us know</a>. Read <a href={url('/arac/#yontem')}>how we compile this</a>.</p> : <p class="ai-note">Bu sayfadaki bilgiler aracın resmi sitesinden ve belirtilen kaynaklardan derlenmiştir; puanlama yapmıyoruz. Yanlış veya eski bir bilgi görürseniz <a href={url('/hata-bildir/')}>bize bildirin</a>. Nasıl derlediğimizi <a href={url('/arac/#yontem')}>yöntem notumuzda</a> okuyabilirsiniz.</p>}
     </article>
     <Sidebar exclude={related.map((n) => n.id)} />
   </div>

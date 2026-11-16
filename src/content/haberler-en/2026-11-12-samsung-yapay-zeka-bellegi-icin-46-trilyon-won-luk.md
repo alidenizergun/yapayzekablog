@@ -5,6 +5,8 @@ title: "Samsung breaks ground on $34 billion HBM packaging hub for AI memory in 
 spot: "Samsung has broken ground on an advanced HBM packaging hub at its Onyang site in South Korea. Total investment is 46 trillion won ($34 billion), and the facility's start of operations has been moved up to June 2028."
 whyItMatters: "Demand for HBM in AI servers is making advanced packaging capacity a major bottleneck. Samsung's investment shows the scale of the capacity race in this area."
 photoAlt: "a large circular object in a large building"
+dealCounterparty: "Onyang HBM packaging center"
+dealAmount: "46 trillion won (about $34 billion)"
 ---
 
 The first groundbreaking under South Korea's "megaproject" program for major industrial investments took place Thursday at Samsung's advanced chip packaging facility. President Lee Jae Myung said a 6 trillion won advanced packaging plant will be built in Onyang, followed by a phased 40 trillion won investment in advanced equipment. Total investment comes to 46 trillion won, or about $34 billion.

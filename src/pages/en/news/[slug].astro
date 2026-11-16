@@ -1,0 +1,10 @@
+---
+import Page from '../../haber/[slug].astro';
+import { getNews } from '../../../lib/news.js';
+import { maps, locNews } from '../../../i18n/index.js';
+export async function getStaticPaths() {
+  const m = await maps();
+  return (await getNews()).map((e) => locNews(e, 'en', m)).filter(Boolean).map((entry) => ({ params: { slug: entry.en.data.slug }, props: { entry } }));
+}
+---
+<Page {...Astro.props} />

@@ -1,15 +1,18 @@
 ---
 // Araç kartı: dizin, "en iyi" sayfaları, ücretsiz araçlar ve araç seçici sonuçlarında kullanılır.
 import { url } from '../lib/news.js';
-import { toolUrl, priceShort, catName } from '../lib/tools.js';
-const { tool: t, note, rank } = Astro.props;
+import { toolUrl } from '../lib/tools.js';
+import { langOf, locTool, toolCat, priceShortL } from '../i18n/index.js';
+const lang = langOf(Astro.url);
+const t = locTool(Astro.props.tool, lang);
+const { note, rank } = Astro.props;
 ---
 <article class="tool-card">
   <div class="tool-mono" aria-hidden="true">{t.name.slice(0, 1)}</div>
   <div class="tool-card-body">
     <h3>{rank && <span class="tool-rank">{rank}.</span>}<a href={url(toolUrl(t.slug))}>{t.name}</a></h3>
-    <p class="tool-co">{t.company} · {t.cats.map(catName).join(', ')}</p>
+    <p class="tool-co">{t.company} · {t.cats.map((c) => toolCat(c, lang)).join(', ')}</p>
     <p class="tool-desc">{note || t.desc}</p>
-    <p class="tool-facts"><span>{priceShort(t)}</span>{t.turkish && <span>Türkçe kullanılabiliyor</span>}</p>
+    <p class="tool-facts"><span>{priceShortL(t, lang)}</span>{t.turkish && <span>{lang === 'en' ? 'Works in Turkish' : 'Türkçe kullanılabiliyor'}</span>}</p>
   </div>
 </article>

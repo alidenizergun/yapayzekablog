@@ -87,8 +87,8 @@ export async function getNews() {
   return all.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 }
 
-export function formatDate(d, withTime = true) {
-  return new Intl.DateTimeFormat(SITE.locale, {
+export function formatDate(d, withTime = true, locale = SITE.locale) {
+  return new Intl.DateTimeFormat(locale, {
     timeZone: SITE.timeZone,
     day: 'numeric',
     month: 'long',
@@ -148,9 +148,12 @@ export async function getDigests() {
 }
 export const digestUrl = (entry) => url(`/haftalik/${entry.id.replace(/\.md$/, '')}/`);
 /** "9-15 Kasım 2026" biçiminde hafta aralığı */
-export function weekRange(start, end) {
-  const f = (d, o) => new Intl.DateTimeFormat('tr-TR', { timeZone: 'Europe/Istanbul', ...o }).format(d);
+export function weekRange(start, end, lang = 'tr') {
+  const f = (d, o) => new Intl.DateTimeFormat(lang === 'en' ? 'en-US' : 'tr-TR', { timeZone: 'Europe/Istanbul', ...o }).format(d);
   const sameMonth = f(start, { month: 'long' }) === f(end, { month: 'long' });
+  if (lang === 'en') return sameMonth
+    ? `${f(start, { month: 'long', day: 'numeric' })}-${f(end, { day: 'numeric' })}, ${f(end, { year: 'numeric' })}`
+    : `${f(start, { month: 'long', day: 'numeric' })} - ${f(end, { month: 'long', day: 'numeric', year: 'numeric' })}`;
   return sameMonth
     ? `${f(start, { day: 'numeric' })}-${f(end, { day: 'numeric', month: 'long', year: 'numeric' })}`
     : `${f(start, { day: 'numeric', month: 'long' })} - ${f(end, { day: 'numeric', month: 'long', year: 'numeric' })}`;

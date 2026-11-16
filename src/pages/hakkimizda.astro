@@ -1,12 +1,15 @@
 ---
 import Base from '../layouts/Base.astro';
 import { getNews, hostOf, url } from '../lib/news.js';
+import { i18n } from '../i18n/index.js';
+const L = await i18n(Astro);
+const { lang, T } = L;
 
 // Sayfadaki bütün rakamlar haber dosyalarından hesaplanır (derleme anında güncellenir)
 const news = await getNews();
 const sources = news.flatMap((n) => n.data.sources);
-const fmt = (n) => n.toLocaleString('tr-TR');
-const avg = news.length ? (sources.length / news.length).toLocaleString('tr-TR', { maximumFractionDigits: 1 }) : '0';
+const fmt = (n) => n.toLocaleString(L.locale);
+const avg = news.length ? (sources.length / news.length).toLocaleString(L.locale, { maximumFractionDigits: 1 }) : '0';
 const byHost = new Map();
 for (const s of sources) {
   const h = hostOf(s.url);
@@ -19,81 +22,81 @@ const publishers = [...byHost.values()].sort((a, b) => b.n - a.n);
 const topPublishers = publishers.filter((p) => p.host !== 'x.com').slice(0, 12);
 const xCount = byHost.get('x.com')?.n ?? 0;
 ---
-<Base title="Hakkımızda" description="YZ Gündemi'nin yapay zeka haberlerini nasıl hazırladığı, kaynak kuralları ve yayın ilkeleri.">
+<Base title={T('Hakkımızda', 'About us')} description={T("YZ Gündemi'nin yapay zeka haberlerini nasıl hazırladığı, kaynak kuralları ve yayın ilkeleri.", 'How YZ Gündemi produces its AI news, our sourcing rules and editorial standards.')}>
   <div class="about">
     <header class="about-hero">
       <div class="about-intro">
-        <span class="cat">Hakkımızda</span>
-        <h1>Yapay zeka gündemini Türkçe, kaynağıyla birlikte takip edin.</h1>
-        <p class="spot">YZ Gündemi, yapay zeka alanındaki gelişmeleri her gün tarayıp Türkçe haber olarak yayınlar. Haberler yapay zeka desteğiyle yazılır; her birinin altında, bilginin alındığı orijinal kaynaklar yer alır.</p>
+        <span class="cat">{T('Hakkımızda', 'About')}</span>
+        <h1>{T('Yapay zeka gündemini Türkçe, kaynağıyla birlikte takip edin.', 'Follow the AI news cycle, with every source in plain view.')}</h1>
+        <p class="spot">{T('YZ Gündemi, yapay zeka alanındaki gelişmeleri her gün tarayıp Türkçe haber olarak yayınlar. Haberler yapay zeka desteğiyle yazılır; her birinin altında, bilginin alındığı orijinal kaynaklar yer alır.', 'YZ Gündemi is a Turkish AI news site that scans developments in artificial intelligence every day and publishes them as news. Stories are written with AI assistance, and each one lists the original sources it draws on. This English edition is translated from our Turkish stories.')}</p>
       </div>
-      <dl class="about-facts" aria-label="Rakamlarla YZ Gündemi">
-        <div><dt>Yayınlanan haber</dt><dd>{fmt(news.length)}</dd></div>
-        <div><dt>Kaynak bağlantısı</dt><dd>{fmt(sources.length)}</dd></div>
-        <div><dt>Haber başına kaynak</dt><dd>{avg}</dd></div>
-        <div><dt>Farklı kaynak sitesi</dt><dd>{fmt(publishers.length)}</dd></div>
-        <p class="facts-note">Rakamlar sitedeki haberlerden otomatik hesaplanır.</p>
+      <dl class="about-facts" aria-label={T('Rakamlarla YZ Gündemi', 'YZ Gündemi by the numbers')}>
+        <div><dt>{T('Yayınlanan haber', 'Stories published')}</dt><dd>{fmt(news.length)}</dd></div>
+        <div><dt>{T('Kaynak bağlantısı', 'Source links')}</dt><dd>{fmt(sources.length)}</dd></div>
+        <div><dt>{T('Haber başına kaynak', 'Sources per story')}</dt><dd>{avg}</dd></div>
+        <div><dt>{T('Farklı kaynak sitesi', 'Distinct source sites')}</dt><dd>{fmt(publishers.length)}</dd></div>
+        <p class="facts-note">{T('Rakamlar sitedeki haberlerden otomatik hesaplanır.', 'Figures are calculated automatically from the stories on the site.')}</p>
       </dl>
     </header>
 
     <section class="about-sec" aria-labelledby="how-h">
-      <div class="sechead"><h2 id="how-h">Bir haber nasıl hazırlanır?</h2><span class="meta">Her sabah 08.00 civarı</span></div>
+      <div class="sechead"><h2 id="how-h">{T('Bir haber nasıl hazırlanır?', 'How a story is made')}</h2><span class="meta">{T('Her sabah ve öğlen', 'Every morning and midday (Istanbul time)')}</span></div>
       <ol class="steps">
         <li>
           <span class="step-n" aria-hidden="true">1</span>
-          <h3>Tarama</h3>
-          <p>Son saatlerdeki gelişmeler web aramasıyla bulunur. Yapay zeka alanındaki önemli kişilerin ve şirketlerin X hesapları da taranır. Aramaların bir kısmı her zaman Türkiye'deki gelişmelere ayrılır.</p>
+          <h3>{T('Tarama', 'Scanning')}</h3>
+          <p>{T("Son saatlerdeki gelişmeler web aramasıyla bulunur. Yapay zeka alanındaki önemli kişilerin ve şirketlerin X hesapları da taranır. Aramaların bir kısmı her zaman Türkiye'deki gelişmelere ayrılır.", 'Web searches surface the latest developments, and we scan the X accounts of key people and companies in AI. Some searches are always reserved for developments in Turkey.')}</p>
         </li>
         <li>
           <span class="step-n" aria-hidden="true">2</span>
-          <h3>Seçme ve yazma</h3>
-          <p>Haber değeri taşıyan gelişmeler seçilir, daha önce yayınlananlar ve tekrarlar elenir. Haberler kaynak metin kopyalanmadan, kendi cümlelerimizle Türkçe yazılır. Ardından ayrı bir editör adımı metni çeviri dili, anlam bütünlüğü ve yazım açısından yeniden okur; rakamlara ve iddialara dokunmaz.</p>
+          <h3>{T('Seçme ve yazma', 'Selecting and writing')}</h3>
+          <p>{T('Haber değeri taşıyan gelişmeler seçilir, daha önce yayınlananlar ve tekrarlar elenir. Haberler kaynak metin kopyalanmadan, kendi cümlelerimizle Türkçe yazılır. Ardından ayrı bir editör adımı metni çeviri dili, anlam bütünlüğü ve yazım açısından yeniden okur; rakamlara ve iddialara dokunmaz.', 'Newsworthy developments are selected, and anything already covered or duplicated is dropped. Stories are written in our own words without copying source text. A separate editing pass then rereads each story for clarity, coherence and spelling, without touching figures or claims.')}</p>
         </li>
         <li>
           <span class="step-n" aria-hidden="true">3</span>
-          <h3>Kaynak doğrulama</h3>
-          <p>Haberdeki her kaynak adresi, araştırma sırasında gerçekten görülen adreslerle karşılaştırılır. Doğrulanmış kaynağı kalmayan haber yayınlanmaz.</p>
+          <h3>{T('Kaynak doğrulama', 'Source checks')}</h3>
+          <p>{T('Haberdeki her kaynak adresi, araştırma sırasında gerçekten görülen adreslerle karşılaştırılır. Doğrulanmış kaynağı kalmayan haber yayınlanmaz.', 'Every source link in a story is checked against the pages actually seen during research. A story with no verified source left is not published.')}</p>
         </li>
         <li>
           <span class="step-n" aria-hidden="true">4</span>
-          <h3>Yayın</h3>
-          <p>Site yeniden derlenir; hatalı bir haber dosyası varsa yeni haberler geri alınır ve site bozulmaz. Habere uygun logo veya fotoğraf seçilir.</p>
+          <h3>{T('Yayın', 'Publishing')}</h3>
+          <p>{T('Site yeniden derlenir; hatalı bir haber dosyası varsa yeni haberler geri alınır ve site bozulmaz. Habere uygun logo veya fotoğraf seçilir.', 'The site is rebuilt; if a story file is broken, the new stories are rolled back so the site stays up. A fitting logo or photo is chosen for each story.')}</p>
         </li>
       </ol>
     </section>
 
     <section class="about-sec" aria-labelledby="rules-h">
-      <div class="sechead"><h2 id="rules-h">Yayın ilkelerimiz</h2></div>
+      <div class="sechead"><h2 id="rules-h">{T('Yayın ilkelerimiz', 'Our editorial standards')}</h2></div>
       <ul class="rules">
-        <li><h3>Kaynaksız haber yok</h3><p>Her haberde en az bir orijinal kaynak bağlantısı bulunur. Mümkün olduğunda şirketin kendi duyurusu veya araştırmanın kendisi de eklenir.</p></li>
-        <li><h3>Kopya yok</h3><p>Kaynak metinler kopyalanmaz. Doğrudan alıntı gerekiyorsa kısa tutulur ve tırnak içinde verilir.</p></li>
-        <li><h3>Söylenti haber değildir</h3><p>Doğrulanmamış iddialar olgu gibi sunulmaz. Bir kişinin açıklaması "söyledi" diye aktarılır, iddia niteliğindeki bilgiler açıkça belirtilir.</p></li>
-        <li><h3>Görseller ne olduğunu söyler</h3><p>Şirket haberlerinde şirketin logosu kullanılır. Fotoğraflar Unsplash'ten alınan temsili görsellerdir ve fotoğrafçının adıyla gösterilir. Gerçek kişilerin fotoğrafı kullanılmaz.</p></li>
-        <li><h3>Yapay zeka kullanımı açıktır</h3><p>Haberler yapay zeka desteğiyle derlenir ve her haberin altında bu belirtilir. Yapay zeka hata yapabilir; bu yüzden kaynaklar her zaman görünür.</p></li>
-        <li><h3>Hatalar düzeltilir</h3><p>Bildirilen her hata kaynaklarla karşılaştırılır. Doğrulanırsa haber düzeltilir ya da yayından kaldırılır.</p></li>
+        <li><h3>{T('Kaynaksız haber yok', 'No story without a source')}</h3><p>{T('Her haberde en az bir orijinal kaynak bağlantısı bulunur. Mümkün olduğunda şirketin kendi duyurusu veya araştırmanın kendisi de eklenir.', 'Every story links to at least one original source. Where possible we also link the company’s own announcement or the research itself.')}</p></li>
+        <li><h3>{T('Kopya yok', 'No copying')}</h3><p>{T('Kaynak metinler kopyalanmaz. Doğrudan alıntı gerekiyorsa kısa tutulur ve tırnak içinde verilir.', 'We don’t copy source text. Direct quotes are kept short and in quotation marks.')}</p></li>
+        <li><h3>{T('Söylenti haber değildir', 'Rumor isn’t news')}</h3><p>{T('Doğrulanmamış iddialar olgu gibi sunulmaz. Bir kişinin açıklaması "söyledi" diye aktarılır, iddia niteliğindeki bilgiler açıkça belirtilir.', 'Unverified claims are never presented as fact. Statements are attributed (“said”), and claims are clearly labeled as such.')}</p></li>
+        <li><h3>{T('Görseller ne olduğunu söyler', 'Images say what they are')}</h3><p>{T("Şirket haberlerinde şirketin logosu kullanılır. Fotoğraflar Unsplash'ten alınan temsili görsellerdir ve fotoğrafçının adıyla gösterilir. Gerçek kişilerin fotoğrafı kullanılmaz.", 'Company stories use the company’s logo. Photos are illustrative images from Unsplash, credited to the photographer. We don’t use photos of real people.')}</p></li>
+        <li><h3>{T('Yapay zeka kullanımı açıktır', 'AI use is disclosed')}</h3><p>{T('Haberler yapay zeka desteğiyle derlenir ve her haberin altında bu belirtilir. Yapay zeka hata yapabilir; bu yüzden kaynaklar her zaman görünür.', 'Stories are compiled with AI assistance, and every story says so. AI can make mistakes, which is why sources are always visible.')}</p></li>
+        <li><h3>{T('Hatalar düzeltilir', 'Errors get fixed')}</h3><p>{T('Bildirilen her hata kaynaklarla karşılaştırılır. Doğrulanırsa haber düzeltilir ya da yayından kaldırılır.', 'Every reported error is checked against the sources. If confirmed, the story is corrected or taken down.')}</p></li>
       </ul>
     </section>
 
     {topPublishers.length > 0 && (
       <section class="about-sec" aria-labelledby="pub-h">
-        <div class="sechead"><h2 id="pub-h">En çok kaynak gösterdiğimiz yayınlar</h2><span class="meta">Kaynak bağlantısı sayısı</span></div>
+        <div class="sechead"><h2 id="pub-h">{T('En çok kaynak gösterdiğimiz yayınlar', 'Our most-cited publications')}</h2><span class="meta">{T('Kaynak bağlantısı sayısı', 'Number of source links')}</span></div>
         <ul class="pubs">
           {topPublishers.map((p) => (
             <li><span class="pub-name">{p.name}</span><span class="pub-host">{p.host}</span><span class="pub-n">{p.n}</span></li>
           ))}
         </ul>
-        {xCount > 0 && <p class="meta pubs-note">Bunlara ek olarak {fmt(xCount)} kaynak bağlantısı, şirketlerin ve kişilerin X gönderileridir.</p>}
+        {xCount > 0 && <p class="meta pubs-note">{T(`Bunlara ek olarak ${fmt(xCount)} kaynak bağlantısı, şirketlerin ve kişilerin X gönderileridir.`, `In addition, ${fmt(xCount)} source links are posts on X by companies and people.`)}</p>}
       </section>
     )}
 
     <section class="about-cta" aria-labelledby="fix-h">
       <div>
-        <h2 id="fix-h">Bir hata mı gördünüz?</h2>
-        <p>Yanlış bir bilgi, eksik bir kaynak ya da yazım hatası gördüyseniz bize bildirin. Haberden gelirseniz form hangi haber olduğunu otomatik doldurur.</p>
+        <h2 id="fix-h">{T('Bir hata mı gördünüz?', 'Spotted an error?')}</h2>
+        <p>{T('Yanlış bir bilgi, eksik bir kaynak ya da yazım hatası gördüyseniz bize bildirin. Haberden gelirseniz form hangi haber olduğunu otomatik doldurur.', 'If you see something wrong, a missing source or a typo, let us know. Coming from a story, the form fills in which one automatically.')}</p>
       </div>
       <div class="cta-actions">
-        <a class="btn cta-primary" href={url('/hata-bildir/')}>Hata bildir</a>
-        <a class="btn cta-secondary" href={url('/rss.xml')}>RSS ile takip et</a>
+        <a class="btn cta-primary" href={url('/hata-bildir/')}>{T('Hata bildir', 'Report an error')}</a>
+        <a class="btn cta-secondary" href={url('/rss.xml')}>{T('RSS ile takip et', 'Follow via RSS')}</a>
       </div>
     </section>
   </div>

@@ -1,0 +1,13 @@
+---
+import Page from '../../gelisme/[slug].astro';
+import { getNews } from '../../../lib/news.js';
+import { storyIndex } from '../../../lib/stories.js';
+import { maps } from '../../../i18n/index.js';
+export async function getStaticPaths() {
+  const m = await maps();
+  return [...storyIndex(await getNews()).values()]
+    .filter(({ items }) => items.filter((n) => m.newsByRef.has(n.id.replace(/\.md$/, ''))).length >= 2)
+    .map(({ story, items }) => ({ params: { slug: story.slug }, props: { story, items } }));
+}
+---
+<Page {...Astro.props} />

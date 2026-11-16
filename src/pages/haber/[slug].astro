@@ -9,16 +9,20 @@ import { brandOf } from '../../lib/brands.js';
 import { entitiesOf } from '../../lib/entities.js';
 import { storyOf, storyIndex } from '../../lib/stories.js';
 import Visual from '../../components/Visual.astro';
+import { i18n, locNews, locNewsList } from '../../i18n/index.js';
 
 export async function getStaticPaths() {
   const news = await getNews();
   return news.map((entry) => ({ params: { slug: slugOf(entry) }, props: { entry } }));
 }
 
-const { entry } = Astro.props;
+const L = await i18n(Astro);
+const { lang, T, S, u } = L;
+const entry = locNews(Astro.props.entry, lang, L.m);
 const d = entry.data;
-const { Content } = await render(entry);
-const all = await getNews();
+const { Content } = await render(entry.en ?? entry);
+const all = locNewsList(await getNews(), lang, L.m);
+const cat = S(`cat.${d.category}.name`, catName(d.category));
 const related = all
   .filter((n) => n.id !== entry.id)
   .map((n) => ({ n, score: (n.data.category === d.category ? 2 : 0) + n.data.tags.filter((t) => d.tags.includes(t)).length }))
@@ -34,7 +38,7 @@ const ents = entitiesOf(entry);
 const story = storyOf(entry);
 const storyItems = story ? storyIndex(all).get(story.slug)?.items ?? [] : [];
 const og = ogImageFor(entry);
-const pageUrl = new URL(newsUrl(entry), Astro.site).href;
+const pageUrl = new URL(u(`/haber/${slugOf(entry)}/`), Astro.site).href;
 // Google haber görseli için üç oran (16:9, 4:3, 1:1), en az 1200px; fotoğraf yoksa paylaşım görseli
 const ldImages = d.photo
   ? [photoSrc(d.photo, 1200, 675), photoSrc(d.photo, 1200, 900), photoSrc(d.photo, 1200, 1200)]
@@ -46,43 +50,43 @@ const jsonLd = {
   description: d.spot,
   datePublished: d.date.toISOString(),
   dateModified: d.date.toISOString(),
-  inLanguage: 'tr-TR',
+  inLanguage: L.locale,
   image: ldImages,
-  author: { '@type': 'Organization', name: d.author, url: new URL(url('/hakkimizda/'), Astro.site).href },
+  author: { '@type': 'Organization', name: d.author, url: new URL(u('/hakkimizda/'), Astro.site).href },
   publisher: { '@id': new URL(url('/#organization'), Astro.site).href },
   isPartOf: { '@id': new URL(url('/#website'), Astro.site).href },
   mainEntityOfPage: pageUrl,
   url: pageUrl,
-  articleSection: catName(d.category),
-  keywords: d.tags.join(', '),
+  articleSection: cat,
+  ...(lang === 'tr' ? { keywords: d.tags.join(', ') } : {}),
   wordCount: entry.body.split(/\s+/).filter(Boolean).length,
   isAccessibleForFree: true,
   citation: d.sources.map((s) => ({ '@type': 'CreativeWork', name: s.title, url: s.url })),
 };
-const crumbs = [{ name: 'Ana sayfa', path: '/' }, { name: catName(d.category), path: `/kategori/${d.category}/` }, { name: d.title, path: `/haber/${slugOf(entry)}/` }];
+const crumbs = [{ name: 'Ana sayfa', path: '/' }, { name: cat, path: `/kategori/${d.category}/` }, { name: d.title, path: `/haber/${slugOf(entry)}/` }];
 ---
 <Base title={d.title} description={d.spot} ogImage={og} ogType="article" currentCat={d.category} jsonLd={jsonLd} breadcrumbs={crumbs}
-  article={{ published: d.date, section: catName(d.category), tags: d.tags }}>
+  article={{ published: d.date, section: cat, tags: lang === 'tr' ? d.tags : [] }}>
   <div class="cols" style="margin-top:0;gap:56px">
-    <article class="article" data-pagefind-body data-pagefind-filter={`Kategori:${catName(d.category)}`} data-pagefind-meta={`date:${formatDate(d.date, false)}`}>
-      <nav class="crumb" aria-label="Konum" data-pagefind-ignore><a href={url('/')}>Ana sayfa</a><span aria-hidden="true">/</span><a href={catUrl(d.category)}>{catName(d.category)}</a></nav>
-      <span class="badge" data-pagefind-ignore>{catName(d.category)}</span>{d.format === 'kisa' && <span class="badge badge-short" data-pagefind-ignore>Kısa not</span>}
+    <article class="article" data-pagefind-body data-pagefind-filter={`${T('Kategori', 'Section')}:${cat}`} data-pagefind-meta={`date:${formatDate(d.date, false, L.locale)}`}>
+      <nav class="crumb" aria-label={T('Konum', 'Breadcrumb')} data-pagefind-ignore><a href={u('/')}>{T('Ana sayfa', 'Home')}</a><span aria-hidden="true">/</span><a href={u(`/kategori/${d.category}/`)}>{cat}</a></nav>
+      <span class="badge" data-pagefind-ignore>{cat}</span>{d.format === 'kisa' && <span class="badge badge-short" data-pagefind-ignore>{T('Kısa not', 'Brief')}</span>}
       <h1 data-pagefind-meta="title">{d.title}</h1>
       <p class="spot">{d.spot}</p>
       {story && storyItems.length >= 2 && (
-        <aside class="story-band" aria-label="Gelişen hikâye" data-pagefind-ignore>
-          <div><span class="cat">Gelişen hikâye · {storyItems.findIndex((n) => n.id === entry.id) + 1}. gelişme / {storyItems.length}</span><strong>{story.title}</strong></div>
-          <a class="more" href={url(`/gelisme/${story.slug}/`)}>Olayların gelişimi →</a>
+        <aside class="story-band" aria-label={T('Gelişen hikâye', 'Developing story')} data-pagefind-ignore>
+          <div><span class="cat">{T('Gelişen hikâye', 'Developing story')} · {T(`${storyItems.findIndex((n) => n.id === entry.id) + 1}. gelişme / ${storyItems.length}`, `update ${storyItems.findIndex((n) => n.id === entry.id) + 1} of ${storyItems.length}`)}</span><strong>{S(`story.${story.slug}.title`, story.title)}</strong></div>
+          <a class="more" href={u(`/gelisme/${story.slug}/`)}>{T('Olayların gelişimi →', 'Full timeline →')}</a>
         </aside>
       )}
       <div class="byline">
-        <span class="meta byline-meta" data-pagefind-ignore><Time date={d.date} /> · {readingMinutes(entry.body)} dk okuma</span>
+        <span class="meta byline-meta" data-pagefind-ignore><Time date={d.date} /> · {readingMinutes(entry.body)} {T('dk okuma', 'min read')}</span>
         <div class="share" data-pagefind-ignore>
-          <a class="tag" href={`https://x.com/intent/post?text=${encodeURIComponent(d.title)}&url=${encodeURIComponent(pageUrl)}`} target="_blank" rel="noopener">X'te paylaş</a>
+          <a class="tag" href={`https://x.com/intent/post?text=${encodeURIComponent(d.title)}&url=${encodeURIComponent(pageUrl)}`} target="_blank" rel="noopener">{T("X'te paylaş", 'Share on X')}</a>
           <a class="tag" href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(pageUrl)}`} target="_blank" rel="noopener">LinkedIn</a>
           <a class="tag" href={`https://wa.me/?text=${encodeURIComponent(`${d.title} ${pageUrl}`)}`} target="_blank" rel="noopener">WhatsApp</a>
           <button type="button" data-share-ig data-title={d.title}>Instagram</button>
-          <button type="button" data-copy>Bağlantıyı kopyala</button>
+          <button type="button" data-copy>{T('Bağlantıyı kopyala', 'Copy link')}</button>
           <span class="share-note" role="status" aria-live="polite"></span>
         </div>
       </div>
@@ -91,51 +95,51 @@ const crumbs = [{ name: 'Ana sayfa', path: '/' }, { name: catName(d.category), p
         <Visual entry={entry} choice={main} w={780} h={420} eager credit={false} />
         <figcaption>
           {main.kind === 'photo' && d.photo ? (
-            <>Fotoğraf: <a href={withUtm(d.photo.authorUrl)} target="_blank" rel="noopener">{d.photo.author}</a> / <a href={withUtm('https://unsplash.com/')} target="_blank" rel="noopener">Unsplash</a> · Temsili görseldir</>
+            <>{T('Fotoğraf', 'Photo')}: <a href={withUtm(d.photo.authorUrl)} target="_blank" rel="noopener">{d.photo.author}</a> / <a href={withUtm('https://unsplash.com/')} target="_blank" rel="noopener">Unsplash</a> · {T('Temsili görseldir', 'Illustrative image')}</>
           ) : main.kind === 'brand' ? (
-            <>{brandOf(d.brand)?.name} logosu. Logolar sahiplerinin tescilli markalarıdır.</>
+            <>{T(`${brandOf(d.brand)?.name} logosu. Logolar sahiplerinin tescilli markalarıdır.`, `${brandOf(d.brand)?.name} logo. Logos are registered trademarks of their owners.`)}</>
           ) : (
-            <>İllüstrasyon: YZ Gündemi</>
+            <>{T('İllüstrasyon', 'Illustration')}: YZ Gündemi</>
           )}
         </figcaption>
       </figure>
 
       {d.keyPoints && d.keyPoints.length >= 2 && (
-        <aside class="why guide-summary key-points" aria-label="Kısaca">
-          <strong>Kısaca</strong>
+        <aside class="why guide-summary key-points" aria-label={T('Kısaca', 'Key points')}>
+          <strong>{T('Kısaca', 'Key points')}</strong>
           <ul>{d.keyPoints.map((k) => <li>{k}</li>)}</ul>
         </aside>
       )}
 
       {d.byNumbers && d.byNumbers.length >= 2 && (
-        <aside class="by-numbers" aria-label="Rakamlarla">
-          <span class="cat">Rakamlarla</span>
+        <aside class="by-numbers" aria-label={T('Rakamlarla', 'By the numbers')}>
+          <span class="cat">{T('Rakamlarla', 'By the numbers')}</span>
           <dl>{d.byNumbers.map((b) => <div><dt>{b.value}</dt><dd>{b.label}</dd></div>)}</dl>
         </aside>
       )}
 
       <div class="prose"><Content /></div>
       {d.newTool && (
-        <aside class="why new-tool" aria-label="Yeni araç">
-          <strong>Yeni araç: {d.newTool.name}</strong>
+        <aside class="why new-tool" aria-label={T('Yeni araç', 'New tool')}>
+          <strong>{T('Yeni araç', 'New tool')}: {d.newTool.name}</strong>
           {d.newTool.what && <p>{d.newTool.what}</p>}
-          <p><a href={d.newTool.url} rel="noopener">{d.newTool.name} sitesine git ↗</a> · <a href={url('/yeni-araclar/')}>Diğer yeni araçlar</a></p>
+          <p><a href={d.newTool.url} rel="noopener">{T(`${d.newTool.name} sitesine git ↗`, `Visit ${d.newTool.name} ↗`)}</a> · <a href={u('/yeni-araclar/')}>{T('Diğer yeni araçlar', 'More new tools')}</a></p>
         </aside>
       )}
 
       {(d.whyItMatters || d.turkeyAngle || d.whatsNext) && (
-        <aside class="why" aria-label="Bu ne anlama geliyor">
-          <span class="cat">Bu ne anlama geliyor?</span>
+        <aside class="why" aria-label={T('Bu ne anlama geliyor', 'Why it matters')}>
+          <span class="cat">{T('Bu ne anlama geliyor?', 'Why it matters')}</span>
           {d.whyItMatters && <p>{d.whyItMatters}</p>}
           {d.whatsNext && (
             <div class="why-tr why-next">
-              <span class="why-tr-label">Sırada ne var?</span>
+              <span class="why-tr-label">{T('Sırada ne var?', 'What’s next')}</span>
               <p>{d.whatsNext}</p>
             </div>
           )}
           {d.turkeyAngle && (
             <div class="why-tr">
-              <span class="why-tr-label">Türkiye açısından</span>
+              <span class="why-tr-label">{T('Türkiye açısından', 'The Turkey angle')}</span>
               <p>{d.turkeyAngle}</p>
             </div>
           )}
@@ -143,7 +147,7 @@ const crumbs = [{ name: 'Ana sayfa', path: '/' }, { name: catName(d.category), p
       )}
 
       <section class="sources" aria-labelledby="src-h" data-pagefind-ignore>
-        <h2 id="src-h">Kaynaklar</h2>
+        <h2 id="src-h">{T('Kaynaklar', 'Sources')}</h2>
         <ol>
           {d.sources.map((s) => (
             <li>
@@ -153,24 +157,24 @@ const crumbs = [{ name: 'Ana sayfa', path: '/' }, { name: catName(d.category), p
           ))}
         </ol>
         {d.generated
-          ? <p class="ai-note">Bu haber, yukarıdaki kaynaklardan yapay zeka desteğiyle derlenmiştir. Bir hata görürseniz <a href={`${url('/hata-bildir/')}?haber=${slugOf(entry)}`}>bize bildirin</a>.</p>
-          : <p class="ai-note">Bir hata görürseniz <a href={`${url('/hata-bildir/')}?haber=${slugOf(entry)}`}>bize bildirin</a>.</p>}
+          ? <p class="ai-note">{T('Bu haber, yukarıdaki kaynaklardan yapay zeka desteğiyle derlenmiştir.', 'This article was compiled with AI assistance from the sources above')}{lang === 'en' && ' and translated from our Turkish edition.'} {T('Bir hata görürseniz', 'Spotted an error?')} <a href={`${u('/hata-bildir/')}?haber=${slugOf(entry)}`}>{T('bize bildirin', 'Let us know')}</a>.</p>
+          : <p class="ai-note">{T('Bir hata görürseniz', 'Spotted an error?')} <a href={`${u('/hata-bildir/')}?haber=${slugOf(entry)}`}>{T('bize bildirin', 'Let us know')}</a>.</p>}
       </section>
 
       {ents.length > 0 && (
-        <nav class="entity-links" aria-label="Bu haberde geçen şirketler ve kişiler" data-pagefind-ignore>
-          <strong>Bu haberde:</strong>
-          {ents.map((e) => <a class="tag" href={url(`/konu/${e.slug}/`)}>{e.name}</a>)}
+        <nav class="entity-links" aria-label={T('Bu haberde geçen şirketler ve kişiler', 'Companies and people in this story')} data-pagefind-ignore>
+          <strong>{T('Bu haberde:', 'In this story:')}</strong>
+          {ents.map((e) => <a class="tag" href={u(`/konu/${e.slug}/`)}>{e.name}</a>)}
         </nav>
       )}
-      {d.tags.length > 0 && <div class="atags" data-pagefind-ignore>{d.tags.map((t) => <a class="tag" href={tagUrl(t)}>#{t}</a>)}</div>}
+      {lang === 'tr' && d.tags.length > 0 && <div class="atags" data-pagefind-ignore>{d.tags.map((t) => <a class="tag" href={tagUrl(t)}>#{t}</a>)}</div>}
 
       {related.length > 0 && (
         <section class="related" aria-labelledby="rel-h" data-pagefind-ignore>
-          <div class="sechead sm"><h2 id="rel-h">İlgili Haberler</h2></div>
+          <div class="sechead sm"><h2 id="rel-h">{T('İlgili Haberler', 'Related News')}</h2></div>
           <div class="grid4">
             {related.map((n) => (
-              <a href={newsUrl(n)}>
+              <a href={u(`/haber/${slugOf(n)}/`)}>
                 <Visual entry={n} choice={relV.get(n.id)} w={300} h={130} />
                 <h3>{n.data.title}</h3>
               </a>

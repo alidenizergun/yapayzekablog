@@ -5,6 +5,7 @@ import seoPostBuild from './scripts/seo-integration.mjs';
 import securityHeaders from './scripts/security-integration.mjs';
 import contentGuard from './scripts/content-guard.mjs';
 import glossaryLinks from './scripts/glossary-integration.mjs';
+import i18nLinks from './scripts/i18n-integration.mjs';
 
 // Sitenin kendi domaini; repo değişkeni SITE_URL verilirse o kullanılır.
 const DEFAULT_SITE = 'https://yzgundemi.com';
@@ -15,6 +16,6 @@ export default defineConfig({
   site,
   base,
   trailingSlash: 'ignore',
-  integrations: [sitemap({ filter: (page) => !page.includes('/hata-bildir') }), contentGuard(), glossaryLinks(), nofollowExternalLinks(), seoPostBuild(), securityHeaders()],
+  integrations: [sitemap({ filter: (page) => !page.includes('/hata-bildir') }), contentGuard(), glossaryLinks(), nofollowExternalLinks(), seoPostBuild(), i18nLinks({ site, base }), securityHeaders()],
   build: { format: 'directory' },
 });

@@ -18,10 +18,13 @@ const d = entry.data;
 const brand = choice.kind === 'brand' ? brandOf(d.brand) : undefined;
 const photo = choice.kind === 'photo' ? d.photo : undefined;
 const loading = eager ? 'eager' : 'lazy';
+import { langOf } from '../i18n/index.js';
+const EN = langOf(Astro.url) === 'en';
+const IMG_EN = { arama: 'Chat bubble and magnifier illustration', gemini: 'Star constellation illustration', benchmark: 'Bar chart illustration', kod: 'Code editor and cursor illustration', rss: 'Crossed-out RSS icon illustration', modeller: 'Neural network illustration', gozluk: 'Smart glasses illustration', guvenlik: 'Locked shield illustration', regulasyon: 'Scales of justice illustration', pazarlama: 'Megaphone illustration', altyapi: 'Server racks illustration', girisim: 'Rocket illustration', odul: 'Trophy illustration' };
 ---
 <span class="visual">
   {brand ? (
-    <span class:list={['brandcard', { wordmark: !brand.path }]} style={`--bl:${brand.onLight};--bd:${brand.onDark}`} role="img" aria-label={`${brand.name} logosu`}>
+    <span class:list={['brandcard', { wordmark: !brand.path }]} style={`--bl:${brand.onLight};--bd:${brand.onDark}`} role="img" aria-label={EN ? `${brand.name} logo` : `${brand.name} logosu`}>
       {brand.path && <svg viewBox="0 0 24 24" aria-hidden="true"><path d={brand.path} /></svg>}
       <span class="bn" aria-hidden="true">{brand.name}</span>
     </span>
@@ -31,6 +34,6 @@ const loading = eager ? 'eager' : 'lazy';
       {credit && <span class="credit" aria-hidden="true">{photo.author} / Unsplash</span>}
     </>
   ) : (
-    <img class="thumb illus" src={imageFor(entry, choice.v)} alt={IMAGES[d.image]} loading={loading} width={w} height={h} />
+    <img class="thumb illus" src={imageFor(entry, choice.v)} alt={EN ? IMG_EN[d.image] : IMAGES[d.image]} loading={loading} width={w} height={h} />
   )}
 </span>

@@ -112,7 +112,7 @@ const haberlerEn = defineCollection({
   loader: glob({ pattern: '**/*.md', base: './src/content/haberler-en' }),
   schema: z.object({ ...enBase, spot: z.string(), whyItMatters: z.string().optional(), turkeyAngle: z.string().optional(),
     keyPoints: z.array(z.string()).optional(), whatsNext: z.string().optional(),
-    byNumbers: z.array(z.object({ value: z.string(), label: z.string() })).optional(), newToolWhat: z.string().optional(), photoAlt: z.string().optional() }),
+    byNumbers: z.array(z.object({ value: z.string(), label: z.string() })).optional(), newToolWhat: z.string().optional(), photoAlt: z.string().optional(), dealCounterparty: z.string().optional(), dealAmount: z.string().optional() }),
 });
 const rehberlerEn = defineCollection({
   loader: glob({ pattern: '**/*.md', base: './src/content/rehberler-en' }),

@@ -1,0 +1,9 @@
+---
+import Page from '../../kategori/[slug].astro';
+import { CATEGORIES } from '../../../lib/site.js';
+import { CAT_EN } from '../../../i18n/index.js';
+export function getStaticPaths() {
+  return CATEGORIES.map((c) => ({ params: { slug: CAT_EN[c.slug] }, props: { cat: c } }));
+}
+---
+<Page {...Astro.props} />

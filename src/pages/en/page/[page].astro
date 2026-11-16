@@ -1,0 +1,11 @@
+---
+import Page from '../../sayfa/[page].astro';
+import { getNews, HOME_MAIN } from '../../../lib/news.js';
+import { maps, locNewsList } from '../../../i18n/index.js';
+export async function getStaticPaths() {
+  const news = locNewsList(await getNews(), 'en', await maps());
+  const pages = Math.ceil(Math.max(0, news.length - HOME_MAIN) / 12);
+  return Array.from({ length: pages }, (_, i) => ({ params: { page: String(i + 2) } }));
+}
+---
+<Page />

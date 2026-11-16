@@ -2,13 +2,15 @@
 import { newsUrl, catName } from '../lib/news.js';
 import Time from './Time.astro';
 import Visual from './Visual.astro';
+import { s, langOf } from '../i18n/index.js';
 const { item, choice } = Astro.props;
+const lang = langOf(Astro.url);
 const d = item.data;
 ---
 <a class="row" href={newsUrl(item)}>
   <Visual entry={item} choice={choice} w={400} h={256} />
   <div>
-    <span class="cat">{catName(d.category)}</span>
+    <span class="cat">{s(lang, `cat.${d.category}.name`, catName(d.category))}</span>
     <h3>{d.title}</h3>
     <p>{d.spot}</p>
     <span class="meta"><Time date={d.date} /></span>

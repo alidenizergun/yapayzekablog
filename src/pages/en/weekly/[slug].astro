@@ -1,0 +1,11 @@
+---
+import Page from '../../haftalik/[slug].astro';
+import { getDigests } from '../../../lib/news.js';
+import { maps } from '../../../i18n/index.js';
+export async function getStaticPaths() {
+  const m = await maps();
+  const all = (await getDigests()).filter((g) => m.digestsByRef.has(g.id));
+  return all.map((entry, i) => ({ params: { slug: m.digestsByRef.get(entry.id).data.slug }, props: { entry, prev: all[i + 1], next: all[i - 1] } }));
+}
+---
+<Page {...Astro.props} />

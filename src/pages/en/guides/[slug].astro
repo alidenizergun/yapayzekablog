@@ -1,0 +1,11 @@
+---
+import Page from '../../rehber/[slug].astro';
+import { getCollection } from 'astro:content';
+import { maps } from '../../../i18n/index.js';
+export async function getStaticPaths() {
+  const m = await maps();
+  const guides = await getCollection('rehberler', (g) => !g.data.draft);
+  return guides.filter((g) => m.guidesByRef.has(g.id)).map((g) => ({ params: { slug: m.guidesByRef.get(g.id).data.slug }, props: { g, all: guides } }));
+}
+---
+<Page {...Astro.props} />

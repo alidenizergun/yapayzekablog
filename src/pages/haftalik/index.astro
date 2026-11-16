@@ -2,24 +2,27 @@
 import Base from '../../layouts/Base.astro';
 import Time from '../../components/Time.astro';
 import { getDigests, digestUrl, weekRange } from '../../lib/news.js';
-const digests = await getDigests();
+import { i18n, locDigest } from '../../i18n/index.js';
+const L = await i18n(Astro);
+const { lang, T } = L;
+const digests = (await getDigests()).map((g) => locDigest(g, lang, L.m)).filter(Boolean);
 ---
-<Base title="Haftalık özet" description="Yapay zeka dünyasında haftanın öne çıkan gelişmeleri, her pazartesi tek sayfada."
-  breadcrumbs={[{ name: 'Ana sayfa', path: '/' }, { name: 'Haftalık özet', path: '/haftalik/' }]}>
+<Base title={T('Haftalık özet', 'Weekly AI roundup')} description={T('Yapay zeka dünyasında haftanın öne çıkan gelişmeleri, her pazartesi tek sayfada.', 'The week’s most important AI developments, on one page every Monday.')}
+  breadcrumbs={[{ name: 'Ana sayfa', path: '/' }, { name: T('Haftalık özet', 'Weekly roundup'), path: '/haftalik/' }]}>
   <section class="digest-index">
-    <h1 class="page-h">Haftalık özet</h1>
-    <p class="spot">Yapay zeka dünyasında haftanın öne çıkan gelişmeleri, her pazartesi sabahı tek sayfada.</p>
+    <h1 class="page-h">{T('Haftalık özet', 'Weekly AI roundup')}</h1>
+    <p class="spot">{T('Yapay zeka dünyasında haftanın öne çıkan gelişmeleri, her pazartesi sabahı tek sayfada.', 'The week’s most important AI developments, on one page every Monday morning.')}</p>
     {digests.length ? (
       <ol class="digest-archive">
         {digests.map((g) => (
           <li><a href={digestUrl(g)}>
-            <span class="cat">{weekRange(g.data.weekStart, g.data.weekEnd)}</span>
+            <span class="cat">{weekRange(g.data.weekStart, g.data.weekEnd, lang)}</span>
             <h2>{g.data.title}</h2>
             <p>{g.data.spot}</p>
-            <span class="meta">{g.data.items.length} gelişme · <Time date={g.data.date} /></span>
+            <span class="meta">{g.data.items.length} {T('gelişme', 'stories')} · <Time date={g.data.date} /></span>
           </a></li>
         ))}
       </ol>
-    ) : <p class="empty">İlk haftalık özet pazartesi sabahı yayınlanacak.</p>}
+    ) : <p class="empty">{T('İlk haftalık özet pazartesi sabahı yayınlanacak.', 'No weekly roundups yet.')}</p>}
   </section>
 </Base>

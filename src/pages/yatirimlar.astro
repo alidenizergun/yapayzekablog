@@ -1,57 +1,60 @@
 ---
 import Base from '../layouts/Base.astro';
 import { getNews, newsUrl, formatDate, url } from '../lib/news.js';
-
-const deals = (await getNews()).filter((n) => n.data.deal).map((n) => ({ n, d: n.data.deal }));
+import { i18n, locNewsList } from '../i18n/index.js';
+const L = await i18n(Astro);
+const { lang, T } = L;
+const EN = lang === 'en';
+const deals = locNewsList(await getNews(), lang, L.m).filter((n) => n.data.deal).map((n) => ({ n, d: n.data.deal }));
 const types = [...new Set(deals.map((x) => x.d.type))];
 const countries = [...new Set(deals.map((x) => x.d.country).filter(Boolean))];
 const total = deals.reduce((a, x) => a + (x.d.amountUsdM || 0), 0);
-const fmtB = (m) => (m >= 1000 ? `${(m / 1000).toLocaleString('tr-TR', { maximumFractionDigits: 1 })} milyar $` : `${m.toLocaleString('tr-TR')} milyon $`);
+const fmtB = (m) => EN ? (m >= 1000 ? `$${(m / 1000).toLocaleString('en-US', { maximumFractionDigits: 1 })} billion` : `$${m.toLocaleString('en-US')} million`) : (m >= 1000 ? `${(m / 1000).toLocaleString('tr-TR', { maximumFractionDigits: 1 })} milyar $` : `${m.toLocaleString('tr-TR')} milyon $`);
 const pageUrl = new URL(url('/yatirimlar/'), Astro.site).href;
 const jsonLd = {
-  '@type': 'CollectionPage', name: 'Yapay zeka yatırımları ve satın almaları', inLanguage: 'tr-TR', url: pageUrl,
+  '@type': 'CollectionPage', name: T('Yapay zeka yatırımları ve satın almaları', 'AI funding and acquisitions tracker'), inLanguage: L.locale, url: pageUrl,
   mainEntity: { '@type': 'ItemList', itemListElement: deals.map((x, i) => ({ '@type': 'ListItem', position: i + 1, url: new URL(newsUrl(x.n), Astro.site).href, name: `${x.d.company}${x.d.counterparty ? ' – ' + x.d.counterparty : ''}: ${x.d.type}` })) },
 };
 ---
-<Base title="Yapay zeka yatırımları ve satın almaları" description="Yapay zeka şirketlerine yapılan yatırımlar, satın almalar, halka arzlar ve büyük anlaşmalar: şirket, tutar, tür ve ülkeye göre filtrelenebilir takip tablosu."
-  jsonLd={jsonLd} breadcrumbs={[{ name: 'Ana sayfa', path: '/' }, { name: 'Yatırım takipçisi', path: '/yatirimlar/' }]}>
+<Base title={T('Yapay zeka yatırımları ve satın almaları', 'AI funding and acquisitions tracker')} description={T('Yapay zeka şirketlerine yapılan yatırımlar, satın almalar, halka arzlar ve büyük anlaşmalar: şirket, tutar, tür ve ülkeye göre filtrelenebilir takip tablosu.', 'Funding rounds, acquisitions, IPOs and major deals in AI: a tracker you can filter by company, amount, type and country.')}
+  jsonLd={jsonLd} breadcrumbs={[{ name: 'Ana sayfa', path: '/' }, { name: T('Yatırım takipçisi', 'Funding tracker'), path: '/yatirimlar/' }]}>
   <section class="deals">
-    <span class="cat">Takipçi</span>
-    <h1 class="page-h">Yapay zeka yatırımları ve satın almaları</h1>
-    <p class="spot">Yapay zeka şirketlerine yapılan yatırımlar, satın almalar, halka arzlar ve büyük anlaşmalar. Tablo, YZ Gündemi'nde yayınlanan haberlerden otomatik olarak güncellenir; her satır ilgili habere ve kaynaklarına bağlanır.</p>
+    <span class="cat">{T('Takipçi', 'Tracker')}</span>
+    <h1 class="page-h">{T('Yapay zeka yatırımları ve satın almaları', 'AI funding and acquisitions')}</h1>
+    <p class="spot">{T("Yapay zeka şirketlerine yapılan yatırımlar, satın almalar, halka arzlar ve büyük anlaşmalar. Tablo, YZ Gündemi'nde yayınlanan haberlerden otomatik olarak güncellenir; her satır ilgili habere ve kaynaklarına bağlanır.", 'Funding rounds, acquisitions, IPOs and major deals in AI. The table updates automatically from stories published on YZ Gündemi; each row links to the story and its sources.')}</p>
 
     <dl class="deal-stats">
-      <div><dt>Kayıtlı anlaşma</dt><dd>{deals.length}</dd></div>
-      <div><dt>Toplam büyüklük</dt><dd>{fmtB(total)}</dd></div>
-      <div><dt>Ülke</dt><dd>{countries.length}</dd></div>
+      <div><dt>{T('Kayıtlı anlaşma', 'Deals tracked')}</dt><dd>{deals.length}</dd></div>
+      <div><dt>{T('Toplam büyüklük', 'Total value')}</dt><dd>{fmtB(total)}</dd></div>
+      <div><dt>{T('Ülke', 'Countries')}</dt><dd>{countries.length}</dd></div>
     </dl>
 
-    <div class="deal-filters" role="group" aria-label="Türe göre süz" data-deal-filters>
-      <button type="button" aria-pressed="true" data-type="">Tümü</button>
+    <div class="deal-filters" role="group" aria-label={T('Türe göre süz', 'Filter by type')} data-deal-filters>
+      <button type="button" aria-pressed="true" data-type="">{T('Tümü', 'All')}</button>
       {types.map((t) => <button type="button" aria-pressed="false" data-type={t}>{t}</button>)}
     </div>
-    <label class="sr-only" for="deal-q">Şirket ara</label>
-    <input id="deal-q" class="deal-search" type="search" placeholder="Şirket veya ülke ara" data-deal-q />
+    <label class="sr-only" for="deal-q">{T('Şirket ara', 'Search companies')}</label>
+    <input id="deal-q" class="deal-search" type="search" placeholder={T('Şirket veya ülke ara', 'Search company or country')} data-deal-q />
 
     <div class="deal-table-wrap">
       <table class="deal-table">
-        <thead><tr><th scope="col">Tarih</th><th scope="col">Şirket</th><th scope="col">Tür</th><th scope="col">Tutar</th><th scope="col">Karşı taraf / ayrıntı</th><th scope="col">Ülke</th></tr></thead>
+        <thead><tr><th scope="col">{T('Tarih', 'Date')}</th><th scope="col">{T('Şirket', 'Company')}</th><th scope="col">{T('Tür', 'Type')}</th><th scope="col">{T('Tutar', 'Amount')}</th><th scope="col">{T('Karşı taraf / ayrıntı', 'Counterparty / details')}</th><th scope="col">{T('Ülke', 'Country')}</th></tr></thead>
         <tbody>
           {deals.map(({ n, d }) => (
-            <tr data-type={d.type} data-text={`${d.company} ${d.counterparty ?? ''} ${d.country ?? ''} ${(d.investors ?? []).join(' ')}`.toLocaleLowerCase('tr')}>
-              <td class="nowrap">{formatDate(n.data.date, false)}</td>
+            <tr data-type={d.type} data-text={`${d.company} ${d.counterparty ?? ''} ${d.country ?? ''} ${(d.investors ?? []).join(' ')}`.toLocaleLowerCase(lang)}>
+              <td class="nowrap">{formatDate(n.data.date, false, L.locale)}</td>
               <td><a href={newsUrl(n)}><strong>{d.company}</strong></a></td>
               <td><span class="deal-type">{d.type}</span>{d.round && <span class="meta"> · {d.round}</span>}</td>
               <td class="nowrap">{d.amount ?? '—'}</td>
-              <td>{d.counterparty ?? ''}{d.investors?.length ? <span class="meta">{d.counterparty ? ' · ' : ''}Yatırımcılar: {d.investors.join(', ')}</span> : null}</td>
+              <td>{d.counterparty ?? ''}{d.investors?.length ? <span class="meta">{d.counterparty ? ' · ' : ''}{T('Yatırımcılar', 'Investors')}: {d.investors.join(', ')}</span> : null}</td>
               <td>{d.country ?? '—'}</td>
             </tr>
           ))}
         </tbody>
       </table>
     </div>
-    <p class="empty" data-deal-empty hidden>Bu süzgece uyan anlaşma yok.</p>
-    <p class="ai-note">Tutarlar haberlerdeki ve kaynaklarındaki yazımla verilir; "toplam büyüklük" farklı türdeki anlaşmaları (halka arz, satın alma, tesis yatırımı) bir arada toplar ve yalnızca bir fikir vermek içindir.</p>
+    <p class="empty" data-deal-empty hidden>{T('Bu süzgece uyan anlaşma yok.', 'No deals match this filter.')}</p>
+    <p class="ai-note">{T('Tutarlar haberlerdeki ve kaynaklarındaki yazımla verilir; "toplam büyüklük" farklı türdeki anlaşmaları (halka arz, satın alma, tesis yatırımı) bir arada toplar ve yalnızca bir fikir vermek içindir.', 'Amounts are given as reported in our stories and their sources. “Total value” adds up different kinds of deals (IPOs, acquisitions, facility investments) and is only a rough indication.')}</p>
   </section>
 </Base>
 
@@ -62,7 +65,7 @@ const jsonLd = {
   const empty = document.querySelector<HTMLElement>('[data-deal-empty]')!;
   let type = '';
   const apply = () => {
-    const term = q.value.trim().toLocaleLowerCase('tr');
+    const term = q.value.trim().toLocaleLowerCase(document.documentElement.lang || 'tr');
     let shown = 0;
     rows.forEach((r) => { const ok = (!type || r.dataset.type === type) && (!term || r.dataset.text!.includes(term)); r.hidden = !ok; if (ok) shown++; });
     empty.hidden = shown > 0;

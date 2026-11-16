@@ -4,23 +4,28 @@ import NewsRow from '../../components/NewsRow.astro';
 import Sidebar from '../../components/Sidebar.astro';
 import { CATEGORIES } from '../../lib/site.js';
 import { spreadVisuals, getNews, url } from '../../lib/news.js';
+import { i18n, locNewsList } from '../../i18n/index.js';
 
 export function getStaticPaths() {
   return CATEGORIES.map((c) => ({ params: { slug: c.slug }, props: { cat: c } }));
 }
 const { cat } = Astro.props;
-const items = (await getNews()).filter((n) => n.data.category === cat.slug).slice(0, 60);
+const L = await i18n(Astro);
+const { lang, T, S } = L;
+const name = S(`cat.${cat.slug}.name`, cat.name);
+const intro = S(`cat.${cat.slug}.intro`, cat.intro);
+const items = locNewsList(await getNews(), lang, L.m).filter((n) => n.data.category === cat.slug).slice(0, 60);
 const rowV = spreadVisuals(items);
 ---
-<Base title={`${cat.name} haberleri`} description={cat.intro || `${cat.name} alanındaki en yeni yapay zeka haberleri: ${items.slice(0, 2).map((n) => n.data.title).join('; ') || 'yakında'}.`} currentCat={cat.slug}
+<Base title={T(`${cat.name} haberleri`, `AI ${name} news`)} description={intro || T(`${cat.name} alanındaki en yeni yapay zeka haberleri.`, `The latest AI news in ${name}.`)} currentCat={cat.slug}
   noindex={items.length === 0}
-  breadcrumbs={[{ name: 'Ana sayfa', path: '/' }, { name: cat.name, path: `/kategori/${cat.slug}/` }]}
-  jsonLd={{ '@type': 'CollectionPage', name: `${cat.name} haberleri`, inLanguage: 'tr-TR' }}>
+  breadcrumbs={[{ name: 'Ana sayfa', path: '/' }, { name, path: `/kategori/${cat.slug}/` }]}
+  jsonLd={{ '@type': 'CollectionPage', name: T(`${cat.name} haberleri`, `AI ${name} news`), inLanguage: L.locale }}>
   <div class="cols" style="margin-top:0">
     <section class="main" aria-labelledby="h">
-      <div class="sechead"><h1 id="h" class="page-h">{cat.name}</h1><span class="meta">{items.length} haber</span></div>
-      {cat.intro && <p class="cat-intro">{cat.intro}{cat.links?.length > 0 && <> {cat.links.map((l, i) => <>{i > 0 && ' · '}<a href={url(l.href)}>{l.label}</a></>)}</>}</p>}
-      {items.length ? items.map((n) => <NewsRow item={n} choice={rowV.get(n.id)} />) : <p class="empty">Bu kategoride henüz haber yok. Yeni haberler otomatik güncellemelerle eklenecek.</p>}
+      <div class="sechead"><h1 id="h" class="page-h">{name}</h1><span class="meta">{items.length} {T('haber', items.length === 1 ? 'story' : 'stories')}</span></div>
+      {intro && <p class="cat-intro">{intro}{cat.links?.length > 0 && <> {cat.links.map((l, i) => <>{i > 0 && ' · '}<a href={url(l.href)}>{S(`cat.${cat.slug}.link.${i}`, l.label)}</a></>)}</>}</p>}
+      {items.length ? items.map((n) => <NewsRow item={n} choice={rowV.get(n.id)} />) : <p class="empty">{T('Bu kategoride henüz haber yok. Yeni haberler otomatik güncellemelerle eklenecek.', 'No stories in this section yet.')}</p>}
     </section>
     <Sidebar exclude={items.map((n) => n.id)} />
   </div>

@@ -1,6 +1,9 @@
 ---
 import Base from '../layouts/Base.astro';
 import { getNews, slugOf, newsUrl, url } from '../lib/news.js';
+import { i18n, locNews } from '../i18n/index.js';
+const L = await i18n(Astro);
+const { lang, T, u } = L;
 
 // Bildirimler nereye gider?
 // - PUBLIC_REPORT_FORM_ACTION tanımlıysa (Formspree, Getform vb. form adresi) form oraya gönderilir
@@ -9,53 +12,53 @@ import { getNews, slugOf, newsUrl, url } from '../lib/news.js';
 const formAction = import.meta.env.PUBLIC_REPORT_FORM_ACTION || '';
 const repo = process.env.GITHUB_REPOSITORY || 'alidenizergun/yapayzekablog';
 
-const news = (await getNews()).slice(0, 400);
+const news = (await getNews()).slice(0, 400).map((n) => locNews(n, lang, L.m) ?? n);
 const site = Astro.site;
-const index = Object.fromEntries(news.map((n) => [slugOf(n), { t: n.data.title, u: new URL(newsUrl(n), site).href }]));
+const index = Object.fromEntries(news.map((n) => [slugOf(n), { t: n.data.title, u: new URL(u(`/haber/${slugOf(n)}/`), site).href }]));
 ---
-<Base title="Hata bildir" noindex description="Bir haberde hata gördüyseniz bize bildirin; inceleyip düzeltelim.">
+<Base title={T('Hata bildir', 'Report an error')} noindex description={T('Bir haberde hata gördüyseniz bize bildirin; inceleyip düzeltelim.', 'Spotted an error in a story? Tell us and we’ll review and fix it.')}>
   <div class="cols" style="margin-top:0;gap:56px">
     <section class="article report" aria-labelledby="report-h">
-      <nav class="crumb" aria-label="Konum"><a href={url('/')}>Ana sayfa</a><span aria-hidden="true">/</span><span>Hata bildir</span></nav>
-      <h1 id="report-h">Hata bildir</h1>
-      <p class="spot">Haberlerimiz yapay zeka desteğiyle, belirtilen kaynaklardan derlenir. Yanlış bir bilgi, eksik bir kaynak ya da yazım hatası gördüyseniz bize bildirin. Her bildirimi inceliyoruz; düzeltme gerekirse haber güncellenir.</p>
+      <nav class="crumb" aria-label={T('Konum', 'Breadcrumb')}><a href={url('/')}>{T('Ana sayfa', 'Home')}</a><span aria-hidden="true">/</span><span>{T('Hata bildir', 'Report an error')}</span></nav>
+      <h1 id="report-h">{T('Hata bildir', 'Report an error')}</h1>
+      <p class="spot">{T('Haberlerimiz yapay zeka desteğiyle, belirtilen kaynaklardan derlenir. Yanlış bir bilgi, eksik bir kaynak ya da yazım hatası gördüyseniz bize bildirin. Her bildirimi inceliyoruz; düzeltme gerekirse haber güncellenir.', 'Our stories are compiled with AI assistance from the sources listed. If you see something wrong, a missing source or a typo, let us know. We review every report and update the story if needed. You can write in English.')}</p>
 
       <form id="report-form" class="report-form" data-action={formAction} data-repo={repo} novalidate>
         <div class="field" id="news-field">
-          <label for="r-news">Hangi haber?</label>
+          <label for="r-news">{T('Hangi haber?', 'Which story?')}</label>
           <select id="r-news" name="haber">
-            <option value="">Genel bildirim (belirli bir haber değil)</option>
+            <option value="">{T('Genel bildirim (belirli bir haber değil)', 'General feedback (not a specific story)')}</option>
             {news.map((n) => <option value={slugOf(n)}>{n.data.title}</option>)}
           </select>
-          <p class="picked" id="r-news-link" hidden><strong data-picked-title></strong><a href="#" target="_blank" rel="noopener">Haberi yeni sekmede aç</a></p>
+          <p class="picked" id="r-news-link" hidden><strong data-picked-title></strong><a href="#" target="_blank" rel="noopener">{T('Haberi yeni sekmede aç', 'Open the story in a new tab')}</a></p>
         </div>
 
         <fieldset class="field">
-          <legend>Hatanın türü</legend>
+          <legend>{T('Hatanın türü', 'Type of error')}</legend>
           <div class="choices">
-            <label class="choice"><input type="radio" name="tur" value="Yanlış bilgi" checked /> Yanlış bilgi</label>
-            <label class="choice"><input type="radio" name="tur" value="Kaynak sorunu" /> Kaynak eksik veya hatalı</label>
-            <label class="choice"><input type="radio" name="tur" value="Güncel değil" /> Bilgi güncel değil</label>
-            <label class="choice"><input type="radio" name="tur" value="Yazım veya çeviri" /> Yazım veya çeviri hatası</label>
-            <label class="choice"><input type="radio" name="tur" value="Diğer" /> Diğer</label>
+            <label class="choice"><input type="radio" name="tur" value="Yanlış bilgi" checked /> {T('Yanlış bilgi', 'Incorrect information')}</label>
+            <label class="choice"><input type="radio" name="tur" value="Kaynak sorunu" /> {T('Kaynak eksik veya hatalı', 'Missing or wrong source')}</label>
+            <label class="choice"><input type="radio" name="tur" value="Güncel değil" /> {T('Bilgi güncel değil', 'Out of date')}</label>
+            <label class="choice"><input type="radio" name="tur" value="Yazım veya çeviri" /> {T('Yazım veya çeviri hatası', 'Spelling or translation error')}</label>
+            <label class="choice"><input type="radio" name="tur" value="Diğer" /> {T('Diğer', 'Other')}</label>
           </div>
         </fieldset>
 
         <div class="field">
-          <label for="r-desc">Hata nedir?</label>
-          <textarea id="r-desc" name="aciklama" rows="6" required minlength="15" maxlength="3000" placeholder="Örnek: Haberde yatırım tutarı 500 milyon dolar yazıyor, kaynakta 50 milyon dolar geçiyor."></textarea>
-          <p class="error" id="r-desc-err" hidden>Lütfen hatayı en az birkaç kelimeyle açıklayın.</p>
+          <label for="r-desc">{T('Hata nedir?', 'What’s wrong?')}</label>
+          <textarea id="r-desc" name="aciklama" rows="6" required minlength="15" maxlength="3000" placeholder={T('Örnek: Haberde yatırım tutarı 500 milyon dolar yazıyor, kaynakta 50 milyon dolar geçiyor.', 'Example: The story says the round was $500 million, but the source says $50 million.')}></textarea>
+          <p class="error" id="r-desc-err" hidden>{T('Lütfen hatayı en az birkaç kelimeyle açıklayın.', 'Please describe the error in at least a few words.')}</p>
         </div>
 
         <div class="field">
-          <label for="r-source">Doğru bilginin kaynağı <span class="opt">(isteğe bağlı)</span></label>
+          <label for="r-source">{T('Doğru bilginin kaynağı', 'Source for the correct information')} <span class="opt">{T('(isteğe bağlı)', '(optional)')}</span></label>
           <input id="r-source" name="kaynak" type="url" inputmode="url" placeholder="https://" />
-          <p class="error" id="r-source-err" hidden>Bağlantı https:// ile başlamalı.</p>
+          <p class="error" id="r-source-err" hidden>{T('Bağlantı https:// ile başlamalı.', 'The link must start with https://.')}</p>
         </div>
 
         {formAction && (
           <div class="field">
-            <label for="r-email">E-posta adresiniz <span class="opt">(isteğe bağlı, size dönüş yapabilmemiz için)</span></label>
+            <label for="r-email">{T('E-posta adresiniz', 'Your email')} <span class="opt">{T('(isteğe bağlı, size dönüş yapabilmemiz için)', '(optional, so we can get back to you)')}</span></label>
             <input id="r-email" name="email" type="email" autocomplete="email" placeholder="ad@ornek.com" />
           </div>
         )}
@@ -63,27 +66,27 @@ const index = Object.fromEntries(news.map((n) => [slugOf(n), { t: n.data.title, 
         {formAction && <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" class="hp" />}
 
         {!formAction && (
-          <p class="hint">Gönder'e bastığınızda bildiriminiz GitHub'da hazır doldurulmuş olarak açılır. Göndermek için ücretsiz bir GitHub hesabıyla oturum açmanız gerekir. GitHub bildirimleri herkese açıktır; kişisel bilgi eklemeyin.</p>
+          <p class="hint">{T("Gönder'e bastığınızda bildiriminiz GitHub'da hazır doldurulmuş olarak açılır. Göndermek için ücretsiz bir GitHub hesabıyla oturum açmanız gerekir. GitHub bildirimleri herkese açıktır; kişisel bilgi eklemeyin.", 'When you submit, your report opens pre-filled on GitHub. You need a free GitHub account to send it. GitHub reports are public, so don’t include personal information.')}</p>
         )}
-        <button type="submit" class="btn report-submit">{formAction ? 'Bildirimi gönder' : "GitHub'da bildirimi aç"}</button>
+        <button type="submit" class="btn report-submit">{formAction ? T('Bildirimi gönder', 'Send report') : T("GitHub'da bildirimi aç", 'Open report on GitHub')}</button>
 
         <div class="report-ok" id="report-ok" role="status" hidden>
-          <strong>Teşekkürler, bildiriminiz bize ulaştı.</strong>
-          <p>İnceleyip gerekirse haberi düzelteceğiz. <a href={url('/')}>Ana sayfaya dön</a></p>
+          <strong>{T('Teşekkürler, bildiriminiz bize ulaştı.', 'Thanks, we got your report.')}</strong>
+          <p>{T('İnceleyip gerekirse haberi düzelteceğiz.', 'We’ll review it and correct the story if needed.')} <a href={url('/')}>{T('Ana sayfaya dön', 'Back to home')}</a></p>
         </div>
         <div class="report-err" id="report-err" role="alert" hidden>
-          <strong>Bildirim gönderilemedi.</strong>
-          <p>Bağlantınızı kontrol edip tekrar deneyin.</p>
+          <strong>{T('Bildirim gönderilemedi.', 'Your report couldn’t be sent.')}</strong>
+          <p>{T('Bağlantınızı kontrol edip tekrar deneyin.', 'Check your connection and try again.')}</p>
         </div>
       </form>
     </section>
 
     <aside class="side-col">
       <section class="week">
-        <span class="cat">Yayın ilkelerimiz</span>
-        <h2>Düzeltmeleri nasıl yapıyoruz?</h2>
-        <p>Her haberde en az bir kaynak bulunur. Bildirilen hata kaynaklarla karşılaştırılır; doğrulanırsa haber düzeltilir ya da yayından kaldırılır.</p>
-        <a href={url('/hakkimizda/')}>Hakkımızda →</a>
+        <span class="cat">{T('Yayın ilkelerimiz', 'Editorial standards')}</span>
+        <h2>{T('Düzeltmeleri nasıl yapıyoruz?', 'How we handle corrections')}</h2>
+        <p>{T('Her haberde en az bir kaynak bulunur. Bildirilen hata kaynaklarla karşılaştırılır; doğrulanırsa haber düzeltilir ya da yayından kaldırılır.', 'Every story has at least one source. Reported errors are checked against the sources; if confirmed, the story is corrected or taken down.')}</p>
+        <a href={url('/hakkimizda/')}>{T('Hakkımızda →', 'About us →')}</a>
       </section>
     </aside>
   </div>
@@ -138,7 +141,7 @@ const index = Object.fromEntries(news.map((n) => [slugOf(n), { t: n.data.title, 
         fd.set('haber', n ? `${n.t} — ${n.u}` : 'Genel bildirim');
         fd.set('_subject', `Hata bildirimi: ${tur}${n ? ' — ' + n.t : ''}`);
         const btn = form.querySelector('button[type=submit]') as HTMLButtonElement;
-        btn.disabled = true; btn.textContent = 'Gönderiliyor…';
+        btn.disabled = true; btn.textContent = document.documentElement.lang === 'en' ? 'Sending…' : 'Gönderiliyor…';
         try {
           const res = await fetch(action, { method: 'POST', body: fd, headers: { Accept: 'application/json' } });
           if (!res.ok) throw new Error(String(res.status));
@@ -147,7 +150,7 @@ const index = Object.fromEntries(news.map((n) => [slugOf(n), { t: n.data.title, 
         } catch {
           err.hidden = false;
         } finally {
-          btn.disabled = false; btn.textContent = 'Bildirimi gönder';
+          btn.disabled = false; btn.textContent = document.documentElement.lang === 'en' ? 'Send report' : 'Bildirimi gönder';
         }
         return;
       }
@@ -168,8 +171,9 @@ const index = Object.fromEntries(news.map((n) => [slugOf(n), { t: n.data.title, 
       const ghUrl = `https://github.com/${form.dataset.repo}/issues/new?title=${encodeURIComponent(title)}&body=${encodeURIComponent(body)}`;
       window.open(ghUrl, '_blank', 'noopener');
       ok.hidden = false;
-      ok.querySelector('strong')!.textContent = 'Bildiriminiz GitHub\'da yeni sekmede açıldı.';
-      ok.querySelector('p')!.innerHTML = 'Göndermek için açılan sayfada <b>Create</b> butonuna basın. Sekme açılmadıysa <a target="_blank" rel="nofollow noopener">buraya tıklayın</a>.';
+      const EN = document.documentElement.lang === 'en';
+      ok.querySelector('strong')!.textContent = EN ? 'Your report opened on GitHub in a new tab.' : 'Bildiriminiz GitHub\'da yeni sekmede açıldı.';
+      ok.querySelector('p')!.innerHTML = EN ? 'Press <b>Create</b> on that page to submit. If no tab opened, <a target="_blank" rel="nofollow noopener">click here</a>.' : 'Göndermek için açılan sayfada <b>Create</b> butonuna basın. Sekme açılmadıysa <a target="_blank" rel="nofollow noopener">buraya tıklayın</a>.';
       (ok.querySelector('p a') as HTMLAnchorElement).href = ghUrl;
     });
   </script>

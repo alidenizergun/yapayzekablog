@@ -4,15 +4,17 @@
 // Form, ziyaretçiyi doğrudan servisin sayfasına gönderir; kayıt orada tamamlanır.
 const action = import.meta.env.PUBLIC_NEWSLETTER_ACTION || '';
 const { id = 'email' } = Astro.props;
+import { langOf } from '../i18n/index.js';
+const EN = langOf(Astro.url) === 'en';
 ---
 {action && (
   <section class="news" id="bulten" aria-labelledby={`${id}-h`}>
-    <h2 id={`${id}-h`}>Yapay zeka gündemi, her sabah e-postanda</h2>
-    <p>Günün en önemli gelişmeleri, 3 dakikada okunur.</p>
+    <h2 id={`${id}-h`}>{EN ? 'AI news in your inbox every morning' : 'Yapay zeka gündemi, her sabah e-postanda'}</h2>
+    <p>{EN ? 'The day’s top stories in a 3-minute read.' : 'Günün en önemli gelişmeleri, 3 dakikada okunur.'}</p>
     <form method="post" action={action} target="_blank">
-      <label for={id}>E-posta adresin</label>
-      <input id={id} name="email" type="email" required placeholder="ad@sirket.com" autocomplete="email" />
-      <button type="submit">Abone ol</button>
+      <label for={id}>{EN ? 'Your email' : 'E-posta adresin'}</label>
+      <input id={id} name="email" type="email" required placeholder={EN ? 'name@company.com' : 'ad@sirket.com'} autocomplete="email" />
+      <button type="submit">{EN ? 'Subscribe' : 'Abone ol'}</button>
     </form>
   </section>
 )}

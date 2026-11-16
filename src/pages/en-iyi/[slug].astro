@@ -5,17 +5,26 @@ import { TASKS, toolBySlug, freeLabel, trDate, TOOLS_CHECKED, toolUrl } from '..
 import { usdTry, fmtUsd, fmtTry } from '../../lib/fx.js';
 import { url } from '../../lib/news.js';
 import { getCollection } from 'astro:content';
+import { i18n, locTask, locGuide, freeL, dateL, usdL, tryL } from '../../i18n/index.js';
 
 export function getStaticPaths() {
   return TASKS.map((k) => ({ params: { slug: k.slug }, props: { k } }));
 }
-const { k } = Astro.props;
+const L = await i18n(Astro);
+const { lang, T } = L;
+const EN = lang === 'en';
+const k = locTask(Astro.props.k, lang);
 const fx = await usdTry();
 const picks = k.picks.map(([s, note]) => ({ t: toolBySlug(s), note }));
-const guide = k.guide ? (await getCollection('rehberler')).find((g) => g.id === k.guide) : null;
-const others = TASKS.filter((x) => x.slug !== k.slug);
+const guide0 = k.guide ? (await getCollection('rehberler')).find((g) => g.id === k.guide) : null;
+const guide = guide0 && locGuide(guide0, lang, L.m);
+const others = TASKS.filter((x) => x.slug !== k.slug).map((x) => locTask(x, lang));
 const freeOnes = picks.filter(({ t }) => t.free === 'var').map(({ t }) => t.name);
-const faq = [
+const faqEn = [
+  [`Are there free ${k.q}?`, freeOnes.length ? `Of the tools on this list, ${freeOnes.join(', ')} offer a free plan. Free plans may have different usage limits and commercial-use rights than paid ones.` : 'We could not verify a permanent free plan for the tools on this list; see each tool page for trial options.'],
+  ['How did you put this list together?', 'We don’t score tools. Picks are editorial, based on adoption, fit for the job and features the companies disclose. No tool pays to be listed.'],
+];
+const faq = EN ? faqEn : [
   [`Ücretsiz ${k.q} var mı?`, freeOnes.length ? `Bu listedeki araçlardan ${freeOnes.join(', ')} ücretsiz plan sunuyor. Ücretsiz planların kullanım sınırları ve ticari kullanım hakları ücretli planlardan farklı olabilir.` : 'Bu listedeki araçların kalıcı ücretsiz planı doğrulanmadı; deneme seçenekleri için araç sayfalarına bakın.'],
   ['Bu listeyi nasıl hazırladınız?', 'Araçlara puan vermiyoruz. Seçimler; yaygınlık, bu işe uygunluk ve şirketlerin açıkladığı özelliklere dayanan editoryal seçimdir. Hiçbir araç listede yer almak için ödeme yapmaz.'],
 ];
@@ -24,42 +33,42 @@ const jsonLd = [
   { '@type': 'FAQPage', mainEntity: faq.map(([q, a]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a } })) },
 ];
 ---
-<Base title={k.title} description={`${k.intro.split('. ')[0]}. ${picks.map(({ t }) => t.name).join(', ')}: fiyatlar, ücretsiz planlar ve Türkçe desteği.`.slice(0, 300)}
-  jsonLd={jsonLd} breadcrumbs={[{ name: 'Ana sayfa', path: '/' }, { name: 'Yapay zeka araçları', path: '/arac/' }, { name: k.short, path: `/en-iyi/${k.slug}/` }]}>
+<Base title={k.title} description={`${k.intro.split('. ')[0]}. ${picks.map(({ t }) => t.name).join(', ')}: ${T('fiyatlar, ücretsiz planlar ve Türkçe desteği.', 'pricing, free plans and Turkish support.')}`.slice(0, 300)}
+  jsonLd={jsonLd} breadcrumbs={[{ name: 'Ana sayfa', path: '/' }, { name: T('Yapay zeka araçları', 'AI tools'), path: '/arac/' }, { name: k.short, path: `/en-iyi/${k.slug}/` }]}>
   <section class="deals best" data-pagefind-body>
-    <span class="cat">En iyi araçlar</span>
+    <span class="cat">{T('En iyi araçlar', 'Best tools')}</span>
     <h1 class="page-h">{k.title}</h1>
     <p class="spot">{k.intro}</p>
-    <p class="models-checked">Son kontrol: {trDate(TOOLS_CHECKED)} · Puanlama yapmıyoruz; <a href={url('/arac/#yontem')}>seçim ölçütlerimiz</a></p>
+    <p class="models-checked">{T('Son kontrol', 'Last checked')}: {dateL(TOOLS_CHECKED, lang)} · {T('Puanlama yapmıyoruz;', 'We don’t score tools;')} <a href={url('/arac/#yontem')}>{T('seçim ölçütlerimiz', 'how we pick')}</a></p>
 
     <div class="deal-table-wrap">
       <table class="deal-table">
-        <thead><tr><th scope="col">Araç</th><th scope="col">Ücretsiz kullanım</th><th scope="col">Ücretli başlangıç</th><th scope="col">Türkçe</th></tr></thead>
+        <thead><tr><th scope="col">{T('Araç', 'Tool')}</th><th scope="col">{T('Ücretsiz kullanım', 'Free use')}</th><th scope="col">{T('Ücretli başlangıç', 'Paid from')}</th><th scope="col">{T('Türkçe', 'Turkish')}</th></tr></thead>
         <tbody>{picks.map(({ t }) => (
-          <tr><td><a href={url(toolUrl(t.slug))}><strong>{t.name}</strong></a></td><td>{t.free ? freeLabel[t.free] : '—'}</td>
-            <td class="nowrap">{t.price?.from ? <>{fmtUsd(t.price.from)}/ay{fx && <span class="meta"> {fmtTry(t.price.from, fx)}</span>}</> : <a href={t.pricingUrl} rel="noopener">Resmi sayfada</a>}</td>
-            <td>{t.turkish ? 'Var' : '—'}</td></tr>
+          <tr><td><a href={url(toolUrl(t.slug))}><strong>{t.name}</strong></a></td><td>{t.free ? freeL(t.free, lang) : '—'}</td>
+            <td class="nowrap">{t.price?.from ? <>{usdL(t.price.from, lang)}/{T('ay', 'mo')}{fx && <span class="meta"> {tryL(t.price.from, fx, lang)}</span>}</> : <a href={t.pricingUrl} rel="noopener">{T('Resmi sayfada', 'Official site')}</a>}</td>
+            <td>{t.turkish ? T('Var', 'Yes') : '—'}</td></tr>
         ))}</tbody>
       </table>
     </div>
-    <p class="price-src">Fiyatlar aylık ve ABD dolarıdır; kaynakları ve tarihleri her aracın sayfasında yer alır. {fx && `TL karşılıkları TCMB kuruyla (${fx.date}), vergiler hariç.`}</p>
+    <p class="price-src">{T('Fiyatlar aylık ve ABD dolarıdır; kaynakları ve tarihleri her aracın sayfasında yer alır.', 'Prices are monthly in US dollars; sources and dates are on each tool page.')} {fx && T(`TL karşılıkları TCMB kuruyla (${fx.date}), vergiler hariç.`, `Lira amounts at the TCMB rate (${fx.date}), excluding taxes.`)}</p>
 
-    <h2 class="ev-h">Öne çıkan araçlar</h2>
+    <h2 class="ev-h">{T('Öne çıkan araçlar', 'Top picks')}</h2>
     <div class="tool-grid tool-grid-1">{picks.map(({ t, note }, i) => <ToolCard tool={t} note={note} rank={i + 1} />)}</div>
 
     {guide && (
-      <aside class="why" aria-label="Rehber">
-        <strong>Nasıl kullanılır?</strong>
-        <p>Araç seçmek işin yarısı. Adım adım yöntem ve hazır istem kalıpları için: <a href={url(`/rehber/${guide.id}/`)}>{guide.data.title}</a></p>
+      <aside class="why" aria-label={T('Rehber', 'Guide')}>
+        <strong>{T('Nasıl kullanılır?', 'How to use them')}</strong>
+        <p>{T('Araç seçmek işin yarısı. Adım adım yöntem ve hazır istem kalıpları için:', 'Picking a tool is half the job. For a step-by-step method and ready-made prompts:')} <a href={url(`/rehber/${guide.id}/`)}>{guide.data.title}</a></p>
       </aside>
     )}
 
     <section class="models-faq" aria-labelledby="bf-h">
-      <h2 id="bf-h">Sık sorulanlar</h2>
+      <h2 id="bf-h">{T('Sık sorulanlar', 'FAQ')}</h2>
       {faq.map(([q, a]) => <details><summary>{q}</summary><p>{a}</p></details>)}
     </section>
 
-    <h2 class="ev-h">Diğer görevler</h2>
+    <h2 class="ev-h">{T('Diğer görevler', 'Other tasks')}</h2>
     <ul class="task-chips">{others.map((x) => <li><a href={url(`/en-iyi/${x.slug}/`)}>{x.short}</a></li>)}</ul>
   </section>
 </Base>

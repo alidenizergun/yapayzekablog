@@ -1,0 +1,9 @@
+---
+import Page from '../../en-iyi/[slug].astro';
+import { TASKS } from '../../../lib/tools.js';
+import { TASK_EN } from '../../../i18n/index.js';
+export function getStaticPaths() {
+  return TASKS.map((k) => ({ params: { slug: TASK_EN[k.slug] }, props: { k } }));
+}
+---
+<Page {...Astro.props} />

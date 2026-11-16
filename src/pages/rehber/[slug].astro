@@ -6,22 +6,30 @@ import { getCollection, render } from 'astro:content';
 import { GLOSSARY } from '../../lib/glossary.js';
 import { url, formatDate, getNews, spreadVisuals, readingMinutes } from '../../lib/news.js';
 import { find } from '../../../scripts/glossary-integration.mjs';
+import { LONG } from '../../lib/glossary-long.js';
+import { i18n, locGuide, locNewsList, locTerm, TOPIC_EN, LEVEL_EN } from '../../i18n/index.js';
 
 export async function getStaticPaths() {
   const guides = await getCollection('rehberler', (g) => !g.data.draft);
   return guides.map((g) => ({ params: { slug: g.id }, props: { g, all: guides } }));
 }
-const { g, all } = Astro.props;
-const { Content, headings } = await render(g);
+const L = await i18n(Astro);
+const { lang, T } = L;
+const g = locGuide(Astro.props.g, lang, L.m);
+const all = Astro.props.all.map((x) => locGuide(x, lang, L.m)).filter(Boolean);
+const { Content, headings } = await render(g.en ?? g);
 const d = g.data;
+const topic = lang === 'en' ? TOPIC_EN[d.topic] ?? d.topic : d.topic;
+const level = lang === 'en' ? LEVEL_EN[d.level] ?? d.level : d.level;
 const pageUrl = new URL(url(`/rehber/${g.id}/`), Astro.site).href;
-const terms = d.terms.map((s) => GLOSSARY.find((t) => t.slug === s)).filter(Boolean);
+const terms0 = d.terms.map((s) => GLOSSARY.find((t) => t.slug === s)).filter(Boolean);
+const terms = terms0.map((t) => locTerm(t, LONG[t.slug], lang));
 // Diğer rehberler: önce aynı konu grubu, sonra ortak terimi olanlar
 const score = (o) => (o.data.topic === d.topic ? 2 : 0) + o.data.terms.filter((t) => d.terms.includes(t)).length;
 const others = all.filter((x) => x.id !== g.id).sort((a, b) => score(b) - score(a)).slice(0, 5);
 const toc = headings.filter((h) => h.depth === 2);
 // İlgili haberler: rehberin terimlerinden biri geçen son haberler
-const related = terms.length ? (await getNews()).filter((n) => terms.some((t) => find(`${n.data.title} ${n.data.spot} ${n.body}`, t))).slice(0, 4) : [];
+const related = terms0.length ? locNewsList((await getNews()).filter((n) => terms0.some((t) => find(`${n.data.title} ${n.data.spot} ${n.body}`, t))), lang, L.m).slice(0, 4) : [];
 const rowV = spreadVisuals(related);
 const minutes = readingMinutes(g.body || '');
 // "## 1. Başlık" biçimindeki bölümler adım sayılır → HowTo
@@ -29,56 +37,56 @@ const steps = [...(g.body || '').matchAll(/^##\s+\d+\.\s+(.+)\n+([\s\S]*?)(?=\n#
   .map(([, name, text]) => ({ name: name.trim(), text: text.replace(/[*_`#>]/g, '').replace(/\[([^\]]+)\]\([^)]*\)/g, '$1').replace(/\s+/g, ' ').trim().slice(0, 500) }));
 const iso = (x) => x.toISOString().slice(0, 10);
 const jsonLd = [
-  { '@type': 'Article', headline: d.title, description: d.description, inLanguage: 'tr-TR', url: pageUrl, mainEntityOfPage: pageUrl,
-    datePublished: iso(d.date), dateModified: iso(d.updated || d.date), articleSection: d.topic,
+  { '@type': 'Article', headline: d.title, description: d.description, inLanguage: L.locale, url: pageUrl, mainEntityOfPage: pageUrl,
+    datePublished: iso(d.date), dateModified: iso(d.updated || d.date), articleSection: topic,
     author: { '@type': 'Organization', name: 'YZ Gündemi' }, publisher: { '@id': new URL(url('/#organization'), Astro.site).href } },
-  ...(steps.length >= 3 ? [{ '@type': 'HowTo', name: d.title, description: d.description, inLanguage: 'tr-TR',
+  ...(steps.length >= 3 ? [{ '@type': 'HowTo', name: d.title, description: d.description, inLanguage: L.locale,
     step: steps.map((s, i) => ({ '@type': 'HowToStep', position: i + 1, name: s.name, text: s.text })) }] : []),
   ...(d.faq.length ? [{ '@type': 'FAQPage', mainEntity: d.faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) }] : []),
 ];
 ---
 <Base title={d.title} description={d.description} jsonLd={jsonLd} ogType="article"
-  article={{ published: d.date, modified: d.updated || d.date, section: 'Rehberler', tags: [] }}
-  breadcrumbs={[{ name: 'Ana sayfa', path: '/' }, { name: 'Rehberler', path: '/rehber/' }, { name: d.title, path: `/rehber/${g.id}/` }]}>
+  article={{ published: d.date, modified: d.updated || d.date, section: T('Rehberler', 'Guides'), tags: [] }}
+  breadcrumbs={[{ name: 'Ana sayfa', path: '/' }, { name: T('Rehberler', 'Guides'), path: '/rehber/' }, { name: d.title, path: `/rehber/${g.id}/` }]}>
   <div class="cols" style="margin-top:0">
-    <article class="article term guide" data-pagefind-body data-pagefind-meta="date:Rehber">
-      <nav class="crumb" aria-label="Konum" data-pagefind-ignore><a href={url('/')}>Ana sayfa</a><span aria-hidden="true">/</span><a href={url('/rehber/')}>Rehberler</a></nav>
-      <span class="badge" data-pagefind-ignore>Rehber · {d.topic}</span>
+    <article class="article term guide" data-pagefind-body data-pagefind-meta={`date:${T('Rehber', 'Guide')}`}>
+      <nav class="crumb" aria-label={T('Konum', 'Breadcrumb')} data-pagefind-ignore><a href={url('/')}>{T('Ana sayfa', 'Home')}</a><span aria-hidden="true">/</span><a href={url('/rehber/')}>{T('Rehberler', 'Guides')}</a></nav>
+      <span class="badge" data-pagefind-ignore>{T('Rehber', 'Guide')} · {topic}</span>
       <h1 data-pagefind-meta="title">{d.title}</h1>
       <p class="spot">{d.description}</p>
-      <p class="byline" data-pagefind-ignore>{d.updated ? `Güncellendi: ${formatDate(d.updated, false)}` : formatDate(d.date, false)} · {minutes} dk okuma · Seviye: {d.level}</p>
-      <aside class="why guide-summary" aria-label="Kısaca">
-        <strong>Kısaca</strong>
+      <p class="byline" data-pagefind-ignore>{d.updated ? `${T('Güncellendi', 'Updated')}: ${formatDate(d.updated, false, L.locale)}` : formatDate(d.date, false, L.locale)} · {minutes} {T('dk okuma', 'min read')} · {T('Seviye', 'Level')}: {level}</p>
+      <aside class="why guide-summary" aria-label={T('Kısaca', 'Key points')}>
+        <strong>{T('Kısaca', 'Key points')}</strong>
         <ul>{d.summary.map((s) => <li>{s}</li>)}</ul>
       </aside>
       {toc.length >= 4 && (
-        <nav class="guide-toc" aria-label="İçindekiler" data-pagefind-ignore>
-          <strong>İçindekiler</strong>
+        <nav class="guide-toc" aria-label={T('İçindekiler', 'Contents')} data-pagefind-ignore>
+          <strong>{T('İçindekiler', 'Contents')}</strong>
           <ol>{toc.map((h) => <li><a href={`#${h.slug}`}>{h.text.replace(/^\d+\.\s*/, '')}</a></li>)}</ol>
         </nav>
       )}
       <div class="prose"><Content /></div>
       {d.faq.length > 0 && (
         <section class="models-faq guide-faq" aria-labelledby="gf-h">
-          <h2 id="gf-h">Sık sorulanlar</h2>
+          <h2 id="gf-h">{T('Sık sorulanlar', 'FAQ')}</h2>
           {d.faq.map((f) => <details><summary>{f.q}</summary><p>{f.a}</p></details>)}
         </section>
       )}
       {terms.length > 0 && (
-        <nav class="entity-links" aria-label="İlgili terimler" data-pagefind-ignore>
-          <strong>İlgili terimler:</strong>
+        <nav class="entity-links" aria-label={T('İlgili terimler', 'Related terms')} data-pagefind-ignore>
+          <strong>{T('İlgili terimler:', 'Related terms:')}</strong>
           {terms.map((t) => <a class="tag" href={url(`/sozluk/${t.slug}/`)}>{t.term}</a>)}
         </nav>
       )}
       {others.length > 0 && (
         <section class="guide-more" aria-labelledby="gm-h" data-pagefind-ignore>
-          <h2 id="gm-h">Diğer rehberler</h2>
+          <h2 id="gm-h">{T('Diğer rehberler', 'More guides')}</h2>
           <ul>{others.map((o) => <li><a href={url(`/rehber/${o.id}/`)}>{o.data.title}</a></li>)}</ul>
         </section>
       )}
       {related.length > 0 && (
         <section class="term-news" aria-labelledby="gn-h" data-pagefind-ignore>
-          <div class="sechead"><h2 id="gn-h">Konuyla ilgili haberler</h2></div>
+          <div class="sechead"><h2 id="gn-h">{T('Konuyla ilgili haberler', 'Related news')}</h2></div>
           {related.map((n) => <NewsRow item={n} choice={rowV.get(n.id)} />)}
         </section>
       )}

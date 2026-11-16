@@ -3,6 +3,8 @@ import { getCollection } from 'astro:content';
 import { SITE, CATEGORIES } from '../lib/site.js';
 import { getNews, newsUrl, getDigests, digestUrl } from '../lib/news.js';
 import { GLOSSARY } from '../lib/glossary.js';
+import { maps, locNewsList, toEn } from '../i18n/index.js';
+import { slugOf } from '../lib/news.js';
 
 export async function GET(context) {
   const abs = (p) => new URL(p, context.site).href;
@@ -10,6 +12,8 @@ export async function GET(context) {
   const digests = (await getDigests()).slice(0, 4);
   const guides = await getCollection('rehberler', (g) => !g.data.draft);
   const one = (s) => String(s).replace(/\s+/g, ' ').trim();
+  const m = await maps();
+  const enNews = locNewsList(news, 'en', m).slice(0, 15);
   const lines = [
     `# ${SITE.name}`, '',
     `> ${SITE.description} Haberler yapay zeka desteğiyle, belirtilen kaynaklardan derlenir ve editoryal kontrolden geçer; her haberin altında kaynak bağlantıları yer alır. Dil: Türkçe.`, '',
@@ -36,6 +40,17 @@ export async function GET(context) {
     ...news.map((n) => `- [${n.data.title}](${abs(newsUrl(n))}): ${one(n.data.spot)}`), '',
     '## Optional', '',
     `- [RSS](${abs('/rss.xml')})`, `- [Site haritası](${abs('/sitemap-index.xml')})`, `- [Hakkımızda ve yayın ilkeleri](${abs('/hakkimizda/')})`, '',
+    '## English edition', '',
+    `An English edition translated from the Turkish stories is available at ${abs('/en/')}.`, '',
+    `- [AI news in English](${abs('/en/')})`,
+    `- [AI model pricing comparison](${abs('/en/ai-model-pricing/')})`,
+    `- [AI tools directory](${abs('/en/tools/')})`,
+    `- [AI in Turkey](${abs('/en/ai-in-turkey/')})`,
+    `- [Turkish AI models](${abs('/en/turkish-ai-models/')})`,
+    `- [AI glossary](${abs('/en/glossary/')})`,
+    `- [AI guides](${abs('/en/guides/')})`,
+    `- [English RSS](${abs('/en/rss.xml')})`, '',
+    ...enNews.map((n) => `- [${n.data.title}](${abs(toEn(`/haber/${slugOf(n)}/`, m))}): ${one(n.data.spot)}`), '',
   ];
   return new Response(lines.join('\n'), { headers: { 'Content-Type': 'text/plain; charset=utf-8' } });
 }

@@ -13,6 +13,7 @@ byNumbers:
   - value: "$1.4 trillion"
     label: "Valuation at the top of the range"
 photoAlt: "New york stock exchange building with american flags"
+dealAmount: "$57.75–64.35 billion"
 ---
 
 On November 12, Anthropic announced its IPO page at ipo.anthropic.com with a post titled "Our initial public offering" on its official X account. The post also includes the legal disclaimer required by the U.S. Securities and Exchange Commission (SEC).

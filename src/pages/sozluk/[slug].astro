@@ -7,81 +7,86 @@ import { LONG } from '../../lib/glossary-long.js';
 import { getNews, spreadVisuals, url } from '../../lib/news.js';
 import { find } from '../../../scripts/glossary-integration.mjs';
 import { getCollection } from 'astro:content';
+import { i18n, locNewsList, locTerm, locGuide } from '../../i18n/index.js';
 
 export function getStaticPaths() {
   return GLOSSARY.map((t) => ({ params: { slug: t.slug }, props: { t } }));
 }
-const { t } = Astro.props;
-const long = LONG[t.slug];
+const L = await i18n(Astro);
+const { lang, T } = L;
+const t0 = Astro.props.t;
+const t = locTerm(t0, LONG[t0.slug], lang);
+const long = LONG[t.slug] && { how: t.how, why: t.why, example: t.example };
 const news = await getNews();
+const tLoc = (x) => locTerm(x, LONG[x.slug], lang);
 // Terimin geçtiği haberler (haber metninde, başlıkta veya spotta)
-const related = news.filter((n) => find(`${n.data.title} ${n.data.spot} ${n.body}`, t)).slice(0, 8);
+const related = locNewsList(news.filter((n) => find(`${n.data.title} ${n.data.spot} ${n.body}`, t0)), lang, L.m).slice(0, 8);
 const rowV = spreadVisuals(related);
 // Alfabetik komşu terimler + aynı haberlerde sık geçen terimler
-const sorted = [...GLOSSARY].sort((a, b) => a.term.localeCompare(b.term, 'tr'));
+const sorted = GLOSSARY.map(tLoc).sort((a, b) => a.term.localeCompare(b.term, lang));
 const i = sorted.findIndex((x) => x.slug === t.slug);
-const others = [sorted[i - 1], sorted[i + 1], ...sorted.filter((x) => x.slug !== t.slug && related.some((n) => find(n.body, x)))]
+const others = [sorted[i - 1], sorted[i + 1], ...sorted.filter((x) => x.slug !== t.slug && related.some((n) => find((n.en ? news.find((z) => z.id === n.id) : n).body, x)))]
   .filter(Boolean).filter((x, k, arr) => arr.findIndex((y) => y.slug === x.slug) === k).slice(0, 6);
-const name = t.term;
+const name = lang === 'en' ? t.term.replace(/\s*\(.*?\)\s*$/, '') : t.term;
 // Aynı gruptaki terimler ilgili terimlere eklenir
 const sameCat = sorted.filter((x) => x.slug !== t.slug && x.cat && x.cat === t.cat && !others.some((o) => o.slug === x.slug));
 others.unshift(...sameCat.slice(0, 4)); // önce aynı konu grubundan terimler
 others.splice(8);
-const guides = (await getCollection('rehberler', (g) => !g.data.draft)).filter((g) => g.data.terms.includes(t.slug)).slice(0, 5);
-const faq = long?.faq ?? [];
+const guides = (await getCollection('rehberler', (g) => !g.data.draft)).filter((g) => g.data.terms.includes(t.slug)).map((g) => locGuide(g, lang, L.m)).filter(Boolean).slice(0, 5);
+const faq = t.faq;
 const pageUrl = new URL(url(`/sozluk/${t.slug}/`), Astro.site).href;
 const jsonLd = [
-  { '@type': 'DefinedTerm', '@id': `${pageUrl}#terim`, name: t.term, alternateName: t.en, description: t.def, url: pageUrl,
-    inDefinedTermSet: { '@type': 'DefinedTermSet', name: 'Yapay zeka terimleri sözlüğü', url: new URL(url('/sozluk/'), Astro.site).href } },
-  { '@type': 'Article', headline: `${name} nedir?`, description: t.def, inLanguage: 'tr-TR', url: pageUrl, mainEntityOfPage: pageUrl,
+  { '@type': 'DefinedTerm', '@id': `${pageUrl}#terim`, name: t.term, alternateName: lang === 'en' ? t0.term : t.en, description: t.def, url: pageUrl,
+    inDefinedTermSet: { '@type': 'DefinedTermSet', name: T('Yapay zeka terimleri sözlüğü', 'AI glossary'), url: new URL(url('/sozluk/'), Astro.site).href } },
+  { '@type': 'Article', headline: T(`${name} nedir?`, `What is ${name}?`), description: t.def, inLanguage: L.locale, url: pageUrl, mainEntityOfPage: pageUrl,
     about: { '@id': `${pageUrl}#terim` }, author: { '@type': 'Organization', name: 'YZ Gündemi' }, publisher: { '@id': new URL(url('/#organization'), Astro.site).href } },
   ...(faq.length ? [{ '@type': 'FAQPage', mainEntity: faq.map(([q, a]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a } })) }] : []),
 ];
 ---
-<Base title={`${name} nedir? Yapay zekada ${t.en} ne demek`} description={t.def} jsonLd={jsonLd}
-  breadcrumbs={[{ name: 'Ana sayfa', path: '/' }, { name: 'Terimler sözlüğü', path: '/sozluk/' }, { name, path: `/sozluk/${t.slug}/` }]}>
+<Base title={T(`${name} nedir? Yapay zekada ${t.en} ne demek`, `What is ${name}? Meaning and examples in AI`)} description={t.def} jsonLd={jsonLd}
+  breadcrumbs={[{ name: 'Ana sayfa', path: '/' }, { name: T('Terimler sözlüğü', 'AI glossary'), path: '/sozluk/' }, { name, path: `/sozluk/${t.slug}/` }]}>
   <div class="cols" style="margin-top:0">
-    <article class="article term" data-pagefind-body data-pagefind-meta="date:Sözlük">
-      <nav class="crumb" aria-label="Konum" data-pagefind-ignore><a href={url('/')}>Ana sayfa</a><span aria-hidden="true">/</span><a href={url('/sozluk/')}>Terimler sözlüğü</a></nav>
-      <span class="badge" data-pagefind-ignore>Sözlük</span>
-      <h1 data-pagefind-meta="title">{name} nedir?</h1>
-      <p class="term-en" data-pagefind-ignore>İngilizcesi: <span lang="en">{t.en}</span>{t.cat && <> · Konu: {t.cat}</>}</p>
+    <article class="article term" data-pagefind-body data-pagefind-meta={`date:${T('Sözlük', 'Glossary')}`}>
+      <nav class="crumb" aria-label={T('Konum', 'Breadcrumb')} data-pagefind-ignore><a href={url('/')}>{T('Ana sayfa', 'Home')}</a><span aria-hidden="true">/</span><a href={url('/sozluk/')}>{T('Terimler sözlüğü', 'AI glossary')}</a></nav>
+      <span class="badge" data-pagefind-ignore>{T('Sözlük', 'Glossary')}</span>
+      <h1 data-pagefind-meta="title">{T(`${name} nedir?`, `What is ${name}?`)}</h1>
+      <p class="term-en" data-pagefind-ignore>{lang === 'en' ? <>In Turkish: <span lang="tr">{t0.term}</span></> : <>İngilizcesi: <span lang="en">{t.en}</span></>}{t.cat && <> · {T('Konu', 'Topic')}: {t.catName}</>}</p>
       <p class="spot term-def">{t.def}</p>
       {long && (
         <div class="prose">
-          <h2>Nasıl çalışır?</h2>
+          <h2>{T('Nasıl çalışır?', 'How does it work?')}</h2>
           <p>{long.how}</p>
-          <h2>Neden önemli?</h2>
+          <h2>{T('Neden önemli?', 'Why does it matter?')}</h2>
           <p>{long.why}</p>
-          <h2>Örnek</h2>
+          <h2>{T('Örnek', 'Example')}</h2>
           <p>{long.example}</p>
         </div>
       )}
       {faq.length > 0 && (
         <section class="models-faq guide-faq" aria-labelledby="tf-h">
-          <h2 id="tf-h">Sık sorulanlar</h2>
+          <h2 id="tf-h">{T('Sık sorulanlar', 'FAQ')}</h2>
           {faq.map(([q, a]) => <details><summary>{q}</summary><p>{a}</p></details>)}
         </section>
       )}
       {guides.length > 0 && (
         <section class="guide-more" aria-labelledby="tg-h" data-pagefind-ignore>
-          <h2 id="tg-h">İlgili rehberler</h2>
+          <h2 id="tg-h">{T('İlgili rehberler', 'Related guides')}</h2>
           <ul>{guides.map((g) => <li><a href={url(`/rehber/${g.id}/`)}>{g.data.title}</a></li>)}</ul>
         </section>
       )}
       {others.length > 0 && (
-        <nav class="entity-links" aria-label="İlgili terimler" data-pagefind-ignore>
-          <strong>İlgili terimler:</strong>
+        <nav class="entity-links" aria-label={T('İlgili terimler', 'Related terms')} data-pagefind-ignore>
+          <strong>{T('İlgili terimler:', 'Related terms:')}</strong>
           {others.map((o) => <a class="tag" href={url(`/sozluk/${o.slug}/`)}>{o.term}</a>)}
         </nav>
       )}
       {related.length > 0 && (
         <section class="term-news" aria-labelledby="tn-h" data-pagefind-ignore>
-          <div class="sechead"><h2 id="tn-h">"{name}" geçen haberler</h2><span class="meta">{related.length} haber</span></div>
+          <div class="sechead"><h2 id="tn-h">{T(`"${name}" geçen haberler`, `News mentioning "${name}"`)}</h2><span class="meta">{related.length} {T('haber', 'stories')}</span></div>
           {related.map((n) => <NewsRow item={n} choice={rowV.get(n.id)} />)}
         </section>
       )}
-      <p class="ai-note" data-pagefind-ignore><a href={url('/sozluk/')}>Tüm terimler →</a></p>
+      <p class="ai-note" data-pagefind-ignore><a href={url('/sozluk/')}>{T('Tüm terimler →', 'All terms →')}</a></p>
     </article>
     <Sidebar exclude={related.map((n) => n.id)} />
   </div>

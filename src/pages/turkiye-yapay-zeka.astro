@@ -5,34 +5,42 @@ import { YERLI_MODELS, STATUS_LABEL, TR_POLICY, TR_STATS, TR_ROUNDS, TR_CHECKED 
 import { trDate } from '../lib/tools.js';
 import { EVENTS } from '../lib/events.js';
 import { getNews, spreadVisuals, url } from '../lib/news.js';
+import { i18n, locNewsList, dateL } from '../i18n/index.js';
+const L = await i18n(Astro);
+const { lang, T, S } = L;
+const EN = lang === 'en';
+const ST = EN ? { acik: 'Available', sinirli: 'Limited access', kapali: 'Not yet public' } : STATUS_LABEL;
+const YM = YERLI_MODELS.map((m) => ({ ...m, about: S(`yerli.${m.slug}.about`, m.about), access: S(`yerli.${m.slug}.access`, m.access), dev: S(`yerli.${m.slug}.dev`, m.dev) }));
 
-const MONTHS = ['Ocak', 'Şubat', 'Mart', 'Nisan', 'Mayıs', 'Haziran', 'Temmuz', 'Ağustos', 'Eylül', 'Ekim', 'Kasım', 'Aralık'];
-const when = (d) => { const [y, m, day] = d.split('-').map(Number); return day ? `${day} ${MONTHS[m - 1]} ${y}` : `${MONTHS[m - 1]} ${y}`; };
-const news = (await getNews()).filter((n) => n.data.category === 'turkiye' || n.data.turkeyAngle).slice(0, 6);
+const MONTHS = EN ? ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'] : ['Ocak', 'Şubat', 'Mart', 'Nisan', 'Mayıs', 'Haziran', 'Temmuz', 'Ağustos', 'Eylül', 'Ekim', 'Kasım', 'Aralık'];
+const when = (d) => { const [y, m, day] = d.split('-').map(Number); return day ? (EN ? `${MONTHS[m - 1]} ${day}, ${y}` : `${day} ${MONTHS[m - 1]} ${y}`) : `${MONTHS[m - 1]} ${y}`; };
+const news = locNewsList((await getNews()).filter((n) => n.data.category === 'turkiye' || n.data.turkeyAngle), lang, L.m).slice(0, 6);
 const rowV = spreadVisuals(news);
-const policy = [...TR_POLICY].reverse();
+const policy = TR_POLICY.map((p, i) => ({ ...p, title: S(`policy.${i}.title`, p.title), note: p.note && S(`policy.${i}.note`, p.note) })).reverse();
+const stats = TR_STATS.map((s, i) => ({ ...s, label: S(`trstat.${i}.label`, s.label) }));
+const rounds = TR_ROUNDS.map((r, i) => ({ ...r, what: S(`round.${i}.what`, r.what), round: S(`round.${i}.round`, r.round), amount: r.amount && S(`round.${i}.amount`, r.amount), where: r.where && S(`round.${i}.where`, r.where) }));
 const today = new Date(Date.now() + 3 * 3600e3).toISOString().slice(0, 10);
-const nextEvents = EVENTS.filter((e) => e.end >= today).sort((a, b) => a.start.localeCompare(b.start)).slice(0, 3);
+const nextEvents = EVENTS.map((e, i) => ({ ...e, name: S(`event.${i}.name`, e.name), city: S(`event.${i}.city`, e.city) })).filter((e) => e.end >= today).sort((a, b) => a.start.localeCompare(b.start)).slice(0, 3);
 ---
-<Base title="Türkiye'de yapay zeka: yerli modeller, girişimler, düzenlemeler" description="Türkiye yapay zeka ekosistemi tek sayfada: yerli dil modelleri, girişim sayıları ve yatırımlar, Yapay Zeka Eylem Planı ve kanun teklifleri, KVKK rehberleri, etkinlikler ve haberler."
-  breadcrumbs={[{ name: 'Ana sayfa', path: '/' }, { name: "Türkiye'de yapay zeka", path: '/turkiye-yapay-zeka/' }]}>
+<Base title={T("Türkiye'de yapay zeka: yerli modeller, girişimler, düzenlemeler", 'AI in Turkey: homegrown models, startups and regulation')} description={T('Türkiye yapay zeka ekosistemi tek sayfada: yerli dil modelleri, girişim sayıları ve yatırımlar, Yapay Zeka Eylem Planı ve kanun teklifleri, KVKK rehberleri, etkinlikler ve haberler.', 'Turkey’s AI ecosystem on one page: homegrown language models, startups and funding, the national AI action plan and draft laws, data-protection (KVKK) guidance, events and news.')}
+  breadcrumbs={[{ name: 'Ana sayfa', path: '/' }, { name: T("Türkiye'de yapay zeka", 'AI in Turkey'), path: '/turkiye-yapay-zeka/' }]}>
   <section class="deals tr-desk" data-pagefind-body>
-    <span class="cat">Türkiye masası</span>
-    <h1 class="page-h">Türkiye'de yapay zeka</h1>
-    <p class="spot">Türkiye'nin yapay zeka ekosistemini tek sayfada izliyoruz: yerli modeller, girişimler ve yatırımlar, kamu politikaları ve düzenlemeler. Her bilgi kaynağına bağlıdır.</p>
-    <p class="models-checked">Son kontrol: {trDate(TR_CHECKED)}</p>
+    <span class="cat">{T('Türkiye masası', 'Turkey desk')}</span>
+    <h1 class="page-h">{T("Türkiye'de yapay zeka", 'AI in Turkey')}</h1>
+    <p class="spot">{T("Türkiye'nin yapay zeka ekosistemini tek sayfada izliyoruz: yerli modeller, girişimler ve yatırımlar, kamu politikaları ve düzenlemeler. Her bilgi kaynağına bağlıdır.", 'We track Turkey’s AI ecosystem on one page: homegrown models, startups and funding, public policy and regulation. Everything links to its source.')}</p>
+    <p class="models-checked">{T('Son kontrol', 'Last checked')}: {dateL(TR_CHECKED, lang)}</p>
 
-    <aside class="by-numbers" aria-label="Rakamlarla">
-      <span class="cat">Rakamlarla</span>
-      <dl>{TR_STATS.map((s) => <div><dt>{s.value}</dt><dd>{s.label} · <a href={s.src[1]} rel="noopener">{s.src[0]}</a></dd></div>)}</dl>
-      <p class="meta">Kaynakların "yapay zeka girişimi" tanımları farklı olduğu için sayılar birbirinden farklıdır.</p>
+    <aside class="by-numbers" aria-label={T('Rakamlarla', 'By the numbers')}>
+      <span class="cat">{T('Rakamlarla', 'By the numbers')}</span>
+      <dl>{stats.map((s) => <div><dt>{s.value}</dt><dd>{s.label} · <a href={s.src[1]} rel="noopener">{s.src[0]}</a></dd></div>)}</dl>
+      <p class="meta">{T('Kaynakların "yapay zeka girişimi" tanımları farklı olduğu için sayılar birbirinden farklıdır.', 'Figures differ because sources define an “AI startup” differently.')}</p>
     </aside>
 
-    <h2 class="ev-h">Yerli modeller</h2>
-    <ul class="task-chips">{YERLI_MODELS.map((m) => <li><a href={url(`/yerli-yapay-zeka/#${m.slug}`)}>{m.name} · {STATUS_LABEL[m.status]}</a></li>)}</ul>
-    <p><a class="more-link" href={url('/yerli-yapay-zeka/')}>Yerli modellerin durumu ve erişim yolları →</a></p>
+    <h2 class="ev-h">{T('Yerli modeller', 'Homegrown models')}</h2>
+    <ul class="task-chips">{YM.map((m) => <li><a href={url(`/yerli-yapay-zeka/#${m.slug}`)}>{m.name} · {ST[m.status]}</a></li>)}</ul>
+    <p><a class="more-link" href={url('/yerli-yapay-zeka/')}>{T('Yerli modellerin durumu ve erişim yolları →', 'Status and access for Turkish AI models →')}</a></p>
 
-    <h2 class="ev-h">Düzenleme ve kamu politikası</h2>
+    <h2 class="ev-h">{T('Düzenleme ve kamu politikası', 'Regulation and public policy')}</h2>
     <ol class="ev-list">
       {policy.map((p) => (
         <li class="ev">
@@ -40,36 +48,36 @@ const nextEvents = EVENTS.filter((e) => e.end >= today).sort((a, b) => a.start.l
           <div class="ev-body">
             <h3>{p.title}</h3>
             {p.note && <p>{p.note}</p>}
-            <p class="meta">Kaynak: <a href={p.src[1]} rel="noopener">{p.src[0]}</a></p>
+            <p class="meta">{T('Kaynak', 'Source')}: <a href={p.src[1]} rel="noopener">{p.src[0]}</a></p>
           </div>
         </li>
       ))}
     </ol>
 
-    <h2 class="ev-h">Türk kurucuların 2026'daki öne çıkan yatırım turları</h2>
+    <h2 class="ev-h">{T("Türk kurucuların 2026'daki öne çıkan yatırım turları", 'Notable 2026 funding rounds by Turkish founders')}</h2>
     <div class="deal-table-wrap">
       <table class="deal-table">
-        <thead><tr><th scope="col">Girişim</th><th scope="col">Ne yapıyor</th><th scope="col">Tur</th><th scope="col">Yatırımcılar</th><th scope="col">Tarih</th></tr></thead>
-        <tbody>{TR_ROUNDS.map((r) => (
+        <thead><tr><th scope="col">{T('Girişim', 'Startup')}</th><th scope="col">{T('Ne yapıyor', 'What it does')}</th><th scope="col">{T('Tur', 'Round')}</th><th scope="col">{T('Yatırımcılar', 'Investors')}</th><th scope="col">{T('Tarih', 'Date')}</th></tr></thead>
+        <tbody>{rounds.map((r) => (
           <tr><td><strong>{r.name}</strong><span class="meta model-note">{r.where}</span></td><td>{r.what}</td><td>{r.round}<span class="meta model-note">{r.amount}</span></td><td>{r.investors}</td><td class="nowrap"><a href={r.src[1]} rel="noopener">{when(r.date)}</a></td></tr>
         ))}</tbody>
       </table>
     </div>
-    <p class="price-src">Tüm yapay zeka yatırımları için <a href={url('/yatirimlar/')}>yatırım takipçimize</a> bakın.</p>
+    <p class="price-src">{T('Tüm yapay zeka yatırımları için', 'For all AI deals, see our')} <a href={url('/yatirimlar/')}>{T('yatırım takipçimize', 'funding tracker')}</a>{T(' bakın.', '.')}</p>
 
     {nextEvents.length > 0 && (
       <>
-        <h2 class="ev-h">Yaklaşan etkinlikler</h2>
+        <h2 class="ev-h">{T('Yaklaşan etkinlikler', 'Upcoming events')}</h2>
         <ul class="guide-more-list">{nextEvents.map((e) => <li><a href={url('/etkinlikler/')}>{e.name}</a> <span class="meta">· {e.city}</span></li>)}</ul>
       </>
     )}
 
     {news.length > 0 && (
       <section class="term-news" aria-labelledby="trn-h">
-        <div class="sechead"><h2 id="trn-h">Türkiye ile ilgili son haberler</h2><a class="more" href={url('/kategori/turkiye/')}>Tümü →</a></div>
+        <div class="sechead"><h2 id="trn-h">{T('Türkiye ile ilgili son haberler', 'Latest Turkey news')}</h2><a class="more" href={url('/kategori/turkiye/')}>{T('Tümü →', 'All →')}</a></div>
         {news.map((n) => <NewsRow item={n} choice={rowV.get(n.id)} />)}
       </section>
     )}
-    <p class="ai-note">Türkiye ekosisteminden bir gelişmeyi bize iletmek için <a href={url('/hata-bildir/')}>yazın</a>.</p>
+    <p class="ai-note">{T('Türkiye ekosisteminden bir gelişmeyi bize iletmek için', 'Have news from Turkey’s AI ecosystem?')} <a href={url('/hata-bildir/')}>{T('yazın', 'Tell us')}</a>.</p>
   </section>
 </Base>

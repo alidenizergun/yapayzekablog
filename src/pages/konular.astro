@@ -3,21 +3,24 @@ import Base from '../layouts/Base.astro';
 import { getNews, url } from '../lib/news.js';
 import { entityIndex } from '../lib/entities.js';
 import { brandOf } from '../lib/brands.js';
+import { i18n, locNewsList } from '../i18n/index.js';
+const L = await i18n(Astro);
+const { lang, T } = L;
 
-const idx = [...entityIndex(await getNews()).values()].sort((a, b) => b.items.length - a.items.length || a.entity.name.localeCompare(b.entity.name, 'tr'));
+const idx = [...entityIndex(locNewsList(await getNews(), lang, L.m)).values()].sort((a, b) => b.items.length - a.items.length || a.entity.name.localeCompare(b.entity.name, 'tr'));
 const groups = [
-  { title: 'Şirketler', list: idx.filter((x) => x.entity.type === 'company') },
-  { title: 'Kişiler', list: idx.filter((x) => x.entity.type === 'person') },
+  { id: 'sirketler', title: T('Şirketler', 'Companies'), list: idx.filter((x) => x.entity.type === 'company') },
+  { id: 'kisiler', title: T('Kişiler', 'People'), list: idx.filter((x) => x.entity.type === 'person') },
 ].filter((g) => g.list.length);
 ---
-<Base title="Şirketler ve kişiler" description="Yapay zeka gündemindeki şirketler ve kişiler: OpenAI, Anthropic, Nvidia, Google ve daha fazlası hakkında YZ Gündemi haberleri."
-  breadcrumbs={[{ name: 'Ana sayfa', path: '/' }, { name: 'Şirketler ve kişiler', path: '/konular/' }]}>
+<Base title={T('Şirketler ve kişiler', 'AI companies and people')} description={T('Yapay zeka gündemindeki şirketler ve kişiler: OpenAI, Anthropic, Nvidia, Google ve daha fazlası hakkında YZ Gündemi haberleri.', 'The companies and people shaping AI: news on OpenAI, Anthropic, Nvidia, Google and more.')}
+  breadcrumbs={[{ name: 'Ana sayfa', path: '/' }, { name: T('Şirketler ve kişiler', 'Companies and people'), path: '/konular/' }]}>
   <section class="entities-page">
-    <h1 class="page-h">Şirketler ve kişiler</h1>
-    <p class="spot">Yapay zeka gündemindeki şirketler ve kişiler, haklarındaki son haberlerle.</p>
+    <h1 class="page-h">{T('Şirketler ve kişiler', 'Companies and people')}</h1>
+    <p class="spot">{T('Yapay zeka gündemindeki şirketler ve kişiler, haklarındaki son haberlerle.', 'The companies and people in AI news, with their latest stories.')}</p>
     {groups.map((g) => (
-      <section class="entity-group" aria-labelledby={`g-${g.title}`}>
-        <div class="sechead"><h2 id={`g-${g.title}`}>{g.title}</h2></div>
+      <section class="entity-group" aria-labelledby={`g-${g.id}`}>
+        <div class="sechead"><h2 id={`g-${g.id}`}>{g.title}</h2></div>
         <ul class="entity-grid">
           {g.list.map(({ entity: e, items }) => {
             const b = brandOf(e.brand);
@@ -27,7 +30,7 @@ const groups = [
                   <span class:list={["entity-logo sm brandcard", { wordmark: !b.path }]} style={`--bl:${b.onLight};--bd:${b.onDark}`} aria-hidden="true">{b.path ? <svg viewBox="0 0 24 24"><path d={b.path} /></svg> : <span class="bn">{b.name}</span>}</span>
                 ) : <span class="entity-logo sm entity-initials" aria-hidden="true">{e.name.split(/\s+/).map((w) => w[0]).slice(0, 2).join('')}</span>}
                 <span class="entity-name">{e.name}</span>
-                <span class="meta">{items.length} haber</span>
+                <span class="meta">{items.length} {T('haber', 'stories')}</span>
               </a></li>
             );
           })}

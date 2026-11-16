@@ -3,47 +3,58 @@ import Base from '../layouts/Base.astro';
 import { YERLI_MODELS, STATUS_LABEL, TR_CHECKED } from '../lib/turkiye.js';
 import { trDate } from '../lib/tools.js';
 import { url } from '../lib/news.js';
+import { i18n, dateL } from '../i18n/index.js';
+const L = await i18n(Astro);
+const { lang, T, S } = L;
+const EN = lang === 'en';
+const ST = EN ? { acik: 'Available', sinirli: 'Limited access', kapali: 'Not yet public' } : STATUS_LABEL;
+const YM = YERLI_MODELS.map((m) => ({ ...m, about: S(`yerli.${m.slug}.about`, m.about), access: S(`yerli.${m.slug}.access`, m.access), dev: S(`yerli.${m.slug}.dev`, m.dev) }));
 
-const usable = YERLI_MODELS.filter((m) => m.status === 'acik').map((m) => m.name);
-const faq = [
+const usable = YM.filter((m) => m.status === 'acik').map((m) => m.name);
+const faqEn = [
+  ['Can you use Turkish AI models?', `Of the projects we checked, ${usable.join(' and ')} can be used on the web. The Trendyol, COSMOS and Turkcell models can be downloaded and run on your own hardware; BİLGE is not yet open to the public.`],
+  ['Are Turkish models as good as ChatGPT?', 'In general they are not as capable as the largest models from global companies, but some are built for Turkish text, internal enterprise use and work where data must stay in the country. Testing them on your own tasks is the best way to judge.'],
+  ['Why is Turkey building its own AI models?', 'The main reasons cited are better representation of Turkish, processing data inside the country and reducing foreign dependence in critical areas.'],
+];
+const faq = EN ? faqEn : [
   ['Yerli yapay zeka modelleri kullanılabiliyor mu?', `Kontrol ettiğimiz projelerden ${usable.join(' ve ')} web üzerinden kullanılabiliyor. Trendyol, COSMOS ve Turkcell modelleri indirilip kendi donanımınızda çalıştırılabiliyor; BİLGE ise henüz genel kullanıma açık değil.`],
   ['Yerli modeller ChatGPT kadar iyi mi?', 'Genel olarak küresel şirketlerin en büyük modelleri kadar yetenekli değiller; ancak bazıları Türkçe metinler, kurum içi kullanım ve verinin yurt içinde kalması gereken işler için geliştiriliyor. Kendi işinizle denemek en doğru yöntem.'],
   ['Neden yerli yapay zeka modeli geliştiriliyor?', 'Türkçeyi daha iyi temsil etmek, verinin ülke içinde işlenmesi ve kritik alanlarda dışa bağımlılığı azaltmak başlıca gerekçeler olarak öne çıkıyor.'],
 ];
 const jsonLd = [
-  { '@type': 'ItemList', name: 'Yerli yapay zeka modelleri', itemListElement: YERLI_MODELS.map((m, i) => ({ '@type': 'ListItem', position: i + 1, name: m.name, url: m.url })) },
+  { '@type': 'ItemList', name: T('Yerli yapay zeka modelleri', 'Turkish AI models'), itemListElement: YM.map((m, i) => ({ '@type': 'ListItem', position: i + 1, name: m.name, url: m.url })) },
   { '@type': 'FAQPage', mainEntity: faq.map(([q, a]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a } })) },
 ];
 ---
-<Base title="Yerli yapay zeka modelleri: hangisi kullanılabiliyor?" description="EVREN, Kumru, Trendyol LLM, COSMOS, Turkcell LLM, HAVELSAN MAIN, T3 AI ve BİLGE: Türkiye'de geliştirilen yapay zeka modellerinin durumu, erişim yolu ve kaynakları."
-  jsonLd={jsonLd} breadcrumbs={[{ name: 'Ana sayfa', path: '/' }, { name: "Türkiye'de yapay zeka", path: '/turkiye-yapay-zeka/' }, { name: 'Yerli modeller', path: '/yerli-yapay-zeka/' }]}>
+<Base title={T('Yerli yapay zeka modelleri: hangisi kullanılabiliyor?', 'Turkish AI models: which ones can you use?')} description={T("EVREN, Kumru, Trendyol LLM, COSMOS, Turkcell LLM, HAVELSAN MAIN, T3 AI ve BİLGE: Türkiye'de geliştirilen yapay zeka modellerinin durumu, erişim yolu ve kaynakları.", 'EVREN, Kumru, Trendyol LLM, COSMOS, Turkcell LLM, HAVELSAN MAIN, T3 AI and BİLGE: status, access and sources for AI models built in Turkey.')}
+  jsonLd={jsonLd} breadcrumbs={[{ name: 'Ana sayfa', path: '/' }, { name: T("Türkiye'de yapay zeka", 'AI in Turkey'), path: '/turkiye-yapay-zeka/' }, { name: T('Yerli modeller', 'Turkish models'), path: '/yerli-yapay-zeka/' }]}>
   <section class="deals" data-pagefind-body>
-    <span class="cat">Türkiye</span>
-    <h1 class="page-h">Yerli yapay zeka modelleri</h1>
-    <p class="spot">Türkiye'de geliştirilen büyük dil modelleri ve yapay zeka platformları: kim geliştirdi, bugün nasıl erişiliyor, kullanıma açık mı? Her bilgi resmi kaynağa veya haberine bağlıdır.</p>
-    <p class="models-checked">Son kontrol: {trDate(TR_CHECKED)}</p>
+    <span class="cat">{T('Türkiye', 'Turkey')}</span>
+    <h1 class="page-h">{T('Yerli yapay zeka modelleri', 'Turkish AI models')}</h1>
+    <p class="spot">{T("Türkiye'de geliştirilen büyük dil modelleri ve yapay zeka platformları: kim geliştirdi, bugün nasıl erişiliyor, kullanıma açık mı? Her bilgi resmi kaynağa veya haberine bağlıdır.", 'Large language models and AI platforms built in Turkey: who made them, how to access them today and whether they’re open to the public. Everything links to an official source or news report.')}</p>
+    <p class="models-checked">{T('Son kontrol', 'Last checked')}: {dateL(TR_CHECKED, lang)}</p>
     <div class="deal-table-wrap">
       <table class="deal-table">
-        <thead><tr><th scope="col">Model / platform</th><th scope="col">Geliştiren</th><th scope="col">Durum</th><th scope="col">Erişim</th></tr></thead>
-        <tbody>{YERLI_MODELS.map((m) => (
-          <tr><td><a href={`#${m.slug}`}><strong>{m.name}</strong></a></td><td>{m.dev}</td><td><span class={`pclass st-${m.status}`}>{STATUS_LABEL[m.status]}</span></td><td>{m.access}</td></tr>
+        <thead><tr><th scope="col">Model / platform</th><th scope="col">{T('Geliştiren', 'Developer')}</th><th scope="col">{T('Durum', 'Status')}</th><th scope="col">{T('Erişim', 'Access')}</th></tr></thead>
+        <tbody>{YM.map((m) => (
+          <tr><td><a href={`#${m.slug}`}><strong>{m.name}</strong></a></td><td>{m.dev}</td><td><span class={`pclass st-${m.status}`}>{ST[m.status]}</span></td><td>{m.access}</td></tr>
         ))}</tbody>
       </table>
     </div>
     <div class="yerli-list">
-      {YERLI_MODELS.map((m) => (
+      {YM.map((m) => (
         <article class="yerli" id={m.slug}>
-          <h2>{m.name} <span class={`pclass st-${m.status}`}>{STATUS_LABEL[m.status]}</span></h2>
+          <h2>{m.name} <span class={`pclass st-${m.status}`}>{ST[m.status]}</span></h2>
           <p class="tool-co">{m.dev}</p>
           <p>{m.about}</p>
-          <p class="meta"><a href={m.url} rel="noopener">Resmi sayfa ↗</a> · Kaynak: {m.sources.map(([l, u], i) => <>{i > 0 && ', '}<a href={u} rel="noopener">{l}</a></>)}</p>
+          <p class="meta"><a href={m.url} rel="noopener">{T('Resmi sayfa ↗', 'Official page ↗')}</a> · {T('Kaynak', 'Source')}: {m.sources.map(([l, u], i) => <>{i > 0 && ', '}<a href={u} rel="noopener">{l}</a></>)}</p>
         </article>
       ))}
     </div>
     <section class="models-faq" aria-labelledby="yf-h">
-      <h2 id="yf-h">Sık sorulanlar</h2>
+      <h2 id="yf-h">{T('Sık sorulanlar', 'FAQ')}</h2>
       {faq.map(([q, a]) => <details><summary>{q}</summary><p>{a}</p></details>)}
     </section>
-    <p class="ai-note">Listede olmayan veya durumu değişen bir yerli model mi var? <a href={url('/hata-bildir/')}>Bize bildirin</a>. Türkiye ekosisteminin geneli için <a href={url('/turkiye-yapay-zeka/')}>Türkiye'de yapay zeka</a> sayfasına bakın.</p>
+    {EN ? <p class="ai-note">Know of a Turkish model we’re missing, or one whose status has changed? <a href={url('/hata-bildir/')}>Let us know</a>. For the wider ecosystem, see <a href={url('/turkiye-yapay-zeka/')}>AI in Turkey</a>.</p> : <p class="ai-note">Listede olmayan veya durumu değişen bir yerli model mi var? <a href={url('/hata-bildir/')}>Bize bildirin</a>. Türkiye ekosisteminin geneli için <a href={url('/turkiye-yapay-zeka/')}>Türkiye'de yapay zeka</a> sayfasına bakın.</p>}
   </section>
 </Base>

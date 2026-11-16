@@ -457,6 +457,12 @@ header.site .masthead { display: flex; align-items: center; justify-content: spa
 .catbar-search[aria-current="page"] { color: var(--accent-text); }
 .catbar-search svg { width: 20px; height: 20px; }
 .catbar .catbar-search + .theme-btn { margin-left: 4px; }
+/* Dil seçimi (TR/EN) */
+.lang-switch { flex: 0 0 auto; height: 44px; min-width: 44px; display: inline-flex; align-items: center; justify-content: center; padding: 0 8px; margin-left: 4px; border-radius: 22px; font-family: var(--display); font-weight: 700; font-size: 13px; letter-spacing: .06em; color: var(--fg); }
+.lang-switch:hover { background: var(--soft); color: var(--accent-text); }
+.lang-switch:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
+.catbar .lang-switch + .theme-btn { margin-left: 4px; }
+@media (max-width: 760px) { .lang-switch { min-width: 36px; padding: 0 4px; margin-left: 0; } .catbar-search { margin-left: 12px; width: 40px; } }
 
 /* ---------------------------------------------------------------- şirket ve kişi sayfaları */
 .entity-head { display: flex; gap: 20px; align-items: flex-start; margin: 8px 0 32px; }

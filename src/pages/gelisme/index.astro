@@ -3,19 +3,22 @@ import Base from '../../layouts/Base.astro';
 import Time from '../../components/Time.astro';
 import { getNews, url } from '../../lib/news.js';
 import { storyIndex } from '../../lib/stories.js';
+import { i18n } from '../../i18n/index.js';
+const L = await i18n(Astro);
+const { T, S } = L;
 const list = [...storyIndex(await getNews()).values()].sort((a, b) => b.items.at(-1).data.date - a.items.at(-1).data.date);
 ---
-<Base title="Gelişen hikâyeler" description="Birkaç gün süren yapay zeka gelişmelerinin bütün haberleri, tarih sırasıyla tek sayfada."
-  breadcrumbs={[{ name: 'Ana sayfa', path: '/' }, { name: 'Gelişen hikâyeler', path: '/gelisme/' }]}>
+<Base title={T('Gelişen hikâyeler', 'Developing AI stories')} description={T('Birkaç gün süren yapay zeka gelişmelerinin bütün haberleri, tarih sırasıyla tek sayfada.', 'Every story on multi-day AI developments, in chronological order on one page.')}
+  breadcrumbs={[{ name: 'Ana sayfa', path: '/' }, { name: T('Gelişen hikâyeler', 'Developing stories'), path: '/gelisme/' }]}>
   <section class="digest-index">
-    <h1 class="page-h">Gelişen hikâyeler</h1>
-    <p class="spot">Birkaç gün süren gelişmelerin bütün haberleri, tarih sırasıyla tek sayfada.</p>
+    <h1 class="page-h">{T('Gelişen hikâyeler', 'Developing stories')}</h1>
+    <p class="spot">{T('Birkaç gün süren gelişmelerin bütün haberleri, tarih sırasıyla tek sayfada.', 'Every story on multi-day developments, in chronological order on one page.')}</p>
     <ol class="digest-archive">
       {list.map(({ story: s, items }) => (
         <li><a href={url(`/gelisme/${s.slug}/`)}>
-          <span class="cat">{items.length} haber · son gelişme <Time date={items.at(-1).data.date} /></span>
-          <h2>{s.title}</h2>
-          <p>{s.intro}</p>
+          <span class="cat">{items.length} {T('haber', 'stories')} · {T('son gelişme', 'latest')} <Time date={items.at(-1).data.date} /></span>
+          <h2>{S(`story.${s.slug}.title`, s.title)}</h2>
+          <p>{S(`story.${s.slug}.intro`, s.intro)}</p>
         </a></li>
       ))}
     </ol>

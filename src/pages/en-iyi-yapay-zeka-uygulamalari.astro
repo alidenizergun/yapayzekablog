@@ -3,19 +3,22 @@ import Base from '../layouts/Base.astro';
 import ToolCard from '../components/ToolCard.astro';
 import { TASKS, toolBySlug, TOOLS_CHECKED, trDate, toolUrl } from '../lib/tools.js';
 import { url } from '../lib/news.js';
+import { i18n, locTask, dateL } from '../i18n/index.js';
+const L = await i18n(Astro);
+const { lang, T } = L;
 
 // Her görev için ilk iki seçim
-const sections = TASKS.filter((k) => k.slug !== 'yapay-zeka-dedektoru').map((k) => ({ k, picks: k.picks.slice(0, 2).map(([s, note]) => ({ t: toolBySlug(s), note })) }));
+const sections = TASKS.filter((k) => k.slug !== 'yapay-zeka-dedektoru').map((k) => locTask(k, lang)).map((k) => ({ k, picks: k.picks.slice(0, 2).map(([s, note]) => ({ t: toolBySlug(s), note })) }));
 const all = [...new Map(sections.flatMap((s) => s.picks.map((p) => [p.t.slug, p.t]))).values()];
-const jsonLd = { '@type': 'ItemList', name: 'En iyi yapay zeka uygulamaları', itemListElement: all.map((t, i) => ({ '@type': 'ListItem', position: i + 1, name: t.name, url: new URL(url(toolUrl(t.slug)), Astro.site).href })) };
+const jsonLd = { '@type': 'ItemList', name: T('En iyi yapay zeka uygulamaları', 'Best AI apps'), itemListElement: all.map((t, i) => ({ '@type': 'ListItem', position: i + 1, name: t.name, url: new URL(url(toolUrl(t.slug)), Astro.site).href })) };
 ---
-<Base title="En iyi yapay zeka uygulamaları: işe göre seçilmiş araçlar" description="Sohbet, CV, görsel, video, müzik, seslendirme, logo, sunum, kod, çeviri, özet ve toplantı notu için en çok kullanılan yapay zeka uygulamaları; ücretsiz planları ve fiyatlarıyla."
-  jsonLd={jsonLd} breadcrumbs={[{ name: 'Ana sayfa', path: '/' }, { name: 'Yapay zeka araçları', path: '/arac/' }, { name: 'En iyi uygulamalar', path: '/en-iyi-yapay-zeka-uygulamalari/' }]}>
+<Base title={T('En iyi yapay zeka uygulamaları: işe göre seçilmiş araçlar', 'Best AI apps: our picks for every task')} description={T('Sohbet, CV, görsel, video, müzik, seslendirme, logo, sunum, kod, çeviri, özet ve toplantı notu için en çok kullanılan yapay zeka uygulamaları; ücretsiz planları ve fiyatlarıyla.', 'The most widely used AI apps for chat, resumes, images, video, music, voice, logos, presentations, code, translation, summaries and meeting notes, with free plans and pricing.')}
+  jsonLd={jsonLd} breadcrumbs={[{ name: 'Ana sayfa', path: '/' }, { name: T('Yapay zeka araçları', 'AI tools'), path: '/arac/' }, { name: T('En iyi uygulamalar', 'Best apps'), path: '/en-iyi-yapay-zeka-uygulamalari/' }]}>
   <section class="glossary" data-pagefind-body>
-    <span class="cat">En iyi uygulamalar</span>
-    <h1 class="page-h">En iyi yapay zeka uygulamaları</h1>
-    <p class="spot">Her iş için en yaygın kullanılan ve öne çıkan iki uygulama. Daha geniş liste için görev başlığına tıklayın. Puanlama yapmıyoruz; <a href={url('/arac/#yontem')}>seçim ölçütlerimizi</a> okuyabilirsiniz.</p>
-    <p class="models-checked">Son kontrol: {trDate(TOOLS_CHECKED)}</p>
+    <span class="cat">{T('En iyi uygulamalar', 'Best apps')}</span>
+    <h1 class="page-h">{T('En iyi yapay zeka uygulamaları', 'Best AI apps')}</h1>
+    <p class="spot">{lang === 'en' ? <>The two most widely used, standout apps for each task. Click a task for the longer list. We don’t score tools; read <a href={url('/arac/#yontem')}>how we pick</a>.</> : <>Her iş için en yaygın kullanılan ve öne çıkan iki uygulama. Daha geniş liste için görev başlığına tıklayın. Puanlama yapmıyoruz; <a href={url('/arac/#yontem')}>seçim ölçütlerimizi</a> okuyabilirsiniz.</>}</p>
+    <p class="models-checked">{T('Son kontrol', 'Last checked')}: {dateL(TOOLS_CHECKED, lang)}</p>
     {sections.map(({ k, picks }) => (
       <section aria-labelledby={`bs-${k.slug}`}>
         <h2 id={`bs-${k.slug}`} class="ev-h"><a href={url(`/en-iyi/${k.slug}/`)}>{k.short}</a></h2>

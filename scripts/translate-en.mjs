@@ -110,12 +110,12 @@ async function translateStrings() {
 
 // ------------------------------------------------------------ haberler
 const NEWS_SCHEMA = { type: 'object', additionalProperties: false,
-  required: ['title', 'spot', 'why_it_matters', 'turkey_angle', 'key_points', 'whats_next', 'by_numbers', 'new_tool_what', 'photo_alt', 'body_markdown'],
+  required: ['title', 'spot', 'why_it_matters', 'turkey_angle', 'key_points', 'whats_next', 'by_numbers', 'new_tool_what', 'photo_alt', 'deal_counterparty', 'deal_amount', 'body_markdown'],
   properties: {
     title: { type: 'string' }, spot: { type: 'string' }, why_it_matters: { type: 'string' }, turkey_angle: { type: 'string' },
     key_points: { type: 'array', items: { type: 'string' } }, whats_next: { type: 'string' },
     by_numbers: { type: 'array', items: { type: 'object', additionalProperties: false, required: ['value', 'label'], properties: { value: { type: 'string' }, label: { type: 'string' } } } },
-    new_tool_what: { type: 'string' }, photo_alt: { type: 'string' }, body_markdown: { type: 'string' } } };
+    new_tool_what: { type: 'string' }, photo_alt: { type: 'string' }, deal_counterparty: { type: 'string' }, deal_amount: { type: 'string' }, body_markdown: { type: 'string' } } };
 
 async function translateNews() {
   const srcDir = path.join(ROOT, 'src/content/haberler'), outDir = path.join(ROOT, 'src/content/haberler-en');
@@ -128,7 +128,8 @@ async function translateNews() {
     if (fmGet(fm, 'draft') === 'true') continue;
     const tr = { title: fmGet(fm, 'title'), spot: fmGet(fm, 'spot'), why_it_matters: fmGet(fm, 'whyItMatters'), turkey_angle: fmGet(fm, 'turkeyAngle'),
       key_points: fmList(fm, 'keyPoints'), whats_next: fmGet(fm, 'whatsNext'), by_numbers: fmObjList(fm, 'byNumbers', ['value', 'label']),
-      new_tool_what: (fm.match(/^newTool:\n(?:  .*\n)*?  what:\s*(.*)$/m) || [])[1]?.replace(/^"|"$/g, '') || '', photo_alt: (fm.match(/^  alt:\s*(.*)$/m) || [])[1]?.replace(/^"|"$/g, '') || '', body_markdown: body };
+      new_tool_what: (fm.match(/^newTool:\n(?:  .*\n)*?  what:\s*(.*)$/m) || [])[1]?.replace(/^"|"$/g, '') || '', photo_alt: (fm.match(/^  alt:\s*(.*)$/m) || [])[1]?.replace(/^"|"$/g, '') || '',
+      deal_counterparty: (fm.match(/^deal:\n(?:  .*\n)*?  counterparty:\s*(.*)$/m) || [])[1]?.replace(/^"|"$/g, '') || '', deal_amount: (fm.match(/^deal:\n(?:  .*\n)*?  amount:\s*(.*)$/m) || [])[1]?.replace(/^"|"$/g, '') || '', body_markdown: body };
     if (DRY) { log('(deneme)', f); continue; }
     try {
       const en = await ask(`Translate this Turkish news article (JSON fields) into English. Empty fields stay empty. Keep the headline under 110 characters. photo_alt is an English image description; if it is already English, keep it.\n\n${JSON.stringify(tr, null, 1)}`, NEWS_SCHEMA);
@@ -143,6 +144,8 @@ async function translateNews() {
       if (en.by_numbers?.length) lines.push('byNumbers:', ...en.by_numbers.flatMap((b) => [`  - value: ${yamlStr(b.value)}`, `    label: ${yamlStr(b.label)}`]));
       if (en.new_tool_what) lines.push(`newToolWhat: ${yamlStr(en.new_tool_what)}`);
       if (en.photo_alt) lines.push(`photoAlt: ${yamlStr(en.photo_alt)}`);
+      if (en.deal_counterparty) lines.push(`dealCounterparty: ${yamlStr(en.deal_counterparty)}`);
+      if (en.deal_amount) lines.push(`dealAmount: ${yamlStr(en.deal_amount)}`);
       lines.push('---', '', en.body_markdown.trim(), '');
       fs.writeFileSync(path.join(outDir, f), lines.join('\n'));
       log(`YAZILDI ${f} → ${slug}`);

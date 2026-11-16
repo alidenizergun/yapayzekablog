@@ -1,0 +1,13 @@
+---
+import Page from '../../konu/[slug].astro';
+import { getNews } from '../../../lib/news.js';
+import { entityIndex } from '../../../lib/entities.js';
+import { maps } from '../../../i18n/index.js';
+export async function getStaticPaths() {
+  const m = await maps();
+  return [...entityIndex(await getNews()).values()]
+    .filter(({ items }) => items.some((n) => m.newsByRef.has(n.id.replace(/\.md$/, ''))))
+    .map(({ entity, items }) => ({ params: { slug: entity.slug }, props: { entity, items } }));
+}
+---
+<Page {...Astro.props} />

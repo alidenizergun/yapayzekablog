@@ -1,18 +1,20 @@
 ---
 import Base from '../layouts/Base.astro';
 import { url } from '../lib/news.js';
+import { i18n } from '../i18n/index.js';
+const { T } = await i18n(Astro);
 ---
-<Base title="Haberlerde ara" description="YZ Gündemi'nde yayınlanan bütün yapay zeka haberlerinde arama yapın." noindex>
+<Base title={T('Haberlerde ara', 'Search')} description={T("YZ Gündemi'nde yayınlanan bütün yapay zeka haberlerinde arama yapın.", 'Search all AI news on YZ Gündemi.')} noindex>
   <section class="search-page">
-    <h1 class="page-h">Haberlerde ara</h1>
+    <h1 class="page-h">{T('Haberlerde ara', 'Search')}</h1>
     <form class="search-box" role="search" action={url('/ara/')} data-search-form>
-      <label for="q" class="sr-only">Aranacak kelime</label>
+      <label for="q" class="sr-only">{T('Aranacak kelime', 'Search term')}</label>
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
-      <input id="q" name="q" type="search" placeholder="Örn. OpenAI, halka arz, Nvidia çip" autocomplete="off" enterkeyhint="search" />
+      <input id="q" name="q" type="search" placeholder={T('Örn. OpenAI, halka arz, Nvidia çip', 'e.g. OpenAI, IPO, Nvidia chips')} autocomplete="off" enterkeyhint="search" />
     </form>
     <p class="search-status meta" role="status" aria-live="polite" data-search-status></p>
     <ol class="search-results" data-search-results></ol>
-    <p class="search-empty" data-search-empty hidden>Sonuç bulunamadı. Farklı bir kelimeyle deneyin ya da <a href={url('/')}>son haberlere</a> göz atın.</p>
+    <p class="search-empty" data-search-empty hidden>{T('Sonuç bulunamadı. Farklı bir kelimeyle deneyin ya da', 'No results. Try a different word or browse the')} <a href={url('/')}>{T('son haberlere', 'latest news')}</a>{T(' göz atın.', '.')}</p>
   </section>
 </Base>
 
@@ -24,6 +26,7 @@ import { url } from '../lib/news.js';
   const status = document.querySelector<HTMLElement>('[data-search-status]')!;
   const empty = document.querySelector<HTMLElement>('[data-search-empty]')!;
   const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+  const EN = document.documentElement.lang === 'en';
   let pf: any = null;
   const load = async () => {
     if (!pf) {
@@ -42,25 +45,25 @@ import { url } from '../lib/news.js';
     if (q) u.searchParams.set('q', q); else u.searchParams.delete('q');
     history.replaceState(null, '', u);
     if (q.length < 2) { list.innerHTML = ''; status.textContent = ''; empty.hidden = true; return; }
-    status.textContent = 'Aranıyor…';
+    status.textContent = EN ? 'Searching…' : 'Aranıyor…';
     const p = await load();
     const res = await p.debouncedSearch(q, {}, 200);
     if (res === null || my !== seq) return;
     const all = await Promise.all(res.results.slice(0, 40).map((r: any) => r.data()));
     if (my !== seq) return;
     // Yakın eşleşme süzgeci: yalnızca aranan kelimeyle en az 3 harf ortak başlangıcı olan vurgular sayılır
-    const norm = (t: string) => t.toLocaleLowerCase('tr').normalize('NFKD').replace(/[\u0300-\u036f]/g, '');
+    const norm = (t: string) => t.toLocaleLowerCase(EN ? 'en' : 'tr').normalize('NFKD').replace(/[\u0300-\u036f]/g, '');
     const words = norm(q).split(/[^\p{L}\p{N}]+/u).filter((x) => x.length >= 2);
     const relevant = (d: any) => [...String(d.excerpt + ' ' + (d.meta.title ?? '')).matchAll(/<mark>([^<]+)<\/mark>/g)].map((m) => norm(m[1]))
       .some((m) => words.some((w) => (m.length >= 3 || m === w) && (m.startsWith(w.slice(0, 3)) || w.startsWith(m.slice(0, 3)))))
       || words.some((w) => norm(d.meta.title ?? '').includes(w));
     const data = all.filter(relevant).slice(0, 20);
-    status.textContent = data.length ? `"${q}" için ${data.length} haber bulundu` : '';
+    status.textContent = data.length ? (EN ? `${data.length} results for "${q}"` : `"${q}" için ${data.length} haber bulundu`) : '';
     empty.hidden = data.length > 0;
     // Özet metni Pagefind'in kendi ürettiği <mark> etiketleri dışında kaçırılır
     list.innerHTML = data.map((d: any) => {
       const excerpt = esc(d.excerpt.replace(/<\/?mark>/g, '\u0001')).replace(/\u0001([^\u0001]*)\u0001/g, '<mark>$1</mark>');
-      return `<li><a href="${esc(d.url)}"><span class="cat">${esc(d.filters?.Kategori?.[0] ?? '')}</span><h2>${esc(d.meta.title ?? '')}</h2><p>${excerpt}</p><span class="meta">${esc(d.meta.date ?? '')}</span></a></li>`;
+      return `<li><a href="${esc(d.url)}"><span class="cat">${esc((d.filters?.Kategori ?? d.filters?.Section)?.[0] ?? '')}</span><h2>${esc(d.meta.title ?? '')}</h2><p>${excerpt}</p><span class="meta">${esc(d.meta.date ?? '')}</span></a></li>`;
     }).join('');
   };
   form.addEventListener('submit', (e) => { e.preventDefault(); run(input.value); });

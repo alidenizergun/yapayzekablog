@@ -4,37 +4,41 @@ import Sidebar from '../../components/Sidebar.astro';
 import Time from '../../components/Time.astro';
 import { getNews, newsUrl, catName, formatDate, url } from '../../lib/news.js';
 import { storyIndex } from '../../lib/stories.js';
+import { i18n, locNews } from '../../i18n/index.js';
 
 export async function getStaticPaths() {
   const idx = storyIndex(await getNews());
   return [...idx.values()].map(({ story, items }) => ({ params: { slug: story.slug }, props: { story, items } }));
 }
-const { story: s, items } = Astro.props;
+const L = await i18n(Astro);
+const { lang, T, S } = L;
+const s = { ...Astro.props.story, title: S(`story.${Astro.props.story.slug}.title`, Astro.props.story.title), intro: S(`story.${Astro.props.story.slug}.intro`, Astro.props.story.intro) };
+const items = Astro.props.items.map((n) => locNews(n, lang, L.m)).filter(Boolean);
 // Tarihe göre grupla (eskiden yeniye)
 const days = [];
 for (const n of items) {
-  const day = formatDate(n.data.date, false);
+  const day = formatDate(n.data.date, false, L.locale);
   if (!days.length || days.at(-1).day !== day) days.push({ day, list: [] });
   days.at(-1).list.push(n);
 }
 const first = items[0].data.date, last = items.at(-1).data.date;
 const pageUrl = new URL(url(`/gelisme/${s.slug}/`), Astro.site).href;
 const jsonLd = {
-  '@type': 'CollectionPage', name: `${s.title}: olayların gelişimi`, description: s.intro, inLanguage: 'tr-TR', url: pageUrl,
+  '@type': 'CollectionPage', name: T(`${s.title}: olayların gelişimi`, `${s.title}: timeline`), description: s.intro, inLanguage: L.locale, url: pageUrl,
   dateModified: last.toISOString(),
   mainEntity: { '@type': 'ItemList', itemListOrder: 'https://schema.org/ItemListOrderAscending',
     itemListElement: items.map((n, i) => ({ '@type': 'ListItem', position: i + 1, url: new URL(newsUrl(n), Astro.site).href, name: n.data.title })) },
 };
 ---
-<Base title={`${s.title}: olayların gelişimi`} description={s.intro} jsonLd={jsonLd}
-  breadcrumbs={[{ name: 'Ana sayfa', path: '/' }, { name: 'Gelişen hikâyeler', path: '/gelisme/' }, { name: s.title, path: `/gelisme/${s.slug}/` }]}>
+<Base title={T(`${s.title}: olayların gelişimi`, `${s.title}: timeline`)} description={s.intro} jsonLd={jsonLd}
+  breadcrumbs={[{ name: 'Ana sayfa', path: '/' }, { name: T('Gelişen hikâyeler', 'Developing stories'), path: '/gelisme/' }, { name: s.title, path: `/gelisme/${s.slug}/` }]}>
   <div class="cols" style="margin-top:0">
-    <article class="article story" data-pagefind-body data-pagefind-meta={`date:${formatDate(last, false)}`}>
-      <nav class="crumb" aria-label="Konum" data-pagefind-ignore><a href={url('/')}>Ana sayfa</a><span aria-hidden="true">/</span><a href={url('/gelisme/')}>Gelişen hikâyeler</a></nav>
-      <span class="badge" data-pagefind-ignore>Gelişen hikâye</span>
-      <h1 data-pagefind-meta="title">{s.title}: olayların gelişimi</h1>
+    <article class="article story" data-pagefind-body data-pagefind-meta={`date:${formatDate(last, false, L.locale)}`}>
+      <nav class="crumb" aria-label={T('Konum', 'Breadcrumb')} data-pagefind-ignore><a href={url('/')}>{T('Ana sayfa', 'Home')}</a><span aria-hidden="true">/</span><a href={url('/gelisme/')}>{T('Gelişen hikâyeler', 'Developing stories')}</a></nav>
+      <span class="badge" data-pagefind-ignore>{T('Gelişen hikâye', 'Developing story')}</span>
+      <h1 data-pagefind-meta="title">{T(`${s.title}: olayların gelişimi`, `${s.title}: timeline`)}</h1>
       <p class="spot">{s.intro}</p>
-      <p class="meta story-meta" data-pagefind-ignore>{items.length} haber · {formatDate(first, false)} - {formatDate(last, false)} · Son güncelleme: <Time date={last} /></p>
+      <p class="meta story-meta" data-pagefind-ignore>{items.length} {T('haber', 'stories')} · {formatDate(first, false, L.locale)} - {formatDate(last, false, L.locale)} · {T('Son güncelleme', 'Last updated')}: <Time date={last} /></p>
       <ol class="timeline">
         {days.map((g) => (
           <li class="tl-day">
@@ -43,7 +47,7 @@ const jsonLd = {
               {g.list.map((n) => (
                 <li class="tl-item">
                   <a href={newsUrl(n)}>
-                    <span class="cat">{catName(n.data.category)}</span>
+                    <span class="cat">{S(`cat.${n.data.category}.name`, catName(n.data.category))}</span>
                     <h3>{n.data.title}</h3>
                     <p>{n.data.spot}</p>
                   </a>

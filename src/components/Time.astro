@@ -1,6 +1,8 @@
 ---
 // Tarih her zaman "15 Kasım 2026" biçiminde gösterilir: saat ve "dün", "3 saat önce" gibi ifadeler yok.
 import { formatDate } from '../lib/news.js';
+import { langOf, LOCALE } from '../i18n/index.js';
 const { date } = Astro.props;
+const locale = LOCALE[langOf(Astro.url)];
 ---
-<time datetime={date.toISOString()}>{formatDate(date, false)}</time>
+<time datetime={date.toISOString()}>{formatDate(date, false, locale)}</time>

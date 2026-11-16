@@ -1,0 +1,40 @@
+---
+import Base from '../../../layouts/Base.astro';
+import { SITE } from '../../../lib/site.js';
+import { url } from '../../../lib/news.js';
+const ga = SITE.analytics?.ga4;
+---
+<Base title="Privacy and cookies" description="What data YZ Gündemi processes, how cookies are used and how to change your cookie choice.">
+  <article class="article legal">
+    <span class="badge">About</span>
+    <h1>Privacy and cookies</h1>
+    <p class="spot">You don’t need to sign up or share personal information to read YZ Gündemi. This page explains what data is processed and why.</p>
+    <div class="prose">
+      <h2>Visit statistics (Google Analytics)</h2>
+      {ga ? (
+        <>
+          <p>We use Google Analytics 4 with Google’s Consent Mode to understand which stories are read and how the site is used.</p>
+          <p><strong>If you don’t consent,</strong> no Google Analytics cookies are placed in your browser. Google receives only cookieless, non-identifying ping signals (for example, that a page was viewed), from which it produces aggregate statistics.</p>
+          <p><strong>If you consent,</strong> Google Analytics cookies (<code>_ga</code>, <code>_ga_*</code>) are placed in your browser and kept for up to 2 years. Information such as pages visited, device and browser type, approximate location (city or country level) and how you arrived at the site is collected. Google Analytics 4 does not store IP addresses. Advertising and personalization features are always off.</p>
+          <p>Data is processed on Google’s servers outside Turkey. See the <a href="https://policies.google.com/privacy?hl=en">Google Privacy Policy</a> for details.</p>
+          <p><button type="button" class="btn" data-consent-open>Change my cookie choice</button></p>
+        </>
+      ) : (
+        <p>The site doesn’t currently use a visit-statistics tool.</p>
+      )}
+
+      <h2>Essential browser storage</h2>
+      <p>Your dark/light theme choice and cookie choice are stored only in your own browser (localStorage) and are not sent to us.</p>
+
+      <h2>Error reports</h2>
+      <p>When you use the “Report an error” form, your report is opened as a public issue on GitHub, so don’t include personal information. If the form is connected to an email service, your email address is used only to reply to you.</p>
+
+      <h2>Hosting</h2>
+      <p>The site is hosted on GitHub Pages. GitHub may keep visitors’ IP addresses in its logs for security and to operate the service. Fonts and page files are served from our own domain; story photos load from Unsplash.</p>
+
+      <h2>Your rights</h2>
+      <p>Under Turkey’s Personal Data Protection Law (KVKK, Law No. 6698), you can request information about, correction of or deletion of your data by <a href={url('/hata-bildir/')}>contacting us</a>. You can withdraw cookie consent at any time on this page or via the “Cookie settings” link in the site footer.</p>
+      <p class="meta">Last updated: November 16, 2026</p>
+    </div>
+  </article>
+</Base>

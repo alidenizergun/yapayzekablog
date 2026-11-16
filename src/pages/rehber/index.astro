@@ -2,32 +2,36 @@
 import Base from '../../layouts/Base.astro';
 import { getCollection } from 'astro:content';
 import { url } from '../../lib/news.js';
+import { i18n, locGuide, TOPIC_EN, LEVEL_EN } from '../../i18n/index.js';
+const L = await i18n(Astro);
+const { lang, T } = L;
+const tp = (t) => (lang === 'en' ? TOPIC_EN[t] ?? t : t);
 
 const TOPICS = ['Temel kullanım', 'Yazı ve içerik', 'İş ve kariyer', 'Eğitim ve öğrenme', 'Güvenlik ve gizlilik', 'Teknik'];
-const guides = (await getCollection('rehberler', (g) => !g.data.draft)).sort((a, b) => a.data.title.localeCompare(b.data.title, 'tr'));
+const guides = (await getCollection('rehberler', (g) => !g.data.draft)).map((g) => locGuide(g, lang, L.m)).filter(Boolean).sort((a, b) => a.data.title.localeCompare(b.data.title, lang));
 const groups = TOPICS.map((t, i) => ({ t, id: `konu-${i + 1}`, items: guides.filter((g) => g.data.topic === t) })).filter((x) => x.items.length);
 const pageUrl = new URL(url('/rehber/'), Astro.site).href;
 const jsonLd = {
-  '@type': 'CollectionPage', name: 'Yapay zeka rehberleri', url: pageUrl, inLanguage: 'tr-TR',
+  '@type': 'CollectionPage', name: T('Yapay zeka rehberleri', 'AI guides'), url: pageUrl, inLanguage: L.locale,
   mainEntity: { '@type': 'ItemList', itemListElement: guides.map((g, i) => ({ '@type': 'ListItem', position: i + 1, url: new URL(url(`/rehber/${g.id}/`), Astro.site).href, name: g.data.title })) },
 };
 ---
-<Base title="Yapay zeka rehberleri: adım adım Türkçe kullanım kılavuzları" description="ChatGPT, Claude ve Gemini gibi yapay zeka araçlarını işte, okulda ve günlük hayatta doğru kullanmak için adım adım Türkçe rehberler: istem yazma, CV, sunum, görsel üretme, güvenlik ve daha fazlası."
-  jsonLd={jsonLd} breadcrumbs={[{ name: 'Ana sayfa', path: '/' }, { name: 'Rehberler', path: '/rehber/' }]}>
+<Base title={T('Yapay zeka rehberleri: adım adım Türkçe kullanım kılavuzları', 'AI guides: step-by-step how-tos for ChatGPT, Claude and Gemini')} description={T('ChatGPT, Claude ve Gemini gibi yapay zeka araçlarını işte, okulda ve günlük hayatta doğru kullanmak için adım adım Türkçe rehberler: istem yazma, CV, sunum, görsel üretme, güvenlik ve daha fazlası.', 'Step-by-step guides to using AI tools like ChatGPT, Claude and Gemini at work, at school and in daily life: prompting, resumes, presentations, image generation, safety and more.')}
+  jsonLd={jsonLd} breadcrumbs={[{ name: 'Ana sayfa', path: '/' }, { name: T('Rehberler', 'Guides'), path: '/rehber/' }]}>
   <section class="glossary guides">
-    <span class="cat">Rehberler</span>
-    <h1 class="page-h">Yapay zeka rehberleri</h1>
-    <p class="spot">Yapay zeka araçlarını doğru, verimli ve güvenli kullanmak için adım adım Türkçe kılavuzlar. Rehberler, belirli bir uygulamanın menülerine değil her araçta geçerli yöntemlere odaklanır. Terimlerin anlamı için <a href={url('/sozluk/')}>yapay zeka sözlüğüne</a> bakabilirsiniz.</p>
-    <nav class="glossary-az guide-topics" aria-label="Konular">
-      {groups.map((g) => <a href={`#${g.id}`}>{g.t} <span class="meta">{g.items.length}</span></a>)}
+    <span class="cat">{T('Rehberler', 'Guides')}</span>
+    <h1 class="page-h">{T('Yapay zeka rehberleri', 'AI guides')}</h1>
+    <p class="spot">{lang === 'en' ? <>Step-by-step guides to using AI tools well, efficiently and safely. They focus on methods that work in any tool rather than one app's menus. For definitions, see our <a href={url('/sozluk/')}>AI glossary</a>.</> : <>Yapay zeka araçlarını doğru, verimli ve güvenli kullanmak için adım adım Türkçe kılavuzlar. Rehberler, belirli bir uygulamanın menülerine değil her araçta geçerli yöntemlere odaklanır. Terimlerin anlamı için <a href={url('/sozluk/')}>yapay zeka sözlüğüne</a> bakabilirsiniz.</>}</p>
+    <nav class="glossary-az guide-topics" aria-label={T('Konular', 'Topics')}>
+      {groups.map((g) => <a href={`#${g.id}`}>{tp(g.t)} <span class="meta">{g.items.length}</span></a>)}
     </nav>
     {groups.map((grp) => (
       <section class="guide-group" id={grp.id} aria-labelledby={`${grp.id}-h`}>
-        <h2 id={`${grp.id}-h`} class="ev-h">{grp.t}</h2>
+        <h2 id={`${grp.id}-h`} class="ev-h">{tp(grp.t)}</h2>
         <ul class="guide-list">
           {grp.items.map((g) => (
             <li class="guide-item">
-              <span class="guide-level">{g.data.level}</span>
+              <span class="guide-level">{lang === 'en' ? LEVEL_EN[g.data.level] ?? g.data.level : g.data.level}</span>
               <h3><a href={url(`/rehber/${g.id}/`)}>{g.data.title}</a></h3>
               <p>{g.data.description}</p>
             </li>

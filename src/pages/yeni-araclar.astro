@@ -4,45 +4,47 @@ import ToolCard from '../components/ToolCard.astro';
 import NewsRow from '../components/NewsRow.astro';
 import { TOOLS, trDate } from '../lib/tools.js';
 import { getNews, newsUrl, spreadVisuals, formatDate, url } from '../lib/news.js';
-
-const news = await getNews();
+import { i18n, locNewsList } from '../i18n/index.js';
+const L = await i18n(Astro);
+const { lang, T } = L;
+const news = locNewsList(await getNews(), lang, L.m);
 const launches = news.filter((n) => n.data.newTool);
 const toolNews = news.filter((n) => !n.data.newTool && ['araclar', 'ajanlar'].includes(n.data.category)).slice(0, 8);
 const rowV = spreadVisuals(toolNews);
 const recent = [...TOOLS].sort((a, b) => b.added.localeCompare(a.added)).slice(0, 6);
 ---
-<Base title="Yeni yapay zeka araçları: bu hafta çıkan uygulamalar ve özellikler" description="Yeni çıkan yapay zeka araçları ve uygulamaları, büyük asistanlara gelen yeni özellikler ve araç rehberimize son eklenenler; her gün güncellenir."
-  breadcrumbs={[{ name: 'Ana sayfa', path: '/' }, { name: 'Yapay zeka araçları', path: '/arac/' }, { name: 'Yeni araçlar', path: '/yeni-araclar/' }]}>
+<Base title={T('Yeni yapay zeka araçları: bu hafta çıkan uygulamalar ve özellikler', 'New AI tools: the latest apps and features')} description={T('Yeni çıkan yapay zeka araçları ve uygulamaları, büyük asistanlara gelen yeni özellikler ve araç rehberimize son eklenenler; her gün güncellenir.', 'Newly launched AI tools and apps, new features in the big assistants and the latest additions to our tools directory.')}
+  breadcrumbs={[{ name: 'Ana sayfa', path: '/' }, { name: T('Yapay zeka araçları', 'AI tools'), path: '/arac/' }, { name: T('Yeni araçlar', 'New tools'), path: '/yeni-araclar/' }]}>
   <section class="glossary">
     <span class="cat">Radar</span>
-    <h1 class="page-h">Yeni yapay zeka araçları</h1>
-    <p class="spot">Haberlerimizde duyurusu yapılan yeni yapay zeka araçları, mevcut asistanlara gelen yeni özellikler ve araç rehberimize son eklenenler. Liste haber motorumuzla her gün güncellenir.</p>
+    <h1 class="page-h">{T('Yeni yapay zeka araçları', 'New AI tools')}</h1>
+    <p class="spot">{T('Haberlerimizde duyurusu yapılan yeni yapay zeka araçları, mevcut asistanlara gelen yeni özellikler ve araç rehberimize son eklenenler. Liste haber motorumuzla her gün güncellenir.', 'New AI tools announced in our news coverage, new features in existing assistants and the latest additions to our tools directory.')}</p>
 
-    <h2 class="ev-h">Yeni çıkan araçlar</h2>
+    <h2 class="ev-h">{T('Yeni çıkan araçlar', 'Just launched')}</h2>
     {launches.length ? (
       <ol class="ev-list">
         {launches.map((n) => (
           <li class="ev">
-            <div class="ev-date"><time datetime={n.data.date.toISOString()}>{formatDate(n.data.date, false)}</time></div>
+            <div class="ev-date"><time datetime={n.data.date.toISOString()}>{formatDate(n.data.date, false, L.locale)}</time></div>
             <div class="ev-body">
               <h3><a href={n.data.newTool.url} rel="noopener">{n.data.newTool.name} ↗</a></h3>
               {n.data.newTool.what && <p>{n.data.newTool.what}</p>}
-              <p class="meta">Haber: <a href={newsUrl(n)}>{n.data.title}</a></p>
+              <p class="meta">{T('Haber', 'Story')}: <a href={newsUrl(n)}>{n.data.title}</a></p>
             </div>
           </li>
         ))}
       </ol>
-    ) : <p class="empty">Haber motorumuz yeni çıkan araçları burada listeleyecek. Şimdilik yeni özellik haberlerine ve rehbere son eklenen araçlara göz atın.</p>}
+    ) : <p class="empty">{T('Haber motorumuz yeni çıkan araçları burada listeleyecek. Şimdilik yeni özellik haberlerine ve rehbere son eklenen araçlara göz atın.', 'New launches will be listed here. Meanwhile, see the feature news and recent additions below.')}</p>}
 
     {toolNews.length > 0 && (
       <section class="term-news" aria-labelledby="yn-h">
-        <div class="sechead"><h2 id="yn-h">Araç ve özellik haberleri</h2></div>
+        <div class="sechead"><h2 id="yn-h">{T('Araç ve özellik haberleri', 'Tool and feature news')}</h2></div>
         {toolNews.map((n) => <NewsRow item={n} choice={rowV.get(n.id)} />)}
       </section>
     )}
 
-    <h2 class="ev-h">Araç rehberine son eklenenler</h2>
+    <h2 class="ev-h">{T('Araç rehberine son eklenenler', 'Recently added to our directory')}</h2>
     <div class="tool-grid">{recent.map((t) => <ToolCard tool={t} />)}</div>
-    <p class="ai-note">Rehberde görmek istediğiniz bir araç mı var? <a href={url('/hata-bildir/')}>Bize yazın</a>.</p>
+    <p class="ai-note">{T('Rehberde görmek istediğiniz bir araç mı var?', 'Want to see a tool in our directory?')} <a href={url('/hata-bildir/')}>{T('Bize yazın', 'Tell us')}</a>.</p>
   </section>
 </Base>

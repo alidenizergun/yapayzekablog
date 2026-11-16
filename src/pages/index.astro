@@ -5,12 +5,16 @@ import Sidebar from '../components/Sidebar.astro';
 import Time from '../components/Time.astro';
 import Visual from '../components/Visual.astro';
 import { CATEGORIES } from '../lib/site.js';
+import { i18n, locNewsList } from '../i18n/index.js';
 import { getNews, pickLead, getTags, tagSlug, newsUrl, spreadVisuals, catName, catUrl, tagUrl, url, HOME_MAIN } from '../lib/news.js';
 
 // Ana sayfa önem sırası:
 // 1. Manşet + 3 yan haber   2. Öne çıkanlar (3 kart)   3. Son haberler listesi + kenar çubuğu
 // 4. Kategori blokları (1 büyük + 3 küçük)
-const news = await getNews();
+const L = await i18n(Astro);
+const { lang, T, S } = L;
+const news = locNewsList(await getNews(), lang, L.m);
+const cn = (slug) => S(`cat.${slug}.name`, catName(slug));
 
 // Manşet: son 36 saatin en çok okunma potansiyeli olan haberi (src/lib/news.js › pickLead)
 const lead = pickLead(news);
@@ -26,7 +30,7 @@ const tags = await getTags();
 const recent = news.filter((n) => n.data.date.valueOf() > Date.now() - 3 * 86400e3);
 const tagCount = new Map();
 for (const n of recent) for (const s of new Set(n.data.tags.map(tagSlug))) if (s) tagCount.set(s, (tagCount.get(s) ?? 0) + 1);
-const trending = [...tagCount.entries()].filter(([, c]) => c > 1).sort((a, b) => b[1] - a[1]).slice(0, 8).map(([s]) => tags.get(s)).filter(Boolean);
+const trending = lang === 'en' ? [] : [...tagCount.entries()].filter(([, c]) => c > 1).sort((a, b) => b[1] - a[1]).slice(0, 8).map(([s]) => tags.get(s)).filter(Boolean);
 
 // Kategori blokları: son 30 günde en az 3 gösterilmemiş haberi olan kategoriler (1 büyük + 2-3 küçük), en yeni haberine göre
 const monthAgo = Date.now() - 30 * 86400e3;
@@ -42,11 +46,11 @@ const listV = spreadVisuals(latest);
 <Base>
   {lead ? (
     <div class="home">
-      <section class="hero" aria-label="Manşet">
+      <section class="hero" aria-label={T('Manşet', 'Top story')}>
         <a class="lead" href={newsUrl(lead)}>
           <div class="imgbox">
             <Visual entry={lead} choice={heroV.get(lead.id)} w={820} h={420} eager />
-            <span class="badge">{catName(lead.data.category)}</span>
+            <span class="badge">{cn(lead.data.category)}</span>
           </div>
           <h1>{lead.data.title}</h1>
           <p>{lead.data.spot}</p>
@@ -58,7 +62,7 @@ const listV = spreadVisuals(latest);
               <a href={newsUrl(n)}>
                 {i === 0 && <Visual entry={n} choice={heroV.get(n.id)} w={420} h={170} />}
                 <div>
-                  <span class="cat">{catName(n.data.category)}</span>
+                  <span class="cat">{cn(n.data.category)}</span>
                   <h2>{n.data.title}</h2>
                   <span class="meta"><Time date={n.data.date} /></span>
                 </div>
@@ -78,11 +82,11 @@ const listV = spreadVisuals(latest);
 
       {second.length > 0 && (
         <section class="second" aria-labelledby="second-h">
-          <h2 id="second-h" class="sr-only">Öne çıkanlar</h2>
+          <h2 id="second-h" class="sr-only">{T('Öne çıkanlar', 'Featured')}</h2>
           {second.map((n) => (
             <a class="card" href={newsUrl(n)}>
               <Visual entry={n} choice={secondV.get(n.id)} w={440} h={240} />
-              <span class="cat">{catName(n.data.category)}</span>
+              <span class="cat">{cn(n.data.category)}</span>
               <h3>{n.data.title}</h3>
               <p>{n.data.spot}</p>
               <span class="meta"><Time date={n.data.date} /></span>
@@ -93,9 +97,9 @@ const listV = spreadVisuals(latest);
 
       <div class="cols">
         <section class="main" aria-labelledby="latest-h">
-          <div class="sechead"><h2 id="latest-h">Son Haberler</h2></div>
-          {latest.length ? latest.map((n) => <NewsRow item={n} choice={listV.get(n.id)} />) : <p class="empty">Yeni haberler bir sonraki güncellemede burada olacak.</p>}
-          {hasMore && <div class="pager"><span></span><a href={url('/sayfa/2/')}>Daha eski haberler →</a></div>}
+          <div class="sechead"><h2 id="latest-h">{T('Son Haberler', 'Latest News')}</h2></div>
+          {latest.length ? latest.map((n) => <NewsRow item={n} choice={listV.get(n.id)} />) : <p class="empty">{T('Yeni haberler bir sonraki güncellemede burada olacak.', 'New stories will appear here after the next update.')}</p>}
+          {hasMore && <div class="pager"><span></span><a href={url('/sayfa/2/')}>{T('Daha eski haberler →', 'Older news →')}</a></div>}
         </section>
         <Sidebar exclude={[...shown]} />
       </div>
@@ -105,7 +109,7 @@ const listV = spreadVisuals(latest);
         const [big, ...small] = b.items;
         return (
           <section class="catblock" aria-labelledby={`cb-${b.cat.slug}`}>
-            <div class="sechead"><h2 id={`cb-${b.cat.slug}`}>{b.cat.name}</h2><a class="meta more-link" href={catUrl(b.cat.slug)}>Tüm {b.cat.name} haberleri →</a></div>
+            <div class="sechead"><h2 id={`cb-${b.cat.slug}`}>{cn(b.cat.slug)}</h2><a class="meta more-link" href={catUrl(b.cat.slug)}>{T(`Tüm ${b.cat.name} haberleri →`, `All ${cn(b.cat.slug)} news →`)}</a></div>
             <div class="catblock-grid">
               <a class="card big" href={newsUrl(big)}>
                 <Visual entry={big} choice={v.get(big.id)} w={640} h={340} />
@@ -127,6 +131,6 @@ const listV = spreadVisuals(latest);
       })}
     </div>
   ) : (
-    <p class="empty">Henüz haber yok. İlk otomatik güncellemeden sonra haberler burada görünecek.</p>
+    <p class="empty">{T('Henüz haber yok. İlk otomatik güncellemeden sonra haberler burada görünecek.', 'No stories yet.')}</p>
   )}
 </Base>

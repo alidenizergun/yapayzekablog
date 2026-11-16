@@ -17,6 +17,8 @@ byNumbers:
   - value: "$12.9 billion"
     label: "Pending Hugging Face acquisition"
 photoAlt: "selective focus photography of GEFORCE RTX graphics card"
+dealCounterparty: "Hugging Face"
+dealAmount: "$12.9 billion"
 ---
 
 Nvidia announced on Thursday that Jensen Huang has resigned as president and CEO. According to a filing the company made with regulators, the board accepted the resignation on Wednesday. Huang thus ends his 33-year tenure as CEO.

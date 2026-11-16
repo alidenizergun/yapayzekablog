@@ -4,23 +4,28 @@ import Base from '../../layouts/Base.astro';
 import Visual from '../../components/Visual.astro';
 import Time from '../../components/Time.astro';
 import { getNews, getDigests, digestUrl, weekRange, slugOf, newsUrl, catName, spreadVisuals, url } from '../../lib/news.js';
+import { i18n, locDigest, locNews } from '../../i18n/index.js';
 
 export async function getStaticPaths() {
   const digests = await getDigests();
   return digests.map((entry, i) => ({ params: { slug: entry.id.replace(/\.md$/, '') }, props: { entry, prev: digests[i + 1], next: digests[i - 1] } }));
 }
-const { entry, prev, next } = Astro.props;
+const L = await i18n(Astro);
+const { lang, T, S } = L;
+const entry = locDigest(Astro.props.entry, lang, L.m);
+const prev = Astro.props.prev && locDigest(Astro.props.prev, lang, L.m);
+const next = Astro.props.next && locDigest(Astro.props.next, lang, L.m);
 const d = entry.data;
-const { Content } = await render(entry);
-const news = await getNews();
+const { Content } = await render(entry.en ?? entry);
+const news = (await getNews()).map((n) => locNews(n, lang, L.m)).filter(Boolean);
 const bySlug = new Map(news.map((n) => [slugOf(n), n]));
 const items = d.items.map((it) => ({ ...it, news: bySlug.get(it.slug) })).filter((it) => it.news);
 const vis = spreadVisuals(items.map((it) => it.news));
-const range = weekRange(d.weekStart, d.weekEnd);
+const range = weekRange(d.weekStart, d.weekEnd, lang);
 const pageUrl = new URL(digestUrl(entry), Astro.site).href;
 const jsonLd = {
   '@type': 'NewsArticle', headline: d.title, description: d.spot, datePublished: d.date.toISOString(), dateModified: d.date.toISOString(),
-  inLanguage: 'tr-TR', url: pageUrl, mainEntityOfPage: pageUrl, articleSection: 'Haftalık özet',
+  inLanguage: L.locale, url: pageUrl, mainEntityOfPage: pageUrl, articleSection: T('Haftalık özet', 'Weekly roundup'),
   author: { '@type': 'Organization', name: 'YZ Gündemi', url: new URL(url('/hakkimizda/'), Astro.site).href },
   publisher: { '@id': new URL(url('/#organization'), Astro.site).href },
   image: [new URL(url('/og/site.png'), Astro.site).href],
@@ -28,11 +33,11 @@ const jsonLd = {
 };
 ---
 <Base title={d.title} description={d.spot} ogType="article" jsonLd={jsonLd}
-  article={{ published: d.date, section: 'Haftalık özet' }}
-  breadcrumbs={[{ name: 'Ana sayfa', path: '/' }, { name: 'Haftalık özet', path: '/haftalik/' }, { name: range, path: `/haftalik/${entry.id.replace(/\.md$/, '')}/` }]}>
+  article={{ published: d.date, section: T('Haftalık özet', 'Weekly roundup') }}
+  breadcrumbs={[{ name: 'Ana sayfa', path: '/' }, { name: T('Haftalık özet', 'Weekly roundup'), path: '/haftalik/' }, { name: range, path: `/haftalik/${entry.id.replace(/\.md$/, '')}/` }]}>
   <article class="digest" data-pagefind-body data-pagefind-meta={`date:${range}`}>
-    <nav class="crumb" aria-label="Konum" data-pagefind-ignore><a href={url('/')}>Ana sayfa</a><span aria-hidden="true">/</span><a href={url('/haftalik/')}>Haftalık özet</a></nav>
-    <span class="badge" data-pagefind-ignore>Haftalık özet · {range}</span>
+    <nav class="crumb" aria-label={T('Konum', 'Breadcrumb')} data-pagefind-ignore><a href={url('/')}>{T('Ana sayfa', 'Home')}</a><span aria-hidden="true">/</span><a href={url('/haftalik/')}>{T('Haftalık özet', 'Weekly roundup')}</a></nav>
+    <span class="badge" data-pagefind-ignore>{T('Haftalık özet', 'Weekly roundup')} · {range}</span>
     <h1 data-pagefind-meta="title">{d.title}</h1>
     <p class="spot">{d.spot}</p>
     <div class="prose digest-intro"><Content /></div>
@@ -44,21 +49,21 @@ const jsonLd = {
           <a class="digest-item" href={newsUrl(it.news)}>
             <Visual entry={it.news} choice={vis.get(it.news.id)} w={240} h={150} credit={false} />
             <div>
-              <span class="cat">{catName(it.news.data.category)}</span>
+              <span class="cat">{S(`cat.${it.news.data.category}.name`, catName(it.news.data.category))}</span>
               <h2>{it.news.data.title}</h2>
               <p>{it.summary}</p>
-              <span class="meta"><Time date={it.news.data.date} /> · Haberi oku →</span>
+              <span class="meta"><Time date={it.news.data.date} /> · {T('Haberi oku →', 'Read the story →')}</span>
             </div>
           </a>
         </li>
       ))}
     </ol>
 
-    <p class="ai-note" data-pagefind-ignore>Bu özet, YZ Gündemi'nde o hafta yayınlanan haberlerden yapay zeka desteğiyle derlenmiştir. Her maddenin kaynakları ilgili haber sayfasındadır.</p>
+    <p class="ai-note" data-pagefind-ignore>{T("Bu özet, YZ Gündemi'nde o hafta yayınlanan haberlerden yapay zeka desteğiyle derlenmiştir. Her maddenin kaynakları ilgili haber sayfasındadır.", 'This roundup was compiled with AI assistance from the stories YZ Gündemi published that week. Sources for each item are on the story page.')}</p>
     {(prev || next) && (
-      <nav class="digest-nav" aria-label="Diğer haftalar" data-pagefind-ignore>
-        {prev ? <a href={digestUrl(prev)}>← {weekRange(prev.data.weekStart, prev.data.weekEnd)}</a> : <span></span>}
-        {next ? <a href={digestUrl(next)}>{weekRange(next.data.weekStart, next.data.weekEnd)} →</a> : <span></span>}
+      <nav class="digest-nav" aria-label={T('Diğer haftalar', 'Other weeks')} data-pagefind-ignore>
+        {prev ? <a href={digestUrl(prev)}>← {weekRange(prev.data.weekStart, prev.data.weekEnd, lang)}</a> : <span></span>}
+        {next ? <a href={digestUrl(next)}>{weekRange(next.data.weekStart, next.data.weekEnd, lang)} →</a> : <span></span>}
       </nav>
     )}
   </article>
