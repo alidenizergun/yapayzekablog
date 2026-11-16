@@ -182,6 +182,7 @@ function toMarkdown(a, dateIso) {
   if (a.story && STORIES.some((s) => s.slug === a.story)) lines.push(`story: ${a.story}`);
   if (a.turkey_angle && !/^(yok|-|—)\.?$/i.test(a.turkey_angle)) lines.push(`turkeyAngle: ${yamlStr(a.turkey_angle)}`);
   if (a.key_points?.length >= 2) lines.push('keyPoints:', ...a.key_points.map((k) => `  - ${yamlStr(k)}`));
+  if (a.new_tool) lines.push('newTool:', `  name: ${yamlStr(a.new_tool.name)}`, `  url: ${yamlStr(a.new_tool.url)}`, ...(a.new_tool.what ? [`  what: ${yamlStr(a.new_tool.what)}`] : []));
   lines.push('sources:');
   for (const s of a.sources) {
     lines.push(`  - title: ${yamlStr(s.title)}`, `    url: ${yamlStr(s.url)}`);
@@ -287,7 +288,7 @@ const ARTICLE_SCHEMA = {
       items: {
         type: 'object',
         additionalProperties: false,
-        required: ['title', 'spot', 'category', 'tags', 'image', 'brand', 'image_query', 'body_markdown', 'why_it_matters', 'key_points', 'turkey_angle', 'story', 'deal', 'featured', 'popularity', 'tweet', 'sources'],
+        required: ['title', 'spot', 'category', 'tags', 'image', 'brand', 'image_query', 'body_markdown', 'why_it_matters', 'key_points', 'turkey_angle', 'story', 'deal', 'new_tool', 'featured', 'popularity', 'tweet', 'sources'],
         properties: {
           title: { type: 'string', description: 'Haber başlığı, 60-100 karakter' },
           spot: { type: 'string', description: 'Spot metni, 1-2 cümle, 140-280 karakter' },
@@ -308,6 +309,11 @@ const ARTICLE_SCHEMA = {
               amount_usd_millions: { type: 'number', description: 'Tutarın milyon dolar karşılığı (kaynakta dolar karşılığı yoksa 0)' },
               round: { type: 'string' }, investors: { type: 'array', items: { type: 'string' } }, country: { type: 'string' },
             },
+          },
+          new_tool: {
+            type: 'object', additionalProperties: false, required: ['name', 'url', 'what'],
+            description: 'Haber herkesin kullanabileceği YENİ bir yapay zeka aracının/uygulamasının çıkışını duyuruyorsa doldur (yeni model sürümleri ve iç araştırmalar hariç); değilse alanları boş bırak. url aracın resmi adresi olmalı ve kaynaklarda geçmeli.',
+            properties: { name: { type: 'string' }, url: { type: 'string' }, what: { type: 'string', description: 'Ne işe yaradığı, tek kısa cümle' } },
           },
           story: { type: 'string', enum: ['', ...STORIES.map((s) => s.slug)], description: 'Haber aşağıdaki süren hikâyelerden birinin devamıysa onun slug\'ı; değilse boş' },
           key_points: { type: 'array', items: { type: 'string' }, description: '"Kısaca" kutusu: haberin en önemli 3 noktası, her biri tek kısa cümle (en fazla 140 karakter); yalnızca metinde yazan bilgiler' },
@@ -509,6 +515,16 @@ function validate(articles, seen, existing) {
         .map((k) => String(k).replace(/<[^>]*>/g, '').replace(/\s+/g, ' ').trim().slice(0, 180)).filter(Boolean)
         .filter((k) => (k.match(/\d+(?:[.,]\d+)*/g) || []).every((n) => `${a.title} ${a.spot} ${a.body_markdown}`.includes(n)))
         .slice(0, 3),
+      new_tool: (() => {
+        // Yeni araç: ad metinde geçmeli; adres http(s) olmalı ve alan adı kaynaklardan birinde ya da metinde geçmeli
+        const nt = a.new_tool || {};
+        const name = String(nt.name || '').replace(/<[^>]*>/g, '').trim().slice(0, 60);
+        let u; try { u = new URL(String(nt.url || '').trim()); } catch { return null; }
+        if (!name || !/^https?:$/.test(u.protocol) || !`${a.title} ${a.spot} ${a.body_markdown}`.includes(name)) return null;
+        const host = u.hostname.replace(/^www\./, '');
+        if (!sources.some((x) => x.url.includes(host)) && !String(a.body_markdown).includes(host)) return null;
+        return { name, url: u.href, what: String(nt.what || '').replace(/<[^>]*>/g, '').trim().slice(0, 160) };
+      })(),
       popularity: Math.min(100, Math.max(1, Math.round(Number(a.popularity) || 50))),
       tags: [...new Set((a.tags || []).map((t) => String(t).replace(/[#\s]+/g, '')).filter(Boolean))].slice(0, 6),
       sources,

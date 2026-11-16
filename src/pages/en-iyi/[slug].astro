@@ -1,0 +1,65 @@
+---
+import Base from '../../layouts/Base.astro';
+import ToolCard from '../../components/ToolCard.astro';
+import { TASKS, toolBySlug, freeLabel, trDate, TOOLS_CHECKED, toolUrl } from '../../lib/tools.js';
+import { usdTry, fmtUsd, fmtTry } from '../../lib/fx.js';
+import { url } from '../../lib/news.js';
+import { getCollection } from 'astro:content';
+
+export function getStaticPaths() {
+  return TASKS.map((k) => ({ params: { slug: k.slug }, props: { k } }));
+}
+const { k } = Astro.props;
+const fx = await usdTry();
+const picks = k.picks.map(([s, note]) => ({ t: toolBySlug(s), note }));
+const guide = k.guide ? (await getCollection('rehberler')).find((g) => g.id === k.guide) : null;
+const others = TASKS.filter((x) => x.slug !== k.slug);
+const freeOnes = picks.filter(({ t }) => t.free === 'var').map(({ t }) => t.name);
+const faq = [
+  [`Ücretsiz ${k.q} var mı?`, freeOnes.length ? `Bu listedeki araçlardan ${freeOnes.join(', ')} ücretsiz plan sunuyor. Ücretsiz planların kullanım sınırları ve ticari kullanım hakları ücretli planlardan farklı olabilir.` : 'Bu listedeki araçların kalıcı ücretsiz planı doğrulanmadı; deneme seçenekleri için araç sayfalarına bakın.'],
+  ['Bu listeyi nasıl hazırladınız?', 'Araçlara puan vermiyoruz. Seçimler; yaygınlık, bu işe uygunluk ve şirketlerin açıkladığı özelliklere dayanan editoryal seçimdir. Hiçbir araç listede yer almak için ödeme yapmaz.'],
+];
+const jsonLd = [
+  { '@type': 'ItemList', name: k.title, itemListElement: picks.map(({ t }, i) => ({ '@type': 'ListItem', position: i + 1, name: t.name, url: new URL(url(toolUrl(t.slug)), Astro.site).href })) },
+  { '@type': 'FAQPage', mainEntity: faq.map(([q, a]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a } })) },
+];
+---
+<Base title={k.title} description={`${k.intro.split('. ')[0]}. ${picks.map(({ t }) => t.name).join(', ')}: fiyatlar, ücretsiz planlar ve Türkçe desteği.`.slice(0, 300)}
+  jsonLd={jsonLd} breadcrumbs={[{ name: 'Ana sayfa', path: '/' }, { name: 'Yapay zeka araçları', path: '/arac/' }, { name: k.short, path: `/en-iyi/${k.slug}/` }]}>
+  <section class="deals best" data-pagefind-body>
+    <span class="cat">En iyi araçlar</span>
+    <h1 class="page-h">{k.title}</h1>
+    <p class="spot">{k.intro}</p>
+    <p class="models-checked">Son kontrol: {trDate(TOOLS_CHECKED)} · Puanlama yapmıyoruz; <a href={url('/arac/#yontem')}>seçim ölçütlerimiz</a></p>
+
+    <div class="deal-table-wrap">
+      <table class="deal-table">
+        <thead><tr><th scope="col">Araç</th><th scope="col">Ücretsiz kullanım</th><th scope="col">Ücretli başlangıç</th><th scope="col">Türkçe</th></tr></thead>
+        <tbody>{picks.map(({ t }) => (
+          <tr><td><a href={url(toolUrl(t.slug))}><strong>{t.name}</strong></a></td><td>{t.free ? freeLabel[t.free] : '—'}</td>
+            <td class="nowrap">{t.price?.from ? <>{fmtUsd(t.price.from)}/ay{fx && <span class="meta"> {fmtTry(t.price.from, fx)}</span>}</> : <a href={t.pricingUrl} rel="noopener">Resmi sayfada</a>}</td>
+            <td>{t.turkish ? 'Var' : '—'}</td></tr>
+        ))}</tbody>
+      </table>
+    </div>
+    <p class="price-src">Fiyatlar aylık ve ABD dolarıdır; kaynakları ve tarihleri her aracın sayfasında yer alır. {fx && `TL karşılıkları TCMB kuruyla (${fx.date}), vergiler hariç.`}</p>
+
+    <h2 class="ev-h">Öne çıkan araçlar</h2>
+    <div class="tool-grid tool-grid-1">{picks.map(({ t, note }, i) => <ToolCard tool={t} note={note} rank={i + 1} />)}</div>
+
+    {guide && (
+      <aside class="why" aria-label="Rehber">
+        <strong>Nasıl kullanılır?</strong>
+        <p>Araç seçmek işin yarısı. Adım adım yöntem ve hazır istem kalıpları için: <a href={url(`/rehber/${guide.id}/`)}>{guide.data.title}</a></p>
+      </aside>
+    )}
+
+    <section class="models-faq" aria-labelledby="bf-h">
+      <h2 id="bf-h">Sık sorulanlar</h2>
+      {faq.map(([q, a]) => <details><summary>{q}</summary><p>{a}</p></details>)}
+    </section>
+
+    <h2 class="ev-h">Diğer görevler</h2>
+    <ul class="task-chips">{others.map((x) => <li><a href={url(`/en-iyi/${x.slug}/`)}>{x.short}</a></li>)}</ul>
+  </section>
+</Base>

@@ -1,0 +1,18 @@
+---
+import Base from '../../layouts/Base.astro';
+import { COMPARISONS, toolBySlug, compareSlug } from '../../lib/tools.js';
+import { url } from '../../lib/news.js';
+---
+<Base title="Yapay zeka araçları karşılaştırmaları" description="ChatGPT, Claude, Gemini, DeepSeek, Perplexity, Copilot, Cursor ve diğer yapay zeka araçlarının fiyat, özellik ve kullanım karşılaştırmaları."
+  breadcrumbs={[{ name: 'Ana sayfa', path: '/' }, { name: 'Yapay zeka araçları', path: '/arac/' }, { name: 'Karşılaştırmalar', path: '/karsilastir/' }]}>
+  <section class="glossary">
+    <span class="cat">Karşılaştırma</span>
+    <h1 class="page-h">Yapay zeka araçları karşılaştırmaları</h1>
+    <p class="spot">En çok merak edilen yapay zeka araçlarını fiyat, ücretsiz kullanım, Türkçe desteği ve güçlü yanlarına göre yan yana inceliyoruz.</p>
+    <ul class="guide-list">
+      {COMPARISONS.map(([a, b, ans]) => (
+        <li class="guide-item"><h2><a href={url(`/karsilastir/${compareSlug(a, b)}/`)}>{toolBySlug(a).name} mi {toolBySlug(b).name} mi?</a></h2><p>{ans}</p></li>
+      ))}
+    </ul>
+  </section>
+</Base>

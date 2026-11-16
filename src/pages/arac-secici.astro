@@ -1,0 +1,82 @@
+---
+import Base from '../layouts/Base.astro';
+import { TOOLS, TASKS, freeLabel, toolUrl, catName } from '../lib/tools.js';
+import { url } from '../lib/news.js';
+
+// İstemciye yalnızca gereken alanlar (görev sırası = editoryal sıra)
+const data = {
+  tasks: TASKS.map((k) => ({ slug: k.slug, short: k.short, picks: k.picks })),
+  tools: Object.fromEntries(TOOLS.map((t) => [t.slug, { name: t.name, company: t.company, cats: t.cats.map(catName).join(', '), desc: t.desc,
+    free: t.free, freeText: t.free ? freeLabel[t.free] : '', from: t.price?.from ?? null, turkish: !!t.turkish, href: url(toolUrl(t.slug)) }])),
+};
+---
+<Base title="Yapay zeka araç seçici: size uygun aracı bulun" description="Ne yapmak istediğinizi, bütçenizi ve Türkçe ihtiyacınızı seçin; size uygun yapay zeka araçlarını fiyat ve ücretsiz plan bilgisiyle görün."
+  breadcrumbs={[{ name: 'Ana sayfa', path: '/' }, { name: 'Yapay zeka araçları', path: '/arac/' }, { name: 'Araç seçici', path: '/arac-secici/' }]}>
+  <section class="glossary picker">
+    <span class="cat">Araç seçici</span>
+    <h1 class="page-h">Size uygun yapay zeka aracını bulun</h1>
+    <p class="spot">Üç soruyu yanıtlayın; ihtiyacınıza uyan araçları gösterelim. Kayıt gerekmez, seçimleriniz hiçbir yere gönderilmez.</p>
+
+    <form class="pick-form" data-picker>
+      <fieldset>
+        <legend>1. Ne yapmak istiyorsunuz?</legend>
+        <div class="pick-opts">{TASKS.map((k, i) => <label><input type="radio" name="task" value={k.slug} checked={i === 0} /><span>{k.short}</span></label>)}</div>
+      </fieldset>
+      <fieldset>
+        <legend>2. Bütçeniz?</legend>
+        <div class="pick-opts">
+          <label><input type="radio" name="budget" value="free" /><span>Yalnızca ücretsiz</span></label>
+          <label><input type="radio" name="budget" value="20" /><span>Aylık 20 $'a kadar</span></label>
+          <label><input type="radio" name="budget" value="any" checked /><span>Fark etmez</span></label>
+        </div>
+      </fieldset>
+      <fieldset>
+        <legend>3. Türkçe kullanım şart mı?</legend>
+        <div class="pick-opts">
+          <label><input type="radio" name="tr" value="yes" /><span>Evet</span></label>
+          <label><input type="radio" name="tr" value="no" checked /><span>Önemli değil</span></label>
+        </div>
+      </fieldset>
+    </form>
+
+    <section aria-live="polite" aria-labelledby="pick-h">
+      <h2 id="pick-h" class="ev-h" data-pick-title>Önerilen araçlar</h2>
+      <div class="tool-grid tool-grid-1" data-pick-results></div>
+      <p class="empty" data-pick-empty hidden>Bu ölçütlere uyan araç bulamadık. Bütçe veya Türkçe koşulunu gevşetmeyi deneyin; ya da <a href={url('/arac/')}>tüm araçlara</a> göz atın.</p>
+      <p class="ai-note">Sıralama editoryal seçimimize göredir; ödeme karşılığı sıralama yapılmaz. Türkçe desteği yalnızca doğrulayabildiğimiz araçlarda işaretlidir, bu yüzden "Türkçe şart" seçimi bazı araçları eleyebilir. <a href={url('/arac/#yontem')}>Yöntemimiz</a></p>
+    </section>
+    <script type="application/json" id="pick-data" set:html={JSON.stringify(data).replace(/</g, '\\u003c')}></script>
+  </section>
+</Base>
+
+<script>
+  type T = { name: string; company: string; cats: string; desc: string; free: string | null; freeText: string; from: number | null; turkish: boolean; href: string };
+  const data = JSON.parse(document.getElementById('pick-data')!.textContent || '{}') as { tasks: { slug: string; short: string; picks: [string, string][] }[]; tools: Record<string, T> };
+  const form = document.querySelector<HTMLFormElement>('[data-picker]')!;
+  const out = document.querySelector<HTMLElement>('[data-pick-results]')!;
+  const empty = document.querySelector<HTMLElement>('[data-pick-empty]')!;
+  const title = document.querySelector<HTMLElement>('[data-pick-title]')!;
+  const esc = (s: string) => s.replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]!));
+  function render() {
+    const f = new FormData(form);
+    const task = data.tasks.find((k) => k.slug === f.get('task'))!;
+    const budget = String(f.get('budget')), tr = f.get('tr') === 'yes';
+    const list = task.picks.map(([s, note]) => ({ t: data.tools[s], note })).filter(({ t }) => {
+      if (!t) return false;
+      if (tr && !t.turkish) return false;
+      if (budget === 'free' && !(t.free === 'var' || t.free === 'deneme')) return false;
+      if (budget === '20' && !(t.free === 'var' || (t.from != null && t.from <= 20))) return false;
+      return true;
+    });
+    title.textContent = `${task.short}: önerilen araçlar (${list.length})`;
+    empty.hidden = list.length > 0;
+    out.innerHTML = list.map(({ t, note }, i) => {
+      const price = [t.freeText, t.from != null ? `${t.from} $/ay'dan` : ''].filter(Boolean).join(' · ') || 'Fiyat: resmi sayfada';
+      return `<article class="tool-card"><div class="tool-mono" aria-hidden="true">${esc(t.name.slice(0, 1))}</div><div class="tool-card-body">
+        <h3><span class="tool-rank">${i + 1}.</span><a href="${t.href}">${esc(t.name)}</a></h3><p class="tool-co">${esc(t.company)} · ${esc(t.cats)}</p>
+        <p class="tool-desc">${esc(note)}</p><p class="tool-facts"><span>${esc(price)}</span>${t.turkish ? '<span>Türkçe kullanılabiliyor</span>' : ''}</p></div></article>`;
+    }).join('');
+  }
+  form.addEventListener('change', render);
+  render();
+</script>

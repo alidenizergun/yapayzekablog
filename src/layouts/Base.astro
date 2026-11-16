@@ -205,13 +205,24 @@ const isBreaking = latest && Date.now() - latest.data.date.valueOf() < BREAKING_
         <h2 id="foot-cats">Kategoriler</h2>
         <ul>{footerCats.map((c) => <li><a href={catUrl(c.slug)}>{c.name}</a></li>)}</ul>
       </nav>
+      <nav class="foot-col" aria-labelledby="foot-tools">
+        <h2 id="foot-tools">Araçlar</h2>
+        <ul>
+          <li><a href={url('/arac/')}>Yapay zeka araçları</a></li>
+          <li><a href={url('/arac-secici/')}>Araç seçici</a></li>
+          <li><a href={url('/en-iyi/')}>İşe göre en iyiler</a></li>
+          <li><a href={url('/karsilastir/')}>Karşılaştırmalar</a></li>
+          <li><a href={url('/ucretsiz-yapay-zeka-araclari/')}>Ücretsiz araçlar</a></li>
+          <li><a href={url('/yeni-araclar/')}>Yeni araçlar</a></li>
+          <li><a href={url('/modeller-karsilastirma/')}>Model fiyatları</a></li>
+        </ul>
+      </nav>
       <nav class="foot-col" aria-labelledby="foot-site">
         <h2 id="foot-site">Kurumsal</h2>
         <ul>
           <li><a href={url('/konular/')}>Şirketler ve kişiler</a></li>
           <li><a href={url('/gelisme/')}>Gelişen hikâyeler</a></li>
           <li><a href={url('/yatirimlar/')}>Yatırım takipçisi</a></li>
-          <li><a href={url('/modeller-karsilastirma/')}>Model karşılaştırma</a></li>
           <li><a href={url('/etkinlikler/')}>Etkinlik takvimi</a></li>
           <li><a href={url('/sozluk/')}>Terimler sözlüğü</a></li>
           <li><a href={url('/rehber/')}>Rehberler</a></li>

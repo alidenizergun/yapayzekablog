@@ -1,0 +1,26 @@
+---
+import Base from '../layouts/Base.astro';
+import ToolCard from '../components/ToolCard.astro';
+import { TASKS, toolBySlug, TOOLS_CHECKED, trDate, toolUrl } from '../lib/tools.js';
+import { url } from '../lib/news.js';
+
+// Her görev için ilk iki seçim
+const sections = TASKS.filter((k) => k.slug !== 'yapay-zeka-dedektoru').map((k) => ({ k, picks: k.picks.slice(0, 2).map(([s, note]) => ({ t: toolBySlug(s), note })) }));
+const all = [...new Map(sections.flatMap((s) => s.picks.map((p) => [p.t.slug, p.t]))).values()];
+const jsonLd = { '@type': 'ItemList', name: 'En iyi yapay zeka uygulamaları', itemListElement: all.map((t, i) => ({ '@type': 'ListItem', position: i + 1, name: t.name, url: new URL(url(toolUrl(t.slug)), Astro.site).href })) };
+---
+<Base title="En iyi yapay zeka uygulamaları: işe göre seçilmiş araçlar" description="Sohbet, CV, görsel, video, müzik, seslendirme, logo, sunum, kod, çeviri, özet ve toplantı notu için en çok kullanılan yapay zeka uygulamaları; ücretsiz planları ve fiyatlarıyla."
+  jsonLd={jsonLd} breadcrumbs={[{ name: 'Ana sayfa', path: '/' }, { name: 'Yapay zeka araçları', path: '/arac/' }, { name: 'En iyi uygulamalar', path: '/en-iyi-yapay-zeka-uygulamalari/' }]}>
+  <section class="glossary" data-pagefind-body>
+    <span class="cat">En iyi uygulamalar</span>
+    <h1 class="page-h">En iyi yapay zeka uygulamaları</h1>
+    <p class="spot">Her iş için en yaygın kullanılan ve öne çıkan iki uygulama. Daha geniş liste için görev başlığına tıklayın. Puanlama yapmıyoruz; <a href={url('/arac/#yontem')}>seçim ölçütlerimizi</a> okuyabilirsiniz.</p>
+    <p class="models-checked">Son kontrol: {trDate(TOOLS_CHECKED)}</p>
+    {sections.map(({ k, picks }) => (
+      <section aria-labelledby={`bs-${k.slug}`}>
+        <h2 id={`bs-${k.slug}`} class="ev-h"><a href={url(`/en-iyi/${k.slug}/`)}>{k.short}</a></h2>
+        <div class="tool-grid">{picks.map(({ t, note }) => <ToolCard tool={t} note={note} />)}</div>
+      </section>
+    ))}
+  </section>
+</Base>

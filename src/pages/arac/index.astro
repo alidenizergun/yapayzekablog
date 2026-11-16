@@ -1,0 +1,49 @@
+---
+import Base from '../../layouts/Base.astro';
+import ToolCard from '../../components/ToolCard.astro';
+import { TOOLS, TOOL_CATS, TASKS, COMPARISONS, TOOLS_CHECKED, toolBySlug, compareSlug, trDate, toolUrl } from '../../lib/tools.js';
+import { url } from '../../lib/news.js';
+
+const groups = TOOL_CATS.map((c) => ({ ...c, items: TOOLS.filter((t) => t.cats[0] === c.slug) })).filter((g) => g.items.length);
+const pageUrl = new URL(url('/arac/'), Astro.site).href;
+const jsonLd = { '@type': 'CollectionPage', name: 'Yapay zeka araçları', url: pageUrl, inLanguage: 'tr-TR',
+  mainEntity: { '@type': 'ItemList', itemListElement: TOOLS.map((t, i) => ({ '@type': 'ListItem', position: i + 1, name: t.name, url: new URL(url(toolUrl(t.slug)), Astro.site).href })) } };
+---
+<Base title="Yapay zeka araçları: fiyatlar, ücretsiz planlar ve alternatifler" description={`ChatGPT, Claude, Gemini, Midjourney, ElevenLabs ve ${TOOLS.length} yapay zeka aracının fiyatları, ücretsiz planları, Türkçe desteği ve alternatifleri; görevlere göre en iyi araçlar ve karşılaştırmalar.`}
+  jsonLd={jsonLd} breadcrumbs={[{ name: 'Ana sayfa', path: '/' }, { name: 'Yapay zeka araçları', path: '/arac/' }]}>
+  <section class="glossary tools-index">
+    <span class="cat">Araçlar</span>
+    <h1 class="page-h">Yapay zeka araçları</h1>
+    <p class="spot">En çok kullanılan yapay zeka araçlarının ne işe yaradığı, fiyatları, ücretsiz planları, Türkçe desteği ve alternatifleri. Fiyatlar kaynağı ve kontrol tarihiyle verilir; puanlama yapmıyoruz.</p>
+    <nav class="tools-quick" aria-label="Araç sayfaları">
+      <a class="btn" href={url('/arac-secici/')}>Bana uygun aracı bul</a>
+      <a class="btn btn-ghost" href={url('/ucretsiz-yapay-zeka-araclari/')}>Ücretsiz araçlar</a>
+      <a class="btn btn-ghost" href={url('/en-iyi-yapay-zeka-uygulamalari/')}>En iyi uygulamalar</a>
+      <a class="btn btn-ghost" href={url('/yeni-araclar/')}>Yeni araçlar</a>
+    </nav>
+
+    <h2 class="ev-h">Ne yapmak istiyorsunuz?</h2>
+    <ul class="task-chips">{TASKS.map((k) => <li><a href={url(`/en-iyi/${k.slug}/`)}>{k.short}</a></li>)}</ul>
+
+    {groups.map((g) => (
+      <section aria-labelledby={`tc-${g.slug}`}>
+        <h2 id={`tc-${g.slug}`} class="ev-h">{g.name}</h2>
+        <div class="tool-grid">{g.items.map((t) => <ToolCard tool={t} />)}</div>
+      </section>
+    ))}
+
+    <h2 class="ev-h">Karşılaştırmalar</h2>
+    <ul class="task-chips">{COMPARISONS.map(([a, b]) => <li><a href={url(`/karsilastir/${compareSlug(a, b)}/`)}>{toolBySlug(a).name} mi {toolBySlug(b).name} mi?</a></li>)}</ul>
+
+    <section class="method" id="yontem" aria-labelledby="ym-h">
+      <h2 id="ym-h" class="ev-h">Bu bilgileri nasıl derliyoruz?</h2>
+      <ul>
+        <li><strong>Fiyatlar:</strong> Mümkün olduğunca aracın resmi fiyat sayfasından alınır; resmi sayfaya ulaşılamadığında tarihli ikincil kaynak kullanılır ve sayfada "ikincil kaynak" olarak belirtilir. Doğrulayamadığımız fiyatı yazmayız.</li>
+        <li><strong>TL karşılıkları:</strong> Dolar fiyatları TCMB döviz satış kuruyla çevrilir; vergiler ve yerel fiyatlandırma nedeniyle ödenen tutar farklı olabilir.</li>
+        <li><strong>Türkçe desteği:</strong> Yalnızca aracın Türkçe kullanılabildiğini doğrulayabildiğimizde belirtiriz; emin olmadığımız yerde "doğrulanmadı" yazarız.</li>
+        <li><strong>Sıralama ve seçim:</strong> Araçlara puan vermeyiz. "En iyi" sayfalarındaki seçimler; yaygınlık, işe uygunluk ve şirketlerin açıkladığı özelliklere dayanan editoryal seçimdir. Hiçbir araç bu listelerde yer almak için ödeme yapmaz; bağlantılarımız satış ortaklığı (affiliate) bağlantısı değildir.</li>
+        <li><strong>Güncelleme:</strong> Son genel kontrol: {trDate(TOOLS_CHECKED)}. Hata görürseniz <a href={url('/hata-bildir/')}>bildirin</a>.</li>
+      </ul>
+    </section>
+  </section>
+</Base>

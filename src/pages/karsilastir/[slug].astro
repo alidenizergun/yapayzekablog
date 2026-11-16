@@ -1,0 +1,65 @@
+---
+import Base from '../../layouts/Base.astro';
+import { COMPARISONS, toolBySlug, compareSlug, freeLabel, trDate, toolUrl, catName } from '../../lib/tools.js';
+import { usdTry, fmtUsd, fmtTry } from '../../lib/fx.js';
+import { url } from '../../lib/news.js';
+
+export function getStaticPaths() {
+  return COMPARISONS.map(([a, b, answer]) => ({ params: { slug: compareSlug(a, b) }, props: { a: toolBySlug(a), b: toolBySlug(b), answer } }));
+}
+const { a, b, answer } = Astro.props;
+const fx = await usdTry();
+const both = [a, b];
+const priceCell = (t) => t.price?.from ? `${t.price.plan}: ${fmtUsd(t.price.from)}/ay${fx ? ` (${fmtTry(t.price.from, fx)})` : ''}` : 'Resmi sayfada';
+const rows = [
+  ['Şirket', (t) => t.company],
+  ['Kategori', (t) => t.cats.map(catName).join(', ')],
+  ['Ücretsiz kullanım', (t) => (t.free ? freeLabel[t.free] : 'Doğrulanmadı')],
+  ['Ücretli başlangıç', priceCell],
+  ['Türkçe', (t) => (t.turkish ? 'Kullanılabiliyor' : 'Doğrulanmadı')],
+  ['Platformlar', (t) => t.platforms.join(', ')],
+];
+const others = COMPARISONS.filter(([x, y]) => compareSlug(x, y) !== compareSlug(a.slug, b.slug)).slice(0, 8);
+const faq = [
+  [`${a.name} mi ${b.name} mi daha iyi?`, answer],
+  [`${a.name} ve ${b.name} ücretsiz mi?`, both.map((t) => `${t.name}: ${t.free ? freeLabel[t.free].toLocaleLowerCase('tr') : 'doğrulanmadı'}`).join('. ') + '.'],
+];
+const jsonLd = { '@type': 'FAQPage', mainEntity: faq.map(([q, ans]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: ans } })) };
+---
+<Base title={`${a.name} mi ${b.name} mi? Fiyat, özellik ve kullanım karşılaştırması`} description={`${a.name} ve ${b.name} karşılaştırması: fiyatlar, ücretsiz planlar, Türkçe desteği, güçlü yanlar ve hangisinin kimin için uygun olduğu.`}
+  jsonLd={jsonLd} breadcrumbs={[{ name: 'Ana sayfa', path: '/' }, { name: 'Yapay zeka araçları', path: '/arac/' }, { name: `${a.name} mi ${b.name} mi?`, path: `/karsilastir/${compareSlug(a.slug, b.slug)}/` }]}>
+  <section class="deals compare" data-pagefind-body>
+    <span class="cat">Karşılaştırma</span>
+    <h1 class="page-h">{a.name} mi {b.name} mi?</h1>
+    <aside class="why guide-summary" aria-label="Kısa cevap"><strong>Kısa cevap</strong><p>{answer}</p></aside>
+
+    <div class="deal-table-wrap">
+      <table class="deal-table compare-table">
+        <thead><tr><th scope="col"></th>{both.map((t) => <th scope="col"><a href={url(toolUrl(t.slug))}>{t.name}</a></th>)}</tr></thead>
+        <tbody>{rows.map(([label, f]) => <tr><th scope="row">{label}</th>{both.map((t) => <td>{f(t)}</td>)}</tr>)}</tbody>
+      </table>
+    </div>
+    <p class="price-src">Fiyat kaynakları: {both.filter((t) => t.price).map((t, i) => <>{i > 0 && ' · '}<a href={t.price.source.url} rel="noopener">{t.price.source.label}</a> ({trDate(t.price.source.checked)}{!t.price.source.official && ', ikincil kaynak'})</>)}. {fx && `TL karşılıkları TCMB kuruyla (${fx.date}); vergiler hariç. `}Satın almadan önce resmi sayfaları kontrol edin.</p>
+
+    <div class="compare-cols">
+      {both.map((t) => (
+        <section aria-labelledby={`c-${t.slug}`}>
+          <h2 id={`c-${t.slug}`}>{t.name} kimler için?</h2>
+          <ul class="tool-list tool-good">{t.good.map((g) => <li>{g}</li>)}</ul>
+          <h3>Ne zaman uygun değil?</h3>
+          <ul class="tool-list tool-bad">{t.notFor.map((g) => <li>{g}</li>)}</ul>
+          <p><a href={url(toolUrl(t.slug))}>{t.name} fiyatları ve ayrıntılar →</a></p>
+        </section>
+      ))}
+    </div>
+
+    <section class="models-faq" aria-labelledby="cf-h">
+      <h2 id="cf-h">Sık sorulanlar</h2>
+      {faq.map(([q, ans]) => <details><summary>{q}</summary><p>{ans}</p></details>)}
+      <p>En doğru karar için iki aracı kendi işlerinizden birkaç örnekle deneyin. <a href={url('/rehber/hangi-yapay-zeka-modelini-secmeliyim/')}>Model seçme rehberimiz</a> bu konuda yardımcı olur.</p>
+    </section>
+
+    <h2 class="ev-h">Diğer karşılaştırmalar</h2>
+    <ul class="task-chips">{others.map(([x, y]) => <li><a href={url(`/karsilastir/${compareSlug(x, y)}/`)}>{toolBySlug(x).name} mi {toolBySlug(y).name} mi?</a></li>)}</ul>
+  </section>
+</Base>

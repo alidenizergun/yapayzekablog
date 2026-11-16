@@ -1,0 +1,18 @@
+---
+import Base from '../../layouts/Base.astro';
+import { TASKS, toolBySlug } from '../../lib/tools.js';
+import { url } from '../../lib/news.js';
+---
+<Base title="İşe göre en iyi yapay zeka araçları" description="CV, görsel, video, müzik, seslendirme, logo, sunum, kod, çeviri, özet ve toplantı notu için en çok kullanılan yapay zeka araçları."
+  breadcrumbs={[{ name: 'Ana sayfa', path: '/' }, { name: 'Yapay zeka araçları', path: '/arac/' }, { name: 'İşe göre en iyiler', path: '/en-iyi/' }]}>
+  <section class="glossary">
+    <span class="cat">En iyi araçlar</span>
+    <h1 class="page-h">İşe göre en iyi yapay zeka araçları</h1>
+    <p class="spot">Ne yapmak istediğinizi seçin; o iş için öne çıkan araçları fiyat, ücretsiz plan ve Türkçe desteğiyle birlikte görün.</p>
+    <ul class="guide-list">
+      {TASKS.map((k) => (
+        <li class="guide-item"><h2><a href={url(`/en-iyi/${k.slug}/`)}>{k.title}</a></h2><p>{k.picks.map(([s]) => toolBySlug(s).name).join(', ')}</p></li>
+      ))}
+    </ul>
+  </section>
+</Base>

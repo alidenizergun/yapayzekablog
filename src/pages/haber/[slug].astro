@@ -108,6 +108,13 @@ const crumbs = [{ name: 'Ana sayfa', path: '/' }, { name: catName(d.category), p
       )}
 
       <div class="prose"><Content /></div>
+      {d.newTool && (
+        <aside class="why new-tool" aria-label="Yeni araç">
+          <strong>Yeni araç: {d.newTool.name}</strong>
+          {d.newTool.what && <p>{d.newTool.what}</p>}
+          <p><a href={d.newTool.url} rel="noopener">{d.newTool.name} sitesine git ↗</a> · <a href={url('/yeni-araclar/')}>Diğer yeni araçlar</a></p>
+        </aside>
+      )}
 
       {(d.whyItMatters || d.turkeyAngle) && (
         <aside class="why" aria-label="Bu ne anlama geliyor">

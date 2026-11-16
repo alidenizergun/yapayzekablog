@@ -90,3 +90,7 @@ Bir güncellemede en fazla bir haber manşet olarak işaretlenir: yalnızca ger�
 - Haberin en önemli 3 noktası; okur yalnızca bunları okusa da olayı anlamalı.
 - Her madde tek, kısa ve tam bir cümle (en fazla 140 karakter). Başlığı ve spotu tekrar etme; ne oldu, rakam, sonuç.
 - Yalnızca metinde yazan bilgiler. Rakamları metindeki yazımıyla kullan (metinde geçmeyen rakam içeren madde otomatik atılır).
+
+## new_tool (yeni araç radarı)
+- Yalnızca haber, herkesin kullanabileceği YENİ bir yapay zeka aracının veya uygulamasının çıkışını duyuruyorsa doldur. Mevcut bir modelin yeni sürümü, araştırma makalesi, iç test ve yalnızca kurumsal sözleşmeyle sunulan ürünler yeni araç değildir.
+- url aracın resmi adresidir ve kaynaklarda geçmelidir. Emin değilsen boş bırak.
