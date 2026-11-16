@@ -75,6 +75,38 @@ const counts = new Map();
 for (const n of allNews) counts.set(n.data.category, (counts.get(n.data.category) ?? 0) + 1);
 // Menü: önce NAV sırası, ardından haberi olan diğer kategoriler; haberi olmayan kategori gösterilmez
 const nav = [...NAV, ...CATEGORIES.map((c) => c.slug).filter((s) => !NAV.includes(s))].filter((slug) => counts.get(slug));
+// Gruplu menü: Haberler (kategoriler) · Araç rehberi · Öğren · Türkiye · Takip
+const path = Astro.url.pathname;
+const item = (label, href, desc = '') => ({ label, href: url(href), desc, current: href === '/' ? isHome : path.startsWith(url(href)) });
+const navGroups = [
+  { label: 'Haberler', cols: true, items: nav.map((slug) => ({ ...item(categoryBySlug(slug)?.name, `/kategori/${slug}/`), current: slug === currentCat })) },
+  { label: 'Araç rehberi', items: [
+    item('Yapay zeka araçları', '/arac/', 'Fiyatlar, ücretsiz planlar, alternatifler'),
+    item('Araç seçici', '/arac-secici/', 'Size uygun aracı bulun'),
+    item('İşe göre en iyiler', '/en-iyi/', 'CV, görsel, video, kod ve daha fazlası'),
+    item('Karşılaştırmalar', '/karsilastir/', 'ChatGPT mi Claude mi?'),
+    item('Ücretsiz araçlar', '/ucretsiz-yapay-zeka-araclari/'),
+    item('Yeni araçlar', '/yeni-araclar/'),
+    item('Model API fiyatları', '/modeller-karsilastirma/'),
+  ] },
+  { label: 'Öğren', items: [
+    item('Rehberler', '/rehber/', 'Adım adım kullanım kılavuzları'),
+    item('Sözlük', '/sozluk/', 'Yapay zeka terimleri sade Türkçeyle'),
+    item('Yapay zeka nedir?', '/sozluk/yapay-zeka/'),
+  ] },
+  { label: 'Türkiye', items: [
+    item("Türkiye'de yapay zeka", '/turkiye-yapay-zeka/', 'Ekosistem, düzenlemeler, yatırımlar'),
+    item('Yerli modeller', '/yerli-yapay-zeka/'),
+    ...(counts.get('turkiye') ? [item('Türkiye haberleri', '/kategori/turkiye/')] : []),
+    item('Etkinlik takvimi', '/etkinlikler/'),
+  ] },
+  { label: 'Takip', right: true, items: [
+    item('Haftalık özet', '/haftalik/', 'Haftanın en önemli gelişmeleri'),
+    item('Gelişen hikâyeler', '/gelisme/', 'Süren olayların zaman çizelgesi'),
+    item('Yatırım takipçisi', '/yatirimlar/'),
+    item('Şirketler ve kişiler', '/konular/'),
+  ] },
+];
 const isHome = Astro.url.pathname.replace(/\/$/, '') === url('/').replace(/\/$/, '');
 const footerCats = CATEGORIES.filter((c) => counts.get(c.slug));
 const year = new Intl.DateTimeFormat('tr-TR', { year: 'numeric', timeZone: SITE.timeZone }).format(new Date());
@@ -177,26 +209,33 @@ const isBreaking = latest && Date.now() - latest.data.date.valueOf() < BREAKING_
   <nav class="catbar" aria-label="Bölümler" data-catbar>
     <div class="wrap">
       <a class="catbar-logo" href={url('/')} aria-label="YZ Gündemi ana sayfa" tabindex="-1"><span class="wm-badge" aria-hidden="true">YZ</span></a>
-      <div class="catbar-scroll" data-catbar-scroll>
-        <a href={url('/')} aria-current={isHome ? 'page' : undefined}>Gündem</a>
-        <a href={url('/akis/')} aria-current={Astro.url.pathname.startsWith(url('/akis')) ? 'page' : undefined}>Akış</a>
-        <a href={url('/haftalik/')} aria-current={Astro.url.pathname.startsWith(url('/haftalik')) ? 'page' : undefined}>Haftalık</a>
-        {nav.map((slug) => <a href={catUrl(slug)} aria-current={slug === currentCat ? 'page' : undefined}>{categoryBySlug(slug)?.name}</a>)}
-      </div>
-      <details class="catbar-more" data-catbar-more>
-        <summary>Daha fazla<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
-        <div class="more-panel">
-          <ul class="more-cats" data-more-cats aria-label="Diğer bölümler"></ul>
-          <ul class="more-sections" aria-label="Rehber ve araçlar">
-            <li><a href={url('/turkiye-yapay-zeka/')}>Türkiye'de yapay zeka</a></li>
-            <li><a href={url('/arac/')}>Yapay zeka araçları</a></li>
-            <li><a href={url('/rehber/')}>Rehberler</a></li>
-            <li><a href={url('/sozluk/')}>Sözlük</a></li>
-            <li><a href={url('/yatirimlar/')}>Yatırım takipçisi</a></li>
-            <li><a href={url('/etkinlikler/')}>Etkinlikler</a></li>
-          </ul>
-        </div>
-      </details>
+      <ul class="nav-main" data-nav>
+        <li class="nav-quick"><a href={url('/')} aria-current={isHome ? 'page' : undefined}>Gündem</a></li>
+        <li class="nav-quick"><a href={url('/akis/')} aria-current={path.startsWith(url('/akis')) ? 'page' : undefined}>Akış</a></li>
+        {navGroups.map((g) => (
+          <li class="nav-group-item">
+            <details class={`nav-group${g.items.some((i) => i.current) ? ' has-current' : ''}`} data-nav-group>
+              <summary>{g.label}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
+              <div class={`nav-panel${g.cols ? ' nav-panel-cols' : ''}${g.right ? ' nav-panel-right' : ''}`}>
+                <ul>{g.items.map((i) => <li><a href={i.href} aria-current={i.current ? 'page' : undefined}>{i.label}{i.desc && <span>{i.desc}</span>}</a></li>)}</ul>
+              </div>
+            </details>
+          </li>
+        ))}
+        <li class="nav-mobile">
+          <details class={`nav-group nav-all${navGroups.some((g) => g.items.some((i) => i.current)) ? ' has-current' : ''}`} data-nav-group>
+            <summary>Menü<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
+            <div class="nav-panel nav-panel-full">
+              {navGroups.map((g) => (
+                <section>
+                  <h2>{g.label}</h2>
+                  <ul>{g.items.map((i) => <li><a href={i.href} aria-current={i.current ? 'page' : undefined}>{i.label}</a></li>)}</ul>
+                </section>
+              ))}
+            </div>
+          </details>
+        </li>
+      </ul>
       <a class="catbar-search" href={url('/ara/')} aria-label="Haberlerde ara" title="Haberlerde ara" aria-current={Astro.url.pathname.startsWith(url('/ara')) ? 'page' : undefined}>
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
       </a>
@@ -345,34 +384,15 @@ const isBreaking = latest && Date.now() - latest.data.date.valueOf() < BREAKING_
         setTimeout(showCurrent, 220); // küçük logonun açılma süresinden sonra
       }).observe(masthead);
     }
-    // Masaüstünde sığmayan bölümler "Daha fazla" menüsüne taşınır (telefonda liste yana kayar)
-    const more = document.querySelector<HTMLDetailsElement>('[data-catbar-more]');
-    const moreCats = document.querySelector<HTMLElement>('[data-more-cats]');
-    const fit = () => {
-      if (!scroller || !more || !moreCats) return;
-      // Önce hepsini geri al
-      moreCats.querySelectorAll('a').forEach((a) => { scroller.appendChild(a); });
-      moreCats.replaceChildren();
-      if (window.innerWidth > 760) {
-        const links = [...scroller.querySelectorAll<HTMLAnchorElement>('a')];
-        const moved: HTMLAnchorElement[] = [];
-        while (scroller.scrollWidth > scroller.clientWidth + 1 && links.length > 3) {
-          const a = links.pop()!;
-          moved.unshift(a);
-          a.remove();
-        }
-        moved.forEach((a) => { const li = document.createElement('li'); li.appendChild(a); moreCats.appendChild(li); });
-      }
-      moreCats.hidden = !moreCats.children.length;
-      more.classList.toggle('has-current', !!moreCats.querySelector('[aria-current="page"]'));
-      scroller.dispatchEvent(new Event('scroll'));
-    };
-    fit();
-    let fitT: number | undefined;
-    window.addEventListener('resize', () => { clearTimeout(fitT); fitT = window.setTimeout(fit, 120); });
-    if (catbar) new MutationObserver(() => setTimeout(fit, 230)).observe(catbar, { attributes: true, attributeFilter: ['class'] });
-    document.addEventListener('click', (e) => { if (more?.open && !more.contains(e.target as Node)) more.open = false; });
-    document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && more?.open) { more.open = false; more.querySelector('summary')?.focus(); } });
+    // Gruplu menü: aynı anda tek grup açık; dışarı tıklayınca veya Escape ile kapanır
+    const groups = [...document.querySelectorAll<HTMLDetailsElement>('[data-nav-group]')];
+    groups.forEach((g) => g.addEventListener('toggle', () => { if (g.open) groups.forEach((o) => { if (o !== g) o.open = false; }); }));
+    document.addEventListener('click', (e) => groups.forEach((g) => { if (g.open && !g.contains(e.target as Node)) g.open = false; }));
+    document.addEventListener('keydown', (e) => {
+      if (e.key !== 'Escape') return;
+      const g = groups.find((x) => x.open);
+      if (g) { g.open = false; g.querySelector('summary')?.focus(); }
+    });
     if (scroller) {
       const edges = () => {
         const max = scroller.scrollWidth - scroller.clientWidth;
