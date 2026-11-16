@@ -86,5 +86,37 @@
     "importance": 45,
     "featured": false,
     "date": "2026-11-16T17:24:51+03:00"
+  },
+  {
+    "slug": "ls-electric-yapay-zeka-veri-merkezi-icin-94-milyon",
+    "title": "LS Electric, yapay zeka veri merkezi için 94 milyon dolarlık güç ekipmanı sözleşmesi imzaladı",
+    "text": "LS Electric, küresel bir teknoloji şirketinin hiperölçekli veri merkezi için yaklaşık 93,83 milyon dolarlık güç sistemi sözleşmesi imzaladı.",
+    "importance": 30,
+    "featured": false,
+    "date": "2026-11-16T17:44:59+03:00"
+  },
+  {
+    "slug": "londra-merkezli-hukuk-girisimi-alecto-insight-partners-liderliginde-20",
+    "title": "Londra merkezli hukuk girişimi Alecto, Insight Partners liderliğinde 20 milyon dolar tohum yatırımı aldı",
+    "text": "Londra merkezli yapay zeka hukuk girişimi Alecto, Insight Partners liderliğinde 20 milyon dolarlık tohum yatırımı aldığı bildirildi.",
+    "importance": 28,
+    "featured": false,
+    "date": "2026-11-16T17:43:59+03:00"
+  },
+  {
+    "slug": "runway-27b-boyutundaki-praxis-1-dunya-modelinin-agirliklarini-acik",
+    "title": "Runway, 27B boyutundaki Praxis-1 dünya modelinin ağırlıklarını açık kaynak yayımladı",
+    "text": "Runway'in 27B MoE mimarisindeki dünya modeli Praxis-1'in ağırlıklarını Apache 2.0 lisansıyla açık olarak yayımladığı bildirildi.",
+    "importance": 38,
+    "featured": false,
+    "date": "2026-11-16T17:42:59+03:00"
+  },
+  {
+    "slug": "anthropic-in-karsi-istihbarat-alaninda-2026-da-33-kisi",
+    "title": "Anthropic'in karşı istihbarat alanında 2026'da 33 kişi işe aldığı bildirildi",
+    "text": "Anthropic'in 2026'da karşı istihbarat işlevleri için 33 çalışan aldığı, 2025'te bu sayının 14 olduğu bildirildi. Bilgi bir günlük bültene dayanıyor. #Anthropic",
+    "importance": 40,
+    "featured": false,
+    "date": "2026-11-16T17:41:59+03:00"
   }
 ]
