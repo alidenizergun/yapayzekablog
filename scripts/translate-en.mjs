@@ -85,6 +85,7 @@ const existingSlugs = (dir) => new Set(fs.existsSync(dir) ? fs.readdirSync(dir).
 // ------------------------------------------------------------ veri metinleri
 async function translateStrings() {
   const file = path.join(ROOT, 'src/i18n/en/strings.json');
+  fs.mkdirSync(path.dirname(file), { recursive: true });
   const store = fs.existsSync(file) ? JSON.parse(fs.readFileSync(file, 'utf8')) : {};
   const src = sourceStrings();
   const todo = Object.entries(src).filter(([k, v]) => store[k]?.h !== hash(v));

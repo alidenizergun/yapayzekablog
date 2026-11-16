@@ -106,4 +106,21 @@ const rehberler = defineCollection({
   }),
 });
 
-export const collections = { haberler, ozetler, rehberler };
+// İngilizce çeviriler (scripts/translate-en.mjs üretir). "ref": Türkçe dosyanın adı; "slug": İngilizce adres parçası.
+const enBase = { ref: z.string(), slug: z.string(), title: z.string() };
+const haberlerEn = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/haberler-en' }),
+  schema: z.object({ ...enBase, spot: z.string(), whyItMatters: z.string().optional(), turkeyAngle: z.string().optional(),
+    keyPoints: z.array(z.string()).optional(), whatsNext: z.string().optional(),
+    byNumbers: z.array(z.object({ value: z.string(), label: z.string() })).optional(), newToolWhat: z.string().optional(), photoAlt: z.string().optional() }),
+});
+const rehberlerEn = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/rehberler-en' }),
+  schema: z.object({ ...enBase, description: z.string(), summary: z.array(z.string()), faq: z.array(z.object({ q: z.string(), a: z.string() })).optional() }),
+});
+const ozetlerEn = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/ozetler-en' }),
+  schema: z.object({ ...enBase, spot: z.string(), items: z.array(z.object({ slug: z.string(), summary: z.string() })) }),
+});
+
+export const collections = { haberler, ozetler, rehberler, haberlerEn, rehberlerEn, ozetlerEn };
