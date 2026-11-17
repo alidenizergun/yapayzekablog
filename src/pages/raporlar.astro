@@ -1,0 +1,94 @@
+---
+import Base from '../layouts/Base.astro';
+import { REPORTS_CHECKED, REPORT_TOPICS, reportsSorted } from '../lib/reports.js';
+import { formatDate, url } from '../lib/news.js';
+import { i18n } from '../i18n/index.js';
+const L = await i18n(Astro);
+const { lang, T } = L;
+const EN = lang === 'en';
+
+const MONTHS = EN ? ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'] : ['Ocak', 'Şubat', 'Mart', 'Nisan', 'Mayıs', 'Haziran', 'Temmuz', 'Ağustos', 'Eylül', 'Ekim', 'Kasım', 'Aralık'];
+const when = (r) => {
+  const [y, m, d] = r.date.split('-').map(Number);
+  if (r.dateApprox) return `${MONTHS[m - 1]} ${y}`;
+  return EN ? `${MONTHS[m - 1]} ${d}, ${y}` : `${d} ${MONTHS[m - 1]} ${y}`;
+};
+const topicName = (slug) => { const t = REPORT_TOPICS.find((x) => x.slug === slug); return t ? (EN ? t.en : t.tr) : slug; };
+const reports = reportsSorted().map((r) => ({
+  ...r,
+  pub: EN ? r.publisherEn ?? r.publisher : r.publisher,
+  heading: EN ? r.titleEn ?? r.title : r.titleTr ?? r.title,
+  original: EN ? (r.titleEn ? r.title : null) : (r.titleTr ? r.title : null),
+  sum: EN ? r.summary.en : r.summary.tr,
+  meth: EN ? r.method.en : r.method.tr,
+  note: r.urlNote && (EN ? r.urlNote.en : r.urlNote.tr),
+  facts: r.findings.map((f) => ({ v: EN ? f.valueEn ?? f.value : f.value, t: EN ? f.en : f.tr })),
+}));
+const topics = REPORT_TOPICS.filter((t) => reports.some((r) => r.topics.includes(t.slug)));
+const checked = formatDate(new Date(`${REPORTS_CHECKED}T12:00:00+03:00`), false, L.locale);
+const pageUrl = new URL(url('/raporlar/'), Astro.site).href;
+const jsonLd = [
+  { '@type': 'CollectionPage', name: T('Yapay zeka raporları', 'AI research reports'), url: pageUrl, inLanguage: L.locale,
+    description: T('McKinsey, Stanford, PwC, BCG, Microsoft, Deloitte ve diğer kurumların yapay zeka raporlarından öne çıkan bulgular.', 'Key findings from AI reports by McKinsey, Stanford, PwC, BCG, Microsoft, Deloitte and others.') },
+  { '@type': 'ItemList', name: T('Yapay zeka raporları', 'AI research reports'), numberOfItems: reports.length,
+    itemListElement: reports.map((r, i) => ({ '@type': 'ListItem', position: i + 1,
+      item: { '@type': 'Report', name: r.title, ...(r.titleTr && !EN ? { alternateName: r.titleTr } : {}), datePublished: r.date, url: r.url,
+        publisher: { '@type': 'Organization', name: r.publisherEn ?? r.publisher }, abstract: r.sum } })) },
+];
+---
+<Base title={T('Yapay zeka raporları: McKinsey, Stanford, PwC ve diğerlerinden öne çıkanlar', 'AI research reports: key findings from McKinsey, Stanford, PwC and more')}
+  description={T(`McKinsey, Stanford AI Index, State of AI, PwC, BCG, Microsoft, Deloitte ve Türkiye raporları: ${reports.length} yapay zeka raporunun özeti, öne çıkan rakamları ve resmi bağlantısı.`, `Summaries, key figures and official links for ${reports.length} AI reports, including McKinsey, the Stanford AI Index, State of AI, PwC, BCG, Microsoft, Deloitte and Turkey studies.`)}
+  jsonLd={jsonLd} breadcrumbs={[{ name: 'Ana sayfa', path: '/' }, { name: T('Raporlar', 'Reports'), path: '/raporlar/' }]}>
+  <section class="deals reports">
+    <span class="cat">{T('Araştırma', 'Research')}</span>
+    <h1 class="page-h">{T('Yapay zeka raporları', 'AI research reports')}</h1>
+    <p class="spot">{T('Danışmanlık şirketleri, üniversiteler, uluslararası kuruluşlar ve yapay zeka şirketlerinin yayımladığı raporların özeti. Her raporun öne çıkan rakamlarını sade Türkçeyle verip resmi sayfasına bağlıyoruz.', 'Summaries of reports from consultancies, universities, international organizations and AI companies. We pull out the key figures and link to each official source.')}</p>
+    <p class="models-checked">{T('Son kontrol', 'Last checked')}: <time datetime={REPORTS_CHECKED}>{checked}</time> · {reports.length} {T('rapor', 'reports')}</p>
+
+    <div class="deal-filters" role="group" aria-label={T('Konuya göre süz', 'Filter by topic')} data-rep-filters>
+      <button type="button" aria-pressed="true" data-topic="">{T('Tümü', 'All')}</button>
+      {topics.map((t) => <button type="button" aria-pressed="false" data-topic={t.slug}>{EN ? t.en : t.tr}</button>)}
+    </div>
+
+    <ol class="rep-list">
+      {reports.map((r) => (
+        <li class="rep" id={r.slug} data-topics={r.topics.join(' ')}>
+          <div class="rep-meta">
+            <span class="rep-pub">{r.pub}</span>
+            <time datetime={r.date}>{when(r)}</time>
+            <span class="rep-topics">{r.topics.map(topicName).join(' · ')}</span>
+          </div>
+          <div class="rep-body">
+            <h2><a href={r.url} rel="noopener">{r.heading}</a></h2>
+            {r.original && <p class="rep-orig" lang={EN ? 'tr' : 'en'}>{r.original}</p>}
+            <p>{r.sum}</p>
+            <aside class="by-numbers" aria-label={T(`${r.heading}: öne çıkan bulgular`, `${r.heading}: key findings`)}>
+              <span class="cat">{T('Öne çıkan bulgular', 'Key findings')}</span>
+              <dl>{r.facts.map((f) => <div><dt>{f.v}</dt><dd>{f.t}</dd></div>)}</dl>
+            </aside>
+            <p class="meta rep-method">{T('Yöntem', 'Method')}: {r.meth}</p>
+            <p class="rep-link"><a href={r.url} rel="noopener">{r.note ? T('Kaynağa git ↗', 'Go to source ↗') : T('Raporu aç ↗', 'Open the report ↗')}</a>{r.note && <span class="meta"> · {r.note}</span>}</p>
+          </div>
+        </li>
+      ))}
+    </ol>
+    <p class="empty" data-rep-empty hidden>{T('Bu konuda rapor yok.', 'No reports on this topic.')}</p>
+
+    <p class="ai-note">{EN
+      ? <>Figures are taken from each report’s official page or press release; summaries are ours. Know of a report we should add? <a href={url('/hata-bildir/')}>Let us know</a>. For the numbers behind Turkey’s ecosystem, see <a href={url('/turkiye-yapay-zeka/')}>AI in Turkey</a>.</>
+      : <>Rakamlar her raporun resmi sayfasından veya basın bülteninden alınmıştır; özetler bize aittir. Eklenmesini istediğiniz bir rapor mu var? <a href={url('/hata-bildir/')}>Bize bildirin</a>. Türkiye ekosisteminin rakamları için <a href={url('/turkiye-yapay-zeka/')}>Türkiye'de yapay zeka</a> sayfasına bakın.</>}</p>
+  </section>
+</Base>
+
+<script>
+  const btns = [...document.querySelectorAll<HTMLButtonElement>('[data-rep-filters] button')];
+  const items = [...document.querySelectorAll<HTMLElement>('.rep')];
+  const empty = document.querySelector<HTMLElement>('[data-rep-empty]')!;
+  btns.forEach((b) => b.addEventListener('click', () => {
+    const t = b.dataset.topic || '';
+    btns.forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
+    let n = 0;
+    items.forEach((li) => { const ok = !t || (li.dataset.topics || '').split(' ').includes(t); li.hidden = !ok; if (ok) n++; });
+    empty.hidden = n > 0;
+  }));
+</script>
