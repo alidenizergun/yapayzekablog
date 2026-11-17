@@ -117,9 +117,10 @@ jobs:
           git pull --rebase origin "$BRANCH"
           git push
 
+  # Yeni haber çıkmasa da site her turda yeniden derlenir: manşet 24 saati dolduran haberden çıkar, "x saat önce" yazıları güncellenir.
   deploy:
     needs: generate
-    if: needs.generate.outputs.changed != '0'
+    if: needs.generate.result == 'success'
     permissions:
       contents: read
       pages: write

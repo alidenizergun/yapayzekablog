@@ -140,13 +140,28 @@ export const HOME_MAIN = 15;
 // Okunma potansiyeli: puanı olmayan eski haberlerde manşet işaretliyse 80, değilse 50
 export const popularityOf = (n) => n.data.popularity ?? (n.data.featured ? 80 : 50);
 
-/** Manşet: son 36 saatin en çok okunma potansiyeli olan haberi.
- *  Her saat 0,5 puan düşer; böylece büyük bir haber bir sonraki güncellemede de manşette kalır,
- *  ama ertesi gün daha yeni bir gelişmeye yer açar. Son 36 saatte haber yoksa en yeni haber. */
+// Site günde dört kez yeniden derlenir (İstanbul 04:53, 09:23, 13:23, 18:23). Manşet derleme anında seçildiği için
+// bir haber, bir sonraki derlemeye kadar da manşette kalır; bu süre hesaba katılır.
+const BUILD_SLOTS_MIN = [4 * 60 + 53, 9 * 60 + 23, 13 * 60 + 23, 18 * 60 + 23];
+const LEAD_MAX_H = 24;      // bir haber en fazla bu kadar saat manşette kalır
+const BUILD_DELAY_H = 1;    // zamanlayıcı gecikmesi payı
+function hoursToNextBuild(now) {
+  const t = new Date(now + 3 * 3600e3); // İstanbul (UTC+3, yaz saati yok)
+  const m = t.getUTCHours() * 60 + t.getUTCMinutes();
+  const next = BUILD_SLOTS_MIN.find((s) => s > m) ?? BUILD_SLOTS_MIN[0] + 1440;
+  return (next - m) / 60 + BUILD_DELAY_H;
+}
+
+/** Manşet: yayınlanmasının üzerinden 24 saat geçmemiş haberlerin en yüksek puanlısı.
+ *  Puan = okunma potansiyeli (1-100) − saat başına 1,5 puan; böylece yeni gelişmeler manşete daha çabuk çıkar.
+ *  Bir sonraki derlemede 24 saati dolduracak haber aday olmaz; bu yüzden hiçbir haber 24 saatten uzun manşette kalmaz.
+ *  Uygun haber yoksa (uzun süre yeni haber çıkmadıysa) en yeni haber. */
 export function pickLead(news, now = Date.now()) {
-  const pool = news.filter((n) => now - n.data.date.valueOf() < 36 * 3600e3);
+  const limitH = LEAD_MAX_H - hoursToNextBuild(now);
+  const ageH = (n) => (now - n.data.date.valueOf()) / 3600e3;
+  const pool = news.filter((n) => ageH(n) >= 0 && ageH(n) < limitH);
   if (!pool.length) return news[0];
-  const score = (n) => popularityOf(n) - ((now - n.data.date.valueOf()) / 3600e3) * 0.5;
+  const score = (n) => popularityOf(n) - ageH(n) * 1.5;
   return pool.reduce((best, n) => (score(n) > score(best) ? n : best));
 }
 

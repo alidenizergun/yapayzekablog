@@ -16,7 +16,7 @@ const { lang, T, S } = L;
 const news = locNewsList(await getNews(), lang, L.m);
 const cn = (slug) => S(`cat.${slug}.name`, catName(slug));
 
-// Manşet: son 36 saatin en çok okunma potansiyeli olan haberi (src/lib/news.js › pickLead)
+// Manşet: son 24 saatin en yüksek puanlı haberi; hiçbir haber 24 saatten uzun manşette kalmaz (src/lib/news.js › pickLead)
 const lead = pickLead(news);
 const rest = news.filter((n) => n !== lead);
 const side = rest.slice(0, 3);
