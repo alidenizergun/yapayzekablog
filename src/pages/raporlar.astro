@@ -24,12 +24,13 @@ const reports = reportsSorted().map((r) => ({
   note: r.urlNote && (EN ? r.urlNote.en : r.urlNote.tr),
   facts: r.findings.map((f) => ({ v: EN ? f.valueEn ?? f.value : f.value, t: EN ? f.en : f.tr })),
 }));
+const years = [...new Set(reports.map((r) => r.date.slice(0, 4)))];
 const topics = REPORT_TOPICS.filter((t) => reports.some((r) => r.topics.includes(t.slug)));
 const checked = formatDate(new Date(`${REPORTS_CHECKED}T12:00:00+03:00`), false, L.locale);
 const pageUrl = new URL(url('/raporlar/'), Astro.site).href;
 const jsonLd = [
   { '@type': 'CollectionPage', name: T('Yapay zeka raporları', 'AI research reports'), url: pageUrl, inLanguage: L.locale,
-    description: T('McKinsey, Stanford, PwC, BCG, Microsoft, Deloitte ve diğer kurumların yapay zeka raporlarından öne çıkan bulgular.', 'Key findings from AI reports by McKinsey, Stanford, PwC, BCG, Microsoft, Deloitte and others.') },
+    description: T('McKinsey, Stanford, MIT, PwC, BCG, Microsoft, Deloitte, TÜİK ve diğer kurumların 2025-2026 yapay zeka raporlarından öne çıkan bulgular.', 'Key findings from AI reports by McKinsey, Stanford, PwC, BCG, Microsoft, Deloitte and others.') },
   { '@type': 'ItemList', name: T('Yapay zeka raporları', 'AI research reports'), numberOfItems: reports.length,
     itemListElement: reports.map((r, i) => ({ '@type': 'ListItem', position: i + 1,
       item: { '@type': 'Report', name: r.title, ...(r.titleTr && !EN ? { alternateName: r.titleTr } : {}), datePublished: r.date, url: r.url,
@@ -37,7 +38,7 @@ const jsonLd = [
 ];
 ---
 <Base title={T('Yapay zeka raporları: McKinsey, Stanford, PwC ve diğerlerinden öne çıkanlar', 'AI research reports: key findings from McKinsey, Stanford, PwC and more')}
-  description={T(`McKinsey, Stanford AI Index, State of AI, PwC, BCG, Microsoft, Deloitte ve Türkiye raporları: ${reports.length} yapay zeka raporunun özeti, öne çıkan rakamları ve resmi bağlantısı.`, `Summaries, key figures and official links for ${reports.length} AI reports, including McKinsey, the Stanford AI Index, State of AI, PwC, BCG, Microsoft, Deloitte and Turkey studies.`)}
+  description={T(`McKinsey, Stanford AI Index, MIT, PwC, BCG, Microsoft, Deloitte, TÜİK ve diğer kurumların 2025-2026 raporları: ${reports.length} yapay zeka raporunun özeti, öne çıkan rakamları ve resmi bağlantısı.`, `Summaries, key figures and official links for ${reports.length} AI reports, including McKinsey, the Stanford AI Index, State of AI, PwC, BCG, Microsoft, Deloitte and Turkey studies.`)}
   jsonLd={jsonLd} breadcrumbs={[{ name: 'Ana sayfa', path: '/' }, { name: T('Raporlar', 'Reports'), path: '/raporlar/' }]}>
   <section class="deals reports">
     <span class="cat">{T('Araştırma', 'Research')}</span>
@@ -50,8 +51,11 @@ const jsonLd = [
       {topics.map((t) => <button type="button" aria-pressed="false" data-topic={t.slug}>{EN ? t.en : t.tr}</button>)}
     </div>
 
+    {years.map((y) => (
+    <section class="rep-year" aria-labelledby={`y-${y}`} data-rep-year>
+    <h2 id={`y-${y}`} class="ev-h">{y} <span class="meta">{reports.filter((r) => r.date.startsWith(y)).length} {T('rapor', 'reports')}</span></h2>
     <ol class="rep-list">
-      {reports.map((r) => (
+      {reports.filter((r) => r.date.startsWith(y)).map((r) => (
         <li class="rep" id={r.slug} data-topics={r.topics.join(' ')}>
           <div class="rep-meta">
             <span class="rep-pub">{r.pub}</span>
@@ -59,19 +63,21 @@ const jsonLd = [
             <span class="rep-topics">{r.topics.map(topicName).join(' · ')}</span>
           </div>
           <div class="rep-body">
-            <h2><a href={r.url} rel="noopener">{r.heading}</a></h2>
+            <h3><a href={r.url} rel="noopener">{r.heading}</a></h3>
             {r.original && <p class="rep-orig" lang={EN ? 'tr' : 'en'}>{r.original}</p>}
             <p>{r.sum}</p>
-            <aside class="by-numbers" aria-label={T(`${r.heading}: öne çıkan bulgular`, `${r.heading}: key findings`)}>
+            <div class="by-numbers">
               <span class="cat">{T('Öne çıkan bulgular', 'Key findings')}</span>
               <dl>{r.facts.map((f) => <div><dt>{f.v}</dt><dd>{f.t}</dd></div>)}</dl>
-            </aside>
+            </div>
             <p class="meta rep-method">{T('Yöntem', 'Method')}: {r.meth}</p>
             <p class="rep-link"><a href={r.url} rel="noopener">{r.note ? T('Kaynağa git ↗', 'Go to source ↗') : T('Raporu aç ↗', 'Open the report ↗')}</a>{r.note && <span class="meta"> · {r.note}</span>}</p>
           </div>
         </li>
       ))}
     </ol>
+    </section>
+    ))}
     <p class="empty" data-rep-empty hidden>{T('Bu konuda rapor yok.', 'No reports on this topic.')}</p>
 
     <p class="ai-note">{EN
@@ -89,6 +95,7 @@ const jsonLd = [
     btns.forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
     let n = 0;
     items.forEach((li) => { const ok = !t || (li.dataset.topics || '').split(' ').includes(t); li.hidden = !ok; if (ok) n++; });
+    document.querySelectorAll<HTMLElement>('[data-rep-year]').forEach((sec) => { sec.hidden = !sec.querySelector('.rep:not([hidden])'); });
     empty.hidden = n > 0;
   }));
 </script>
