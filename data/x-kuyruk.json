@@ -166,5 +166,21 @@
     "importance": 36,
     "featured": false,
     "date": "2026-11-17T19:16:03+03:00"
+  },
+  {
+    "slug": "openai-gpt-6-2-astra-ve-sol-modellerini-chatgpt",
+    "title": "OpenAI, GPT-6.2 Astra ve Sol modellerini ChatGPT, Codex ve API'ye getirdi",
+    "text": "OpenAI, GPT-6.2 Astra ve Sol modellerini duyurdu. Astra'nın standart API fiyatı yüzde 20 düştü; modeller ChatGPT Work ve Codex'te Plus, Pro, Enterprise ve Edu kullanıcılarına açıldı. #OpenAI",
+    "importance": 80,
+    "featured": true,
+    "date": "2026-11-17T21:50:27+03:00"
+  },
+  {
+    "slug": "google-gemini-deki-tasks-ozelligini-alti-ulkede-ucretsiz-yapti",
+    "title": "Google, Gemini'deki Tasks özelliğini altı ülkede ücretsiz yaptı",
+    "text": "Google, Gemini'deki Tasks özelliğini ABD, Japonya, Kore, Kanada, Avustralya ve Hindistan'da ücretsiz yaptı. Aramalar ve ödemeler önce yalnızca ABD'de başlıyor. #Gemini",
+    "importance": 60,
+    "featured": false,
+    "date": "2026-11-17T21:49:27+03:00"
   }
 ]
