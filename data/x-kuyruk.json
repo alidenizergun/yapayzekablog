@@ -182,5 +182,21 @@
     "importance": 60,
     "featured": false,
     "date": "2026-11-17T21:49:27+03:00"
+  },
+  {
+    "slug": "microsoft-ignite-ta-openai-ve-anthropic-e-rakip-alti",
+    "title": "Microsoft, Ignite'ta OpenAI ve Anthropic'e rakip altı yeni MAI modelini tanıttı",
+    "text": "Microsoft, Ignite'ta kodlama, siber güvenlik ve ses alanlarında yeni MAI modellerini tanıttı. Şirket, MAI Code 2'nin Claude Opus 5.5 performansının yüzde 96'sını yaklaşık yüzde 5 maliyetle sunduğunu söylüyor. #Microsoft",
+    "importance": 68,
+    "featured": false,
+    "date": "2026-11-18T00:30:49+03:00"
+  },
+  {
+    "slug": "microsoft-40-tan-fazla-kurulusla-yapay-zeka-seffaflik-girisimini",
+    "title": "Microsoft, 40'tan fazla kuruluşla yapay zeka şeffaflık girişimini başlattı",
+    "text": "Microsoft, Accenture, Adobe, KPMG, Mastercard ve Volvo Cars dahil 40'tan fazla kuruluşla yapay zeka şeffaflık girişimini başlattı. Amaç, güvenlik ve yönetişimde ortak standartlar. #Microsoft",
+    "importance": 42,
+    "featured": false,
+    "date": "2026-11-18T00:29:49+03:00"
   }
 ]
