@@ -1,0 +1,39 @@
+---
+import Base from '../layouts/Base.astro';
+import { CORRECTIONS } from '../lib/corrections.js';
+import { getNews, slugOf, url, formatDate } from '../lib/news.js';
+import { i18n, locNews } from '../i18n/index.js';
+const L = await i18n(Astro);
+const { lang, T, u, m } = L;
+const EN = lang === 'en';
+const news = await getNews();
+const bySlug = new Map(news.map((n) => [slugOf(n), n]));
+const items = [...CORRECTIONS].sort((a, b) => b.date.localeCompare(a.date)).map((c) => ({ ...c, n: bySlug.get(c.slug) })).map((c) => ({ ...c, n: c.n && (locNews(c.n, lang, m) ?? c.n) }));
+const fd = (d) => formatDate(new Date(`${d}T12:00:00+03:00`), false, L.locale);
+---
+<Base title={T('Düzeltmeler', 'Corrections')} description={T('YZ Gündemi haberlerinde yapılan düzeltmelerin listesi ve hata düzeltme ilkelerimiz.', 'A log of corrections to YZ Gündemi stories and our corrections policy.')}
+  breadcrumbs={[{ name: 'Ana sayfa', path: '/' }, { name: T('Düzeltmeler', 'Corrections'), path: '/duzeltmeler/' }]}>
+  <article class="article legal">
+    <span class="badge">{T('Kurumsal', 'About')}</span>
+    <h1>{T('Düzeltmeler', 'Corrections')}</h1>
+    <p class="spot">{T('Hatalarımızı açıkça düzeltiriz. Bir haberde anlamı değiştiren bir hata düzelttiğimizde, haberin sonuna tarihli bir not ekler ve burada listeleriz.', 'We correct our mistakes openly. When we fix an error that changes the meaning of a story, we add a dated note at the end of the story and list it here.')}</p>
+    <div class="prose">
+      <h2>{T('Düzeltme günlüğü', 'Corrections log')}</h2>
+      {items.length ? (
+        <ol class="corr-list">{items.map((c) => (
+          <li><time datetime={c.date}>{fd(c.date)}</time> · {c.n ? <a href={u(`/haber/${c.slug}/`)}>{c.n.data.title}</a> : c.slug}<br />{EN ? c.en ?? c.tr : c.tr}</li>
+        ))}</ol>
+      ) : (
+        <p>{T('Şu ana kadar düzeltme gerektiren bir hata kaydedilmedi.', 'No corrections have been recorded so far.')}</p>
+      )}
+      <h2>{T('Nasıl düzeltiyoruz', 'How we correct')}</h2>
+      <ul>
+        <li>{T('Rakam, tarih, isim veya iddia gibi anlamı değiştiren hataları düzeltir, haberin sonuna ne değiştiğini yazan tarihli bir not ekleriz.', 'Errors that change the meaning, such as a figure, date, name or claim, are corrected with a dated note at the end of the story saying what changed.')}</li>
+        <li>{T('Yazım ve noktalama hatalarını not eklemeden düzeltiriz.', 'Spelling and punctuation errors are fixed without a note.')}</li>
+        <li>{T('Kaynağı sonradan geri çekilen veya doğrulanamayan bir haberi yayından kaldırır ya da başına açıklama ekleriz.', 'If a story’s source is later withdrawn or cannot be verified, we remove the story or add an explanation at the top.')}</li>
+        <li>{T('Türkçe haberde yapılan düzeltme İngilizce baskıya da uygulanır.', 'A correction to a Turkish story is applied to the English edition too.')}</li>
+      </ul>
+      <p>{T('Bir hata mı gördünüz?', 'Spotted an error?')} <a href={url('/hata-bildir/')}>{T('Hata bildir formunu', 'Use the report form')}</a>{T(' kullanın; haberin adresini eklemeniz yeterli.', '; just include the story’s address.')}</p>
+    </div>
+  </article>
+</Base>

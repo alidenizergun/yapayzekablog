@@ -7,3 +7,7 @@ src/content/haberler/_deneme-*
 
 # Güvenlik denetimi kayıtları (herkese açık repoda paylaşılmaz)
 .security-audit/
+
+# Markalı haber kartları yayın sırasında üretilir
+public/og/haber/
+public/og/news/

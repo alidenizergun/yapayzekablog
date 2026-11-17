@@ -367,6 +367,16 @@ footer.site .linkish { background: none; border: 0; padding: 0; color: var(--ban
 .legal { max-width: 760px; }
 .legal .prose { font-family: var(--body); font-size: 17px; }
 .legal .prose h2 { font-size: 22px; margin-top: 36px; }
+.kunye { display: grid; gap: 0; margin: 8px 0 0; border-top: 1px solid var(--line); }
+.kunye > div { display: grid; grid-template-columns: minmax(140px, 32%) 1fr; gap: 16px; padding: 12px 0; border-bottom: 1px solid var(--line); }
+.kunye dt { font-family: var(--display); font-weight: 700; font-size: 15px; color: var(--muted); }
+.kunye dd { margin: 0; }
+@media (max-width: 520px) { .kunye > div { grid-template-columns: 1fr; gap: 2px; } }
+.corr-list { padding-left: 0; list-style: none; }
+.corr-list li { padding: 12px 0; border-bottom: 1px solid var(--line); }
+.correction { margin: 32px 0 0; padding: 16px 20px; border-left: 4px solid var(--accent); background: var(--soft); }
+.correction h2 { font-size: 18px; margin: 0 0 6px; }
+.correction p { margin: 4px 0; }
 
 /* ---------------------------------------------------------------- ana sayfa ızgarası
    Bütün bölümler aynı 3 sütunlu ızgarayı paylaşır (32px boşluk): geniş alanlar 2 sütun, sağ alanlar 1 sütun.

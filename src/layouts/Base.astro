@@ -55,7 +55,8 @@ const siteLd: object[] = [
     logo: { '@type': 'ImageObject', url: abs('/logo.png'), width: 512, height: 512 },
     description: SITE_DESC,
     ethicsPolicy: abs('/hakkimizda/'),
-    correctionsPolicy: abs('/hata-bildir/'),
+    correctionsPolicy: abs('/duzeltmeler/'),
+    masthead: abs('/kunye/'),
     publishingPrinciples: abs('/hakkimizda/'),
     sameAs: [
       SITE.social?.x && `https://x.com/${SITE.social.x}`,
@@ -292,7 +293,9 @@ const isBreaking = latest && Date.now() - latest.data.date.valueOf() < BREAKING_
         <h2 id="foot-site">YZ Gündemi</h2>
         <ul>
           <li><a href={L.u('/hakkimizda/')}>{T('Hakkımızda', 'About us')}</a></li>
+          <li><a href={L.u('/kunye/')}>{T('Künye', 'Masthead')}</a></li>
           <li><a href={L.u('/hata-bildir/')}>{T('Hata bildir', 'Report an error')}</a></li>
+          <li><a href={L.u('/duzeltmeler/')}>{T('Düzeltmeler', 'Corrections')}</a></li>
           <li><a href={L.u('/akis/')}>{T('Canlı akış', 'Live feed')}</a></li>
           <li><a href={L.u('/rss.xml')}>RSS</a></li>
           <li><a href={switchHref} hreflang={lang === 'en' ? 'tr' : 'en'} lang={lang === 'en' ? 'tr' : 'en'}>{lang === 'en' ? 'Türkçe' : 'English'}</a></li>
@@ -306,7 +309,7 @@ const isBreaking = latest && Date.now() - latest.data.date.valueOf() < BREAKING_
     <div class="foot-bottom"><div class="wrap">
       <p>© {year} {SITE.name} · {SITE.domain}</p>
       <p class="foot-credits">{T('Fotoğraflar', 'Photos from')} <a href="https://unsplash.com/?utm_source=yzgundemi&utm_medium=referral">Unsplash</a>{T(', şirket logoları ', ', company logos from ')}<a href="https://simpleicons.org/">Simple Icons</a>{T(' kaynaklıdır; logolar sahiplerinin markasıdır.', '; logos are trademarks of their owners.')}</p>
-      <span class="foot-links"><a href={L.u('/gizlilik/')}>{T('Gizlilik ve çerezler', 'Privacy and cookies')}</a>{SITE.analytics?.ga4 && <button type="button" class="linkish" data-consent-open>{T('Çerez tercihleri', 'Cookie settings')}</button>}</span>
+      <span class="foot-links"><a href={L.u('/kullanim-kosullari/')}>{T('Kullanım koşulları', 'Terms of use')}</a><a href={L.u('/gizlilik/')}>{T('Gizlilik ve çerezler', 'Privacy and cookies')}</a>{SITE.analytics?.ga4 && <button type="button" class="linkish" data-consent-open>{T('Çerez tercihleri', 'Cookie settings')}</button>}</span>
       <a class="foot-top" href="#icerik">{T('Başa dön', 'Back to top')} <span aria-hidden="true">↑</span></a>
     </div></div>
   </footer>

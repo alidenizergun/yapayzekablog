@@ -1,0 +1,117 @@
+# Haber motoru uyarısı: bir iş akışı başarısız olursa, API kredisi biterse ya da planlı tur atlanırsa
+# depoda "haber-motoru" etiketli bir konu (issue) açar. GitHub size e-postayla bildirir.
+# Aynı türde açık bir konu varsa yenisi açılmaz, mevcut konuya yorum eklenir.
+# Atlanan tur bulunursa ara tur kendiliğinden başlatılır; tur başarılı olunca "atlandı" konusu kapanır.
+name: Haber motoru uyarısı
+
+on:
+  workflow_run:
+    workflows: ['Haber güncellemesi', 'Haftalık özet', 'İngilizce çeviri', 'Siteyi yayınla']
+    types: [completed]
+  schedule:
+    - cron: '47 */2 * * *'   # iki saatte bir: son tur ne zaman çalıştı?
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: alert
+  cancel-in-progress: false
+
+jobs:
+  failed:
+    if: github.event_name == 'workflow_run' && (github.event.workflow_run.conclusion == 'failure' || github.event.workflow_run.conclusion == 'timed_out')
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      actions: read
+      issues: write
+    steps:
+      - name: Konu aç veya yorum ekle
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          RUN_ID: ${{ github.event.workflow_run.id }}
+          RUN_URL: ${{ github.event.workflow_run.html_url }}
+          WF_NAME: ${{ github.event.workflow_run.name }}
+          CONCLUSION: ${{ github.event.workflow_run.conclusion }}
+          OWNER: ${{ github.repository_owner }}
+        run: |
+          set -euo pipefail
+          gh label create haber-motoru --color CF2E13 --description "Haber motoru uyarıları" --force >/dev/null
+          log=$(gh run view "$RUN_ID" --log-failed 2>/dev/null | tail -c 200000 || true)
+          if grep -qiE 'credit balance is too low|insufficient.?credit|billing' <<<"$log"; then
+            title="Anthropic API kredisi bitti"
+            hint="Anthropic Console > Billing bölümünden kredi yükleyin. Kredi yüklenince sonraki tur kendiliğinden çalışır; beklemek istemezseniz Actions > Haber güncellemesi > Run workflow."
+          elif grep -qiE 'authentication_error|invalid x-api-key' <<<"$log"; then
+            title="Anthropic API anahtarı geçersiz"
+            hint="ANTHROPIC_API_KEY sırrını (Settings > Secrets and variables > Actions) yenileyin."
+          elif grep -qiE 'overloaded_error|rate_limit_error' <<<"$log"; then
+            title="Anthropic API yoğunluk veya hız sınırı: ${WF_NAME}"
+            hint="Genellikle geçicidir; sonraki tur kendiliğinden dener."
+          else
+            title="İş akışı başarısız: ${WF_NAME}"
+            hint="Çalışma kaydındaki kırmızı adımı açın."
+          fi
+          excerpt=$(grep -iE 'error|hata|failed' <<<"$log" | sed -E 's/\x1b\[[0-9;]*m//g' | tail -n 12 | cut -c1-300 || true)
+          when=$(TZ=Europe/Istanbul date '+%d.%m.%Y %H:%M')
+          body=$(printf '**%s** · %s (İstanbul) · sonuç: `%s`\n\n%s\n\nÇalışma kaydı: %s\n\n<details><summary>Kayıttan son hata satırları</summary>\n\n```\n%s\n```\n</details>' "$WF_NAME" "$when" "$CONCLUSION" "$hint" "$RUN_URL" "$excerpt")
+          num=$(gh issue list --label haber-motoru --state open --search "\"$title\" in:title" --json number,title --jq ".[] | select(.title == \"$title\") | .number" | head -n1)
+          if [ -n "$num" ]; then
+            gh issue comment "$num" --body "Yine oldu. $body"
+          else
+            gh issue create --title "$title" --label haber-motoru --body "@${OWNER} $body"
+          fi
+
+  watchdog:
+    if: github.event_name != 'workflow_run'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: read
+      actions: write
+      issues: write
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+          sparse-checkout: data
+
+      - name: Son turu denetle
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          OWNER: ${{ github.repository_owner }}
+          BRANCH: ${{ github.event.repository.default_branch }}
+        run: |
+          set -euo pipefail
+          title="Planlı haber turu atlandı"
+          last=$(jq -r '.at // empty' data/son-tur.json 2>/dev/null || true)
+          [ -z "$last" ] && { echo "son-tur.json yok"; exit 0; }
+          age_min=$(( ( $(date +%s) - $(date -d "$last" +%s) ) / 60 ))
+          hour=$(TZ=Europe/Istanbul date +%H)
+          # Gündüz turlar en çok ~5 saat arayla, gece (18:23 → 04:53) 10,5 saat arayla çalışır.
+          if [ "$hour" -ge 7 ] && [ "$hour" -le 22 ]; then limit=360; else limit=720; fi
+          echo "son tur $age_min dakika önce; sınır $limit"
+          num=$(gh issue list --label haber-motoru --state open --search "\"$title\" in:title" --json number,title --jq ".[] | select(.title == \"$title\") | .number" | head -n1)
+          if [ "$age_min" -lt "$limit" ]; then
+            if [ -n "$num" ]; then gh issue close "$num" --comment "Turlar yeniden çalışıyor (son tur $age_min dakika önce)."; fi
+            exit 0
+          fi
+          # Çalışan bir tur varsa veya son tur kredi/anahtar hatasıyla düştüyse yeniden başlatma (o durumda ayrı konu açılmıştır)
+          state=$(gh run list --workflow news.yml -L 1 --json status,conclusion --jq '.[0] | "\(.status) \(.conclusion)"' || echo "")
+          action="Ara tur kendiliğinden başlatıldı."
+          case "$state" in
+            in_progress*|queued*|waiting*) action="Şu an çalışan bir tur var; yeniden başlatılmadı." ;;
+            *failure*) action="Son tur hatayla bitti; yeniden başlatılmadı (hata için ayrı konuya bakın)." ;;
+            *) gh workflow run news.yml --ref "$BRANCH" -f mode=ogle >/dev/null || action="Ara tur başlatılamadı." ;;
+          esac
+          gh label create haber-motoru --color CF2E13 --description "Haber motoru uyarıları" --force >/dev/null
+          when=$(TZ=Europe/Istanbul date '+%d.%m.%Y %H:%M')
+          body="$when (İstanbul): son haber turu $((age_min / 60)) saat $((age_min % 60)) dakika önce çalıştı. $action GitHub zamanlayıcısı yoğunlukta turları atlayabilir; dış zamanlayıcı (cron-job.org) bunu önler."
+          if [ -n "$num" ]; then
+            gh issue comment "$num" --body "$body"
+          else
+            gh issue create --title "$title" --label haber-motoru --body "@${OWNER} $body"
+          fi

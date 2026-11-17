@@ -243,6 +243,7 @@ async function researchTopic(anthropic, existing, xPosts, topic, seen) {
     .slice(0, 80);
   const covered = recent.map((e) => `- ${e.title}${e.urls[0] ? ` (${e.urls[0]})` : ''}`).join('\n') || '- (henüz yok)';
   const now = istanbulIso();
+  const interest = readerInterest();
 
   const system = `Sen YZ Gündemi adlı Türkçe yapay zeka haber sitesinin araştırma editörüsün. Görevin, haber olmaya değer YENİ gelişmeleri web aramasıyla bulmak ve her biri için doğrulanmış bilgi notu çıkarmak.\n\n${GUIDELINES}`;
   const focus = `BU ARAŞTIRMANIN KONUSU: ${topic.title} (${topic.hint}). Yalnızca bu konuya odaklan; en fazla ${topic.uses} arama yap ve en fazla ${MIDDAY ? MAX_ARTICLES + 1 : 5} aday çıkar.`;
@@ -254,7 +255,7 @@ Son ${LOOKBACK_HOURS} saat içinde yayınlanmış, yapay zeka alanındaki en ön
 
 Her aday için birincil kaynağı (resmi blog, duyuru, makale) veya tanınmış bir haber kuruluşunu bul. Yalnızca haber bülteni, derleme sitesi (ör. "AI'da bugün olan her şey"), Substack/Medium yazısı veya yatırım veri tabanında geçen adayı ELE; bunlar tek başına kaynak sayılmaz. Aynı konuyu farklı kelimelerle tekrar tekrar arama.
 
-Aşağıdaki haberler son 7 günde zaten yayınlandı. Bunları ve bunların yeni bilgi içermeyen tekrarlarını ATLA:
+${interest}Aşağıdaki haberler son 7 günde zaten yayınlandı. Bunları ve bunların yeni bilgi içermeyen tekrarlarını ATLA:
 ${covered}
 ${xPosts.length ? `
 X'TEKİ TAKİP LİSTESİNDEN YENİ GÖNDERİLER (resmi X API'den alındı; adresleri gerçektir):
@@ -670,6 +671,19 @@ function markRun() {
   if (DRY) return;
   fs.mkdirSync(path.dirname(LAST_RUN_FILE), { recursive: true });
   fs.writeFileSync(LAST_RUN_FILE, JSON.stringify({ at: new Date().toISOString(), mode: MIDDAY ? 'ara' : 'gece' }) + '\n');
+}
+
+// Okur ilgisi (scripts/traffic-report.mjs haftalık yazar): eşit önemdeki adaylar arasında öncelik için. 15 günden eskiyse kullanılmaz.
+function readerInterest() {
+  try {
+    const j = JSON.parse(fs.readFileSync(path.join(ROOT, 'data/okur-ilgisi.json'), 'utf8'));
+    if (Date.now() - new Date(j.updated).valueOf() > 15 * 86400e3) return '';
+    const cats = (j.topCategories || []).slice(0, 4).map((c) => c.category).join(', ');
+    const news = (j.topNews || []).slice(0, 5).map((n) => n.title).join(' | ');
+    const qs = (j.topQueries || []).slice(0, 8).map((q) => q.query).join(', ');
+    if (!cats && !news && !qs) return '';
+    return `OKUR İLGİSİ (geçen hafta sitede en çok okunan): ${[cats && `kategoriler: ${cats}`, news && `haberler: ${news}`, qs && `Google'da bizi bulan aramalar: ${qs}`].filter(Boolean).join('; ')}. Önem bakımından eşit adaylar arasında bu konulara yakın olanı öne al; sırf bu yüzden önemsiz bir gelişmeyi aday yapma.\n\n`;
+  } catch { return ''; }
 }
 
 async function main() {

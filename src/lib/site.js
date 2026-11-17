@@ -16,7 +16,7 @@ export const SITE = {
 };
 
 export const CATEGORIES = [
-  { slug: 'modeller', name: 'Modeller', images: ['modeller', 'gemini'], intro: 'Yapay zeka model haberleri: ChatGPT, Claude, Gemini, DeepSeek ve açık ağırlıklı modellerin yeni sürümleri, fiyat değişiklikleri ve test sonuçları.', links: [{ href: '/modeller-karsilastirma/', label: 'Model karşılaştırma tablosu' }, { href: '/rehber/hangi-yapay-zeka-modelini-secmeliyim/', label: 'Hangi modeli seçmeli?' }] },
+  { slug: 'modeller', name: 'Modeller', images: ['modeller', 'gemini'], intro: 'Yapay zeka model haberleri: ChatGPT, Claude, Gemini, DeepSeek ve açık ağırlıklı modellerin yeni sürümleri, fiyat değişiklikleri ve test sonuçları.', links: [{ href: '/modeller-karsilastirma/', label: 'Model API fiyatları' }, { href: '/rehber/hangi-yapay-zeka-modelini-secmeliyim/', label: 'Hangi modeli seçmeli?' }] },
   { slug: 'ajanlar', name: 'Ajanlar', images: ['kod', 'odul'], intro: "Yapay zeka ajanları haberleri: kullanıcı adına web'de gezinen, alışveriş yapan, kod yazan ve iş akışlarını yürüten otonom sistemlerdeki gelişmeler.", links: [{ href: '/sozluk/yapay-zeka-ajani/', label: 'Yapay zeka ajanı nedir?' }] },
   { slug: 'araclar', name: 'Araçlar', images: ['kod'], intro: 'Yapay zeka araçları haberleri: sohbet asistanları, kodlama araçları, görsel ve video üreticileri ve günlük işlerde kullanılan yeni özellikler.', links: [{ href: '/rehber/', label: 'Kullanım rehberleri' }] },
   { slug: 'girisim-yatirim', name: 'Girişim & Yatırım', images: ['girisim', 'altyapi'], intro: 'Yapay zeka girişimleri ve yatırımları: yatırım turları, satın almalar, halka arzlar ve büyük anlaşmalar.', links: [{ href: '/yatirimlar/', label: 'Yatırım takipçisi' }] },

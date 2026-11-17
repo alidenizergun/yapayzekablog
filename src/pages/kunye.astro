@@ -1,0 +1,33 @@
+---
+import Base from '../layouts/Base.astro';
+import { SITE } from '../lib/site.js';
+import { url } from '../lib/news.js';
+import { i18n } from '../i18n/index.js';
+const L = await i18n(Astro);
+const { T } = L;
+const rows = [
+  [T('Yayın adı', 'Publication'), SITE.name],
+  [T('Alan adı', 'Domain'), SITE.domain],
+  [T('Yayın türü', 'Type'), T('İnternet haber sitesi (yapay zeka haberleri)', 'Online news site covering artificial intelligence')],
+  [T('Yayın dili', 'Language'), T('Türkçe; İngilizce baskı Türkçe haberlerden çevrilir', 'Turkish; the English edition is translated from our Turkish stories')],
+  [T('Yayın sıklığı', 'Frequency'), T('Her gün, günde dört güncelleme', 'Daily, four updates a day')],
+  [T('Yayın başlangıcı', 'Founded'), T('Kasım 2026', 'November 2026')],
+  [T('Yayın sorumlusu', 'Editor in charge'), SITE.name],
+  [T('Yer sağlayıcı', 'Hosting'), 'GitHub Pages (GitHub, Inc.)'],
+];
+---
+<Base title={T('Künye', 'Masthead')} description={T("YZ Gündemi'nin künyesi: yayın bilgileri, yayın sorumlusu, iletişim ve yer sağlayıcı.", 'YZ Gündemi masthead: publication details, editor in charge, contact and hosting.')}
+  breadcrumbs={[{ name: 'Ana sayfa', path: '/' }, { name: T('Künye', 'Masthead'), path: '/kunye/' }]}>
+  <article class="article legal">
+    <span class="badge">{T('Kurumsal', 'About')}</span>
+    <h1>{T('Künye', 'Masthead')}</h1>
+    <div class="prose">
+      <dl class="kunye">{rows.map(([k, v]) => <div><dt>{k}</dt><dd>{v}</dd></div>)}
+        <div><dt>{T('İletişim', 'Contact')}</dt><dd><a href={url('/hata-bildir/')}>{T('Hata bildir ve iletişim formu', 'Report an error and contact form')}</a></dd></div>
+      </dl>
+      <h2>{T('Nasıl yayın yapıyoruz', 'How we publish')}</h2>
+      <p>{T('Haberler, kamuya açık kaynaklardan yapay zeka desteğiyle derlenir ve her haberin altında kaynak bağlantıları yer alır. Kaynak kurallarımız ve yayın ilkelerimiz', 'Stories are compiled with AI assistance from public sources, and every story links to its sources. Our sourcing rules and editorial standards are on the')} <a href={url('/hakkimizda/')}>{T('Hakkımızda', 'About us')}</a> {T('sayfasında, hata düzeltme kurallarımız', 'page; our corrections policy is on the')} <a href={url('/duzeltmeler/')}>{T('Düzeltmeler', 'Corrections')}</a> {T('sayfasındadır.', 'page.')}</p>
+      <p>{T('Sitenin kullanım koşulları için', 'For terms of use, see')} <a href={url('/kullanim-kosullari/')}>{T('Kullanım koşulları', 'Terms of use')}</a>{T(', kişisel veriler ve çerezler için', '; for personal data and cookies, see')} <a href={url('/gizlilik/')}>{T('Gizlilik ve çerezler', 'Privacy and cookies')}</a>{T(' sayfasına bakın.', '.')}</p>
+    </div>
+  </article>
+</Base>

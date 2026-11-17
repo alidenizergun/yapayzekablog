@@ -1,3 +1,5 @@
+import fs from 'node:fs';
+import path from 'node:path';
 import { getCollection } from 'astro:content';
 import { SITE, categoryBySlug } from './site.js';
 
@@ -37,7 +39,14 @@ export function defaultVisual(entry, large = false) {
 }
 
 /** Sosyal medya paylaşım görseli: 1200x630 PNG/JPG (SVG'yi sosyal ağlar göstermez) */
+// Markalı haber kartı (scripts/news-cards.mjs, yayın sırasında üretilir); yoksa fotoğraf, logo veya illüstrasyon
+export function cardFor(entry) {
+  const p = entry.en?.data?.slug ? `/og/news/${entry.en.data.slug}.jpg` : `/og/haber/${slugOf(entry)}.jpg`;
+  return fs.existsSync(path.join(process.cwd(), 'public', p)) ? url(p) : null;
+}
 export function ogImageFor(entry) {
+  const card = cardFor(entry);
+  if (card) return card;
   const d = entry.data;
   if (d.photo) return photoSrc(d.photo, 1200, 630);
   if (d.brand) return url(`/og/marka/${d.brand}.png`);

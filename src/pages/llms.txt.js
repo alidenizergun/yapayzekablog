@@ -40,7 +40,7 @@ export async function GET(context) {
     '## Son haberler', '',
     ...news.map((n) => `- [${n.data.title}](${abs(newsUrl(n))}): ${one(n.data.spot)}`), '',
     '## Optional', '',
-    `- [RSS](${abs('/rss.xml')})`, `- [Site haritası](${abs('/sitemap-index.xml')})`, `- [Hakkımızda ve yayın ilkeleri](${abs('/hakkimizda/')})`, '',
+    `- [RSS](${abs('/rss.xml')})`, `- [Site haritası](${abs('/sitemap-index.xml')})`, `- [Hakkımızda ve yayın ilkeleri](${abs('/hakkimizda/')})`, `- [Künye](${abs('/kunye/')})`, `- [Düzeltmeler](${abs('/duzeltmeler/')})`, `- [Kullanım koşulları](${abs('/kullanim-kosullari/')})`, '',
     '## English edition', '',
     `An English edition translated from the Turkish stories is available at ${abs('/en/')}.`, '',
     `- [AI news in English](${abs('/en/')})`,

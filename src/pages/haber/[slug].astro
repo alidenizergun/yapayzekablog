@@ -1,10 +1,11 @@
 ---
 import { render } from 'astro:content';
+import { correctionsFor } from '../../lib/corrections.js';
 import Base from '../../layouts/Base.astro';
 import Sidebar from '../../components/Sidebar.astro';
 import Time from '../../components/Time.astro';
 import { IMAGES } from '../../lib/site.js';
-import { tagUrl, getNews, slugOf, newsUrl, spreadVisuals, defaultVisual, ogImageFor, withUtm, catName, catUrl, url, readingMinutes, hostOf, photoSrc, formatDate } from '../../lib/news.js';
+import { tagUrl, getNews, slugOf, newsUrl, spreadVisuals, defaultVisual, ogImageFor, cardFor, withUtm, catName, catUrl, url, readingMinutes, hostOf, photoSrc, formatDate } from '../../lib/news.js';
 import { brandOf } from '../../lib/brands.js';
 import { entitiesOf } from '../../lib/entities.js';
 import { storyOf, storyIndex } from '../../lib/stories.js';
@@ -40,16 +41,21 @@ const storyItems = story ? storyIndex(all).get(story.slug)?.items ?? [] : [];
 const og = ogImageFor(entry);
 const pageUrl = new URL(u(`/haber/${slugOf(entry)}/`), Astro.site).href;
 // Google haber görseli için üç oran (16:9, 4:3, 1:1), en az 1200px; fotoğraf yoksa paylaşım görseli
-const ldImages = d.photo
-  ? [photoSrc(d.photo, 1200, 675), photoSrc(d.photo, 1200, 900), photoSrc(d.photo, 1200, 1200)]
-  : [new URL(og, Astro.site).href];
+const card = cardFor(entry);
+const ldImages = [
+  ...(d.photo ? [photoSrc(d.photo, 1200, 675), photoSrc(d.photo, 1200, 900), photoSrc(d.photo, 1200, 1200)] : []),
+  ...(card || !d.photo ? [new URL(og, Astro.site).href] : []),
+];
+const fixes = correctionsFor(slugOf(entry));
+const lastFix = fixes.at(-1);
 const jsonLd = {
   '@type': 'NewsArticle',
   '@id': `${pageUrl}#article`,
   headline: d.title.length > 110 ? d.title.slice(0, 109) + '…' : d.title,
   description: d.spot,
   datePublished: d.date.toISOString(),
-  dateModified: d.date.toISOString(),
+  dateModified: lastFix ? new Date(`${lastFix.date}T12:00:00+03:00`).toISOString() : d.date.toISOString(),
+  ...(fixes.length ? { correction: fixes.map((c) => ({ '@type': 'CorrectionComment', datePublished: c.date, text: lang === 'en' ? c.en ?? c.tr : c.tr })) } : {}),
   inLanguage: L.locale,
   image: ldImages,
   author: { '@type': 'Organization', name: d.author, url: new URL(u('/hakkimizda/'), Astro.site).href },
@@ -144,6 +150,14 @@ const crumbs = [{ name: 'Ana sayfa', path: '/' }, { name: cat, path: `/kategori/
               <p>{d.turkeyAngle}</p>
             </div>
           )}
+        </aside>
+      )}
+
+      {fixes.length > 0 && (
+        <aside class="correction" aria-labelledby="fix-h">
+          <h2 id="fix-h">{T('Düzeltme', 'Correction')}</h2>
+          {fixes.map((c) => <p><time datetime={c.date}>{formatDate(new Date(`${c.date}T12:00:00+03:00`), false, L.locale)}</time>: {lang === 'en' ? c.en ?? c.tr : c.tr}</p>)}
+          <p class="meta"><a href={u('/duzeltmeler/')}>{T('Tüm düzeltmeler', 'All corrections')}</a></p>
         </aside>
       )}
 

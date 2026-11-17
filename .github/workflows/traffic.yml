@@ -1,0 +1,65 @@
+# Haftalık trafik raporu (Search Console + Google Analytics 4). Her pazartesi 08:17 İstanbul (05:17 UTC).
+# Raporu "trafik-raporu" etiketli bir konu (issue) olarak açar, önceki raporu kapatır ve okur ilgisini data/okur-ilgisi.json'a kaydeder.
+# Kurulum: GOOGLE_SA_KEY sırrı, GA4_PROPERTY_ID ve GSC_SITE_URL değişkenleri (scripts/traffic-report.mjs başındaki açıklama).
+name: Haftalık trafik raporu
+
+on:
+  schedule:
+    - cron: '17 5 * * 1'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: news
+  cancel-in-progress: false
+
+jobs:
+  report:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: write
+      issues: write
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+
+      - name: Raporu hazırla
+        id: report
+        env:
+          GOOGLE_SA_KEY: ${{ secrets.GOOGLE_SA_KEY }}
+          GA4_PROPERTY_ID: ${{ vars.GA4_PROPERTY_ID }}
+          GSC_SITE_URL: ${{ vars.GSC_SITE_URL }}
+          REPORT_FILE: ${{ runner.temp }}/trafik-raporu.md
+        run: node scripts/traffic-report.mjs
+
+      - name: Konu olarak aç
+        if: steps.report.outputs.title != ''
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          TITLE: ${{ steps.report.outputs.title }}
+          FILE: ${{ runner.temp }}/trafik-raporu.md
+        run: |
+          gh label create trafik-raporu --color 1F6FEB --description "Haftalık trafik raporu" --force >/dev/null
+          for n in $(gh issue list --label trafik-raporu --state open --json number --jq '.[].number'); do gh issue close "$n" >/dev/null; done
+          gh issue create --title "$TITLE" --label trafik-raporu --body-file "$FILE"
+
+      - name: Okur ilgisini kaydet
+        if: steps.report.outputs.title != ''
+        env:
+          BRANCH: ${{ github.ref_name }}
+        run: |
+          git config user.name "yzgundemi-bot"
+          git config user.email "yzgundemi-bot@users.noreply.github.com"
+          git add data/okur-ilgisi.json 2>/dev/null || exit 0
+          git diff --cached --quiet && exit 0
+          git commit -m "Okur ilgisi güncellendi (haftalık trafik raporu)"
+          git pull --rebase origin "$BRANCH"
+          git push
