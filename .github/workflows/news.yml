@@ -1,17 +1,12 @@
 # Günde 4 güncelleme: gece tam turu + 3 ara tur. Haberleri üretir, İngilizcesini çevirir, siteyi derleyip yayınlar.
-# Saatler UTC'dir (İstanbul = UTC+3). Tam saat başı GitHub'da en yoğun an olduğu için dakikalar kaydırıldı.
-#   01:53 UTC = 04:53 gece turu (tam haber, 12 arama)
-#   06:23 UTC = 09:23 sabah ara turu · 10:23 UTC = 13:23 öğle ara turu · 15:23 UTC = 18:23 akşam ara turu
-#   Ara turlar: son 8 saatin kayda değer gelişmeleri, kısa not, 4 arama, en fazla 3 haber
-# Not: GitHub zamanlanmış işleri yoğunluğa göre birkaç dakika gecikmeli başlatabilir.
+# Turları cron-job.org başlatır (GitHub'ın kendi zamanlayıcısı yoğunlukta saatlerce gecikip turları atladığı için kaldırıldı):
+#   04:53 İstanbul  gece turu (tam haber, 12 arama)        gövde: {"ref":"main"}
+#   09:23, 13:23, 18:23 İstanbul  ara turlar (kısa not, 4 arama, en fazla 3 haber)   gövde: {"ref":"main","inputs":{"mode":"ogle"}}
+# Yedek: "Haber motoru uyarısı" iki saatte bir son turu denetler; tur atlanmışsa ara turu kendisi başlatır ve konu açar.
+# cron-job.org'daki GitHub anahtarının süresi dolarsa turlar durur; yeni anahtarı cron-job.org'daki iki işe girin.
 name: Haber güncellemesi
 
 on:
-  schedule:
-    - cron: '53 1 * * *'    # gece turu: 04:53 İstanbul, tam haber
-    - cron: '23 6 * * *'    # sabah ara turu: 09:23 İstanbul
-    - cron: '23 10 * * *'   # öğle ara turu: 13:23 İstanbul
-    - cron: '23 15 * * *'   # akşam ara turu: 18:23 İstanbul
   workflow_dispatch:
     inputs:
       max_articles:
@@ -65,10 +60,10 @@ jobs:
           X_BEARER_TOKEN: ${{ secrets.X_BEARER_TOKEN }}
           UNSPLASH_ACCESS_KEY: ${{ secrets.UNSPLASH_ACCESS_KEY }}
           NEWS_MODEL: ${{ vars.NEWS_MODEL }}
-          NEWS_MODE: ${{ ((github.event_name == 'schedule' && github.event.schedule != '53 1 * * *') || inputs.mode == 'ogle') && 'ogle' || '' }}
-          MAX_ARTICLES: ${{ ((github.event_name == 'schedule' && github.event.schedule != '53 1 * * *') || inputs.mode == 'ogle') && (vars.MIDDAY_ARTICLES || '3') || inputs.max_articles || vars.MAX_ARTICLES || '10' }}
-          LOOKBACK_HOURS: ${{ ((github.event_name == 'schedule' && github.event.schedule != '53 1 * * *') || inputs.mode == 'ogle') && '8' || vars.LOOKBACK_HOURS || '26' }}
-          MAX_SEARCHES: ${{ ((github.event_name == 'schedule' && github.event.schedule != '53 1 * * *') || inputs.mode == 'ogle') && '4' || vars.MAX_SEARCHES || '12' }}
+          NEWS_MODE: ${{ inputs.mode == 'ogle' && 'ogle' || '' }}
+          MAX_ARTICLES: ${{ inputs.mode == 'ogle' && (vars.MIDDAY_ARTICLES || '3') || inputs.max_articles || vars.MAX_ARTICLES || '10' }}
+          LOOKBACK_HOURS: ${{ inputs.mode == 'ogle' && '8' || vars.LOOKBACK_HOURS || '26' }}
+          MAX_SEARCHES: ${{ inputs.mode == 'ogle' && '4' || vars.MAX_SEARCHES || '12' }}
           RESEARCH_MODEL: ${{ vars.RESEARCH_MODEL }}
           NEWS_BATCH: ${{ vars.NEWS_BATCH || 'true' }}
           EDITOR_PASS: ${{ vars.EDITOR_PASS || 'false' }}
