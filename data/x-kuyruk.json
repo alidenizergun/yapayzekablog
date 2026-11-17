@@ -126,5 +126,29 @@
     "importance": 55,
     "featured": false,
     "date": "2026-11-17T02:51:11+03:00"
+  },
+  {
+    "slug": "bakan-kacir-cop31-de-yapay-zeka-destekli-temiz-teknolojiler",
+    "title": "Bakan Kacır, COP31'de Yapay Zeka Destekli Temiz Teknolojiler Girişimi'ni başlattı",
+    "text": "Bakan Kacır, COP31 kapsamında Yapay Zeka Destekli Temiz Teknolojiler Girişimi'ni başlattı. Girişim, geliştiricileri sanayi ortakları ve yatırımcılarla buluşturarak pilot projeleri kolaylaştırmayı hedefliyor.",
+    "importance": 55,
+    "featured": false,
+    "date": "2026-11-17T12:36:35+03:00"
+  },
+  {
+    "slug": "abd-yapay-zeka-ciplerine-uzaktan-erisimi-sinirlayan-yeni-ihracat",
+    "title": "ABD, yapay zeka çiplerine uzaktan erişimi sınırlayan yeni ihracat kuralını yayımladı",
+    "text": "ABD Ticaret Bakanlığı, yapay zeka çiplerine uzaktan erişimle ihracat kısıtlamalarının aşılmasını önlemeye yönelik yeni kuralı yayımladı. Beş ülkedeki veri merkezi operatörleri lisans alacak.",
+    "importance": 58,
+    "featured": false,
+    "date": "2026-11-17T12:35:35+03:00"
+  },
+  {
+    "slug": "zoho-musteri-destek-yazilimi-zoho-desk-e-yapay-zeka",
+    "title": "Zoho, müşteri destek yazılımı Zoho Desk'e yapay zeka ajanları ekledi",
+    "text": "Zoho, Zoho Desk'in 10. yılında müşteri destek süreçleri için yapay zeka ajanları sundu. Blended Agents, Express paketinden itibaren kullanılabiliyor.",
+    "importance": 28,
+    "featured": false,
+    "date": "2026-11-17T12:34:35+03:00"
   }
 ]
