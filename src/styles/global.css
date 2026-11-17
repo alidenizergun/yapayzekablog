@@ -599,6 +599,10 @@ header.site .masthead { display: flex; align-items: center; justify-content: spa
 .deal-table a:hover strong { color: var(--accent-text); text-decoration: underline; }
 .deal-table .nowrap { white-space: nowrap; }
 .deal-type { font-weight: 600; }
+.deal-filters-2 { margin-top: 10px; }
+.deal-detail { display: block; margin-top: 4px; font-size: 14px; }
+.deal-src { display: block; margin-top: 4px; font-size: 13px; }
+.deal-src a { text-decoration: underline; text-underline-offset: 3px; }
 .deal-table tr[hidden] { display: none; }
 @media (max-width: 600px) { .deal-stats dd { font-size: 20px; } .deal-filters button { min-height: 44px; } }
 

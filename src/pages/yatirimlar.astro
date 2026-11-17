@@ -1,35 +1,73 @@
 ---
 import Base from '../layouts/Base.astro';
 import { getNews, newsUrl, formatDate, url } from '../lib/news.js';
-import { i18n, locNewsList } from '../i18n/index.js';
+import { DEALS, DEALS_CHECKED } from '../lib/deals.js';
+import { i18n, locNewsList, DEAL_TYPE_EN, COUNTRY_EN } from '../i18n/index.js';
 const L = await i18n(Astro);
 const { lang, T } = L;
 const EN = lang === 'en';
-const deals = locNewsList(await getNews(), lang, L.m).filter((n) => n.data.deal).map((n) => ({ n, d: n.data.deal }));
-const types = [...new Set(deals.map((x) => x.d.type))];
-const countries = [...new Set(deals.map((x) => x.d.country).filter(Boolean))];
-const total = deals.reduce((a, x) => a + (x.d.amountUsdM || 0), 0);
-const fmtB = (m) => EN ? (m >= 1000 ? `$${(m / 1000).toLocaleString('en-US', { maximumFractionDigits: 1 })} billion` : `$${m.toLocaleString('en-US')} million`) : (m >= 1000 ? `${(m / 1000).toLocaleString('tr-TR', { maximumFractionDigits: 1 })} milyar $` : `${m.toLocaleString('tr-TR')} milyon $`);
+
+const fmtM = (m) => EN ? (m >= 1e6 ? `$${(m / 1e6).toLocaleString('en-US', { maximumFractionDigits: 2 })} trillion` : m >= 1000 ? `$${(m / 1000).toLocaleString('en-US', { maximumFractionDigits: 1 })} billion` : `$${m.toLocaleString('en-US')} million`)
+  : (m >= 1e6 ? `${(m / 1e6).toLocaleString('tr-TR', { maximumFractionDigits: 2 })} trilyon $` : m >= 1000 ? `${(m / 1000).toLocaleString('tr-TR', { maximumFractionDigits: 1 })} milyar $` : `${m.toLocaleString('tr-TR')} milyon $`);
+const money = (x) => {
+  const v = fmtM(x.usdM);
+  if (x.upTo) return EN ? `up to ${v}` : `en fazla ${v}`;
+  if (x.over) return EN ? `over ${v}` : `${v}'dan fazla`;
+  if (x.approx) return EN ? `about ${v}` : `yaklaşık ${v}`;
+  return v;
+};
+const ROUND_EN = { 'Tohum': 'Seed', '%49 hisse': '49% stake', 'Stratejik yatırım': 'Strategic investment' };
+const MONTHS = EN ? ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'] : ['Ocak', 'Şubat', 'Mart', 'Nisan', 'Mayıs', 'Haziran', 'Temmuz', 'Ağustos', 'Eylül', 'Ekim', 'Kasım', 'Aralık'];
+
+// Sitedeki haberlerden gelen anlaşmalar + arşiv (src/lib/deals.js)
+const fromNews = locNewsList(await getNews(), lang, L.m).filter((n) => n.data.deal).map((n) => {
+  const d = n.data.deal;
+  return { ts: n.data.date.valueOf(), dateText: formatDate(n.data.date, false, L.locale), iso: n.data.date.toISOString().slice(0, 10), type: d.type, company: d.company, counterparty: d.counterparty,
+    amount: d.amount, usdM: d.amountUsdM, round: d.round, investors: d.investors, country: d.country, href: newsUrl(n), ext: false, story: true };
+});
+const archive = DEALS.map((x) => {
+  const [y, mo, da] = x.date.split('-').map(Number);
+  const orig = x.orig && (EN ? x.orig.en : x.orig.tr);
+  return { ts: Date.UTC(y, mo - 1, da, 9), iso: x.date, dateText: x.dateApprox ? `${MONTHS[mo - 1]} ${y}` : formatDate(new Date(Date.UTC(y, mo - 1, da, 9)), false, L.locale),
+    type: EN ? DEAL_TYPE_EN[x.type] ?? x.type : x.type, company: x.company, counterparty: x.counterparty,
+    amount: orig ?? (x.usdM ? money(x) : undefined), amountNote: orig && x.usdM ? `≈ ${fmtM(x.usdM)}` : undefined, usdM: x.usdM,
+    val: x.valUsdM ? `${x.approxVal ? (EN ? 'about ' : 'yaklaşık ') : ''}${fmtM(x.valUsdM)}` : undefined,
+    round: x.round && (EN ? ROUND_EN[x.round] ?? x.round : x.round), investors: x.investors, country: EN ? COUNTRY_EN[x.country] ?? x.country : x.country,
+    detail: x.detail && (EN ? x.detail.en : x.detail.tr), href: x.url, src: x.src, ext: true };
+});
+const deals = [...fromNews, ...archive].sort((a, b) => b.ts - a.ts).map((x) => ({ ...x, year: x.iso.slice(0, 4) }));
+const types = [...new Set(deals.map((x) => x.type))];
+const years = [...new Set(deals.map((x) => x.year))].sort().reverse();
+const countries = [...new Set(deals.map((x) => x.country).filter(Boolean))];
+const rounds = deals.filter((x) => x.type === (EN ? 'Funding round' : 'Yatırım turu'));
+const raised = rounds.reduce((a, x) => a + (x.usdM || 0), 0);
+const checked = formatDate(new Date(`${DEALS_CHECKED}T12:00:00+03:00`), false, L.locale);
 const pageUrl = new URL(url('/yatirimlar/'), Astro.site).href;
+const abs = (h) => (/^https?:/.test(h) ? h : new URL(h, Astro.site).href);
 const jsonLd = {
   '@type': 'CollectionPage', name: T('Yapay zeka yatırımları ve satın almaları', 'AI funding and acquisitions tracker'), inLanguage: L.locale, url: pageUrl,
-  mainEntity: { '@type': 'ItemList', itemListElement: deals.map((x, i) => ({ '@type': 'ListItem', position: i + 1, url: new URL(newsUrl(x.n), Astro.site).href, name: `${x.d.company}${x.d.counterparty ? ' – ' + x.d.counterparty : ''}: ${x.d.type}` })) },
+  mainEntity: { '@type': 'ItemList', numberOfItems: deals.length, itemListElement: deals.map((x, i) => ({ '@type': 'ListItem', position: i + 1, url: abs(x.href), name: `${x.company}${x.counterparty ? ' – ' + x.counterparty : ''}: ${x.type}` })) },
 };
 ---
-<Base title={T('Yapay zeka yatırımları ve satın almaları', 'AI funding and acquisitions tracker')} description={T('Yapay zeka şirketlerine yapılan yatırımlar, satın almalar, halka arzlar ve büyük anlaşmalar: şirket, tutar, tür ve ülkeye göre filtrelenebilir takip tablosu.', 'Funding rounds, acquisitions, IPOs and major deals in AI: a tracker you can filter by company, amount, type and country.')}
+<Base title={T('Yapay zeka yatırımları ve satın almaları', 'AI funding and acquisitions tracker')} description={T(`Ocak 2025'ten bu yana yapay zekadaki ${deals.length} büyük yatırım turu, satın alma, halka arz ve altyapı anlaşması: OpenAI, Anthropic, xAI, Nvidia ve diğerleri. Yıla, türe ve şirkete göre süzülebilir.`, `${deals.length} major AI funding rounds, acquisitions, IPOs and infrastructure deals since January 2025, from OpenAI, Anthropic and xAI to Nvidia. Filter by year, type and company.`)}
   jsonLd={jsonLd} breadcrumbs={[{ name: 'Ana sayfa', path: '/' }, { name: T('Yatırım takipçisi', 'Funding tracker'), path: '/yatirimlar/' }]}>
   <section class="deals">
     <span class="cat">{T('Takipçi', 'Tracker')}</span>
     <h1 class="page-h">{T('Yapay zeka yatırımları ve satın almaları', 'AI funding and acquisitions')}</h1>
-    <p class="spot">{T("Yapay zeka şirketlerine yapılan yatırımlar, satın almalar, halka arzlar ve büyük anlaşmalar. Tablo, YZ Gündemi'nde yayınlanan haberlerden otomatik olarak güncellenir; her satır ilgili habere ve kaynaklarına bağlanır.", 'Funding rounds, acquisitions, IPOs and major deals in AI. The table updates automatically from stories published on YZ Gündemi; each row links to the story and its sources.')}</p>
+    <p class="spot">{T("Ocak 2025'ten bu yana yapay zeka şirketlerine yapılan büyük yatırımlar, satın almalar, halka arzlar ve altyapı anlaşmaları. Yeni anlaşmalar YZ Gündemi'nde yayınlanan haberlerden otomatik eklenir; her satır habere ya da resmi kaynağa bağlanır.", 'Major funding rounds, acquisitions, IPOs and infrastructure deals in AI since January 2025. New deals are added automatically from stories on YZ Gündemi; each row links to the story or the original source.')}</p>
+    <p class="models-checked">{T('Arşiv son kontrol', 'Archive last checked')}: <time datetime={DEALS_CHECKED}>{checked}</time></p>
 
     <dl class="deal-stats">
       <div><dt>{T('Kayıtlı anlaşma', 'Deals tracked')}</dt><dd>{deals.length}</dd></div>
-      <div><dt>{T('Toplam büyüklük', 'Total value')}</dt><dd>{fmtB(total)}</dd></div>
+      <div><dt>{T('Yatırım turlarında toplanan', 'Raised in funding rounds')}</dt><dd>{fmtM(raised)}</dd></div>
       <div><dt>{T('Ülke', 'Countries')}</dt><dd>{countries.length}</dd></div>
     </dl>
 
-    <div class="deal-filters" role="group" aria-label={T('Türe göre süz', 'Filter by type')} data-deal-filters>
+    <div class="deal-filters" role="group" aria-label={T('Yıla göre süz', 'Filter by year')} data-deal-years>
+      <button type="button" aria-pressed="true" data-year="">{T('Tüm yıllar', 'All years')}</button>
+      {years.map((y) => <button type="button" aria-pressed="false" data-year={y}>{y}</button>)}
+    </div>
+    <div class="deal-filters deal-filters-2" role="group" aria-label={T('Türe göre süz', 'Filter by type')} data-deal-filters>
       <button type="button" aria-pressed="true" data-type="">{T('Tümü', 'All')}</button>
       {types.map((t) => <button type="button" aria-pressed="false" data-type={t}>{t}</button>)}
     </div>
@@ -40,36 +78,45 @@ const jsonLd = {
       <table class="deal-table">
         <thead><tr><th scope="col">{T('Tarih', 'Date')}</th><th scope="col">{T('Şirket', 'Company')}</th><th scope="col">{T('Tür', 'Type')}</th><th scope="col">{T('Tutar', 'Amount')}</th><th scope="col">{T('Karşı taraf / ayrıntı', 'Counterparty / details')}</th><th scope="col">{T('Ülke', 'Country')}</th></tr></thead>
         <tbody>
-          {deals.map(({ n, d }) => (
-            <tr data-type={d.type} data-text={`${d.company} ${d.counterparty ?? ''} ${d.country ?? ''} ${(d.investors ?? []).join(' ')}`.toLocaleLowerCase(lang)}>
-              <td class="nowrap">{formatDate(n.data.date, false, L.locale)}</td>
-              <td><a href={newsUrl(n)}><strong>{d.company}</strong></a></td>
-              <td><span class="deal-type">{d.type}</span>{d.round && <span class="meta"> · {d.round}</span>}</td>
-              <td class="nowrap">{d.amount ?? '—'}</td>
-              <td>{d.counterparty ?? ''}{d.investors?.length ? <span class="meta">{d.counterparty ? ' · ' : ''}{T('Yatırımcılar', 'Investors')}: {d.investors.join(', ')}</span> : null}</td>
-              <td>{d.country ?? '—'}</td>
+          {deals.map((x) => (
+            <tr data-type={x.type} data-year={x.year} data-text={`${x.company} ${x.counterparty ?? ''} ${x.country ?? ''} ${(x.investors ?? []).join(' ')}`.toLocaleLowerCase(lang)}>
+              <td class="nowrap"><time datetime={x.iso}>{x.dateText}</time></td>
+              <td>{x.ext ? <a href={x.href} rel="noopener"><strong>{x.company}</strong></a> : <a href={x.href}><strong>{x.company}</strong></a>}</td>
+              <td><span class="deal-type">{x.type}</span>{x.round && <span class="meta"> · {x.round}</span>}</td>
+              <td class="nowrap">{x.amount ?? '—'}{x.amountNote && <span class="meta"><br />{x.amountNote}</span>}</td>
+              <td>
+                {x.counterparty && <span>{x.counterparty}</span>}
+                {x.val && <span class="meta">{x.counterparty ? ' · ' : ''}{T('Değerleme', 'Valuation')}: {x.val}</span>}
+                {x.investors?.length ? <span class="meta">{x.counterparty || x.val ? ' · ' : ''}{T('Yatırımcılar', 'Investors')}: {x.investors.join(', ')}</span> : null}
+                {x.detail && <span class="deal-detail">{x.detail}</span>}
+                {x.ext ? <span class="deal-src meta">{T('Kaynak', 'Source')}: <a href={x.href} rel="noopener">{x.src} ↗</a></span> : <span class="deal-src meta"><a href={x.href}>{T('Haberimiz', 'Our story')} →</a></span>}
+              </td>
+              <td>{x.country ?? '—'}</td>
             </tr>
           ))}
         </tbody>
       </table>
     </div>
     <p class="empty" data-deal-empty hidden>{T('Bu süzgece uyan anlaşma yok.', 'No deals match this filter.')}</p>
-    <p class="ai-note">{T('Tutarlar haberlerdeki ve kaynaklarındaki yazımla verilir; "toplam büyüklük" farklı türdeki anlaşmaları (halka arz, satın alma, tesis yatırımı) bir arada toplar ve yalnızca bir fikir vermek içindir.', 'Amounts are given as reported in our stories and their sources. “Total value” adds up different kinds of deals (IPOs, acquisitions, facility investments) and is only a rough indication.')}</p>
+    <p class="ai-note">{T('Tutarlar kaynaklardaki yazımla verilir; avro tutarların dolar karşılığı yaklaşıktır. Altyapı anlaşmalarındaki tutarlar çoğunlukla yıllara yayılan taahhütlerdir. "Yatırım turlarında toplanan" yalnızca yatırım turlarını toplar. Eksik gördüğünüz büyük bir anlaşma varsa', 'Amounts are as reported by the sources; dollar equivalents of euro amounts are approximate. Infrastructure deal values are mostly commitments spread over several years. “Raised in funding rounds” counts funding rounds only. Know of a major deal we’re missing?')} <a href={url('/hata-bildir/')}>{T('bize bildirin', 'Let us know')}</a>.</p>
   </section>
 </Base>
 
 <script>
   const rows = [...document.querySelectorAll<HTMLTableRowElement>('.deal-table tbody tr')];
   const btns = [...document.querySelectorAll<HTMLButtonElement>('[data-deal-filters] button')];
+  const ybtns = [...document.querySelectorAll<HTMLButtonElement>('[data-deal-years] button')];
+  let year = '';
   const q = document.querySelector<HTMLInputElement>('[data-deal-q]')!;
   const empty = document.querySelector<HTMLElement>('[data-deal-empty]')!;
   let type = '';
   const apply = () => {
     const term = q.value.trim().toLocaleLowerCase(document.documentElement.lang || 'tr');
     let shown = 0;
-    rows.forEach((r) => { const ok = (!type || r.dataset.type === type) && (!term || r.dataset.text!.includes(term)); r.hidden = !ok; if (ok) shown++; });
+    rows.forEach((r) => { const ok = (!type || r.dataset.type === type) && (!year || r.dataset.year === year) && (!term || r.dataset.text!.includes(term)); r.hidden = !ok; if (ok) shown++; });
     empty.hidden = shown > 0;
   };
   btns.forEach((b) => b.addEventListener('click', () => { type = b.dataset.type!; btns.forEach((x) => x.setAttribute('aria-pressed', String(x === b))); apply(); }));
+  ybtns.forEach((b) => b.addEventListener('click', () => { year = b.dataset.year!; ybtns.forEach((x) => x.setAttribute('aria-pressed', String(x === b))); apply(); }));
   q.addEventListener('input', apply);
 </script>
