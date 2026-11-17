@@ -150,5 +150,21 @@
     "importance": 28,
     "featured": false,
     "date": "2026-11-17T12:34:35+03:00"
+  },
+  {
+    "slug": "isomorphic-labs-yapay-zeka-destekli-ilac-kesfi-icin-5",
+    "title": "Isomorphic Labs, yapay zeka destekli ilaç keşfi için 5 milyar dolarlık Series C turunu açıkladı",
+    "text": "Isomorphic Labs, Greenoaks ve Sequoia Capital liderliğinde 5 milyar dolarlık Series C turunu açıkladı. Finansman ilaç adaylarını klinik deneylere taşımak için kullanılacak.",
+    "importance": 62,
+    "featured": false,
+    "date": "2026-11-17T19:17:03+03:00"
+  },
+  {
+    "slug": "mistral-vibe-masaustu-uygulamasini-acti-avrupali-gelistiricilere-uc-ay",
+    "title": "Mistral, Vibe masaüstü uygulamasını açtı; Avrupalı geliştiricilere üç ay ücretsiz Vibe Pro sunuyor",
+    "text": "Mistral AI, Vibe masaüstü uygulamasını kullanıma açtı. Avrupa'daki geliştiriciler için Vibe Pro, sınırlı süreyle üç ay ücretsiz. #Mistral",
+    "importance": 36,
+    "featured": false,
+    "date": "2026-11-17T19:16:03+03:00"
   }
 ]
