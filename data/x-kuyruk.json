@@ -198,5 +198,45 @@
     "importance": 42,
     "featured": false,
     "date": "2026-11-18T00:29:49+03:00"
+  },
+  {
+    "slug": "nvidia-nin-geliri-yuzde-103-artti-yonetim-kurulu-huang",
+    "title": "Nvidia'nın geliri yüzde 103 arttı; yönetim kurulu Huang'ı geri getirmeyecek",
+    "text": "Nvidia'nın üçüncü çeyrek geliri yüzde 103 artışla 115,8 milyar dolara ulaştı. Yönetim kurulu, istifa eden Jensen Huang'ı CEO olarak geri getirmeyeceğini açıkladı. #Nvidia",
+    "importance": 88,
+    "featured": true,
+    "date": "2026-11-18T04:33:44+03:00"
+  },
+  {
+    "slug": "nvidia-huang-in-ayriliginin-ardindan-acik-kaynak-yapay-zeka",
+    "title": "Nvidia, Huang'ın ayrılığının ardından açık kaynak yapay zeka stratejisini sürdüreceğini söyledi",
+    "text": "Nvidia'nın geçici CEO'su Colette Kress, Huang'ın istifasından sonraki ilk kazanç çağrısında açık kaynak taahhüdünü yineledi. Hugging Face'in katılım planı da değişmedi. #Nvidia",
+    "importance": 68,
+    "featured": false,
+    "date": "2026-11-18T04:32:44+03:00"
+  },
+  {
+    "slug": "nvidia-yonetim-kurulu-ihracat-kontrolu-ve-ulusal-guvenlik-icin",
+    "title": "Nvidia yönetim kurulu, ihracat kontrolü ve ulusal güvenlik için kalıcı komite kurdu",
+    "text": "Nvidia, yönetim kurulu bünyesinde Ulusal Güvenlik ve İhracat Kontrolü Gözetim Komitesi'ni kurdu. Komite, ulusal güvenlik konularında kurul düzeyinde denetim sağlayacak. #Nvidia",
+    "importance": 50,
+    "featured": false,
+    "date": "2026-11-18T04:31:44+03:00"
+  },
+  {
+    "slug": "adalet-bakanligi-ndan-yapay-zekayla-uretilen-sahte-goruntu-ve",
+    "title": "Adalet Bakanlığı'ndan yapay zekayla üretilen sahte görüntü ve seslere ceza hazırlığı",
+    "text": "Adalet Bakanlığı, 13. Yargı Paketi'ne yapay zekayla izinsiz üretilen sahte görüntü ve ses kayıtlarını doğrudan suç sayan bir düzenleme eklemeye hazırlanıyor. Taslak aşamasında.",
+    "importance": 74,
+    "featured": false,
+    "date": "2026-11-18T04:30:44+03:00"
+  },
+  {
+    "slug": "ingiltere-parlamento-komitesi-yapay-zeka-sirketleri-guvenlik-iddialarini-kanitla",
+    "title": "İngiltere parlamento komitesi: Yapay zeka şirketleri güvenlik iddialarını kanıtlamalı",
+    "text": "İngiltere parlamento komitesi, yapay zeka firmalarının güvenlik iddialarını kanıtlaması ve bağımsız uzmanların bunları incelemesi gerektiğini savunan bir rapor yayımladı.",
+    "importance": 40,
+    "featured": false,
+    "date": "2026-11-18T04:29:44+03:00"
   }
 ]
