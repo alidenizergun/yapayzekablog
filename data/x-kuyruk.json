@@ -238,5 +238,45 @@
     "importance": 40,
     "featured": false,
     "date": "2026-11-18T04:29:44+03:00"
+  },
+  {
+    "slug": "palo-alto-networks-yapay-zeka-startup-i-applied-compute",
+    "title": "Palo Alto Networks, yapay zeka startup'ı Applied Compute'u 4,5 milyar dolara alıyor",
+    "text": "Palo Alto Networks, eski OpenAI araştırmacılarının kurduğu Applied Compute'u tamamen hisse senedi karşılığında 4,5 milyar dolara satın alacak. #PaloAltoNetworks",
+    "importance": 70,
+    "featured": true,
+    "date": "2026-11-19T04:33:48+03:00"
+  },
+  {
+    "slug": "fiziksel-yapay-zeka-girisimi-humyn-labs-47-milyon-dolarlik",
+    "title": "Fiziksel yapay zeka girişimi Humyn Labs, 47 milyon dolarlık Series A turu kapattı",
+    "text": "Fiziksel yapay zeka girişimi Humyn Labs, Accel liderliğinde 47 milyon dolarlık Series A turu kapattı. Şirket altı ayda 50 milyon doları aşan yıllık gelir elde ettiğini iddia ediyor.",
+    "importance": 42,
+    "featured": false,
+    "date": "2026-11-19T04:32:48+03:00"
+  },
+  {
+    "slug": "kaliforniya-buyuk-yapay-zeka-gelistiricileri-icin-zorunlu-guvenlik-standartlari",
+    "title": "Kaliforniya, büyük yapay zeka geliştiricileri için zorunlu güvenlik standartları önerdi",
+    "text": "Kaliforniya, büyük yapay zeka geliştiricileri için zorunlu güvenlik standartları, bağımsız denetim ve acil durdurma yetkisi öneren bir rapor yayımladı. Newsom çerçevenin ulusal taban olmasını istedi.",
+    "importance": 52,
+    "featured": false,
+    "date": "2026-11-19T04:31:48+03:00"
+  },
+  {
+    "slug": "gao-testi-sohbet-robotlarinin-korumalari-asildi-saldiri-plani-bilgisi",
+    "title": "GAO testi: Sohbet robotlarının korumaları aşıldı, saldırı planı bilgisi elde edildi",
+    "text": "ABD Hükümet Sorumluluk Ofisi, Claude, Grok, ChatGPT ve Gemini'nin korumalarını bilinen yöntemlerle aşarak 12 saat içinde saldırıya yardımcı olabilecek bilgi elde ettiğini raporladı.",
+    "importance": 62,
+    "featured": false,
+    "date": "2026-11-19T04:30:48+03:00"
+  },
+  {
+    "slug": "ingiltere-ai-guvenlik-enstitusu-gpt-6-2-astra-onculunden",
+    "title": "İngiltere AI Güvenlik Enstitüsü: GPT-6.2 Astra, öncülünden daha kolay jailbreak ediliyor",
+    "text": "İngiltere AI Güvenlik Enstitüsü, OpenAI'nin GPT-6.2 Astra ön sürümleri için GPT-6 Astra'ya göre yarı sayıda sorguyla evrensel jailbreak geliştirdi. #OpenAI",
+    "importance": 58,
+    "featured": false,
+    "date": "2026-11-19T04:29:48+03:00"
   }
 ]
