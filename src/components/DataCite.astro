@@ -1,0 +1,30 @@
+---
+// "Bu veriyi kullanın" kutusu: kaynak gösterme metni (kopyalanabilir) ve CSV indirme bağlantısı.
+import { url } from '../lib/news.js';
+import { SITE } from '../lib/site.js';
+import { i18n } from '../i18n/index.js';
+interface Props { name: string; nameEn: string; path: string; csv: string; checked: string }
+const { name, nameEn, path, csv, checked } = Astro.props;
+const L = await i18n(Astro);
+const { T } = L;
+const [y, m, d] = checked.split('-').map(Number);
+const dateText = new Date(Date.UTC(y, m - 1, d, 9)).toLocaleDateString(L.locale, { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' });
+const cite = T(`Kaynak: YZ Gündemi, ${name} (${SITE.domain}${path}), ${dateText}.`, `Source: YZ Gündemi, ${nameEn} (${SITE.domain}${L.u(path)}), ${dateText}.`);
+---
+<aside class="data-cite" aria-labelledby="cite-h">
+  <h2 id="cite-h">{T('Bu veriyi kullanın', 'Use this data')}</h2>
+  <p>{T('Haberlerinizde, sunumlarınızda ve araştırmalarınızda kaynak göstererek kullanabilirsiniz. Lütfen bu sayfaya bağlantı verin.', 'You can use it in your stories, presentations and research with attribution. Please link to this page.')}</p>
+  <p class="cite-text" data-cite-text>{cite}</p>
+  <p class="cite-actions">
+    <button type="button" class="btn cta-secondary" data-cite-copy data-done={T('Kopyalandı', 'Copied')}>{T('Kaynak metnini kopyala', 'Copy citation')}</button>
+    <a class="btn cta-secondary" href={url(csv)} download>{T('CSV olarak indir', 'Download CSV')}</a>
+  </p>
+</aside>
+<script>
+  document.querySelectorAll<HTMLButtonElement>('[data-cite-copy]').forEach((b) => b.addEventListener('click', async () => {
+    const box = b.closest('.data-cite')?.querySelector<HTMLElement>('[data-cite-text]');
+    if (!box) return;
+    try { await navigator.clipboard.writeText(box.textContent?.trim() ?? ''); b.textContent = b.dataset.done ?? 'OK'; }
+    catch { const r = document.createRange(); r.selectNodeContents(box); const s = getSelection(); s?.removeAllRanges(); s?.addRange(r); }
+  }));
+</script>

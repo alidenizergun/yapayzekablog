@@ -1,5 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
+import DataCite from '../components/DataCite.astro';
 import NewsRow from '../components/NewsRow.astro';
 import { MODELS, MODELS_CHECKED, priceClass } from '../lib/models.js';
 import { getNews, newsUrl, formatDate, url } from '../lib/news.js';
@@ -33,7 +34,8 @@ const faqTr = [
 ];
 const faq = EN ? faqEn : faqTr;
 const jsonLd = [
-  { '@type': 'Dataset', name: T('Yapay zeka modelleri API fiyat karşılaştırması', 'AI model API pricing comparison'), description: T('Önde gelen yapay zeka modellerinin milyon token başına girdi ve çıktı fiyatları ile bağlam pencereleri.', 'Input and output prices per million tokens and context windows for leading AI models.'),
+  { '@type': 'Dataset', name: T('Yapay zeka modelleri API fiyat karşılaştırması', 'AI model API pricing comparison'), description: T("Önde gelen yapay zeka modellerinin (OpenAI, Anthropic, Google, xAI, DeepSeek ve diğerleri) resmi fiyat sayfalarından derlenen milyon token başına girdi ve çıktı fiyatları ile bağlam pencereleri. YZ Gündemi tarafından düzenli olarak kontrol edilir.", 'Input and output prices per million tokens and context windows for leading AI models from OpenAI, Anthropic, Google, xAI, DeepSeek and others, compiled from official pricing pages and checked regularly by YZ Gündemi.'), isAccessibleForFree: true,
+    distribution: [{ '@type': 'DataDownload', encodingFormat: 'text/csv', contentUrl: new URL(url('/veri/model-fiyatlari.csv'), Astro.site).href }],
     url: pageUrl, inLanguage: L.locale, dateModified: MODELS_CHECKED, creator: { '@id': new URL(url('/#organization'), Astro.site).href },
     isBasedOn: [...new Set(rows.map((m) => m.src.url))] },
   { '@type': 'FAQPage', mainEntity: faq.map(([q, a]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a } })) },
@@ -70,6 +72,7 @@ const jsonLd = [
         </tbody>
       </table>
     </div>
+    <DataCite name="Yapay zeka model API fiyatları" nameEn="AI model API pricing" path="/modeller-karsilastirma/" csv="/veri/model-fiyatlari.csv" checked={MODELS_CHECKED} />
     <p class="ai-note">{T("\"Fiyat sınıfı\" YZ Gündemi'nin çıktı fiyatına göre yaptığı sınıflandırmadır (Üst: 20 $ ve üzeri, Orta: 5-20 $, Ekonomik: 5 $ altı); modelin kalitesini değil maliyetini gösterir. \"Belirtilmemiş\": resmi fiyat sayfasında bağlam penceresi yazmıyor.", '“Price tier” is YZ Gündemi’s grouping by output price (Premium: $20 and up, Mid: $5–20, Budget: under $5); it reflects cost, not quality. “Not stated”: the official pricing page doesn’t list a context window.')}</p>
 
     <section class="calc" aria-labelledby="calc-h" data-calc>

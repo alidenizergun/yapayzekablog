@@ -1,5 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
+import DataCite from '../components/DataCite.astro';
 import { getNews, newsUrl, formatDate, url } from '../lib/news.js';
 import { DEALS, DEALS_CHECKED } from '../lib/deals.js';
 import { i18n, locNewsList, DEAL_TYPE_EN, COUNTRY_EN } from '../i18n/index.js';
@@ -44,10 +45,39 @@ const raised = rounds.reduce((a, x) => a + (x.usdM || 0), 0);
 const checked = formatDate(new Date(`${DEALS_CHECKED}T12:00:00+03:00`), false, L.locale);
 const pageUrl = new URL(url('/yatirimlar/'), Astro.site).href;
 const abs = (h) => (/^https?:/.test(h) ? h : new URL(h, Astro.site).href);
-const jsonLd = {
+// Aylık grafik ve öne çıkan rakamlar (yalnızca yatırım turları)
+const MSHORT = EN ? ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'] : ['Oca', 'Şub', 'Mar', 'Nis', 'May', 'Haz', 'Tem', 'Ağu', 'Eyl', 'Eki', 'Kas', 'Ara'];
+const now = new Date();
+const months = [];
+for (let y = 2025, mo = 0; y * 12 + mo <= now.getUTCFullYear() * 12 + now.getUTCMonth(); mo === 11 ? (y++, (mo = 0)) : mo++) {
+  const key = `${y}-${String(mo + 1).padStart(2, '0')}`;
+  const inMonth = rounds.filter((x) => x.iso.startsWith(key));
+  months.push({ key, label: MSHORT[mo], year: y, first: mo === 0, sum: inMonth.reduce((a, x) => a + (x.usdM || 0), 0), n: inMonth.length });
+}
+const maxSum = Math.max(...months.map((x) => x.sum), 1);
+const CH = { w: 760, h: 240, top: 26, bottom: 38, left: 8, right: 8 };
+const bw = (CH.w - CH.left - CH.right) / months.length;
+const barH = (v) => ((CH.h - CH.top - CH.bottom) * v) / maxSum;
+const shortB = (m) => (m >= 1000 ? `${Math.round(m / 1000)}` : m > 0 ? '<1' : '');
+const biggest = [...rounds].filter((x) => x.usdM).sort((a, b) => b.usdM - a.usdM)[0];
+const byYear = (y) => rounds.filter((x) => x.year === y).reduce((a, x) => a + (x.usdM || 0), 0);
+const billionPlus = rounds.filter((x) => (x.usdM || 0) >= 1000).length;
+const companyCount = new Map();
+for (const x of deals) companyCount.set(x.company, (companyCount.get(x.company) || 0) + 1);
+const [topCo, topCoN] = [...companyCount].sort((a, b) => b[1] - a[1])[0];
+const peak = months.reduce((a, b) => (b.sum > a.sum ? b : a));
+const chartLabel = T(`Ay ay yatırım turlarında toplanan tutar, Ocak 2025'ten bugüne. En yüksek ay: ${peak.label} ${peak.year}, ${fmtM(peak.sum)}.`, `Amount raised in funding rounds by month since January 2025. Peak month: ${peak.label} ${peak.year}, ${fmtM(peak.sum)}.`);
+
+const jsonLd = [{
+  '@type': 'Dataset', name: T('Yapay zeka yatırımları ve satın almaları veri seti', 'AI funding and acquisitions dataset'), url: pageUrl, inLanguage: L.locale, isAccessibleForFree: true,
+  description: T(`Ocak 2025'ten bu yana yapay zeka alanındaki ${deals.length} büyük yatırım turu, satın alma, halka arz, birleşme ve altyapı anlaşması: tarih, tür, şirket, karşı taraf, tutar, değerleme, yatırımcılar, ülke ve kaynak bağlantısı. YZ Gündemi tarafından derlenir ve yeni haberlerle güncellenir.`, `${deals.length} major AI funding rounds, acquisitions, IPOs, mergers and infrastructure deals since January 2025, with date, type, company, counterparty, amount, valuation, investors, country and source link. Compiled by YZ Gündemi and updated with new stories.`),
+  creator: { '@id': new URL(url('/#organization'), Astro.site).href }, dateModified: DEALS_CHECKED, temporalCoverage: `2025-01-01/${DEALS_CHECKED}`,
+  keywords: ['yapay zeka', 'yatırım', 'satın alma', 'girişim', 'AI funding', 'venture capital'],
+  distribution: [{ '@type': 'DataDownload', encodingFormat: 'text/csv', contentUrl: new URL(url('/veri/yatirimlar.csv'), Astro.site).href }],
+}, {
   '@type': 'CollectionPage', name: T('Yapay zeka yatırımları ve satın almaları', 'AI funding and acquisitions tracker'), inLanguage: L.locale, url: pageUrl,
   mainEntity: { '@type': 'ItemList', numberOfItems: deals.length, itemListElement: deals.map((x, i) => ({ '@type': 'ListItem', position: i + 1, url: abs(x.href), name: `${x.company}${x.counterparty ? ' – ' + x.counterparty : ''}: ${x.type}` })) },
-};
+}];
 ---
 <Base title={T('Yapay zeka yatırımları ve satın almaları', 'AI funding and acquisitions tracker')} description={T(`Ocak 2025'ten bu yana yapay zekadaki ${deals.length} büyük yatırım turu, satın alma, halka arz ve altyapı anlaşması: OpenAI, Anthropic, xAI, Nvidia ve diğerleri. Yıla, türe ve şirkete göre süzülebilir.`, `${deals.length} major AI funding rounds, acquisitions, IPOs and infrastructure deals since January 2025, from OpenAI, Anthropic and xAI to Nvidia. Filter by year, type and company.`)}
   jsonLd={jsonLd} breadcrumbs={[{ name: 'Ana sayfa', path: '/' }, { name: T('Yatırım takipçisi', 'Funding tracker'), path: '/yatirimlar/' }]}>
@@ -62,6 +92,34 @@ const jsonLd = {
       <div><dt>{T('Yatırım turlarında toplanan', 'Raised in funding rounds')}</dt><dd>{fmtM(raised)}</dd></div>
       <div><dt>{T('Ülke', 'Countries')}</dt><dd>{countries.length}</dd></div>
     </dl>
+
+    <section class="deal-insights" aria-labelledby="ins-h">
+      <h2 id="ins-h" class="ev-h">{T('Rakamlarla', 'By the numbers')}</h2>
+      <ul class="deal-facts">
+        {biggest && <li><strong>{fmtM(biggest.usdM)}</strong> {T(`ile en büyük yatırım turu: ${biggest.company} (${biggest.dateText})`, `is the largest funding round: ${biggest.company} (${biggest.dateText})`)}</li>}
+        <li><strong>{fmtM(byYear('2025'))}</strong> {T("2025'te yatırım turlarında toplandı;", 'raised in funding rounds in 2025;')} <strong>{fmtM(byYear('2026'))}</strong> {T("2026'da bugüne kadar.", 'in 2026 so far.')}</li>
+        <li><strong>{billionPlus}</strong> {T('yatırım turu 1 milyar doları aştı.', 'funding rounds topped $1 billion.')}</li>
+        <li><strong>{topCo}</strong> {T(`listede en çok yer alan şirket (${topCoN} kayıt).`, `appears most often in the list (${topCoN} entries).`)}</li>
+      </ul>
+      <figure class="deal-chart" tabindex="0" aria-label={T("Aylık yatırım grafiği", "Monthly funding chart")}>
+        <svg viewBox={`0 0 ${CH.w} ${CH.h}`} role="img" aria-label={chartLabel} preserveAspectRatio="xMidYMid meet">
+          {months.map((mo, i) => {
+            const h = barH(mo.sum); const x = CH.left + i * bw; const y0 = CH.h - CH.bottom;
+            return (
+              <g>
+                <title>{`${mo.label} ${mo.year}: ${mo.sum ? fmtM(mo.sum) : '—'} · ${mo.n} ${T('tur', 'rounds')}`}</title>
+                <rect x={x + bw * 0.15} y={y0 - h} width={bw * 0.7} height={Math.max(h, mo.sum ? 1.5 : 0)} rx="2" class="bar" />
+                {mo.sum > 0 && <text x={x + bw / 2} y={y0 - h - 6} text-anchor="middle" class="val">{shortB(mo.sum)}</text>}
+                <text x={x + bw / 2} y={y0 + 15} text-anchor="middle" class="lbl">{mo.label}</text>
+                {mo.first && <text x={x + bw * 0.15} y={y0 + 31} class="yr">{mo.year}</text>}
+              </g>
+            );
+          })}
+          <line x1={CH.left} x2={CH.w - CH.right} y1={CH.h - CH.bottom} y2={CH.h - CH.bottom} class="axis" />
+        </svg>
+        <figcaption class="meta">{T('Ay ay yatırım turlarında toplanan tutar (milyar $). Satın almalar, halka arzlar ve altyapı anlaşmaları dahil değildir. Çubukların üzerine gelerek ayrıntıyı görebilirsiniz.', 'Amount raised in funding rounds by month ($ billion). Excludes acquisitions, IPOs and infrastructure deals. Hover a bar for details.')}</figcaption>
+      </figure>
+    </section>
 
     <div class="deal-filters" role="group" aria-label={T('Yıla göre süz', 'Filter by year')} data-deal-years>
       <button type="button" aria-pressed="true" data-year="">{T('Tüm yıllar', 'All years')}</button>
@@ -98,6 +156,7 @@ const jsonLd = {
       </table>
     </div>
     <p class="empty" data-deal-empty hidden>{T('Bu süzgece uyan anlaşma yok.', 'No deals match this filter.')}</p>
+    <DataCite name="Yapay zeka yatırım takipçisi" nameEn="AI funding tracker" path="/yatirimlar/" csv="/veri/yatirimlar.csv" checked={DEALS_CHECKED} />
     <p class="ai-note">{T('Tutarlar kaynaklardaki yazımla verilir; avro tutarların dolar karşılığı yaklaşıktır. Altyapı anlaşmalarındaki tutarlar çoğunlukla yıllara yayılan taahhütlerdir. "Yatırım turlarında toplanan" yalnızca yatırım turlarını toplar. Eksik gördüğünüz büyük bir anlaşma varsa', 'Amounts are as reported by the sources; dollar equivalents of euro amounts are approximate. Infrastructure deal values are mostly commitments spread over several years. “Raised in funding rounds” counts funding rounds only. Know of a major deal we’re missing?')} <a href={url('/hata-bildir/')}>{T('bize bildirin', 'Let us know')}</a>.</p>
   </section>
 </Base>

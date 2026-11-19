@@ -50,7 +50,7 @@ const xCount = byHost.get('x.com')?.n ?? 0;
         <li>
           <span class="step-n" aria-hidden="true">2</span>
           <h3>{T('Seçme ve yazma', 'Selecting and writing')}</h3>
-          <p>{T('Haber değeri taşıyan gelişmeler seçilir, daha önce yayınlananlar ve tekrarlar elenir. Haberler kaynak metin kopyalanmadan, kendi cümlelerimizle Türkçe yazılır. Ardından ayrı bir editör adımı metni çeviri dili, anlam bütünlüğü ve yazım açısından yeniden okur; rakamlara ve iddialara dokunmaz.', 'Newsworthy developments are selected, and anything already covered or duplicated is dropped. Stories are written in our own words without copying source text. A separate editing pass then rereads each story for clarity, coherence and spelling, without touching figures or claims.')}</p>
+          <p>{T('Haber değeri taşıyan gelişmeler seçilir, daha önce yayınlananlar ve tekrarlar elenir. Yalnızca bülten, derleme sitesi veya kişisel blog yazısına dayanan gelişmeler elenir; şirketin kendi duyurusu ya da tanınmış bir haber kuruluşu aranır. Haberler kaynak metin kopyalanmadan, kendi cümlelerimizle Türkçe yazılır ve her habere okura bağlam veren bir "Bu ne anlama geliyor?" notu eklenir.', 'Newsworthy developments are selected, and anything already covered or duplicated is dropped. Developments that rest only on newsletters, aggregators or personal blogs are dropped in favour of the company’s own announcement or an established news organization. Stories are written in our own words without copying source text, and each one gets a “Why it matters” note that gives the reader context.')}</p>
         </li>
         <li>
           <span class="step-n" aria-hidden="true">3</span>
@@ -73,8 +73,17 @@ const xCount = byHost.get('x.com')?.n ?? 0;
         <li><h3>{T('Söylenti haber değildir', 'Rumor isn’t news')}</h3><p>{T('Doğrulanmamış iddialar olgu gibi sunulmaz. Bir kişinin açıklaması "söyledi" diye aktarılır, iddia niteliğindeki bilgiler açıkça belirtilir.', 'Unverified claims are never presented as fact. Statements are attributed (“said”), and claims are clearly labeled as such.')}</p></li>
         <li><h3>{T('Görseller ne olduğunu söyler', 'Images say what they are')}</h3><p>{T("Şirket haberlerinde şirketin logosu kullanılır. Fotoğraflar Unsplash'ten alınan temsili görsellerdir ve fotoğrafçının adıyla gösterilir. Gerçek kişilerin fotoğrafı kullanılmaz.", 'Company stories use the company’s logo. Photos are illustrative images from Unsplash, credited to the photographer. We don’t use photos of real people.')}</p></li>
         <li><h3>{T('Yapay zeka kullanımı açıktır', 'AI use is disclosed')}</h3><p>{T('Haberler yapay zeka desteğiyle derlenir ve her haberin altında bu belirtilir. Yapay zeka hata yapabilir; bu yüzden kaynaklar her zaman görünür.', 'Stories are compiled with AI assistance, and every story says so. AI can make mistakes, which is why sources are always visible.')}</p></li>
-        <li><h3>{T('Hatalar düzeltilir', 'Errors get fixed')}</h3><p>{T('Bildirilen her hata kaynaklarla karşılaştırılır. Doğrulanırsa haber düzeltilir ya da yayından kaldırılır.', 'Every reported error is checked against the sources. If confirmed, the story is corrected or taken down.')}</p></li>
+        <li><h3>{T('Hatalar düzeltilir', 'Errors get fixed')}</h3><p>{T('Bildirilen her hata kaynaklarla karşılaştırılır. Doğrulanırsa haber düzeltilir ya da yayından kaldırılır; anlamı değiştiren düzeltmeler', 'Every reported error is checked against the sources. If confirmed, the story is corrected or taken down; corrections that change the meaning are listed on the')} <a href={url('/duzeltmeler/')}>{T('Düzeltmeler', 'Corrections')}</a> {T('sayfasında listelenir.', 'page.')}</p></li>
+        <li><h3>{T('Çıkar çatışması yok', 'No conflicts of interest')}</h3><p>{T('Şu an reklam ve sponsorlu içerik yayınlamıyoruz; haberini yaptığımız şirketlerden ücret, ürün veya erken erişim karşılığında içerik üretmiyoruz. İleride sponsorlu içerik yayınlarsak açıkça işaretleriz.', 'We currently run no ads or sponsored content, and we don’t produce coverage in exchange for payment, products or early access from the companies we cover. If we ever publish sponsored content, it will be clearly labeled.')}</p></li>
       </ul>
+    </section>
+
+    <section class="about-sec" id="imza" aria-labelledby="byline-h">
+      <div class="sechead"><h2 id="byline-h">{T('Haberlerde neden imza yok?', 'Why our stories carry no byline')}</h2></div>
+      <div class="prose">
+        <p>{T('Haberlerimiz tek bir muhabirin değil, yukarıda anlatılan editoryal sürecin ürünüdür: gelişmeler yapay zeka desteğiyle taranır, seçilir ve yazılır; kaynak ve kalite kontrollerinden geçer. Bu yüzden haberlerde kişi imzası yerine yayının adı yer alır.', 'Our stories are the product of the editorial process described above rather than of a single reporter: developments are found, selected and written with AI assistance and pass source and quality checks. That is why stories carry the publication’s name instead of a personal byline.')}</p>
+        <p>{T("Yayınlanan her haberin sorumluluğu YZ Gündemi'ne aittir. Yayın bilgileri", 'YZ Gündemi takes responsibility for every story it publishes. Publication details are in the')} <a href={url('/kunye/')}>{T('Künye', 'Masthead')}</a>{T("'de, hata bildirimi için", '; to report an error, use the')} <a href={url('/hata-bildir/')}>{T('Hata bildir', 'Report an error')}</a> {T('formunu kullanabilirsiniz.', 'form.')}</p>
+      </div>
     </section>
 
     {topPublishers.length > 0 && (

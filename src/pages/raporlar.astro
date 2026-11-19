@@ -1,5 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
+import DataCite from '../components/DataCite.astro';
 import { REPORTS_CHECKED, REPORT_TOPICS, reportsSorted } from '../lib/reports.js';
 import { formatDate, url } from '../lib/news.js';
 import { i18n } from '../i18n/index.js';
@@ -29,6 +30,10 @@ const topics = REPORT_TOPICS.filter((t) => reports.some((r) => r.topics.includes
 const checked = formatDate(new Date(`${REPORTS_CHECKED}T12:00:00+03:00`), false, L.locale);
 const pageUrl = new URL(url('/raporlar/'), Astro.site).href;
 const jsonLd = [
+  { '@type': 'Dataset', name: T('Yapay zeka raporları veri seti', 'AI reports dataset'), url: pageUrl, inLanguage: L.locale, isAccessibleForFree: true, dateModified: REPORTS_CHECKED,
+    description: T(`McKinsey, Stanford AI Index, PwC, BCG, Microsoft, Deloitte ve diğer kurumların 2025-2026 yapay zeka raporlarından ${reports.length} tanesinin tarihi, yayıncısı, konusu, özeti, öne çıkan bulguları ve resmi bağlantısı. YZ Gündemi tarafından derlenir.`, `Date, publisher, topic, summary, key findings and official link for ${reports.length} AI reports from 2025-2026 by McKinsey, the Stanford AI Index, PwC, BCG, Microsoft, Deloitte and others. Compiled by YZ Gündemi.`),
+    creator: { '@id': new URL(url('/#organization'), Astro.site).href },
+    distribution: [{ '@type': 'DataDownload', encodingFormat: 'text/csv', contentUrl: new URL(url('/veri/raporlar.csv'), Astro.site).href }] },
   { '@type': 'CollectionPage', name: T('Yapay zeka raporları', 'AI research reports'), url: pageUrl, inLanguage: L.locale,
     description: T('McKinsey, Stanford, MIT, PwC, BCG, Microsoft, Deloitte, TÜİK ve diğer kurumların 2025-2026 yapay zeka raporlarından öne çıkan bulgular.', 'Key findings from AI reports by McKinsey, Stanford, PwC, BCG, Microsoft, Deloitte and others.') },
   { '@type': 'ItemList', name: T('Yapay zeka raporları', 'AI research reports'), numberOfItems: reports.length,
@@ -80,6 +85,7 @@ const jsonLd = [
     ))}
     <p class="empty" data-rep-empty hidden>{T('Bu konuda rapor yok.', 'No reports on this topic.')}</p>
 
+    <DataCite name="Yapay zeka raporları" nameEn="AI research reports" path="/raporlar/" csv="/veri/raporlar.csv" checked={REPORTS_CHECKED} />
     <p class="ai-note">{EN
       ? <>Figures are taken from each report’s official page or press release; summaries are ours. Know of a report we should add? <a href={url('/hata-bildir/')}>Let us know</a>. For the numbers behind Turkey’s ecosystem, see <a href={url('/turkiye-yapay-zeka/')}>AI in Turkey</a>.</>
       : <>Rakamlar her raporun resmi sayfasından veya basın bülteninden alınmıştır; özetler bize aittir. Eklenmesini istediğiniz bir rapor mu var? <a href={url('/hata-bildir/')}>Bize bildirin</a>. Türkiye ekosisteminin rakamları için <a href={url('/turkiye-yapay-zeka/')}>Türkiye'de yapay zeka</a> sayfasına bakın.</>}</p>
