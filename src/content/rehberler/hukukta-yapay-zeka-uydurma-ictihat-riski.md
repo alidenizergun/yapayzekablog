@@ -53,7 +53,7 @@ Bunun tek bir nedeni yok, ancak yaygın örüntüler tahmin edilebilir. Zaman ba
 
 Mahkemelerin tepkisi, yukarıdaki kaynaklarda da görüldüğü gibi yaptırım yönünde. Dilekçeyi sunan kişi, metindeki atıflardan sorumludur; metnin bir yapay zeka aracıyla hazırlanmış olması bu sorumluluğu ortadan kaldırmaz. Yaptırımın türü ve ağırlığı mahkemeye ve ülkeye göre değişir. Belirli bir örneğin sonucunu değerlendirmek için vakanın kendi kaydına bakın; veritabanındaki girişler bu konuda başlangıç noktası olabilir.
 
-Türkiye'deki durum için ayrı bir rehberimiz var: [Türkiye'de hukukta yapay zeka](/rehber/turkiyede-hukukta-yapay-zeka/). Mesleki sorumluluk ve baro düzenlemeleri için ilgili meslek kuruluşunun güncel kurallarına bakmanız gerekir.
+Türkiye'deki durum için ayrı bir rehberimiz var: Türkiye'de hukukta yapay zeka. Mesleki sorumluluk ve baro düzenlemeleri için ilgili meslek kuruluşunun güncel kurallarına bakmanız gerekir.
 
 ## Dilekçeye girmeden önce doğrulama adımları
 

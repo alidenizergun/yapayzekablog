@@ -92,13 +92,13 @@ En bilinen risk uydurma bilgi (halüsinasyon). Model, var olmayan bir karar veya
 - Özetlenen belgeyi, önemli noktalarda asıl metinle karşılaştırın.
 - Tarih, tutar ve isimleri tek tek kontrol edin.
 
-Ayrıntı için [uydurma içtihat riski](/rehber/hukukta-yapay-zeka-uydurma-ictihat-riski/) rehberine, Türkiye'deki duruma dair genel bir bakış için [Türkiye'de hukukta yapay zeka](/rehber/turkiyede-hukukta-yapay-zeka/) sayfasına başvurabilirsiniz.
+Ayrıntı için [uydurma içtihat riski](/rehber/hukukta-yapay-zeka-uydurma-ictihat-riski/) rehberine, Türkiye'deki duruma dair genel bir bakış için Türkiye'de hukukta yapay zeka sayfasına başvurabilirsiniz.
 
 ## Nasıl başlamalı
 
 Küçük ve düşük riskli işlerle başlayın: kendi yazdığınız bir e-postanın sadeleştirilmesi, kamuya açık bir metnin özeti gibi. Ardından şu sırayı izleyin:
 
-1. **Kural koyun:** Hangi araçların, hangi veriyle kullanılabileceğini yazılı bir [şirket içi yapay zeka politikası](/rehber/sirket-ici-yapay-zeka-politikasi/) ile belirleyin.
+1. **Kural koyun:** Hangi araçların, hangi veriyle kullanılabileceğini yazılı bir şirket içi yapay zeka politikası ile belirleyin.
 2. **Deneyin:** Gerçek iş türlerinizden anonimleştirilmiş örneklerle, birden fazla aracı aynı görevde karşılaştırın.
 3. **Doğrulama düzeni kurun:** Çıktıyı kimin, hangi kaynaktan kontrol edeceğini belirleyin. Her çıktıyı insan gözünden geçirmek şart.
 4. **Müvekkili bilgilendirmeyi düşünün:** Açıklama yükümlülüğünün kapsamı için baronuzun rehberine ve meslek kurallarına bakın.
