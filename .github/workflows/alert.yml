@@ -68,6 +68,24 @@ jobs:
             gh issue create --title "$title" --label haber-motoru --body "@${OWNER} $body"
           fi
 
+  # Haber turu başarıyla bitince API kaynaklı açık uyarılar (harcama sınırı, kredi, anahtar, yoğunluk) kendiliğinden kapanır
+  recovered:
+    if: github.event_name == 'workflow_run' && github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.name == 'Haber güncellemesi'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      issues: write
+    steps:
+      - name: Çözülen uyarıları kapat
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          RUN_URL: ${{ github.event.workflow_run.html_url }}
+        run: |
+          set -euo pipefail
+          gh issue list --label haber-motoru --state open --json number,title --jq '.[] | select(.title | test("Anthropic API|İş akışı başarısız: Haber güncellemesi")) | .number' |
+          while read -r n; do gh issue close "$n" --comment "Haber turu yeniden başarıyla çalıştı: $RUN_URL"; done
+
   watchdog:
     if: github.event_name != 'workflow_run'
     runs-on: ubuntu-latest
