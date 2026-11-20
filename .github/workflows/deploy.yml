@@ -91,10 +91,9 @@ jobs:
       # IndexNow: Bing, Yandex ve diğer katılımcı arama motorlarına son haber adreslerini bildirir.
       # Anahtar herkese açık olacak şekilde tasarlanmıştır (public/0c0c22361c000ab306b8057c0f807962.txt); gizli değildir.
       - name: Arama motorlarına bildir (IndexNow)
-        if: vars.CUSTOM_DOMAIN != ''
         continue-on-error: true
         env:
-          HOST: ${{ vars.CUSTOM_DOMAIN }}
+          HOST: yzgundemi.com
           KEY: 0c0c22361c000ab306b8057c0f807962
         run: |
           sleep 60
