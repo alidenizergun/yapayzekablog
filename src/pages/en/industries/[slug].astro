@@ -1,0 +1,10 @@
+---
+import Page from '../../sektor/[slug].astro';
+import { getCollection } from 'astro:content';
+import { SECTORS, SECTOR_EN } from '../../../lib/sectors.js';
+export async function getStaticPaths() {
+  const guides = await getCollection('rehberler', (g) => !g.data.draft && g.data.sector);
+  return SECTORS.filter((s) => guides.some((g) => g.data.sector === s.slug)).map((s) => ({ params: { slug: SECTOR_EN[s.slug] }, props: { slug: s.slug } }));
+}
+---
+<Page {...Astro.props} />

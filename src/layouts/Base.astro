@@ -14,6 +14,8 @@ import '../styles/global.css';
 import { SITE, NAV, CATEGORIES, categoryBySlug } from '../lib/site.js';
 import { getNews, newsUrl, catUrl, url, slugOf } from '../lib/news.js';
 import { i18n, locNewsList, OG_LOCALE, SITE_DESC_EN } from '../i18n/index.js';
+import { getCollection } from 'astro:content';
+import { SECTORS } from '../lib/sectors.js';
 
 interface Props {
   title?: string;
@@ -95,6 +97,9 @@ const nav = [...NAV, ...CATEGORIES.map((c) => c.slug).filter((s) => !NAV.include
 // Gruplu menü: Haberler (kategoriler) · Araç rehberi · Öğren · Türkiye · Takip
 const path = Astro.url.pathname;
 const item = (label, href, desc = '') => ({ label, href: L.u(href), desc, current: href === '/' ? isHome : path.startsWith(L.u(href)) });
+// İş kolları menüsü yalnızca rehberi olan sektörleri gösterir
+const sectorSet = new Set((await getCollection('rehberler', (g) => !g.data.draft && g.data.sector)).map((g) => g.data.sector));
+const liveSectors = SECTORS.filter((s) => sectorSet.has(s.slug));
 const navGroups = [
   { label: T('Haberler', 'News'), cols: true, items: nav.map((slug) => ({ ...item(S(`cat.${slug}.name`, categoryBySlug(slug)?.name), `/kategori/${slug}/`), current: slug === currentCat })) },
   { label: T('Araç rehberi', 'AI tools'), items: [
@@ -112,6 +117,10 @@ const navGroups = [
     item(T('Raporlar', 'Reports'), '/raporlar/', T('McKinsey, Stanford, PwC raporlarından öne çıkanlar', 'Key findings from major AI reports')),
     item(T('Yapay zeka nedir?', 'What is AI?'), '/sozluk/yapay-zeka/'),
   ] },
+  ...(liveSectors.length ? [{ label: T('Sektörler', 'Industries'), items: [
+    item(T('Tüm iş kolları', 'All industries'), '/sektor/', T('Her sektör için rehberler, araçlar ve haberler', 'Guides, tools and news for each industry')),
+    ...liveSectors.map((s) => item(T(s.title, s.en.title), `/sektor/${s.slug}/`)),
+  ] }] : []),
   { label: T('Türkiye', 'Turkey'), items: [
     item(T("Türkiye'de yapay zeka", 'AI in Turkey'), '/turkiye-yapay-zeka/', T('Ekosistem, düzenlemeler, yatırımlar', 'Ecosystem, regulation, funding')),
     item(T('Yerli modeller', 'Turkish AI models'), '/yerli-yapay-zeka/'),
@@ -295,7 +304,7 @@ const isBreaking = latest && Date.now() - latest.data.date.valueOf() < BREAKING_
       </nav>
       <nav class="foot-col foot-cats foot-explore" aria-labelledby="foot-explore">
         <h2 id="foot-explore">{T('Keşfet', 'Explore')}</h2>
-        <ul>{[...navGroups[2].items.filter((i) => !i.href.includes('/sozluk/yapay-zeka')), ...navGroups[3].items.filter((i) => !i.href.includes('/kategori/')), ...navGroups[4].items].map((i) => <li><a href={i.href}>{i.label}</a></li>)}</ul>
+        <ul>{[...navGroups[2].items.filter((i) => !i.href.includes('/sozluk/yapay-zeka')), item(T('İş kolları', 'Industries'), '/sektor/'), ...navGroups.at(-2).items.filter((i) => !i.href.includes('/kategori/')), ...navGroups.at(-1).items].filter((i) => liveSectors.length || !/\/(sektor|industries)\/$/.test(i.href)).map((i) => <li><a href={i.href}>{i.label}</a></li>)}</ul>
       </nav>
       <nav class="foot-col" aria-labelledby="foot-site">
         <h2 id="foot-site">YZ Gündemi</h2>

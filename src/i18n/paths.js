@@ -1,6 +1,7 @@
 // Saf adres eşlemesi (astro:content kullanmaz): site, derleme sonrası bağlantı çevirici ve site haritası birlikte kullanır.
 import { GLOSSARY } from '../lib/glossary.js';
 import { tagSlug } from '../lib/slug.js';
+import { SECTOR_EN } from '../lib/sectors.js';
 
 // ---------------------------------------------------------------- adres eşlemesi
 // Türkçe ilk parça -> İngilizce ilk parça. Listede olmayan bölümlerin (etiket) İngilizcesi yoktur.
@@ -9,7 +10,7 @@ export const SEG = {
   'en-iyi': 'best', karsilastir: 'compare', 'ucretsiz-yapay-zeka-araclari': 'free-ai-tools', 'en-iyi-yapay-zeka-uygulamalari': 'best-ai-apps',
   'yeni-araclar': 'new-ai-tools', 'modeller-karsilastirma': 'ai-model-pricing', akis: 'latest', haftalik: 'weekly', gelisme: 'stories',
   yatirimlar: 'funding-tracker', raporlar: 'ai-reports', etkinlikler: 'events', 'turkiye-yapay-zeka': 'ai-in-turkey', 'yerli-yapay-zeka': 'turkish-ai-models',
-  hakkimizda: 'about', gizlilik: 'privacy', 'hata-bildir': 'report-error', kunye: 'masthead', 'kullanim-kosullari': 'terms', duzeltmeler: 'corrections', ara: 'search', sayfa: 'page', konu: 'topic', konular: 'topics',
+  hakkimizda: 'about', gizlilik: 'privacy', 'hata-bildir': 'report-error', kunye: 'masthead', 'kullanim-kosullari': 'terms', duzeltmeler: 'corrections', sektor: 'industries', ara: 'search', sayfa: 'page', konu: 'topic', konular: 'topics',
   'rss.xml': 'rss.xml',
 };
 export const CAT_EN = { modeller: 'models', ajanlar: 'agents', araclar: 'tools', 'girisim-yatirim': 'startups-funding', regulasyon: 'regulation',
@@ -23,7 +24,7 @@ export const TASK_EN = { sohbet: 'ai-chatbots', 'cv-hazirlama': 'resume-writing'
 
 const SLUG_MAPS = (m) => ({
   haber: m.news, rehber: m.guides, haftalik: m.digests,
-  kategori: new Map(Object.entries(CAT_EN)), sozluk: new Map(Object.entries(GL_EN)), 'en-iyi': new Map(Object.entries(TASK_EN)),
+  kategori: new Map(Object.entries(CAT_EN)), sozluk: new Map(Object.entries(GL_EN)), 'en-iyi': new Map(Object.entries(TASK_EN)), sektor: new Map(Object.entries(SECTOR_EN)),
 });
 const invert = (map) => new Map([...map].map(([k, v]) => [v, k]));
 

@@ -1,0 +1,35 @@
+---
+import Base from '../../layouts/Base.astro';
+import { getCollection } from 'astro:content';
+import { url } from '../../lib/news.js';
+import { SECTORS } from '../../lib/sectors.js';
+import { i18n, locGuide } from '../../i18n/index.js';
+const L = await i18n(Astro);
+const { lang, T } = L;
+const EN = lang === 'en';
+const guides = (await getCollection('rehberler', (g) => !g.data.draft && g.data.sector)).map((g) => locGuide(g, lang, L.m)).filter(Boolean);
+const sectors = SECTORS.map((s) => ({ ...s, items: guides.filter((g) => g.data.sector === s.slug) })).filter((s) => s.items.length);
+const pageUrl = new URL(url('/sektor/'), Astro.site).href;
+const jsonLd = {
+  '@type': 'CollectionPage', name: T('İş kollarında yapay zeka', 'AI by industry'), url: pageUrl, inLanguage: L.locale,
+  mainEntity: { '@type': 'ItemList', itemListElement: sectors.map((s, i) => ({ '@type': 'ListItem', position: i + 1, url: new URL(url(`/sektor/${s.slug}/`), Astro.site).href, name: EN ? s.en.title : s.title })) },
+};
+---
+<Base title={T('İş kollarında yapay zeka: hukuk, pazarlama, sağlık, finans ve daha fazlası', 'AI by industry: law, marketing, healthcare, finance and more')}
+  description={T('Hukuk, pazarlama, sağlık, finans, eğitim, e-ticaret, insan kaynakları ve sanayide yapay zeka: her iş kolu için kaynaklı rehberler, ilgili araçlar ve son haberler.', 'AI in law, marketing, healthcare, finance, education, e-commerce, HR and manufacturing: sourced guides, relevant tools and the latest news for each industry.')}
+  jsonLd={jsonLd} breadcrumbs={[{ name: 'Ana sayfa', path: '/' }, { name: T('İş kolları', 'Industries'), path: '/sektor/' }]}>
+  <section class="glossary guides sectors">
+    <span class="cat">{T('İş kolları', 'Industries')}</span>
+    <h1 class="page-h">{T('İş kollarında yapay zeka', 'AI by industry')}</h1>
+    <p class="spot">{T('Yapay zeka her sektörde farklı işler görüyor, farklı kurallara tabi. Her iş kolu için pratik kullanım yollarını, riskleri ve düzenlemeleri kaynaklarıyla anlatan rehberler hazırladık.', 'AI does different jobs in each industry and is subject to different rules. For each industry we have prepared sourced guides on practical uses, risks and regulation.')}</p>
+    <ul class="sector-grid">
+      {sectors.map((s) => (
+        <li class="sector-card">
+          <h2><a href={url(`/sektor/${s.slug}/`)}>{EN ? s.en.title : s.title}</a></h2>
+          <p>{EN ? s.intro.en : s.intro.tr}</p>
+          <ul>{s.items.slice(0, 5).map((g) => <li><a href={url(`/rehber/${g.id}/`)}>{g.data.title}</a></li>)}</ul>
+        </li>
+      ))}
+    </ul>
+  </section>
+</Base>

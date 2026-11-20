@@ -1,0 +1,76 @@
+---
+import Base from '../../layouts/Base.astro';
+import NewsRow from '../../components/NewsRow.astro';
+import ToolCard from '../../components/ToolCard.astro';
+import { getCollection } from 'astro:content';
+import { url, getNews, spreadVisuals } from '../../lib/news.js';
+import { SECTORS, sectorBySlug } from '../../lib/sectors.js';
+import { toolBySlug } from '../../lib/tools.js';
+import { i18n, locGuide, locNewsList, LEVEL_EN } from '../../i18n/index.js';
+
+export async function getStaticPaths() {
+  const guides = await getCollection('rehberler', (g) => !g.data.draft && g.data.sector);
+  return SECTORS.filter((s) => guides.some((g) => g.data.sector === s.slug)).map((s) => ({ params: { slug: s.slug } }));
+}
+const L = await i18n(Astro);
+const { lang, T } = L;
+const EN = lang === 'en';
+const slug = Astro.props.slug ?? Astro.params.slug;
+const s = sectorBySlug(slug);
+const title = EN ? s.en.title : s.title;
+const order = new Map(s.topics.map((t, i) => [t.slug, i]));
+const guides = (await getCollection('rehberler', (g) => !g.data.draft && g.data.sector === s.slug)).map((g) => locGuide(g, lang, L.m)).filter(Boolean)
+  .sort((a, b) => (order.get(a.id) ?? 99) - (order.get(b.id) ?? 99));
+const tools = s.tools.map(toolBySlug).filter(Boolean);
+const news = locNewsList((await getNews()).filter((n) => s.newsRe.test(`${n.data.title} ${n.data.spot} ${(n.data.tags || []).join(' ')}`)), lang, L.m).slice(0, 6);
+const rowV = spreadVisuals(news);
+const others = SECTORS.filter((x) => x.slug !== s.slug);
+const pageUrl = new URL(url(`/sektor/${s.slug}/`), Astro.site).href;
+const jsonLd = {
+  '@type': 'CollectionPage', name: title, url: pageUrl, inLanguage: L.locale, description: EN ? s.intro.en : s.intro.tr,
+  isPartOf: { '@type': 'CollectionPage', name: T('İş kollarında yapay zeka', 'AI by industry'), url: new URL(url('/sektor/'), Astro.site).href },
+  mainEntity: { '@type': 'ItemList', itemListElement: guides.map((g, i) => ({ '@type': 'ListItem', position: i + 1, url: new URL(url(`/rehber/${g.id}/`), Astro.site).href, name: g.data.title })) },
+};
+---
+<Base title={T(`${title}: kullanım alanları, araçlar, riskler ve düzenlemeler`, `${title}: uses, tools, risks and regulation`)}
+  description={(EN ? s.intro.en : s.intro.tr).slice(0, 300)}
+  jsonLd={jsonLd} breadcrumbs={[{ name: 'Ana sayfa', path: '/' }, { name: T('İş kolları', 'Industries'), path: '/sektor/' }, { name: title, path: `/sektor/${s.slug}/` }]}>
+  <section class="glossary guides sector">
+    <nav class="crumb" aria-label={T('Konum', 'Breadcrumb')}><a href={url('/')}>{T('Ana sayfa', 'Home')}</a><span aria-hidden="true">/</span><a href={url('/sektor/')}>{T('İş kolları', 'Industries')}</a></nav>
+    <span class="cat">{T('İş kolları', 'Industries')}</span>
+    <h1 class="page-h">{title}</h1>
+    <p class="spot">{EN ? s.intro.en : s.intro.tr}</p>
+
+    <section aria-labelledby="sg-h">
+      <h2 id="sg-h" class="ev-h">{T('Rehberler', 'Guides')}</h2>
+      <ul class="guide-list">
+        {guides.map((g) => (
+          <li class="guide-item">
+            <span class="guide-level">{EN ? LEVEL_EN[g.data.level] ?? g.data.level : g.data.level}</span>
+            <h3><a href={url(`/rehber/${g.id}/`)}>{g.data.title}</a></h3>
+            <p>{g.data.description}</p>
+          </li>
+        ))}
+      </ul>
+    </section>
+
+    {tools.length > 0 && (
+      <section aria-labelledby="st-h">
+        <h2 id="st-h" class="ev-h">{T('Bu alanda kullanılan araçlar', 'Tools used in this field')}</h2>
+        <div class="tool-grid">{tools.map((t) => <ToolCard tool={t} />)}</div>
+      </section>
+    )}
+
+    {news.length > 0 && (
+      <section aria-labelledby="sn-h">
+        <h2 id="sn-h" class="ev-h">{T('İlgili son haberler', 'Related news')}</h2>
+        <div class="term-news">{news.map((n) => <NewsRow item={n} choice={rowV.get(n.id)} />)}</div>
+      </section>
+    )}
+
+    <nav class="entity-links sector-others" aria-label={T('Diğer iş kolları', 'Other industries')}>
+      <strong>{T('Diğer iş kolları:', 'Other industries:')}</strong>
+      {others.map((o) => <a class="tag" href={url(`/sektor/${o.slug}/`)}>{EN ? o.en.title : o.title}</a>)}
+    </nav>
+  </section>
+</Base>

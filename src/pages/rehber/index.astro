@@ -3,13 +3,15 @@ import Base from '../../layouts/Base.astro';
 import { getCollection } from 'astro:content';
 import { url } from '../../lib/news.js';
 import { i18n, locGuide, TOPIC_EN, LEVEL_EN } from '../../i18n/index.js';
+import { SECTORS } from '../../lib/sectors.js';
 const L = await i18n(Astro);
 const { lang, T } = L;
 const tp = (t) => (lang === 'en' ? TOPIC_EN[t] ?? t : t);
 
 const TOPICS = ['Temel kullanım', 'Yazı ve içerik', 'İş ve kariyer', 'Eğitim ve öğrenme', 'Güvenlik ve gizlilik', 'Teknik'];
 const guides = (await getCollection('rehberler', (g) => !g.data.draft)).map((g) => locGuide(g, lang, L.m)).filter(Boolean).sort((a, b) => a.data.title.localeCompare(b.data.title, lang));
-const groups = TOPICS.map((t, i) => ({ t, id: `konu-${i + 1}`, items: guides.filter((g) => g.data.topic === t) })).filter((x) => x.items.length);
+const groups = TOPICS.map((t, i) => ({ t, id: `konu-${i + 1}`, items: guides.filter((g) => g.data.topic === t && !g.data.sector) })).filter((x) => x.items.length);
+const sectorGroups = SECTORS.map((s) => ({ s, n: guides.filter((g) => g.data.sector === s.slug).length })).filter((x) => x.n);
 const pageUrl = new URL(url('/rehber/'), Astro.site).href;
 const jsonLd = {
   '@type': 'CollectionPage', name: T('Yapay zeka rehberleri', 'AI guides'), url: pageUrl, inLanguage: L.locale,
@@ -24,7 +26,14 @@ const jsonLd = {
     <p class="spot">{lang === 'en' ? <>Step-by-step guides to using AI tools well, efficiently and safely. They focus on methods that work in any tool rather than one app's menus. For definitions, see our <a href={url('/sozluk/')}>AI glossary</a>.</> : <>Yapay zeka araçlarını doğru, verimli ve güvenli kullanmak için adım adım Türkçe kılavuzlar. Rehberler, belirli bir uygulamanın menülerine değil her araçta geçerli yöntemlere odaklanır. Terimlerin anlamı için <a href={url('/sozluk/')}>yapay zeka sözlüğüne</a> bakabilirsiniz.</>}</p>
     <nav class="glossary-az guide-topics" aria-label={T('Konular', 'Topics')}>
       {groups.map((g) => <a href={`#${g.id}`}>{tp(g.t)} <span class="meta">{g.items.length}</span></a>)}
+      {sectorGroups.length > 0 && <a href="#is-kollari">{T('İş kolları', 'Industries')} <span class="meta">{sectorGroups.reduce((a, x) => a + x.n, 0)}</span></a>}
     </nav>
+    {sectorGroups.length > 0 && (
+      <section class="guide-group" id="is-kollari" aria-labelledby="is-kollari-h">
+        <h2 id="is-kollari-h" class="ev-h">{T('İş kollarında yapay zeka', 'AI by industry')}</h2>
+        <ul class="sector-links">{sectorGroups.map(({ s, n }) => <li><a href={url(`/sektor/${s.slug}/`)}>{lang === 'en' ? s.en.title : s.title}</a> <span class="meta">{n} {T('rehber', n === 1 ? 'guide' : 'guides')}</span></li>)}</ul>
+      </section>
+    )}
     {groups.map((grp) => (
       <section class="guide-group" id={grp.id} aria-labelledby={`${grp.id}-h`}>
         <h2 id={`${grp.id}-h`} class="ev-h">{tp(grp.t)}</h2>
