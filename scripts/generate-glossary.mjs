@@ -6,6 +6,9 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import crypto from 'node:crypto';
+
+const hash = (s) => crypto.createHash('sha1').update(s).digest('hex').slice(0, 10);
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const LIST = path.join(ROOT, 'data/sozluk-terimler.txt');
@@ -174,8 +177,11 @@ async function main() {
     const faq = (tr.faq || []).slice(0, 2).map((f) => [fixTr(f.q), fixTr(f.a)]);
     done.set(t.slug, { slug: t.slug, term: t.term, en: t.en, match: t.match, cat: t.cat, def: fixTr(tr.def), how: fixTr(tr.how), why: fixTr(tr.why), example: fixTr(tr.example), faq });
     const k = (f) => `gl.${t.slug}.${f}`;
-    Object.assign(strings, { [k('term')]: en.term.trim(), [k('def')]: en.def.trim(), [k('how')]: en.how.trim(), [k('why')]: en.why.trim(), [k('example')]: en.example.trim() });
-    (en.faq || []).slice(0, faq.length).forEach((f, i) => { strings[`${k('faq')}.${i}.q`] = f.q.trim(); strings[`${k('faq')}.${i}.a`] = f.a.trim(); });
+    // strings.json biçimi: { h: Türkçe kaynağın özeti, en: çeviri } (translate-en.mjs ile aynı; özet tutmazsa yeniden çevrilir)
+    const e = done.get(t.slug);
+    const put = (key, trText, enText) => { strings[key] = { h: hash(trText), en: String(enText).trim() }; };
+    put(k('term'), e.term, en.term); put(k('def'), e.def, en.def); put(k('how'), e.how, en.how); put(k('why'), e.why, en.why); put(k('example'), e.example, en.example);
+    (en.faq || []).slice(0, faq.length).forEach((f, i) => { put(`${k('faq')}.${i}.q`, faq[i][0], f.q); put(`${k('faq')}.${i}.a`, faq[i][1], f.a); });
     ok++;
   }
   // Liste sırasıyla kaydet
