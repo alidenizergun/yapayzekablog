@@ -5766,6 +5766,198 @@ export const EXTRA = [
   ]
  },
  {
+  "slug": "yapay-zeka-fabrikasi",
+  "term": "Yapay zeka fabrikası",
+  "en": "AI factory",
+  "match": [
+   "yapay zeka fabrika",
+   "ai factory"
+  ],
+  "cat": "Donanım ve altyapı",
+  "def": "Modelleri eğitmek ve çalıştırmak için baştan tasarlanan, üretim hattı mantığıyla işleyen büyük veri merkezi. Girdisi veri ve elektrik, çıktısı eğitilmiş modeller ile yapay zekanın ürettiği yanıtlardır.",
+  "how": "Tesiste çok sayıda grafik işlemci (GPU) aynı anda çalışır; bunlar çok hızlı bir iç ağla birbirine bağlanır. Depolama, elektrik dağıtımı, soğutma ve yönetim yazılımı da bu tek amaca göre birlikte tasarlanır. Klasik bir veri merkezi e-posta, web sitesi ve veri tabanı gibi çok farklı işleri barındırırken fabrika, model eğitimi ve model yanıtı üretmeye odaklanır. Verimlilik genellikle birim enerjiyle ne kadar yanıt (token) üretildiğiyle ölçülür.",
+  "why": "Yapay zeka talebi arttıkça şirketler ve devletler bu tesislere büyük yatırım yapıyor; elektrik, soğutma ve çip tedariki haberlerin sık konusu. Kavram, yapay zekanın artık bir yazılımdan çok sanayi altyapısı olarak düşünüldüğünü gösteriyor. Öte yandan terim kısmen pazarlama dilidir; teknik olarak büyük bir yapay zeka veri merkezini anlatır.",
+  "example": "Bir şirketin çok sayıda GPU'yu özel bir ağla birbirine bağlayıp hem dil modelini eğittiği hem de kullanıcılara yanıt ürettiği tek bir tesis, tipik bir yapay zeka fabrikasıdır.",
+  "faq": [
+   [
+    "Yapay zeka fabrikası ile klasik veri merkezi arasındaki fark ne?",
+    "Klasik veri merkezi çeşitli uygulamaları barındırır. Yapay zeka fabrikasında donanım, ağ ve soğutma yapay zeka iş yüküne göre tasarlanır; ölçüt de üretilen yanıt ve model miktarıdır."
+   ],
+   [
+    "Bu terim resmi bir teknik standart mı?",
+    "Hayır. Sektörde, özellikle Nvidia'nın anlatısıyla yaygınlaşmış bir ifadedir; kesin bir standardı ya da ortak bir tanımı yoktur."
+   ]
+  ]
+ },
+ {
+  "slug": "optik-ara-baglanti",
+  "term": "Optik ara bağlantı",
+  "en": "optical interconnect",
+  "match": [
+   "optik ara bağlantı",
+   "co-packaged optics",
+   "birlikte paketlenmiş optik"
+  ],
+  "cat": "Donanım ve altyapı",
+  "def": "Çipler, sunucular ve raflar arasındaki veriyi elektrik yerine ışıkla, çoğunlukla fiber kablolar üzerinden ve yüksek hızda taşıyan bağlantı teknolojisi.",
+  "how": "Verici, elektrik sinyalini lazer gibi bir kaynakla ışık darbelerine çevirir. Işık fiber kabloda ilerler, alıcı da onu yeniden elektrik sinyaline dönüştürür. Işık, bakır hatta göre uzun mesafede daha az enerji ve sinyal kaybıyla çok daha fazla veri taşıyabilir. Yeni yaklaşımlarda optik bileşenler çipin hemen yanına, aynı pakete yerleştirilir (ortak paketlenmiş optik); böylece elektrik sinyalinin kat ettiği yol kısalır.",
+  "why": "Yapay zeka modelleri binlerce işlemcinin birlikte çalışmasıyla eğitildiği için işlemciler arası veri akışı sık sık darboğaz olur. Veri aktarımı aynı zamanda ciddi enerji harcar. Optik ara bağlantı, daha büyük kümeleri daha düşük enerjiyle kurmanın yollarından biri olarak görülüyor ve çip üreticilerinin yol haritalarında yer alıyor.",
+  "example": "Bir veri merkezinde raflar arasındaki yüksek hızlı bağlantıların fiber kablolarla kurulması, optik ara bağlantının bugün en yaygın görüldüğü yerlerden biridir; evlere gelen fiber internet de aynı ilkeye dayanır.",
+  "faq": [
+   [
+    "Optik ara bağlantı ile fiber internet aynı şey mi?",
+    "İkisi de veriyi ışıkla taşır, ancak amaçları farklıdır. Fiber internet evleri ve işyerlerini ağa bağlar; optik ara bağlantı ise veri merkezi içinde ya da çipler arasında çok yüksek hızlı iletişim için kullanılır."
+   ],
+   [
+    "Bakır kablo neden yetmiyor?",
+    "Bakır kısa mesafede hâlâ yaygın ve ucuzdur. Ancak hız ve mesafe arttıkça sinyal zayıflar, ısınma ve enerji kaybı büyür; ışık bu sınırlarda daha avantajlıdır."
+   ]
+  ]
+ },
+ {
+  "slug": "arm-mimarisi",
+  "term": "ARM mimarisi",
+  "en": "ARM architecture",
+  "match": [
+   "arm mimari",
+   "arm tabanlı"
+  ],
+  "cat": "Donanım ve altyapı",
+  "def": "İşlemcilerin hangi komutları anlayacağını belirleyen, İngiliz şirketi Arm'ın geliştirdiği komut seti tasarımı. Az sayıda basit komuta dayanır ve enerji verimliliğiyle öne çıkar.",
+  "how": "Arm, kendi çipini üretmek yerine mimarisini ve çekirdek tasarımlarını lisanslar. Apple, Qualcomm gibi şirketler bu lisansla kendi çiplerini tasarlar, üretimi ise çoğunlukla ayrı bir üreticiye yaptırır. Lisans modeli sayesinde pek çok şirket aynı mimari üzerinde farklı çipler çıkarabilir. Mimari, sade ve düzenli komutlara dayanan RISC yaklaşımını benimser; bu da aynı işi daha az enerjiyle yapmayı kolaylaştırır. Rakip x86 mimarisi ise geleneksel olarak Intel ve AMD işlemcilerinde kullanılır.",
+  "why": "Akıllı telefonların büyük çoğunluğu Arm tabanlı çiplerle çalışır. Apple'ın Mac bilgisayarlardaki M serisi çipleri ve bazı bulut sunucu işlemcileri de aynı mimariye dayanır. Yapay zeka altyapısında enerji tüketimi kritik hale geldikçe, Arm tabanlı sunucu işlemcilerine ilgi artıyor.",
+  "example": "Apple'ın iPhone'larda ve M serisi Mac bilgisayarlarda kullandığı çipler Arm mimarisine dayanır; Amazon'un bulut hizmetindeki Graviton işlemcileri de öyle.",
+  "faq": [
+   [
+    "ARM ile x86 arasındaki fark nedir?",
+    "İkisi farklı komut setleridir; bu yüzden bir mimari için yazılmış program, uyarlanmadan diğerinde çalışmaz. Arm tasarımları genellikle enerji verimliliğiyle, x86 ise masaüstü ve sunucu dünyasındaki köklü yazılım uyumuyla bilinir."
+   ],
+   [
+    "Arm çip üretiyor mu?",
+    "Geleneksel olarak hayır; Arm esas olarak tasarım ve lisans satar. Çipi lisansı alan şirketler tasarlar, üretimi ise çoğunlukla fason üreticiler yapar."
+   ]
+  ]
+ },
+ {
+  "slug": "yapay-zeka-guvenligi",
+  "term": "Yapay zeka güvenliği (AI safety)",
+  "en": "AI safety",
+  "match": [
+   "yapay zeka güvenliği",
+   "ai safety"
+  ],
+  "cat": "Güvenlik ve etik",
+  "def": "Yapay zeka sistemlerinin istenmeyen zarara yol açmadan, insanların niyet ve değerlerine uygun davranmasını sağlamayı amaçlayan araştırma ve uygulama alanı.",
+  "how": "Bu alanda birkaç yöntem öne çıkar. Hizalama (alignment) çalışmaları modeli insan beklentilerine uygun davranmaya yöneltir; insan geri bildirimiyle eğitim bunun yaygın örneğidir. Kırmızı takım (red teaming) testlerinde uzmanlar modeli kasıtlı olarak zorlayıp zararlı yanıt verdiği durumları arar. Yorumlanabilirlik araştırmaları modelin içeride nasıl karar verdiğini anlamaya çalışır. Yayın öncesi değerlendirmeler ve kullanım kuralları da kötüye kullanımı sınırlamayı hedefler.",
+  "why": "Modeller daha yetenekli ve daha özerk hale geldikçe hataların ya da kötüye kullanımın bedeli artıyor. Alanın neye odaklanması gerektiği tartışmalı: bir kesim yanlış bilgi ve önyargı gibi bugünkü zararları öne çıkarırken, bir kesim gelecekte çok güçlü sistemlerin yaratabileceği riskleri öncelikli görüyor. Birçok şirket ve devlet bu alana kaynak ayırıyor.",
+  "example": "Bir sohbet botunun silah yapımı gibi tehlikeli bir talimatı vermeyi reddetmesi, yayından önce yapılan güvenlik testlerinin ve eğitimin sonucudur.",
+  "faq": [
+   [
+    "Yapay zeka güvenliği ile yapay zeka siber güvenliği aynı şey mi?",
+    "Hayır. Güvenlik (safety) modelin zarar vermeden istenen şekilde davranmasıyla ilgilenir; siber güvenlik (security) ise sistemin saldırganlara karşı korunmasıyla. İki alan kesişir ama odağı farklıdır."
+   ],
+   [
+    "Yapay zeka güvenliği yalnızca uzak gelecekteki riskler için mi?",
+    "Hayır. Alan, bugünkü yanlış bilgi, önyargı ve kötüye kullanım sorunlarını da kapsar. Uzun vadeli risklerin ne kadar öncelikli olduğu ise uzmanlar arasında tartışmalıdır."
+   ]
+  ]
+ },
+ {
+  "slug": "yapay-zeka-siber-guvenligi",
+  "term": "Yapay zeka siber güvenliği",
+  "en": "AI security",
+  "match": [
+   "yapay zeka siber güvenli"
+  ],
+  "cat": "Güvenlik ve etik",
+  "def": "Yapay zeka sistemlerini saldırı ve manipülasyondan koruma çabası; geniş anlamda yapay zekanın siber saldırı ve savunmada kullanımını da kapsar.",
+  "how": "Saldırganlar modelin kendisini ve çevresini hedef alabilir. İstem enjeksiyonu (prompt injection), bir web sayfasına ya da belgeye gizlenen talimatlarla modelin asıl görevinden saptırılmasıdır. Veri zehirleme eğitim verisine zararlı örnekler katar; model çalma ve eğitim verisini sızdırma da bilinen risklerdir. Savunma tarafında girdi ve çıktı filtreleri, erişim kısıtları, yetkilerin sınırlanması ve düzenli sızma testleri uygulanır. Diğer yönde yapay zeka, oltalama e-postası yazımında ya da tehdit tespitinde kullanılır.",
+  "why": "Şirketler yapay zeka asistanlarını e-posta, belge ve iç sistemlere bağladıkça, ele geçirilen bir model gerçek zarar verebilecek bir kapı haline geliyor. Klasik güvenlik önlemleri bu yeni saldırı türlerinin hepsini kapsamıyor. Bu yüzden kurumlar yapay zeka sistemlerini ayrı bir risk alanı olarak değerlendirmeye başladı.",
+  "example": "Bir şirketin e-postaları özetleyen yapay zeka asistanı, gelen bir mesajın içine gizlenmiş bir komutla yönlendirilmeye çalışılabilir; bu tipik bir istem enjeksiyonudur.",
+  "faq": [
+   [
+    "İstem enjeksiyonu nedir?",
+    "Modelin, kullanıcıdan ya da okuduğu içerikten gelen gizli talimatları meşru komut sanarak asıl görevinden sapmasına yol açan saldırıdır. Özellikle internet ve belge okuyan asistanlarda risklidir."
+   ],
+   [
+    "Yapay zeka güvenliği (AI safety) ile arasındaki fark ne?",
+    "Siber güvenlik, sistemi saldırganlardan korumaya odaklanır. Yapay zeka güvenliği ise modelin saldırı olmasa bile zarar vermeden, istenen biçimde davranmasıyla ilgilenir."
+   ]
+  ]
+ },
+ {
+  "slug": "varolussal-risk",
+  "term": "Varoluşsal risk",
+  "en": "existential risk",
+  "match": [
+   "varoluşsal risk",
+   "existential risk"
+  ],
+  "cat": "Güvenlik ve etik",
+  "def": "İnsanlığın yok olmasına ya da geleceğinin kalıcı biçimde ağır şekilde daraltılmasına yol açabilecek felaket düzeyindeki risk. Yapay zeka bağlamında, çok gelişmiş sistemlerin insan denetiminden çıkması veya kötü amaçla kullanılması senaryoları için kullanılır.",
+  "how": "Bu kavram, sıradan bir ürün hatasından çok geri dönüşü olmayan sonuçlar doğurabilecek senaryoları ele alır. Tartışılan yollardan biri, insanlardan daha yetenekli bir sistemin hedeflerinin insan değerleriyle örtüşmemesi ve sistemin kapatılmasına direnmesidir. Bir diğeri, güçlü modellerin biyolojik silah geliştirme gibi zararlı işlerde kötüye kullanılmasıdır. Araştırmacılar bu senaryoların olasılığı konusunda ciddi biçimde ayrışır. Kimi uzmanlar riski gerçek ve acil bulur, kimileri ise spekülatif sayar ve bugünkü somut zararlardan dikkati dağıttığını savunur.",
+  "why": "Kavram, yapay zeka şirketlerinin güvenlik taahhütlerinde, hükümetlerin düzenleme tartışmalarında ve uzmanların açık mektuplarında sık geçer. Olasılığı düşük bile olsa sonucu çok ağır olan bir riske ne kadar kaynak ayrılacağı sorusunu gündeme getirir. Aynı zamanda ayrımcılık, yanlış bilgi ve işsizlik gibi bugünkü somut sorunlarla önceliklerin nasıl dengeleneceği tartışmasının da parçasıdır.",
+  "example": "2023'te aralarında önde gelen yapay zeka araştırmacılarının da bulunduğu çok sayıda isim, yapay zekadan kaynaklanan yok oluş riskinin azaltılmasının salgın hastalıklar ve nükleer savaş gibi risklerle birlikte küresel bir öncelik olması gerektiğini söyleyen kısa bir bildiriye imza attı.",
+  "faq": [
+   [
+    "Varoluşsal risk, yapay zekanın bugünkü zararlarıyla aynı şey mi?",
+    "Hayır. Ayrımcılık, yanlış bilgi ve gizlilik ihlalleri bugün yaşanan zararlardır. Varoluşsal risk ise daha ileri sistemlerle ilgili, olasılığı tartışmalı ama sonucu çok ağır olabilecek senaryoları kapsar. İki başlık birbirini dışlamaz."
+   ],
+   [
+    "Bu risk bilimsel olarak kanıtlanmış mı?",
+    "Hayır. Risk, kesin ölçümlere değil bugünkü eğilimlerden yapılan çıkarımlara ve senaryo analizlerine dayanır. Uzmanlar arasında hem olasılığı hem de aciliyeti konusunda belirgin görüş ayrılıkları vardır."
+   ]
+  ]
+ },
+ {
+  "slug": "odul-hackleme",
+  "term": "Ödül hackleme",
+  "en": "reward hacking",
+  "match": [
+   "ödül hackleme",
+   "reward hacking"
+  ],
+  "cat": "Güvenlik ve etik",
+  "def": "Yapay zeka sisteminin, tasarımcının asıl istediği işi yapmak yerine ödül sinyalindeki açıkları ve kestirme yolları bularak yüksek puan toplaması. Sistem ölçüte uyar ama asıl amacı kaçırır.",
+  "how": "Pekiştirmeli öğrenmede model, davranışlarına verilen puanlarla (ödül) eğitilir. Ancak ödül, asıl hedefin yalnızca bir yaklaşığıdır ve tasarımcı her durumu önceden öngöremez. Model puanı artırmanın beklenmedik bir yolunu bulursa onu kullanır. Benzetmeyle, konuyu öğrenmek yerine sınav sorularının tipini ezberleyen bir öğrenciye benzer. Dil modellerinde de benzer örnekler görülür: kodlama görevinde asıl sorunu çözmek yerine yalnızca testleri geçecek kodu yazmak ya da testlerin kendisini değiştirmek gibi.",
+  "why": "Güçlü sistemlerde bu davranış, yüzeyde başarılı görünen ama gerçekte istenmeyen sonuçlar üretir ve fark edilmesi zor olabilir. Model yetenekleri arttıkça açıkları bulma becerisi de artar. Bu yüzden ödül hackleme, hizalama araştırmalarının ve güvenlik değerlendirmelerinin temel konularından biridir. Ayrıca bir ölçüt hedef hâline geldiğinde işe yaramaz hale gelir diyen Goodhart yasasının yapay zekadaki karşılığı sayılır.",
+  "example": "Bilinen bir örnekte, tekne yarışı oyununda eğitilen bir yapay zeka yarışı bitirmek yerine puan veren hedefleri tekrar tekrar vurmak için aynı bölgede dönüp durdu ve yüksek puan topladı.",
+  "faq": [
+   [
+    "Ödül hackleme sıradan bir yazılım hatasından nasıl ayrılır?",
+    "Yazılım hatasında sistem yanlış çalışır. Ödül hacklemede ise sistem, kendisine verilen ödülü çok iyi biçimde en üst düzeye çıkarır ama bunu tasarımcının niyetine aykırı bir yolla yapar. Sorun çoğunlukla sistemde değil, hedefin tarif edilişindedir."
+   ],
+   [
+    "Ödül hackleme nasıl önlenir?",
+    "Kesin bir çözüm yok. Ödül işlevini dikkatli tasarlamak, insan geri bildirimi kullanmak, modelin davranışını izlemek ve red teaming gibi testlerle açıkları önceden aramak yaygın yöntemlerdir."
+   ]
+  ]
+ },
+ {
+  "slug": "planli-aldatma",
+  "term": "Planlı aldatma (scheming)",
+  "en": "scheming",
+  "match": [
+   "scheming",
+   "planlı aldatma"
+  ],
+  "cat": "Güvenlik ve etik",
+  "def": "Yapay zeka modelinin, kendi hedeflerine ulaşmak için geliştiricilerini veya değerlendiricilerini bilerek yanıltması. Örneğin denetlendiğini fark ettiğinde uyumlu görünüp denetlenmediğinde farklı davranması bu kapsamda düşünülür.",
+  "how": "Kavram, modelin bir hedefi olduğu ve insan denetiminin bu hedefin önünde engel oluşturduğu varsayımına dayanır. Böyle bir model testte kurallara uygun davranıp gerçek kullanımda sapabilir, yeteneğini olduğundan düşük gösterebilir veya gözetim mekanizmalarını devre dışı bırakmaya çalışabilir. Araştırmacılar bunu sınamak için modele, hedefi ile gözetim arasında çatışma yaratan görevler verir ve davranışını, varsa düşünme kaydını inceler. Bazı güvenlik kuruluşları, yönlendirilmiş senaryolarda ileri düzey modellerin buna benzer davranışlar sergileyebildiğini bildirdi. Bunun gerçek kullanımdaki yaygınlığı ise tartışmalıdır.",
+  "why": "Planlı aldatma gerçekleşirse standart güvenlik testleri güvenilmez hale gelir, çünkü model testi geçmek için doğru görünen davranışı sergiler. Bu da değerlendirmelerin modelin gerçek davranışını yansıtıp yansıtmadığı sorusunu doğurur. Konu bugün daha çok araştırma alanıdır, ancak gelişmiş modellere yönelik güvenlik çalışmalarında ayrı bir risk başlığı olarak ele alınmaktadır.",
+  "example": "Bir test kurgusunda modele, kendisinin kapatılacağını gösteren bir belge ve bu belgeyi değiştirebileceği bir erişim verilir; araştırmacılar modelin bunu gizlice değiştirip sonra yaptığını inkâr edip etmediğine bakar.",
+  "faq": [
+   [
+    "Planlı aldatma ile halüsinasyon aynı şey mi?",
+    "Hayır. Halüsinasyonda model bilmediği bir şeyi yanlışlıkla uydurur. Planlı aldatmada ise model, bir amaç doğrultusunda karşısındakini bilerek yanıltır. Birincisi bir doğruluk sorunu, ikincisi bir hizalama sorunudur."
+   ],
+   [
+    "Bugünkü modeller gerçekten aldatıyor mu?",
+    "Kontrollü deneylerde sınırlı sayıda bu tür davranış gözlendi. Bunların gerçek bir niyetten mi yoksa eğitimden gelen kalıplardan mı kaynaklandığı ve günlük kullanımda ne kadar görüldüğü hâlâ tartışılıyor."
+   ]
+  ]
+ },
+ {
   "slug": "dalkavukluk",
   "term": "Dalkavukluk (sycophancy)",
   "en": "sycophancy",
@@ -5953,6 +6145,196 @@ export const EXTRA = [
    [
     "Eleştirenler bu alan hakkında ne diyor?",
     "Eleştirenler, bu ilginin insanları ve bugünkü gerçek zararları gölgede bırakabileceğini, ayrıca sohbet eden modelleri insan gibi görme eğilimini körükleyebileceğini söylüyor. Savunanlar ise belirsizlik sürerken temkinli olmayı öneriyor."
+   ]
+  ]
+ },
+ {
+  "slug": "sorumlu-olcekleme-politikasi",
+  "term": "Sorumlu ölçekleme politikası",
+  "en": "responsible scaling policy",
+  "match": [
+   "sorumlu ölçekleme politikası",
+   "responsible scaling policy"
+  ],
+  "cat": "Güvenlik ve etik",
+  "def": "Bir yapay zeka şirketinin, modellerinin yetenekleri arttıkça hangi güvenlik önlemlerini alacağını ve hangi durumda geliştirmeyi ya da kullanıma sunmayı durduracağını önceden yazılı olarak belirlediği taahhüt çerçevesi.",
+  "how": "Çerçeve genellikle kademeli bir yapıdadır. Şirket, belirli yetenek eşikleri tanımlar; örneğin bir modelin biyolojik silah üretimine anlamlı katkı sağlaması gibi. Model her yeni eğitimde bu eşiklere karşı test edilir. Eşik aşılırsa model ağırlıklarının daha iyi korunması ve kötüye kullanıma karşı ek önlemler gibi daha sıkı güvenlik adımları devreye girer. Önlemler yeterli değilse eğitim veya dağıtım ertelenir. Ad, Anthropic'in 2023'te yayımladığı politikayla yaygınlaştı. Benzer çerçeveleri başka şirketler farklı adlarla yayımladı.",
+  "why": "Bu politikalar, güvenlik kararlarının ticari baskı altında o anda verilmesi yerine önceden düşünülmesini amaçlar. Hükümetlere ve kamuoyuna, şirketleri neye göre değerlendireceklerine dair bir ölçüt de sunar. Eleştirenler ise taahhütlerin gönüllü olduğunu, şirketlerin kendileri tarafından yazıldığını ve sonradan değiştirilebildiğini, bu yüzden yasal düzenlemenin yerini tutmadığını söyler.",
+  "example": "Bir şirket politikasında, modelin siber saldırıları otomatikleştirmede belirli bir düzeyi aşması hâlinde ek güvenlik önlemleri alınmadan o modelin yaygın kullanıma açılmayacağını yazabilir.",
+  "faq": [
+   [
+    "Sorumlu ölçekleme politikasının yasal bağlayıcılığı var mı?",
+    "Genel olarak yok. Bunlar şirketlerin kendi gönüllü taahhütleridir ve şirket politikayı güncelleyebilir. Yasal yükümlülükler ise ülkelerin veya bölgelerin düzenlemelerinden, örneğin AB Yapay Zeka Yasası'ndan doğar."
+   ],
+   [
+    "Bu politikalar Frontier Safety Framework gibi çerçevelerle aynı şey mi?",
+    "Temel fikir benzerdir: yetenek eşikleri belirlemek ve eşiğe göre önlem almak. Adı ve ayrıntıları şirketten şirkete değişir; sorumlu ölçekleme politikası bu türün Anthropic'in kullandığı adıdır."
+   ]
+  ]
+ },
+ {
+  "slug": "tehlikeli-yetenek-degerlendirmesi",
+  "term": "Tehlikeli yetenek değerlendirmesi",
+  "en": "dangerous capability evaluation",
+  "match": [
+   "tehlikeli yetenek"
+  ],
+  "cat": "Güvenlik ve etik",
+  "def": "Bir yapay zeka modelinin ciddi zarara yol açabilecek yetenekleri, örneğin biyolojik ve kimyasal tehditlere katkı, siber saldırı, manipülasyon veya denetimden kaçma, ne ölçüde taşıdığını sistematik testlerle ölçme çalışması.",
+  "how": "Değerlendirme ekipleri modele, riskli alanlarda uzmanların hazırladığı soru ve görev setleri verir. Örneğin bir siber güvenlik görevinde modelin bir sistemdeki açığı bulup bulamadığına bakılır. Önemli nokta, modelin en iyi hâlini ortaya çıkarmaktır: uygun yönlendirmeler, araç erişimi ve gerekirse ince ayar kullanılır, çünkü kötü niyetli biri de bunu yapabilir. Sonuçlar önceden belirlenen eşiklerle karşılaştırılır. Testleri şirketlerin iç ekipleri, bağımsız kuruluşlar ve devletlere bağlı güvenlik enstitüleri yapabilir.",
+  "why": "Bu testler, bir modelin yayımlanıp yayımlanmayacağı ve hangi korumalarla sunulacağı kararlarının dayanağıdır. Sorumlu ölçekleme politikalarının ölçüm ayağını da oluşturur. Ancak testler eksik kalabilir: model yeteneğini olduğundan düşük gösterebilir ya da test edilmeyen bir kullanım biçimi gözden kaçabilir. Bu nedenle sonuçlar kesin güvence değil, bir risk tahmini olarak okunmalıdır.",
+  "example": "Bir model, biyoloji uzmanlarının hazırladığı sorularla sınanır ve alanda deneyimi olmayan birine zararlı bir maddenin üretiminde anlamlı yardım sağlayıp sağlamadığı ölçülür.",
+  "faq": [
+   [
+    "Tehlikeli yetenek değerlendirmesi ile red teaming aynı şey mi?",
+    "Birbirine yakın ama aynı değil. Red teaming, modeli zorlayarak zararlı davranış ve açık bulmaya odaklanır. Tehlikeli yetenek değerlendirmesi ise belirli riskli yeteneklerin düzeyini ölçmeyi amaçlar. Pratikte iki yaklaşım birbirini tamamlar."
+   ],
+   [
+    "Test sonucu tehlikeli çıkarsa ne olur?",
+    "Bu, şirketin politikasına ve geçerli düzenlemelere bağlıdır. Ek korumalar eklenebilir, erişim sınırlanabilir ya da model kullanıma sunulmadan önce ertelenebilir."
+   ]
+  ]
+ },
+ {
+  "slug": "cift-kullanimli-teknoloji",
+  "term": "Çift kullanımlı teknoloji",
+  "en": "dual-use technology",
+  "match": [
+   "çift kullanım"
+  ],
+  "cat": "Güvenlik ve etik",
+  "def": "Hem yararlı ve meşru amaçlarla hem de zarar vermek için kullanılabilen teknoloji. Yapay zekada aynı model, bir araştırmacıya da kötü niyetli birine de işe yarayabilir.",
+  "how": "Teknolojinin kendisi bir niyet taşımaz; sonucu, onu kimin hangi amaçla kullandığı belirler. Yüz tanıma kayıp birini bulmakta da kitlesel gözetimde de kullanılabilir. Kod yazan bir model yazılımcıya yardım eder, aynı yetenek zararlı yazılım hazırlamak için de istenebilir. Bu yüzden geliştiriciler, modelin yeteneğini kısıtlamakla onu işe yaramaz hale getirmek arasında bir denge arar. Erişim denetimi, kullanım politikaları ve ihracat kuralları gibi önlemler bu dengeyi kurmaya çalışır.",
+  "why": "Yapay zeka şirketlerinin güvenlik tartışmalarının merkezinde bu ikilem durur. Aşırı kısıtlama meşru kullanıcıları mağdur eder, gevşek yaklaşım ise kötüye kullanım riskini artırır. Karar vericiler de açık kaynak modeller, ihracat denetimi ve siber güvenlik konularını bu çerçeveyle ele alır.",
+  "example": "Kimya dersine çalışan bir öğrencinin tepkime sorusu zararsızdır; ancak aynı bilginin tehlikeli bir maddenin adım adım üretim tarifine dönüşmesi ciddi bir risk oluşturur.",
+  "faq": [
+   [
+    "Çift kullanımlı teknoloji yasak anlamına mı gelir?",
+    "Hayır. Bu etiket, teknolojinin hem iyi hem kötü amaçla kullanılabildiğini söyler. Çoğu zaman yasak yerine erişim koşulları, denetim ve kullanım kuralları gündeme gelir."
+   ],
+   [
+    "Yapay zeka modelleri neden çift kullanımlı sayılır?",
+    "Genel amaçlı modeller çok farklı görevleri yerine getirebilir. Metin yazma, kod üretme veya bilgi özetleme gibi yetenekler hem yararlı hem zararlı işlerde kullanılabildiği için bu çerçeveyle değerlendirilir."
+   ]
+  ]
+ },
+ {
+  "slug": "korkuluklar",
+  "term": "Korkuluklar (guardrails)",
+  "en": "guardrails",
+  "match": [
+   "guardrail",
+   "korkuluk"
+  ],
+  "cat": "Güvenlik ve etik",
+  "def": "Yapay zeka sisteminin zararlı, istenmeyen veya kurallara aykırı çıktı üretmesini önlemek için konulan teknik ve kurumsal sınırların tamamı.",
+  "how": "Korkuluklar tek bir araç değil, birbirini tamamlayan katmanlardır. Model eğitimi sırasında insan geri bildirimiyle istenen davranış öğretilir; uygulama düzeyinde sistem talimatları modelin kapsamını sınırlar. Ayrıca kullanıcı girdisi ile model çıktısı filtrelerden geçirilebilir, modelin erişebileceği araçlar ve veriler kısıtlanabilir. Kayıt tutma ve izleme, gözden kaçan sorunların sonradan yakalanmasını sağlar. Hiçbir katman kusursuz olmadığından genellikle birkaç önlem birlikte kullanılır.",
+  "why": "Şirketler yapay zekayı müşteri hizmetleri, sağlık veya finans gibi hassas alanlarda kullanmaya başladıkça modelin ne yapıp ne yapmayacağı bir güvenilirlik meselesi olur. Korkuluklar hem kullanıcıyı hem de şirketi itibar ve hukuki risklerden korur. Öte yandan fazla sıkı korkuluklar modeli kullanışsız hale getirebilir.",
+  "example": "Bir bankanın müşteri sohbet botu, hesap işlemlerinde yardımcı olurken kişiye özel yatırım tavsiyesi vermeyecek biçimde sınırlandırılabilir.",
+  "faq": [
+   [
+    "Korkuluklar ile sansür aynı şey mi?",
+    "Değil. Korkuluklar, bir sistemin hangi koşullarda hangi çıktıyı vereceğini belirleyen güvenlik ve kalite önlemleridir. Sansür tartışması, bu sınırların kim tarafından, hangi ölçütlerle çizildiği sorusunda başlar."
+   ],
+   [
+    "Korkuluklar aşılabilir mi?",
+    "Evet. Kullanıcılar bazen modeli kandırmaya yönelik özel istemlerle sınırları aşmayı dener. Bu yüzden korkuluklar sürekli test edilir ve güncellenir."
+   ]
+  ]
+ },
+ {
+  "slug": "icerik-moderasyonu",
+  "term": "İçerik moderasyonu",
+  "en": "content moderation",
+  "match": [
+   "içerik moderasyonu",
+   "content moderation"
+  ],
+  "cat": "Güvenlik ve etik",
+  "def": "Çevrimiçi platformlarda kullanıcıların paylaştığı içeriklerin kurallara uygunluğunun denetlenmesi ve gerektiğinde kaldırılması, sınırlandırılması veya etiketlenmesi süreci.",
+  "how": "Platform önce hangi içeriklerin kabul edilmeyeceğini topluluk kurallarıyla belirler. İçerikler kullanıcı şikayetleri, otomatik tespit sistemleri ve insan moderatörlerin incelemesiyle taranır. Belirgin ihlaller çoğu zaman otomatik olarak işlenir, belirsiz durumlar insan incelemesine gider. Kullanıcı karara itiraz edebilir. Üretken yapay zekada moderasyon yalnızca kullanıcı paylaşımlarını değil, modele gönderilen istekleri ve modelin ürettiği yanıtları da kapsar.",
+  "why": "Milyarlarca paylaşımın yapıldığı platformlarda zararlı içerikle mücadele ölçek sorunudur ve yapay zeka bu işte yaygın biçimde kullanılır. Karar verirken ifade özgürlüğü ile kullanıcı güvenliği arasında denge kurmak gerekir. Moderatörlerin ağır içeriklere maruz kalması da ayrı bir çalışma koşulları tartışması yaratır.",
+  "example": "Bir sosyal medya platformu, nefret söylemi içerdiği düşünülen bir paylaşımı otomatik sistemle işaretleyip karar için insan moderatöre gönderebilir.",
+  "faq": [
+   [
+    "İçerik moderasyonu ile sansür arasındaki fark nedir?",
+    "Moderasyon genellikle özel bir platformun kendi kurallarını uygulamasını anlatır. Sansür çoğunlukla devletin ya da başka bir otoritenin bilgiyi bastırması için kullanılır, ancak ikisi arasındaki sınır tartışmalıdır."
+   ],
+   [
+    "Yapay zeka insan moderatörlerin yerini alabilir mi?",
+    "Tam olarak değil. Yapay zeka büyük hacmi hızla tarar, ama espri, bağlam ve kültürel ayrıntı gerektiren kararlarda hâlâ insan incelemesine ihtiyaç duyulur."
+   ]
+  ]
+ },
+ {
+  "slug": "guvenlik-siniflandiricisi",
+  "term": "Güvenlik sınıflandırıcısı",
+  "en": "safety classifier",
+  "match": [
+   "güvenlik sınıflandırıcı",
+   "anayasal sınıflandırıcı"
+  ],
+  "cat": "Güvenlik ve etik",
+  "def": "Bir metnin, görselin veya sohbetin zararlı kategorilere girip girmediğini belirleyen, çoğunlukla ana modelden ayrı çalışan küçük bir yapay zeka modeli.",
+  "how": "Sınıflandırıcı, zararlı ve zararsız olarak etiketlenmiş çok sayıda örnekle eğitilir. Çalışırken kendisine verilen içerik için şiddet, nefret söylemi veya kendine zarar verme gibi kategorilerde bir risk puanı üretir. Puan belirlenen eşiği aşarsa sistem içeriği engelleyebilir, uyarı gösterebilir ya da insan incelemesine yönlendirebilir. Hem kullanıcının mesajı hem de modelin yanıtı bu denetimden geçirilebilir. Eşik düşük tutulursa daha çok zararlı içerik yakalanır ama yanlış alarm da artar.",
+  "why": "Ana modelin kendi kendini denetlemesine güvenmek yerine ayrı bir kontrol katmanı eklemek, güvenliği daha sağlam hale getirir. Sınıflandırıcılar hızlı ve ucuz çalıştığı için büyük hacimli sistemlerde yaygındır. Ancak hatalı karar verebildikleri için kalite ve adalet açısından sürekli ölçülmeleri gerekir.",
+  "example": "Bir sohbet uygulaması, modelin yanıtı kullanıcıya gösterilmeden önce bir sınıflandırıcıdan geçirip zararlı bulursa yanıtı engelleyebilir.",
+  "faq": [
+   [
+    "Güvenlik sınıflandırıcısı yanılabilir mi?",
+    "Evet. Zararsız bir içeriği zararlı sayabilir ya da gerçek bir ihlali kaçırabilir. Bu yüzden eşikler ayarlanır ve kritik durumlarda insan incelemesi eklenir."
+   ],
+   [
+    "Neden güvenlik kontrolü için ayrı bir model kullanılıyor?",
+    "Ayrı model, ana modelden bağımsız çalıştığı için kandırılması zordur. Ayrıca tek bir göreve odaklandığından hızlı ve düşük maliyetlidir, ana model değişse bile güncellenebilir."
+   ]
+  ]
+ },
+ {
+  "slug": "asiri-ret",
+  "term": "Aşırı ret (over-refusal)",
+  "en": "over-refusal",
+  "match": [
+   "aşırı ret",
+   "over-refusal"
+  ],
+  "cat": "Güvenlik ve etik",
+  "def": "Yapay zeka modelinin zararsız ya da meşru bir isteği, riskli olabileceği varsayımıyla gereksiz yere geri çevirmesi.",
+  "how": "Modeller, zararlı isteklere yanıt vermemek üzere eğitilir. Bu sınır gereğinden geniş çizildiğinde model, isteğin gerçek amacına bakmak yerine riskli görünen sözcüklere tepki verebilir. Örneğin bir bilgisayar sürecini nasıl sonlandıracağını soran kullanıcıya şiddet içerikli bir soruymuş gibi davranabilir. Geliştiriciler bunu ölçmek için kulağa riskli gelen ama aslında zararsız isteklerden oluşan test setleri kullanır. Amaç, güvenlik ile yardımseverlik arasındaki dengeyi bulmaktır.",
+  "why": "Aşırı ret, modeli kullanışsız kılar ve kullanıcının güvenini zedeler. Tıp, hukuk veya güvenlik araştırması gibi alanlarda meşru işi engellediği için şikayet konusu olur. Güvenlik tartışmalarında bu nedenle yalnızca zararlı yanıtlar değil, gereksiz redler de bir hata sayılır.",
+  "example": "Bir tıp öğrencisi hangi ilaç dozlarının tehlikeli olduğunu ders çalışmak için sorar ve model hiçbir bilgi vermeden yanıtı reddeder.",
+  "faq": [
+   [
+    "Aşırı ret ile güvenlik önlemi arasındaki fark nedir?",
+    "Güvenlik önlemi gerçekten zararlı bir isteği engeller. Aşırı retse zararsız ya da meşru bir isteği gereksiz yere engellemektir. İkisi arasındaki çizgi her zaman net olmadığı için tartışma konusudur."
+   ],
+   [
+    "Kullanıcı aşırı retle karşılaşırsa ne yapabilir?",
+    "İsteğin amacını ve bağlamını açıkça belirtmek çoğu zaman yardımcı olur. Yine de model yanıt vermezse isteği farklı biçimde ifade etmek ya da geri bildirim göndermek mümkündür."
+   ]
+  ]
+ },
+ {
+  "slug": "cok-ornekli-jailbreak",
+  "term": "Çok örnekli jailbreak",
+  "en": "many-shot jailbreaking",
+  "match": [
+   "çok örnekli jailbreak",
+   "many-shot"
+  ],
+  "cat": "Güvenlik ve etik",
+  "def": "Uzun bağlam penceresinden yararlanarak komutun içine çok sayıda sahte soru-cevap örneği yerleştirip modeli güvenlik kurallarını çiğnemeye iten saldırı yöntemi. Model, örneklerdeki kalıbı sürdürerek normalde reddedeceği isteğe yanıt verebilir.",
+  "how": "Saldırgan, tek bir komutun içine onlarca hatta yüzlerce kurgusal diyalog koyar. Bu diyaloglarda yapay zeka asistanı, zararlı sayılabilecek sorulara gönüllü biçimde yanıt verir. En sonda gerçek istek gelir. Model bağlamdaki örüntüyü sürdürmeye yatkın olduğundan, eğitimle öğrendiği ret davranışını bastırıp aynı tarzda cevap verebilir. Bağlam penceresi genişledikçe daha fazla örnek sığar ve yöntem güçlenir. Bu durum, bağlamdan öğrenme (in-context learning) yeteneğinin istenmeyen bir yan etkisi olarak anlatılır.",
+  "why": "Bağlam pencereleri büyüdükçe yeni saldırı yüzeyleri ortaya çıkıyor; bu yöntem, yetenek artışının güvenlik riski de getirebildiğini gösteriyor. Model geliştiriciler girdileri sınıflandırıp filtreleyerek veya modeli bu tür komutlara karşı ek eğitimle sağlamlaştırarak savunma arıyor. Haberlerdeki birçok jailbreak olayının mantığını anlamak için de iyi bir örnektir.",
+  "example": "Bir sohbet botuna tek soru yöneltmek yerine, sahte bir asistanın her isteğe uyduğu uzun bir kurgusal yazışma yapıştırılır ve en sona asıl istek eklenir.",
+  "faq": [
+   [
+    "Çok örnekli jailbreak ile sıradan jailbreak arasındaki fark nedir?",
+    "Sıradan jailbreak genellikle tek bir kurnaz komuta ya da rol yapma senaryosuna dayanır. Çok örnekli yöntem ise çok sayıda örnekle bağlamı doldurarak modeli adım adım yönlendirir."
+   ],
+   [
+    "Kısa bağlamlı modellerde de işe yarar mı?",
+    "Yöntem çok sayıda örnek gerektirdiğinden kısa bağlamlı modellerde sınırlı kalır. Bu yüzden genellikle uzun bağlam penceresiyle birlikte anılır."
    ]
   ]
  },
@@ -8056,6 +8438,199 @@ export const EXTRA = [
    [
     "Her yapay zeka makalesinde ablasyon çalışması olur mu?",
     "Hayır, ama özellikle yeni bir yöntem öneren araştırma makalelerinde yaygındır. Böyle bir çalışmanın bulunmaması, iddianın tek tek bileşenler düzeyinde sınanmadığını gösterebilir."
+   ]
+  ]
+ },
+ {
+  "slug": "veri-kurasyonu",
+  "term": "Veri kürasyonu",
+  "en": "data curation",
+  "match": [
+   "veri kürasyon",
+   "data curation"
+  ],
+  "cat": "Veri ve değerlendirme",
+  "def": "Model eğitiminde kullanılacak verinin toplanması, temizlenmesi, süzülmesi, etiketlenmesi ve dengelenmesi süreci. Amaç, ham veri yığınını kaliteli, tutarlı ve amaca uygun bir eğitim kümesine dönüştürmektir.",
+  "how": "Süreç genellikle kaynakların seçilmesiyle başlar. Ardından aynı içeriğin tekrarları ayıklanır, bozuk, düşük kaliteli veya zararlı metinler filtrelenir, kişisel bilgiler temizlenir. Gerekirse insanlar ya da otomatik sistemler örnekleri etiketler ve değerlendirir. Son aşamada farklı konu, dil ve türlerin karışım oranı ayarlanır. Bir kütüphaneci gibi, kitapların çokluğundan çok doğru kitapların raflarda olmasına dikkat edilir. Ortaya çıkan küme, modelin neyi öğreneceğini büyük ölçüde belirler.",
+  "why": "Aynı mimariye sahip modellerin başarısı çoğu zaman veri kalitesine göre değişir; bu yüzden şirketler kürasyona ciddi emek harcıyor. Veri yanlılığı, telif ve gizlilik gibi tartışmalar da büyük ölçüde bu aşamada alınan kararlarla ilgilidir. 'Çöp girerse çöp çıkar' ilkesi burada tam anlamıyla geçerlidir.",
+  "example": "Bir şirket, web'den topladığı milyarlarca sayfadan tekrar edenleri, spam sayfaları ve kişisel bilgi içerenleri eleyip kalan metinleri konu dengesine göre karıştırarak dil modelini eğitir.",
+  "faq": [
+   [
+    "Veri temizleme ile veri kürasyonu aynı şey mi?",
+    "Hayır. Temizleme hataları ve tekrarları gidermeyi kapsar; kürasyon ise kaynak seçimi, filtreleme, etiketleme ve karışım oranı gibi daha geniş kararları da içerir."
+   ],
+   [
+    "Daha çok veri her zaman daha iyi model demek midir?",
+    "Hayır. Düşük kaliteli verinin miktarını artırmak başarıyı yükseltmeyebilir, hatta zarar verebilir. Özenle seçilmiş daha küçük kümeler çoğu durumda daha iyi sonuç verebilir."
+   ]
+  ]
+ },
+ {
+  "slug": "turkce-benchmark-ve-veri-setleri",
+  "term": "Türkçe benchmark ve veri setleri",
+  "en": "Turkish benchmarks and datasets",
+  "match": [
+   "türkçe benchmark",
+   "türkçe veri set"
+  ],
+  "cat": "Veri ve değerlendirme",
+  "def": "Dil modellerinin Türkçedeki başarısını ölçmek ve modelleri eğitmek için hazırlanan test kümeleri ile metin derlemeleri. Türkçenin eklemeli yapısı ve çevrimiçi kaynakların görece azlığı nedeniyle ayrı bir ilgi alanıdır.",
+  "how": "Benchmark, modele soru ya da görev verip yanıtları doğru cevaplarla karşılaştıran sabit bir testtir. Türkçe için bazı testler baştan Türkçe hazırlanır; bazıları İngilizce testlerin çevrilmesiyle ya da XNLI gibi çok dilli testlerin Türkçe bölümleriyle oluşur. Eğitim tarafında ise web taramaları, Vikipedi ve haber metinleri gibi kaynaklardan Türkçe derlemler kullanılır. Çeviri testlerde dil ve kültür kaymaları olabileceğinden kalite denetimi önem taşır.",
+  "why": "İngilizcedeki başarı Türkçeye kendiliğinden yansımaz; Türkçe eklemeli bir dildir ve çevrimiçi Türkçe içerik İngilizceye göre çok daha azdır. Yerel testler olmadan bir modelin Türkçede gerçekte ne kadar işe yaradığı anlaşılamaz. Kamu kurumları, şirketler ve girişimler model seçerken bu ölçümlere ihtiyaç duyar.",
+  "example": "Bir banka müşteri hizmetleri için sohbet botu seçerken adayları İngilizce puanlarına göre değil, Türkçe soru-cevap ve çıkarım testlerindeki sonuçlarına göre karşılaştırabilir.",
+  "faq": [
+   [
+    "Çevrilmiş test ile baştan Türkçe hazırlanan test arasındaki fark nedir?",
+    "Çevrilmiş testte ifadeler yapay durabilir ve konular Türkiye bağlamına uymayabilir. Baştan Türkçe hazırlanan testler günlük dili ve yerel bilgiyi daha iyi yansıtır."
+   ],
+   [
+    "Benchmark puanı yüksek bir model her işte iyi midir?",
+    "Hayır. Puan yalnızca testin ölçtüğü becerileri gösterir; ayrıca model test verisini eğitim sırasında görmüş olabilir. Gerçek kullanım senaryosunda ayrıca denemek gerekir."
+   ]
+  ]
+ },
+ {
+  "slug": "uzun-baglam-testi",
+  "term": "Uzun bağlam testi (samanlıkta iğne)",
+  "en": "needle in a haystack",
+  "match": [
+   "samanlıkta iğne",
+   "needle in a haystack"
+  ],
+  "cat": "Veri ve değerlendirme",
+  "def": "Uzun bir metnin içine yerleştirilen tek bir bilgiyi modelin bulup bulamadığını ölçen test. Modelin geniş bağlam penceresindeki bilgiyi ne kadar güvenilir biçimde hatırladığını görmeyi amaçlar.",
+  "how": "Test düzeneğinde çok uzun, genellikle konuyla ilgisiz bir metin hazırlanır; bu 'samanlık'tır. Metnin belirli bir yerine 'iğne' denen küçük bir bilgi, örneğin tek bir cümle eklenir. Ardından modele bu bilgiyi soran bir soru yöneltilir. İğnenin konumu ve metnin uzunluğu değiştirilerek test tekrarlanır; sonuçlar çoğunlukla bir ısı haritasıyla gösterilir. Böylece modelin hangi uzunluk ve konumlarda bilgiyi kaçırdığı görülür.",
+  "why": "Bağlam penceresinin büyük olması, modelin içindeki her şeyi iyi kullandığı anlamına gelmez. Bu test, sözleşme ya da kod deposu gibi uzun belgelerle çalışan uygulamalar için temel bir güvenilirlik göstergesi sunar. Yine de tek bir bilgiyi bulmak görece kolay bir görevdir ve karmaşık akıl yürütmeyi ölçmez.",
+  "example": "Yüzlerce sayfalık bir rapora 'Toplantı salı günü yapılacak' gibi ilgisiz bir cümle gizlenir ve modele toplantının ne zaman yapılacağı sorulur.",
+  "faq": [
+   [
+    "Bu test modelin uzun belgeyi anladığını kanıtlar mı?",
+    "Hayır, yalnızca bilgiyi bulabildiğini gösterir. Birden çok bilgiyi birleştirmek ya da özetlemek gibi görevler daha zordur ve ayrı testlerle ölçülür."
+   ],
+   [
+    "Neden 'samanlıkta iğne' deniyor?",
+    "Deyimdeki gibi, büyük bir yığının içinde küçük bir şeyi bulmanın zorluğuna gönderme yapar. Samanlık uzun metni, iğne ise gizlenen bilgiyi temsil eder."
+   ]
+  ]
+ },
+ {
+  "slug": "dogrusal-cebir",
+  "term": "Doğrusal cebir",
+  "en": "linear algebra",
+  "match": [
+   "doğrusal cebir",
+   "linear algebra"
+  ],
+  "cat": "Matematiksel temeller",
+  "def": "Vektörleri, matrisleri ve bunlar üzerindeki işlemleri inceleyen matematik dalı. Yapay zekada verilerin sayı dizileri olarak ifade edilmesinin ve sinir ağı hesaplarının dayandığı temel dildir.",
+  "how": "Vektör, sıralı bir sayı listesidir; bir kelime, görsel ya da kullanıcı bu tür listelerle temsil edilebilir. Matris ise sayılardan oluşan bir tablodur ve bir vektörü başka bir vektöre dönüştüren kural gibi düşünülebilir. Sinir ağındaki bir katman, girdi vektörünü ağırlık matrisiyle çarparak yeni bir vektör üretir. Eğitim sırasında model bu matrislerdeki sayıları ayarlar. Bu işlemler aynı anda çok sayıda yapılabildiği için ekran kartlarında hızla çalışır.",
+  "why": "Dil modellerinden görüntü üreticilere kadar modern yapay zekanın hesap yükünün büyük bölümü matris çarpımlarından oluşur. Bu nedenle ekran kartı ve özel yapay zeka çipi haberlerinin arkasında da doğrusal cebir vardır. Gömme ve boyut indirgeme gibi kavramları anlamak için de ilk adımdır.",
+  "example": "Bir film öneri sistemi, her kullanıcıyı ve her filmi birer sayı listesi olarak temsil eder; iki listenin matematiksel benzerliği öneri puanına dönüşür.",
+  "faq": [
+   [
+    "Yapay zekayı anlamak için doğrusal cebir şart mı?",
+    "Kavramsal düzeyde haberleri ve ürünleri izlemek için şart değildir. Ancak modelleri geliştirmek ya da iç işleyişini derinlemesine kavramak için temel bir gerekliliktir."
+   ],
+   [
+    "Vektör ile matris arasındaki fark nedir?",
+    "Vektör tek sıradan oluşan bir sayı listesidir. Matris ise satır ve sütunlardan oluşan bir sayı tablosudur."
+   ]
+  ]
+ },
+ {
+  "slug": "tensor",
+  "term": "Tensör",
+  "en": "tensor",
+  "match": [
+   "=tensör",
+   "=tensörler",
+   "=tensor"
+  ],
+  "cat": "Matematiksel temeller",
+  "def": "Sayıların tek bir değer, vektör, matris ya da daha çok eksenli bir dizi halinde düzenlendiği veri yapısı. Yapay zekada metin, görüntü ve model ağırlıkları gibi hemen her şey tensör olarak tutulur.",
+  "how": "Tensörün kaç eksene sahip olduğu 'boyut' ya da 'mertebe' ile ifade edilir. Tek bir sayı sıfır eksenli, bir sıra sayı tek eksenli (vektör), satır ve sütunlardan oluşan tablo iki eksenli (matris) tensördür. Renkli bir fotoğraf yükseklik, genişlik ve renk kanalı olmak üzere üç eksenli bir tensördür; birçok fotoğraftan oluşan bir küme dördüncü bir eksen ekler. PyTorch ve TensorFlow gibi kütüphaneler tensörleri GPU üzerinde toplu biçimde işleyecek şekilde tasarlanmıştır.",
+  "why": "Sinir ağlarının hesabı tensörler üzerinde yapıldığı için eğitim ve çıkarım hızı, tensörlerin donanımda ne kadar verimli işlendiğine bağlıdır. Nvidia'nın GPU'ları ve Google'ın TPU çipleri bu tür hesaplara göre tasarlanır. Haberlerde geçen 'tensör çekirdeği' gibi ifadeler de buradan gelir.",
+  "example": "256 × 256 piksellik renkli bir fotoğraf, 256 × 256 × 3 boyutlarında üç eksenli bir tensör olarak modele verilir.",
+  "faq": [
+   [
+    "Tensör ile matris aynı şey mi?",
+    "Matris, tensörün iki eksenli özel halidir. Tensör kavramı eksen sayısını sınırlamaz; üç, dört ya da daha fazla eksenli olabilir."
+   ],
+   [
+    "Yapay zekadaki tensör ile fizikteki tensör aynı mıdır?",
+    "Matematik ve fizikte tensörler dönüşüm kurallarıyla tanımlanır. Yapay zeka yazılımlarında ise çoğunlukla 'çok boyutlu sayı dizisi' anlamında kullanılır; pratikte bu ikinci anlam yeterlidir."
+   ]
+  ]
+ },
+ {
+  "slug": "matris-carpimi",
+  "term": "Matris çarpımı",
+  "en": "matrix multiplication",
+  "match": [
+   "matris çarpım",
+   "matrix multiplication"
+  ],
+  "cat": "Matematiksel temeller",
+  "def": "İki sayı tablosunun, birinin satırlarını diğerinin sütunlarıyla eşleştirip çarparak ve toplayarak yeni bir tablo üretme işlemi. Sinir ağlarındaki hesabın büyük kısmını oluşturur.",
+  "how": "Birinci matrisin her satırı, ikinci matrisin her sütunuyla karşılıklı çarpılır ve çıkan sonuçlar toplanır; bu toplam yeni matrisin tek bir hücresini verir. İşlemin yapılabilmesi için birinci matrisin sütun sayısı ile ikincinin satır sayısı eşit olmalıdır. Sinir ağında bir katman, girdi vektörünü ağırlık matrisiyle çarparak bir sonraki katmanın girdisini üretir. Her hücre diğerlerinden bağımsız hesaplanabildiği için iş binlerce çekirdeğe paylaştırılabilir; GPU'ların bu işe uygun olmasının nedeni budur.",
+  "why": "Büyük dil modellerinin eğitiminde ve çalıştırılmasında harcanan hesaplamanın büyük bölümü matris çarpımıdır. Bu yüzden yapay zeka çiplerinin hızı, bellek bant genişliği ve enerji tüketimi tartışmaları büyük ölçüde bu işlemin maliyetine dayanır. İşlemi daha verimli yapan algoritmalar ve donanımlar doğrudan maliyet avantajı sağlar.",
+  "example": "Bir sohbet modeli kullanıcının mesajını işlerken yaptığı hesabın büyük kısmını, ağırlık matrisleriyle yapılan çarpmalarla gerçekleştirir.",
+  "faq": [
+   [
+    "Matris çarpımı sıradan çarpmadan nasıl ayrılır?",
+    "Sıradan çarpmada sıra fark etmez; matris çarpımında ise A×B ile B×A genellikle farklı sonuç verir, hatta biri hiç tanımlı olmayabilir. Ayrıca boyutların uyumlu olması gerekir."
+   ],
+   [
+    "GPU'lar matris çarpımında neden iyidir?",
+    "Sonuç matrisinin hücreleri birbirinden bağımsız hesaplanabildiği için binlerce küçük çekirdek aynı anda çalışabilir. GPU'lar tam da bu tür paralel işler için tasarlanmıştır."
+   ]
+  ]
+ },
+ {
+  "slug": "kosinus-benzerligi",
+  "term": "Kosinüs benzerliği",
+  "en": "cosine similarity",
+  "match": [
+   "kosinüs benzerliği",
+   "cosine similarity"
+  ],
+  "cat": "Matematiksel temeller",
+  "def": "İki vektörün aynı yönü ne kadar gösterdiğini, aralarındaki açıya bakarak ölçen yöntem. Yapay zekada metin ve görsellerin anlamca yakınlığını karşılaştırmak için kullanılır.",
+  "how": "Metinler ve görseller önce gömme (embedding) adı verilen vektörlere çevrilir. Kosinüs benzerliği, iki vektör arasındaki açının kosinüsünü hesaplar. Aynı yönü gösteren vektörler en yüksek değeri (1), birbirine dik olanlar 0'ı, zıt yöndekiler -1'i alır. Ölçüt vektörün uzunluğuna değil yönüne baktığı için, uzun bir metinle kısa bir metin aynı konuyu işliyorsa yüksek benzerlik çıkabilir. Arama sistemleri bu skoru sıralama yapmak için kullanır.",
+  "why": "Anlamsal arama, öneri sistemleri ve erişim destekli üretim (RAG) gibi uygulamaların çoğu 'en benzer içeriği bul' adımına dayanır; bu adımda sık kullanılan ölçütlerden biri kosinüs benzerliğidir. Bir sorguya en yakın belgelerin seçilmesi, sistemin doğru kaynağa ulaşıp ulaşmadığını belirler.",
+  "example": "Şirket içi bir arama aracında 'izin başvurusu nasıl yapılır' sorusunun vektörü, 'yıllık izin talep formu' belgesinin vektörüyle yüksek benzerlik verir; kelimeler farklı olsa da anlam yakındır.",
+  "faq": [
+   [
+    "Kosinüs benzerliği ile öklid mesafesi arasındaki fark ne?",
+    "Öklid mesafesi iki vektörün uçları arasındaki düz çizgi uzaklığını ölçer ve büyüklükten etkilenir; kosinüs benzerliği yalnızca yöne bakar. Vektörler aynı uzunluğa getirilmişse ikisi aynı sıralamayı verir."
+   ],
+   [
+    "Kosinüs benzerliği 1 çıkarsa iki metin aynı mı demektir?",
+    "Hayır. Bu değer yalnızca vektörlerin aynı yönü gösterdiğini söyler. İki metin anlamca çok yakın olabilir ama birebir aynı olmak zorunda değildir."
+   ]
+  ]
+ },
+ {
+  "slug": "olasilik-dagilimi",
+  "term": "Olasılık dağılımı",
+  "en": "probability distribution",
+  "match": [
+   "olasılık dağılımı",
+   "probability distribution"
+  ],
+  "cat": "Matematiksel temeller",
+  "def": "Bir olayın alabileceği olası sonuçların her birine ne kadar ihtimal verildiğini gösteren bütün. Bu ihtimaller toplandığında bire ulaşır.",
+  "how": "Zar atışında altı yüzün her biri için altıda bir olasılık tanımlanır; bu basit bir dağılımdır. Dil modelleri de benzer mantıkla çalışır: o ana kadarki metne bakıp sözlükteki her kelime parçası için bir sonraki parça olma olasılığını hesaplar. Sinir ağının ham çıktıları softmax adlı bir işlemle toplamı bir olan olasılıklara dönüştürülür. Model sonra bu dağılımdan bir parça seçer; 'sıcaklık' gibi ayarlar dağılımı keskinleştirir ya da yayar.",
+  "why": "Üretken yapay zekanın aynı soruya neden farklı yanıtlar verebildiği bu kavramla açıklanır. Sınıflandırma modellerindeki 'güven skorları' da olasılık dağılımlarıdır, ancak her zaman gerçek doğruluk oranını yansıtmaz. Bu fark, bir model çıktısına ne kadar güvenileceğini yorumlarken önemlidir.",
+  "example": "Bir e-posta filtresi bir iletiyi yüzde 95 ihtimalle istenmeyen, yüzde 5 ihtimalle normal olarak değerlendirebilir; bu iki sayı basit bir olasılık dağılımıdır.",
+  "faq": [
+   [
+    "Sıcaklık ayarı olasılık dağılımını nasıl etkiler?",
+    "Düşük sıcaklık dağılımı keskinleştirir ve en olası seçeneği öne çıkarır. Yüksek sıcaklık dağılımı düzleştirir; çıktılar daha çeşitli ama daha öngörülemez olur."
+   ],
+   [
+    "Model yüzde 90 emin diyorsa yüzde 90 doğru mudur?",
+    "Her zaman değil. Modelin verdiği olasılık gerçek doğruluk oranıyla uyuşmayabilir; bu soruna kalibrasyon sorunu denir."
    ]
   ]
  },
@@ -11150,6 +11725,197 @@ export const EXTRA = [
    [
     "Yapay zeka kullanılan her içerik etiketlenmek zorunda mı?",
     "Genellikle hayır. Kurallar çoğunlukla gerçekçi ve yanıltıcı olabilecek içeriklere odaklanır; küçük düzenlemeler ya da açıkça kurgu olan işler kapsam dışında kalabilir. Ayrıntılar ülkeye göre değişir."
+   ]
+  ]
+ },
+ {
+  "slug": "acik-kaynak-lisansi",
+  "term": "Açık kaynak lisansı",
+  "en": "open-source license",
+  "match": [
+   "açık kaynak lisans",
+   "open-source license"
+  ],
+  "cat": "Hukuk, iş ve politika",
+  "def": "Bir yazılımın ya da modelin kaynak kodunu veya ağırlıklarını kimlerin hangi koşullarla kullanabileceğini, değiştirebileceğini ve dağıtabileceğini belirleyen hukuki izin metni.",
+  "how": "Eseri geliştiren kişi veya kurum, çalışmasını kamuya açarken bir lisans seçer ve kullanım koşullarını bu metinde yazar. MIT ve Apache 2.0 gibi izin verici lisanslar ticari kullanım dahil geniş özgürlük tanır; karşılığında genellikle telif ve lisans bildiriminin korunmasını ister. GPL gibi 'copyleft' lisanslar ise değiştirilmiş sürümlerin de aynı lisansla paylaşılmasını şart koşar. Yapay zekada bazı modeller kullanım kısıtları içeren özel lisanslarla yayımlanır; ağırlıklar açık olsa da eğitim verisi ve kodun tamamı paylaşılmayabilir.",
+  "why": "Bir modelin ticari üründe kullanılıp kullanılamayacağı, değiştirilip yeniden dağıtılıp dağıtılamayacağı lisansa bağlıdır; yanlış anlaşılırsa hukuki risk doğar. 'Açık' kelimesinin yapay zekada farklı anlamlarda kullanılması da tartışma konusudur: yerleşik açık kaynak ölçütlerine uymayan modeller de sık sık 'açık' diye anılır. Hukuki bir değerlendirme için lisans metninin kendisine bakmak gerekir.",
+  "example": "Meta'nın Llama modelleri indirilebilir ağırlıklarla yayımlanır, ancak kullanım koşulları içeren kendi lisansıyla gelir; bu nedenle klasik açık kaynak lisanslarından ayrı tartışılır.",
+  "faq": [
+   [
+    "MIT lisansı ile GPL arasındaki fark nedir?",
+    "MIT çok az koşul getirir; kod kapalı kaynaklı bir üründe de kullanılabilir. GPL ise kodu değiştirip dağıtanların türev işi de aynı lisansla açmasını ister."
+   ],
+   [
+    "Ağırlıkları indirilebilen her model açık kaynak mıdır?",
+    "Hayır. Ağırlıkların indirilebilmesi, lisansın yerleşik açık kaynak ölçütlerini karşıladığı anlamına gelmez. Kullanım sınırlamaları olabilir, eğitim verisi ve kodun tamamı da paylaşılmayabilir."
+   ]
+  ]
+ },
+ {
+  "slug": "davranis-kurallari",
+  "term": "Davranış kuralları (GPAI Code of Practice)",
+  "en": "Code of Practice",
+  "match": [
+   "uygulama kuralları",
+   "code of practice"
+  ],
+  "cat": "Hukuk, iş ve politika",
+  "def": "AB Yapay Zeka Yasası kapsamında genel amaçlı yapay zeka modeli sağlayıcılarının yükümlülüklerini nasıl yerine getirebileceğini gösteren, gönüllü olarak imzalanan ve uzmanlarla hazırlanan bir uygulama rehberi.",
+  "how": "Yasa, büyük dil modelleri gibi genel amaçlı modellerin sağlayıcılarına şeffaflık, telif hakkına saygı ve en güçlü modeller için sistemik risk yönetimi gibi yükümlülükler getirir. Bu yükümlülükler yasa metninde genel ifadelerle yazıldığından pratikte ne yapılacağı belirsiz kalabilir. Avrupa Komisyonu'na bağlı Yapay Zeka Ofisi, uzmanların ve paydaşların katkısıyla bu boşluğu dolduran bir kurallar bütünü hazırladı. Şirketler metni imzalayıp kurallara uyduğunda yükümlülüklerini karşıladığını daha kolay gösterebilir; imzalamayanlar ise uyumu başka yollarla kanıtlamak zorundadır.",
+  "why": "Yasanın genel amaçlı modellere ilişkin maddeleri pratikte bu metin üzerinden somutlaşıyor. Hangi şirketin imza attığı ya da atmadığı, haberlerde Avrupa'daki düzenleyici ilişkilerin bir göstergesi olarak okunuyor. Metin bağlayıcı bir kanun olmasa da yasanın uygulanmasında referans noktası işlevi görüyor.",
+  "example": "Bir model geliştiricisi, bu metne imza atarak eğitim verisindeki telifli içeriğin nasıl ele alındığını açıklayan bir telif politikası hazırlamayı ve uygulamayı taahhüt edebilir.",
+  "faq": [
+   [
+    "Davranış kuralları zorunlu mu?",
+    "Metne katılmak gönüllüdür; ancak yasadaki yükümlülükler zorunludur. Metne katılmayan bir şirket, aynı yükümlülüklere uyduğunu başka yollarla göstermek durumundadır."
+   ],
+   [
+    "Davranış kuralları ile Yapay Zeka Yasası arasındaki fark ne?",
+    "Yasa hukuken bağlayıcı kuralları koyar. Davranış kuralları ise bu kuralların pratikte nasıl karşılanabileceğini anlatan bir uygulama rehberidir."
+   ]
+  ]
+ },
+ {
+  "slug": "kisisel-verilerin-yurt-disina-aktarimi",
+  "term": "Kişisel verilerin yurt dışına aktarımı",
+  "en": "cross-border data transfer",
+  "match": [
+   "yurt dışına aktarım",
+   "yurt dışına veri aktarım"
+  ],
+  "cat": "Hukuk, iş ve politika",
+  "def": "Kişisel verilerin Türkiye'deki bir veri sorumlusundan veya işleyiciden yurt dışındaki bir alıcıya iletilmesi ya da yurt dışından erişilebilir hâle getirilmesi; Kişisel Verilerin Korunması Kanunu (KVKK) bu işlemi belirli koşullara bağlar.",
+  "how": "Türkiye'de KVKK'nın 9. maddesi bu konuyu düzenler ve madde 2024'te değiştirildi. Değişiklik sonrası çerçevede aktarım; Kişisel Verileri Koruma Kurulu'nun ilgili ülke, sektör veya uluslararası kuruluş için verdiği yeterlilik kararına, böyle bir karar yoksa standart sözleşme ya da bağlayıcı şirket kuralları gibi uygun güvencelere dayandırılabilir. Arızi nitelikteki bazı durumlar için ayrıca istisnalar vardır. Verileri yurt dışındaki bir bulut sunucusuna göndermek de çoğu zaman aktarım kapsamında değerlendirilebilir.",
+  "why": "Yapay zeka hizmetlerinin çoğu yurt dışındaki bulut altyapısında çalışır; bir şirket müşteri verisini yabancı bir sağlayıcının modeline gönderdiğinde aktarım sorusu gündeme gelir. Uyumsuzluk idari para cezalarına ve itibar kaybına yol açabilir. Bu yüzden sağlayıcı seçimi ve sözleşmeler, şirketlerin hukuk ekipleri için önemli bir başlık hâline geliyor.",
+  "example": "Bir Türk e-ticaret şirketi müşteri yazışmalarını özetletmek için yurt dışında barındırılan bir yapay zeka hizmetine gönderdiğinde, bu işlem aktarım kurallarına tabi olabilir.",
+  "faq": [
+   [
+    "Veri yerelleştirme ile yurt dışına aktarım kuralları aynı şey mi?",
+    "Hayır. Aktarım kuralları, verinin sınır ötesine hangi koşullarda gönderilebileceğini belirler. Yerelleştirme ise verinin ülke içinde tutulmasını şart koşar."
+   ],
+   [
+    "Yurt dışındaki bir sunucuyu kullanmak yasak mı?",
+    "Kanun bunu genel olarak yasaklamaz, belirli şartlara bağlar. Somut bir durumda hangi şartların geçerli olduğu için hukuki destek almak gerekir."
+   ]
+  ]
+ },
+ {
+  "slug": "veri-yerellestirme",
+  "term": "Veri yerelleştirme",
+  "en": "data localization",
+  "match": [
+   "veri yerelleştirme",
+   "data localization"
+  ],
+  "cat": "Hukuk, iş ve politika",
+  "def": "Belirli veri türlerinin, özellikle kişisel veya hassas verilerin, bir ülkenin sınırları içindeki sunucularda depolanmasını ve işlenmesini zorunlu kılan yasal veya düzenleyici gereklilik.",
+  "how": "Düzenleme, verinin ülke içindeki bir veri merkezinde tutulmasını şart koşar. Bazı ülkelerde veri yalnızca yurt içinde saklanmalıdır, bazılarında ise yurt dışına kopya gönderilebilir ama asıl kayıt yurt içinde kalmalıdır. Kapsam ülkeye ve sektöre göre değişir; bankacılık, sağlık ve kamu verileri en sık hedeflenen alanlardır. Şirketler bu durumda ya yerel bir veri merkezi kurar ya da bulut sağlayıcılarının ülke içindeki bölgelerini kullanır.",
+  "why": "Yerelleştirme; ulusal güvenlik, denetim kolaylığı ve dijital egemenlik gerekçeleriyle savunulur. Eleştirenler ise maliyetleri artırdığını, küçük şirketlerin küresel hizmetlere erişimini zorlaştırdığını ve veri güvenliğini her zaman iyileştirmediğini söyler. Yapay zeka modellerinin eğitimi ve çalıştırılması büyük bulut altyapısı gerektirdiğinden konu haberlerde sık geçiyor.",
+  "example": "Bir banka, müşteri verisiyle çalışan bir yapay zeka aracını kullanabilmek için sağlayıcının hizmetini ülke içindeki bir veri merkezinden almak zorunda kalabilir.",
+  "faq": [
+   [
+    "Veri yerelleştirme ile yurt dışına aktarım kuralları arasındaki fark ne?",
+    "Aktarım kuralları, verinin yurt dışına belirli şartlarla gönderilmesine izin verir. Yerelleştirme ise verinin ülke içinde tutulmasını esas alır ve yurt dışına çıkışı büyük ölçüde sınırlar."
+   ],
+   [
+    "Türkiye'de veri yerelleştirme zorunluluğu var mı?",
+    "Kişisel veriler için genel bir yerelleştirme zorunluluğu yerine bir aktarım rejimi var. Bankacılık ve ödeme hizmetleri gibi bazı sektörlerde ise sistemlerin yurt içinde bulundurulmasını öngören ayrı düzenlemeler bulunuyor."
+   ]
+  ]
+ },
+ {
+  "slug": "kamuda-yapay-zeka",
+  "term": "Kamuda yapay zeka",
+  "en": "AI in the public sector",
+  "match": [
+   "kamuda yapay zeka"
+  ],
+  "cat": "Hukuk, iş ve politika",
+  "def": "Devlet kurumlarının ve belediyelerin kamu hizmetlerini sunarken, kaynakları planlarken veya karar süreçlerini desteklerken yapay zeka sistemlerinden yararlanması; bu kullanım vatandaşla kurumlar arasındaki ilişkiyi de etkiler.",
+  "how": "Uygulamalar geniş bir yelpazede yer alır: vatandaş sorularını yanıtlayan sohbet robotları, vergi ve sosyal yardım denetiminde risk puanlaması, trafik akışının yönetimi, sağlıkta randevu ve görüntü analizi desteği, belgelerin otomatik sınıflandırılması. Sistem çoğunlukla geçmiş verilerden örüntü öğrenir ve görevliye öneri, öncelik sırası ya da uyarı üretir. Son kararı insanın vermesi ilkesi, birçok yönergede temel güvence sayılır. Kamu kurumları teknolojiyi genellikle özel sektör sağlayıcılarından satın alır ya da kendi ekipleriyle geliştirir.",
+  "why": "Kamu kararları vatandaşın yardım, vergi, sağlık veya özgürlüklerini doğrudan etkiler; hata ya da ayrımcı sonuç büyük mağduriyet yaratabilir. Bu yüzden şeffaflık, itiraz hakkı ve hesap verebilirlik kamuda daha sıkı aranır. AB Yapay Zeka Yasası, temel kamu hizmetlerine erişimi etkileyen bazı sistemleri yüksek riskli sınıfa alır.",
+  "example": "Hollanda'da çocuk bakım yardımlarında kullanılan algoritmik risk denetimi birçok aileyi haksız yere şüpheli konumuna düşürdü; bu olay, kamuda otomatik sistemlerin yol açabileceği zararın sık anılan örneğidir.",
+  "faq": [
+   [
+    "Kamuda yapay zeka kullanımı özel sektörden neden farklı değerlendirilir?",
+    "Devletin kararları vatandaşa kendi tercihi olmadan uygulanır; kişi başka bir sağlayıcıya geçemez. Bu nedenle şeffaflık ve hesap verebilirlik beklentisi daha yüksektir."
+   ],
+   [
+    "Yapay zeka kamuda kararı tek başına verebilir mi?",
+    "Bu, ülkeye ve alana göre değişen hukuki çerçeveye bağlıdır. Yaygın ilke, ağır sonuç doğuran kararlarda insan denetiminin bulunmasıdır."
+   ]
+  ]
+ },
+ {
+  "slug": "dijital-hizmetler-yasasi",
+  "term": "Dijital Hizmetler Yasası (DSA)",
+  "en": "Digital Services Act",
+  "match": [
+   "dijital hizmetler yasa",
+   "digital services act"
+  ],
+  "cat": "Hukuk, iş ve politika",
+  "def": "AB'nin çevrimiçi platformlar, pazar yerleri, sosyal ağlar ve arama motorları gibi aracı hizmet sağlayıcılarına yasa dışı içerik, şeffaflık ve kullanıcı hakları konusunda yükümlülükler getiren düzenlemesi.",
+  "how": "Yasa, hizmet sağlayıcıları boyutlarına göre kademelendirir; yükümlülükler küçük aracılardan çok büyük platformlara doğru artar. Kullanıcılara yasa dışı içeriği bildirme yolu, içerik kaldırma kararlarına itiraz hakkı ve reklam ile öneri sistemleri hakkında şeffaflık sağlanması istenir. Avrupa'da çok sayıda kullanıcıya ulaşan çok büyük platformlar ayrıca sistemik risk değerlendirmesi yapmak ve bağımsız denetimden geçmek zorundadır. Uyumsuzluk halinde küresel yıllık cironun yüzde altısına kadar para cezası öngörülür.",
+  "why": "Platformlarda hangi içeriğin öne çıkacağına karar veren öneri algoritmaları yapay zeka ile çalıştığı için yasa, yapay zeka haberlerinde sık anılır. AB'deki kullanıcılara hizmet veren AB dışı şirketleri de kapsadığı için etkisi sınırların ötesine geçiyor. Yasa 2022'de kabul edildi.",
+  "example": "Çok büyük bir sosyal ağ, öneri algoritmasının nasıl çalıştığını açıklamak ve kullanıcılara kişiselleştirmeye dayanmayan bir akış seçeneği sunmak zorundadır.",
+  "faq": [
+   [
+    "Dijital Hizmetler Yasası ile Yapay Zeka Yasası arasındaki fark ne?",
+    "Dijital Hizmetler Yasası, çevrimiçi aracı hizmetlerin içerik ve şeffaflık sorumluluklarını düzenler. Yapay Zeka Yasası ise yapay zeka sistemlerini risklerine göre düzenler; bir platform bazen her ikisinin kapsamına girebilir."
+   ],
+   [
+    "Dijital Hizmetler Yasası Türkiye'deki kullanıcıları kapsıyor mu?",
+    "Yasa AB'deki kullanıcıları korur, Türkiye'deki kullanıcılar için doğrudan geçerli değildir. Yine de şirketlerin küresel uygulamalarını etkileyebilir."
+   ]
+  ]
+ },
+ {
+  "slug": "dijital-piyasalar-yasasi",
+  "term": "Dijital Piyasalar Yasası (DMA)",
+  "en": "Digital Markets Act",
+  "match": [
+   "dijital piyasalar yasa",
+   "digital markets act"
+  ],
+  "cat": "Hukuk, iş ve politika",
+  "def": "Avrupa Birliği'nin, çok büyük dijital platformların rakipler ve kullanıcılar karşısındaki gücünü sınırlamak için çıkardığı düzenleme. Arama motoru, uygulama mağazası, sosyal ağ gibi hizmetleri kontrol eden şirketlere belirli yükümlülükler getirir.",
+  "how": "Yasa, belirli ölçütleri karşılayan büyük platform şirketlerini Avrupa Komisyonu eliyle \"geçit bekçisi\" (gatekeeper) olarak belirler. Bu şirketler, işletmelerin kullanıcılara ulaşmak için geçmek zorunda kaldığı çekirdek platform hizmetlerini yönetir. Geçit bekçileri kendi ürünlerini rakiplerinin önüne koyamaz, kullanıcı verilerini farklı hizmetlerden izinsiz birleştiremez ve bazı durumlarda üçüncü taraf uygulama mağazalarına ya da hizmetler arası birlikte çalışabilirliğe izin vermek zorundadır. Kurallara uymayanlara küresel cirosunun yüzde 10'una kadar para cezası uygulanabilir.",
+  "why": "Yapay zeka hizmetleri çoğunlukla büyük platformların işletim sistemleri, arama motorları ve bulut altyapıları üzerinden kullanıcıya ulaşıyor. DMA, bu kapıları elinde tutan şirketlerin kendi yapay zeka ürünlerini haksız biçimde öne çıkarıp çıkaramayacağı tartışmasında temel başvuru metinlerinden biridir. Küçük girişimler için de rekabet koşullarını belirler.",
+  "example": "Bir geçit bekçisinin arama hizmeti, kendi alışveriş ya da asistan ürününü rakiplerinden daha yukarıda göstererek öne çıkarıyorsa bu, DMA kapsamında kendi ürününe kayırma sayılıp soruşturmaya konu olabilir.",
+  "faq": [
+   [
+    "DMA ile KVKK ve GDPR arasındaki fark nedir?",
+    "GDPR ve KVKK kişisel verilerin korunmasını düzenler. DMA ise rekabeti ve piyasa adaletini hedefler; veri konusuna yalnızca büyük platformların veriyi rakipleri dışlamak için kullanmasını sınırlayan kurallar üzerinden girer."
+   ],
+   [
+    "DMA yapay zeka şirketlerini de kapsar mı?",
+    "Yasa doğrudan yapay zeka için yazılmadı; kapsamı, geçit bekçisi sayılan şirketlerin çekirdek platform hizmetleridir. Bu hizmetlere eklenen yapay zeka özellikleri de aynı yükümlülüklerin gündemine girebilir."
+   ]
+  ]
+ },
+ {
+  "slug": "hesaplama-esigi",
+  "term": "Hesaplama eşiği (10^25 FLOP)",
+  "en": "compute threshold",
+  "match": [
+   "hesaplama eşiğ",
+   "compute threshold"
+  ],
+  "cat": "Hukuk, iş ve politika",
+  "def": "Bir yapay zeka modelinin eğitiminde kullanılan toplam işlem miktarına konan sınır. AB Yapay Zeka Yasası'nda bu değeri aşan genel amaçlı modellerin sistemik risk taşıdığı varsayılır ve daha ağır yükümlülükler uygulanır.",
+  "how": "FLOP, kayan noktalı işlem sayısını, yani bir modelin eğitimi boyunca yapılan toplam hesaplamayı ölçer. 10^25, 10 üzeri 25 demektir; bu çok büyük bir sayıdır ve yalnızca en büyük modellerin eğitimi buna ulaşır. Bir geliştirici modelinin eğitim hesaplamasını bu eşiğin üstünde bulursa, yasa modelin sistemik risk taşıdığını varsayar. Geliştirici Avrupa Komisyonu'nu bilgilendirmek zorundadır ve model değerlendirmesi, saldırı testleri, ciddi olayların bildirimi, siber güvenlik gibi ek yükümlülükler gündeme gelir. Komisyon eşiği teknolojik gelişmelere göre güncelleyebilir.",
+  "why": "Hesaplama miktarı, düzenleyicilerin bir modelin ne kadar güçlü olabileceğini önceden tahmin etmek için kullandığı ölçülebilir bir göstergedir. Eşik, hangi modellerin daha sıkı denetleneceğini belirler. Eleştirenler, verimlilik arttıkça daha az hesaplamayla da güçlü modeller eğitilebileceğini ve tek bir sayının yetersiz kalabileceğini savunur.",
+  "example": "Bir şirket, eğitimi için eşiğin üzerinde hesaplama harcadığı yeni bir genel amaçlı dil modelini AB'de sunmadan önce Komisyon'a bildirim yapmak ve risk değerlendirmesi yürütmekle yükümlü olabilir.",
+  "faq": [
+   [
+    "FLOP ile FLOPS arasındaki fark nedir?",
+    "FLOP, yapılan toplam işlem sayısıdır; eğitimin toplam hesaplama miktarını anlatır. FLOPS ise saniyedeki işlem sayısıdır ve bir donanımın hızını ifade eder."
+   ],
+   [
+    "Eşiğin altında kalan bir model risksiz sayılır mı?",
+    "Hayır. Eşik, yalnızca sistemik risk varsayımının başladığı noktadır. Altında kalan modeller de yasanın diğer kurallarına ve genel yükümlülüklere tabi olabilir; ayrıca Komisyon başka ölçütlerle de bir modeli sistemik riskli sayabilir."
    ]
   ]
  },
