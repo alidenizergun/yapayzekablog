@@ -92,18 +92,20 @@ Kapsamda örnek, vaka, kurum veya düzenleme adı geçiyorsa bunları özellikle
 Notları maddeler halinde yaz. Her maddenin sonunda dayandığı sayfanın tam adresini parantez içinde ver. Yalnızca aramada GERÇEKTEN gördüğün bilgileri yaz; bulamadığın konuyu "doğrulanamadı" diye belirt, tahmin yürütme.`;
   const messages = [{ role: 'user', content: user }];
   let text = '';
-  for (let i = 0; i < 4; i++) {
-    const res = await anthropic.messages.create({ model: RESEARCH_MODEL, max_tokens: 6000, system, messages, tools: [{ type: 'web_search_20250305', name: 'web_search', max_uses: SEARCHES }] });
+  let stop = '';
+  for (let i = 0; i < 6; i++) {
+    const res = await anthropic.messages.create({ model: RESEARCH_MODEL, max_tokens: 10000, system, messages, tools: [{ type: 'web_search_20250305', name: 'web_search', max_uses: SEARCHES }] });
     track(res, RESEARCH_MODEL);
     searches += res.usage?.server_tool_use?.web_search_requests ?? 0;
     for (const b of res.content) {
       if (b.type === 'web_search_tool_result' && Array.isArray(b.content)) for (const r of b.content) { const k = normalizeUrl(r.url); if (k && !seen.has(k)) seen.set(k, { url: r.url, title: r.title }); }
       if (b.type === 'text') { text += b.text; for (const c of b.citations ?? []) { const k = normalizeUrl(c.url); if (k && !seen.has(k)) seen.set(k, { url: c.url, title: c.title }); } }
     }
+    stop = res.stop_reason;
     if (res.stop_reason === 'pause_turn') { messages.push({ role: 'assistant', content: res.content }); continue; }
     break;
   }
-  return { notes: text.trim(), seen };
+  return { notes: text.trim(), seen, stop };
 }
 
 // ------------------------------------------------------------ 2) yazım
@@ -226,10 +228,11 @@ async function main() {
   const anthropic = await client();
   const researched = await pool(todo, CONCURRENCY, async (j) => {
     const r = await research(anthropic, j.sector, j.topic);
-    log(`araştırıldı: ${j.topic.slug} (${r.seen.size} adres)`);
+    log(`araştırıldı: ${j.topic.slug} (${r.seen.size} adres, not ${r.notes.length} karakter, ${r.stop})`);
     return { ...j, ...r };
   });
   const ok = researched.filter((j) => !j.error && j.notes && j.seen.size >= 2);
+  researched.filter((j) => !j.error && !ok.includes(j)).forEach((j) => log(`araştırma yetersiz: ${j.topic.slug} (not ${j.notes?.length ?? 0} karakter, ${j.seen?.size ?? 0} adres, son durum ${j.stop})`));
   researched.filter((j) => j.error).forEach((j) => log(`araştırma hatası: ${j.error.message}`));
 
   const written = await writeAll(anthropic, ok);
