@@ -87,3 +87,19 @@ jobs:
     steps:
       - id: deployment
         uses: actions/deploy-pages@d6db90164ac5ed86f2b6aed7e0febac5b3c0c03e # v4
+
+      # IndexNow: Bing, Yandex ve diğer katılımcı arama motorlarına son haber adreslerini bildirir.
+      # Anahtar herkese açık olacak şekilde tasarlanmıştır (public/0c0c22361c000ab306b8057c0f807962.txt); gizli değildir.
+      - name: Arama motorlarına bildir (IndexNow)
+        if: vars.CUSTOM_DOMAIN != ''
+        continue-on-error: true
+        env:
+          HOST: ${{ vars.CUSTOM_DOMAIN }}
+          KEY: 0c0c22361c000ab306b8057c0f807962
+        run: |
+          sleep 60
+          urls=$(curl -fsS "https://$HOST/news-sitemap.xml" | grep -o '<loc>[^<]*</loc>' | sed 's/<\/\?loc>//g' | head -n 100)
+          [ -z "$urls" ] && { echo "haber adresi yok"; exit 0; }
+          body=$(jq -n --arg host "$HOST" --arg key "$KEY" --arg list "$urls" '{host: $host, key: $key, keyLocation: ("https://" + $host + "/" + $key + ".txt"), urlList: ($list | split("\n") | map(select(length > 0)))}')
+          code=$(curl -sS -o /dev/null -w '%{http_code}' -X POST https://api.indexnow.org/indexnow -H 'Content-Type: application/json; charset=utf-8' -d "$body")
+          echo "IndexNow yanıtı: $code ($(printf '%s\n' "$urls" | wc -l) adres)"

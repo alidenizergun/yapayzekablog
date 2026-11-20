@@ -29,12 +29,14 @@ interface Props {
   article?: { published: Date; modified?: Date; section?: string; tags?: string[] };
   // Konum (breadcrumb) şeması: [{ name, path }]
   breadcrumbs?: { name: string; path: string }[];
+  // Sayfaya özel ek RSS akışı (ör. kategori akışı)
+  feed?: { title: string; path: string };
 }
 const L = await i18n(Astro);
 const { lang, T, alternates, S } = L;
 const SITE_TITLE = T(SITE.title, 'YZ Gündemi · AI News from Turkey and the World');
 const SITE_DESC = T(SITE.description, SITE_DESC_EN);
-const { title, description: rawDescription = SITE_DESC, ogImage, ogType = 'website', currentCat, jsonLd, noindex = false, article, breadcrumbs } = Astro.props;
+const { title, description: rawDescription = SITE_DESC, ogImage, ogType = 'website', currentCat, jsonLd, noindex = false, article, breadcrumbs, feed } = Astro.props;
 // Başlık: "Haber başlığı · YZ Gündemi"; çok uzun başlıklarda (70+) marka eki atılır, arama sonucunda kesilmesin
 const fullTitle = title ? (`${title} · ${SITE.name}`.length > 70 ? title : `${title} · ${SITE.name}`) : SITE_TITLE;
 // Açıklama en fazla 160 karakter, kelime ortasında kesilmez
@@ -157,6 +159,8 @@ const isBreaking = latest && Date.now() - latest.data.date.valueOf() < BREAKING_
   <meta name="theme-color" content="#121212" media="(prefers-color-scheme: dark)" />
   <meta name="format-detection" content="telephone=no" />
   <link rel="alternate" type="application/rss+xml" title={SITE_TITLE} href={L.u('/rss.xml')} />
+  {feed && <link rel="alternate" type="application/rss+xml" title={feed.title} href={url(feed.path)} />}
+  <link rel="preconnect" href="https://images.unsplash.com" crossorigin />
   {altTr && altEn && <link rel="alternate" hreflang="tr" href={altTr} />}
   {altTr && altEn && <link rel="alternate" hreflang="en" href={altEn} />}
   {altTr && altEn && <link rel="alternate" hreflang="x-default" href={altTr} />}
@@ -316,6 +320,7 @@ const isBreaking = latest && Date.now() - latest.data.date.valueOf() < BREAKING_
           <li><a href={L.u('/duzeltmeler/')}>{T('Düzeltmeler', 'Corrections')}</a></li>
           <li><a href={L.u('/akis/')}>{T('Canlı akış', 'Live feed')}</a></li>
           <li><a href={L.u('/rss.xml')}>RSS</a></li>
+          <li><a href="https://www.google.com/preferences/source?q=yzgundemi.com" rel="noopener" target="_blank">{T("Google'da tercih edilen kaynak yap", 'Add as a preferred source on Google')}</a></li>
           <li><a href={switchHref} hreflang={lang === 'en' ? 'tr' : 'en'} lang={lang === 'en' ? 'tr' : 'en'}>{lang === 'en' ? 'Türkçe' : 'English'}</a></li>
           {newsletterOn && <li><a href={L.u('/') + '#bulten'}>{T('E-posta bülteni', 'Newsletter')}</a></li>}
           {SITE.social?.x && <li><a href={`https://x.com/${SITE.social.x}`}>X</a></li>}

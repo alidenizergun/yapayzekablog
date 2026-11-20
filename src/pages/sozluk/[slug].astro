@@ -36,6 +36,11 @@ others.unshift(...sameCat.slice(0, 4)); // önce aynı konu grubundan terimler
 others.splice(8);
 const guides = (await getCollection('rehberler', (g) => !g.data.draft)).filter((g) => g.data.terms.includes(t.slug)).map((g) => locGuide(g, lang, L.m)).filter(Boolean).slice(0, 5);
 const faq = t.faq;
+// Arama sonucunda kesilmesin: uzun terimlerde başlık kısalır
+const pick = (...c) => c.find((x) => x.length <= 62) ?? c[c.length - 1];
+const pageTitle = lang === 'en'
+  ? pick(`What is ${name}? Meaning and examples in AI`, `What is ${name}? Meaning and examples`, `What is ${name}?`)
+  : pick(`${name} nedir? Yapay zekada ${t.en} ne demek`, `${name} nedir? Anlamı ve örnekleri`, `${name} nedir?`);
 const pageUrl = new URL(url(`/sozluk/${t.slug}/`), Astro.site).href;
 const jsonLd = [
   { '@type': 'DefinedTerm', '@id': `${pageUrl}#terim`, name: t.term, alternateName: lang === 'en' ? t0.term : t.en, description: t.def, url: pageUrl,
@@ -45,7 +50,7 @@ const jsonLd = [
   ...(faq.length ? [{ '@type': 'FAQPage', mainEntity: faq.map(([q, a]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a } })) }] : []),
 ];
 ---
-<Base title={T(`${name} nedir? Yapay zekada ${t.en} ne demek`, `What is ${name}? Meaning and examples in AI`)} description={t.def} jsonLd={jsonLd}
+<Base title={pageTitle} description={t.def} jsonLd={jsonLd}
   breadcrumbs={[{ name: 'Ana sayfa', path: '/' }, { name: T('Sözlük', 'Glossary'), path: '/sozluk/' }, { name, path: `/sozluk/${t.slug}/` }]}>
   <div class="cols flush">
     <article class="article term" data-pagefind-body data-pagefind-meta={`date:${T('Sözlük', 'Glossary')}`}>

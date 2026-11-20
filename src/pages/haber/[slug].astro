@@ -112,6 +112,7 @@ const crumbs = [{ name: 'Ana sayfa', path: '/' }, { name: cat, path: `/kategori/
           <a class="tag" href={`https://wa.me/?text=${encodeURIComponent(`${d.title} ${pageUrl}`)}`} target="_blank" rel="noopener">WhatsApp</a>
           <button type="button" data-share-ig data-title={d.title}>Instagram</button>
           <button type="button" data-copy>{T('Bağlantıyı kopyala', 'Copy link')}</button>
+          <a class="tag pref-src" href="https://www.google.com/preferences/source?q=yzgundemi.com" target="_blank" rel="noopener" title={T('Google aramalarında YZ Gündemi haberlerini daha sık görün', 'See more YZ Gündemi stories in Google Search')}>{T("Google'da tercih et", 'Prefer on Google')}</a>
           <span class="share-note" role="status" aria-live="polite"></span>
         </div>
       </div>

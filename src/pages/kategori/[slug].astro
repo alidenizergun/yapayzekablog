@@ -18,13 +18,14 @@ const items = locNewsList(await getNews(), lang, L.m).filter((n) => n.data.categ
 const rowV = spreadVisuals(items);
 ---
 <Base title={T(`${cat.name}: son yapay zeka haberleri`, `AI ${name} news`)} description={intro || T(`${cat.name} alanındaki en yeni yapay zeka haberleri.`, `The latest AI news in ${name}.`)} currentCat={cat.slug}
-  noindex={items.length === 0}
+  noindex={items.length === 0} feed={lang === 'tr' ? { title: `${cat.name} · YZ Gündemi`, path: `/kategori/${cat.slug}/rss.xml` } : undefined}
   breadcrumbs={[{ name: 'Ana sayfa', path: '/' }, { name, path: `/kategori/${cat.slug}/` }]}
   jsonLd={{ '@type': 'CollectionPage', name: T(`${cat.name}: yapay zeka haberleri`, `AI ${name} news`), inLanguage: L.locale }}>
   <div class="cols flush">
     <section class="main" aria-labelledby="h">
       <div class="sechead"><h1 id="h" class="page-h">{name}</h1><span class="meta">{items.length} {T('haber', items.length === 1 ? 'story' : 'stories')}</span></div>
       {intro && <p class="cat-intro">{intro}{cat.links?.length > 0 && <> {cat.links.map((l, i) => <>{i > 0 && ' · '}<a href={url(l.href)}>{S(`cat.${cat.slug}.link.${i}`, l.label)}</a></>)}</>}</p>}
+      {lang === 'tr' && items.length > 0 && <p class="cat-feed meta"><a href={url(`/kategori/${cat.slug}/rss.xml`)}>Bu bölümün RSS akışı</a></p>}
       {items.length ? items.map((n) => <NewsRow item={n} choice={rowV.get(n.id)} level={2} />) : <p class="empty">{T('Bu kategoride henüz haber yok. Yeni haberler otomatik güncellemelerle eklenecek.', 'No stories in this section yet.')}</p>}
     </section>
     <Sidebar exclude={items.map((n) => n.id)} />
