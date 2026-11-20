@@ -1,7 +1,8 @@
 # Haber motoru uyarısı: bir iş akışı başarısız olursa, API kredisi biterse ya da planlı tur atlanırsa
 # depoda "haber-motoru" etiketli bir konu (issue) açar. GitHub size e-postayla bildirir.
 # Aynı türde açık bir konu varsa yenisi açılmaz, mevcut konuya yorum eklenir.
-# Atlanan tur bulunursa ara tur kendiliğinden başlatılır; tur başarılı olunca "atlandı" konusu kapanır.
+# Haber turları yalnızca dış zamanlayıcıyla (cron-job.org) başlar; atlanan tur bulunursa yalnızca uyarı verilir,
+# tur kendiliğinden başlatılmaz. Tur yeniden çalışınca "atlandı" konusu kapanır.
 name: Haber motoru uyarısı
 
 on:
@@ -73,7 +74,7 @@ jobs:
     timeout-minutes: 5
     permissions:
       contents: read
-      actions: write
+      actions: read
       issues: write
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
@@ -102,17 +103,16 @@ jobs:
             if [ -n "$num" ]; then gh issue close "$num" --comment "Turlar yeniden çalışıyor (son tur $age_min dakika önce)."; fi
             exit 0
           fi
-          # Çalışan bir tur varsa veya son tur kredi/anahtar hatasıyla düştüyse yeniden başlatma (o durumda ayrı konu açılmıştır)
+          # Turlar yalnızca cron-job.org ile başlar: burada tur başlatılmaz, yalnızca durum bildirilir
           state=$(gh run list --workflow news.yml -L 1 --json status,conclusion --jq '.[0] | "\(.status) \(.conclusion)"' || echo "")
-          action="Ara tur kendiliğinden başlatıldı."
           case "$state" in
-            in_progress*|queued*|waiting*) action="Şu an çalışan bir tur var; yeniden başlatılmadı." ;;
-            *failure*) action="Son tur hatayla bitti; yeniden başlatılmadı (hata için ayrı konuya bakın)." ;;
-            *) gh workflow run news.yml --ref "$BRANCH" -f mode=ogle >/dev/null || action="Ara tur başlatılamadı." ;;
+            in_progress*|queued*|waiting*) action="Şu an çalışan bir tur var." ;;
+            *failure*) action="Son tur hatayla bitti (hata için ayrı konuya bakın)." ;;
+            *) action="cron-job.org'daki işin etkin olduğunu ve son çalışmasının başarılı göründüğünü kontrol edin." ;;
           esac
           gh label create haber-motoru --color CF2E13 --description "Haber motoru uyarıları" --force >/dev/null
           when=$(TZ=Europe/Istanbul date '+%d.%m.%Y %H:%M')
-          body="$when (İstanbul): son haber turu $((age_min / 60)) saat $((age_min % 60)) dakika önce çalıştı. $action GitHub zamanlayıcısı yoğunlukta turları atlayabilir; dış zamanlayıcı (cron-job.org) bunu önler."
+          body="$when (İstanbul): son haber turu $((age_min / 60)) saat $((age_min % 60)) dakika önce çalıştı. $action Turlar yalnızca cron-job.org ile başlatılır."
           if [ -n "$num" ]; then
             gh issue comment "$num" --body "$body"
           else
