@@ -41,7 +41,10 @@ jobs:
           set -euo pipefail
           gh label create haber-motoru --color CF2E13 --description "Haber motoru uyarıları" --force >/dev/null
           log=$(gh run view "$RUN_ID" --log-failed 2>/dev/null | tail -c 200000 || true)
-          if grep -qiE 'credit balance is too low|insufficient.?credit|billing' <<<"$log"; then
+          if grep -qiE 'reached your specified API usage limits' <<<"$log"; then
+            title="Anthropic API aylık harcama sınırına ulaşıldı"
+            hint="Anthropic Console > Settings > Limits bölümünden aylık harcama sınırını yükseltin. Sınır yükseltilince sonraki tur kendiliğinden çalışır."
+          elif grep -qiE 'credit balance is too low|insufficient.?credit|billing' <<<"$log"; then
             title="Anthropic API kredisi bitti"
             hint="Anthropic Console > Billing bölümünden kredi yükleyin. Kredi yüklenince sonraki tur kendiliğinden çalışır; beklemek istemezseniz Actions > Haber güncellemesi > Run workflow."
           elif grep -qiE 'authentication_error|invalid x-api-key' <<<"$log"; then
