@@ -1,4 +1,5 @@
 ---
+import { GLOSSARY } from '../lib/glossary.js';
 // Yazı tipleri sitenin kendi sunucusundan verilir (Google'a ziyaretçi IP'si gitmez, KVKK; CSP daha sıkı)
 import '@fontsource/inter/400.css';
 import '@fontsource/inter/500.css';
@@ -102,51 +103,59 @@ const item = (label, href, desc = '') => ({ label, href: L.u(href), desc, curren
 // İş kolları menüsü yalnızca rehberi olan sektörleri gösterir
 const sectorSet = new Set((await getCollection('rehberler', (g) => !g.data.draft && g.data.sector)).map((g) => g.data.sector));
 const liveSectors = SECTORS.filter((s) => sectorSet.has(s.slug));
+// Menü grupları okurun sorusuna göre: "Ne oldu?" (Haberler) · "Hangi aracı kullanayım?" (Araçlar) ·
+// "Bu ne demek, nasıl yapılır?" (Öğren) · "Benim işimde ne işe yarar?" (Sektörler) · "Türkiye'de durum ne?" (Türkiye) ·
+// "Rakamlar ne diyor?" (Veriler). Her bağlantının altında ne bulacağını söyleyen kısa açıklama var.
 const navGroups = [
-  { label: T('Haberler', 'News'), cols: true, items: nav.map((slug) => ({ ...item(S(`cat.${slug}.name`, categoryBySlug(slug)?.name), `/kategori/${slug}/`), current: slug === currentCat })) },
-  { label: T('Araç rehberi', 'AI tools'), items: [
-    item(T('Yapay zeka araçları', 'AI tools directory'), '/arac/', T('Fiyatlar, ücretsiz planlar, alternatifler', 'Pricing, free plans, alternatives')),
-    item(T('Araç seçici', 'Tool finder'), '/arac-secici/', T('Size uygun aracı bulun', 'Find the right tool for you')),
-    item(T('İşe göre en iyiler', 'Best tools by task'), '/en-iyi/', T('CV, görsel, video, kod ve daha fazlası', 'Resumes, images, video, code and more')),
+  { key: 'news', label: T('Haberler', 'News'), cols: true, items: [
+    item(T('Son haberler', 'Latest news'), '/akis/', T('Tüm haberler, en yeniden eskiye', 'All stories, newest first')),
+    item(T('Haftanın özeti', 'Week in review'), '/haftalik/', T('Haftanın en önemli gelişmeleri', 'The week’s biggest stories')),
+    item(T('Süren olaylar', 'Ongoing stories'), '/gelisme/', T('Gelişen hikâyelerin zaman çizelgesi', 'Timelines of developing stories')),
+    // "Araçlar" haber bölümü, menüdeki Araçlar rehberiyle karışmasın diye burada "Araç haberleri" olarak gösterilir
+    ...nav.map((slug) => ({ ...item(slug === 'araclar' ? T('Araç haberleri', 'Tool news') : S(`cat.${slug}.name`, categoryBySlug(slug)?.name), `/kategori/${slug}/`), current: slug === currentCat })),
+  ] },
+  { key: 'tools', label: T('Araçlar', 'Tools'), items: [
+    item(T('Tüm yapay zeka araçları', 'All AI tools'), '/arac/', T('Ne işe yarar, fiyatı ne, ücretsiz mi?', 'What it does, pricing, free plans')),
+    item(T('Bana uygun aracı bul', 'Find the right tool'), '/arac-secici/', T('Birkaç soruyla size göre öneri', 'A few questions, a tailored pick')),
+    item(T('İşe göre en iyi araçlar', 'Best tools by task'), '/en-iyi/', T('CV, görsel, video, kod ve daha fazlası', 'Resumes, images, video, code and more')),
     item(T('Karşılaştırmalar', 'Comparisons'), '/karsilastir/', T('ChatGPT mi Claude mi?', 'ChatGPT or Claude?')),
-    item(T('Ücretsiz araçlar', 'Free AI tools'), '/ucretsiz-yapay-zeka-araclari/'),
-    item(T('Yeni araçlar', 'New AI tools'), '/yeni-araclar/'),
-    item(T('Model API fiyatları', 'AI model API pricing'), '/modeller-karsilastirma/'),
+    item(T('Ücretsiz araçlar', 'Free AI tools'), '/ucretsiz-yapay-zeka-araclari/', T('Para ödemeden kullanabilecekleriniz', 'Tools you can use for free')),
+    item(T('Yeni çıkan araçlar', 'New AI tools'), '/yeni-araclar/', T('Son eklenen araçlar', 'Recently added tools')),
   ] },
-  { label: T('Öğren', 'Learn'), items: [
-    item(T('Rehberler', 'Guides'), '/rehber/', T('Adım adım kullanım kılavuzları', 'Step-by-step how-to guides')),
-    item(T('Sözlük', 'Glossary'), '/sozluk/', T('Yapay zeka terimleri sade Türkçeyle', 'AI terms in plain English')),
-    item(T('Raporlar', 'Reports'), '/raporlar/', T('McKinsey, Stanford, PwC raporlarından öne çıkanlar', 'Key findings from major AI reports')),
-    item(T('Yapay zeka nedir?', 'What is AI?'), '/sozluk/yapay-zeka/'),
+  { key: 'learn', label: T('Öğren', 'Learn'), items: [
+    item(T('Yapay zeka nedir?', 'What is AI?'), '/sozluk/yapay-zeka/', T('Sıfırdan başlayanlar için', 'Start here if you are new')),
+    item(T('Nasıl yapılır rehberleri', 'How-to guides'), '/rehber/', T('Adım adım kullanım kılavuzları', 'Step-by-step guides')),
+    item(T('Yapay zeka sözlüğü', 'AI glossary'), '/sozluk/', T(`${GLOSSARY.length} terim sade Türkçeyle`, `${GLOSSARY.length} AI terms in plain English`)),
   ] },
-  ...(liveSectors.length ? [{ label: T('Sektörler', 'Industries'), items: [
-    item(T('Tüm iş kolları', 'All industries'), '/sektor/', T('Her sektör için rehberler, araçlar ve haberler', 'Guides, tools and news for each industry')),
+  ...(liveSectors.length ? [{ key: 'sectors', label: T('Sektörler', 'Industries'), items: [
+    item(T('Tüm sektörler', 'All industries'), '/sektor/', T('Her sektör için rehber, araç ve haber', 'Guides, tools and news for each industry')),
     ...liveSectors.map((s) => item(T(s.title, s.en.title), `/sektor/${s.slug}/`)),
   ] }] : []),
-  { label: T('Türkiye', 'Turkey'), items: [
+  { key: 'turkey', label: T('Türkiye', 'Turkey'), items: [
     item(T("Türkiye'de yapay zeka", 'AI in Turkey'), '/turkiye-yapay-zeka/', T('Ekosistem, düzenlemeler, yatırımlar', 'Ecosystem, regulation, funding')),
-    item(T('Yerli modeller', 'Turkish AI models'), '/yerli-yapay-zeka/'),
-    ...(counts.get('turkiye') ? [item(T('Türkiye haberleri', 'Turkey news'), '/kategori/turkiye/')] : []),
-    item(T('Etkinlik takvimi', 'Events'), '/etkinlikler/'),
+    ...(counts.get('turkiye') ? [item(T('Türkiye haberleri', 'Turkey news'), '/kategori/turkiye/', T('Türkiye’den son gelişmeler', 'Latest from Turkey'))] : []),
+    item(T('Yerli yapay zeka modelleri', 'Turkish AI models'), '/yerli-yapay-zeka/', T('Türkiye’de geliştirilen modeller', 'Models built in Turkey')),
+    item(T('Etkinlik takvimi', 'Events'), '/etkinlikler/', T('Konferans, zirve ve buluşmalar', 'Conferences and meetups')),
   ] },
-  { label: T('Takip', 'Trackers'), right: true, items: [
-    item(T('Haftalık özet', 'Weekly roundup'), '/haftalik/', T('Haftanın en önemli gelişmeleri', 'The week’s biggest stories')),
-    item(T('Gelişen hikâyeler', 'Developing stories'), '/gelisme/', T('Süren olayların zaman çizelgesi', 'Timelines of ongoing stories')),
-    item(T('Yatırım takipçisi', 'Funding tracker'), '/yatirimlar/'),
-    item(T('Şirketler ve kişiler', 'Companies and people'), '/konular/'),
+  { key: 'data', label: T('Veriler', 'Data'), right: true, items: [
+    item(T('Yatırımlar ve satın almalar', 'Funding and acquisitions'), '/yatirimlar/', T('Kim, kime, ne kadar yatırım yaptı?', 'Who invested how much in whom')),
+    item(T('Model fiyatları', 'Model pricing'), '/modeller-karsilastirma/', T('API fiyatları ve özellikler yan yana', 'API prices and features side by side')),
+    item(T('Raporlar', 'Reports'), '/raporlar/', T('Büyük araştırma raporlarından öne çıkanlar', 'Key findings from major AI reports')),
+    item(T('Şirketler ve kişiler', 'Companies and people'), '/konular/', T('OpenAI, Nvidia, Altman ve diğerleri', 'OpenAI, Nvidia, Altman and others')),
   ] },
 ];
+const groupOf = (k) => navGroups.find((g) => g.key === k)?.items ?? [];
 const isHome = Astro.url.pathname.replace(/\/$/, '') === L.u('/').replace(/\/$/, '');
 const footerCats = CATEGORIES.filter((c) => counts.get(c.slug));
 // Alt bilgi menüsü: telefonda açılır kapanır gruplar, geniş ekranda hepsi açık
 const footGroups = [
-  { label: T('Haberler', 'News'), wide: true, items: [item(T('Son haberler', 'Latest stories'), '/akis/'), ...footerCats.map((c) => item(S(`cat.${c.slug}.name`, c.name), `/kategori/${c.slug}/`))] },
-  { label: T('Araç rehberi', 'AI tools'), items: navGroups[1].items },
+  { label: T('Haberler', 'News'), wide: true, items: groupOf('news') },
+  { label: T('Araçlar', 'Tools'), items: groupOf('tools') },
   { label: T('Öğren ve keşfet', 'Learn and explore'), wide: true, items: [
-    ...navGroups[2].items.filter((i) => !i.href.includes('/sozluk/yapay-zeka')),
-    ...(liveSectors.length ? [item(T('İş kolları', 'Industries'), '/sektor/')] : []),
-    ...navGroups.at(-2).items.filter((i) => !i.href.includes('/kategori/')),
-    ...navGroups.at(-1).items,
+    ...groupOf('learn').filter((i) => !i.href.includes('/sozluk/yapay-zeka')),
+    ...(liveSectors.length ? [item(T('Sektörler', 'Industries'), '/sektor/')] : []),
+    ...groupOf('turkey').filter((i) => !i.href.includes('/kategori/')),
+    ...groupOf('data'),
   ] },
   { label: 'YZ Gündemi', items: [
     item(T('Hakkımızda', 'About us'), '/hakkimizda/'),
@@ -275,8 +284,8 @@ const isBreaking = latest && Date.now() - latest.data.date.valueOf() < BREAKING_
     <div class="wrap">
       <a class="catbar-logo" href={L.u('/')} aria-label={T('YZ Gündemi ana sayfa', 'YZ Gündemi home')} tabindex="-1"><span class="wm-badge" aria-hidden="true">YZ</span></a>
       <ul class="nav-main" data-nav>
-        <li class="nav-quick"><a href={L.u('/')} aria-current={isHome ? 'page' : undefined}>{T('Gündem', 'Top stories')}</a></li>
-        <li class="nav-quick"><a href={L.u('/akis/')} aria-current={path.startsWith(L.u('/akis/')) ? 'page' : undefined}>{T('Akış', 'Latest')}</a></li>
+        <li class="nav-quick"><a href={L.u('/')} aria-current={isHome ? 'page' : undefined}>{T('Ana sayfa', 'Home')}</a></li>
+        <li class="nav-quick"><a href={L.u('/akis/')} aria-current={path.startsWith(L.u('/akis/')) ? 'page' : undefined}>{T('Son haberler', 'Latest')}</a></li>
         {navGroups.map((g) => (
           <li class="nav-group-item">
             <details class={`nav-group${g.items.some((i) => i.current) ? ' has-current' : ''}`} data-nav-group>
@@ -297,7 +306,7 @@ const isBreaking = latest && Date.now() - latest.data.date.valueOf() < BREAKING_
                 <button type="submit">{T('Ara', 'Search')}</button>
               </form>
               <ul class="menu-quick">
-                <li><a href={L.u('/akis/')}>{T('Son haberler', 'Latest')}</a></li>
+                <li><a href={L.u('/haftalik/')}>{T('Haftanın özeti', 'Week in review')}</a></li>
                 <li><a href={L.u('/arac/')}>{T('Araçlar', 'Tools')}</a></li>
                 <li><a href={L.u('/rehber/')}>{T('Rehberler', 'Guides')}</a></li>
                 <li><a href={L.u('/sozluk/')}>{T('Sözlük', 'Glossary')}</a></li>

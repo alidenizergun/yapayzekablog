@@ -855,7 +855,7 @@ header.site .masthead { display: flex; align-items: center; justify-content: spa
   .nav-panel-full h2 { margin: 4px 12px 4px; font-size: 12px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); font-family: var(--body); }
   .nav-panel-full a { min-height: 40px; padding: 4px 12px; font-size: 15px; }
 }
-@media (max-width: 520px) { .nav-panel-full { grid-template-columns: 1fr; } .nav-panel-full section:first-child ul { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 520px) { .nav-panel-full { grid-template-columns: 1fr; } .nav-panel-full section:first-of-type ul { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (max-width: 560px) {
   .river-filters { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; margin-inline: calc(-1 * max(16px, env(safe-area-inset-left, 0px))); padding-inline: max(16px, env(safe-area-inset-left, 0px)); }
   .river-filters::-webkit-scrollbar { display: none; }
@@ -1014,3 +1014,9 @@ img.thumb { color: transparent; font-size: 0; }
 .nav-panel .menu-quick a { justify-content: center; align-items: center; min-height: 44px; border: 1px solid var(--line); border-radius: 8px; font-size: 14px; }
 /* Geniş ekranda üst bilgide arama kutusu varken çubuktaki arama simgesi yalnızca çubuk yapışınca görünür */
 @media (min-width: 761px) { .catbar:not(.is-stuck) .catbar-search { display: none; } }
+/* Haberler menüsü: açıklamalı bağlantılar (son haberler, haftanın özeti, süren olaylar) tam genişlikte, konular iki sütunda */
+.nav-panel-cols li:has(a > span) { grid-column: 1 / -1; }
+.nav-panel-cols li:has(a > span):has(+ li:not(:has(a > span))) { border-bottom: 1px solid var(--line); margin-bottom: 6px; padding-bottom: 6px; }
+/* Telefonda logo hemen üstte olduğu için "Ana sayfa" kısayolu gizlenir */
+@media (max-width: 760px) { .nav-main > .nav-quick:first-child { display: none !important; } }
+@media (max-width: 520px) { .nav-panel-full section:first-of-type li:nth-child(-n+3) { grid-column: 1 / -1; } }
