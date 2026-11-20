@@ -1,0 +1,28 @@
+---
+title: "Trump yapay zekada küresel düzenlemeye karşı çıktı, Şi insan kontrolünü vurguladı"
+spot: "ABD Başkanı Donald Trump, Şencen'deki APEC toplantısında yapay zekanın her türlü küresel düzenlemesine karşı olduğunu söyledi. Çin Devlet Başkanı Şi Cinping ise iki ülkenin iş birliği yapması gerektiğini belirtti."
+category: regulasyon
+tags: ["YapayZekaDüzenlemesi", "Trump", "Çin"]
+date: 2026-11-20T04:32:41+03:00
+image: regulasyon
+popularity: 60
+imageQuery: "summit conference hall flags"
+whyItMatters: "ABD ile Çin'in yapay zeka yönetişimine ilişkin farklı tutumları, uluslararası düzenleme çabalarının önündeki siyasi engeli gösteriyor."
+keyPoints:
+  - "Trump, yapay zekanın her türlü küresel düzenlemesine karşı çıktı."
+  - "Şi, ABD ile Çin'in yapay zekayı insan kontrolü altında tutmak için iş birliği yapmasını istedi."
+  - "Carney, küresel yönetişimin olmamasının muazzam bir risk olduğunu söyledi."
+sources:
+  - title: "US President Trump rejects global AI regulation as China's Xi calls for cooperation on safety"
+    url: "https://www.euronews.com/2026/11/19/us-president-trump-rejects-global-ai-regulation-as-chinas-xi-calls-for-cooperation-on-safe"
+    publisher: "Euronews"
+  - title: "Trump opposes 'globalist regulation' of AI"
+    url: "https://tribune.net.ph/2026/11/19/trump-opposes-globalist-regulation-of-ai"
+    publisher: "Tribune"
+---
+
+ABD Başkanı Donald Trump, Çin Devlet Başkanı Şi Cinping ile görüşmeden önce Şencen'deki APEC toplantısında konuştu. Trump, yapay zekanın her türlü "küresel düzenlemesine" karşı olduğunu söyledi.
+
+Şi ise ABD ile Çin'in yapay zekayı "insan kontrolü altında" tutmak için iş birliği yapması gerektiğini belirtti. İki liderin yaklaşımı bu konuda birbirinden ayrışıyor.
+
+Kanada Başbakanı Mark Carney de çarşamba günü, küresel yapay zeka yönetişiminin bulunmamasının "muazzam bir risk" oluşturduğunu söyledi.

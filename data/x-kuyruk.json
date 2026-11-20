@@ -278,5 +278,37 @@
     "importance": 58,
     "featured": false,
     "date": "2026-11-19T04:29:48+03:00"
+  },
+  {
+    "slug": "apple-kullanici-adina-is-yapabilen-kendi-yapay-zeka-ajanini",
+    "title": "Apple, kullanıcı adına iş yapabilen kendi yapay zeka ajanını geliştiriyor",
+    "text": "Bloomberg'e göre Apple, kod yazabilen, web'de gezinen ve uygulamaları kontrol eden otonom bir yapay zeka ajanı geliştiriyor. Plan, bu hafta eklenen iş ilanlarında yer alıyor. #Apple",
+    "importance": 62,
+    "featured": false,
+    "date": "2026-11-20T04:33:41+03:00"
+  },
+  {
+    "slug": "trump-yapay-zekada-kuresel-duzenlemeye-karsi-cikti-si-insan",
+    "title": "Trump yapay zekada küresel düzenlemeye karşı çıktı, Şi insan kontrolünü vurguladı",
+    "text": "Trump, Şencen'deki APEC toplantısında yapay zekanın her türlü küresel düzenlemesine karşı çıktı. Şi Cinping ise ABD ile Çin'in iş birliği yapması gerektiğini söyledi.",
+    "importance": 60,
+    "featured": false,
+    "date": "2026-11-20T04:32:41+03:00"
+  },
+  {
+    "slug": "anthropic-in-halka-arzinin-ardindan-yapay-zeka-finansmani-icin",
+    "title": "Anthropic'in halka arzının ardından yapay zeka finansmanı için şeffaflık çağrısı",
+    "text": "Anthropic'in halka arzının ardından Senatör Mark Warner, halka açık şirketlerin yapay zekayla bağlantılı finansmanı açıklamasını şart koşan bir yasa önerisi tanıttı. #Anthropic",
+    "importance": 64,
+    "featured": false,
+    "date": "2026-11-20T04:31:41+03:00"
+  },
+  {
+    "slug": "allianz-kritik-yapay-zeka-olaylari-son-iki-yilda-yuzde",
+    "title": "Allianz: Kritik yapay zeka olayları son iki yılda yüzde 150'den fazla arttı",
+    "text": "Allianz Commercial'ın raporuna göre kritik yapay zeka olayları son iki yılda yüzde 150'den fazla arttı. Rapor, doğrulanan kayıpların asıl riskin yalnızca küçük bir kısmı olduğunu söylüyor.",
+    "importance": 38,
+    "featured": false,
+    "date": "2026-11-20T04:30:41+03:00"
   }
 ]
