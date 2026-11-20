@@ -8,13 +8,16 @@ import { GLOSSARY } from '../src/lib/glossary.js';
 import { TOOLS } from '../src/lib/tools.js';
 
 const MAX_PER_PAGE = 6;
-const lower = (s) => s.toLocaleLowerCase('tr');
+// Küçük harfe çevirirken ı/i ayrımı kaldırılır ("AI" ve "ai", "İ" ve "I" aynı eşleşsin); uzunluk korunur
+const lower = (s) => s.toLocaleLowerCase('tr').replace(/ı/g, 'i');
 const isLetter = (ch) => !!ch && /\p{L}|\p{N}/u.test(ch);
 const esc = (s) => s.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;');
 
 /** Metinde terimin ilk geçtiği yer: [başlangıç, bitiş] */
+let lastText = null, lastLow = '';
 export function find(text, entry) {
-  const low = lower(text);
+  // Aynı metin art arda yüzlerce terimle aranır; küçük harfe çevrilmiş hâli saklanır
+  const low = text === lastText ? lastLow : (lastLow = lower(text), lastText = text, lastLow);
   let best = null;
   for (const m of entry.match) {
     const exact = m.startsWith('=');
@@ -52,11 +55,13 @@ export function linkGlossary(html, base = '') {
     if (skip || !p.trim() || n >= MAX_PER_PAGE) continue;
     let text = p;
     // Bu metin parçasında henüz bağlanmamış terimleri, metindeki sırasına göre bağla
-    const hits = GLOSSARY.filter((g) => !used.has(g.slug)).map((g) => ({ g, at: find(text, g) })).filter((h) => h.at)
+    // Daha önce bağlanmış terimler de yer tutar: "büyük dil modeli" ikinci kez geçtiğinde içindeki daha kısa bir terim bağlanmaz
+    const hits = GLOSSARY.map((g) => ({ g, at: find(text, g) })).filter((h) => h.at)
       .sort((a, b) => a.at[0] - b.at[0] || b.at[1] - a.at[1]); // aynı yerde başlayanlardan uzun olan (örn. "istem enjeksiyonu" > "istem")
     let out = '', cursor = 0;
     for (const { g, at } of hits) {
       if (n >= MAX_PER_PAGE || at[0] < cursor) continue;
+      if (used.has(g.slug)) { out += text.slice(cursor, at[1]); cursor = at[1]; continue; }
       const word = text.slice(at[0], at[1]);
       const short = g.def.length > 140 ? g.def.slice(0, 137).replace(/\s+\S*$/, '') + '…' : g.def;
       out += text.slice(cursor, at[0]) + `<a class="gloss" href="${base}/sozluk/${g.slug}/" title="${esc(short)}">${word}</a>`;

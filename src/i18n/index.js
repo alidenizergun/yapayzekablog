@@ -85,7 +85,7 @@ export function locDigest(entry, lang, m) {
 }
 
 // ---------------------------------------------------------------- veri yerelleştirmesi
-export const GL_CAT_EN = { 'Temel kavramlar': 'Core concepts', 'Modeller ve eğitim': 'Models and training', 'Kullanım ve araçlar': 'Using AI', 'Donanım ve altyapı': 'Hardware and infrastructure', 'Güvenlik ve etik': 'Safety and ethics' };
+export const GL_CAT_EN = { 'Temel kavramlar': 'Core concepts', 'Modeller ve eğitim': 'Models and training', 'Kullanım ve araçlar': 'Using AI', 'Donanım ve altyapı': 'Hardware and infrastructure', 'Güvenlik ve etik': 'Safety and ethics', 'Veri ve değerlendirme': 'Data and evaluation', 'Matematiksel temeller': 'Math foundations', 'Görüntü, ses ve robotik': 'Vision, audio and robotics', 'Hukuk, iş ve politika': 'Law, business and policy' };
 /** Sözlük terimi: { term, def, how, why, example, faq, catName } */
 export function locTerm(t, long, lang) {
   const k = (f) => `gl.${t.slug}.${f}`;

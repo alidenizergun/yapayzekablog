@@ -682,7 +682,12 @@ header.site .masthead { display: flex; align-items: center; justify-content: spa
 .glossary-cats { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
 
 .glossary-cat { margin-top: 16px; }
-.glossary-cat h3 { margin: 0; font-size: 15px; letter-spacing: .04em; text-transform: uppercase; color: var(--accent-text); }
+.glossary-cat summary { display: flex; align-items: baseline; gap: 10px; cursor: pointer; min-height: 44px; align-items: center; border-bottom: 1px solid var(--line); list-style: none; }
+.glossary-cat summary::-webkit-details-marker { display: none; }
+.glossary-cat summary::after { content: '+'; margin-left: auto; font-size: 20px; color: var(--accent-text); }
+.glossary-cat[open] summary::after { content: '−'; }
+.glossary-cat summary .meta { font-size: 14px; }
+.glossary-cat h3 { display: inline; margin: 0; font-size: 15px; letter-spacing: .04em; text-transform: uppercase; color: var(--accent-text); }
 .glossary-cat p { margin: 6px 0 0; line-height: 1.8; font-size: 16px; }
 .glossary-cat a:hover { color: var(--accent-text); text-decoration: underline; }
 .glossary .spot a { color: var(--accent-text); text-decoration: underline; text-underline-offset: 3px; }

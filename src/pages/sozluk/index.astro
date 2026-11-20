@@ -11,7 +11,7 @@ const terms = GLOSSARY.map((t) => locTerm(t, LONG[t.slug], lang)).sort((a, b) =>
 // Alfabe gezinmesi: yalnızca terimi olan harfler
 const letterOf = (t) => t.term[0].toLocaleUpperCase(lang);
 const letters = [...new Set(terms.map(letterOf))];
-const byCat = GLOSSARY_CATS.map((c) => ({ c, items: terms.filter((t) => t.cat === c) }));
+const byCat = GLOSSARY_CATS.map((c) => ({ c, items: terms.filter((t) => t.cat === c) })).filter((g) => g.items.length);
 const pageUrl = new URL(url('/sozluk/'), Astro.site).href;
 const jsonLd = {
   '@type': 'DefinedTermSet', '@id': `${pageUrl}#sozluk`, name: T('Yapay zeka terimleri sözlüğü', 'AI glossary'), inLanguage: L.locale,
@@ -27,10 +27,10 @@ const jsonLd = {
     <section class="glossary-bycat" aria-labelledby="bycat-h" data-pagefind-ignore>
       <h2 id="bycat-h" class="ev-h">{T('Konulara göre', 'By topic')}</h2>
       {byCat.map((g) => (
-        <div class="glossary-cat">
-          <h3>{lang === 'en' ? GL_CAT_EN[g.c] ?? g.c : g.c}</h3>
+        <details class="glossary-cat">
+          <summary><h3>{lang === 'en' ? GL_CAT_EN[g.c] ?? g.c : g.c}</h3> <span class="meta">{g.items.length} {T('terim', 'terms')}</span></summary>
           <p>{g.items.map((t, i) => <>{i > 0 && ' · '}<a href={url(`/sozluk/${t.slug}/`)}>{t.term}</a></>)}</p>
-        </div>
+        </details>
       ))}
     </section>
     <h2 class="ev-h">{T("A'dan Z'ye tüm terimler", 'All terms A to Z')}</h2>

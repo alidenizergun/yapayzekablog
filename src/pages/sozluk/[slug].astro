@@ -5,7 +5,7 @@ import Sidebar from '../../components/Sidebar.astro';
 import { GLOSSARY } from '../../lib/glossary.js';
 import { LONG } from '../../lib/glossary-long.js';
 import { getNews, spreadVisuals, url } from '../../lib/news.js';
-import { find } from '../../../scripts/glossary-integration.mjs';
+import { glossaryIndex } from '../../lib/glossary-index.js';
 import { getCollection } from 'astro:content';
 import { i18n, locNewsList, locTerm, locGuide } from '../../i18n/index.js';
 
@@ -20,12 +20,14 @@ const long = LONG[t.slug] && { how: t.how, why: t.why, example: t.example };
 const news = await getNews();
 const tLoc = (x) => locTerm(x, LONG[x.slug], lang);
 // Terimin geçtiği haberler (haber metninde, başlıkta veya spotta)
-const related = locNewsList(news.filter((n) => find(`${n.data.title} ${n.data.spot} ${n.body}`, t0)), lang, L.m).slice(0, 8);
+const idx = glossaryIndex(news);
+const relIds = new Set(idx.bySlug.get(t0.slug));
+const related = locNewsList(news.filter((n) => relIds.has(n.id)), lang, L.m).slice(0, 8);
 const rowV = spreadVisuals(related);
 // Alfabetik komşu terimler + aynı haberlerde sık geçen terimler
 const sorted = GLOSSARY.map(tLoc).sort((a, b) => a.term.localeCompare(b.term, lang));
 const i = sorted.findIndex((x) => x.slug === t.slug);
-const others = [sorted[i - 1], sorted[i + 1], ...sorted.filter((x) => x.slug !== t.slug && related.some((n) => find((n.en ? news.find((z) => z.id === n.id) : n).body, x)))]
+const others = [sorted[i - 1], sorted[i + 1], ...sorted.filter((x) => x.slug !== t.slug && related.some((n) => idx.byNews.get(n.id)?.has(x.slug)))]
   .filter(Boolean).filter((x, k, arr) => arr.findIndex((y) => y.slug === x.slug) === k).slice(0, 6);
 const name = lang === 'en' ? t.term.replace(/\s*\(.*?\)\s*$/, '') : t.term;
 // Aynı gruptaki terimler ilgili terimlere eklenir

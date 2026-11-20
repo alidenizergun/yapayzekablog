@@ -1,0 +1,515 @@
+# Sözlüğe eklenecek terimler: kategori | Türkçe terim | İngilizce karşılığı | eşleşme (isteğe bağlı)
+# Kategori kodları: T temel kavramlar, M modeller ve eğitim, K kullanım ve araçlar, D donanım ve altyapı,
+# G güvenlik ve etik, V veri ve değerlendirme, I matematiksel temeller, S görüntü, ses ve robotik, P hukuk, iş ve politika
+# Eşleşme: boş = Türkçe terimden ve kısaltmadan otomatik; "-" = haber metinlerinde otomatik bağlanmaz;
+# aksi halde virgülle ayrılmış ifadeler ("=" ile başlayan ifade tam kelime olarak eşleşir).
+# Bu dosyadaki terimlerin tanım ve açıklamaları scripts/generate-glossary.mjs ile yazılır (src/lib/glossary-extra.js).
+
+T|Dar yapay zeka|narrow AI
+T|Yapay süper zeka (ASI)|artificial superintelligence|yapay süper zeka,süper zeka,superintelligence
+T|Sembolik yapay zeka|symbolic AI
+T|Uzman sistem|expert system
+T|Yapay zeka kışı|AI winter
+T|Algoritma|algorithm|-
+T|Denetimsiz öğrenme|unsupervised learning
+T|Yarı denetimli öğrenme|semi-supervised learning
+T|Öz denetimli öğrenme|self-supervised learning
+T|Transfer öğrenme|transfer learning
+T|Sürekli öğrenme|continual learning
+T|Meta öğrenme|meta-learning
+T|Federe öğrenme|federated learning
+T|Aktif öğrenme|active learning
+T|Temel model|foundation model
+T|Öncü model (frontier model)|frontier model|öncü model,frontier model,sınır model
+T|Küçük dil modeli (SLM)|small language model
+T|Görü-dil modeli (VLM)|vision-language model|görü-dil model,görsel dil model,vision-language model,=vlm
+T|Otoregresif model|autoregressive model
+T|Ortaya çıkan yetenekler|emergent abilities
+T|Ölçekleme yasaları|scaling laws
+T|Acı ders (The Bitter Lesson)|the bitter lesson|bitter lesson
+T|Nöro-sembolik yapay zeka|neuro-symbolic AI
+T|Somutlaşmış yapay zeka|embodied AI
+T|Fiziksel yapay zeka|physical AI
+T|Ajansal yapay zeka (agentic AI)|agentic AI|ajansal yapay zeka,agentic ai,ajan tabanlı yapay zeka
+T|Çoklu ajan sistemi|multi-agent system|çoklu ajan,çok ajanlı,multi-agent
+T|Makine bilinci|machine consciousness
+T|Çin odası argümanı|Chinese room argument
+T|Örüntü tanıma|pattern recognition
+T|Sınıflandırma|classification|-
+T|Regresyon|regression|-
+T|Kümeleme|clustering|-
+T|Boyut indirgeme|dimensionality reduction
+T|Anomali tespiti|anomaly detection
+T|Öneri sistemi|recommender system|öneri sistem,öneri motor,öneri algoritma
+T|Tahmine dayalı analitik|predictive analytics
+T|Zaman serisi tahmini|time series forecasting
+T|Yapay zeka okuryazarlığı|AI literacy
+T|Kara kutu problemi|black box problem|kara kutu
+T|Genelleme|generalization|-
+T|Dijital ikiz|digital twin
+T|Kendi kendini geliştiren yapay zeka|recursive self-improvement|kendi kendini geliştiren yapay zeka,özyinelemeli kendini geliştirme
+
+M|Dikkat mekanizması|attention mechanism
+M|Öz dikkat (self-attention)|self-attention
+M|Çok başlı dikkat|multi-head attention
+M|Gruplanmış sorgu dikkati (GQA)|grouped-query attention
+M|FlashAttention|FlashAttention|flashattention,flash attention
+M|Konumsal kodlama|positional encoding
+M|Kodlayıcı-kod çözücü mimarisi|encoder-decoder architecture|kodlayıcı-kod çözücü,encoder-decoder
+M|Yalnızca kod çözücü model|decoder-only model|yalnızca kod çözücü,decoder-only
+M|BERT|Bidirectional Encoder Representations from Transformers|=bert
+M|GPT mimarisi|Generative Pre-trained Transformer|gpt mimarisi,generative pre-trained transformer
+M|Durum uzayı modeli (SSM)|state space model
+M|Tekrarlayan sinir ağı (RNN)|recurrent neural network
+M|Uzun kısa süreli bellek (LSTM)|long short-term memory
+M|Evrişimli sinir ağı (CNN)|convolutional neural network
+M|Görü transformerı (ViT)|vision transformer
+M|Çekişmeli üretici ağ (GAN)|generative adversarial network
+M|Varyasyonel otomatik kodlayıcı (VAE)|variational autoencoder
+M|Otomatik kodlayıcı|autoencoder
+M|Gizli uzay (latent space)|latent space
+M|Difüzyon transformerı (DiT)|diffusion transformer
+M|Grafik sinir ağı (GNN)|graph neural network
+M|Çok katmanlı algılayıcı (MLP)|multilayer perceptron
+M|Algılayıcı (perceptron)|perceptron
+M|Yapay nöron|artificial neuron
+M|Aktivasyon fonksiyonu|activation function
+M|ReLU|rectified linear unit|=relu
+M|Softmax|softmax|=softmax
+M|Seyreltme (dropout)|dropout
+M|Geri yayılım|backpropagation
+M|Gradyan inişi|gradient descent
+M|Adam optimize edicisi|Adam optimizer|adam optimize,adam optimizer,adamw
+M|Öğrenme oranı|learning rate
+M|Kayıp fonksiyonu|loss function
+M|Epok|epoch|=epok,=epoch
+M|Yığın boyutu (batch size)|batch size
+M|Hiperparametre|hyperparameter
+M|Erken durdurma|early stopping
+M|Düzenlileştirme (regularization)|regularization
+M|Eksik öğrenme (underfitting)|underfitting
+M|Kaybolan gradyan|vanishing gradient
+M|Ön eğitim|pre-training|ön eğitim,pre-training,pretraining
+M|Eğitim sonrası aşama (post-training)|post-training|post-training,eğitim sonrası aşama
+M|Talimat ayarı (instruction tuning)|instruction tuning
+M|Denetimli ince ayar (SFT)|supervised fine-tuning
+M|İnsan geri bildirimiyle pekiştirmeli öğrenme (RLHF)|reinforcement learning from human feedback
+M|Yapay zeka geri bildirimiyle pekiştirmeli öğrenme (RLAIF)|reinforcement learning from AI feedback
+M|Anayasal yapay zeka|constitutional AI
+M|Doğrudan tercih optimizasyonu|direct preference optimization|doğrudan tercih optimizasyon,direct preference optimization
+M|Proksimal politika optimizasyonu (PPO)|proximal policy optimization
+M|Grup göreli politika optimizasyonu (GRPO)|group relative policy optimization
+M|Ödül modeli|reward model
+M|Doğrulanabilir ödüllerle pekiştirmeli öğrenme (RLVR)|reinforcement learning with verifiable rewards
+M|Süreç ödül modeli|process reward model
+M|LoRA|low-rank adaptation|=lora,low-rank adaptation
+M|Parametre verimli ince ayar (PEFT)|parameter-efficient fine-tuning
+M|Model birleştirme|model merging
+M|Budama (pruning)|pruning|model budama,pruning
+M|Seyrek model|sparse model
+M|Katastrofik unutma|catastrophic forgetting
+M|Karşıtsal öğrenme|contrastive learning
+M|CLIP|Contrastive Language-Image Pre-training|clip model,openai clip
+M|Sonraki token tahmini|next-token prediction
+M|Tokenleştirme|tokenization|tokenleştir,tokenization,tokenizer
+M|Bayt çifti kodlaması (BPE)|byte-pair encoding
+M|Sözcük gömmesi (Word2Vec)|word embedding|sözcük gömme,kelime gömme,word2vec,word embedding
+M|Sıcaklık (temperature)|temperature|sıcaklık ayar,sıcaklık parametre,sıcaklık değeri,temperature
+M|Top-p örnekleme|top-p sampling|=top-p,nucleus sampling
+M|Spekülatif kod çözme|speculative decoding
+M|KV önbelleği|KV cache|kv önbell,kv cache
+M|Uzun bağlam|long context|uzun bağlam,long context
+M|Çıkarım zamanı hesaplaması (test-time compute)|test-time compute|test-time compute,çıkarım zamanı hesaplama,test zamanı hesaplama,çıkarım zamanı ölçekleme
+M|Düşünme bütçesi|thinking budget
+M|Genişletilmiş düşünme|extended thinking
+M|ReAct|reasoning and acting|react yöntem,react çerçeve,react deseni,react yaklaşım
+M|Kendi kendine oyun (self-play)|self-play
+M|Model çöküşü|model collapse
+M|Kontrol noktası (checkpoint)|checkpoint|kontrol noktası,checkpoint
+M|Model ağırlıkları|model weights
+M|Temel sürüm model (base model)|base model|base model
+M|Talimat modeli (instruct model)|instruct model|instruct model,talimat modeli
+M|Gömme modeli|embedding model
+M|Yeniden sıralama modeli (reranker)|reranker|reranker,yeniden sıralama model
+M|Hibrit akıl yürütme modeli|hybrid reasoning model
+M|Karma hassasiyetli eğitim|mixed-precision training
+M|Eğitim kesme tarihi|training cutoff|bilgi kesme tarihi,eğitim kesme tarihi,knowledge cutoff
+M|Kendiliğinden öğrenme (in-context learning)|in-context learning|in-context learning,bağlam içi öğrenme
+M|Model distilasyonu saldırısı|distillation attack|damıtma saldırı
+M|Uzun ufuklu görevler|long-horizon tasks|uzun ufuklu
+
+K|Sistem istemi|system prompt
+K|İstem önbellekleme (prompt caching)|prompt caching|istem önbellek,prompt caching
+K|İstem şablonu|prompt template
+K|Yapılandırılmış çıktı|structured output
+K|Fonksiyon çağırma (araç kullanımı)|function calling|fonksiyon çağırma,function calling,tool use,araç kullanımı,araç çağırma
+K|Bilgisayar kullanımı (computer use)|computer use|computer use,bilgisayar kullanımı özell
+K|Tarayıcı ajanı|browser agent|tarayıcı ajan,browser agent
+K|Kodlama ajanı|coding agent|kodlama ajan,kod ajan,coding agent
+K|Vibe coding|vibe coding|vibe coding,vibe kodlama
+K|Yapay zeka asistanı|AI assistant
+K|Yardımcı pilot (copilot)|copilot|yardımcı pilot
+K|Kod tamamlama|code completion
+K|Ajan orkestrasyonu|agent orchestration
+K|Ajan iş akışı|agentic workflow
+K|Alt ajan|subagent|alt ajan,subagent
+K|Ajan belleği|agent memory
+K|Ajanlar arası protokol (A2A)|agent-to-agent protocol|agent2agent,agent-to-agent,=a2a
+K|Semantik arama|semantic search
+K|Parçalama (chunking)|chunking|chunking,metin parçalama
+K|Bilgi grafiği|knowledge graph|bilgi grafı,bilgi grafiği,knowledge graph
+K|GraphRAG|GraphRAG|graphrag
+K|Ajansal RAG|agentic RAG|ajansal rag,agentic rag
+K|Temellendirme (grounding)|grounding|grounding,temellendirme
+K|Derin araştırma|deep research|derin araştırma,deep research
+K|Yapay zeka arama motoru|AI search engine
+K|Üretken motor optimizasyonu (GEO)|generative engine optimization|üretken motor optimizasyon,generative engine optimization
+K|Bağlam mühendisliği|context engineering
+K|Model yönlendirme|model routing
+K|Hız sınırı (rate limit)|rate limit|rate limit,hız sınırı
+K|Toplu işleme API'si (batch API)|batch API|batch api,toplu işleme api
+K|Akışlı yanıt (streaming)|streaming|streaming,akışlı yanıt
+K|SDK (yazılım geliştirme kiti)|software development kit|=sdk,yazılım geliştirme kit
+K|Kodsuz yapay zeka (no-code)|no-code AI|no-code,kodsuz yapay zeka
+K|Robotik süreç otomasyonu (RPA)|robotic process automation
+K|Akıllı belge işleme (IDP)|intelligent document processing
+K|Optik karakter tanıma (OCR)|optical character recognition
+K|Makine çevirisi|machine translation
+K|Duygu analizi|sentiment analysis
+K|Varlık adı tanıma (NER)|named entity recognition
+K|Yerel dil modeli (local LLM)|local LLM|yerel dil model,yerel llm,local llm
+K|MLOps|machine learning operations|=mlops
+K|LLM gözlemlenebilirliği|LLM observability|gözlemlenebilirlik,observability
+K|PyTorch|PyTorch|=pytorch
+K|TensorFlow|TensorFlow|=tensorflow
+K|LangChain|LangChain|=langchain
+K|llama.cpp|llama.cpp|llama.cpp
+K|Yapay zeka arkadaşı (AI companion)|AI companion|yapay zeka arkadaş,yapay zeka yoldaş,ai companion
+K|GGUF|GPT-Generated Unified Format|=gguf
+K|AutoML|automated machine learning|=automl,otomatik makine öğrenme
+K|Ajan becerileri (skills)|agent skills|ajan beceri,agent skills
+K|Ajan çerçevesi|agent framework|ajan çerçeve,agent framework
+K|İstem kütüphanesi|prompt library
+K|Bağlam yönetimi (sıkıştırma ve özetleme)|context management|bağlam yönetim
+K|Sesli mod|voice mode|sesli mod,voice mode
+K|Arka plan ajanı|background agent|arka plan ajan,background agent
+K|Talimat takibi|instruction following|talimat takib,instruction following
+K|Konuşma tabanlı yapay zeka|conversational AI|konuşma tabanlı yapay zeka,conversational ai
+
+D|Yapay zeka hızlandırıcısı|AI accelerator|yapay zeka hızlandırıcı,ai accelerator
+D|ASIC (özel amaçlı çip)|application-specific integrated circuit|=asic
+D|CPU (merkezi işlem birimi)|central processing unit|=cpu,merkezi işlem birim
+D|Tensör çekirdeği|tensor core|tensör çekirdek,tensor core
+D|CUDA|Compute Unified Device Architecture|=cuda
+D|NVLink|NVLink|=nvlink
+D|InfiniBand|InfiniBand|=infiniband
+D|Süper bilgisayar|supercomputer|süper bilgisayar,süperbilgisayar,supercomputer
+D|GPU kümesi|GPU cluster|gpu küme,gpu cluster
+D|Hiper ölçekli şirket (hyperscaler)|hyperscaler|hyperscaler,hiper ölçekli
+D|Bulut bilişim|cloud computing
+D|Uç bilişim (edge computing)|edge computing|uç bilişim,edge computing,uç cihaz
+D|Sıvı soğutma|liquid cooling
+D|Güç kullanım etkinliği (PUE)|power usage effectiveness
+D|Gigavat ölçekli veri merkezi|gigawatt-scale data center|gigavat ölçekli,gigavatlık veri merkez
+D|Yarı iletken|semiconductor
+D|Yapay zeka çipi|AI chip|yapay zeka çip,ai chip
+D|Dökümhane (foundry)|foundry|dökümhane,foundry
+D|Üretim süreci (nanometre)|process node|=nanometre,nm süreç,process node
+D|Silikon pul (wafer)|wafer|silikon pul,=wafer
+D|EUV litografi|extreme ultraviolet lithography|=euv
+D|Gelişmiş paketleme (CoWoS)|advanced packaging|gelişmiş paketleme,=cowos,advanced packaging
+D|Çiplet|chiplet|çiplet,chiplet
+D|Bellek bant genişliği|memory bandwidth
+D|DRAM|dynamic random-access memory|=dram
+D|VRAM (ekran kartı belleği)|video RAM|=vram
+D|TOPS|trillion operations per second|=tops
+D|FLOP (kayan nokta işlemi)|floating-point operation|=flop,=flops
+D|Nöromorfik çip|neuromorphic chip|nöromorfik
+D|Kuantum bilişim|quantum computing|kuantum bilişim,kuantum bilgisayar,quantum computing
+D|Fotonik bilişim|photonic computing|fotonik
+D|Yapay zekanın enerji tüketimi|AI energy consumption|-
+D|Veri merkezi su tüketimi|data center water use|-
+D|Küçük modüler reaktör (SMR)|small modular reactor
+D|GPU bulutu (neocloud)|neocloud|neocloud,gpu bulut
+D|Hesaplama gücü (compute)|compute|hesaplama gücü,hesaplama kapasite
+D|Yapay zeka bilgisayarı (AI PC)|AI PC|=ai pc,yapay zeka bilgisayar
+D|Çıkarım çipi|inference chip|çıkarım çip,inference chip
+D|Wafer ölçekli çip|wafer-scale chip|wafer ölçekli,wafer-scale
+D|Raf ölçekli sistem|rack-scale system|raf ölçekli,rack-scale
+D|Gecikme süresi (latency)|latency|gecikme süre,latency
+D|İlk token süresi (TTFT)|time to first token|ilk token süre,time to first token
+D|Saniye başına token|tokens per second|saniye başına token,saniyede token,tokens per second
+D|Model sunumu (model serving)|model serving|model serving,model sunum
+D|vLLM|vLLM|=vllm
+D|Dağıtık eğitim|distributed training
+D|Veri paralelliği|data parallelism
+D|Model paralelliği|model parallelism
+D|FP8 ve düşük hassasiyetli sayılar|FP8 and low-precision formats|=fp8,=fp4,=fp16
+D|BF16 (bfloat16)|bfloat16|=bf16,bfloat16
+D|Güç anlaşması (PPA)|power purchase agreement|güç satın alma anlaşma,power purchase agreement
+D|Elektrik şebekesi kapasitesi|grid capacity|şebeke kapasite
+D|Yapay zeka fabrikası|AI factory|yapay zeka fabrika,ai factory
+D|Optik ara bağlantı|optical interconnect|optik ara bağlantı,co-packaged optics,birlikte paketlenmiş optik
+D|ARM mimarisi|ARM architecture|arm mimari,arm tabanlı
+
+G|Yapay zeka güvenliği (AI safety)|AI safety|yapay zeka güvenliği,ai safety
+G|Yapay zeka siber güvenliği|AI security|yapay zeka siber güvenli
+G|Varoluşsal risk|existential risk
+G|Ödül hackleme|reward hacking
+G|Planlı aldatma (scheming)|scheming|scheming,planlı aldatma
+G|Dalkavukluk (sycophancy)|sycophancy|dalkavuk,sycophancy
+G|Düzeltilebilirlik (corrigibility)|corrigibility|corrigibility,düzeltilebilirlik
+G|Kontrol problemi|control problem
+G|Ölçeklenebilir denetim|scalable oversight
+G|Yorumlanabilirlik|interpretability
+G|Mekanistik yorumlanabilirlik|mechanistic interpretability
+G|Seyrek otomatik kodlayıcı|sparse autoencoder|seyrek otomatik kodlayıcı,sparse autoencoder
+G|Model refahı|model welfare|model refah,model welfare
+G|Sorumlu ölçekleme politikası|responsible scaling policy
+G|Tehlikeli yetenek değerlendirmesi|dangerous capability evaluation|tehlikeli yetenek
+G|Çift kullanımlı teknoloji|dual-use technology|çift kullanım
+G|Korkuluklar (guardrails)|guardrails|guardrail,korkuluk
+G|İçerik moderasyonu|content moderation
+G|Güvenlik sınıflandırıcısı|safety classifier|güvenlik sınıflandırıcı,anayasal sınıflandırıcı
+G|Aşırı ret (over-refusal)|over-refusal|aşırı ret,over-refusal
+G|Çok örnekli jailbreak|many-shot jailbreaking|çok örnekli jailbreak,many-shot
+G|Dolaylı istem enjeksiyonu|indirect prompt injection|dolaylı istem enjeksiyon,indirect prompt injection
+G|Veri zehirlenmesi|data poisoning|veri zehirle,data poisoning
+G|Model arka kapısı|model backdoor|arka kapı
+G|Çekişmeli saldırı|adversarial attack|çekişmeli saldırı,adversarial attack
+G|Model çıkarma saldırısı|model extraction|model çıkarma,model extraction
+G|Eğitim verisi sızıntısı|training data leakage|eğitim verisi sızıntı
+G|Diferansiyel gizlilik|differential privacy|diferansiyel gizlilik,differential privacy
+G|Gizli bilişim (confidential computing)|confidential computing|confidential computing,gizli bilişim
+G|Yapay zeka filigranı|AI watermarking|filigran,watermark
+G|İçerik kimlik bilgileri (C2PA)|content credentials|=c2pa,content credentials,içerik kimlik bilgi
+G|İçerik kaynağı doğrulama (provenance)|content provenance|provenance,içerik kaynağı doğrula
+G|Yapay zeka içerik tespiti|AI content detection|yapay zeka tespit,yapay zeka dedektör,ai detector
+G|Ses klonlama|voice cloning|ses klonla,voice cloning,ses kopyala
+G|Yapay zeka destekli kimlik avı|AI-powered phishing|kimlik avı,phishing,oltalama
+G|Dezenformasyon|disinformation|dezenformasyon
+G|Yapay zeka çöpü (AI slop)|AI slop|ai slop,yapay zeka çöpü
+G|Algoritmik adalet|algorithmic fairness|algoritmik adalet,algorithmic fairness
+G|İnsan denetimi (human oversight)|human oversight|insan denetim,human oversight
+G|İnsan döngüde (human-in-the-loop)|human-in-the-loop|human-in-the-loop,insan döngüde
+G|Yapay zeka etiği|AI ethics|yapay zeka etiğ,ai ethics
+G|Sorumlu yapay zeka|responsible AI
+G|Kabul edilebilir kullanım politikası|acceptable use policy|kullanım politika,acceptable use policy
+G|Hata ödülü programı (bug bounty)|bug bounty|bug bounty,hata ödülü
+G|Ajan güvenliği|agent security|ajan güvenli
+G|Aşırı yetki (excessive agency)|excessive agency|excessive agency,aşırı yetki
+G|Kum havuzu (sandbox)|sandbox|sandbox,kum havuzu
+G|Yüz tanıma|facial recognition|yüz tanıma,facial recognition
+G|Biyometrik gözetim|biometric surveillance|biyometrik
+G|Otonom silahlar|autonomous weapons|otonom silah
+G|Model kartı|model card|model kart,model card,sistem kartı,system card
+G|Gizli ajanda testleri (sabotaj değerlendirmesi)|sabotage evaluation|sabotaj değerlendirme
+G|Değerlendirme farkındalığı|evaluation awareness|değerlendirme farkındalı,evaluation awareness
+G|Yapay zeka olay veritabanı|AI incident database|yapay zeka olay veritaban,ai incident database,ai incident
+G|Yaş doğrulama|age verification
+G|Kimlik sahtekarlığı (yapay zeka ile)|AI-enabled impersonation|kimliğine bürün,impersonation
+G|Yapay zeka destekli siber saldırı|AI-enabled cyberattack|yapay zeka destekli siber saldırı,yapay zeka destekli saldırı
+G|Yapay zeka ile güvenlik açığı bulma|AI vulnerability discovery|güvenlik açığı bul
+G|Sıfırıncı gün açığı (zero-day)|zero-day vulnerability|sıfırıncı gün,zero-day
+
+V|Veri seti|dataset|veri set,veriseti,dataset
+V|Veri etiketleme|data labeling|veri etiketle,data labeling,data annotation
+V|Veri temizleme|data cleaning|veri temizle
+V|Veri artırma|data augmentation|veri artırma,data augmentation
+V|Web kazıma (scraping)|web scraping|web kazıma,scraping,veri kazıma
+V|Web tarayıcı bot (crawler)|web crawler|crawler,tarayıcı bot
+V|Common Crawl|Common Crawl|common crawl
+V|Büyük veri|big data
+V|Veri madenciliği|data mining|veri madenciliğ,data mining
+V|Veri bilimi|data science|veri bilim,data science
+V|Özellik mühendisliği|feature engineering
+V|Doğrulama seti|validation set
+V|Test seti|test set|test set,test kümesi
+V|Çapraz doğrulama|cross-validation
+V|Benchmark kirlenmesi|benchmark contamination|benchmark kirlen,veri kirlenmesi,contamination
+V|Model değerlendirmesi (evals)|model evaluation|model değerlendirme,=evals,=eval
+V|Hakem olarak LLM (LLM-as-a-judge)|LLM-as-a-judge|llm-as-a-judge,hakem model,hakem olarak llm
+V|İnsan değerlendirmesi|human evaluation|insan değerlendirme
+V|Arena sıralaması|arena leaderboard|arena sıralama,lmarena,chatbot arena
+V|Liderlik tablosu|leaderboard|liderlik tablo,leaderboard
+V|MMLU|Massive Multitask Language Understanding|=mmlu
+V|GPQA|Graduate-Level Google-Proof Q&A|=gpqa
+V|SWE-bench|SWE-bench|swe-bench
+V|Humanity's Last Exam|Humanity's Last Exam|humanity's last exam,humanity’s last exam,insanlığın son sınavı
+V|ARC-AGI|Abstraction and Reasoning Corpus|arc-agi
+V|HumanEval|HumanEval|=humaneval
+V|GSM8K|Grade School Math 8K|=gsm8k
+V|AIME (matematik benchmarkı)|American Invitational Mathematics Examination|=aime
+V|Terminal-Bench|Terminal-Bench|terminal-bench
+V|OSWorld|OSWorld|=osworld
+V|Doğruluk oranı (accuracy)|accuracy|doğruluk oran
+V|Kesinlik ve duyarlılık|precision and recall|precision and recall,kesinlik ve duyarlılık
+V|F1 skoru|F1 score|f1 skor,f1 puan,f1 score
+V|Karışıklık matrisi|confusion matrix
+V|ROC eğrisi ve AUC|ROC curve and AUC|roc eğri,=auc
+V|Şaşkınlık değeri (perplexity metriği)|perplexity (metric)|şaşkınlık değer
+V|Pass@k|pass@k|pass@
+V|Benchmark doygunluğu|benchmark saturation|doygunluğ,benchmark saturation
+V|Gerçek referans verisi (ground truth)|ground truth|ground truth
+V|Sınıf dengesizliği|class imbalance|sınıf dengesizli,class imbalance
+V|Veri yönetişimi|data governance|veri yönetişim,data governance
+V|Anonimleştirme|anonymization|anonimleştir,anonymization
+V|Açık veri|open data
+V|Veri duvarı|data wall|veri duvar,data wall
+V|Talimat veri seti|instruction dataset|talimat veri set
+V|Tercih verisi|preference data|tercih veri
+V|Model sürüklenmesi|model drift|model sürüklen,model drift
+V|Veri kayması|data drift|veri kayma,data drift
+V|Güven skoru|confidence score|güven skor,güven puan,confidence score
+V|Ablasyon çalışması|ablation study|ablasyon,ablation
+V|Veri kürasyonu|data curation|veri kürasyon,data curation
+V|Türkçe benchmark ve veri setleri|Turkish benchmarks and datasets|türkçe benchmark,türkçe veri set
+V|Uzun bağlam testi (samanlıkta iğne)|needle in a haystack|samanlıkta iğne,needle in a haystack
+
+I|Doğrusal cebir|linear algebra
+I|Tensör|tensor|=tensör,=tensörler,=tensor
+I|Matris çarpımı|matrix multiplication|matris çarpım,matrix multiplication
+I|Kosinüs benzerliği|cosine similarity
+I|Olasılık dağılımı|probability distribution
+I|Bayes teoremi|Bayes' theorem|bayes teorem
+I|Bayesçi çıkarım|Bayesian inference|bayesçi
+I|En çok olabilirlik tahmini|maximum likelihood estimation|en çok olabilirlik,maximum likelihood
+I|Entropi|entropy|=entropi,=entropy
+I|Çapraz entropi|cross-entropy|çapraz entropi,cross-entropy
+I|KL ıraksaması|Kullback-Leibler divergence|kl ıraksama,kl divergence
+I|Yerel minimum|local minimum|yerel minimum,local minimum,yerel minimuma
+I|Ortalama kare hata (MSE)|mean squared error
+I|Yanlılık-varyans dengesi|bias-variance tradeoff|yanlılık-varyans,bias-variance
+I|Boyutluluk laneti|curse of dimensionality
+I|Temel bileşen analizi (PCA)|principal component analysis
+I|K-ortalamalar (k-means)|k-means|k-ortalama,k-means
+I|K-en yakın komşu (KNN)|k-nearest neighbors|k-en yakın,=knn
+I|Doğrusal regresyon|linear regression
+I|Lojistik regresyon|logistic regression
+I|Karar ağacı|decision tree
+I|Rastgele orman|random forest|rastgele orman,random forest
+I|Gradyan artırma (XGBoost)|gradient boosting|gradyan artırma,gradient boosting,=xgboost
+I|Destek vektör makinesi (SVM)|support vector machine
+I|Markov zinciri|Markov chain
+I|Markov karar süreci|Markov decision process
+I|Q-öğrenme|Q-learning|q-öğrenme,q-learning
+I|Politika gradyanı|policy gradient
+I|Keşif ve sömürü ikilemi|exploration-exploitation tradeoff|keşif ve sömürü,exploration-exploitation
+I|Monte Carlo ağaç araması|Monte Carlo tree search
+I|Evrimsel algoritma|evolutionary algorithm
+I|Genetik algoritma|genetic algorithm
+I|Bulanık mantık|fuzzy logic
+I|Evrensel yaklaşım teoremi|universal approximation theorem
+I|Nedensel çıkarım|causal inference
+I|Ağırlık azaltma (weight decay)|weight decay|weight decay,ağırlık azaltma
+I|Bilgi teorisi|information theory
+I|Grokking|grokking|grokking
+I|Çift iniş (double descent)|double descent|çift iniş,double descent
+
+S|Metinden görüntü üretimi|text-to-image|metinden görüntü,text-to-image,metinden görsel
+S|Metinden video üretimi|text-to-video|metinden video,text-to-video
+S|Görüntüden video üretimi|image-to-video|görüntüden video,image-to-video,görselden video
+S|Metinden konuşmaya (TTS)|text-to-speech|metinden konuşma,metinden sese,text-to-speech,seslendirme motor
+S|Otomatik konuşma tanıma (ASR)|automatic speech recognition|konuşma tanıma,ses tanıma,speech recognition,=asr
+S|Konuşmadan konuşmaya model|speech-to-speech|speech-to-speech,konuşmadan konuşmaya
+S|Yapay zeka ile müzik üretimi|AI music generation|müzik üretim
+S|Yapay zeka ile görüntü düzenleme|AI image editing|görüntü düzenle
+S|İç boyama (inpainting)|inpainting|inpainting,iç boyama
+S|Dış boyama (outpainting)|outpainting|outpainting,dış boyama
+S|Görüntü yükseltme (upscaling)|AI upscaling|upscal,görüntü yükselt
+S|Stil aktarımı|style transfer
+S|ControlNet|ControlNet|=controlnet
+S|Negatif istem|negative prompt|negatif istem,negative prompt
+S|Gürültü giderme|denoising|gürültü gider,denoising
+S|Nesne tespiti|object detection|nesne tespit,nesne algıla,object detection
+S|Görüntü sınıflandırma|image classification
+S|Görüntü bölütleme|image segmentation|bölütleme,segmentasyon
+S|Poz tahmini|pose estimation
+S|Görüntü altyazılama|image captioning
+S|3B model üretimi|3D generation|3b model üret,3d model üret
+S|NeRF (nöral ışıma alanları)|neural radiance fields|=nerf
+S|Gauss sıçratma (Gaussian splatting)|Gaussian splatting|gaussian splatting,gauss sıçratma
+S|Dudak senkronizasyonu|lip sync|dudak senkron,lip sync
+S|Yüz değiştirme (face swap)|face swap|yüz değiştir,face swap
+S|Video anlama|video understanding
+S|Ses kaynağı ayrıştırma|audio source separation|kaynak ayrıştır,stem ayır
+S|Konuşmacı ayrıştırma (diarization)|speaker diarization|diarization,konuşmacı ayrıştır
+S|Gerçek zamanlı çeviri|real-time translation|gerçek zamanlı çeviri,canlı çeviri,anlık çeviri
+S|Sentetik medya|synthetic media
+S|Dijital insan|digital human
+S|LiDAR|light detection and ranging|=lidar
+S|Sensör füzyonu|sensor fusion|sensör füzyon,sensor fusion
+S|Otonom sürüş|autonomous driving|otonom sürüş,sürücüsüz,otonom araç
+S|Sürüş otomasyonu seviyeleri|levels of driving automation|seviye 4 otonom,seviye 3 otonom,level 4
+S|Robotaksi|robotaxi|robotaksi,robotaxi,robot taksi
+S|İnsansı robot|humanoid robot|insansı robot,humanoid
+S|Robot öğrenmesi|robot learning
+S|Görü-dil-eylem modeli (VLA)|vision-language-action model|görü-dil-eylem,vision-language-action
+S|Taklit öğrenmesi|imitation learning|taklit öğren,imitation learning
+S|Simülasyondan gerçeğe aktarım (sim-to-real)|sim-to-real transfer|sim-to-real,sim2real
+S|Teleoperasyon|teleoperation|teleoperasyon,teleoperation,uzaktan kumanda ile robot
+S|Makine görüşü|machine vision|makine görü
+S|Yapay zeka avatarı|AI avatar|yapay zeka avatar,ai avatar,dijital avatar
+S|Sesli asistan|voice assistant|sesli asistan,voice assistant
+S|Ses tasarımı ve seslendirme (yapay zeka)|AI voice-over|yapay zeka seslendirme,yapay zeka dublaj,ai dublaj
+S|Görüntü tanıma|image recognition
+S|Endüstriyel robot ve cobot|collaborative robot|=cobot,işbirlikçi robot
+
+P|AB Yapay Zeka Yasası|EU AI Act|ab yapay zeka yasa,eu ai act,yapay zeka yasası
+P|Yüksek riskli yapay zeka sistemi|high-risk AI system|yüksek riskli yapay zeka,yüksek riskli sistem
+P|Genel amaçlı yapay zeka modeli (GPAI)|general-purpose AI model|genel amaçlı yapay zeka,=gpai
+P|Sistemik risk taşıyan model|systemic-risk model|sistemik risk
+P|Yasaklı yapay zeka uygulamaları|prohibited AI practices|yasaklı yapay zeka,yasaklanan yapay zeka uygulama
+P|KVKK ve yapay zeka|Turkish Personal Data Protection Law|=kvkk,kişisel verilerin korunması kanun
+P|GDPR|General Data Protection Regulation|=gdpr
+P|Telif hakkı ve yapay zeka|copyright and AI|telif
+P|Adil kullanım (fair use)|fair use|fair use,adil kullanım
+P|Metin ve veri madenciliği istisnası|text and data mining exception|veri madenciliği istisna,tdm istisna
+P|Devre dışı bırakma hakkı (opt-out)|opt-out|=opt-out,ret hakkı
+P|robots.txt|robots.txt|robots.txt
+P|Veri lisans anlaşması|data licensing deal|lisans anlaşma,içerik lisans
+P|Yapay zeka düzenlemesi|AI regulation|yapay zeka düzenleme,yapay zeka mevzuat,ai regulation
+P|Yapay zeka yönetişimi|AI governance|yapay zeka yönetişim,ai governance
+P|Düzenleyici deneme alanı|regulatory sandbox|düzenleyici deneme,regulatory sandbox,düzenleyici sandbox
+P|Yapay zeka denetimi (audit)|AI audit|yapay zeka denetim,algoritma denetim
+P|ISO/IEC 42001|ISO/IEC 42001|42001
+P|NIST Yapay Zeka Risk Yönetimi Çerçevesi|NIST AI Risk Management Framework|=nist,ai rmf
+P|Yapay Zeka Güvenlik Enstitüsü|AI Safety Institute|güvenlik enstitü,ai safety institute,caisi
+P|Yapay zeka balonu|AI bubble|yapay zeka balon,ai bubble,yapay zeka köpüğü
+P|Değerleme (şirket değeri)|valuation|değerleme,piyasa değeri,valuation
+P|Tohum yatırım turu|seed round|tohum yatırım,tohum turu,seed yatırım,seed round
+P|Seri A, B, C yatırım turları|Series A, B, C funding|=seri a,=seri b,=seri c,=seri d,series a,series b,series c
+P|Risk sermayesi|venture capital|risk sermaye,girişim sermaye,venture capital
+P|Halka arz (IPO)|initial public offering|halka arz,=ipo
+P|Unicorn (tek boynuzlu at)|unicorn|unicorn,tek boynuzlu
+P|Yetenek satın alımı (acqui-hire)|acqui-hire|acqui-hire,acquihire,yetenek satın alım
+P|Yapay zeka sermaye harcaması (capex)|AI capital expenditure|sermaye harcama,=capex
+P|Yıllık tekrarlayan gelir (ARR)|annual recurring revenue|yıllık tekrarlayan gelir,yıllıklandırılmış gelir,=arr
+P|SaaS (hizmet olarak yazılım)|software as a service|=saas,hizmet olarak yazılım
+P|Kullanım bazlı fiyatlandırma|usage-based pricing|kullanım bazlı,kullanıma dayalı fiyat
+P|Token başına fiyatlandırma|per-token pricing|token başına,milyon token başına
+P|Yapay zeka yerlisi şirket (AI-native)|AI-native|ai-native,yapay zeka yerlisi
+P|Yapay zeka sarmalayıcısı (wrapper)|AI wrapper|wrapper,sarmalayıcı
+P|İş gücü otomasyonu|workforce automation|iş gücü otomasyon
+P|Yeniden beceri kazandırma (reskilling)|reskilling|reskilling,yeniden beceri,upskilling
+P|Gölge yapay zeka (shadow AI)|shadow AI|gölge yapay zeka,shadow ai
+P|Kurumsal yapay zeka|enterprise AI|kurumsal yapay zeka,enterprise ai
+P|Kavram kanıtı (PoC)|proof of concept|kavram kanıt,proof of concept,=poc
+P|Ulusal yapay zeka stratejisi|national AI strategy|ulusal yapay zeka strateji,yapay zeka stratejisi
+P|Egemen yapay zeka (sovereign AI)|sovereign AI|egemen yapay zeka,sovereign ai,yapay zeka egemenliğ
+P|Çip ihracat kontrolleri|chip export controls|ihracat kontrol,ihracat kısıtlama,export control
+P|Rekabet hukuku ve yapay zeka|antitrust and AI|antitröst,rekabet soruşturma,rekabet kurumu
+P|Yapay zeka kaynaklı zararlardan sorumluluk|AI liability|-
+P|Yapay zeka içerik etiketleme zorunluluğu|AI content labeling|yapay zeka etiketi,etiketleme zorunlu
+P|Açık kaynak lisansı|open-source license|açık kaynak lisans,open-source license
+P|Davranış kuralları (GPAI Code of Practice)|Code of Practice|uygulama kuralları,code of practice
+P|Kişisel verilerin yurt dışına aktarımı|cross-border data transfer|yurt dışına aktarım,yurt dışına veri aktarım
+P|Veri yerelleştirme|data localization|veri yerelleştirme,data localization
+P|Kamuda yapay zeka|AI in the public sector|kamuda yapay zeka
+P|Dijital Hizmetler Yasası (DSA)|Digital Services Act|dijital hizmetler yasa,digital services act
+P|Dijital Piyasalar Yasası (DMA)|Digital Markets Act|dijital piyasalar yasa,digital markets act
+P|Hesaplama eşiği (10^25 FLOP)|compute threshold|hesaplama eşiğ,compute threshold
+P|Model sürümü ve kullanımdan kaldırma|model deprecation|kullanımdan kaldırılan model,deprecation
+P|Yapay zeka yatırım getirisi (ROI)|AI return on investment|yatırım getiri,=roi
+P|Yapay zeka ile verimlilik artışı|AI productivity gains|verimlilik artış
+P|Yapay zekanın istihdama etkisi|AI impact on jobs|istihdama etki,iş kaybı

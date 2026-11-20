@@ -1,3 +1,4 @@
+import { EXTRA } from './glossary-extra.js';
 // Terimler sözlüğü (/sozluk/). Haber metinlerinde bir terim ilk geçtiği yerde otomatik olarak sözlüğe bağlanır
 // (scripts/glossary-integration.mjs). "match": metinde aranacak kökler; Türkçe ekler otomatik kapsanır
 // (örn. "çıkarım" → "çıkarımı", "çıkarımda"). Kökler küçük harfle yazılır.
@@ -84,7 +85,7 @@ const RAW = [
     def: "Bir modelin deneme yanılma yoluyla, doğru davranışlarda ödül, yanlışlarda ceza alarak öğrendiği makine öğrenmesi yöntemi." },
   { slug: 'denetimli-ogrenme', term: 'Denetimli ve denetimsiz öğrenme', en: 'supervised and unsupervised learning', match: ['denetimli öğrenme', 'denetimsiz öğrenme'],
     def: "Denetimli öğrenmede model, doğru cevabı belli (etiketli) örneklerden öğrenir; denetimsiz öğrenmede ise etiket olmadan verideki grupları ve örüntüleri kendisi bulur." },
-  { slug: 'egitim-verisi', term: 'Eğitim verisi', en: 'training data', match: ['eğitim veri'],
+  { slug: 'egitim-verisi', term: 'Eğitim verisi', en: 'training data', match: ['eğitim verisi', 'eğitim verileri', 'eğitim verisin', 'eğitim verilerin', 'training data'],
     def: "Bir yapay zeka modelinin öğrenmesi için kullanılan metin, görsel, ses veya sayısal veri topluluğu. Modelin bilgisi ve hataları büyük ölçüde bu veriden gelir." },
   { slug: 'gomme', term: 'Gömme (embedding)', en: 'embedding', match: ['=embedding', '=embeddings', 'vektör temsil'],
     def: "Bir kelimenin, cümlenin veya görselin anlamını sayı dizisi (vektör) olarak ifade etme yöntemi. Anlamca yakın içerikler birbirine yakın vektörlerle temsil edilir." },
@@ -125,7 +126,7 @@ const RAW = [
 ];
 
 // Konu grupları (sözlük sayfasında gruplama ve ilgili terimler için)
-export const GLOSSARY_CATS = ['Temel kavramlar', 'Modeller ve eğitim', 'Kullanım ve araçlar', 'Donanım ve altyapı', 'Güvenlik ve etik'];
+export const GLOSSARY_CATS = ['Temel kavramlar', 'Modeller ve eğitim', 'Kullanım ve araçlar', 'Donanım ve altyapı', 'Güvenlik ve etik', 'Veri ve değerlendirme', 'Matematiksel temeller', 'Görüntü, ses ve robotik', 'Hukuk, iş ve politika'];
 const CAT = {
   'Temel kavramlar': ['yapay-zeka', 'makine-ogrenmesi', 'derin-ogrenme', 'yapay-sinir-agi', 'uretken-yapay-zeka', 'dogal-dil-isleme', 'bilgisayarli-goru', 'buyuk-dil-modeli', 'agi', 'turing-testi', 'cok-modlu', 'dunya-modeli', 'acik-kaynak', 'acik-agirlikli-model'],
   'Modeller ve eğitim': ['transformer', 'pekistirmeli-ogrenme', 'denetimli-ogrenme', 'egitim-verisi', 'gomme', 'difuzyon-modeli', 'sentetik-veri', 'kuantizasyon', 'uzmanlar-karisimi', 'asiri-ogrenme', 'egitim', 'ince-ayar', 'damitma', 'parametre', 'token', 'akil-yurutme-modeli', 'benchmark', 'cikarim', 'baglam-penceresi'],
@@ -134,6 +135,10 @@ const CAT = {
   'Güvenlik ve etik': ['halusinasyon', 'deepfake', 'yapay-zeka-onyargisi', 'aciklanabilir-yapay-zeka', 'hizalama', 'jailbreak', 'istem-enjeksiyonu', 'kirmizi-takim', 'sizma-testi'],
 };
 const catOf = Object.fromEntries(Object.entries(CAT).flatMap(([c, slugs]) => slugs.map((sl) => [sl, c])));
-export const GLOSSARY = RAW.map((t) => ({ ...t, cat: catOf[t.slug] }));
+// Ek terimler (scripts/generate-glossary.mjs ile yazılır): uzun açıklamaları glossary-long.js'e eklenir
+export const GLOSSARY = [
+  ...RAW.map((t) => ({ ...t, cat: catOf[t.slug] })),
+  ...EXTRA.map(({ slug, term, en, match, cat, def }) => ({ slug, term, en, match, cat, def, extra: true })),
+];
 
 export const glossaryUrl = (slug) => `/sozluk/${slug}/`;

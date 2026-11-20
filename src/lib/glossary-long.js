@@ -1,3 +1,4 @@
+import { EXTRA } from './glossary-extra.js';
 // Sözlük terim sayfaları (/sozluk/<terim>/) için ayrıntılı açıklamalar.
 // how: nasıl çalışır · why: neden önemli · example: somut bir örnek · faq: [[soru, yanıt], ...]. Kısa tanım src/lib/glossary.js içindedir.
 
@@ -521,3 +522,6 @@ const FAQ = {
   ],
 };
 for (const [k, v] of Object.entries(FAQ)) if (LONG[k]) LONG[k].faq = v;
+
+// Ek terimlerin açıklamaları
+for (const t of EXTRA) LONG[t.slug] ??= { how: t.how, why: t.why, example: t.example, faq: t.faq };
