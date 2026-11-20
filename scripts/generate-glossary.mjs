@@ -18,7 +18,7 @@ const arg = (k) => (args.find((a) => a.startsWith(`--${k}=`)) || '').split('=')[
 const LIMIT = Number(arg('limit') || process.env.GLOSSARY_LIMIT || 0);
 const DRY = args.includes('--dry-run');
 const MODEL = process.env.GLOSSARY_MODEL || 'claude-sonnet-5-5';
-const PER_REQUEST = 8;
+const PER_REQUEST = Number(process.env.GLOSSARY_PER_REQUEST || 5);
 const BATCH_WAIT_MIN = Number(process.env.BATCH_WAIT_MIN || 50);
 const log = (...a) => console.log('[sözlük]', ...a);
 
@@ -105,7 +105,7 @@ DOĞRULUK KURALLARI (zorunlu)
 function params(batch) {
   const list = batch.map((t) => `- slug: ${t.slug} | terim: ${t.term} | İngilizcesi: ${t.en} | konu grubu: ${t.cat}`).join('\n');
   return {
-    model: MODEL, max_tokens: 24000,
+    model: MODEL, max_tokens: 32000,
     system: [{ type: 'text', text: SYSTEM, cache_control: { type: 'ephemeral' } }],
     messages: [{ role: 'user', content: `Şu ${batch.length} sözlük maddesini yaz. Her terimi verilen slug ile, listedeki sırayla döndür; "tr.term" alanına terimi listede yazıldığı gibi koy.\n\n${list}` }],
     output_config: { format: { type: 'json_schema', schema: SCHEMA } },
