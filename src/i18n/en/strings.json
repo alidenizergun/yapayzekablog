@@ -80,8 +80,8 @@
   "en": "AI model news: new releases, pricing changes and test results for ChatGPT, Claude, Gemini, DeepSeek and open-weight models."
  },
  "cat.modeller.link.0": {
-  "h": "dff3b40104",
-  "en": "Model comparison table"
+  "h": "227b77befa",
+  "en": "Model API pricing"
  },
  "cat.modeller.link.1": {
   "h": "fb18ef5c21",
@@ -155,6 +155,14 @@
   "h": "d50e586c4a",
   "en": "Both are versatile assistants, and their paid plans start at around $20 per month. If you rely heavily on Gmail, Drive and Android, Gemini's integrations are an advantage; if you want a broad feature set and ecosystem, ChatGPT is the more common choice."
  },
+ "cmp.chatgpt-vs-grok": {
+  "h": "fc6a0b9487",
+  "en": "Grok is integrated with X and can access current posts on X; its paid plan starts at $8 per month. ChatGPT, with a broader feature set and integrations, is more widely used for general-purpose tasks; its paid plan starts at $20 per month."
+ },
+ "cmp.chatgpt-vs-meta-ai": {
+  "h": "22c06e4cf7",
+  "en": "Meta AI is free and works inside apps you already use, such as WhatsApp and Instagram, making it practical for quick Q&A. ChatGPT is stronger for more comprehensive tasks such as long documents, file analysis, coding and agents; its paid plan starts at $20 per month."
+ },
  "cmp.chatgpt-vs-microsoft-copilot": {
   "h": "28b838da0a",
   "en": "Copilot is advantageous for Office users because it works inside Word, Excel, PowerPoint and Outlook. ChatGPT offers a broader feature set as a standalone assistant. If you use Office heavily, consider Microsoft 365 plans; for general use, consider ChatGPT."
@@ -162,6 +170,10 @@
  "cmp.chatgpt-vs-perplexity": {
   "h": "bd4819ddfa",
   "en": "Perplexity works like an AI search engine that searches the web and cites sources; it is strong for up-to-date information and research. ChatGPT is used for a broader range of tasks such as writing, analysis, images and code, and can also search the web."
+ },
+ "cmp.claude-vs-deepseek": {
+  "h": "51f36c7e5c",
+  "en": "DeepSeek's chat app is free and strong in tasks such as math and coding. Claude stands out for working with long documents, high-quality writing and coding; its paid plan starts at $20 per month. If you will work with personal or company data, consider where DeepSeek processes its data."
  },
  "cmp.claude-vs-gemini": {
   "h": "39af05923c",
@@ -171,9 +183,37 @@
   "h": "ad5333342e",
   "en": "GitHub Copilot is an assistant that plugs into your existing editor (VS Code, JetBrains) and starts at $10 per month. Cursor is a separate code editor designed around AI and stands out for its project-wide agent features."
  },
+ "cmp.cursor-vs-lovable": {
+  "h": "4aac206ccf",
+  "en": "Cursor is an AI-powered code editor for professional developers. Lovable focuses on people who don't code building websites and apps through conversation; its paid plan starts at $25 per month. If you write code, Cursor is the better fit; if you want a quick prototype, Lovable is more suitable."
+ },
+ "cmp.deepl-vs-google-translate": {
+  "h": "332c2506ca",
+  "en": "Google Translate is free, supports a very wide range of languages and has practical features such as camera and voice translation. DeepL stands out especially for document translation with more natural, fluent results; it can translate Word and PDF files while preserving their formatting."
+ },
+ "cmp.gamma-vs-canva": {
+  "h": "6266824518",
+  "en": "Gamma focuses on producing presentations and documents in minutes from a text or outline. Canva, in addition to presentations, lets you create all kinds of designs such as social media graphics, posters and videos using templates; its paid plan starts at $18 per month."
+ },
+ "cmp.gemini-vs-perplexity": {
+  "h": "9dd3a9a4c5",
+  "en": "Perplexity works like an AI search engine that shows web sources in every answer, making it strong for current information and sourced research. Gemini, meanwhile, covers broader tasks thanks to its integration with Google services such as Gmail, Drive and YouTube, and its ability to generate images and video. Both have a free plan and a paid plan at $20 per month."
+ },
+ "cmp.heygen-vs-synthesia": {
+  "h": "6e4749326f",
+  "en": "Both produce videos with avatars that speak text. HeyGen, with its voiceover and translation features, focuses on individual creators and marketing, while Synthesia focuses on internal training and corporate communication videos. Both offer a free trial."
+ },
  "cmp.midjourney-vs-adobe-firefly": {
   "h": "d67b3c63ae",
   "en": "Midjourney is strong at aesthetic and artistic images, but has no free plan. Adobe Firefly stands out for its integration with Adobe apps such as Photoshop and its emphasis on commercial-use assurances; it also has a free option."
+ },
+ "cmp.midjourney-vs-ideogram": {
+  "h": "c2cc14aa05",
+  "en": "Midjourney excels at aesthetic and artistic visuals but has no free plan; it starts at $10 per month. Ideogram is strong at generating readable text within images, is better suited to logos, posters and typographic designs, and offers a free usage option."
+ },
+ "cmp.otter-vs-fireflies": {
+  "h": "e59be53b7f",
+  "en": "Both record online meetings, transcribe them, and produce summaries and task lists. Otter's paid plan starts at $16.99 per month. For Turkish meetings, check language support in both before purchasing."
  },
  "cmp.runway-vs-kling": {
   "h": "90b323a3fa",
@@ -3099,6 +3139,42 @@
   "h": "bc1c98f0e6",
   "en": "per user"
  },
+ "tool.capcut.desc": {
+  "h": "0c35f2f736",
+  "en": "Video editing app from ByteDance, TikTok's owner. Speeds up short video production with auto captions, background removal, text-to-video and AI effects."
+ },
+ "tool.capcut.good.0": {
+  "h": "1dc7a9578c",
+  "en": "Quick short videos for Reels, TikTok and Shorts"
+ },
+ "tool.capcut.good.1": {
+  "h": "d360ddadd7",
+  "en": "Auto captions and ready-made templates"
+ },
+ "tool.capcut.notFor.0": {
+  "h": "0b7e527490",
+  "en": "Long and professional editing projects"
+ },
+ "tool.capcut.notFor.1": {
+  "h": "ac53fc13d6",
+  "en": "Those who want a fixed price: amounts vary by region, and the final price is shown after sign-in"
+ },
+ "tool.capcut.plan.0.note": {
+  "h": "53c04ad4eb",
+  "en": "basic editing tools"
+ },
+ "tool.capcut.plan.1.note": {
+  "h": "3042322565",
+  "en": "AI features and 1,200 credits per month; 7-day trial for new users"
+ },
+ "tool.capcut.plan.2.note": {
+  "h": "16ac81b51d",
+  "en": "8,645 AI credits per month"
+ },
+ "tool.capcut.plan.3.note": {
+  "h": "bc1c98f0e6",
+  "en": "per user"
+ },
  "tool.chatgpt.desc": {
   "h": "cfc595859a",
   "en": "OpenAI's general-purpose AI assistant. It offers writing, analysis, coding, image generation, file reading and web search in a single app, and is the most widely used chat assistant in the world."
@@ -3383,6 +3459,34 @@
   "h": "f99c901411",
   "en": "Turkish texts: results may be less reliable"
  },
+ "tool.grammarly.desc": {
+  "h": "90e988f66c",
+  "en": "AI writing assistant that offers spelling, grammar, tone and clarity suggestions for English texts. Works in emails, documents and messages via its browser extension and apps."
+ },
+ "tool.grammarly.good.0": {
+  "h": "ed5c973c4f",
+  "en": "English emails, reports and application letters"
+ },
+ "tool.grammarly.good.1": {
+  "h": "781fb408c4",
+  "en": "Improving tone and clarity when writing in English"
+ },
+ "tool.grammarly.notFor.0": {
+  "h": "d4ce2d185a",
+  "en": "Turkish texts (the tool is designed for English writing)"
+ },
+ "tool.grammarly.plan.0.note": {
+  "h": "0a404725d8",
+  "en": "spelling correction, tone analysis, 100 AI prompts"
+ },
+ "tool.grammarly.plan.1.note": {
+  "h": "ddefcd6a87",
+  "en": "free trial available"
+ },
+ "tool.grammarly.plan.2.note": {
+  "h": "a24b0d16a7",
+  "en": "price on request"
+ },
  "tool.grok.desc": {
   "h": "b9358d49eb",
   "en": "The assistant from xAI, the AI company founded by Elon Musk. It is integrated with X (Twitter) and stands out for its access to current posts on X."
@@ -3475,6 +3579,94 @@
   "h": "56b643d632",
   "en": "Corporate projects where data privacy is sensitive (review the policy)"
  },
+ "tool.le-chat.desc": {
+  "h": "bcef67cb5d",
+  "en": "The chat assistant from France's Mistral AI. Offers web search, deep research, document analysis and image generation; stands out as a Europe-based alternative."
+ },
+ "tool.le-chat.good.0": {
+  "h": "be36c094b6",
+  "en": "Users who prefer a Europe-based assistant"
+ },
+ "tool.le-chat.good.1": {
+  "h": "2832a77bcc",
+  "en": "Those looking for an affordably priced paid plan"
+ },
+ "tool.le-chat.notFor.0": {
+  "h": "4eaa94e049",
+  "en": "Turkish-heavy work: test language quality on the free plan first"
+ },
+ "tool.le-chat.plan.1.note": {
+  "h": "45094710c4",
+  "en": "excluding taxes; $5.99 per month for verified students"
+ },
+ "tool.le-chat.plan.2.note": {
+  "h": "56221b5583",
+  "en": "per user, excluding taxes"
+ },
+ "tool.le-chat.plan.3.note": {
+  "h": "a24b0d16a7",
+  "en": "price on request"
+ },
+ "tool.lovable.desc": {
+  "h": "8fc2fe7355",
+  "en": "Sweden-based AI tool that builds websites and apps through conversation. You describe what you want, and it generates the code and interface itself; designed for people who don't know how to code."
+ },
+ "tool.lovable.good.0": {
+  "h": "0d40e5ca42",
+  "en": "Prototypes, landing pages or simple apps without coding"
+ },
+ "tool.lovable.good.1": {
+  "h": "4bde92d0a4",
+  "en": "Quickly turning an idea into a working version to test"
+ },
+ "tool.lovable.notFor.0": {
+  "h": "9903274527",
+  "en": "Large and complex software projects (a developer tool is needed)"
+ },
+ "tool.lovable.notFor.1": {
+  "h": "73145fc69d",
+  "en": "Heavy use without tracking credit consumption"
+ },
+ "tool.lovable.plan.0.note": {
+  "h": "9a3916c2da",
+  "en": "no credit card required"
+ },
+ "tool.lovable.plan.1.note": {
+  "h": "9e2a88e881",
+  "en": "100 credits per month"
+ },
+ "tool.lovable.plan.2.note": {
+  "h": "9e2a88e881",
+  "en": "100 credits per month"
+ },
+ "tool.lovable.plan.3.note": {
+  "h": "9338242467",
+  "en": "pricing based on usage"
+ },
+ "tool.meta-ai.desc": {
+  "h": "367cea8abe",
+  "en": "Meta's AI assistant. Works inside WhatsApp, Instagram, Facebook and Messenger, offering question answering, text writing and image generation. Available in Turkish in Turkey since October 2025."
+ },
+ "tool.meta-ai.good.0": {
+  "h": "47201a5fed",
+  "en": "Quick Q&A inside WhatsApp or Instagram, which you already use"
+ },
+ "tool.meta-ai.good.1": {
+  "h": "ef83cbedba",
+  "en": "Creating short text and images within a chat"
+ },
+ "tool.meta-ai.notFor.0": {
+  "h": "e10acc4ff6",
+  "en": "Long documents and in-depth analysis (general-purpose assistants are stronger)"
+ },
+ "tool.meta-ai.notFor.1": {
+  "h": "7d6e953e84",
+  "en": "Sharing private personal or company information"
+ },
+ "tool.meta-ai.priceNote": {
+  "h": "a8e0f2d323",
+  "en": "Free; can be used inside WhatsApp and Instagram without downloading a separate app."
+ },
  "tool.microsoft-copilot.desc": {
   "h": "d443baab53",
   "en": "Microsoft's AI assistant. Alongside the free Copilot app, it works inside Word, Excel, PowerPoint and Outlook with Microsoft 365 subscriptions."
@@ -3542,6 +3734,38 @@
  "tool.notebooklm.priceNote": {
   "h": "d40f97f04c",
   "en": "Free to use; higher limits are included in Google AI plans."
+ },
+ "tool.notion.desc": {
+  "h": "87a5165946",
+  "en": "AI features of Notion, the note, document and project management app. Summarizes pages, writes text, produces meeting notes and offers agents that search the workspace."
+ },
+ "tool.notion.good.0": {
+  "h": "588249d7fc",
+  "en": "Teams that already keep their notes and documents in Notion"
+ },
+ "tool.notion.good.1": {
+  "h": "35e6f10278",
+  "en": "Meeting notes and quick access to internal company information"
+ },
+ "tool.notion.notFor.0": {
+  "h": "1092ca747e",
+  "en": "Those who don't use Notion (the AI features run inside the app)"
+ },
+ "tool.notion.plan.0.note": {
+  "h": "d661fcc0a9",
+  "en": "Notion AI trial only"
+ },
+ "tool.notion.plan.1.note": {
+  "h": "a423937607",
+  "en": "per user; Notion AI trial only"
+ },
+ "tool.notion.plan.2.note": {
+  "h": "b0a137a41d",
+  "en": "per user; Notion AI included"
+ },
+ "tool.notion.plan.3.note": {
+  "h": "a24b0d16a7",
+  "en": "price on request"
  },
  "tool.otter.desc": {
   "h": "a162db05e4",
