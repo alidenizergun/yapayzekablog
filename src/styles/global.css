@@ -271,36 +271,51 @@ figcaption a { color: inherit; text-decoration: underline; text-underline-offset
 .lead .imgbox .badge { z-index: 1; }
 
 /* ---------------------------------------------------------------- alt bilgi
-   Üstte: tanıtım | kategoriler (2 sütun) | araçlar | kurumsal | takip et. Altta ince çizgiyle ayrılmış telif satırı. */
-footer.site .foot-main { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1.2fr) minmax(0, .9fr) minmax(0, 1.5fr) minmax(0, .7fr); gap: 32px 40px; padding-block: 48px 40px; }
+   Üstte: tanıtım + takip | haberler (2 sütun) | araçlar | öğren ve keşfet (2 sütun) | kurumsal.
+   Telefonda gruplar açılır kapanır (akordeon), takip bağlantıları her zaman görünür. Altta telif ve yasal satır. */
+footer.site .foot-main { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1.2fr) minmax(0, 1fr) minmax(0, 1.5fr) minmax(0, .9fr); gap: 32px 40px; padding-block: 48px 40px; }
 footer.site .foot-about p { margin: 12px 0 0; max-width: 360px; line-height: 1.55; }
 footer.site .foot-about .foot-ai { font-size: 13px; }
 .foot-about p a, .foot-bottom a { color: var(--band-fg); text-decoration: underline; text-underline-offset: 3px; text-decoration-color: rgba(255,255,255,.4); }
 .foot-about p a:hover, .foot-bottom a:hover { text-decoration-color: currentColor; }
 .foot-col ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
-.foot-cats ul { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 24px; }
-.foot-col h2 { font-family: var(--body); font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--band-muted); margin: 0 0 10px; }
-footer.site .foot-col a { color: var(--band-fg); display: inline-flex; align-items: center; min-height: 34px; white-space: nowrap; }
+.foot-wide ul { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 24px; }
+.foot-col summary { display: flex; align-items: center; justify-content: space-between; list-style: none; cursor: default; }
+.foot-col summary::-webkit-details-marker { display: none; }
+.foot-col summary svg { display: none; width: 18px; height: 18px; transition: transform .15s ease; }
+.foot-col h2, .foot-follow-h { font-family: var(--body); font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--band-muted); margin: 0 0 10px; }
+footer.site .foot-col a { color: var(--band-fg); display: inline-flex; align-items: center; min-height: 34px; line-height: 1.3; padding-block: 4px; }
 footer.site .foot-col a:hover { color: var(--band-accent); }
+.foot-follow-h { margin-top: 24px; }
+.foot-follow { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+footer.site .foot-follow a { display: inline-flex; align-items: center; gap: 6px; min-height: 36px; padding: 0 12px; border: 1px solid rgba(255,255,255,.22); border-radius: 999px; color: var(--band-fg); font-size: 13px; font-weight: 600; text-decoration: none; }
+footer.site .foot-follow a:hover { border-color: var(--band-accent); color: var(--band-accent); }
+.foot-follow svg { width: 15px; height: 15px; }
 .foot-bottom { border-top: 1px solid rgba(255,255,255,.12); font-size: 13px; }
 .foot-bottom .wrap { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 24px; padding-block: 18px; }
 .foot-bottom p { margin: 0; }
 .foot-bottom .foot-credits { flex: 1 1 320px; }
 footer.site .foot-top { color: var(--band-fg); text-decoration: none; font-weight: 600; min-height: 44px; display: inline-flex; align-items: center; gap: 6px; }
 footer.site .foot-top:hover { color: var(--band-accent); }
-@media (max-width: 1000px) {
-  footer.site .foot-main { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-  .foot-about, .foot-cats { grid-column: 1 / -1; }
-  .foot-explore { order: 5; }
-  .foot-cats ul { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+@media (max-width: 1100px) {
+  footer.site .foot-main { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .foot-about { grid-column: 1 / -1; }
+  .foot-about p { max-width: 640px; }
 }
 @media (max-width: 760px) {
-  footer.site .foot-main { padding-block: 40px 28px; gap: 28px 24px; }
-  .foot-cats ul { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  footer.site .foot-main { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  footer.site .foot-main { grid-template-columns: minmax(0, 1fr); gap: 0; padding-block: 32px 16px; }
+  .foot-about { padding-bottom: 20px; }
+  .foot-col { border-top: 1px solid rgba(255,255,255,.12); }
+  .foot-col summary { cursor: pointer; min-height: 52px; }
+  .foot-col summary h2 { margin: 0; font-size: 13px; color: var(--band-fg); }
+  .foot-col summary svg { display: block; color: var(--band-muted); }
+  .foot-col[open] summary svg { transform: rotate(180deg); }
+  .foot-col ul { padding-bottom: 14px; }
+  .foot-col:last-child { border-bottom: 1px solid rgba(255,255,255,.12); }
   footer.site .foot-col a { min-height: 44px; }
   .foot-bottom .wrap { flex-direction: column; align-items: flex-start; gap: 4px; padding-block: 16px 8px; }
   .foot-bottom .foot-credits { flex: none; }
+  .foot-links { flex-wrap: wrap; gap: 0 16px; }
 }
 
 /* ---------------------------------------------------------------- ana sayfa hiyerarşisi */
@@ -822,7 +837,7 @@ header.site .masthead { display: flex; align-items: center; justify-content: spa
 .nav-group summary::-webkit-details-marker { display: none; }
 .nav-group summary svg { width: 16px; height: 16px; transition: transform .15s ease; }
 .nav-group[open] summary svg { transform: rotate(180deg); }
-.nav-panel { position: absolute; left: -12px; top: 100%; z-index: 8; min-width: 260px; padding: 8px; background: var(--bg); border: 1px solid var(--line); border-radius: 8px; box-shadow: 0 14px 36px rgba(0,0,0,.16); }
+.nav-panel { position: absolute; left: -12px; top: 100%; z-index: 8; min-width: 300px; padding: 8px; background: var(--bg); border: 1px solid var(--line); border-radius: 8px; box-shadow: 0 14px 36px rgba(0,0,0,.16); }
 .nav-panel-right { left: auto; right: -12px; }
 .nav-panel ul { list-style: none; margin: 0; padding: 0; }
 .nav-panel-cols ul { display: grid; grid-template-columns: repeat(2, minmax(170px, 1fr)); column-gap: 4px; }
@@ -980,3 +995,22 @@ img.thumb { color: transparent; font-size: 0; }
 .tool-card h3 a, .guide-more li a, .entity-links a { display: inline-block; min-height: 24px; padding-block: 2px; }
 .cols.flush { margin-top: 0; }
 .cols.gap-wide { gap: 56px; }
+
+/* Üst bilgi araması (geniş ekran) ve telefon menüsündeki arama + hızlı bağlantılar */
+.head-search { position: relative; display: flex; align-items: center; width: min(360px, 34vw); }
+.head-search input { width: 100%; height: 44px; padding: 0 76px 0 16px; border: 1px solid var(--line); border-radius: 999px; background: var(--soft); color: var(--fg); font: inherit; font-size: 15px; }
+.head-search input::placeholder { color: var(--muted); }
+.head-search input:focus { outline: 2px solid var(--accent); outline-offset: 1px; background: var(--bg); }
+.head-search button { position: absolute; right: 4px; width: 36px; height: 36px; display: inline-flex; align-items: center; justify-content: center; border: 0; border-radius: 999px; background: transparent; color: var(--fg); cursor: pointer; }
+.head-search button:hover { background: var(--line); }
+.head-search button svg { width: 18px; height: 18px; }
+.head-search kbd { position: absolute; right: 44px; font: 600 12px/1 var(--body); color: var(--muted); border: 1px solid var(--line); border-radius: 4px; padding: 3px 6px; background: var(--bg); pointer-events: none; }
+.head-search input:focus ~ kbd, .head-search input:not(:placeholder-shown) ~ kbd { display: none; }
+@media (max-width: 760px) { .head-search { display: none; } }
+.menu-search { grid-column: 1 / -1; display: flex; gap: 8px; padding: 4px 4px 0; }
+.menu-search input { flex: 1 1 auto; min-width: 0; height: 44px; padding: 0 14px; border: 1px solid var(--line); border-radius: 8px; background: var(--soft); color: var(--fg); font: inherit; font-size: 16px; }
+.menu-search button { flex: 0 0 auto; height: 44px; padding: 0 16px; border: 0; border-radius: 8px; background: var(--fg); color: var(--bg); font: inherit; font-weight: 700; cursor: pointer; }
+.nav-panel .menu-quick { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; padding: 4px; }
+.nav-panel .menu-quick a { justify-content: center; align-items: center; min-height: 44px; border: 1px solid var(--line); border-radius: 8px; font-size: 14px; }
+/* Geniş ekranda üst bilgide arama kutusu varken çubuktaki arama simgesi yalnızca çubuk yapışınca görünür */
+@media (min-width: 761px) { .catbar:not(.is-stuck) .catbar-search { display: none; } }

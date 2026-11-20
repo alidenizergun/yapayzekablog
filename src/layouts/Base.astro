@@ -138,6 +138,23 @@ const navGroups = [
 ];
 const isHome = Astro.url.pathname.replace(/\/$/, '') === L.u('/').replace(/\/$/, '');
 const footerCats = CATEGORIES.filter((c) => counts.get(c.slug));
+// Alt bilgi menüsü: telefonda açılır kapanır gruplar, geniş ekranda hepsi açık
+const footGroups = [
+  { label: T('Haberler', 'News'), wide: true, items: [item(T('Son haberler', 'Latest stories'), '/akis/'), ...footerCats.map((c) => item(S(`cat.${c.slug}.name`, c.name), `/kategori/${c.slug}/`))] },
+  { label: T('Araç rehberi', 'AI tools'), items: navGroups[1].items },
+  { label: T('Öğren ve keşfet', 'Learn and explore'), wide: true, items: [
+    ...navGroups[2].items.filter((i) => !i.href.includes('/sozluk/yapay-zeka')),
+    ...(liveSectors.length ? [item(T('İş kolları', 'Industries'), '/sektor/')] : []),
+    ...navGroups.at(-2).items.filter((i) => !i.href.includes('/kategori/')),
+    ...navGroups.at(-1).items,
+  ] },
+  { label: 'YZ Gündemi', items: [
+    item(T('Hakkımızda', 'About us'), '/hakkimizda/'),
+    item(T('Yayın ilkeleri', 'Editorial standards'), '/hakkimizda/#ilkeler'),
+    item(T('Düzeltmeler', 'Corrections'), '/duzeltmeler/'),
+    item(T('Hata bildir', 'Report an error'), '/hata-bildir/'),
+  ] },
+];
 const year = new Intl.DateTimeFormat(L.locale, { year: 'numeric', timeZone: SITE.timeZone }).format(new Date());
 // Bülten formu yalnızca bir bülten servisi bağlıysa gösterilir
 const newsletterOn = Boolean(import.meta.env.PUBLIC_NEWSLETTER_ACTION);
@@ -242,7 +259,15 @@ const isBreaking = latest && Date.now() - latest.data.date.valueOf() < BREAKING_
       <a class="logo" href={L.u('/')} aria-label={T('YZ Gündemi ana sayfa', 'YZ Gündemi home')}>
         <span class="wm" aria-hidden="true"><span class="wm-badge">YZ</span><span class="wm-text"><span class="wm-sub">{T('YAPAY ZEKA', 'AI NEWS')}</span><span class="wm-main">Gündemi</span></span></span>
       </a>
-      {newsletterOn && <div class="head-actions"><a class="btn btn-newsletter" href="#bulten">{T('Bültene abone ol', 'Subscribe')}</a></div>}
+      <div class="head-actions">
+        <form class="head-search" role="search" action={L.u('/ara/')} method="get">
+          <label class="sr-only" for="head-q">{T('Sitede ara', 'Search the site')}</label>
+          <input id="head-q" name="q" type="search" autocomplete="off" placeholder={T('Haber, araç veya terim ara', 'Search news, tools, terms')} data-search-input />
+          <button type="submit" aria-label={T('Ara', 'Search')}><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></button>
+          <kbd aria-hidden="true">/</kbd>
+        </form>
+        {newsletterOn && <a class="btn btn-newsletter" href="#bulten">{T('Bültene abone ol', 'Subscribe')}</a>}
+      </div>
     </div>
   </header>
   <!-- Bölüm çubuğu: her ekranda tek menü; sayfa kaydırılınca üstte kalır, sığmazsa yana kayar -->
@@ -266,6 +291,17 @@ const isBreaking = latest && Date.now() - latest.data.date.valueOf() < BREAKING_
           <details class={`nav-group nav-all${navGroups.some((g) => g.items.some((i) => i.current)) ? ' has-current' : ''}`} data-nav-group>
             <summary>{T('Menü', 'Menu')}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
             <div class="nav-panel nav-panel-full">
+              <form class="menu-search" role="search" action={L.u('/ara/')} method="get">
+                <label class="sr-only" for="menu-q">{T('Sitede ara', 'Search the site')}</label>
+                <input id="menu-q" name="q" type="search" autocomplete="off" placeholder={T('Haber, araç veya terim ara', 'Search news, tools, terms')} />
+                <button type="submit">{T('Ara', 'Search')}</button>
+              </form>
+              <ul class="menu-quick">
+                <li><a href={L.u('/akis/')}>{T('Son haberler', 'Latest')}</a></li>
+                <li><a href={L.u('/arac/')}>{T('Araçlar', 'Tools')}</a></li>
+                <li><a href={L.u('/rehber/')}>{T('Rehberler', 'Guides')}</a></li>
+                <li><a href={L.u('/sozluk/')}>{T('Sözlük', 'Glossary')}</a></li>
+              </ul>
               {navGroups.map((g) => (
                 <section>
                   <h2>{g.label}</h2>
@@ -298,41 +334,28 @@ const isBreaking = latest && Date.now() - latest.data.date.valueOf() < BREAKING_
         <a class="logo" href={L.u('/')} aria-label={T('YZ Gündemi ana sayfa', 'YZ Gündemi home')}><span class="wm" aria-hidden="true"><span class="wm-badge">YZ</span><span class="wm-text"><span class="wm-sub">{T('YAPAY ZEKA', 'AI NEWS')}</span><span class="wm-main">Gündemi</span></span></span></a>
         <p>{SITE_DESC}</p>
         <p class="foot-ai">{T('Haberler yapay zeka desteğiyle, belirtilen kaynaklardan derlenir; her haberin altında kaynak bağlantıları yer alır.', 'Stories are compiled with AI assistance from the cited sources; every article links to its sources.')} <a href={L.u('/hakkimizda/')}>{T('Nasıl çalışıyoruz?', 'How we work')}</a></p>
-      </div>
-      <nav class="foot-col foot-cats" aria-labelledby="foot-cats">
-        <h2 id="foot-cats">{T('Haberler', 'News')}</h2>
-        <ul>{footerCats.map((c) => <li><a href={L.u(`/kategori/${c.slug}/`)}>{S(`cat.${c.slug}.name`, c.name)}</a></li>)}</ul>
-      </nav>
-      <nav class="foot-col" aria-labelledby="foot-tools">
-        <h2 id="foot-tools">{T('Araç rehberi', 'AI tools')}</h2>
-        <ul>{navGroups[1].items.map((i) => <li><a href={i.href}>{i.label}</a></li>)}</ul>
-      </nav>
-      <nav class="foot-col foot-cats foot-explore" aria-labelledby="foot-explore">
-        <h2 id="foot-explore">{T('Keşfet', 'Explore')}</h2>
-        <ul>{[...navGroups[2].items.filter((i) => !i.href.includes('/sozluk/yapay-zeka')), item(T('İş kolları', 'Industries'), '/sektor/'), ...navGroups.at(-2).items.filter((i) => !i.href.includes('/kategori/')), ...navGroups.at(-1).items].filter((i) => liveSectors.length || !/\/(sektor|industries)\/$/.test(i.href)).map((i) => <li><a href={i.href}>{i.label}</a></li>)}</ul>
-      </nav>
-      <nav class="foot-col" aria-labelledby="foot-site">
-        <h2 id="foot-site">YZ Gündemi</h2>
-        <ul>
-          <li><a href={L.u('/hakkimizda/')}>{T('Hakkımızda', 'About us')}</a></li>
-          <li><a href={L.u('/kunye/')}>{T('Künye', 'Masthead')}</a></li>
-          <li><a href={L.u('/hata-bildir/')}>{T('Hata bildir', 'Report an error')}</a></li>
-          <li><a href={L.u('/duzeltmeler/')}>{T('Düzeltmeler', 'Corrections')}</a></li>
-          <li><a href={L.u('/akis/')}>{T('Canlı akış', 'Live feed')}</a></li>
-          <li><a href={L.u('/rss.xml')}>RSS</a></li>
-          <li><a href="https://www.google.com/preferences/source?q=yzgundemi.com" rel="noopener" target="_blank">{T("Google'da tercih edilen kaynak yap", 'Add as a preferred source on Google')}</a></li>
-          <li><a href={switchHref} hreflang={lang === 'en' ? 'tr' : 'en'} lang={lang === 'en' ? 'tr' : 'en'}>{lang === 'en' ? 'Türkçe' : 'English'}</a></li>
+        <h2 class="foot-follow-h">{T('Takip edin', 'Follow us')}</h2>
+        <ul class="foot-follow">
+          <li><a href="https://www.google.com/preferences/source?q=yzgundemi.com" rel="noopener" target="_blank"><svg viewBox="0 0 24 24" aria-hidden="true" fill="currentColor"><path d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.4l-5.9 3.1 1.2-6.5-4.8-4.6 6.6-.9z"/></svg>{T("Google'da tercih et", 'Prefer on Google')}</a></li>
+          <li><a href={L.u('/rss.xml')}><svg viewBox="0 0 24 24" aria-hidden="true" fill="currentColor"><circle cx="6" cy="18" r="2.2"/><path d="M4 10.5a9.5 9.5 0 0 1 9.5 9.5h-2.7A6.8 6.8 0 0 0 4 13.2zM4 4.5A15.5 15.5 0 0 1 19.5 20h-2.7A12.8 12.8 0 0 0 4 7.2z"/></svg>RSS</a></li>
           {newsletterOn && <li><a href={L.u('/') + '#bulten'}>{T('E-posta bülteni', 'Newsletter')}</a></li>}
           {SITE.social?.x && <li><a href={`https://x.com/${SITE.social.x}`}>X</a></li>}
           {SITE.social?.instagram && <li><a href={`https://www.instagram.com/${SITE.social.instagram}/`}>Instagram</a></li>}
           {SITE.social?.linkedin && <li><a href={`https://www.linkedin.com/company/${SITE.social.linkedin}/`}>LinkedIn</a></li>}
+          <li><a href={switchHref} hreflang={lang === 'en' ? 'tr' : 'en'} lang={lang === 'en' ? 'tr' : 'en'}>{lang === 'en' ? 'Türkçe' : 'English'}</a></li>
         </ul>
-      </nav>
+      </div>
+      {footGroups.map((g) => (
+        <details class={`foot-col${g.wide ? ' foot-wide' : ''}`} open data-foot-group>
+          <summary><h2>{g.label}</h2><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
+          <ul>{g.items.map((i) => <li><a href={i.href}>{i.label}</a></li>)}</ul>
+        </details>
+      ))}
     </div>
     <div class="foot-bottom"><div class="wrap">
       <p>© {year} {SITE.name} · {SITE.domain}</p>
       <p class="foot-credits">{T('Fotoğraflar', 'Photos from')} <a href="https://unsplash.com/?utm_source=yzgundemi&utm_medium=referral">Unsplash</a>{T(', şirket logoları ', ', company logos from ')}<a href="https://simpleicons.org/">Simple Icons</a>{T(' kaynaklıdır; logolar sahiplerinin markasıdır.', '; logos are trademarks of their owners.')}</p>
-      <span class="foot-links"><a href={L.u('/kullanim-kosullari/')}>{T('Kullanım koşulları', 'Terms of use')}</a><a href={L.u('/gizlilik/')}>{T('Gizlilik ve çerezler', 'Privacy and cookies')}</a>{SITE.analytics?.ga4 && <button type="button" class="linkish" data-consent-open>{T('Çerez tercihleri', 'Cookie settings')}</button>}</span>
+      <span class="foot-links"><a href={L.u('/kunye/')}>{T('Künye', 'Masthead')}</a><a href={L.u('/kullanim-kosullari/')}>{T('Kullanım koşulları', 'Terms of use')}</a><a href={L.u('/gizlilik/')}>{T('Gizlilik ve çerezler', 'Privacy and cookies')}</a>{SITE.analytics?.ga4 && <button type="button" class="linkish" data-consent-open>{T('Çerez tercihleri', 'Cookie settings')}</button>}</span>
       <a class="foot-top" href="#icerik">{T('Başa dön', 'Back to top')} <span aria-hidden="true">↑</span></a>
     </div></div>
   </footer>
@@ -435,6 +458,23 @@ const isBreaking = latest && Date.now() - latest.data.date.valueOf() < BREAKING_
       showCurrent();
       edges();
     }
+    // Alt bilgi grupları: telefonda kapalı başlar (başlığa dokununca açılır), geniş ekranda hep açık
+    const footGroups = [...document.querySelectorAll<HTMLDetailsElement>('[data-foot-group]')];
+    const narrow = matchMedia('(max-width: 760px)');
+    const syncFoot = () => footGroups.forEach((d) => { d.open = !narrow.matches; });
+    syncFoot();
+    narrow.addEventListener('change', syncFoot);
+    footGroups.forEach((d) => d.querySelector('summary')?.addEventListener('click', (e) => { if (!narrow.matches) e.preventDefault(); }));
+    // "/" kısayolu: arama kutusuna odaklan (yazı alanında değilken)
+    document.addEventListener('keydown', (e) => {
+      if (e.key !== '/' || e.ctrlKey || e.metaKey || e.altKey) return;
+      const t = e.target as HTMLElement;
+      if (t.closest('input, textarea, select, [contenteditable="true"]')) return;
+      const box = document.querySelector<HTMLInputElement>('[data-search-input]');
+      if (!box || !box.offsetParent) return;
+      e.preventDefault();
+      box.focus();
+    });
     // Tema düğmesi (ikon): seçim tarayıcıda saklanır; seçim yoksa cihaz ayarı geçerli
     const root = document.documentElement;
     const media = window.matchMedia('(prefers-color-scheme: dark)');
