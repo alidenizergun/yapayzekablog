@@ -284,7 +284,6 @@ const isBreaking = latest && Date.now() - latest.data.date.valueOf() < BREAKING_
     <div class="wrap">
       <a class="catbar-logo" href={L.u('/')} aria-label={T('YZ Gündemi ana sayfa', 'YZ Gündemi home')} tabindex="-1"><span class="wm-badge" aria-hidden="true">YZ</span></a>
       <ul class="nav-main" data-nav>
-        <li class="nav-quick"><a href={L.u('/')} aria-current={isHome ? 'page' : undefined}>{T('Ana sayfa', 'Home')}</a></li>
         <li class="nav-quick"><a href={L.u('/akis/')} aria-current={path.startsWith(L.u('/akis/')) ? 'page' : undefined}>{T('Son haberler', 'Latest')}</a></li>
         {navGroups.map((g) => (
           <li class="nav-group-item">

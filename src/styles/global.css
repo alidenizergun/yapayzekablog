@@ -1017,6 +1017,4 @@ img.thumb { color: transparent; font-size: 0; }
 /* Haberler menüsü: açıklamalı bağlantılar (son haberler, haftanın özeti, süren olaylar) tam genişlikte, konular iki sütunda */
 .nav-panel-cols li:has(a > span) { grid-column: 1 / -1; }
 .nav-panel-cols li:has(a > span):has(+ li:not(:has(a > span))) { border-bottom: 1px solid var(--line); margin-bottom: 6px; padding-bottom: 6px; }
-/* Telefonda logo hemen üstte olduğu için "Ana sayfa" kısayolu gizlenir */
-@media (max-width: 760px) { .nav-main > .nav-quick:first-child { display: none !important; } }
 @media (max-width: 520px) { .nav-panel-full section:first-of-type li:nth-child(-n+3) { grid-column: 1 / -1; } }
