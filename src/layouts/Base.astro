@@ -144,6 +144,8 @@ const navGroups = [
     item(T('Şirketler ve kişiler', 'Companies and people'), '/konular/', T('OpenAI, Nvidia, Altman ve diğerleri', 'OpenAI, Nvidia, Altman and others')),
   ] },
 ];
+// Menü çubuğunda ayrıca kısayolu olan sayfalar (Son haberler) açıldığında grup başlığı da işaretlenmesin
+const groupCur = (i) => i.current && i.href !== L.u('/akis/');
 const groupOf = (k) => navGroups.find((g) => g.key === k)?.items ?? [];
 const isHome = Astro.url.pathname.replace(/\/$/, '') === L.u('/').replace(/\/$/, '');
 const footerCats = CATEGORIES.filter((c) => counts.get(c.slug));
@@ -287,7 +289,7 @@ const isBreaking = latest && Date.now() - latest.data.date.valueOf() < BREAKING_
         <li class="nav-quick"><a href={L.u('/akis/')} aria-current={path.startsWith(L.u('/akis/')) ? 'page' : undefined}>{T('Son haberler', 'Latest')}</a></li>
         {navGroups.map((g) => (
           <li class="nav-group-item">
-            <details class={`nav-group${g.items.some((i) => i.current) ? ' has-current' : ''}`} data-nav-group>
+            <details class={`nav-group${g.items.some(groupCur) ? ' has-current' : ''}`} data-nav-group>
               <summary>{g.label}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
               <div class={`nav-panel${g.cols ? ' nav-panel-cols' : ''}${g.right ? ' nav-panel-right' : ''}`}>
                 <ul>{g.items.map((i) => <li><a href={i.href} aria-current={i.current ? 'page' : undefined}>{i.label}{i.desc && <span>{i.desc}</span>}</a></li>)}</ul>
@@ -296,7 +298,7 @@ const isBreaking = latest && Date.now() - latest.data.date.valueOf() < BREAKING_
           </li>
         ))}
         <li class="nav-mobile">
-          <details class={`nav-group nav-all${navGroups.some((g) => g.items.some((i) => i.current)) ? ' has-current' : ''}`} data-nav-group>
+          <details class={`nav-group nav-all${navGroups.some((g) => g.items.some(groupCur)) ? ' has-current' : ''}`} data-nav-group>
             <summary>{T('Menü', 'Menu')}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
             <div class="nav-panel nav-panel-full">
               <form class="menu-search" role="search" action={L.u('/ara/')} method="get">
