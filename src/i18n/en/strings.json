@@ -651,6 +651,24 @@
   "h": "5f4e175f07",
   "en": "It noticeably improves accuracy in math, programming, scientific analysis and multistep agent tasks. On simple questions, however, it can add unnecessary cost, so choosing a model to fit the job matters."
  },
+ "gl.aktif-ogrenme.def": "A method in which the model itself picks the examples that would be most useful to label and asks a human for those labels, aiming for high accuracy with fewer labeled examples.",
+ "gl.aktif-ogrenme.example": "A radiology team has the model pick the few hundred scans it is least sure about and shows only those to a specialist, instead of paying for the whole archive to be labeled.",
+ "gl.aktif-ogrenme.faq.0.a": "No. 'Active' here means the model chooses which data to have labeled. In reinforcement learning, an agent learns by trying things in an environment and receiving rewards and penalties.",
+ "gl.aktif-ogrenme.faq.0.q": "Is active learning the same as reinforcement learning?",
+ "gl.aktif-ogrenme.faq.1.a": "Usually they are examples the model is most uncertain about, that differ from one another, and that are expected to add the most to learning. The exact selection criterion depends on the method.",
+ "gl.aktif-ogrenme.faq.1.q": "How are the examples to label chosen?",
+ "gl.aktif-ogrenme.how": "The process starts with a small labeled dataset and a first round of training. The model then scans the unlabeled examples and flags the ones it is least sure about, such as cases where it cannot decide between two classes. These selected examples go to an expert, the labels come back, and the model is retrained. The loop continues until performance is good enough or the labeling budget runs out. It is usually more efficient than labeling examples at random.",
+ "gl.aktif-ogrenme.term": "Active learning",
+ "gl.aktif-ogrenme.why": "Labeling eats time and money, especially in fields such as medicine or law that need expert judgment. Active learning cuts that cost by focusing a limited budget on the examples that carry the most information. Since data preparation is often the most expensive part of an AI project, the approach has real practical value.",
+ "gl.algoritma.def": "A clearly defined set of steps followed to solve a problem or complete a task. In computing, it is a sequence of instructions that turns an input into an output in a finite number of steps.",
+ "gl.algoritma.example": "A map app finding the best route between two points, or a set of steps that sorts a list from smallest to largest, are everyday examples of algorithms.",
+ "gl.algoritma.faq.0.a": "An algorithm is a set of steps describing how to do something. An AI model is the structure that comes out of training a learning algorithm on data, and it is what makes predictions.",
+ "gl.algoritma.faq.0.q": "What is the difference between an algorithm and an AI model?",
+ "gl.algoritma.faq.1.a": "No. Simple algorithms such as sorting or adding numbers are not considered AI. AI covers only a portion of all algorithms.",
+ "gl.algoritma.faq.1.q": "Is every algorithm artificial intelligence?",
+ "gl.algoritma.how": "An algorithm resembles a recipe: the ingredients are the input, the ordered steps are the processing, and the finished dish is the output. Several algorithms can solve the same problem, and they differ in speed and memory use. In AI, a learning algorithm adjusts a model's internal settings step by step by looking at data. When training ends, what you have is the model; the algorithm is the method that produced it.",
+ "gl.algoritma.term": "Algorithm",
+ "gl.algoritma.why": "In the news, “algorithm” is often used loosely for recommendation systems or AI models. Asking what an algorithm does, who designed it and what data it works on is the basis of debates about transparency, bias and accountability.",
  "gl.api.def": {
   "h": "a24bf780a1",
   "en": "An interface that lets one piece of software talk to another. Developers mostly connect AI models to their own applications through APIs and pay for what they use."
@@ -1011,6 +1029,15 @@
   "h": "3f481852f7",
   "en": "Distillation enables the spread of cheap, fast models. It is also controversial: distilling one company's model from a rival's model without permission can raise terms-of-service and intellectual property issues."
  },
+ "gl.dar-yapay-zeka.def": "A type of AI built to perform one specific task or a small set of related tasks. Nearly every AI system in use today falls into this group.",
+ "gl.dar-yapay-zeka.example": "An email service's spam filter only classifies incoming messages; the same system cannot translate text or play chess.",
+ "gl.dar-yapay-zeka.faq.0.a": "Narrow AI is designed for a particular job and is useless outside it. General AI would be a system that can learn many kinds of tasks and transfer what it knows between them, as people do, and it does not exist yet.",
+ "gl.dar-yapay-zeka.faq.0.q": "What is the difference between narrow AI and general AI?",
+ "gl.dar-yapay-zeka.faq.1.a": "Opinions differ. Many sources still count them as narrow AI, since they are fundamentally trained to process language. Because they handle such a wide range of tasks, some researchers see them as an early step toward general AI.",
+ "gl.dar-yapay-zeka.faq.1.q": "Are chatbots like ChatGPT narrow AI?",
+ "gl.dar-yapay-zeka.how": "A narrow AI system is trained on data for one job, or built with rules written for that job. A face recognition model learns only to pick out faces in images, and a chess program only plays chess. Once the system leaves the domain it was built for, its performance usually drops sharply, because it has no general understanding that would let it carry its skills over on its own. Narrow does not mean weak: many narrow systems outperform people at their specific task.",
+ "gl.dar-yapay-zeka.term": "Narrow AI",
+ "gl.dar-yapay-zeka.why": "When news stories say “AI”, they are usually talking about narrow AI. Knowing the distinction helps readers judge both the strengths and the limits of today's systems. It also gives a baseline for evaluating claims about artificial general intelligence and superintelligence.",
  "gl.deepfake.def": {
   "h": "6885ee8eb0",
   "en": "Fake video, audio or images produced with AI that show a real person saying something they never said or doing something they never did."
@@ -1083,6 +1110,15 @@
   "h": "77c9a5f830",
   "en": "Preparing labeled data is expensive and laborious, so the choice of method determines both cost and outcome. The success of today's large models comes from their ability to learn from massive amounts of unlabeled data."
  },
+ "gl.denetimsiz-ogrenme.def": "A machine learning approach in which a model tries to discover patterns and groupings in unlabeled data on its own, without being given correct answers. There are no labels telling it what the examples are.",
+ "gl.denetimsiz-ogrenme.example": "An online store sorts its customers into clusters based on shopping habits, and the marketing team names the groups afterwards.",
+ "gl.denetimsiz-ogrenme.faq.0.a": "In supervised learning, a model is trained on labeled examples whose correct answers are known. In unsupervised learning there are no labels, and the model tries to find the structure of the data by itself.",
+ "gl.denetimsiz-ogrenme.faq.0.q": "What is the difference between supervised and unsupervised learning?",
+ "gl.denetimsiz-ogrenme.faq.1.a": "Not exactly. In self-supervised learning the labels come from the data itself, such as predicting the next word in a sentence, so it is usually treated as a separate category.",
+ "gl.denetimsiz-ogrenme.faq.1.q": "Is self-supervised learning the same as unsupervised learning?",
+ "gl.denetimsiz-ogrenme.how": "The data carries no labels such as “this is a cat, this is a dog”; the algorithm looks only at how similar the examples are to each other. The most common tasks are clustering (grouping similar examples), dimensionality reduction (summarizing data with fewer variables) and finding unusual examples. People usually make choices such as how many groups to look for, and people also interpret what the resulting groups mean. “Self-supervised learning”, used in pretraining large language models, is a related but separate concept.",
+ "gl.denetimsiz-ogrenme.term": "Unsupervised learning",
+ "gl.denetimsiz-ogrenme.why": "Most of the world's data is unlabeled, and labeling it is expensive and slow. Unsupervised methods let organizations draw value from such data in tasks like customer segmentation, fraud detection or spotting equipment faults. The catch is that without a “right answer”, it is hard to measure how good the results are.",
  "gl.derin-ogrenme.def": {
   "h": "60e07200c2",
   "en": "A machine learning method that learns from large amounts of data using multilayer artificial neural networks. It is the foundation of today's language, image and audio models."
@@ -1299,6 +1335,15 @@
   "h": "af3cb0e27f",
   "en": "Training is the most expensive stage of developing the most powerful models and can be done only by a few companies with access to large capital and data centers. A significant share of chip and energy demand comes from it."
  },
+ "gl.federe-ogrenme.def": "A way of building a shared model by combining updates trained locally on devices or at institutions, without gathering the underlying data in one central place.",
+ "gl.federe-ogrenme.example": "A phone keyboard can improve its word suggestions by training locally on each phone and merging the updates, without sending what users type to a server.",
+ "gl.federe-ogrenme.faq.0.a": "No. Raw data is not shared, but some information can be inferred from model updates. That is why extra safeguards such as encryption and differential privacy are used.",
+ "gl.federe-ogrenme.faq.0.q": "Does federated learning make data completely safe?",
+ "gl.federe-ogrenme.faq.1.a": "In centralized training all the data is collected in one place. In federated learning the data stays where it is and only model updates travel to the center.",
+ "gl.federe-ogrenme.faq.1.q": "How is it different from centralized training?",
+ "gl.federe-ogrenme.how": "A central server sends a copy of the shared model to phones or to institutions such as hospitals. Each participant trains the model briefly on its own data, and the raw data never leaves the device. Only the model updates, meaning the changes to the weights, go back to the server. The server combines the updates, often by averaging them, and sends out the new version. This cycle repeats many times. To strengthen privacy, the method is often paired with techniques such as differential privacy or encryption.",
+ "gl.federe-ogrenme.term": "Federated learning",
+ "gl.federe-ogrenme.why": "In health care, banking and mobile devices, data is both sensitive and personal, and regulations such as the GDPR in Europe or KVKK, Turkey's personal data protection law, limit how it can move. Federated learning allows shared learning without sharing the data, which eases privacy concerns. Information can still leak from the updates, so it is not complete protection on its own.",
  "gl.gomme.def": {
   "h": "238b55e406",
   "en": "A method of expressing the meaning of a word, sentence or image as a sequence of numbers (a vector). Content that is close in meaning is represented by vectors that are close to each other."
@@ -1803,6 +1848,33 @@
   "h": "ff71ec2b0e",
   "en": "For AI agents to do real work, they need to connect to company systems. Because MCP standardizes this connection, it quickly came to be supported by many AI companies and software tools. If misconfigured, however, it can create security risks."
  },
+ "gl.meta-ogrenme.def": "Training a model to learn how to learn, so that when it meets a new task it can adapt quickly from only a handful of examples. It is often summed up as 'learning to learn'.",
+ "gl.meta-ogrenme.example": "An image classifier that has practiced on hundreds of similar small tasks during training may be able to tell apart bird species it has never seen after being given only five photos of each.",
+ "gl.meta-ogrenme.faq.0.a": "In transfer learning, the knowledge of an existing model is carried over to a new task. In meta-learning, the model is trained from the start across many tasks specifically so that it can adapt fast to new ones.",
+ "gl.meta-ogrenme.faq.0.q": "How does meta-learning differ from transfer learning?",
+ "gl.meta-ogrenme.faq.1.a": "Few-shot learning names the goal: learning from a few examples. Meta-learning is one of the main methods used to reach that goal.",
+ "gl.meta-ogrenme.faq.1.q": "How does meta-learning relate to few-shot learning?",
+ "gl.meta-ogrenme.how": "Instead of one big task, training consists of many small tasks. In each one the model sees a few examples and is then tested on fresh examples from the same task. The resulting error is fed back to adjust the model's starting settings so that it gets better both at solving tasks and at adapting quickly. The model ends up with a starting point or learning strategy that gives good results on a new task within a few steps. Someone who has learned many languages picking up a new one faster is a fair analogy.",
+ "gl.meta-ogrenme.term": "Meta-learning",
+ "gl.meta-ogrenme.why": "In areas where labeled data is scarce, such as rare diseases or less widely spoken languages, learning from a few examples is a big advantage. Meta-learning is one of the main approaches in few-shot learning research. The in-context learning of large language models is also sometimes discussed through this lens.",
+ "gl.oncu-model.def": "One of the most advanced general-purpose AI models, sitting at the current edge of capability and watched more closely because its powerful abilities may come with risks that are not yet fully understood.",
+ "gl.oncu-model.example": "The most capable chat and reasoning models released by the large AI labs are called frontier models, though today's frontier model may look ordinary a few years from now.",
+ "gl.oncu-model.faq.0.a": "There is no single official criterion. The bar shifts over time and institutions use different definitions, most often based on the amount of computing used in training or on the level of capability.",
+ "gl.oncu-model.faq.0.q": "Which models count as frontier models?",
+ "gl.oncu-model.faq.1.a": "As their capabilities grow, so can the risks of misuse and unexpected behavior. That is why special safety testing before release is increasingly discussed.",
+ "gl.oncu-model.faq.1.q": "Why are frontier models monitored separately?",
+ "gl.oncu-model.how": "Frontier is not a fixed technical threshold; it is a moving yardstick. The term usually applies to models that need very large amounts of computing power, broad data and costly training, and that tend to be a company's or lab's most capable work. Such models are often expected to go through safety testing before release, for instance attempts to misuse them in cyberattack or biological risk scenarios. Some companies and public bodies have published voluntary commitments or frameworks for these evaluations.",
+ "gl.oncu-model.term": "Frontier model",
+ "gl.oncu-model.why": "Regulators and companies treat the risks of the most powerful models as a separate matter, and safety evaluations and policy debates are organized around this category. Which models count as frontier is contested: some want strict oversight, while others argue that heavy regulation would burden innovation and smaller players.",
+ "gl.oz-denetimli-ogrenme.def": "A training approach in which a model learns from tasks created out of unlabeled data itself, so useful patterns can be extracted without people writing labels by hand.",
+ "gl.oz-denetimli-ogrenme.example": "A language model is trained by predicting how unfinished sentences such as 'The weather today is very ...' continue; the correct answer comes from the text itself.",
+ "gl.oz-denetimli-ogrenme.faq.0.a": "Not exactly. Unsupervised learning usually looks for structure in data, such as clusters, while self-supervised learning builds an artificial prediction task and trains against a real target. For that reason it is sometimes treated as a special kind of unsupervised learning.",
+ "gl.oz-denetimli-ogrenme.faq.0.q": "Is self-supervised learning the same as unsupervised learning?",
+ "gl.oz-denetimli-ogrenme.faq.1.a": "Because internet-scale text can be used without labeling. The task of predicting the next word teaches grammar, world knowledge and much more.",
+ "gl.oz-denetimli-ogrenme.faq.1.q": "Why is it used for large language models?",
+ "gl.oz-denetimli-ogrenme.how": "A piece of the data is hidden and the model tries to predict it. Guessing the next word in a text or a word removed from the middle of a sentence are typical cases, and filling in a masked region of an image works the same way. Because the correct answer is already in the data, nobody has to write labels. By solving this task billions of times, the model absorbs the structure of language or images. That knowledge can later be adapted to specific jobs with much smaller labeled datasets.",
+ "gl.oz-denetimli-ogrenme.term": "Self-supervised learning",
+ "gl.oz-denetimli-ogrenme.why": "Labeled data is expensive and slow to produce, while text, images and audio exist online in enormous unlabeled quantities. Self-supervised learning made that stockpile usable and became the foundation of pretraining for large language models. When news stories mention pretraining, this is usually the method behind it.",
  "gl.parametre.def": {
   "h": "45ff8cbed2",
   "en": "The numerical values a model learns during training. The parameter count (for example, 70 billion) is often used to describe a model's size."
@@ -1911,6 +1983,15 @@
   "h": "8a3a27c58e",
   "en": "It is the most common way for companies to build assistants that work with their own documents. There is no need to retrain the model, the information can be updated, and answers can cite sources, which reduces fabricated information."
  },
+ "gl.sembolik-yapay-zeka.def": "An approach that tries to build intelligence by manipulating human-readable symbols according to logical rules. Instead of learning from data, it relies on knowledge and rules that people write down explicitly.",
+ "gl.sembolik-yapay-zeka.example": "A loan program that evaluates applications with hand-written rules like “approve if the applicant is under a certain age and earns more than a certain amount” is a simple example of the symbolic approach.",
+ "gl.sembolik-yapay-zeka.faq.0.a": "In symbolic AI, people write the knowledge down as rules. In machine learning, the model works out the rules from examples on its own.",
+ "gl.sembolik-yapay-zeka.faq.0.q": "What is the difference between symbolic AI and machine learning?",
+ "gl.sembolik-yapay-zeka.faq.1.a": "It is still used. Rule-based decision systems, planning software and verification tools rely on it, and there is ongoing work to combine its ideas with learning-based models.",
+ "gl.sembolik-yapay-zeka.faq.1.q": "Is symbolic AI no longer used?",
+ "gl.sembolik-yapay-zeka.how": "Knowledge is written by hand as facts and rules, such as “all birds have wings” and “a sparrow is a bird”. A reasoning engine combines these statements to reach new conclusions, for example “a sparrow has wings”. Because the reasoning can be followed step by step, the system can explain why it gave a particular answer. Its weakness is the messiness of the real world: writing a rule for every situation is laborious, and the system easily gets stuck on cases nobody anticipated.",
+ "gl.sembolik-yapay-zeka.term": "Symbolic AI",
+ "gl.sembolik-yapay-zeka.why": "This approach was the dominant strand of AI research from the 1950s into the 1980s, and today's learning-based systems can partly be read as a reaction to it. Even now, with neural networks in the lead, some researchers want to combine the two, building so-called neuro-symbolic systems, because logic offers explainability and reliability.",
  "gl.sentetik-veri.def": {
   "h": "59f9abc050",
   "en": "Data generated by computers or AI rather than collected from the real world, designed to mimic the properties of real data."
@@ -2055,6 +2136,24 @@
   "h": "b0e2db5d64",
   "en": "It is the most widespread AI application for 24/7 customer service support, quick access to information and assistance with everyday tasks. Because of the risk of giving incorrect information, human oversight is still needed on critical matters."
  },
+ "gl.surekli-ogrenme.def": "An approach in which a model learns new data and tasks one after another over time without losing what it learned earlier, aiming for something like human lifelong learning.",
+ "gl.surekli-ogrenme.example": "A spam filter has to learn new phishing tricks as they appear without losing its ability to spot the older ones.",
+ "gl.surekli-ogrenme.faq.0.a": "They are close but not identical. Online learning describes data arriving as a stream with the model updated continuously. Continual learning focuses specifically on keeping old knowledge intact while new tasks arrive.",
+ "gl.surekli-ogrenme.faq.0.q": "Is continual learning the same as online learning?",
+ "gl.surekli-ogrenme.faq.1.a": "It is when a neural network updates its weights for a new task and in doing so disrupts the settings that worked for an earlier task, so its performance on that earlier task drops.",
+ "gl.surekli-ogrenme.faq.1.q": "What is catastrophic forgetting?",
+ "gl.surekli-ogrenme.how": "A classic model is trained once and then frozen. If training simply continues on new data, the model can quickly forget the old material, a problem known as catastrophic forgetting. Continual learning methods try to prevent this. Examples include storing small samples from earlier tasks and replaying them, limiting changes to the weights that matter most, or reserving a separate part of the network for each task. The goal is to add new knowledge while keeping the old.",
+ "gl.surekli-ogrenme.term": "Continual learning",
+ "gl.surekli-ogrenme.why": "The real world does not stand still: user habits, language and fraud tactics keep changing, and retraining a model from scratch each time is costly. Continual learning could reduce that cost, but forgetting remains an open research problem, and large models are still mostly updated through retraining or fine-tuning.",
+ "gl.temel-model.def": "A general-purpose AI model trained at large scale on broad and varied data, which can then be adapted to many different jobs such as chat, translation, coding or image understanding.",
+ "gl.temel-model.example": "A company can use the same language model under three separate products: a customer service chatbot, a contract summarizer and a coding assistant.",
+ "gl.temel-model.faq.0.a": "Every large language model can be considered a foundation model, but not every foundation model is a language model; there are also ones that work with images, audio or several data types at once.",
+ "gl.temel-model.faq.0.q": "Is a foundation model the same as a large language model?",
+ "gl.temel-model.faq.1.a": "A foundation model is defined by being general-purpose and adaptable. A frontier model is one at the leading edge of capability at a given time; frontier models are usually foundation models as well.",
+ "gl.temel-model.faq.1.q": "What is the difference between a foundation model and a frontier model?",
+ "gl.temel-model.how": "A foundation model is first pretrained on internet-scale data such as text, images, audio or code, usually through self-supervised learning. This stage takes enormous computing power and gives the model broad knowledge of language and the world. The resulting model is not built for one particular job; through fine-tuning, prompting or further training it becomes the base for many different applications. It is called a foundation because many products rest on a model trained once.",
+ "gl.temel-model.term": "Foundation model",
+ "gl.temel-model.why": "Most of the large language models in the news are foundation models. Having one model underpin many products lowers costs, but it also means that errors and biases can carry over to all of those products. In regulatory debates, these models are often treated as a category of their own.",
  "gl.token.def": {
   "h": "f5334558cb",
   "en": "The small units language models use to process text; a token can be a word or part of a word. API prices are usually set per million tokens."
@@ -2127,6 +2226,15 @@
   "h": "70788a9fa7",
   "en": "Because demand for AI chips has increased dependence on Nvidia's GPUs, big tech companies are developing their own chips. NPUs allow AI to run on the device itself, without an internet connection and more privately."
  },
+ "gl.transfer-ogrenme.def": "Reusing the knowledge a model gained on one task for a related task, so that work on the new problem starts from an existing foundation rather than from scratch.",
+ "gl.transfer-ogrenme.example": "A hospital can take a model trained on general image datasets and adapt it with only a few thousand X-rays to build a system that flags abnormalities in chest scans.",
+ "gl.transfer-ogrenme.faq.0.a": "Fine-tuning is a common way of doing transfer learning: the weights of a pretrained model are updated with new data. Transfer learning is the broader idea and covers any way of carrying knowledge over to another task.",
+ "gl.transfer-ogrenme.faq.0.q": "What is the difference between transfer learning and fine-tuning?",
+ "gl.transfer-ogrenme.faq.1.a": "No. If the source and target tasks are very different, the transferred knowledge may not help and can even make results worse.",
+ "gl.transfer-ogrenme.faq.1.q": "Does transfer learning always work?",
+ "gl.transfer-ogrenme.how": "A model is first trained on a broad dataset, for example learning to recognize objects from millions of images. Its weights are then used as the starting point for a new task. Either only the last layers are trained on the new data, or the whole model is fine-tuned with small updates. Because the lower layers already know general features such as edges, textures or language patterns, the new task needs far less data. Someone who plays piano picking up the organ faster is a fair analogy.",
+ "gl.transfer-ogrenme.term": "Transfer learning",
+ "gl.transfer-ogrenme.why": "Many organizations lack the data or computing power to train a large model from nothing. Transfer learning lets them adapt ready-made models to specialized jobs with little data and at low cost. The common practice of fine-tuning pretrained models today is a direct result of this approach.",
  "gl.transformer.def": {
   "h": "6ecb9cabd3",
   "en": "A neural network architecture introduced in 2017 that uses an \"attention\" mechanism to evaluate the relationships among all the words in a text at once. Nearly all large language models are based on this architecture."
@@ -2235,6 +2343,15 @@
   "h": "544670bcfc",
   "en": "It cuts creative work that only humans could do before, such as writing, design, coding, music and video, down to minutes. While this boosts productivity, it also raises new debates over copyright, fake content and the effects on professions."
  },
+ "gl.uzman-sistem.def": "A computer program that stores a human expert's knowledge as rules and uses it to answer questions or recommend decisions in a specific field. Expert systems became widespread in the 1970s and 1980s.",
+ "gl.uzman-sistem.example": "MYCIN, developed at Stanford University in the 1970s, was a well-known research prototype that used a set of rules to suggest which antibiotic to give for blood infections.",
+ "gl.uzman-sistem.faq.0.a": "In an expert system, people write the rules; in machine learning, the model learns from examples. That makes expert systems easy to trace but laborious to keep up to date.",
+ "gl.uzman-sistem.faq.0.q": "What is the difference between an expert system and machine learning?",
+ "gl.uzman-sistem.faq.1.a": "They are less often called by that name, but rule-based decision support and automation software is still used at many organizations.",
+ "gl.uzman-sistem.faq.1.q": "Are expert systems still used?",
+ "gl.uzman-sistem.how": "An expert system has three main parts: a knowledge base that holds the rules, an inference engine that chains those rules together to reach a conclusion, and an interface for talking to the user. Knowledge engineers interview the expert and write rules like “if this symptom is present, this diagnosis becomes more likely”. As the user answers questions, the engine fires the relevant rules in sequence and produces a recommendation. It can often also show which rules led to that result.",
+ "gl.uzman-sistem.term": "Expert system",
+ "gl.uzman-sistem.why": "Expert systems were among the first serious commercial uses of AI and drew heavy corporate investment in the 1980s. But the difficulty of keeping the rules up to date and their brittleness in unforeseen situations contributed to disappointed expectations and, eventually, an AI winter. They can be seen as ancestors of today's rule-based decision software.",
  "gl.uzmanlar-karisimi.def": {
   "h": "12423d2334",
   "en": "An architecture in which a model consists of many sub-networks (experts) and only a few of them run for each input. It makes it possible to run large models at lower compute cost."
@@ -2379,6 +2496,15 @@
   "h": "2ae0a07c8e",
   "en": "Neural networks are the building blocks of deep learning and, by extension, of today's language, image and audio models. What we call a model's \"parameter count\" is the number of weights in this network."
  },
+ "gl.yapay-super-zeka.def": "A theoretical level of AI that would far surpass human intelligence in nearly every field, including scientific creativity and general reasoning. No such system exists today.",
+ "gl.yapay-super-zeka.example": "A single system that designs new drugs, solves physics problems and runs a company far better than the best human experts would count as ASI, but for now that remains science fiction.",
+ "gl.yapay-super-zeka.faq.0.a": "AGI describes a system that can do a broad range of tasks at a human level. Superintelligence would go beyond that level and be far more capable than any human.",
+ "gl.yapay-super-zeka.faq.0.q": "What is the difference between superintelligence and artificial general intelligence (AGI)?",
+ "gl.yapay-super-zeka.faq.1.a": "Nobody knows. Experts' estimates range from several decades to never, so anyone offering a firm timeline deserves some skepticism.",
+ "gl.yapay-super-zeka.faq.1.q": "When will artificial superintelligence arrive?",
+ "gl.yapay-super-zeka.how": "Since superintelligence is still hypothetical, how it would work is not settled; the discussion usually treats it as a stage after artificial general intelligence. One scenario goes like this: a system that reaches human level improves its own design, the improved system does so even faster, and progress quickly leaves humans behind. Other researchers consider such a rapid leap unlikely and expect progress to be slow, gradual, or held back by limits in hardware, data and energy.",
+ "gl.yapay-super-zeka.term": "Artificial superintelligence (ASI)",
+ "gl.yapay-super-zeka.why": "Superintelligence sits at the center of debates about AI safety and alignment. Some people regard it as a serious long-term risk that warrants precautions today; others think the focus distracts from present-day problems such as bias and effects on jobs. Knowing this divide helps when reading news claims about it.",
  "gl.yapay-zeka-ajani.def": {
   "h": "92b6ce3c6a",
   "en": "An AI system that carries out a given goal by planning the steps itself and using tools, such as searching the web, filling in forms or running code."
@@ -2415,6 +2541,15 @@
   "h": "d9a979e3b7",
   "en": "Agents turn AI from an assistant that only answers questions into a colleague that does work on the user's behalf. They are spreading quickly in areas such as shopping, appointment booking, software development and customer service, and questions about security and accountability come with them."
  },
+ "gl.yapay-zeka-kisi.def": "A period in which unmet, overblown expectations cause interest, investment and research funding for AI to drop sharply. The term describes the boom-and-bust pattern in the field's history.",
+ "gl.yapay-zeka-kisi.example": "In the 1980s, companies selling expert systems and firms building specialized AI computers such as Lisp machines lost customers and saw their market shrink as cheaper general-purpose computers rose.",
+ "gl.yapay-zeka-kisi.faq.0.a": "People usually speak of two major ones, in the 1970s and in the late 1980s. Historians do not agree on their exact boundaries, and smaller downturns are also mentioned.",
+ "gl.yapay-zeka-kisi.faq.0.q": "How many AI winters have there been?",
+ "gl.yapay-zeka-kisi.faq.1.a": "Nobody can say for sure. Some commentators think inflated expectations could cause another letdown; others argue that real, widespread use of today's technology makes this period unlike the earlier ones.",
+ "gl.yapay-zeka-kisi.faq.1.q": "Will there be another AI winter?",
+ "gl.yapay-zeka-kisi.how": "The cycle tends to run the same way: a new method brings big promises, money flows in, results fall short of expectations, disappointment sets in and funding is cut. History usually points to two major winters: roughly the 1970s, and the stretch from the late 1980s into the early 1990s. In the second, the collapse of the expert system market and of the market for specialized hardware played a part. Research never stopped completely during these winters; many ideas kept developing in a quieter climate.",
+ "gl.yapay-zeka-kisi.term": "AI winter",
+ "gl.yapay-zeka-kisi.why": "The term often comes up when today's wave of AI investment is discussed. One view holds that inflated expectations could lead to another downturn; another says things are different now because today's systems are actually used by large numbers of people. History cannot predict the future, but it is a useful reminder about managing expectations.",
  "gl.yapay-zeka-onyargisi.def": {
   "h": "332377620e",
   "en": "When an AI system systematically produces erroneous or unfair results against certain people or groups. It mostly stems from imbalances in the training data."
@@ -2487,6 +2622,15 @@
   "h": "4a64907c9a",
   "en": "It is changing the way business is done in nearly every sector, from search engines to banking, healthcare to advertising. Alongside opportunities such as productivity gains, new products and a transformation of the labor market, it brings risks such as misinformation, privacy and security; for this reason, governments are drafting laws to regulate AI."
  },
+ "gl.yari-denetimli-ogrenme.def": "A machine learning approach that trains a model using a small amount of labeled data together with a large amount of unlabeled data. It sits between supervised and unsupervised learning.",
+ "gl.yari-denetimli-ogrenme.example": "A hospital might have radiologists label only a few hundred X-rays, then add thousands of unlabeled X-rays to training in the hope of getting a better model.",
+ "gl.yari-denetimli-ogrenme.faq.0.a": "Semi-supervised learning has at least a few labeled examples, and the model learns its target from them. Unsupervised learning has no labels at all.",
+ "gl.yari-denetimli-ogrenme.faq.0.q": "What is the difference between semi-supervised and unsupervised learning?",
+ "gl.yari-denetimli-ogrenme.faq.1.a": "No. If its assumptions fail, for example if the unlabeled data differs from the labeled data, results can get worse, so the method is not helpful for every problem.",
+ "gl.yari-denetimli-ogrenme.faq.1.q": "Does semi-supervised learning always give better results?",
+ "gl.yari-denetimli-ogrenme.how": "The process starts with an initial model trained on a small labeled set. The structure of the unlabeled data then comes into play, drawing on assumptions such as the tendency of similar examples to share the same label. In one common method, the model makes predictions on unlabeled examples, treats the ones it is confident about as provisional labels, and retrains itself on the enlarged dataset. This lets most of the costly labeling work be skipped.",
+ "gl.yari-denetimli-ogrenme.term": "Semi-supervised learning",
+ "gl.yari-denetimli-ogrenme.why": "Producing labels often takes expert effort; for instance, only doctors can label medical images correctly. Semi-supervised learning promises to cut that cost. Still, if a model treats its own wrong predictions as labels, errors can reinforce themselves, so careful validation is needed.",
  "gl.zincirleme-dusunce.def": {
   "h": "1f1b48af06",
   "en": "A model reasoning by writing out intermediate steps in order instead of jumping straight to a conclusion. It improves accuracy on math and logic questions."
