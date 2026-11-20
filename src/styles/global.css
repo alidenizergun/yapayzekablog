@@ -953,3 +953,16 @@ img.thumb { color: transparent; font-size: 0; }
 .sector-links li { padding: 12px 14px; border: 1px solid var(--line); border-radius: 8px; }
 .sector .tool-grid { margin-top: 16px; }
 .sector-others { margin-top: 36px; }
+
+/* İç bağlantı: "Konuyu derinlemesine okuyun" kutusu ve ana sayfa sektör şeridi */
+.more-box { margin: 28px 0 0; padding: 16px 20px; border: 1px solid var(--line); border-left: 4px solid var(--accent); border-radius: 8px; }
+.more-box h2 { font-size: 18px; margin: 0 0 8px; }
+.more-box ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 8px; }
+.more-box li { display: flex; gap: 10px; align-items: baseline; flex-wrap: wrap; }
+.more-kind { font: 700 11px/1 var(--display); letter-spacing: .06em; text-transform: uppercase; color: var(--accent-text); min-width: 92px; }
+.sector-strip { margin: 40px 0 8px; }
+.sector-strip ul { list-style: none; padding: 0; margin: 12px 0 0; display: flex; flex-wrap: wrap; gap: 10px; }
+.sector-strip a { display: inline-block; padding: 10px 16px; border: 1px solid var(--line); border-radius: 999px; text-decoration: none; font-weight: 600; min-height: 44px; box-sizing: border-box; }
+.sector-strip a:hover { border-color: var(--fg); }
+.more-box a { text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; }
+@media (max-width: 520px) { .more-box li { flex-direction: column; gap: 4px; } }

@@ -5,6 +5,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { GLOSSARY } from '../src/lib/glossary.js';
+import { TOOLS } from '../src/lib/tools.js';
 
 const MAX_PER_PAGE = 6;
 const lower = (s) => s.toLocaleLowerCase('tr');
@@ -68,6 +69,40 @@ export function linkGlossary(html, base = '') {
   return { html: html.slice(0, start) + parts.join('') + html.slice(end), n };
 }
 
+// Araç adları: haber ve rehber metninde bir aracın ilk geçtiği yer /arac/<slug>/ sayfasına bağlanır (sayfa başına en fazla 3).
+const MAX_TOOLS = 3;
+const TOOL_RES = TOOLS.map((t) => ({ t, re: new RegExp(t.match ? t.match.source : t.name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), t.match?.flags?.replace('g', '') || '') }));
+export function linkTools(html, base = '') {
+  const start = html.indexOf('<div class="prose">');
+  if (start === -1) return { html, n: 0 };
+  const end = html.indexOf('</div>', start);
+  const parts = html.slice(start, end).split(/(<[^>]+>)/);
+  const used = new Set();
+  let skip = 0, n = 0;
+  for (let k = 0; k < parts.length && n < MAX_TOOLS; k++) {
+    const p = parts[k];
+    if (p.startsWith('<')) {
+      if (/^<(a|h[1-6]|code|pre)\b/i.test(p)) skip++;
+      else if (/^<\/(a|h[1-6]|code|pre)>/i.test(p)) skip = Math.max(0, skip - 1);
+      continue;
+    }
+    if (skip || !p.trim()) continue;
+    const hits = TOOL_RES.filter(({ t }) => !used.has(t.slug)).map(({ t, re }) => {
+      const m = re.exec(p);
+      if (!m || isLetter(p[m.index - 1]) || isLetter(p[m.index + m[0].length])) return null;
+      return { t, at: [m.index, m.index + m[0].length] };
+    }).filter(Boolean).sort((a, b) => a.at[0] - b.at[0] || b.at[1] - a.at[1]);
+    let out = '', cursor = 0;
+    for (const { t, at } of hits) {
+      if (n >= MAX_TOOLS || at[0] < cursor) continue;
+      out += p.slice(cursor, at[0]) + `<a class="tool-link" href="${base}/arac/${t.slug}/">${p.slice(at[0], at[1])}</a>`;
+      cursor = at[1]; used.add(t.slug); n++;
+    }
+    parts[k] = out + p.slice(cursor);
+  }
+  return { html: html.slice(0, start) + parts.join('') + html.slice(end), n };
+}
+
 export default function glossaryLinks() {
   return {
     name: 'glossary-links',
@@ -75,7 +110,7 @@ export default function glossaryLinks() {
       'astro:build:done': ({ dir, logger }) => {
         const root = fileURLToPath(dir);
         const base = (process.env.BASE_PATH || '').replace(/\/$/, '');
-        let pages = 0, links = 0;
+        let pages = 0, links = 0, toolLinks = 0;
         // Haberler ve rehberler
         const files = ['haber', 'rehber'].flatMap((d) => {
           const hdir = path.join(root, d);
@@ -84,9 +119,10 @@ export default function glossaryLinks() {
         for (const f of files) {
           if (!fs.existsSync(f)) continue;
           const r = linkGlossary(fs.readFileSync(f, 'utf8'), base);
-          if (r.n) { fs.writeFileSync(f, r.html); pages++; links += r.n; }
+          const t = linkTools(r.html, base);
+          if (r.n || t.n) { fs.writeFileSync(f, t.html); pages++; links += r.n; toolLinks += t.n; }
         }
-        logger.info(`sözlük bağlantıları: ${links} bağlantı, ${pages} haber`);
+        logger.info(`sözlük bağlantıları: ${links}, araç bağlantıları: ${toolLinks} (${pages} sayfa)`);
       },
     },
   };

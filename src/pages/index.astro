@@ -5,6 +5,8 @@ import Sidebar from '../components/Sidebar.astro';
 import Time from '../components/Time.astro';
 import Visual from '../components/Visual.astro';
 import { CATEGORIES } from '../lib/site.js';
+import { SECTORS } from '../lib/sectors.js';
+import { getCollection } from 'astro:content';
 import { i18n, locNewsList } from '../i18n/index.js';
 import { getNews, pickLead, getTags, tagSlug, newsUrl, spreadVisuals, catName, catUrl, tagUrl, url, HOME_MAIN } from '../lib/news.js';
 
@@ -34,6 +36,9 @@ const trending = lang === 'en' ? [] : [...tagCount.entries()].filter(([, c]) => 
 
 // Kategori blokları: son 30 günde en az 3 gösterilmemiş haberi olan kategoriler (1 büyük + 2-3 küçük), en yeni haberine göre
 const monthAgo = Date.now() - 30 * 86400e3;
+// İş kolları şeridi (yalnızca rehberi olan sektörler)
+const sectorSet = new Set((await getCollection('rehberler', (g) => !g.data.draft && g.data.sector)).map((g) => g.data.sector));
+const liveSectors = SECTORS.filter((s) => sectorSet.has(s.slug));
 const blocks = CATEGORIES.map((c) => ({
   cat: c,
   items: news.filter((n) => n.data.category === c.slug && n.data.date.valueOf() > monthAgo && !shown.has(n.id)).slice(0, 4),
@@ -103,6 +108,13 @@ const listV = spreadVisuals(latest);
         </section>
         <Sidebar exclude={[...shown]} />
       </div>
+
+      {liveSectors.length > 0 && (
+        <section class="sector-strip" aria-labelledby="sec-h">
+          <div class="sechead"><h2 id="sec-h">{T('İş kollarında yapay zeka', 'AI by industry')}</h2><a class="more-link" href={url('/sektor/')}>{T('Tümü →', 'All →')}</a></div>
+          <ul>{liveSectors.map((s) => <li><a href={url(`/sektor/${s.slug}/`)}>{lang === 'en' ? s.en.title : s.title}</a></li>)}</ul>
+        </section>
+      )}
 
       {blocks.map((b) => {
         const v = spreadVisuals(b.items, { largeFirst: true });

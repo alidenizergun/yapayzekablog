@@ -2,7 +2,8 @@
 import Base from '../../layouts/Base.astro';
 import NewsRow from '../../components/NewsRow.astro';
 import Sidebar from '../../components/Sidebar.astro';
-import { getTags, spreadVisuals } from '../../lib/news.js';
+import { getTags, spreadVisuals, url } from '../../lib/news.js';
+import { ENTITIES } from '../../lib/entities.js';
 
 export async function getStaticPaths() {
   const tags = await getTags();
@@ -15,6 +16,9 @@ const rowV = spreadVisuals(items);
 const human = tag.name.replace(/(\p{Ll})(\p{Lu})/gu, '$1 $2').replace(/(\p{Lu})(\p{Lu}\p{Ll})/gu, '$1 $2');
 const keep = /^(OpenAI|ChatGPT|DeepSeek|HuggingFace|GitHub|DeepMind|xAI)$/;
 const label = keep.test(tag.name) ? tag.name : human;
+// Şirket ve kişi etiketlerinin asıl sayfası /konu/<slug>/: etiket sayfası arama dışında kalır ve oraya yönlendirir
+const norm = (s) => String(s).toLocaleLowerCase('tr').replace(/[^\p{L}\p{N}]/gu, '');
+const entity = ENTITIES.find((e) => e.slug === tag.slug || norm(e.name) === norm(tag.name));
 const desc = `${label} ile ilgili ${items.length} yapay zeka haberi. Son gelişme: ${items[0]?.data.title ?? ''}`;
 ---
 <Base
@@ -22,12 +26,13 @@ const desc = `${label} ile ilgili ${items.length} yapay zeka haberi. Son gelişm
   description={desc}
   breadcrumbs={[{ name: 'Ana sayfa', path: '/' }, { name: `${label} haberleri`, path: `/etiket/${tag.slug}/` }]}
   jsonLd={{ '@type': 'CollectionPage', name: `${label} haberleri`, inLanguage: 'tr-TR' }}
-  noindex={items.length < 2}
+  noindex={items.length < 3 || Boolean(entity)}
 >
   <div class="cols" style="margin-top:0">
     <section class="main" aria-labelledby="h">
       <div class="sechead"><h1 id="h" class="page-h">#{tag.name}</h1><span class="meta">{items.length} haber</span></div>
-      {items.map((n) => <NewsRow item={n} choice={rowV.get(n.id)} />)}
+      {entity && <p class="cat-intro">{entity.name} hakkındaki tüm haberler, profil ve zaman çizelgesi için <a href={url(`/konu/${entity.slug}/`)}>{entity.name} sayfasına</a> bakın.</p>}
+      {items.map((n) => <NewsRow item={n} choice={rowV.get(n.id)} level={2} />)}
     </section>
     <Sidebar exclude={items.map((n) => n.id)} />
   </div>

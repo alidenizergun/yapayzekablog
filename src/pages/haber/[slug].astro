@@ -10,7 +10,10 @@ import { brandOf } from '../../lib/brands.js';
 import { entitiesOf } from '../../lib/entities.js';
 import { storyOf, storyIndex } from '../../lib/stories.js';
 import Visual from '../../components/Visual.astro';
-import { i18n, locNews, locNewsList } from '../../i18n/index.js';
+import { i18n, locNews, locNewsList, locGuide } from '../../i18n/index.js';
+import { getCollection } from 'astro:content';
+import { moreFor } from '../../lib/related.js';
+import { toolBySlug, compareSlug, vsTr } from '../../lib/tools.js';
 
 export async function getStaticPaths() {
   const news = await getNews();
@@ -36,6 +39,21 @@ const related = all
 const relV = spreadVisuals([entry, ...related]);
 const main = defaultVisual(entry, true);
 const ents = entitiesOf(entry);
+// Daha fazlası: haberden kalıcı sayfalara (sektör, rehber, karşılaştırma, takipçi) bağlantı. Eşleştirme Türkçe metinle.
+const trGuides = await getCollection('rehberler', (g) => !g.data.draft);
+const more = moreFor(Astro.props.entry, trGuides);
+const moreGuides = more.guides.map((g) => locGuide(g, lang, L.m)).filter(Boolean);
+const moreLinks = [
+  ...(more.sector ? [{ href: u(`/sektor/${more.sector.slug}/`), label: lang === 'en' ? more.sector.en.title : more.sector.title, kind: T('Sektör', 'Industry') }] : []),
+  ...moreGuides.map((g) => ({ href: u(`/rehber/${g.id}/`), label: g.data.title, kind: T('Rehber', 'Guide') })),
+  ...(more.comparison ? [{ href: u(`/karsilastir/${compareSlug(more.comparison[0], more.comparison[1])}/`), label: T(vsTr(toolBySlug(more.comparison[0]), toolBySlug(more.comparison[1])), `${toolBySlug(more.comparison[0]).name} vs ${toolBySlug(more.comparison[1]).name}`), kind: T('Karşılaştırma', 'Comparison') }] : []),
+  ...(more.deal ? [{ href: u('/yatirimlar/'), label: T('Yapay zeka yatırımları ve satın almaları', 'AI funding and acquisitions tracker'), kind: T('Takipçi', 'Tracker') }] : []),
+  ...(more.report ? [{ href: u('/raporlar/'), label: T('Yapay zeka raporlarından öne çıkanlar', 'Key findings from AI reports'), kind: T('Raporlar', 'Reports') }] : []),
+].slice(0, 5);
+// Etiketler: "Bu haberde" bölümünde zaten bağlanan şirket ve kişileri tekrar etiket olarak gösterme
+const norm = (s) => String(s).toLocaleLowerCase('tr').replace(/[^\p{L}\p{N}]/gu, '');
+const entNames = new Set(ents.map((e) => norm(e.name)));
+const tags = d.tags.filter((t) => !entNames.has(norm(t)));
 const story = storyOf(entry);
 const storyItems = story ? storyIndex(all).get(story.slug)?.items ?? [] : [];
 const og = ogImageFor(entry);
@@ -161,6 +179,13 @@ const crumbs = [{ name: 'Ana sayfa', path: '/' }, { name: cat, path: `/kategori/
         </aside>
       )}
 
+      {moreLinks.length > 0 && (
+        <aside class="more-box" aria-labelledby="more-h" data-pagefind-ignore>
+          <h2 id="more-h">{T('Konuyu derinlemesine okuyun', 'Go deeper')}</h2>
+          <ul>{moreLinks.map((m) => <li><span class="more-kind">{m.kind}</span><a href={m.href}>{m.label}</a></li>)}</ul>
+        </aside>
+      )}
+
       <section class="sources" aria-labelledby="src-h" data-pagefind-ignore>
         <h2 id="src-h">{T('Kaynaklar', 'Sources')}</h2>
         <ol>
@@ -182,7 +207,7 @@ const crumbs = [{ name: 'Ana sayfa', path: '/' }, { name: cat, path: `/kategori/
           {ents.map((e) => <a class="tag" href={u(`/konu/${e.slug}/`)}>{e.name}</a>)}
         </nav>
       )}
-      {lang === 'tr' && d.tags.length > 0 && <div class="atags" data-pagefind-ignore>{d.tags.map((t) => <a class="tag" href={tagUrl(t)}>#{t}</a>)}</div>}
+      {lang === 'tr' && tags.length > 0 && <div class="atags" data-pagefind-ignore>{tags.map((t) => <a class="tag" href={tagUrl(t)}>#{t}</a>)}</div>}
 
       {related.length > 0 && (
         <section class="related" aria-labelledby="rel-h" data-pagefind-ignore>

@@ -23,7 +23,11 @@ const entity = t.entity && ENTITIES.find((e) => e.slug === t.entity);
 const alts = t.alts.map(toolBySlug).filter(Boolean);
 const tasks = TASKS.filter((k) => k.picks.some(([p]) => p === t.slug)).slice(0, 5).map((k) => locTask(k, lang));
 const comps = COMPARISONS.filter(([a, b]) => a === t.slug || b === t.slug);
-const guides = (await getCollection('rehberler', (g) => !g.data.draft)).filter((g) => tasks.some((k) => k.guide === g.id)).map((g) => locGuide(g, lang, L.m)).filter(Boolean).slice(0, 3);
+const toolRe = Astro.props.t.match ? new RegExp(Astro.props.t.match.source, Astro.props.t.match.flags.replace('g', '')) : null;
+const guides = (await getCollection('rehberler', (g) => !g.data.draft))
+  .map((g) => ({ g, s: (tasks.some((k) => k.guide === g.id) ? 3 : 0) + (toolRe && toolRe.test(`${g.data.title} ${g.data.description}`) ? 2 : 0) + (toolRe && toolRe.test(g.body) ? 1 : 0) }))
+  .filter((x) => x.s > 0).sort((a, b) => b.s - a.s || a.g.id.localeCompare(b.g.id))
+  .map((x) => locGuide(x.g, lang, L.m)).filter(Boolean).slice(0, 5);
 const related = locNewsList((await getNews()).filter((n) => newsAbout(t, n)), lang, L.m).slice(0, 5);
 const rowV = spreadVisuals(related);
 const p = t.price;

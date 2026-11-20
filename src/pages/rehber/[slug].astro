@@ -29,11 +29,13 @@ const sources = d.sources ?? [];
 const terms0 = d.terms.map((s) => GLOSSARY.find((t) => t.slug === s)).filter(Boolean);
 const terms = terms0.map((t) => locTerm(t, LONG[t.slug], lang));
 // Diğer rehberler: önce aynı konu grubu, sonra ortak terimi olanlar
-const score = (o) => (o.data.topic === d.topic ? 2 : 0) + o.data.terms.filter((t) => d.terms.includes(t)).length;
+const score = (o) => (d.sector && o.data.sector === d.sector ? 5 : 0) + (o.data.topic === d.topic ? 2 : 0) + o.data.terms.filter((t) => d.terms.includes(t)).length;
 const others = all.filter((x) => x.id !== g.id).sort((a, b) => score(b) - score(a)).slice(0, 5);
 const toc = headings.filter((h) => h.depth === 2);
 // İlgili haberler: rehberin terimlerinden biri geçen son haberler
-const related = terms0.length ? locNewsList((await getNews()).filter((n) => terms0.some((t) => find(`${n.data.title} ${n.data.spot} ${n.body}`, t))), lang, L.m).slice(0, 4) : [];
+// Sektör rehberlerinde: o sektörün konularına dair haberler
+const newsMatch = sector ? (n) => sector.newsRe.test(`${n.data.title} ${n.data.spot} ${(n.data.tags || []).join(' ')}`) : (n) => terms0.some((t) => find(`${n.data.title} ${n.data.spot} ${n.body}`, t));
+const related = sector || terms0.length ? locNewsList((await getNews()).filter(newsMatch), lang, L.m).slice(0, 4) : [];
 const rowV = spreadVisuals(related);
 const minutes = readingMinutes(g.body || '');
 // "## 1. Başlık" biçimindeki bölümler adım sayılır → HowTo
