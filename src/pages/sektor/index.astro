@@ -8,7 +8,7 @@ const L = await i18n(Astro);
 const { lang, T } = L;
 const EN = lang === 'en';
 const guides = (await getCollection('rehberler', (g) => !g.data.draft && g.data.sector)).map((g) => locGuide(g, lang, L.m)).filter(Boolean);
-const sectors = SECTORS.map((s) => ({ ...s, items: guides.filter((g) => g.data.sector === s.slug) })).filter((s) => s.items.length);
+const sectors = SECTORS.map((s) => { const order = new Map(s.topics.map((t, i) => [t.slug, i])); return { ...s, items: guides.filter((g) => g.data.sector === s.slug).sort((a, b) => (order.get(a.id) ?? 99) - (order.get(b.id) ?? 99)) }; }).filter((s) => s.items.length);
 const pageUrl = new URL(url('/sektor/'), Astro.site).href;
 const jsonLd = {
   '@type': 'CollectionPage', name: T('İş kollarında yapay zeka', 'AI by industry'), url: pageUrl, inLanguage: L.locale,
@@ -28,6 +28,7 @@ const jsonLd = {
           <h2><a href={url(`/sektor/${s.slug}/`)}>{EN ? s.en.title : s.title}</a></h2>
           <p>{EN ? s.intro.en : s.intro.tr}</p>
           <ul>{s.items.slice(0, 5).map((g) => <li><a href={url(`/rehber/${g.id}/`)}>{g.data.title}</a></li>)}</ul>
+          {s.items.length > 5 && <a class="more-link" href={url(`/sektor/${s.slug}/`)}>{T(`Tüm ${s.items.length} rehber →`, `All ${s.items.length} guides →`)}</a>}
         </li>
       ))}
     </ul>
