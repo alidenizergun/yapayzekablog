@@ -126,7 +126,7 @@ function validate(x) {
   }
   return e;
 }
-const fixTr = (s) => String(s).replace(/zekâ/g, 'zeka').replace(/Zekâ/g, 'Zeka').trim();
+const fixTr = (s) => String(s).replace(/zekâ/g, 'zeka').replace(/Zekâ/g, 'Zeka').replace(/[“”]/g, '"').replace(/[‘’]/g, "'").trim();
 
 async function main() {
   const all = parseList();

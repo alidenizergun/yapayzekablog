@@ -11,8 +11,8 @@ export const EXTRA = [
   ],
   "cat": "Temel kavramlar",
   "def": "Yalnızca belirli bir görevi ya da sınırlı bir görev kümesini yerine getirmek üzere tasarlanmış yapay zeka türü. Bugün kullanılan yapay zeka sistemlerinin hemen hepsi bu gruba girer.",
-  "how": "Dar yapay zeka sistemi, tek bir işe ait veriyle eğitilir ya da o işe göre hazırlanmış kurallarla çalışır. Yüz tanıma modeli yalnızca görüntülerdeki yüzleri ayırt etmeyi öğrenir; satranç programı yalnızca satranç oynar. Sistem eğitildiği alanın dışına çıkınca başarısı genellikle hızla düşer, çünkü bir alandaki becerisini başka bir alana kendiliğinden aktaracak genel bir kavrayışı yoktur. “Dar” olması zayıf olduğu anlamına gelmez; kendi alanında insanı geride bırakan çok sayıda sistem vardır.",
-  "why": "Haberlerde “yapay zeka” denildiğinde çoğu zaman aslında dar yapay zekadan söz edilir. Bu ayrımı bilmek, bugünkü sistemlerin gücünü ve sınırlarını gerçekçi okumaya yardım eder. Ayrıca genel yapay zeka ve süper zeka tartışmalarındaki iddiaları değerlendirirken bir karşılaştırma noktası sunar.",
+  "how": "Dar yapay zeka sistemi, tek bir işe ait veriyle eğitilir ya da o işe göre hazırlanmış kurallarla çalışır. Yüz tanıma modeli yalnızca görüntülerdeki yüzleri ayırt etmeyi öğrenir; satranç programı yalnızca satranç oynar. Sistem eğitildiği alanın dışına çıkınca başarısı genellikle hızla düşer, çünkü bir alandaki becerisini başka bir alana kendiliğinden aktaracak genel bir kavrayışı yoktur. \"Dar\" olması zayıf olduğu anlamına gelmez; kendi alanında insanı geride bırakan çok sayıda sistem vardır.",
+  "why": "Haberlerde \"yapay zeka\" denildiğinde çoğu zaman aslında dar yapay zekadan söz edilir. Bu ayrımı bilmek, bugünkü sistemlerin gücünü ve sınırlarını gerçekçi okumaya yardım eder. Ayrıca genel yapay zeka ve süper zeka tartışmalarındaki iddiaları değerlendirirken bir karşılaştırma noktası sunar.",
   "example": "Bir e-posta hizmetinin spam filtresi yalnızca gelen iletileri sınıflandırır; aynı sistem çeviri yapamaz, satranç da oynayamaz.",
   "faq": [
    [
@@ -46,7 +46,7 @@ export const EXTRA = [
    ],
    [
     "Yapay süper zeka ne zaman gerçekleşecek?",
-    "Bunu kimse bilmiyor. Uzmanların tahminleri onlarca yıldan “hiçbir zaman”a kadar değişiyor; bu yüzden kesin takvim veren iddialara temkinli yaklaşmak gerekir."
+    "Bunu kimse bilmiyor. Uzmanların tahminleri onlarca yıldan \"hiçbir zaman\"a kadar değişiyor; bu yüzden kesin takvim veren iddialara temkinli yaklaşmak gerekir."
    ]
   ]
  },
@@ -60,9 +60,9 @@ export const EXTRA = [
   ],
   "cat": "Temel kavramlar",
   "def": "Zekayı, insanın okuyabildiği simgeler ve mantık kuralları üzerinden işlem yaparak kurmayı hedefleyen yaklaşım. Veriden öğrenmek yerine açıkça yazılmış bilgi ve kurallara dayanır.",
-  "how": "Bilgi, “bütün kuşların kanadı vardır” ve “serçe bir kuştur” gibi olgu ve kurallar olarak elle yazılır. Bir çıkarım mekanizması bu önermeleri birleştirerek yeni sonuçlara, örneğin “serçenin kanadı vardır” sonucuna ulaşır. Karar süreci adım adım izlenebildiği için sistemin neden o yanıtı verdiği açıklanabilir. Zayıf yanı ise gerçek dünyanın belirsizliği ve istisnalarıdır: her durumu kural olarak yazmak çok zahmetlidir ve sistem öngörülmemiş durumlarda kolayca şaşırır.",
+  "how": "Bilgi, \"bütün kuşların kanadı vardır\" ve \"serçe bir kuştur\" gibi olgu ve kurallar olarak elle yazılır. Bir çıkarım mekanizması bu önermeleri birleştirerek yeni sonuçlara, örneğin \"serçenin kanadı vardır\" sonucuna ulaşır. Karar süreci adım adım izlenebildiği için sistemin neden o yanıtı verdiği açıklanabilir. Zayıf yanı ise gerçek dünyanın belirsizliği ve istisnalarıdır: her durumu kural olarak yazmak çok zahmetlidir ve sistem öngörülmemiş durumlarda kolayca şaşırır.",
   "why": "Yapay zeka araştırmalarında 1950'lerden 1980'lere dek bu yaklaşım ağırlıklı olarak öne çıktı; bugünkü öğrenme tabanlı sistemler ona bir tepki olarak da okunabilir. Sinir ağlarının öne çıktığı günümüzde bile bazı araştırmacılar, mantığın açıklanabilirlik ve güvenilirlik sağlaması nedeniyle iki yaklaşımı birleştirmeye, yani nörosembolik sistemlere yöneliyor.",
-  "example": "Başvuruları “yaş şu sınırın altındaysa ve gelir şu tutarı aşıyorsa onayla” gibi elle yazılmış kurallarla değerlendiren bir kredi yazılımı, sembolik yaklaşımın sade bir örneğidir.",
+  "example": "Başvuruları \"yaş şu sınırın altındaysa ve gelir şu tutarı aşıyorsa onayla\" gibi elle yazılmış kurallarla değerlendiren bir kredi yazılımı, sembolik yaklaşımın sade bir örneğidir.",
   "faq": [
    [
     "Sembolik yapay zeka ile makine öğrenmesi arasındaki fark ne?",
@@ -84,7 +84,7 @@ export const EXTRA = [
   ],
   "cat": "Temel kavramlar",
   "def": "Belirli bir alandaki uzmanın bilgisini kurallar biçiminde saklayıp o alanda soruları yanıtlayan ya da karar önerisi sunan bilgisayar programı. 1970'lerde ve 1980'lerde yaygınlaştı.",
-  "how": "Uzman sistem üç ana parçadan oluşur: kuralların tutulduğu bilgi tabanı, bu kuralları birleştirerek sonuca varan çıkarım motoru ve kullanıcıyla konuşan arayüz. Bilgi mühendisleri uzmanla görüşüp “eğer şu belirti varsa, şu olasılık artar” türünden kurallar yazar. Kullanıcı soruları yanıtladıkça motor uygun kuralları zincirleme çalıştırır ve bir öneri üretir. Çoğu zaman hangi kurallarla o sonuca vardığını da gösterebilir.",
+  "how": "Uzman sistem üç ana parçadan oluşur: kuralların tutulduğu bilgi tabanı, bu kuralları birleştirerek sonuca varan çıkarım motoru ve kullanıcıyla konuşan arayüz. Bilgi mühendisleri uzmanla görüşüp \"eğer şu belirti varsa, şu olasılık artar\" türünden kurallar yazar. Kullanıcı soruları yanıtladıkça motor uygun kuralları zincirleme çalıştırır ve bir öneri üretir. Çoğu zaman hangi kurallarla o sonuca vardığını da gösterebilir.",
   "why": "Uzman sistemler yapay zekanın ilk ciddi ticari uygulamaları oldu ve 1980'lerde şirketlerin bu alana büyük yatırım yapmasını sağladı. Ancak kuralları güncel tutmanın zorluğu ve öngörülmemiş durumlardaki kırılganlık, beklentilerin karşılanmamasına ve ardından yapay zeka kışına katkıda bulundu. Bugünkü kural tabanlı karar yazılımlarının atası sayılabilirler.",
   "example": "1970'lerde Stanford Üniversitesi'nde geliştirilen MYCIN, kan enfeksiyonlarında hangi antibiyotiğin önerileceğini bir kurallar kümesiyle belirlemeye çalışan ünlü bir araştırma prototipiydi.",
   "faq": [
@@ -130,7 +130,7 @@ export const EXTRA = [
   "cat": "Temel kavramlar",
   "def": "Bir problemi çözmek ya da bir işi yapmak için izlenen, adımları açıkça tanımlanmış yöntem. Bilgisayar bağlamında girdiyi sonlu sayıda adımla çıktıya dönüştüren talimatlar dizisi.",
   "how": "Algoritmayı bir yemek tarifine benzetmek mümkün: malzemeler girdi, sıralı adımlar işlem, ortaya çıkan yemek çıktıdır. Aynı problemi çözen birden çok algoritma olabilir; bunlar hız ve bellek kullanımı bakımından birbirinden ayrılır. Yapay zekada öğrenme algoritması, modelin iç ayarlarını veriye bakarak adım adım düzeltir. Eğitim bittiğinde elde edilen şey modeldir; algoritma ise o modeli üreten yöntemdir.",
-  "why": "Haberlerde “algoritma” sözcüğü çoğu zaman öneri sistemleri ya da yapay zeka modelleri için gevşek biçimde kullanılıyor. Algoritmanın ne yaptığını, kimin tasarladığını ve hangi veriyle çalıştığını sormak; şeffaflık, yanlılık ve hesap verebilirlik tartışmalarının temelini oluşturur.",
+  "why": "Haberlerde \"algoritma\" sözcüğü çoğu zaman öneri sistemleri ya da yapay zeka modelleri için gevşek biçimde kullanılıyor. Algoritmanın ne yaptığını, kimin tasarladığını ve hangi veriyle çalıştığını sormak; şeffaflık, yanlılık ve hesap verebilirlik tartışmalarının temelini oluşturur.",
   "example": "Bir harita uygulamasının iki nokta arasında en uygun rotayı bulması ya da bir listeyi küçükten büyüğe sıralayan adımlar, günlük hayattan algoritma örnekleridir.",
   "faq": [
    [
@@ -153,8 +153,8 @@ export const EXTRA = [
   ],
   "cat": "Temel kavramlar",
   "def": "Modelin, kendisine doğru yanıtlar verilmeden, etiketsiz veri içindeki örüntüleri ve grupları kendi başına keşfetmeye çalıştığı makine öğrenmesi yaklaşımı. Örneklerin ne olduğunu söyleyen etiketler yoktur.",
-  "how": "Veride “bu kedi, bu köpek” gibi etiketler bulunmaz; algoritma yalnızca örneklerin birbirine benzerliğine bakar. En yaygın görevler kümeleme (benzer örnekleri gruplama), boyut indirgeme (veriyi daha az değişkenle özetleme) ve sıra dışı örnekleri bulmadır. Kaç grup aranacağı gibi seçimleri çoğunlukla insan yapar, ortaya çıkan grupların ne anlama geldiğini de insan yorumlar. Büyük dil modellerinin ön eğitiminde kullanılan “kendi kendine denetimli öğrenme” ilişkili ama ayrı bir kavramdır.",
-  "why": "Dünyadaki verinin büyük bölümü etiketsizdir ve etiketlemek pahalı, zaman alıcı bir iştir. Denetimsiz yöntemler bu veriden müşteri segmentasyonu, sahtekârlık ya da arıza tespiti gibi işlerde değer üretmeyi sağlar. Öte yandan “doğru yanıt” olmadığı için sonuçların kalitesini ölçmek zordur.",
+  "how": "Veride \"bu kedi, bu köpek\" gibi etiketler bulunmaz; algoritma yalnızca örneklerin birbirine benzerliğine bakar. En yaygın görevler kümeleme (benzer örnekleri gruplama), boyut indirgeme (veriyi daha az değişkenle özetleme) ve sıra dışı örnekleri bulmadır. Kaç grup aranacağı gibi seçimleri çoğunlukla insan yapar, ortaya çıkan grupların ne anlama geldiğini de insan yorumlar. Büyük dil modellerinin ön eğitiminde kullanılan \"kendi kendine denetimli öğrenme\" ilişkili ama ayrı bir kavramdır.",
+  "why": "Dünyadaki verinin büyük bölümü etiketsizdir ve etiketlemek pahalı, zaman alıcı bir iştir. Denetimsiz yöntemler bu veriden müşteri segmentasyonu, sahtekârlık ya da arıza tespiti gibi işlerde değer üretmeyi sağlar. Öte yandan \"doğru yanıt\" olmadığı için sonuçların kalitesini ölçmek zordur.",
   "example": "Bir e-ticaret sitesi, müşterileri alışveriş alışkanlıklarına göre kümelere ayırır; grupların adını sonradan pazarlama ekibi koyar.",
   "faq": [
    [
