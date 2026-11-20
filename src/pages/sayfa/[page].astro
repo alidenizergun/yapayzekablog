@@ -26,7 +26,7 @@ const prev = page === 2 ? url('/') : url(`/sayfa/${page - 1}/`);
 const rowV = spreadVisuals(items);
 ---
 <Base title={T(`Haberler, sayfa ${page}`, `News, page ${page}`)} description={T(`YZ Gündemi yapay zeka haber arşivi, sayfa ${page}: modeller, yatırımlar, regülasyon ve araştırmalar.`, `YZ Gündemi AI news archive, page ${page}: models, funding, regulation and research.`)}>
-  <div class="cols" style="margin-top:0">
+  <div class="cols flush">
     <section class="main" aria-labelledby="h">
       <div class="sechead"><h1 id="h" class="page-h">{T('Tüm haberler', 'All news')}</h1><span class="meta">{T('Sayfa', 'Page')} {page}</span></div>
       {items.map((n) => <NewsRow item={n} choice={rowV.get(n.id)} level={2} />)}

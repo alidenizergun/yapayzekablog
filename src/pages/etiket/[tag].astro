@@ -28,7 +28,7 @@ const desc = `${label} ile ilgili ${items.length} yapay zeka haberi. Son gelişm
   jsonLd={{ '@type': 'CollectionPage', name: `${label} haberleri`, inLanguage: 'tr-TR' }}
   noindex={items.length < 3 || Boolean(entity)}
 >
-  <div class="cols" style="margin-top:0">
+  <div class="cols flush">
     <section class="main" aria-labelledby="h">
       <div class="sechead"><h1 id="h" class="page-h">#{tag.name}</h1><span class="meta">{items.length} haber</span></div>
       {entity && <p class="cat-intro">{entity.name} hakkındaki tüm haberler, profil ve zaman çizelgesi için <a href={url(`/konu/${entity.slug}/`)}>{entity.name} sayfasına</a> bakın.</p>}

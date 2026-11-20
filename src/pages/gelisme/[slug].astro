@@ -32,7 +32,7 @@ const jsonLd = {
 ---
 <Base title={T(`${s.title}: olayların gelişimi`, `${s.title}: timeline`)} description={s.intro} jsonLd={jsonLd}
   breadcrumbs={[{ name: 'Ana sayfa', path: '/' }, { name: T('Gelişen hikâyeler', 'Developing stories'), path: '/gelisme/' }, { name: s.title, path: `/gelisme/${s.slug}/` }]}>
-  <div class="cols" style="margin-top:0">
+  <div class="cols flush">
     <article class="article story" data-pagefind-body data-pagefind-meta={`date:${formatDate(last, false, L.locale)}`}>
       <nav class="crumb" aria-label={T('Konum', 'Breadcrumb')} data-pagefind-ignore><a href={url('/')}>{T('Ana sayfa', 'Home')}</a><span aria-hidden="true">/</span><a href={url('/gelisme/')}>{T('Gelişen hikâyeler', 'Developing stories')}</a></nav>
       <span class="badge" data-pagefind-ignore>{T('Gelişen hikâye', 'Developing story')}</span>

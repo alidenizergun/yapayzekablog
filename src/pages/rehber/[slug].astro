@@ -54,7 +54,7 @@ const jsonLd = [
 <Base title={d.title} description={d.description} jsonLd={jsonLd} ogType="article"
   article={{ published: d.date, modified: d.updated || d.date, section: T('Rehberler', 'Guides'), tags: [] }}
   breadcrumbs={sector ? [{ name: 'Ana sayfa', path: '/' }, { name: T('İş kolları', 'Industries'), path: '/sektor/' }, { name: sectorTitle, path: `/sektor/${sector.slug}/` }, { name: d.title, path: `/rehber/${g.id}/` }] : [{ name: 'Ana sayfa', path: '/' }, { name: T('Rehberler', 'Guides'), path: '/rehber/' }, { name: d.title, path: `/rehber/${g.id}/` }]}>
-  <div class="cols" style="margin-top:0">
+  <div class="cols flush">
     <article class="article term guide" data-pagefind-body data-pagefind-meta={`date:${T('Rehber', 'Guide')}`}>
       <nav class="crumb" aria-label={T('Konum', 'Breadcrumb')} data-pagefind-ignore><a href={url('/')}>{T('Ana sayfa', 'Home')}</a><span aria-hidden="true">/</span>{sector ? <><a href={url('/sektor/')}>{T('İş kolları', 'Industries')}</a><span aria-hidden="true">/</span><a href={url(`/sektor/${sector.slug}/`)}>{sectorTitle}</a></> : <a href={url('/rehber/')}>{T('Rehberler', 'Guides')}</a>}</nav>
       <span class="badge" data-pagefind-ignore>{T('Rehber', 'Guide')} · {sector ? sectorTitle : topic}</span>

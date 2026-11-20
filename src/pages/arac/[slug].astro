@@ -59,7 +59,7 @@ const title = T(`${t.name} nedir, ücretsiz mi, fiyatı ne kadar? Özellikler ve
 ---
 <Base title={title} description={T(`${t.desc.split('. ')[0]}. ${t.name} fiyatları, ücretsiz planı, Türkçe desteği, kimler için uygun olduğu ve alternatifleri.`, `${t.desc.split('. ')[0]}. ${t.name} pricing, free plan, who it's for and alternatives.`).slice(0, 300)}
   jsonLd={jsonLd} breadcrumbs={[{ name: 'Ana sayfa', path: '/' }, { name: T('Yapay zeka araçları', 'AI tools'), path: '/arac/' }, { name: t.name, path: toolUrl(t.slug) }]}>
-  <div class="cols" style="margin-top:0">
+  <div class="cols flush">
     <article class="article term tool-page" data-pagefind-body data-pagefind-meta={`date:${T('Araç', 'Tool')}`}>
       <nav class="crumb" aria-label={T('Konum', 'Breadcrumb')} data-pagefind-ignore><a href={url('/')}>{T('Ana sayfa', 'Home')}</a><span aria-hidden="true">/</span><a href={url('/arac/')}>{T('Yapay zeka araçları', 'AI tools')}</a></nav>
       <span class="badge" data-pagefind-ignore>{t.cats.map((c) => toolCat(c, lang)).join(' · ')}</span>

@@ -17,5 +17,5 @@ export default defineConfig({
   base,
   trailingSlash: 'ignore',
   integrations: [sitemap({ filter: (page) => !page.includes('/hata-bildir') }), contentGuard(), glossaryLinks(), nofollowExternalLinks(), seoPostBuild(), i18nLinks({ site, base }), securityHeaders()],
-  build: { format: 'directory' },
+  build: { format: 'directory', inlineStylesheets: 'never' }, // satır içi <style> yok: CSP style-src 'self'
 });

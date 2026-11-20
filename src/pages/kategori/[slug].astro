@@ -21,7 +21,7 @@ const rowV = spreadVisuals(items);
   noindex={items.length === 0}
   breadcrumbs={[{ name: 'Ana sayfa', path: '/' }, { name, path: `/kategori/${cat.slug}/` }]}
   jsonLd={{ '@type': 'CollectionPage', name: T(`${cat.name}: yapay zeka haberleri`, `AI ${name} news`), inLanguage: L.locale }}>
-  <div class="cols" style="margin-top:0">
+  <div class="cols flush">
     <section class="main" aria-labelledby="h">
       <div class="sechead"><h1 id="h" class="page-h">{name}</h1><span class="meta">{items.length} {T('haber', items.length === 1 ? 'story' : 'stories')}</span></div>
       {intro && <p class="cat-intro">{intro}{cat.links?.length > 0 && <> {cat.links.map((l, i) => <>{i > 0 && ' · '}<a href={url(l.href)}>{S(`cat.${cat.slug}.link.${i}`, l.label)}</a></>)}</>}</p>}

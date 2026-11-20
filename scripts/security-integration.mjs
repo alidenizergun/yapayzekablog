@@ -40,11 +40,15 @@ export default function securityHeaders() {
             hashes.add(`'sha256-${crypto.createHash('sha256').update(code, 'utf8').digest('base64')}'`);
             return m;
           });
+          const styleHashes = new Set();
+          html.replace(/<style[^>]*>([\s\S]*?)<\/style>/gi, (m, css) => { styleHashes.add(`'sha256-${crypto.createHash('sha256').update(css, 'utf8').digest('base64')}'`); return m; });
+          if (/\sstyle="/.test(html)) logger.warn(`satır içi style özniteliği CSP'de engellenir: ${path.relative(root, file)}`);
           const csp = [
             "default-src 'self'",
             // Arama sayfası: Pagefind arama motoru WebAssembly kullanır
             `script-src 'self' ${/pagefind/.test(html) ? "'wasm-unsafe-eval'" : ''} ${ga.script} ${[...hashes].join(' ')}`.replace(/\s+/g, ' ').trim(),
-            "style-src 'self' 'unsafe-inline'",
+            // Satır içi style özniteliği ve <style> kullanılmıyor (marka renkleri /marka-renkleri.css'te); kalan <style> blokları özetle izinli
+            `style-src 'self' ${[...styleHashes].join(' ')}`.trim(),
             `img-src 'self' https://images.unsplash.com data: ${ga.img}`.trim(),
             "font-src 'self'",
             `connect-src 'self' ${ga.connect} ${forms.join(' ')}`.replace(/\s+/g, ' ').trim(),

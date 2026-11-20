@@ -9,13 +9,16 @@ const L = await i18n(Astro);
 const { lang, T } = L;
 const terms = GLOSSARY.map((t) => locTerm(t, LONG[t.slug], lang)).sort((a, b) => a.term.localeCompare(b.term, lang));
 // Alfabe gezinmesi: yalnızca terimi olan harfler
+// Listede tanımın ilk cümlesi (en fazla ~160 karakter); tamamı terim sayfasında
+const short = (d) => { const first = d.split(/(?<=[.!?])\s/)[0]; return first.length <= 170 ? first : first.slice(0, 157).replace(/\s+\S*$/, '') + '…'; };
 const letterOf = (t) => t.term[0].toLocaleUpperCase(lang);
 const letters = [...new Set(terms.map(letterOf))];
 const byCat = GLOSSARY_CATS.map((c) => ({ c, items: terms.filter((t) => t.cat === c) })).filter((g) => g.items.length);
 const pageUrl = new URL(url('/sozluk/'), Astro.site).href;
 const jsonLd = {
   '@type': 'DefinedTermSet', '@id': `${pageUrl}#sozluk`, name: T('Yapay zeka terimleri sözlüğü', 'AI glossary'), inLanguage: L.locale,
-  hasDefinedTerm: terms.map((t) => ({ '@type': 'DefinedTerm', name: t.term, alternateName: lang === 'en' ? undefined : t.en, description: t.def, url: new URL(url(`/sozluk/${t.slug}/`), Astro.site).href, inDefinedTermSet: { '@id': `${pageUrl}#sozluk` } })),
+  // Ayrıntılı DefinedTerm verisi her terimin kendi sayfasında; burada yalnızca ad ve adres (sayfa hafif kalsın)
+  hasDefinedTerm: terms.map((t) => ({ '@type': 'DefinedTerm', name: t.term, url: new URL(url(`/sozluk/${t.slug}/`), Astro.site).href })),
 };
 ---
 <Base title={T('Yapay zeka terimleri sözlüğü', 'AI glossary: key terms explained')} description={T(`Yapay zeka sözlüğü: makine öğrenmesi, derin öğrenme, büyük dil modeli, token, istem, halüsinasyon, deepfake dahil ${terms.length} terimin sade Türkçe açıklaması.`, `AI glossary: plain-English explanations of ${terms.length} terms, from machine learning and LLMs to tokens, prompts, hallucination and deepfakes.`)}
@@ -33,6 +36,11 @@ const jsonLd = {
         </details>
       ))}
     </section>
+    <div class="glossary-search" data-pagefind-ignore>
+      <label for="gl-q">{T('Sözlükte ara', 'Search the glossary')}</label>
+      <input id="gl-q" type="search" autocomplete="off" placeholder={T('ör. token, RAG, halüsinasyon', 'e.g. token, RAG, hallucination')} />
+      <p id="gl-count" class="meta" aria-live="polite"></p>
+    </div>
     <h2 class="ev-h">{T("A'dan Z'ye tüm terimler", 'All terms A to Z')}</h2>
     <nav class="glossary-az" aria-label={T('Harfe göre', 'By letter')} data-pagefind-ignore>
       {letters.map((l) => <a href={`#harf-${l}`}>{l}</a>)}
@@ -42,9 +50,24 @@ const jsonLd = {
         <div class="glossary-item" id={t.slug}>
           {(i === 0 || letterOf(terms[i - 1]) !== letterOf(t)) && <span class="glossary-anchor" id={`harf-${letterOf(t)}`} aria-hidden="true"></span>}
           <dt><a href={url(`/sozluk/${t.slug}/`)}>{t.term}</a> {lang === 'tr' && <span class="glossary-en" lang="en">{t.en}</span>}</dt>
-          <dd>{t.def} <a class="glossary-more" href={url(`/sozluk/${t.slug}/`)}>{T(`Devamı: ${t.term.replace(/\s*\(.*\)$/, '')} nedir? →`, `More: what is ${t.term.replace(/\s*\(.*\)$/, '')}? →`)}</a></dd>
+          <dd>{short(t.def)}</dd>
         </div>
       ))}
     </dl>
   </section>
 </Base>
+<script>
+  // Sözlük içi süzme: yazılan metni terim adında, İngilizcesinde ve tanımda arar
+  const q = document.getElementById('gl-q') as HTMLInputElement | null;
+  const count = document.getElementById('gl-count');
+  const items = [...document.querySelectorAll<HTMLElement>('.glossary-item')];
+  const norm = (s: string) => s.toLocaleLowerCase('tr').replace(/ı/g, 'i').normalize('NFKD').replace(/[\u0300-\u036f]/g, '');
+  const texts = items.map((el) => norm(el.textContent || ''));
+  const lang = document.documentElement.lang;
+  q?.addEventListener('input', () => {
+    const v = norm(q.value.trim());
+    let n = 0;
+    items.forEach((el, i) => { const hit = !v || texts[i].includes(v); el.hidden = !hit; if (hit) n++; });
+    if (count) count.textContent = v ? (lang === 'en' ? `${n} terms found` : `${n} terim bulundu`) : '';
+  });
+</script>

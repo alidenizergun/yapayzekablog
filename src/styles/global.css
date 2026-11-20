@@ -971,3 +971,12 @@ img.thumb { color: transparent; font-size: 0; }
 .sector-strip a:hover { border-color: var(--fg); }
 .more-box a { text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; }
 @media (max-width: 520px) { .more-box li { flex-direction: column; gap: 4px; } }
+
+/* Sözlük araması ve dokunma alanları (WCAG 2.2: en az 24 piksel) */
+.glossary-search { margin-top: 24px; display: grid; gap: 6px; max-width: 520px; }
+.glossary-search label { font-weight: 700; }
+.glossary-search input { font: inherit; font-size: 17px; min-height: 44px; padding: 8px 12px; border: 1px solid var(--line); border-radius: 8px; background: var(--bg); color: var(--fg); }
+.glossary-search .meta { margin: 0; min-height: 1.4em; }
+.tool-card h3 a, .guide-more li a, .entity-links a { display: inline-block; min-height: 24px; padding-block: 2px; }
+.cols.flush { margin-top: 0; }
+.cols.gap-wide { gap: 56px; }

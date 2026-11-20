@@ -29,12 +29,12 @@ const jsonLd = [
 <Base title={T(`${e.name} haberleri`, `${e.name} news and updates`)} description={T(`${e.about} ${e.name} ile ilgili ${items.length} haber.`, `${e.about} ${items.length} stories about ${e.name}.`).slice(0, 300)}
   noindex={items.length < 2} jsonLd={jsonLd}
   breadcrumbs={[{ name: 'Ana sayfa', path: '/' }, { name: T('Şirketler ve kişiler', 'Companies and people'), path: '/konular/' }, { name: e.name, path: `/konu/${e.slug}/` }]}>
-  <div class="cols" style="margin-top:0">
+  <div class="cols flush">
     <section class="main" aria-labelledby="h">
       <nav class="crumb" aria-label={T('Konum', 'Breadcrumb')}><a href={url('/')}>{T('Ana sayfa', 'Home')}</a><span aria-hidden="true">/</span><a href={url('/konular/')}>{T('Şirketler ve kişiler', 'Companies and people')}</a></nav>
       <header class="entity-head">
         {brand ? (
-          <span class:list={["entity-logo brandcard", { wordmark: !brand.path }]} style={`--bl:${brand.onLight};--bd:${brand.onDark}`} role="img" aria-label={T(`${brand.name} logosu`, `${brand.name} logo`)}>
+          <span class:list={["entity-logo brandcard", `b-${e.brand}`, { wordmark: !brand.path }]} role="img" aria-label={T(`${brand.name} logosu`, `${brand.name} logo`)}>
             {brand.path ? <svg viewBox="0 0 24 24" aria-hidden="true"><path d={brand.path} /></svg> : <span class="bn">{brand.name}</span>}
           </span>
         ) : (

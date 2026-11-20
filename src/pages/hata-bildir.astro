@@ -17,7 +17,7 @@ const site = Astro.site;
 const index = Object.fromEntries(news.map((n) => [slugOf(n), { t: n.data.title, u: new URL(u(`/haber/${slugOf(n)}/`), site).href }]));
 ---
 <Base title={T('Hata bildir', 'Report an error')} noindex description={T('Bir haberde hata gördüyseniz bize bildirin; inceleyip düzeltelim.', 'Spotted an error in a story? Tell us and we’ll review and fix it.')}>
-  <div class="cols" style="margin-top:0;gap:56px">
+  <div class="cols flush gap-wide">
     <section class="article report" aria-labelledby="report-h">
       <h1 id="report-h">{T('Hata bildir', 'Report an error')}</h1>
       <p class="spot">{T('Haberlerimiz yapay zeka desteğiyle, belirtilen kaynaklardan derlenir. Yanlış bir bilgi, eksik bir kaynak ya da yazım hatası gördüyseniz bize bildirin. Her bildirimi inceliyoruz; düzeltme gerekirse haber güncellenir.', 'Our stories are compiled with AI assistance from the sources listed. If you see something wrong, a missing source or a typo, let us know. We review every report and update the story if needed. You can write in English.')}</p>

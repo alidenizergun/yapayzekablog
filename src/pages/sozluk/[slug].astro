@@ -47,7 +47,7 @@ const jsonLd = [
 ---
 <Base title={T(`${name} nedir? Yapay zekada ${t.en} ne demek`, `What is ${name}? Meaning and examples in AI`)} description={t.def} jsonLd={jsonLd}
   breadcrumbs={[{ name: 'Ana sayfa', path: '/' }, { name: T('Sözlük', 'Glossary'), path: '/sozluk/' }, { name, path: `/sozluk/${t.slug}/` }]}>
-  <div class="cols" style="margin-top:0">
+  <div class="cols flush">
     <article class="article term" data-pagefind-body data-pagefind-meta={`date:${T('Sözlük', 'Glossary')}`}>
       <nav class="crumb" aria-label={T('Konum', 'Breadcrumb')} data-pagefind-ignore><a href={url('/')}>{T('Ana sayfa', 'Home')}</a><span aria-hidden="true">/</span><a href={url('/sozluk/')}>{T('Sözlük', 'Glossary')}</a></nav>
       <span class="badge" data-pagefind-ignore>{T('Sözlük', 'Glossary')}</span>

@@ -91,7 +91,7 @@ const crumbs = [{ name: 'Ana sayfa', path: '/' }, { name: cat, path: `/kategori/
 ---
 <Base title={d.title} description={d.spot} ogImage={og} ogType="article" currentCat={d.category} jsonLd={jsonLd} breadcrumbs={crumbs}
   article={{ published: d.date, section: cat, tags: lang === 'tr' ? d.tags : [] }}>
-  <div class="cols" style="margin-top:0;gap:56px">
+  <div class="cols flush gap-wide">
     <article class="article" data-pagefind-body data-pagefind-filter={`${T('Kategori', 'Section')}:${cat}`} data-pagefind-meta={`date:${formatDate(d.date, false, L.locale)}`}>
       <nav class="crumb" aria-label={T('Konum', 'Breadcrumb')} data-pagefind-ignore><a href={u('/')}>{T('Ana sayfa', 'Home')}</a><span aria-hidden="true">/</span><a href={u(`/kategori/${d.category}/`)}>{cat}</a></nav>
       <span class="badge" data-pagefind-ignore>{cat}</span>{d.format === 'kisa' && <span class="badge badge-short" data-pagefind-ignore>{T('Kısa not', 'Brief')}</span>}
