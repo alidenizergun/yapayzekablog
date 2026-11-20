@@ -21,7 +21,7 @@ const LIMIT = Number(arg('limit') || process.env.GUIDE_LIMIT || 0);
 const DRY = args.includes('--dry-run');
 const MODEL = process.env.GUIDE_MODEL || 'claude-sonnet-5-5';
 const RESEARCH_MODEL = process.env.RESEARCH_MODEL || 'claude-haiku-5-5';
-const SEARCHES = Number(process.env.GUIDE_SEARCHES || 5);
+const SEARCHES = Number(process.env.GUIDE_SEARCHES || 6);
 const CONCURRENCY = Number(process.env.GUIDE_CONCURRENCY || 4);
 const BATCH_WAIT_MIN = Number(process.env.BATCH_WAIT_MIN || 40);
 const TOPIC_ENUM = ['Temel kullanım', 'Yazı ve içerik', 'İş ve kariyer', 'Eğitim ve öğrenme', 'Güvenlik ve gizlilik', 'Teknik'];
@@ -86,6 +86,7 @@ async function research(anthropic, sector, topic) {
 Kapsam: ${topic.brief}
 
 En fazla ${SEARCHES} arama yap. Okura pratik ve doğru bilgi verecek olgular topla: güncel (2025-2026) gelişmeler, resmi kurum ve şirket kaynakları, araştırma ve raporların rakamları, Türkiye'ye özgü bilgiler. Türkiye ile ilgili bilgiler için Türkçe arama yap.
+Kapsamda örnek, vaka, kurum veya düzenleme adı geçiyorsa bunları özellikle ara ve somut ayrıntıları (tarih, rakam, karar) not et.
 Öncelikli kaynaklar: resmi kurum ve şirket sayfaları, mevzuat, akademik çalışmalar, tanınmış haber kuruluşları. Bülten, derleme sitesi, Substack/Medium yazısı ve forumları kaynak sayma.
 
 Notları maddeler halinde yaz. Her maddenin sonunda dayandığı sayfanın tam adresini parantez içinde ver. Yalnızca aramada GERÇEKTEN gördüğün bilgileri yaz; bulamadığın konuyu "doğrulanamadı" diye belirt, tahmin yürütme.`;
@@ -245,6 +246,12 @@ async function main() {
     saved++; log(`YAZILDI: ${j.sector.slug}/${j.topic.slug} (${words(g.body_markdown)} kelime, ${v.sources.length} kaynak)`);
   }
   rejected.forEach((r) => log(`ELENDİ: ${r}`));
+  // Yazılamayan rehberlere verilmiş site içi bağlantıları düz metne çevir (kırık bağlantı kalmasın)
+  for (const f of fs.readdirSync(OUT_DIR).filter((x) => x.endsWith('.md'))) {
+    const file = path.join(OUT_DIR, f); const md = fs.readFileSync(file, 'utf8');
+    const fixed = md.replace(/\[([^\]]+)\]\(\/rehber\/([a-z0-9-]+)\/\)/g, (m, t, slug) => (fs.existsSync(path.join(OUT_DIR, `${slug}.md`)) ? m : t));
+    if (fixed !== md) { fs.writeFileSync(file, fixed); log(`kırık rehber bağlantısı temizlendi: ${f}`); }
+  }
   const total = tokenCost + searches * 0.01;
   log(`maliyet: $${total.toFixed(2)} (token $${tokenCost.toFixed(2)}, ${searches} arama $${(searches * 0.01).toFixed(2)}) · ${saved} rehber`);
   if (process.env.GITHUB_STEP_SUMMARY) fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY, `### İş kolu rehberleri\n\n- Yazılan: ${saved}\n- Elenen: ${rejected.length}\n${rejected.map((r) => `  - ${r}`).join('\n')}\n- Maliyet: $${total.toFixed(2)}\n`);
