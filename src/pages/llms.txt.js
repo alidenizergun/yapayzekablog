@@ -40,7 +40,7 @@ export async function GET(context) {
     '## Son haberler', '',
     ...news.map((n) => `- [${n.data.title}](${abs(newsUrl(n))}): ${one(n.data.spot)}`), '',
     '## Optional', '',
-    `- [RSS](${abs('/rss.xml')})`, `- [Site haritası](${abs('/sitemap-index.xml')})`, `- [Hakkımızda ve yayın ilkeleri](${abs('/hakkimizda/')})`, `- [Künye](${abs('/kunye/')})`, `- [İş kollarında yapay zeka (hukuk, pazarlama, sağlık, finans, eğitim, e-ticaret, İK, sanayi)](${abs('/sektor/')})`, `- [Düzeltmeler](${abs('/duzeltmeler/')})`, `- [Kullanım koşulları](${abs('/kullanim-kosullari/')})`, '',
+    `- [Site haritası](${abs('/sitemap-index.xml')})`, `- [Hakkımızda ve yayın ilkeleri](${abs('/hakkimizda/')})`, `- [Künye](${abs('/kunye/')})`, `- [İş kollarında yapay zeka (hukuk, pazarlama, sağlık, finans, eğitim, e-ticaret, İK, sanayi)](${abs('/sektor/')})`, `- [Düzeltmeler](${abs('/duzeltmeler/')})`, `- [Kullanım koşulları](${abs('/kullanim-kosullari/')})`, '',
     '## English edition', '',
     `An English edition translated from the Turkish stories is available at ${abs('/en/')}.`, '',
     `- [AI news in English](${abs('/en/')})`,
@@ -51,7 +51,7 @@ export async function GET(context) {
     `- [AI glossary](${abs('/en/glossary/')})`,
     `- [AI research reports](${abs('/en/ai-reports/')})`,
     `- [AI guides](${abs('/en/guides/')})`,
-    `- [English RSS](${abs('/en/rss.xml')})`, '',
+    '',
     ...enNews.map((n) => `- [${n.data.title}](${abs(toEn(`/haber/${slugOf(n)}/`, m))}): ${one(n.data.spot)}`), '',
   ];
   return new Response(lines.join('\n'), { headers: { 'Content-Type': 'text/plain; charset=utf-8' } });

@@ -30,14 +30,12 @@ interface Props {
   article?: { published: Date; modified?: Date; section?: string; tags?: string[] };
   // Konum (breadcrumb) şeması: [{ name, path }]
   breadcrumbs?: { name: string; path: string }[];
-  // Sayfaya özel ek RSS akışı (ör. kategori akışı)
-  feed?: { title: string; path: string };
 }
 const L = await i18n(Astro);
 const { lang, T, alternates, S } = L;
 const SITE_TITLE = T(SITE.title, 'YZ Gündemi · AI News from Turkey and the World');
 const SITE_DESC = T(SITE.description, SITE_DESC_EN);
-const { title, description: rawDescription = SITE_DESC, ogImage, ogType = 'website', currentCat, jsonLd, noindex = false, article, breadcrumbs, feed } = Astro.props;
+const { title, description: rawDescription = SITE_DESC, ogImage, ogType = 'website', currentCat, jsonLd, noindex = false, article, breadcrumbs } = Astro.props;
 // Başlık: "Haber başlığı · YZ Gündemi"; çok uzun başlıklarda (70+) marka eki atılır, arama sonucunda kesilmesin
 const fullTitle = title ? (`${title} · ${SITE.name}`.length > 70 ? title : `${title} · ${SITE.name}`) : SITE_TITLE;
 // Açıklama en fazla 160 karakter, kelime ortasında kesilmez
@@ -186,8 +184,6 @@ const isBreaking = latest && Date.now() - latest.data.date.valueOf() < BREAKING_
   <meta name="theme-color" content="#FFFFFF" media="(prefers-color-scheme: light)" />
   <meta name="theme-color" content="#121212" media="(prefers-color-scheme: dark)" />
   <meta name="format-detection" content="telephone=no" />
-  <link rel="alternate" type="application/rss+xml" title={SITE_TITLE} href={L.u('/rss.xml')} />
-  {feed && <link rel="alternate" type="application/rss+xml" title={feed.title} href={url(feed.path)} />}
   <link rel="preconnect" href="https://images.unsplash.com" crossorigin />
   {altTr && altEn && <link rel="alternate" hreflang="tr" href={altTr} />}
   {altTr && altEn && <link rel="alternate" hreflang="en" href={altEn} />}
@@ -347,7 +343,6 @@ const isBreaking = latest && Date.now() - latest.data.date.valueOf() < BREAKING_
         <h2 class="foot-follow-h">{T('Takip edin', 'Follow us')}</h2>
         <ul class="foot-follow">
           <li><a href="https://www.google.com/preferences/source?q=yzgundemi.com" rel="noopener" target="_blank"><svg viewBox="0 0 24 24" aria-hidden="true" fill="currentColor"><path d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.4l-5.9 3.1 1.2-6.5-4.8-4.6 6.6-.9z"/></svg>{T("Google'da tercih et", 'Prefer on Google')}</a></li>
-          <li><a href={L.u('/rss.xml')}><svg viewBox="0 0 24 24" aria-hidden="true" fill="currentColor"><circle cx="6" cy="18" r="2.2"/><path d="M4 10.5a9.5 9.5 0 0 1 9.5 9.5h-2.7A6.8 6.8 0 0 0 4 13.2zM4 4.5A15.5 15.5 0 0 1 19.5 20h-2.7A12.8 12.8 0 0 0 4 7.2z"/></svg>RSS</a></li>
           {newsletterOn && <li><a href={L.u('/') + '#bulten'}>{T('E-posta bülteni', 'Newsletter')}</a></li>}
           {SITE.social?.x && <li><a href={`https://x.com/${SITE.social.x}`}>X</a></li>}
           {SITE.social?.instagram && <li><a href={`https://www.instagram.com/${SITE.social.instagram}/`}>Instagram</a></li>}

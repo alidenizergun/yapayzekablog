@@ -11,7 +11,6 @@ export const SEG = {
   'yeni-araclar': 'new-ai-tools', 'modeller-karsilastirma': 'ai-model-pricing', akis: 'latest', haftalik: 'weekly', gelisme: 'stories',
   yatirimlar: 'funding-tracker', raporlar: 'ai-reports', etkinlikler: 'events', 'turkiye-yapay-zeka': 'ai-in-turkey', 'yerli-yapay-zeka': 'turkish-ai-models',
   hakkimizda: 'about', gizlilik: 'privacy', 'hata-bildir': 'report-error', kunye: 'masthead', 'kullanim-kosullari': 'terms', duzeltmeler: 'corrections', sektor: 'industries', ara: 'search', sayfa: 'page', konu: 'topic', konular: 'topics',
-  'rss.xml': 'rss.xml',
 };
 export const CAT_EN = { modeller: 'models', ajanlar: 'agents', araclar: 'tools', 'girisim-yatirim': 'startups-funding', regulasyon: 'regulation',
   arastirma: 'research', platformlar: 'platforms', pazarlama: 'marketing', donanim: 'hardware', guvenlik: 'security', turkiye: 'turkey' };

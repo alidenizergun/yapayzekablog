@@ -38,7 +38,6 @@ const latest = all[0]?.data.date;
     <div class="river-status" aria-live="polite">
       {latest && <span>{T('Son güncelleme', 'Last updated')}: <time datetime={latest.toISOString()}>{dayLabel(dayKey(latest))}, {hm(latest)}</time></span>}
       <span class="river-new" data-new-count hidden></span>
-      <a href={url('/rss.xml')}>RSS</a>
     </div>
 
     <div class="deal-filters river-filters" role="group" aria-label={T('Süz', 'Filter')} data-river-filters>
