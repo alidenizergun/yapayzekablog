@@ -103,6 +103,12 @@ Notları maddeler halinde yaz. Her maddenin sonunda dayandığı sayfanın tam a
     }
     stop = res.stop_reason;
     if (res.stop_reason === 'pause_turn') { messages.push({ role: 'assistant', content: res.content }); continue; }
+    // Aramalar token sınırını doldurup not yazılmadıysa: yeni arama yapmadan notları yazmasını iste
+    if (res.stop_reason === 'max_tokens' && !text.trim() && seen.size) {
+      messages.push({ role: 'assistant', content: res.content.filter((b) => b.type !== 'text' || b.text.trim()) });
+      messages.push({ role: 'user', content: 'Yeni arama yapma. Şimdiye kadar bulduklarını kurallara uygun notlar halinde yaz; her maddenin sonunda kaynak adresini ver.' });
+      continue;
+    }
     break;
   }
   return { notes: text.trim(), seen, stop };
