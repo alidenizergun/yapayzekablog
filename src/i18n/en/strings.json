@@ -255,6 +255,278 @@
   "h": "90b323a3fa",
   "en": "Both generate video from text and images. Runway stands out for its video editing tools and creative workflows, Kling for realistic motion generation. Both run on a credit system, so estimate costs in advance for long videos."
  },
+ "course.btk-akademi.desc": {
+  "h": "c29997de08",
+  "en": "The state's free training platform. It offers numerous Turkish-language AI courses, from machine learning fundamentals to large language models, computer vision, AI agent development and using tools such as Gemini, Claude and Perplexity."
+ },
+ "course.btk-akademi.format": {
+  "h": "51a1f58ff3",
+  "en": "Online, self-paced"
+ },
+ "course.btk-akademi.name": {
+  "h": "71b84284a3",
+  "en": "BTK Akademi AI Courses"
+ },
+ "course.btk-akademi.who": {
+  "h": "859c9dd1bb",
+  "en": "Anyone seeking Turkish-language training and a certified starting point"
+ },
+ "course.claude-academy.desc": {
+  "h": "9c10ce9c96",
+  "en": "Anthropic's 28 free courses, ranging from Claude 101 and AI fluency to building applications with Claude Code, the Model Context Protocol and the Claude API. Completers receive a verifiable badge."
+ },
+ "course.claude-academy.format": {
+  "h": "51a1f58ff3",
+  "en": "Online, self-paced"
+ },
+ "course.claude-academy.name": {
+  "h": "cd198bfe7d",
+  "en": "Claude Academy"
+ },
+ "course.claude-academy.who": {
+  "h": "9ff23d02a2",
+  "en": "Claude users and those who want to develop with Claude"
+ },
+ "course.coursera-plus.desc": {
+  "h": "c739c4fab9",
+  "en": "Thousands of courses and certificate programs from Google, IBM, DeepLearning.AI and universities, available through a single subscription. Andrew Ng's AI For Everyone and Machine Learning Specialization, among the best-known AI programs, are also included."
+ },
+ "course.coursera-plus.format": {
+  "h": "65a6f87071",
+  "en": "Subscription; university and company programs"
+ },
+ "course.coursera-plus.name": {
+  "h": "37127de73a",
+  "en": "Coursera Plus (AI Programs)"
+ },
+ "course.coursera-plus.priceNote": {
+  "h": "8d1a54bd89",
+  "en": "$59 per month (7-day trial) or $399 per year; $239 per year during the November 2026 campaign."
+ },
+ "course.coursera-plus.who": {
+  "h": "3172f5a3c3",
+  "en": "Those considering completing several certificate programs in sequence"
+ },
+ "course.datacamp.desc": {
+  "h": "cc21b98b45",
+  "en": "Interactive courses and career tracks, from AI literacy to ChatGPT and LLM applications and machine learning with Python, where you learn by writing code in the browser. Part of the interface is available in Turkish."
+ },
+ "course.datacamp.format": {
+  "h": "fece1f7b35",
+  "en": "Interactive lessons in the browser"
+ },
+ "course.datacamp.name": {
+  "h": "545a09efad",
+  "en": "DataCamp"
+ },
+ "course.datacamp.priceNote": {
+  "h": "4aff87479e",
+  "en": "The first lesson of each course is free; all courses, projects and certificates require a Premium subscription."
+ },
+ "course.datacamp.who": {
+  "h": "498ced6079",
+  "en": "Those who want to build data and AI skills step by step through hands-on practice"
+ },
+ "course.deeplearning-ai.desc": {
+  "h": "40160bdd8e",
+  "en": "More than 100 short courses created by DeepLearning.AI, founded by Andrew Ng, in partnership with companies such as OpenAI, Anthropic, Google and Hugging Face, covering prompt writing, RAG, agents, fine-tuning and more. A paid membership option is also available."
+ },
+ "course.deeplearning-ai.format": {
+  "h": "4787aebc9c",
+  "en": "1-2 hour video courses"
+ },
+ "course.deeplearning-ai.name": {
+  "h": "66be6cefc8",
+  "en": "DeepLearning.AI Short Courses"
+ },
+ "course.deeplearning-ai.who": {
+  "h": "d4e073fa69",
+  "en": "Developers who want to quickly learn current AI techniques"
+ },
+ "course.elements-of-ai.desc": {
+  "h": "04fb0b62d9",
+  "en": "One of the best-known introductory courses in the world, explaining what AI is and what it can and cannot do, without requiring math or coding knowledge. It is offered in many European languages."
+ },
+ "course.elements-of-ai.format": {
+  "h": "51a1f58ff3",
+  "en": "Online, self-paced"
+ },
+ "course.elements-of-ai.name": {
+  "h": "25c6fd0a69",
+  "en": "Elements of AI"
+ },
+ "course.elements-of-ai.who": {
+  "h": "6541e0d28a",
+  "en": "People without a technical background who want a solid foundation"
+ },
+ "course.fast-ai.desc": {
+  "h": "608f826396",
+  "en": "A popular free course among programmers that teaches deep learning by practice first and theory second. It progresses through real projects, from image classification to language models."
+ },
+ "course.fast-ai.format": {
+  "h": "56a1f5a445",
+  "en": "Video lessons and notebooks"
+ },
+ "course.fast-ai.name": {
+  "h": "08d37e3e3f",
+  "en": "Practical Deep Learning for Coders"
+ },
+ "course.fast-ai.who": {
+  "h": "142209f015",
+  "en": "Programmers with some Python knowledge who want to get into deep learning"
+ },
+ "course.gelecegi-yazanlar.desc": {
+  "h": "691582c109",
+  "en": "Turkcell's free technology training platform. Its AI and data science bootcamp covers Python, machine learning and generative AI over 10 weeks; applications are accepted once a year."
+ },
+ "course.gelecegi-yazanlar.format": {
+  "h": "ed0b3f79e1",
+  "en": "Online courses and application-based bootcamp"
+ },
+ "course.gelecegi-yazanlar.name": {
+  "h": "e1f2aa77ef",
+  "en": "Turkcell Geleceği Yazanlar"
+ },
+ "course.gelecegi-yazanlar.who": {
+  "h": "b4003025de",
+  "en": "Students and graduates aiming for careers in AI"
+ },
+ "course.google-ai-essentials.desc": {
+  "h": "297d2d79a7",
+  "en": "Google's introductory program on using AI at work, covering prompt writing, AI tools for productivity and responsible use. Completers receive a Google certificate."
+ },
+ "course.google-ai-essentials.format": {
+  "h": "398bf67da0",
+  "en": "Self-paced, about 10 hours"
+ },
+ "course.google-ai-essentials.name": {
+  "h": "4601a3b7d6",
+  "en": "Google AI Essentials"
+ },
+ "course.google-ai-essentials.priceNote": {
+  "h": "31db1c9349",
+  "en": "$49 per month in the US (7-day free trial); pricing varies by country. Financial aid applications are accepted; included in Coursera Plus."
+ },
+ "course.google-ai-essentials.who": {
+  "h": "b199e51e12",
+  "en": "Non-technical employees who want to use AI in their jobs"
+ },
+ "course.herkes-icin-yapay-zeka.desc": {
+  "h": "27416d58b6",
+  "en": "Turkish-language AI literacy content prepared separately for students, small businesses, developers and managers. It includes YouTube video series, guided learning paths and gamified tasks for ages 11-14."
+ },
+ "course.herkes-icin-yapay-zeka.format": {
+  "h": "eb555185e3",
+  "en": "Video lessons and learning paths"
+ },
+ "course.herkes-icin-yapay-zeka.name": {
+  "h": "4ab9bbeba6",
+  "en": "Artificial Intelligence for Everyone"
+ },
+ "course.herkes-icin-yapay-zeka.who": {
+  "h": "db76f3f337",
+  "en": "Beginners to AI, teachers and business owners"
+ },
+ "course.hugging-face.desc": {
+  "h": "aa494be53f",
+  "en": "Open-source courses on large language models (LLM Course), AI agents (Agents Course), diffusion models, computer vision, audio and robotics. They proceed through hands-on code examples."
+ },
+ "course.hugging-face.format": {
+  "h": "44ddc1cb2a",
+  "en": "Online, open-source course notes"
+ },
+ "course.hugging-face.name": {
+  "h": "00730a0fbd",
+  "en": "Hugging Face Courses"
+ },
+ "course.hugging-face.who": {
+  "h": "66df11eb1d",
+  "en": "Python-literate developers who want to work with open-weight models"
+ },
+ "course.kaggle-learn.desc": {
+  "h": "4c785149f7",
+  "en": "Short courses of a few hours each on topics such as Python, introduction to machine learning, deep learning and computer vision. You write code in the browser without any setup, and a completion certificate is issued at the end of each course."
+ },
+ "course.kaggle-learn.format": {
+  "h": "3ec747c47c",
+  "en": "Short, hands-on lessons in the browser"
+ },
+ "course.kaggle-learn.name": {
+  "h": "a39e52b12d",
+  "en": "Kaggle Learn"
+ },
+ "course.kaggle-learn.who": {
+  "h": "5d88e72089",
+  "en": "Those who want to start data science and machine learning through practice"
+ },
+ "course.microsoft-learn.desc": {
+  "h": "6357b8937b",
+  "en": "Free modules and learning paths on using Copilot, the fundamentals of generative AI and building AI solutions on Azure. Preparation content for paid Microsoft certification exams is also available here."
+ },
+ "course.microsoft-learn.format": {
+  "h": "5bdd391cf1",
+  "en": "Online modules"
+ },
+ "course.microsoft-learn.name": {
+  "h": "5dbebc45a9",
+  "en": "Microsoft Learn AI Courses"
+ },
+ "course.microsoft-learn.who": {
+  "h": "cb710e5871",
+  "en": "Employees and developers using Microsoft 365 and Azure"
+ },
+ "course.openai-academy.desc": {
+  "h": "eeefa5dbf5",
+  "en": "OpenAI's free courses: AI foundations for work, agents and workflows, coding with Codex, RAG and AI application development, plus separate programs for managers and educators. A ChatGPT account is all you need to get started."
+ },
+ "course.openai-academy.format": {
+  "h": "51a1f58ff3",
+  "en": "Online, self-paced"
+ },
+ "course.openai-academy.name": {
+  "h": "db17b96853",
+  "en": "OpenAI Academy"
+ },
+ "course.openai-academy.who": {
+  "h": "e7b7055dc6",
+  "en": "ChatGPT users, managers, educators and developers"
+ },
+ "course.udemy.desc": {
+  "h": "3378759e74",
+  "en": "Thousands of AI courses, including in Turkish: ChatGPT for productivity, Midjourney for image generation, and machine learning with Python. Because quality varies from instructor to instructor, check ratings, reviews and the last updated date."
+ },
+ "course.udemy.format": {
+  "h": "a973e3fd42",
+  "en": "Video courses purchased individually"
+ },
+ "course.udemy.name": {
+  "h": "bb985b1e07",
+  "en": "Udemy AI courses"
+ },
+ "course.udemy.priceNote": {
+  "h": "aa170df7e1",
+  "en": "Paid per course; prices vary by instructor and are often discounted."
+ },
+ "course.udemy.who": {
+  "h": "12998da7ec",
+  "en": "Those who want to learn a specific tool in Turkish and through video"
+ },
+ "course.yapay-zeka-teknoloji-akademisi.desc": {
+  "h": "8c3d6cc49d",
+  "en": "A program in AI applications, data science and game development for university students and graduates aged 18-29. Alongside technical training, it offers entrepreneurship courses, hackathons, mentoring and Coursera certificates."
+ },
+ "course.yapay-zeka-teknoloji-akademisi.format": {
+  "h": "a1f33467b8",
+  "en": "Application-based online program"
+ },
+ "course.yapay-zeka-teknoloji-akademisi.name": {
+  "h": "87fb87c192",
+  "en": "Artificial Intelligence and Technology Academy"
+ },
+ "course.yapay-zeka-teknoloji-akademisi.who": {
+  "h": "8d6d4537f2",
+  "en": "University students and recent graduates aged 18-29"
+ },
  "entity.alexandr-wang.about": {
   "h": "83ed14b681",
   "en": "Founder of Scale AI; leads Meta's AI efforts."
