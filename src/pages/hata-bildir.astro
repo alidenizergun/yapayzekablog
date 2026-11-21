@@ -37,9 +37,7 @@ const index = Object.fromEntries(news.map((n) => [slugOf(n), { t: n.data.title, 
         <fieldset class="field">
           <legend>{T('Hatanın türü', 'Type of error')}</legend>
           <div class="choices">
-            <label class="choice"><input type="radio" name="tur" value="Yanlış bilgi" checked /> {T('Yanlış bilgi', 'Incorrect information')}</label>
-            <label class="choice"><input type="radio" name="tur" value="Kaynak sorunu" /> {T('Kaynak eksik veya hatalı', 'Missing or wrong source')}</label>
-            <label class="choice"><input type="radio" name="tur" value="Güncel değil" /> {T('Bilgi güncel değil', 'Out of date')}</label>
+            <label class="choice"><input type="radio" name="tur" value="Bilgi hatası" checked /> {T('Bilgi hatası (yanlış, eski veya kaynaksız)', 'Factual error (wrong, outdated or unsourced)')}</label>
             <label class="choice"><input type="radio" name="tur" value="Yazım veya çeviri" /> {T('Yazım veya çeviri hatası', 'Spelling or translation error')}</label>
             <label class="choice"><input type="radio" name="tur" value="Diğer" /> {T('Diğer', 'Other')}</label>
           </div>

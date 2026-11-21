@@ -2,9 +2,9 @@
 :root {
   --bg: #FFFFFF; --fg: #141414; --muted: #5A5753; --soft: #F4F3F0; --line: #E6E4E0;
   --accent: #CF2E13; --accent-text: #B32610; --accent-fill: #CF2E13; --band: #141414; --band-fg: #FFFFFF; --band-muted: #CFCFCF; --band-accent: #FF7A62; --input: #222222;
-  --display: 'Schibsted Grotesk', 'Helvetica Neue', Arial, system-ui, sans-serif;
-  --serif: 'Source Serif 4', Georgia, 'Times New Roman', serif;
-  --body: Inter, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --display: 'Schibsted Grotesk', 'Schibsted Fallback', 'Helvetica Neue', Arial, system-ui, sans-serif;
+  --serif: 'Source Serif 4', 'Source Serif Fallback', Georgia, 'Times New Roman', serif;
+  --body: Inter, 'Inter Fallback', system-ui, -apple-system, 'Segoe UI', sans-serif;
   --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
   /* Yazı ölçeği: tüm metin boyutları bu adımlardan seçilir (yeni değer eklemeden önce buraya bakın) */
   --fs-xs: 12px;    /* büyük harfli etiketler, rozetler, küçük notlar */
