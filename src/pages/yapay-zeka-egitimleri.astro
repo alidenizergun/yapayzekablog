@@ -1,0 +1,121 @@
+---
+import Base from '../layouts/Base.astro';
+import { COURSES, COURSES_CHECKED, COURSE_LEVELS, PRICE_LABEL } from '../lib/courses.js';
+import { trDate } from '../lib/tools.js';
+import { url } from '../lib/news.js';
+import { i18n, dateL } from '../i18n/index.js';
+const L = await i18n(Astro);
+const { lang, T, S } = L;
+const EN = lang === 'en';
+const LEVEL_EN = { 'Başlangıç': 'Beginner', 'Orta': 'Intermediate', 'İleri': 'Advanced' };
+const PRICE_EN = { ucretsiz: 'Free', kismen: 'Free + paid options', ucretli: 'Paid' };
+const loc = (c) => ({ ...c, name: S(`course.${c.id}.name`, c.name), desc: S(`course.${c.id}.desc`, c.desc), who: S(`course.${c.id}.who`, c.who), format: S(`course.${c.id}.format`, c.format), priceNote: c.priceNote && S(`course.${c.id}.priceNote`, c.priceNote) });
+const all = COURSES.map(loc);
+// Önce Türkçe, sonra seviyeye göre (başlangıçtan ileriye)
+const order = (a, b) => (a.lang === b.lang ? 0 : a.lang === 'tr' ? -1 : 1) || COURSE_LEVELS.indexOf(a.level) - COURSE_LEVELS.indexOf(b.level);
+const groups = [
+  { id: 'ucretsiz', title: T('Ücretsiz eğitimler', 'Free courses'), intro: T('Tamamı ücretsiz; çoğu bitirince belge veya rozet veriyor.', 'Completely free; most give a certificate or badge on completion.'), items: all.filter((c) => c.price === 'ucretsiz').sort(order) },
+  { id: 'ucretli', title: T('Ücretli eğitimler ve abonelikler', 'Paid courses and subscriptions'), intro: T('Bir kısmının ücretsiz bölümü veya denemesi var; ücretli kısmı sertifika ve tam erişim için.', 'Some have a free tier or trial; the paid part is for certificates and full access.'), items: all.filter((c) => c.price !== 'ucretsiz').sort(order) },
+];
+const trCount = all.filter((c) => c.lang === 'tr').length;
+const freeCount = groups[0].items.length;
+const checked = EN ? dateL(COURSES_CHECKED, 'en') : trDate(COURSES_CHECKED);
+const lv = (l) => (EN ? LEVEL_EN[l] ?? l : l);
+const pageUrl = new URL(url('/yapay-zeka-egitimleri/'), Astro.site).href;
+const jsonLd = [
+  { '@type': 'ItemList', name: T('Yapay zeka eğitimleri', 'AI courses'), url: pageUrl, numberOfItems: all.length,
+    itemListElement: [...groups[0].items, ...groups[1].items].map((c, i) => ({ '@type': 'ListItem', position: i + 1,
+      item: { '@type': 'Course', name: c.name, description: c.desc, url: c.url, inLanguage: c.lang, provider: { '@type': 'Organization', name: c.provider },
+        offers: { '@type': 'Offer', category: c.price === 'ucretsiz' ? 'Free' : c.price === 'kismen' ? 'Partially free' : 'Paid', ...(c.price === 'ucretsiz' ? { price: '0', priceCurrency: 'USD' } : {}) },
+        hasCourseInstance: { '@type': 'CourseInstance', courseMode: 'online' } } })) },
+];
+---
+<Base title={T('Yapay zeka eğitimleri: ücretsiz ve ücretli en iyi kurslar (Türkçe dahil)', 'AI courses: the best free and paid AI training')}
+  description={T(`BTK Akademi, Google, Anthropic, OpenAI, Coursera ve diğer platformlardaki ${all.length} yapay zeka eğitimi: ${freeCount} ücretsiz, ${trCount} Türkçe. Seviye, dil ve sertifika bilgisiyle.`, `${all.length} AI courses from BTK Akademi, Google, Anthropic, OpenAI, Coursera and more: ${freeCount} free, with level, language and certificate details.`)}
+  jsonLd={jsonLd} breadcrumbs={[{ name: 'Ana sayfa', path: '/' }, { name: T('Yapay zeka eğitimleri', 'AI courses'), path: '/yapay-zeka-egitimleri/' }]}>
+  <section class="courses hub" data-courses>
+    <header class="hub-head">
+      <span class="cat">{T('Öğren', 'Learn')}</span>
+      <h1 class="page-h">{T('Yapay zeka eğitimleri', 'AI courses')}</h1>
+      <p class="spot">{T('Yapay zekayı öğrenmek için güvenilir platformlardaki eğitimleri derledik: önce ücretsizler, sonra ücretliler. Türkçe olanlar her bölümde başta.', 'Courses from trusted platforms for learning AI: free ones first, then paid. Turkish-language courses come first in each section.')}</p>
+      <p class="hub-meta"><span><strong>{all.length}</strong> {T('eğitim', 'courses')}</span><span><strong>{freeCount}</strong> {T('ücretsiz', 'free')}</span><span><strong>{trCount}</strong> {T('Türkçe', 'in Turkish')}</span><span>{T('Son kontrol', 'Last checked')}: {checked}</span></p>
+    </header>
+
+    <div class="tool-toolbar" role="group" aria-label={T('Eğitimleri süz', 'Filter courses')}>
+      <div class="chip-row scroll-sm">
+        <button type="button" aria-pressed="false" data-cf="lang:tr">{T('Türkçe', 'Turkish')} <span class="meta">{trCount}</span></button>
+        <button type="button" aria-pressed="false" data-cf="cert">{T('Belge veya rozet veriyor', 'Gives a certificate')}</button>
+        {COURSE_LEVELS.map((l) => <button type="button" aria-pressed="false" data-cf={`level:${l}`}>{lv(l)}</button>)}
+      </div>
+      <p class="tb-count" aria-live="polite" data-cf-count></p>
+    </div>
+
+    {groups.map((g) => (
+      <section class="course-group" id={g.id} aria-labelledby={`${g.id}-h`} data-cgroup>
+        <div class="sec-h"><h2 id={`${g.id}-h`}>{g.title} <span class="meta" data-cg-count>{g.items.length}</span></h2></div>
+        <p class="course-intro">{g.intro}</p>
+        <ul class="course-cards">
+          {g.items.map((c) => (
+            <li class="course-card" data-lang={c.lang} data-level={c.level} data-cert={c.cert ? '1' : ''}>
+              <div class="cc-top">
+                <span class={`price-tag price-${c.price}`}>{EN ? PRICE_EN[c.price] : PRICE_LABEL[c.price]}</span>
+                <span class="cc-lang">{c.lang === 'tr' ? T('Türkçe', 'Turkish') : T('İngilizce', 'English')}</span>
+                <span class="cc-lvl">{lv(c.level)}</span>
+              </div>
+              <h3><a href={c.url} rel="noopener">{c.name}</a></h3>
+              <p class="cc-provider">{c.provider}</p>
+              <p class="cc-desc">{c.desc}</p>
+              <dl class="cc-facts">
+                <div><dt>{T('Kimler için', 'Best for')}</dt><dd>{c.who}</dd></div>
+                <div><dt>{T('Biçim', 'Format')}</dt><dd>{c.format}</dd></div>
+                <div><dt>{T('Belge', 'Certificate')}</dt><dd>{c.cert === true ? T('Var', 'Yes') : c.cert === false ? T('Yok', 'No') : T('Doğrulanmadı', 'Not verified')}</dd></div>
+                {c.priceNote && <div><dt>{T('Fiyat', 'Price')}</dt><dd>{c.priceNote}</dd></div>}
+              </dl>
+              <p class="cc-src">{T('Kaynak', 'Source')}: <a href={c.source.url} rel="noopener">{c.source.label}</a> · {EN ? dateL(c.source.checked, 'en') : trDate(c.source.checked)}</p>
+            </li>
+          ))}
+        </ul>
+      </section>
+    ))}
+    <p class="empty" data-cf-empty hidden>{T('Bu ölçütlere uyan eğitim yok.', 'No courses match these filters.')}</p>
+
+    <section class="models-faq" aria-labelledby="ce-h">
+      <h2 id="ce-h">{T('Nereden başlamalı?', 'Where to start')}</h2>
+      <ol class="pr-tips">
+        <li>{T('Hiç bilmiyorsanız: Türkçe bir giriş eğitimiyle (BTK Akademi veya Herkes için Yapay Zeka) temeli kurun.', 'Brand new: build the basics with an introductory course such as Elements of AI.')}</li>
+        <li>{T('İşinizde kullanacaksanız: kullandığınız aracın kendi akademisine (Claude Academy, OpenAI Academy, Microsoft Learn) geçin.', 'Using AI at work: move on to the academy of the tool you use (Claude Academy, OpenAI Academy, Microsoft Learn).')}</li>
+        <li>{T('Geliştirici olacaksanız: DeepLearning.AI kısa kursları, Kaggle Learn ve Hugging Face ile pratik yapın.', 'Becoming a developer: practise with DeepLearning.AI short courses, Kaggle Learn and Hugging Face.')}</li>
+        <li>{T('Sertifika gerekiyorsa: ücretli programlara geçmeden önce ücretsiz rozet veren seçeneklere bakın.', 'Need a certificate? Check the free options that give badges before paying.')}</li>
+      </ol>
+      <p>{T('Kendi kendinize öğrenmek için:', 'Learn on your own:')} <a href={url('/rehber/')}>{T('Rehberler', 'Guides')}</a> · <a href={url('/yapay-zeka-komutlari/')}>{T('Hazır komutlar', 'Prompt library')}</a> · <a href={url('/sozluk/')}>{T('Sözlük', 'Glossary')}</a></p>
+      <p class="ai-note">{T('Fiyat ve erişim koşulları sık değişir; kaydolmadan önce eğitimin kendi sayfasını kontrol edin. Listede yer almak için ödeme alınmaz ve bağlantılar satış ortaklığı bağlantısı değildir.', 'Prices and access terms change often; check each course’s own page before enrolling. No course pays to be listed, and links are not affiliate links.')} <a href={url('/hata-bildir/')}>{T('Eksik veya hatalı bilgi bildirin', 'Report missing or wrong info')}</a></p>
+    </section>
+  </section>
+</Base>
+
+<script>
+  const root = document.querySelector<HTMLElement>('[data-courses]');
+  if (root) {
+    const cards = [...root.querySelectorAll<HTMLElement>('.course-card')];
+    const groups = [...root.querySelectorAll<HTMLElement>('[data-cgroup]')];
+    const count = root.querySelector<HTMLElement>('[data-cf-count]')!;
+    const empty = root.querySelector<HTMLElement>('[data-cf-empty]')!;
+    const active = new Set<string>();
+    const EN = document.documentElement.lang === 'en';
+    const apply = () => {
+      const levels = [...active].filter((f) => f.startsWith('level:')).map((f) => f.slice(6));
+      let n = 0;
+      cards.forEach((c) => {
+        const ok = (!active.has('lang:tr') || c.dataset.lang === 'tr') && (!active.has('cert') || c.dataset.cert) && (!levels.length || levels.includes(c.dataset.level || ''));
+        c.hidden = !ok; if (ok) n++;
+      });
+      groups.forEach((g) => { const k = g.querySelectorAll('.course-card:not([hidden])').length; g.hidden = k === 0; const gc = g.querySelector('[data-cg-count]'); if (gc) gc.textContent = String(k); });
+      count.textContent = active.size ? (EN ? `${n} courses shown` : `${n} eğitim gösteriliyor`) : '';
+      empty.hidden = n > 0;
+    };
+    root.querySelectorAll<HTMLButtonElement>('[data-cf]').forEach((b) => b.addEventListener('click', () => {
+      const f = b.dataset.cf!; if (active.has(f)) active.delete(f); else active.add(f);
+      b.setAttribute('aria-pressed', String(active.has(f))); apply();
+    }));
+  }
+</script>

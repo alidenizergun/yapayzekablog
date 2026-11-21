@@ -8,7 +8,7 @@ import { SECTOR_EN } from '../lib/sectors.js';
 export const SEG = {
   haber: 'news', kategori: 'category', sozluk: 'glossary', rehber: 'guides', arac: 'tools', 'arac-secici': 'tool-finder',
   'en-iyi': 'best', karsilastir: 'compare', 'ucretsiz-yapay-zeka-araclari': 'free-ai-tools', 'en-iyi-yapay-zeka-uygulamalari': 'best-ai-apps',
-  'yeni-araclar': 'new-ai-tools', 'modeller-karsilastirma': 'ai-model-pricing', 'api-maliyet-hesaplayici': 'ai-api-cost-calculator', 'yapay-zeka-abonelikleri': 'ai-subscription-prices', 'yapay-zeka-komutlari': 'ai-prompts', 'yapay-zeka-kullanim-paylari': 'ai-chatbot-market-share-turkey', akis: 'latest', haftalik: 'weekly', gelisme: 'stories',
+  'yeni-araclar': 'new-ai-tools', 'modeller-karsilastirma': 'ai-model-pricing', 'api-maliyet-hesaplayici': 'ai-api-cost-calculator', 'yapay-zeka-abonelikleri': 'ai-subscription-prices', 'yapay-zeka-komutlari': 'ai-prompts', 'yapay-zeka-egitimleri': 'ai-courses', 'yapay-zeka-kullanim-paylari': 'ai-chatbot-market-share-turkey', akis: 'latest', haftalik: 'weekly', gelisme: 'stories',
   yatirimlar: 'funding-tracker', raporlar: 'ai-reports', etkinlikler: 'events', 'turkiye-yapay-zeka': 'ai-in-turkey', 'yerli-yapay-zeka': 'turkish-ai-models',
   hakkimizda: 'about', gizlilik: 'privacy', 'hata-bildir': 'report-error', kunye: 'masthead', 'kullanim-kosullari': 'terms', duzeltmeler: 'corrections', sektor: 'industries', ara: 'search', sayfa: 'page', konu: 'topic', konular: 'topics',
 };

@@ -109,16 +109,19 @@ const navGroups = [
     // "Araçlar" haber bölümü, Yapay zeka araçları rehberiyle karışmasın diye "Araç haberleri" olarak gösterilir
     ...nav.map((slug) => ({ ...item(slug === 'araclar' ? T('Araç haberleri', 'Tool news') : S(`cat.${slug}.name`, categoryBySlug(slug)?.name), `/kategori/${slug}/`), current: slug === currentCat })),
   ] },
+  // Sıra kullanıcının yolculuğunu izler: aracı bul ve seç → karşılaştır → maliyetini gör → öğren (kavramdan uygulamaya, sonra derinleş)
   { key: 'tools', label: T('Araçlar ve öğren', 'Tools and learning'), items: [
-    item(T('Yapay zeka araçları', 'AI tools'), '/arac/'),
-    item(T('En iyi uygulamalar', 'Best AI apps'), '/en-iyi-yapay-zeka-uygulamalari/'),
-    item(T('Araç karşılaştırmaları', 'Tool comparisons'), '/karsilastir/'),
-    item(T('Abonelik fiyatları', 'Subscription prices'), '/yapay-zeka-abonelikleri/'),
-    item(T('Model fiyatları', 'Model pricing'), '/modeller-karsilastirma/'),
-    item(T('Hazır komutlar', 'Prompt library'), '/yapay-zeka-komutlari/'),
-    item(T('Rehber', 'Guides'), '/rehber/'),
-    ...(liveSectors.length ? [item(T('Sektörlerde yapay zeka', 'AI by industry'), '/sektor/')] : []),
-    item(T('Sözlük', 'Glossary'), '/sozluk/'),
+    { ...item(T('Yapay zeka araçları', 'AI tools'), '/arac/'), sub: 'sec' },
+    { ...item(T('Bana uygun aracı bul', 'Tool finder'), '/arac-secici/'), sub: 'sec' },
+    { ...item(T('En iyi uygulamalar', 'Best AI apps'), '/en-iyi-yapay-zeka-uygulamalari/'), sub: 'sec' },
+    { ...item(T('Araç karşılaştırmaları', 'Tool comparisons'), '/karsilastir/'), sub: 'sec' },
+    { ...item(T('Abonelik fiyatları', 'Subscription prices'), '/yapay-zeka-abonelikleri/'), sub: 'fiyat' },
+    { ...item(T('Model API fiyatları', 'Model API pricing'), '/modeller-karsilastirma/'), sub: 'fiyat' },
+    { ...item(T('Sözlük', 'Glossary'), '/sozluk/'), sub: 'ogren' },
+    { ...item(T('Rehber', 'Guides'), '/rehber/'), sub: 'ogren' },
+    { ...item(T('Hazır komutlar', 'Prompt library'), '/yapay-zeka-komutlari/'), sub: 'ogren' },
+    { ...item(T('Yapay zeka eğitimleri', 'AI courses'), '/yapay-zeka-egitimleri/'), sub: 'ogren' },
+    ...(liveSectors.length ? [{ ...item(T('Sektörlerde yapay zeka', 'AI by industry'), '/sektor/'), sub: 'ogren' }] : []),
   ] },
   { key: 'explore', label: T('Keşfet', 'Explore'), items: [
     item(T("Türkiye'de yapay zeka", 'AI in Turkey'), '/turkiye-yapay-zeka/'),
@@ -136,14 +139,18 @@ const onNews = ['/akis/', '/kategori/', '/haber/', '/haftalik/', '/gelisme/'].so
 const topLinks = [
   { ...item(T('Haberler', 'News'), '/akis/'), current: onNews },
   { ...item(T('Araçlar', 'AI tools'), '/arac/'), current: ['/arac/', '/arac-secici/', '/en-iyi', '/ucretsiz-yapay-zeka-araclari/', '/yeni-araclar/', '/karsilastir/', '/modeller-karsilastirma/', '/yapay-zeka-abonelikleri/', '/api-maliyet-hesaplayici/', '/yapay-zeka-komutlari/', '/yapay-zeka-kullanim-paylari/'].some((p) => path.startsWith(L.u(p))) },
-  { ...item(T('Rehber', 'Guides'), '/rehber/'), current: ['/rehber/', '/sektor/'].some((p) => path.startsWith(L.u(p))) },
+  { ...item(T('Rehber', 'Guides'), '/rehber/'), current: ['/rehber/', '/sektor/', '/yapay-zeka-egitimleri/'].some((p) => path.startsWith(L.u(p))) },
   item(T('Sözlük', 'Glossary'), '/sozluk/'),
 ];
 // "Menü" paneli: üç kısa sütun (adlar navGroups ile aynı)
 const megaCols = [
   { label: T('Haber bölümleri', 'News sections'), groups: [{ cls: 'two', items: [item(T('Tüm haberler', 'All news'), '/akis/'), ...groupOf('news').filter((i) => i.href.includes('/kategori/'))] }] },
   { label: T('Keşfet', 'Explore'), groups: [{ items: [...groupOf('news').filter((i) => /haftalik|gelisme/.test(i.href)), ...groupOf('explore')] }] },
-  { label: T('Araçlar ve öğren', 'Tools and learning'), groups: [{ items: groupOf('tools') }] },
+  { label: T('Araçlar ve öğren', 'Tools and learning'), groups: [
+    { label: T('Seç ve karşılaştır', 'Choose and compare'), items: groupOf('tools').filter((i) => i.sub === 'sec') },
+    { label: T('Fiyatlar', 'Pricing'), items: groupOf('tools').filter((i) => i.sub === 'fiyat') },
+    { label: T('Öğren', 'Learn'), items: groupOf('tools').filter((i) => i.sub === 'ogren') },
+  ] },
 ];
 const isHome = Astro.url.pathname.replace(/\/$/, '') === L.u('/').replace(/\/$/, '');
 const footerCats = CATEGORIES.filter((c) => counts.get(c.slug));

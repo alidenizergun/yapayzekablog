@@ -10,6 +10,7 @@ import { MODELS } from '../lib/models.js';
 import { ENTITIES } from '../lib/entities.js';
 import { STORIES } from '../lib/stories.js';
 import { PROMPTS, PROMPT_CATS } from '../lib/prompts.js';
+import { COURSES } from '../lib/courses.js';
 
 export function sourceStrings() {
   const out = {};
@@ -44,5 +45,6 @@ export function sourceStrings() {
   for (const s of STORIES) { put(`story.${s.slug}.title`, s.title); put(`story.${s.slug}.intro`, s.intro); }
   for (const c of PROMPT_CATS) put(`promptcat.${c.slug}`, c.name);
   for (const p of PROMPTS) { put(`prompt.${p.id}.title`, p.title); put(`prompt.${p.id}.text`, p.text); }
+  for (const c of COURSES) { put(`course.${c.id}.name`, c.name); put(`course.${c.id}.desc`, c.desc); put(`course.${c.id}.who`, c.who); put(`course.${c.id}.format`, c.format); put(`course.${c.id}.priceNote`, c.priceNote); }
   return out;
 }
