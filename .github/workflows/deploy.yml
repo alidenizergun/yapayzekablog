@@ -11,6 +11,9 @@ on:
       ref:
         type: string
         required: false
+    secrets:
+      REPORT_FORM_KEY:
+        required: false
 
 # Varsayılan: yalnızca okuma; Pages'e yayın yetkisi yalnızca "deploy" işinde
 permissions:

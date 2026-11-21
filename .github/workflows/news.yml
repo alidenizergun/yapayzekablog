@@ -126,6 +126,9 @@ jobs:
     uses: ./.github/workflows/deploy.yml
     with:
       ref: ${{ github.ref_name }}
+    # Yalnızca sayfaya gömülen (herkese açık) form anahtarı aktarılır; diğer gizli anahtarlar aktarılmaz
+    secrets:
+      REPORT_FORM_KEY: ${{ secrets.REPORT_FORM_KEY }}
 
   # X'te paylaşım KAPALI. Açmak için repo değişkeni X_POSTS_PER_RUN'a 1 veya daha büyük bir sayı yazın.
   tweet:
