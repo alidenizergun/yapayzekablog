@@ -114,7 +114,7 @@ const navGroups = [
     item(T('En iyi uygulamalar', 'Best AI apps'), '/en-iyi-yapay-zeka-uygulamalari/'),
     item(T('Araç karşılaştırmaları', 'Tool comparisons'), '/karsilastir/'),
     item(T('Model fiyatları', 'Model pricing'), '/modeller-karsilastirma/'),
-    item(T('Rehberler', 'Guides'), '/rehber/'),
+    item(T('Rehber', 'Guides'), '/rehber/'),
     ...(liveSectors.length ? [item(T('Sektörlerde yapay zeka', 'AI by industry'), '/sektor/')] : []),
     item(T('Sözlük', 'Glossary'), '/sozluk/'),
   ] },
@@ -133,7 +133,7 @@ const onNews = ['/akis/', '/kategori/', '/haber/', '/haftalik/', '/gelisme/'].so
 const topLinks = [
   { ...item(T('Haberler', 'News'), '/akis/'), current: onNews },
   { ...item(T('Araçlar', 'AI tools'), '/arac/'), current: ['/arac/', '/arac-secici/', '/en-iyi', '/ucretsiz-yapay-zeka-araclari/', '/yeni-araclar/', '/karsilastir/', '/modeller-karsilastirma/'].some((p) => path.startsWith(L.u(p))) },
-  { ...item(T('Rehberler', 'Guides'), '/rehber/'), current: ['/rehber/', '/sektor/'].some((p) => path.startsWith(L.u(p))) },
+  { ...item(T('Rehber', 'Guides'), '/rehber/'), current: ['/rehber/', '/sektor/'].some((p) => path.startsWith(L.u(p))) },
   item(T('Sözlük', 'Glossary'), '/sozluk/'),
 ];
 // "Menü" paneli: üç kısa sütun (adlar navGroups ile aynı)
