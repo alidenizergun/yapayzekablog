@@ -120,18 +120,37 @@ export function searchArchive(existing, query, { days = 45, limit = 8, siteUrl =
 
 const cached = (text) => [{ type: 'text', text, cache_control: { type: 'ephemeral' } }];
 
+/** Konuşmanın son bloğuna önbellek işareti koyar: her turda önceki turların tamamı önbellekten okunur (ucuz). */
+function withCacheMark(messages) {
+  const out = messages.map((m) => ({ ...m, content: typeof m.content === 'string' ? [{ type: 'text', text: m.content }] : m.content.map((b) => {
+    if (!b.cache_control) return b;
+    const { cache_control, ...rest } = b;
+    return rest;
+  }) }));
+  const last = out.at(-1);
+  for (let i = last.content.length - 1; i >= 0; i--) {
+    const b = last.content[i];
+    if (['text', 'tool_result', 'image', 'document'].includes(b.type)) { last.content[i] = { ...b, cache_control: { type: 'ephemeral' } }; break; }
+  }
+  return out;
+}
+
 /**
  * Tek bir ajanın araç kullanma döngüsü.
  * handlers: { araçAdı: async (input) => sonuç }  ·  stopTools: çağrıldığında döngüyü bitiren araçlar
  */
-async function agentLoop(ctx, { label, model, system, messages, clientTools, handlers, stopTools = [], searchBudget = 0, maxTurns = 10 }) {
-  let searchesLeft = searchBudget;
+async function agentLoop(ctx, { label, model, system, messages, clientTools, handlers, stopTools = [], searchBudget = 0, searchesLeft: startLeft, maxTurns = 10 }) {
+  let searchesLeft = startLeft ?? searchBudget;
   let stoppedBy = null;
+  // Araç listesi döngü boyunca DEĞİŞMEZ: düşünme blokları araç listesine bağlıdır, değişirse istek reddedilir.
+  // Arama hakkı max_uses ile istek başına sınırlanır; toplam aşılırsa döngü durur.
+  const tools = searchBudget > 0
+    ? [{ type: 'web_search_20250305', name: 'web_search', max_uses: searchBudget, blocked_domains: ctx.blockedDomains }, ...clientTools]
+    : [...clientTools];
   for (let turn = 0; turn < maxTurns; turn++) {
-    if (ctx.overBudget()) return { stoppedBy: 'budget' };
-    const tools = [...clientTools];
-    if (searchesLeft > 0) tools.unshift({ type: 'web_search_20250305', name: 'web_search', max_uses: searchesLeft, blocked_domains: ctx.blockedDomains });
-    const res = await ctx.anthropic.messages.create({ model, max_tokens: 16000, system: cached(system), messages, tools });
+    if (ctx.overBudget()) return { stoppedBy: 'budget', searchesLeft };
+    if (searchesLeft < 0) { ctx.log(`${label}: arama hakkı aşıldı, durduruldu`); return { stoppedBy: 'search_limit', searchesLeft }; }
+    const res = await ctx.anthropic.messages.create({ model, max_tokens: 16000, system: cached(system), messages: withCacheMark(messages), tools });
     ctx.track(res, model);
     const used = res.usage?.server_tool_use?.web_search_requests ?? 0;
     searchesLeft -= used;
@@ -143,7 +162,7 @@ async function agentLoop(ctx, { label, model, system, messages, clientTools, han
     }
     messages.push({ role: 'assistant', content: res.content });
     if (res.stop_reason === 'pause_turn') continue;
-    if (res.stop_reason !== 'tool_use') return { stoppedBy: stoppedBy || res.stop_reason };
+    if (res.stop_reason !== 'tool_use') return { stoppedBy: stoppedBy || res.stop_reason, searchesLeft };
     const results = [];
     for (const block of res.content) {
       if (block.type !== 'tool_use') continue;
@@ -154,10 +173,10 @@ async function agentLoop(ctx, { label, model, system, messages, clientTools, han
       if (stopTools.includes(block.name) && !(out && out.error)) stoppedBy = block.name;
     }
     messages.push({ role: 'user', content: results });
-    if (stoppedBy) return { stoppedBy };
+    if (stoppedBy) return { stoppedBy, searchesLeft };
   }
   ctx.log(`${label}: tur sınırına ulaşıldı`);
-  return { stoppedBy: 'max_turns' };
+  return { stoppedBy: 'max_turns', searchesLeft };
 }
 
 async function pool(items, size, fn) {
@@ -420,12 +439,18 @@ Okuma hakkın: ${reporterFetches} sayfa · arama hakkın: ${reporterSearches}.`,
       },
       drop_story: async ({ reason }) => { dropped = String(reason || 'gerekçe yok'); return 'tamam'; },
     };
-    const run = (searchBudget) => agentLoop(ctx, {
-      label: `muhabir: ${a.topic}`, model: reporterModel, system: reporterSystem, messages,
-      clientTools: tools, handlers, stopTools: ['submit_draft', 'drop_story'], searchBudget, maxTurns: 12,
-    });
+    // Düzeltme turu aynı araç listesiyle sürer (arama hakkı kalan kadar)
+    let left = reporterSearches;
+    const run = async (maxTurns) => {
+      const r = await agentLoop(ctx, {
+        label: `muhabir: ${a.topic}`, model: reporterModel, system: reporterSystem, messages,
+        clientTools: tools, handlers, stopTools: ['submit_draft', 'drop_story'], searchBudget: reporterSearches, searchesLeft: left, maxTurns,
+      });
+      left = r.searchesLeft ?? left;
+      return r;
+    };
 
-    const first = await run(reporterSearches);
+    const first = await run(12);
     for (let attempt = 0; attempt < 2; attempt++) {
       if (dropped) { rejected.push({ title: a.topic, reasons: [`muhabir bıraktı: ${dropped}`] }); note(`muhabir bıraktı: ${a.topic} — ${dropped}`); return null; }
       if (!draft) {
@@ -450,7 +475,7 @@ Okuma hakkın: ${reporterFetches} sayfa · arama hakkın: ${reporterSearches}.`,
       last.content.push({ type: 'text', text: `Doğrulama editörü taslakta şu olgusal sorunları buldu:\n${probs.map((p) => `- ${p}`).join('\n')}\n\nKaynakları yeniden kontrol et, hataları düzelt ve submit_draft ile yeniden gönder. Düzeltilemiyorsa drop_story çağır.` });
       draft = null;
       fetchesLeft = Math.max(fetchesLeft, 2);
-      await run(1);
+      await run(6);
     }
     return null;
   }
