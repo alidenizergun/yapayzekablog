@@ -7,7 +7,7 @@ import { defaultVisual, photoSrc, imageFor } from '../lib/news.js';
 
 interface Props {
   entry: any;
-  choice?: { kind: 'brand' | 'photo' | 'illus'; v?: number };
+  choice?: { kind: 'brand' | 'photo' | 'illus'; v?: number; n?: number; b?: string };
   w?: number; // fotoğrafın gösterim genişliği (px)
   h?: number;
   eager?: boolean;
@@ -15,8 +15,9 @@ interface Props {
 }
 const { entry, choice = defaultVisual(entry), w = 400, h = 250, eager = false, credit = true } = Astro.props;
 const d = entry.data;
-const brand = choice.kind === 'brand' ? brandOf(d.brand) : undefined;
-const photo = choice.kind === 'photo' ? d.photo : undefined;
+const brandKey = choice.kind === 'brand' ? (choice.b ?? d.brand) : undefined;
+const brand = brandKey ? brandOf(brandKey) : undefined;
+const photo = choice.kind === 'photo' ? (choice.n === 2 ? d.photo2 : d.photo) : undefined;
 const loading = eager ? 'eager' : 'lazy';
 import { langOf } from '../i18n/index.js';
 const EN = langOf(Astro.url) === 'en';
@@ -24,7 +25,7 @@ const IMG_EN = { arama: 'Chat bubble and magnifier illustration', gemini: 'Star 
 ---
 <span class="visual">
   {brand ? (
-    <span class:list={['brandcard', `b-${d.brand}`, { wordmark: !brand.path }]} role="img" aria-label={EN ? `${brand.name} logo` : `${brand.name} logosu`}>
+    <span class:list={['brandcard', `b-${brandKey}`, { wordmark: !brand.path }]} role="img" aria-label={EN ? `${brand.name} logo` : `${brand.name} logosu`}>
       {brand.path && <svg viewBox="0 0 24 24" aria-hidden="true"><path d={brand.path} /></svg>}
       <span class="bn" aria-hidden="true">{brand.name}</span>
     </span>

@@ -2,6 +2,8 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { getCollection } from 'astro:content';
 import { SITE, categoryBySlug } from './site.js';
+import { entitiesOf } from './entities.js';
+import { BRANDS } from './brands.js';
 
 const BASE = import.meta.env.BASE_URL.replace(/\/$/, '');
 export const url = (path = '/') => `${BASE}${path.startsWith('/') ? path : '/' + path}`;
@@ -35,7 +37,15 @@ export function defaultVisual(entry, large = false) {
   if (large && d.photo) return { kind: 'photo' };
   if (d.brand) return { kind: 'brand' };
   if (d.photo) return { kind: 'photo' };
+  if (d.photo2) return { kind: 'photo', n: 2 };
+  const other = otherBrands(entry)[0];
+  if (other) return { kind: 'brand', b: other };
   return { kind: 'illus', v: variantOf(entry) };
+}
+
+/** Haberde adı geçen, logosu olan diğer şirketler (illüstrasyon yerine logo kartı için yedek) */
+export function otherBrands(entry) {
+  return entitiesOf(entry).map((e) => e.brand).filter((b) => b && b !== entry.data.brand && BRANDS[b]);
 }
 
 /** Sosyal medya paylaşım görseli: 1200x630 PNG/JPG (SVG'yi sosyal ağlar göstermez) */
@@ -59,6 +69,7 @@ export function ogImageFor(entry) {
  * fotoğraf varsa fotoğraf gösterilir.
  * @returns {Map<string, {kind: 'brand'|'photo'|'illus', v?: number}>}
  */
+const tagOf = (d, o) => o.kind === 'brand' ? `b:${o.b ?? d.brand}` : o.kind === 'photo' ? `p:${(o.n === 2 ? d.photo2 : d.photo).id}` : `i:${d.image}:${o.v}`;
 export function spreadVisuals(entries, { largeFirst = false } = {}) {
   const used = new Set();
   const out = new Map();
@@ -68,9 +79,15 @@ export function spreadVisuals(entries, { largeFirst = false } = {}) {
     let choice = null;
     // largeFirst: listenin ilk öğesi büyük gösterilir (manşet) -> fotoğraf önce
     const photoFirst = largeFirst && i === 0;
-    if (photoFirst && d.photo && !used.has(`p:${d.photo.id}`)) choice = { kind: 'photo' };
-    else if (d.brand && !used.has(`b:${d.brand}`)) choice = { kind: 'brand' };
-    else if (d.photo && !used.has(`p:${d.photo.id}`)) choice = { kind: 'photo' };
+    // Sıra: (manşette fotoğraf) → logo → fotoğraf → ikinci fotoğraf → haberde geçen başka şirketin logosu → illüstrasyon.
+    // İllüstrasyon yalnızca hiçbir seçenek kalmadığında (ya da hepsi bu sayfada zaten kullanıldığında) gösterilir.
+    const opts = [];
+    if (photoFirst && d.photo) opts.push({ kind: 'photo' });
+    if (d.brand) opts.push({ kind: 'brand' });
+    if (d.photo) opts.push({ kind: 'photo' });
+    if (d.photo2) opts.push({ kind: 'photo', n: 2 });
+    for (const b of otherBrands(e)) opts.push({ kind: 'brand', b });
+    choice = opts.find((o) => !used.has(tagOf(d, o))) ?? null;
     if (!choice) {
       const key = d.image;
       const base = variantOf(e);
@@ -82,7 +99,7 @@ export function spreadVisuals(entries, { largeFirst = false } = {}) {
       if (prev === `i:${key}:${v}`) v = (v + 1) % IMAGE_VARIANTS;
       choice = { kind: 'illus', v };
     }
-    const tag = choice.kind === 'brand' ? `b:${d.brand}` : choice.kind === 'photo' ? `p:${d.photo.id}` : `i:${d.image}:${choice.v}`;
+    const tag = tagOf(d, choice);
     used.add(tag);
     prev = tag;
     out.set(e.id, choice);

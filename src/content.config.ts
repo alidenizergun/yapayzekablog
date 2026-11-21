@@ -7,6 +7,14 @@ import { BRAND_SLUGS } from './lib/brands.js';
 // Güvenlik: yalnızca http(s) adresleri (javascript:, data: vb. reddedilir); fotoğraflar yalnızca Unsplash'ten
 const httpUrl = z.string().url().refine((u) => /^https?:\/\//i.test(u), 'Yalnızca http(s) adresi');
 const unsplashUrl = (hosts: RegExp) => z.string().url().refine((u) => { try { return hosts.test(new URL(u).hostname); } catch { return false; } }, 'Yalnızca Unsplash adresi');
+const photoSchema = z.object({
+  id: z.string(),
+  url: unsplashUrl(/^images\.unsplash\.com$/),
+  alt: z.string().optional(),
+  author: z.string(),
+  authorUrl: unsplashUrl(/^(www\.)?unsplash\.com$/),
+  link: unsplashUrl(/^(www\.)?unsplash\.com$/),
+});
 
 const categorySlugs = CATEGORIES.map((c) => c.slug) as [string, ...string[]];
 const imageKeys = Object.keys(IMAGES) as [string, ...string[]];
@@ -26,16 +34,9 @@ const haberler = defineCollection({
     // Unsplash'te fotoğraf aramak için İngilizce anahtar kelimeler
     imageQuery: z.string().optional(),
     // Unsplash fotoğrafı (haber hattı doldurur)
-    photo: z
-      .object({
-        id: z.string(),
-        url: unsplashUrl(/^images\.unsplash\.com$/),
-        alt: z.string().optional(),
-        author: z.string(),
-        authorUrl: unsplashUrl(/^(www\.)?unsplash\.com$/),
-        link: unsplashUrl(/^(www\.)?unsplash\.com$/),
-      })
-      .optional(),
+    photo: photoSchema.optional(),
+    // İkinci fotoğraf: aynı sayfada fotoğraf ya da logo tekrarlanacaksa illüstrasyon yerine kullanılır
+    photo2: photoSchema.optional(),
     whyItMatters: z.string().optional(),
     // "Türkiye açısından" notu: yalnızca kaynaklarda somut bir Türkiye bağlantısı varsa (boşsa gösterilmez)
     turkeyAngle: z.string().optional(),

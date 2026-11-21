@@ -175,6 +175,7 @@ function toMarkdown(a, dateIso) {
   if (a.brand) lines.push(`brand: ${a.brand}`);
   if (a.image_query) lines.push(`imageQuery: ${yamlStr(a.image_query)}`);
   if (a.photo) lines.push(...photoYaml(a.photo));
+  if (a.photo2) lines.push(...photoYaml(a.photo2, 'photo2'));
   if (a.why_it_matters) lines.push(`whyItMatters: ${yamlStr(a.why_it_matters)}`);
   const dl = a.deal;
   // Anlaşma: tutar haber metninde (spot/gövde) birebir geçmiyorsa kaydedilmez
@@ -748,8 +749,9 @@ async function main() {
   const usedPhotos = usedPhotoIds(CONTENT_DIR);
   for (const a of ok) {
     try {
-      a.photo = await findPhoto(a.image_query || CATEGORY_QUERIES[a.category], usedPhotos);
-      if (a.photo) photoNote.added++;
+      const qs = [a.image_query, CATEGORY_QUERIES[a.category]];
+      a.photo = await findPhoto(qs, usedPhotos);
+      if (a.photo) { photoNote.added++; a.photo2 = await findPhoto(qs, usedPhotos); }
     } catch (err) { photoNote.error = err.message; break; }
   }
 
@@ -800,11 +802,13 @@ async function backfillPhotos() {
     const file = path.join(CONTENT_DIR, f);
     const raw = fs.readFileSync(file, 'utf8');
     const fm = raw.split(/^---$/m)[1] || '';
-    if (/^photo:/m.test(fm)) continue;
-    const query = (fm.match(/^imageQuery:\s*"?([^"\n]+)"?/m)?.[1] || CATEGORY_QUERIES[fm.match(/^category:\s*(\S+)/m)?.[1]] || '').trim();
+    const hasPhoto = /^photo:/m.test(fm), hasPhoto2 = /^photo2:/m.test(fm);
+    if (hasPhoto && hasPhoto2) continue;
+    const qs = [fm.match(/^imageQuery:\s*"?([^"\n]+)"?/m)?.[1], CATEGORY_QUERIES[fm.match(/^category:\s*(\S+)/m)?.[1]]];
     try {
-      const photo = await findPhoto(query, used);
-      if (photo && addPhotoToFile(file, photo)) photoNote.backfilled++;
+      // Önce eksik ana fotoğraf, sonra ikinci fotoğraf (aynı sayfada tekrar olacaksa illüstrasyon yerine gösterilir)
+      if (!hasPhoto) { const photo = await findPhoto(qs, used); if (photo && addPhotoToFile(file, photo)) photoNote.backfilled++; }
+      else { const photo = await findPhoto(qs, used); if (photo && addPhotoToFile(file, photo, 'photo2')) photoNote.backfilled++; }
     } catch (err) { photoNote.error = err.message; break; }
   }
 }
