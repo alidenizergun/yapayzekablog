@@ -13,7 +13,6 @@ const EN = lang === 'en';
 const all = locNewsList(await getNews(), lang, L.m).slice(0, 120);
 const IST = 3 * 3600e3;
 const dayKey = (d) => new Date(d.valueOf() + IST).toISOString().slice(0, 10);
-const hm = (d) => new Date(d.valueOf() + IST).toISOString().slice(11, 16);
 const MONTHS = ['Ocak', 'Şubat', 'Mart', 'Nisan', 'Mayıs', 'Haziran', 'Temmuz', 'Ağustos', 'Eylül', 'Ekim', 'Kasım', 'Aralık'];
 const DAYS = ['Pazar', 'Pazartesi', 'Salı', 'Çarşamba', 'Perşembe', 'Cuma', 'Cumartesi'];
 const dayLabel = (k) => { const d = new Date(`${k}T12:00:00Z`); return EN ? new Intl.DateTimeFormat('en-US', { weekday: 'long', month: 'long', day: 'numeric', timeZone: 'UTC' }).format(d) : `${Number(k.slice(8))} ${MONTHS[d.getUTCMonth()]} ${DAYS[d.getUTCDay()]}`; };
@@ -36,7 +35,7 @@ const latest = all[0]?.data.date;
     <p class="spot">{T('Yayımladığımız tüm haberler ve kısa notlar, en yeniden eskiye. Site günde dört kez güncellenir: gece turunda günün haberleri, gün içindeki üç ara turda kayda değer yeni gelişmeler eklenir.', 'Every story and brief we publish, newest first. Updated four times a day.')}</p>
 
     <div class="river-status" aria-live="polite">
-      {latest && <span>{T('Son güncelleme', 'Last updated')}: <time datetime={latest.toISOString()}>{dayLabel(dayKey(latest))}, {hm(latest)}</time></span>}
+      {latest && <span>{T('Son güncelleme', 'Last updated')}: <time datetime={latest.toISOString()}>{dayLabel(dayKey(latest))}</time></span>}
       <span class="river-new" data-new-count hidden></span>
     </div>
 
@@ -55,7 +54,6 @@ const latest = all[0]?.data.date;
             const id = slugOf(n);
             return (
               <li class={`river-item${Content ? ' is-short' : ''}`} id={id} data-item data-cat={d.category} data-kind={Content ? 'kisa' : 'haber'} data-ts={d.date.valueOf()}>
-                <a class="river-time" href={`#${id}`} title={T('Bu habere bağlantı', 'Link to this story')}><time datetime={d.date.toISOString()}>{hm(d.date)}</time></a>
                 <div class="river-main">
                   <p class="river-tags">
                     <span class="cat">{S(`cat.${d.category}.name`, catName(d.category))}</span>

@@ -784,13 +784,11 @@ header.site .masthead { display: flex; align-items: center; justify-content: spa
 .river-filters button[aria-pressed="true"] .meta { color: inherit; opacity: .75; }
 .river-dayh { position: sticky; top: 49px; z-index: 2; margin: 28px 0 0; padding: 10px 0; background: var(--bg); font-size: 18px; border-bottom: 1px solid var(--line); }
 .river-list { list-style: none; margin: 0; padding: 0; max-width: 860px; border-left: 2px solid var(--line); }
-.river-item { display: grid; grid-template-columns: 64px minmax(0, 1fr); gap: 12px; padding: 16px 0 16px 18px; position: relative; scroll-margin-top: 120px; }
+.river-item { display: grid; grid-template-columns: minmax(0, 1fr); gap: 12px; padding: 16px 0 16px 18px; position: relative; scroll-margin-top: 120px; }
 .river-item::before { content: ""; position: absolute; left: -6px; top: 22px; width: 10px; height: 10px; border-radius: 50%; background: var(--bg); border: 2px solid var(--muted); }
 .river-item.is-short::before { border-color: var(--accent-text); background: var(--accent-text); }
 .river-item.is-new::before { border-color: var(--accent); background: var(--accent); box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 25%, transparent); }
 .river-item.is-target { background: var(--soft); border-radius: 0 8px 8px 0; }
-.river-time { align-self: start; padding-top: 2px; font-variant-numeric: tabular-nums; font-weight: 700; color: var(--muted); }
-.river-time:hover { color: var(--accent-text); text-decoration: underline; }
 .river-tags { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 10px; margin: 0; }
 .river-kind { font-size: 12px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--fg); }
 .river-chip { font-size: 12px; font-weight: 600; padding: 2px 8px; border-radius: 999px; background: var(--soft); color: var(--fg); }
