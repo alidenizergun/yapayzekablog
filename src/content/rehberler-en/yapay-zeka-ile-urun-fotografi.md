@@ -54,7 +54,7 @@ What to watch for in video:
 
 ## What to look for when choosing a tool
 
-There are many tools, so choose based on your needs rather than trying them all. For comparison lists, see [the best tools by use case](/en-iyi/). For a Turkish-language summary of tools, you can read [Ideasoft's article](https://www.ideasoft.com.tr/yapay-zeka-e-ticaret-fotografi-yapma/). When choosing, ask these questions:
+There are many tools, so choose based on your needs rather than trying them all. For comparison lists, see [the best tools by use case](/en-iyi-yapay-zeka-uygulamalari/). For a Turkish-language summary of tools, you can read [Ideasoft's article](https://www.ideasoft.com.tr/yapay-zeka-e-ticaret-fotografi-yapma/). When choosing, ask these questions:
 
 - How faithfully does it preserve product details? Test three to five products on the same tool with a small sample set.
 - Is commercial use of the output permitted?

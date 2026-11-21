@@ -20,5 +20,10 @@ export default defineConfig({
   integrations: [sitemap({ filter: (page) => !page.includes('/hata-bildir') }), contentGuard(), glossaryLinks(), nofollowExternalLinks(), seoPostBuild(), i18nLinks({ site, base }), securityHeaders()],
   // Yazı tipleri sayfaya base64 olarak gömülmesin (her sayfayı ~14 KB büyütüyordu); ayrı, önbelleğe alınan dosya olarak kalsın
   vite: { build: { assetsInlineLimit: (file) => (/\.woff2?$/.test(file) ? false : undefined) } },
-  build: { format: 'directory', inlineStylesheets: 'always' }, // CSS sayfaya gömülür (oluşturmayı engelleyen istek yok); CSP'de <style> özetle izinli
+  build: { format: 'directory', inlineStylesheets: 'always' },
+  // Birleştirilen sayfalar: eski adres yenisine yönlenir (aynı içerik iki adreste olmasın)
+  redirects: {
+    '/en-iyi': '/en-iyi-yapay-zeka-uygulamalari/',
+    '/en/best': '/en/best-ai-apps/',
+  }, // CSS sayfaya gömülür (oluşturmayı engelleyen istek yok); CSP'de <style> özetle izinli
 });

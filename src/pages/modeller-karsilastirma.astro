@@ -1,4 +1,5 @@
 ---
+import SubNav from '../components/SubNav.astro';
 import Base from '../layouts/Base.astro';
 import DataCite from '../components/DataCite.astro';
 import NewsRow from '../components/NewsRow.astro';
@@ -43,6 +44,7 @@ const jsonLd = [
 ---
 <Base title={T('Yapay zeka modelleri karşılaştırma: API fiyatları ve bağlam pencereleri', 'AI model pricing comparison: API prices and context windows')} description={T(`ChatGPT (OpenAI), Claude, Gemini ve DeepSeek modellerinin milyon token başına API fiyatları, bağlam pencereleri ve aylık maliyet hesaplayıcı. Son kontrol: ${checked}.`, `API prices per million tokens, context windows and a monthly cost calculator for OpenAI, Claude, Gemini and DeepSeek models. Last checked: ${checked}.`)}
   jsonLd={jsonLd} breadcrumbs={[{ name: 'Ana sayfa', path: '/' }, { name: T('Model API fiyatları', 'AI model API pricing'), path: '/modeller-karsilastirma/' }]}>
+  <SubNav set="tools" />
   <section class="deals models">
     <span class="cat">{T('Karşılaştırma', 'Comparison')}</span>
     <h1 class="page-h">{T('Yapay zeka modelleri karşılaştırma tablosu', 'AI model pricing comparison')}</h1>

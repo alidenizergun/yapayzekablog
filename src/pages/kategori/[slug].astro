@@ -1,5 +1,6 @@
 ---
 import Base from '../../layouts/Base.astro';
+import SubNav from '../../components/SubNav.astro';
 import NewsRow from '../../components/NewsRow.astro';
 import Sidebar from '../../components/Sidebar.astro';
 import { CATEGORIES } from '../../lib/site.js';
@@ -21,6 +22,7 @@ const rowV = spreadVisuals(items);
   noindex={items.length === 0}
   breadcrumbs={[{ name: 'Ana sayfa', path: '/' }, { name, path: `/kategori/${cat.slug}/` }]}
   jsonLd={{ '@type': 'CollectionPage', name: T(`${cat.name}: yapay zeka haberleri`, `AI ${name} news`), inLanguage: L.locale }}>
+  {cat.slug === 'turkiye' && <SubNav set="turkey" />}
   <div class="cols flush">
     <section class="main" aria-labelledby="h">
       <div class="sechead"><h1 id="h" class="page-h">{name}</h1><span class="meta">{items.length} {T('haber', items.length === 1 ? 'story' : 'stories')}</span></div>

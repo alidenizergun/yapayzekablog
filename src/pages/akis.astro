@@ -27,11 +27,11 @@ const cats = [...new Set(all.map((n) => n.data.category))].map((c) => ({ c, name
 const shortCount = all.filter((n) => n.data.format === 'kisa').length;
 const latest = all[0]?.data.date;
 ---
-<Base title={T('Akış: yapay zeka gündemi dakika dakika', 'Latest AI news, as it happens')} description={T("YZ Gündemi'nde yayımlanan tüm yapay zeka haberleri ve kısa notlar, en yeniden eskiye, saatleriyle; kategoriye göre süzülebilir.", 'Every AI story and brief we publish, newest first, with times; filter by section.')}
-  breadcrumbs={[{ name: 'Ana sayfa', path: '/' }, { name: T('Akış', 'Latest'), path: '/akis/' }]}>
+<Base title={T('Son haberler: yapay zeka gündemi', 'Latest AI news')} description={T("YZ Gündemi'nde yayımlanan tüm yapay zeka haberleri ve kısa notlar, en yeniden eskiye, saatleriyle; kategoriye göre süzülebilir.", 'Every AI story and brief we publish, newest first, with times; filter by section.')}
+  breadcrumbs={[{ name: 'Ana sayfa', path: '/' }, { name: T('Son haberler', 'Latest'), path: '/akis/' }]}>
   <section class="glossary river" data-river>
-    <span class="cat">{T('Akış', 'Latest')}</span>
-    <h1 class="page-h">{T('Yapay zeka gündemi: akış', 'AI news: the latest')}</h1>
+    <span class="cat">{T('Haberler', 'News')}</span>
+    <h1 class="page-h">{T('Son haberler', 'Latest news')}</h1>
     <p class="spot">{T('Yayımladığımız tüm haberler ve kısa notlar, en yeniden eskiye. Site günde dört kez güncellenir: gece turunda günün haberleri, gün içindeki üç ara turda kayda değer yeni gelişmeler eklenir.', 'Every story and brief we publish, newest first. Updated four times a day.')}</p>
 
     <div class="river-status" aria-live="polite">

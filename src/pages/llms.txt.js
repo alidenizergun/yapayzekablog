@@ -21,7 +21,7 @@ export async function GET(context) {
     `- [Yapay zeka modelleri karşılaştırma](${abs('/modeller-karsilastirma/')}): API fiyatları ve bağlam pencereleri, resmi kaynaklı`,
     `- [Yapay zeka araçları](${abs('/arac/')}): araçların fiyatları (kaynak ve tarihle), ücretsiz planları, Türkçe desteği ve alternatifleri`,
     `- [Araç karşılaştırmaları](${abs('/karsilastir/')})`,
-    `- [İşe göre en iyi araçlar](${abs('/en-iyi/')})`,
+    `- [En iyi yapay zeka uygulamaları (işe göre)](${abs('/en-iyi-yapay-zeka-uygulamalari/')})`,
     `- [Türkiye'de yapay zeka](${abs('/turkiye-yapay-zeka/')}): yerli modeller, girişimler, düzenleme zaman çizelgesi`,
     `- [Yerli yapay zeka modelleri](${abs('/yerli-yapay-zeka/')})`,
     `- [Yatırım takipçisi](${abs('/yatirimlar/')}): yapay zeka yatırımları, satın almalar ve halka arzlar`,

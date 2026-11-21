@@ -1,4 +1,5 @@
 ---
+import SubNav from '../components/SubNav.astro';
 import Base from '../layouts/Base.astro';
 import NewsRow from '../components/NewsRow.astro';
 import { YERLI_MODELS, STATUS_LABEL, TR_POLICY, TR_STATS, TR_ROUNDS, TR_CHECKED } from '../lib/turkiye.js';
@@ -24,6 +25,7 @@ const nextEvents = EVENTS.map((e, i) => ({ ...e, name: S(`event.${i}.name`, e.na
 ---
 <Base title={T("Türkiye'de yapay zeka: yerli modeller, girişimler, düzenlemeler", 'AI in Turkey: homegrown models, startups and regulation')} description={T('Türkiye yapay zeka ekosistemi tek sayfada: yerli dil modelleri, girişim sayıları ve yatırımlar, Yapay Zeka Eylem Planı ve kanun teklifleri, KVKK rehberleri, etkinlikler ve haberler.', 'Turkey’s AI ecosystem on one page: homegrown language models, startups and funding, the national AI action plan and draft laws, data-protection (KVKK) guidance, events and news.')}
   breadcrumbs={[{ name: 'Ana sayfa', path: '/' }, { name: T("Türkiye'de yapay zeka", 'AI in Turkey'), path: '/turkiye-yapay-zeka/' }]}>
+  <SubNav set="turkey" />
   <section class="deals tr-desk" data-pagefind-body>
     <span class="cat">{T('Türkiye masası', 'Turkey desk')}</span>
     <h1 class="page-h">{T("Türkiye'de yapay zeka", 'AI in Turkey')}</h1>

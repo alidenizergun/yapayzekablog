@@ -1,4 +1,5 @@
 ---
+import SubNav from '../../components/SubNav.astro';
 import Base from '../../layouts/Base.astro';
 import ToolCard from '../../components/ToolCard.astro';
 import { TOOLS, TOOL_CATS, TASKS, COMPARISONS, TOOLS_CHECKED, toolBySlug, compareSlug, trDate, toolUrl, vsTr, withGen } from '../../lib/tools.js';
@@ -14,16 +15,11 @@ const jsonLd = { '@type': 'CollectionPage', name: T('Yapay zeka araçları', 'AI
 ---
 <Base title={T('Yapay zeka araçları: fiyatlar, ücretsiz planlar ve alternatifler', 'AI tools directory: pricing, free plans and alternatives')} description={T(`ChatGPT, Claude, Gemini, Midjourney, ElevenLabs ve ${TOOLS.length} yapay zeka aracının fiyatları, ücretsiz planları, Türkçe desteği ve alternatifleri; görevlere göre en iyi araçlar ve karşılaştırmalar.`, `Pricing, free plans and alternatives for ${TOOLS.length} AI tools including ChatGPT, Claude, Gemini, Midjourney and ElevenLabs, plus the best tools by task and head-to-head comparisons.`)}
   jsonLd={jsonLd} breadcrumbs={[{ name: 'Ana sayfa', path: '/' }, { name: T('Yapay zeka araçları', 'AI tools'), path: '/arac/' }]}>
+  <SubNav set="tools" />
   <section class="glossary tools-index">
     <span class="cat">{T('Araçlar', 'Tools')}</span>
     <h1 class="page-h">{T('Yapay zeka araçları', 'AI tools')}</h1>
     <p class="spot">{T('En çok kullanılan yapay zeka araçlarının ne işe yaradığı, fiyatları, ücretsiz planları, Türkçe desteği ve alternatifleri. Fiyatlar kaynağı ve kontrol tarihiyle verilir; puanlama yapmıyoruz.', 'What the most widely used AI tools do, what they cost, their free plans, Turkish support and alternatives. Prices come with a source and the date we checked; we don’t score tools.')}</p>
-    <nav class="tools-quick" aria-label={T('Araç sayfaları', 'Tool pages')}>
-      <a class="btn" href={url('/arac-secici/')}>{T('Bana uygun aracı bul', 'Find the right tool')}</a>
-      <a class="btn btn-ghost" href={url('/ucretsiz-yapay-zeka-araclari/')}>{T('Ücretsiz araçlar', 'Free tools')}</a>
-      <a class="btn btn-ghost" href={url('/en-iyi-yapay-zeka-uygulamalari/')}>{T('En iyi uygulamalar', 'Best apps')}</a>
-      <a class="btn btn-ghost" href={url('/yeni-araclar/')}>{T('Yeni araçlar', 'New tools')}</a>
-    </nav>
 
     <h2 class="ev-h">{T('Ne yapmak istiyorsunuz?', 'What do you want to do?')}</h2>
     <ul class="task-chips">{TASKS.map((k) => <li><a href={url(`/en-iyi/${k.slug}/`)}>{locTask(k, lang).short}</a></li>)}</ul>

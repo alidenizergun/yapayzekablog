@@ -72,7 +72,7 @@ Videoda dikkat edilecekler:
 
 ## Araç seçerken neye bakmalı
 
-Araç sayısı çok; hepsini denemek yerine işinize göre seçin. Karşılaştırma listeleri için [işe göre en iyi araçlar](/en-iyi/) sayfasına, Türkçe bir araç özeti için de [Ideasoft'un yazısına](https://www.ideasoft.com.tr/yapay-zeka-e-ticaret-fotografi-yapma/) bakabilirsiniz. Seçim yaparken şu soruları sorun:
+Araç sayısı çok; hepsini denemek yerine işinize göre seçin. Karşılaştırma listeleri için [işe göre en iyi araçlar](/en-iyi-yapay-zeka-uygulamalari/) sayfasına, Türkçe bir araç özeti için de [Ideasoft'un yazısına](https://www.ideasoft.com.tr/yapay-zeka-e-ticaret-fotografi-yapma/) bakabilirsiniz. Seçim yaparken şu soruları sorun:
 
 - Ürünün detayını ne kadar sadık koruyor? Küçük bir deneme setiyle üç beş ürünü aynı araçta deneyin.
 - Çıktıyı ticari amaçla kullanma izni var mı?

@@ -32,7 +32,7 @@ The central warning in the Salesforce report applies here: production is speedin
 
 ## Visuals and video
 
-According to HubSpot, media production ranks second in intensive use, after content (37.2%). An example workflow: write the campaign idea and visual guidelines (colors, style, elements to avoid); generate several image or short video drafts; discard those that do not fit the brand; and publish the selected one after a final touch-up by your designer. AI speeds up the draft stage, but brand consistency and detail errors (such as distorted hands or misspelled text) require a human eye. To get started, see the [guide to creating images with AI](/rehber/yapay-zeka-ile-gorsel-olusturma/). The [best tools by task](/en-iyi/) page can help you find a tool that fits your work, but the research notes contain no verified finding that any specific tool is superior.
+According to HubSpot, media production ranks second in intensive use, after content (37.2%). An example workflow: write the campaign idea and visual guidelines (colors, style, elements to avoid); generate several image or short video drafts; discard those that do not fit the brand; and publish the selected one after a final touch-up by your designer. AI speeds up the draft stage, but brand consistency and detail errors (such as distorted hands or misspelled text) require a human eye. To get started, see the [guide to creating images with AI](/rehber/yapay-zeka-ile-gorsel-olusturma/). The [best tools by task](/en-iyi-yapay-zeka-uygulamalari/) page can help you find a tool that fits your work, but the research notes contain no verified finding that any specific tool is superior.
 
 ## Ad copy variations
 

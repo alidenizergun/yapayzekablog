@@ -52,7 +52,7 @@ Salesforce raporundaki asıl uyarı da burada geçerli: üretim hızlanıyor, an
 
 ## Görsel ve video
 
-HubSpot'a göre medya üretimi, yoğun kullanımda içerikten sonra ikinci sırada (yüzde 37,2). Örnek bir akış: kampanya fikrini ve görsel yönergelerini (renk, stil, kullanılmayacak unsurlar) yazın; birkaç görsel veya kısa video taslağı üretin; markaya uymayanları eleyin; seçileni tasarımcınızın son rötuşuyla yayına alın. Taslak aşamasında hız kazandırır; marka tutarlılığı ve detay hataları (bozuk el, yanlış yazılmış metin gibi) için insan gözü gerekir. Başlamak için [yapay zeka ile görsel oluşturma rehberine](/rehber/yapay-zeka-ile-gorsel-olusturma/) göz atın. Hangi aracın işinize uyduğu için [işe göre en iyi araçlar](/en-iyi/) sayfası yol gösterebilir; araştırma notlarında belirli bir aracın üstünlüğüne dair doğrulanmış bir bulgu yok.
+HubSpot'a göre medya üretimi, yoğun kullanımda içerikten sonra ikinci sırada (yüzde 37,2). Örnek bir akış: kampanya fikrini ve görsel yönergelerini (renk, stil, kullanılmayacak unsurlar) yazın; birkaç görsel veya kısa video taslağı üretin; markaya uymayanları eleyin; seçileni tasarımcınızın son rötuşuyla yayına alın. Taslak aşamasında hız kazandırır; marka tutarlılığı ve detay hataları (bozuk el, yanlış yazılmış metin gibi) için insan gözü gerekir. Başlamak için [yapay zeka ile görsel oluşturma rehberine](/rehber/yapay-zeka-ile-gorsel-olusturma/) göz atın. Hangi aracın işinize uyduğu için [işe göre en iyi araçlar](/en-iyi-yapay-zeka-uygulamalari/) sayfası yol gösterebilir; araştırma notlarında belirli bir aracın üstünlüğüne dair doğrulanmış bir bulgu yok.
 
 ## Reklam metni varyasyonları
 

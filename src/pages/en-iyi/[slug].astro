@@ -34,9 +34,9 @@ const jsonLd = [
 ];
 ---
 <Base title={k.title} description={`${k.intro.split('. ')[0]}. ${picks.map(({ t }) => t.name).join(', ')}: ${T('fiyatlar, ücretsiz planlar ve Türkçe desteği.', 'pricing, free plans and Turkish support.')}`.slice(0, 300)}
-  jsonLd={jsonLd} breadcrumbs={[{ name: 'Ana sayfa', path: '/' }, { name: T('Yapay zeka araçları', 'AI tools'), path: '/arac/' }, { name: T('İşe göre en iyiler', 'Best tools by task'), path: '/en-iyi/' }, { name: k.short, path: `/en-iyi/${k.slug}/` }]}>
+  jsonLd={jsonLd} breadcrumbs={[{ name: 'Ana sayfa', path: '/' }, { name: T('Yapay zeka araçları', 'AI tools'), path: '/arac/' }, { name: T('İşe göre en iyiler', 'Best tools by task'), path: '/en-iyi-yapay-zeka-uygulamalari/' }, { name: k.short, path: `/en-iyi/${k.slug}/` }]}>
   <section class="deals best" data-pagefind-body>
-    <nav class="crumb" aria-label={T('Konum', 'Breadcrumb')} data-pagefind-ignore><a href={url('/')}>{T('Ana sayfa', 'Home')}</a><span aria-hidden="true">/</span><a href={url('/arac/')}>{T('Yapay zeka araçları', 'AI tools')}</a><span aria-hidden="true">/</span><a href={url('/en-iyi/')}>{T('İşe göre en iyiler', 'Best tools by task')}</a></nav>
+    <nav class="crumb" aria-label={T('Konum', 'Breadcrumb')} data-pagefind-ignore><a href={url('/')}>{T('Ana sayfa', 'Home')}</a><span aria-hidden="true">/</span><a href={url('/arac/')}>{T('Yapay zeka araçları', 'AI tools')}</a><span aria-hidden="true">/</span><a href={url('/en-iyi-yapay-zeka-uygulamalari/')}>{T('İşe göre en iyiler', 'Best tools by task')}</a></nav>
     <span class="cat">{T('En iyi araçlar', 'Best tools')}</span>
     <h1 class="page-h">{k.title}</h1>
     <p class="spot">{k.intro}</p>

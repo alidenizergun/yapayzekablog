@@ -1,4 +1,5 @@
 ---
+import SubNav from '../components/SubNav.astro';
 import Base from '../layouts/Base.astro';
 import { EVENTS, EVENTS_CHECKED } from '../lib/events.js';
 import { formatDate, url } from '../lib/news.js';
@@ -36,6 +37,7 @@ const jsonLd = upcoming.filter((e) => !e.approx).map((e) => ({
 ---
 <Base title={T('Türkiye yapay zeka etkinlikleri takvimi: zirveler, konferanslar, fuarlar', 'AI events in Turkey: summits, conferences and expos')} description={T("Türkiye'de düzenlenecek yapay zeka zirveleri, konferansları ve fuarları: tarih, şehir, mekan ve düzenleyen bilgisiyle güncel etkinlik takvimi.", 'Upcoming AI summits, conferences and expos in Turkey, with dates, cities, venues and organizers.')}
   jsonLd={jsonLd} breadcrumbs={[{ name: 'Ana sayfa', path: '/' }, { name: T('Etkinlik takvimi', 'Events'), path: '/etkinlikler/' }]}>
+  <SubNav set="turkey" />
   <section class="deals events">
     <span class="cat">{T('Takvim', 'Calendar')}</span>
     <h1 class="page-h">{T('Türkiye yapay zeka etkinlikleri takvimi', 'AI events in Turkey')}</h1>

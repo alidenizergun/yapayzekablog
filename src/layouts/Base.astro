@@ -98,42 +98,31 @@ const liveSectors = SECTORS.filter((s) => sectorSet.has(s.slug));
 // Menü grupları okurun sorusuna göre: "Ne oldu?" (Haberler) · "Hangi aracı kullanayım?" (Araçlar) ·
 // "Bu ne demek, nasıl yapılır?" (Öğren) · "Benim işimde ne işe yarar?" (Sektörler) · "Türkiye'de durum ne?" (Türkiye) ·
 // "Rakamlar ne diyor?" (Veriler). Her bağlantının altında ne bulacağını söyleyen kısa açıklama var.
+// Site bölümleri: her sayfanın TEK adı var (menü, alt bilgi ve sayfa başlığı aynı adı kullanır).
+// Birbirine çok yakın sayfalar bir ana sayfa altında toplanır; alt sayfalara o sayfanın üstündeki sekmelerden gidilir
+// (Araçlar: ücretsiz, yeni, karşılaştırma, araç seçici · Türkiye: haberler, yerli modeller, etkinlikler).
 const navGroups = [
-  { key: 'news', label: T('Haberler', 'News'), cols: true, items: [
-    item(T('Son haberler', 'Latest news'), '/akis/', T('Tüm haberler, en yeniden eskiye', 'All stories, newest first')),
-    item(T('Haftanın özeti', 'Week in review'), '/haftalik/', T('Haftanın en önemli gelişmeleri', 'The week’s biggest stories')),
-    item(T('Süren olaylar', 'Ongoing stories'), '/gelisme/', T('Gelişen hikâyelerin zaman çizelgesi', 'Timelines of developing stories')),
-    // "Araçlar" haber bölümü, menüdeki Araçlar rehberiyle karışmasın diye burada "Araç haberleri" olarak gösterilir
+  { key: 'news', label: T('Haberler', 'News'), items: [
+    item(T('Son haberler', 'Latest news'), '/akis/'),
+    item(T('Haftalık özet', 'Weekly roundup'), '/haftalik/'),
+    item(T('Gelişen hikâyeler', 'Developing stories'), '/gelisme/'),
+    // "Araçlar" haber bölümü, Yapay zeka araçları rehberiyle karışmasın diye "Araç haberleri" olarak gösterilir
     ...nav.map((slug) => ({ ...item(slug === 'araclar' ? T('Araç haberleri', 'Tool news') : S(`cat.${slug}.name`, categoryBySlug(slug)?.name), `/kategori/${slug}/`), current: slug === currentCat })),
   ] },
-  { key: 'tools', label: T('Araçlar', 'Tools'), items: [
-    item(T('Tüm yapay zeka araçları', 'All AI tools'), '/arac/', T('Ne işe yarar, fiyatı ne, ücretsiz mi?', 'What it does, pricing, free plans')),
-    item(T('Bana uygun aracı bul', 'Find the right tool'), '/arac-secici/', T('Birkaç soruyla size göre öneri', 'A few questions, a tailored pick')),
-    item(T('İşe göre en iyi araçlar', 'Best tools by task'), '/en-iyi/', T('CV, görsel, video, kod ve daha fazlası', 'Resumes, images, video, code and more')),
-    item(T('Karşılaştırmalar', 'Comparisons'), '/karsilastir/', T('ChatGPT mi Claude mi?', 'ChatGPT or Claude?')),
-    item(T('Ücretsiz araçlar', 'Free AI tools'), '/ucretsiz-yapay-zeka-araclari/', T('Para ödemeden kullanabilecekleriniz', 'Tools you can use for free')),
-    item(T('Yeni çıkan araçlar', 'New AI tools'), '/yeni-araclar/', T('Son eklenen araçlar', 'Recently added tools')),
+  { key: 'tools', label: T('Araçlar ve öğren', 'Tools and learning'), items: [
+    item(T('Yapay zeka araçları', 'AI tools'), '/arac/'),
+    item(T('En iyi uygulamalar', 'Best AI apps'), '/en-iyi-yapay-zeka-uygulamalari/'),
+    item(T('Araç karşılaştırmaları', 'Tool comparisons'), '/karsilastir/'),
+    item(T('Model fiyatları', 'Model pricing'), '/modeller-karsilastirma/'),
+    item(T('Rehberler', 'Guides'), '/rehber/'),
+    ...(liveSectors.length ? [item(T('Sektörlerde yapay zeka', 'AI by industry'), '/sektor/')] : []),
+    item(T('Sözlük', 'Glossary'), '/sozluk/'),
   ] },
-  { key: 'learn', label: T('Öğren', 'Learn'), items: [
-    item(T('Yapay zeka nedir?', 'What is AI?'), '/sozluk/yapay-zeka/', T('Sıfırdan başlayanlar için', 'Start here if you are new')),
-    item(T('Nasıl yapılır rehberleri', 'How-to guides'), '/rehber/', T('Adım adım kullanım kılavuzları', 'Step-by-step guides')),
-    item(T('Yapay zeka sözlüğü', 'AI glossary'), '/sozluk/', T(`${GLOSSARY.length} terim sade Türkçeyle`, `${GLOSSARY.length} AI terms in plain English`)),
-  ] },
-  ...(liveSectors.length ? [{ key: 'sectors', label: T('Sektörler', 'Industries'), items: [
-    item(T('Tüm sektörler', 'All industries'), '/sektor/', T('Her sektör için rehber, araç ve haber', 'Guides, tools and news for each industry')),
-    ...liveSectors.map((s) => item(T(s.title, s.en.title), `/sektor/${s.slug}/`)),
-  ] }] : []),
-  { key: 'turkey', label: T('Türkiye', 'Turkey'), items: [
-    item(T("Türkiye'de yapay zeka", 'AI in Turkey'), '/turkiye-yapay-zeka/', T('Ekosistem, düzenlemeler, yatırımlar', 'Ecosystem, regulation, funding')),
-    ...(counts.get('turkiye') ? [item(T('Türkiye haberleri', 'Turkey news'), '/kategori/turkiye/', T('Türkiye’den son gelişmeler', 'Latest from Turkey'))] : []),
-    item(T('Yerli yapay zeka modelleri', 'Turkish AI models'), '/yerli-yapay-zeka/', T('Türkiye’de geliştirilen modeller', 'Models built in Turkey')),
-    item(T('Etkinlik takvimi', 'Events'), '/etkinlikler/', T('Konferans, zirve ve buluşmalar', 'Conferences and meetups')),
-  ] },
-  { key: 'data', label: T('Veriler', 'Data'), right: true, items: [
-    item(T('Yatırımlar ve satın almalar', 'Funding and acquisitions'), '/yatirimlar/', T('Kim, kime, ne kadar yatırım yaptı?', 'Who invested how much in whom')),
-    item(T('Model fiyatları', 'Model pricing'), '/modeller-karsilastirma/', T('API fiyatları ve özellikler yan yana', 'API prices and features side by side')),
-    item(T('Raporlar', 'Reports'), '/raporlar/', T('Büyük araştırma raporlarından öne çıkanlar', 'Key findings from major AI reports')),
-    item(T('Şirketler ve kişiler', 'Companies and people'), '/konular/', T('OpenAI, Nvidia, Altman ve diğerleri', 'OpenAI, Nvidia, Altman and others')),
+  { key: 'explore', label: T('Keşfet', 'Explore'), items: [
+    item(T("Türkiye'de yapay zeka", 'AI in Turkey'), '/turkiye-yapay-zeka/'),
+    item(T('Yatırımlar ve satın almalar', 'Funding and acquisitions'), '/yatirimlar/'),
+    item(T('Raporlar', 'Reports'), '/raporlar/'),
+    item(T('Şirketler ve kişiler', 'Companies and people'), '/konular/'),
   ] },
 ];
 // Menü çubuğunda ayrıca kısayolu olan sayfalar (Son haberler) açıldığında grup başlığı da işaretlenmesin
@@ -143,44 +132,23 @@ const groupOf = (k) => navGroups.find((g) => g.key === k)?.items ?? [];
 const onNews = ['/akis/', '/kategori/', '/haber/', '/haftalik/', '/gelisme/'].some((p) => path.startsWith(L.u(p)));
 const topLinks = [
   { ...item(T('Haberler', 'News'), '/akis/'), current: onNews },
-  item(T('Araçlar', 'AI tools'), '/arac/'),
-  item(T('Rehberler', 'Guides'), '/rehber/'),
+  { ...item(T('Araçlar', 'AI tools'), '/arac/'), current: ['/arac/', '/arac-secici/', '/en-iyi', '/ucretsiz-yapay-zeka-araclari/', '/yeni-araclar/', '/karsilastir/', '/modeller-karsilastirma/'].some((p) => path.startsWith(L.u(p))) },
+  { ...item(T('Rehberler', 'Guides'), '/rehber/'), current: ['/rehber/', '/sektor/'].some((p) => path.startsWith(L.u(p))) },
   item(T('Sözlük', 'Glossary'), '/sozluk/'),
 ];
-// "Menü" paneli: üç kısa sütun
+// "Menü" paneli: üç kısa sütun (adlar navGroups ile aynı)
 const megaCols = [
   { label: T('Haber bölümleri', 'News sections'), groups: [{ cls: 'two', items: [item(T('Tüm haberler', 'All news'), '/akis/'), ...groupOf('news').filter((i) => i.href.includes('/kategori/'))] }] },
-  { label: T('Keşfet', 'Explore'), groups: [{ items: [
-    item(T('Haftanın özeti', 'Week in review'), '/haftalik/'),
-    item(T('Süren olaylar', 'Ongoing stories'), '/gelisme/'),
-    item(T("Türkiye'de yapay zeka", 'AI in Turkey'), '/turkiye-yapay-zeka/'),
-    item(T('Yatırımlar ve satın almalar', 'Funding and acquisitions'), '/yatirimlar/'),
-    item(T('Raporlar', 'Reports'), '/raporlar/'),
-    item(T('Şirketler ve kişiler', 'Companies and people'), '/konular/'),
-    item(T('Etkinlikler', 'Events'), '/etkinlikler/'),
-  ] }] },
-  { label: T('Araçlar ve öğren', 'Tools and learning'), groups: [{ items: [
-    item(T('Yapay zeka araçları', 'AI tools'), '/arac/'),
-    item(T('Bana uygun aracı bul', 'Find the right tool'), '/arac-secici/'),
-    item(T('Karşılaştırmalar', 'Comparisons'), '/karsilastir/'),
-    item(T('Model fiyatları', 'Model pricing'), '/modeller-karsilastirma/'),
-    item(T('Rehberler', 'Guides'), '/rehber/'),
-    item(T('Sözlük', 'Glossary'), '/sozluk/'),
-    ...(liveSectors.length ? [item(T('Sektörlere göre yapay zeka', 'AI by industry'), '/sektor/')] : []),
-  ] }] },
+  { label: T('Keşfet', 'Explore'), groups: [{ items: [...groupOf('news').filter((i) => /haftalik|gelisme/.test(i.href)), ...groupOf('explore')] }] },
+  { label: T('Araçlar ve öğren', 'Tools and learning'), groups: [{ items: groupOf('tools') }] },
 ];
 const isHome = Astro.url.pathname.replace(/\/$/, '') === L.u('/').replace(/\/$/, '');
 const footerCats = CATEGORIES.filter((c) => counts.get(c.slug));
 // Alt bilgi menüsü: telefonda açılır kapanır gruplar, geniş ekranda hepsi açık
 const footGroups = [
   { label: T('Haberler', 'News'), wide: true, items: groupOf('news') },
-  { label: T('Araçlar', 'Tools'), items: groupOf('tools') },
-  { label: T('Öğren ve keşfet', 'Learn and explore'), wide: true, items: [
-    ...groupOf('learn').filter((i) => !i.href.includes('/sozluk/yapay-zeka')),
-    ...(liveSectors.length ? [item(T('Sektörler', 'Industries'), '/sektor/')] : []),
-    ...groupOf('turkey').filter((i) => !i.href.includes('/kategori/')),
-    ...groupOf('data'),
-  ] },
+  { label: T('Araçlar ve öğren', 'Tools and learning'), items: groupOf('tools') },
+  { label: T('Keşfet', 'Explore'), items: groupOf('explore') },
   { label: 'YZ Gündemi', items: [
     item(T('Hakkımızda', 'About us'), '/hakkimizda/'),
     item(T('Yayın ilkeleri', 'Editorial standards'), '/hakkimizda/#ilkeler'),

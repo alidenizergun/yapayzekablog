@@ -1,4 +1,5 @@
 ---
+import SubNav from '../components/SubNav.astro';
 import Base from '../layouts/Base.astro';
 import ToolCard from '../components/ToolCard.astro';
 import { TOOLS, TOOL_CATS, TOOLS_CHECKED, trDate, toolUrl } from '../lib/tools.js';
@@ -14,6 +15,7 @@ const jsonLd = { '@type': 'ItemList', name: T('Ücretsiz yapay zeka araçları',
 ---
 <Base title={T('Ücretsiz yapay zeka araçları: ücretsiz planı olan en iyi uygulamalar', 'Free AI tools: the best apps with a free plan')} description={T(`Ücretsiz kullanılabilen ${free.length} yapay zeka aracı: sohbet, görsel, video, ses, kodlama, çeviri ve araştırma için ücretsiz planı olan uygulamalar ve sınırları.`, `${free.length} AI tools you can use for free: chat, image, video, audio, coding, translation and research apps with a free plan, and their limits.`)}
   jsonLd={jsonLd} breadcrumbs={[{ name: 'Ana sayfa', path: '/' }, { name: T('Yapay zeka araçları', 'AI tools'), path: '/arac/' }, { name: T('Ücretsiz araçlar', 'Free tools'), path: '/ucretsiz-yapay-zeka-araclari/' }]}>
+  <SubNav set="tools" />
   <section class="glossary" data-pagefind-body>
     <span class="cat">{T('Ücretsiz', 'Free')}</span>
     <h1 class="page-h">{T('Ücretsiz yapay zeka araçları', 'Free AI tools')}</h1>

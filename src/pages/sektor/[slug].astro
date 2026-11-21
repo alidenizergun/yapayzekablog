@@ -34,10 +34,10 @@ const jsonLd = {
 ---
 <Base title={T(`${title}: kullanım alanları, araçlar, riskler ve düzenlemeler`, `${title}: uses, tools, risks and regulation`)}
   description={(EN ? s.intro.en : s.intro.tr).slice(0, 300)}
-  jsonLd={jsonLd} breadcrumbs={[{ name: 'Ana sayfa', path: '/' }, { name: T('İş kolları', 'Industries'), path: '/sektor/' }, { name: title, path: `/sektor/${s.slug}/` }]}>
+  jsonLd={jsonLd} breadcrumbs={[{ name: 'Ana sayfa', path: '/' }, { name: T('Sektörler', 'Industries'), path: '/sektor/' }, { name: title, path: `/sektor/${s.slug}/` }]}>
   <section class="glossary guides sector">
-    <nav class="crumb" aria-label={T('Konum', 'Breadcrumb')}><a href={url('/')}>{T('Ana sayfa', 'Home')}</a><span aria-hidden="true">/</span><a href={url('/sektor/')}>{T('İş kolları', 'Industries')}</a></nav>
-    <span class="cat">{T('İş kolları', 'Industries')}</span>
+    <nav class="crumb" aria-label={T('Konum', 'Breadcrumb')}><a href={url('/')}>{T('Ana sayfa', 'Home')}</a><span aria-hidden="true">/</span><a href={url('/sektor/')}>{T('Sektörler', 'Industries')}</a></nav>
+    <span class="cat">{T('Sektörler', 'Industries')}</span>
     <h1 class="page-h">{title}</h1>
     <p class="spot">{EN ? s.intro.en : s.intro.tr}</p>
 

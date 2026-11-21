@@ -1,0 +1,34 @@
+---
+// Bölüm sekmeleri: birbirine yakın sayfaları tek çatı altında toplar (Araçlar, Türkiye).
+// Menüde yalnızca ana sayfa yer alır; alt sayfalara bu sekmelerden gidilir.
+import { i18n } from '../i18n/index.js';
+interface Props { set: 'tools' | 'turkey' }
+const { set } = Astro.props;
+const L = await i18n(Astro);
+const { T } = L;
+const SETS = {
+  tools: [
+    [T('Tüm araçlar', 'All tools'), '/arac/'],
+    [T('En iyi uygulamalar', 'Best apps'), '/en-iyi-yapay-zeka-uygulamalari/'],
+    [T('Ücretsiz', 'Free'), '/ucretsiz-yapay-zeka-araclari/'],
+    [T('Yeni çıkanlar', 'New'), '/yeni-araclar/'],
+    [T('Karşılaştırmalar', 'Comparisons'), '/karsilastir/'],
+    [T('Model fiyatları', 'Model pricing'), '/modeller-karsilastirma/'],
+    [T('Bana uygun aracı bul', 'Find the right tool'), '/arac-secici/'],
+  ],
+  turkey: [
+    [T('Genel bakış', 'Overview'), '/turkiye-yapay-zeka/'],
+    [T('Türkiye haberleri', 'Turkey news'), '/kategori/turkiye/'],
+    [T('Yerli modeller', 'Turkish models'), '/yerli-yapay-zeka/'],
+    [T('Etkinlikler', 'Events'), '/etkinlikler/'],
+  ],
+};
+const path = Astro.url.pathname;
+const items = SETS[set].map(([label, href]) => {
+  const u = L.u(href);
+  return { label, href: u, current: href === '/arac/' ? path === u : path.startsWith(u) };
+});
+---
+<nav class="subnav" aria-label={set === 'tools' ? T('Araç bölümleri', 'Tool sections') : T('Türkiye bölümleri', 'Turkey sections')} data-pagefind-ignore>
+  <ul>{items.map((i) => <li><a href={i.href} aria-current={i.current ? 'page' : undefined}>{i.label}</a></li>)}</ul>
+</nav>

@@ -1,4 +1,5 @@
 ---
+import SubNav from '../components/SubNav.astro';
 import Base from '../layouts/Base.astro';
 import { TOOLS, TASKS, freeLabel, toolUrl, catName } from '../lib/tools.js';
 import { url } from '../lib/news.js';
@@ -17,6 +18,7 @@ const data = {
 ---
 <Base title={T('Yapay zeka araç seçici: size uygun aracı bulun', 'AI tool finder: find the right AI tool for you')} description={T('Ne yapmak istediğinizi, bütçenizi ve Türkçe ihtiyacınızı seçin; size uygun yapay zeka araçlarını fiyat ve ücretsiz plan bilgisiyle görün.', 'Pick your task, budget and whether you need Turkish, and see matching AI tools with pricing and free-plan details.')}
   breadcrumbs={[{ name: 'Ana sayfa', path: '/' }, { name: T('Yapay zeka araçları', 'AI tools'), path: '/arac/' }, { name: T('Araç seçici', 'Tool finder'), path: '/arac-secici/' }]}>
+  <SubNav set="tools" />
   <section class="glossary picker">
     <span class="cat">{T('Araç seçici', 'Tool finder')}</span>
     <h1 class="page-h">{T('Size uygun yapay zeka aracını bulun', 'Find the right AI tool for you')}</h1>

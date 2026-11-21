@@ -56,7 +56,7 @@ const INTERNAL = new Map([
   ...SECTORS.map((s) => [`/sektor/${s.slug}/`, s.title]),
   ...GLOSSARY.map((g) => [`/sozluk/${g.slug}/`, `sözlük: ${g.term}`]),
   ['/yatirimlar/', 'yatırım takipçisi'], ['/raporlar/', 'yapay zeka raporları'], ['/turkiye-yapay-zeka/', "Türkiye'de yapay zeka"],
-  ['/modeller-karsilastirma/', 'model API fiyatları'], ['/en-iyi/', 'işe göre en iyi araçlar'], ['/karsilastir/', 'karşılaştırmalar'],
+  ['/modeller-karsilastirma/', 'model API fiyatları'], ['/en-iyi-yapay-zeka-uygulamalari/', 'en iyi yapay zeka uygulamaları (işe göre)'], ['/karsilastir/', 'karşılaştırmalar'],
 ]);
 function sanitizeBody(md, allowedExternal) {
   return String(md || '')

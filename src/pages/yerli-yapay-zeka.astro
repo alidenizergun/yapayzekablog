@@ -1,4 +1,5 @@
 ---
+import SubNav from '../components/SubNav.astro';
 import Base from '../layouts/Base.astro';
 import { YERLI_MODELS, STATUS_LABEL, TR_CHECKED } from '../lib/turkiye.js';
 import { trDate } from '../lib/tools.js';
@@ -28,6 +29,7 @@ const jsonLd = [
 ---
 <Base title={T('Yerli yapay zeka modelleri: hangisi kullanılabiliyor?', 'Turkish AI models: which ones can you use?')} description={T("EVREN, Kumru, Trendyol LLM, COSMOS, Turkcell LLM, HAVELSAN MAIN, T3 AI ve BİLGE: Türkiye'de geliştirilen yapay zeka modellerinin durumu, erişim yolu ve kaynakları.", 'EVREN, Kumru, Trendyol LLM, COSMOS, Turkcell LLM, HAVELSAN MAIN, T3 AI and BİLGE: status, access and sources for AI models built in Turkey.')}
   jsonLd={jsonLd} breadcrumbs={[{ name: 'Ana sayfa', path: '/' }, { name: T("Türkiye'de yapay zeka", 'AI in Turkey'), path: '/turkiye-yapay-zeka/' }, { name: T('Yerli modeller', 'Turkish AI models'), path: '/yerli-yapay-zeka/' }]}>
+  <SubNav set="turkey" />
   <section class="deals" data-pagefind-body>
     <nav class="crumb" aria-label={T('Konum', 'Breadcrumb')} data-pagefind-ignore><a href={url('/')}>{T('Ana sayfa', 'Home')}</a><span aria-hidden="true">/</span><a href={url('/turkiye-yapay-zeka/')}>{T("Türkiye'de yapay zeka", 'AI in Turkey')}</a></nav>
     <span class="cat">{T('Türkiye', 'Turkey')}</span>
