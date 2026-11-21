@@ -33,7 +33,7 @@ const jsonLd = { '@type': 'CollectionPage', name: T('Yapay zeka araçları', 'AI
     </header>
 
     <nav class="tool-shortcuts" aria-label={T('Kısayollar', 'Shortcuts')}>
-      <a href={url('/arac-secici/')}><strong>{T('Bana uygun aracı bul →', 'Find the right tool →')}</strong><span>{T('Üç soruyu yanıtlayın, ihtiyacınıza uyan araçları görün.', 'Answer three questions and see tools that fit.')}</span></a>
+      <a href={url('/arac-secici/')}><strong>{T('Bana uygun aracı bul', 'Find the right tool')}</strong><span>{T('Üç soruyu yanıtlayın, ihtiyacınıza uyan araçları görün.', 'Answer three questions and see tools that fit.')}</span></a>
       <a href={url('/yapay-zeka-abonelikleri/')}><strong>{T('Abonelik fiyatları', 'Subscription prices')}</strong><span>{T('Tüm planlar tek tabloda, dolar ve TL.', 'Every plan in one table, in dollars and lira.')}</span></a>
       <a href={url('/karsilastir/')}><strong>{T('Karşılaştırmalar', 'Comparisons')}</strong><span>{T(`${COMPARISONS.length} araç ikilisi yan yana.`, `${COMPARISONS.length} head-to-head comparisons.`)}</span></a>
       <a href={url('/yapay-zeka-komutlari/')}><strong>{T('Hazır komutlar', 'Prompt library')}</strong><span>{T(`${PROMPTS.length} kopyalanabilir Türkçe komut.`, `${PROMPTS.length} ready-to-use prompts.`)}</span></a>

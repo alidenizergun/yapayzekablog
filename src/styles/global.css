@@ -1194,8 +1194,6 @@ img.thumb { color: transparent; font-size: 0; }
 .tool-shortcuts a:hover { border-color: var(--fg); }
 .tool-shortcuts strong { font-size: 16px; }
 .tool-shortcuts span { font-size: 14px; color: var(--muted); line-height: 1.45; }
-.tool-shortcuts a:first-child { background: var(--fg); color: var(--bg); border-color: var(--fg); }
-.tool-shortcuts a:first-child span { color: inherit; opacity: .8; }
 .chip-row { display: flex; flex-wrap: wrap; gap: 8px; list-style: none; margin: 12px 0 0; padding: 0; }
 .chip-row a, .chip-row button { display: inline-flex; align-items: center; gap: 6px; min-height: 40px; padding: 0 14px; border: 1px solid var(--line); border-radius: 999px; background: var(--bg); color: var(--fg); font: inherit; font-size: 14px; font-weight: 600; cursor: pointer; white-space: nowrap; }
 .chip-row a:hover, .chip-row button:hover { border-color: var(--fg); }
