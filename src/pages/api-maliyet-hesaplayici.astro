@@ -38,6 +38,7 @@ const jsonLd = [
   description={T('Günlük istek sayısını ve istek başına token miktarını girin; OpenAI, Anthropic Claude, Google Gemini ve DeepSeek modellerinin aylık API maliyetini dolar ve TL olarak karşılaştırın.', 'Enter daily requests and tokens per request to compare the monthly API cost of OpenAI, Anthropic Claude, Google Gemini and DeepSeek models.')}
   jsonLd={jsonLd} breadcrumbs={[{ name: 'Ana sayfa', path: '/' }, { name: T('Model API fiyatları', 'AI model API pricing'), path: '/modeller-karsilastirma/' }, { name: T('API maliyet hesaplayıcı', 'API cost calculator'), path: '/api-maliyet-hesaplayici/' }]}>
   <SubNav set="tools" />
+  <SubNav set="prices" />
   <section class="glossary picker apicalc">
     <span class="cat">{T('Hesaplayıcı', 'Calculator')}</span>
     <h1 class="page-h">{T('Yapay zeka API maliyet hesaplayıcı', 'AI API cost calculator')}</h1>

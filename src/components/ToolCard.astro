@@ -7,7 +7,7 @@ const lang = langOf(Astro.url);
 const t = locTool(Astro.props.tool, lang);
 const { note, rank } = Astro.props;
 ---
-<article class="tool-card">
+<article class="tool-card" data-tool={t.slug} data-free={t.free === 'var' || t.free === 'deneme' ? '1' : undefined} data-tr={t.turkish ? '1' : undefined} data-added={t.added}>
   <div class="tool-mono" aria-hidden="true">{t.name.slice(0, 1)}</div>
   <div class="tool-card-body">
     <h3>{rank && <span class="tool-rank">{rank}.</span>}<a href={url(toolUrl(t.slug))}>{t.name}</a></h3>

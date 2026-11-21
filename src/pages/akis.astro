@@ -26,58 +26,87 @@ for (const n of all) {
 const cats = [...new Set(all.map((n) => n.data.category))].map((c) => ({ c, name: S(`cat.${c}.name`, catName(c)), count: all.filter((n) => n.data.category === c).length })).sort((a, b) => b.count - a.count);
 const shortCount = all.filter((n) => n.data.format === 'kisa').length;
 const latest = all[0]?.data.date;
+// Kenar sütunu: bu akışta haberi olan gelişen hikâyeler
+const activeStories = [...new Map(all.map((n) => storyOf(n)).filter(Boolean).map((st) => [st.slug, st])).values()].slice(0, 5)
+  .map((st) => ({ ...st, title: S(`story.${st.slug}.title`, st.title), count: all.filter((n) => storyOf(n)?.slug === st.slug).length }));
 ---
 <Base title={T('Son haberler: yapay zeka gündemi', 'Latest AI news')} description={T("YZ Gündemi'nde yayımlanan tüm yapay zeka haberleri ve kısa notlar, en yeniden eskiye, saatleriyle; kategoriye göre süzülebilir.", 'Every AI story and brief we publish, newest first, with times; filter by section.')}
   breadcrumbs={[{ name: 'Ana sayfa', path: '/' }, { name: T('Son haberler', 'Latest'), path: '/akis/' }]}>
-  <section class="glossary river" data-river>
-    <span class="cat">{T('Haberler', 'News')}</span>
-    <h1 class="page-h">{T('Son haberler', 'Latest news')}</h1>
-    <p class="spot">{T('Yayımladığımız tüm haberler ve kısa notlar, en yeniden eskiye. Site günde dört kez güncellenir: gece turunda günün haberleri, gün içindeki üç ara turda kayda değer yeni gelişmeler eklenir.', 'Every story and brief we publish, newest first. Updated four times a day.')}</p>
+  <section class="river hub" data-river>
+    <header class="hub-head">
+      <span class="cat">{T('Haberler', 'News')}</span>
+      <h1 class="page-h">{T('Son haberler', 'Latest news')}</h1>
+      <p class="spot">{T('Yayımladığımız tüm haberler ve kısa notlar, en yeniden eskiye.', 'Every story and brief we publish, newest first.')}</p>
+      <div class="river-status hub-meta" aria-live="polite">
+        {latest && <span>{T('Son güncelleme', 'Last updated')}: <time datetime={latest.toISOString()}>{dayLabel(dayKey(latest))}</time></span>}
+        <span>{T('Günde 4 kez güncellenir', 'Updated 4 times a day')}</span>
+        <span class="river-new" data-new-count hidden></span>
+      </div>
+    </header>
 
-    <div class="river-status" aria-live="polite">
-      {latest && <span>{T('Son güncelleme', 'Last updated')}: <time datetime={latest.toISOString()}>{dayLabel(dayKey(latest))}</time></span>}
-      <span class="river-new" data-new-count hidden></span>
+    <div class="hub-grid">
+      <aside class="hub-side river-side" aria-label={T('Süzgeçler ve bağlantılar', 'Filters and links')}>
+        <div class="side-box">
+          <h2 class="side-h">{T('Bölümler', 'Sections')}</h2>
+          <div class="river-side-filters" role="group" aria-label={T('Haberleri süz', 'Filter stories')} data-river-filters>
+            <button type="button" aria-pressed="true" data-f="">{T('Tümü', 'All')} <span class="meta">{all.length}</span></button>
+            {shortCount > 0 && <button type="button" aria-pressed="false" data-f="kisa">{T('Kısa notlar', 'Briefs')} <span class="meta">{shortCount}</span></button>}
+            {cats.map((c) => <button type="button" aria-pressed="false" data-f={`c:${c.c}`}>{c.name} <span class="meta">{c.count}</span></button>)}
+          </div>
+        </div>
+        {activeStories.length > 0 && (
+          <div class="side-box side-only-wide">
+            <h2 class="side-h">{T('Gelişen hikâyeler', 'Developing stories')}</h2>
+            <ul class="side-links">{activeStories.map((st) => <li><a href={url(`/gelisme/${st.slug}/`)}>{st.title} <span class="meta">{st.count}</span></a></li>)}</ul>
+          </div>
+        )}
+        <div class="side-box side-only-wide">
+          <h2 class="side-h">{T('Daha fazlası', 'More')}</h2>
+          <ul class="side-links">
+            <li><a href={url('/haftalik/')}>{T('Haftalık özetler', 'Weekly digests')}</a></li>
+            <li><a href={url('/yatirimlar/')}>{T('Yatırımlar ve satın almalar', 'Funding tracker')}</a></li>
+            <li><a href={url('/yeni-araclar/')}>{T('Yeni çıkan araçlar', 'New AI tools')}</a></li>
+            <li><a href={url('/sayfa/2/')}>{T('Arşiv', 'Archive')}</a></li>
+          </ul>
+        </div>
+      </aside>
+
+      <div class="hub-main">
+        {days.map((g) => (
+          <section class="river-day" data-day aria-labelledby={`d-${g.k}`}>
+            <h2 id={`d-${g.k}`} class="river-dayh"><span data-day-label={g.k}>{dayLabel(g.k)}</span> <span class="meta"><span data-day-count>{g.items.length}</span> {T('haber', 'stories')}</span></h2>
+            <ol class="river-list">
+              {g.items.map(({ n, story, Content }) => {
+                const d = n.data;
+                const id = slugOf(n);
+                return (
+                  <li class={`river-item${Content ? ' is-short' : ''}`} id={id} data-item data-cat={d.category} data-kind={Content ? 'kisa' : 'haber'} data-ts={d.date.valueOf()}>
+                    <div class="river-main">
+                      <p class="river-tags">
+                        <span class="cat">{S(`cat.${d.category}.name`, catName(d.category))}</span>
+                        {Content && <span class="river-kind">{T('Kısa not', 'Brief')}</span>}
+                        {story && <a class="river-chip" href={url(`/gelisme/${story.slug}/`)}>{T('Gelişen hikâye', 'Developing story')}</a>}
+                        {d.deal && <a class="river-chip" href={url('/yatirimlar/')}>{T(d.deal.type, ({ 'Yatırım turu': 'Funding round', 'Satın alma': 'Acquisition', 'Halka arz': 'IPO', 'Anlaşma': 'Deal', 'Tesis yatırımı': 'Facility investment' })[d.deal.type] ?? d.deal.type)}</a>}
+                        {d.newTool && <a class="river-chip" href={url('/yeni-araclar/')}>{T('Yeni araç', 'New tool')}</a>}
+                        <span class="river-newdot" hidden data-newdot>{T('Yeni', 'New')}</span>
+                      </p>
+                      <h3><a href={newsUrl(n)}>{d.title}</a></h3>
+                      {Content ? <><div class="river-body" data-clamp><Content /></div><button type="button" class="river-more-btn" data-expand hidden aria-expanded="false">{T('Devamını oku', 'Read more')}</button></> : <p>{d.spot}</p>}
+                      {!Content && d.keyPoints && d.keyPoints.length >= 2 && (
+                        <details class="river-kp"><summary>{T('Kısaca', 'Key points')}</summary><ul>{d.keyPoints.map((k) => <li>{k}</li>)}</ul></details>
+                      )}
+                    </div>
+                  </li>
+                );
+              })}
+            </ol>
+          </section>
+        ))}
+        <p class="river-more"><button type="button" class="btn btn-ghost" data-more hidden>{T('Daha fazla göster', 'Show more')}</button></p>
+        <p class="empty" data-empty hidden>{T('Bu süzgece uyan haber yok.', 'No stories match this filter.')}</p>
+        <p class="ai-note">{T('Daha eski haberler için', 'For older stories, see the')} <a href={url('/sayfa/2/')}>{T('arşive', 'archive')}</a> {T('veya', 'or the')} <a href={url('/haftalik/')}>{T('haftalık özetlere', 'weekly digests')}</a>{T(' bakın.', '.')}</p>
+      </div>
     </div>
-
-    <div class="deal-filters river-filters" role="group" aria-label={T('Süz', 'Filter')} data-river-filters>
-      <button type="button" aria-pressed="true" data-f="">{T('Tümü', 'All')} <span class="meta">{all.length}</span></button>
-      {shortCount > 0 && <button type="button" aria-pressed="false" data-f="kisa">{T('Kısa notlar', 'Briefs')} <span class="meta">{shortCount}</span></button>}
-      {cats.map((c) => <button type="button" aria-pressed="false" data-f={`c:${c.c}`}>{c.name} <span class="meta">{c.count}</span></button>)}
-    </div>
-
-    {days.map((g) => (
-      <section class="river-day" data-day aria-labelledby={`d-${g.k}`}>
-        <h2 id={`d-${g.k}`} class="river-dayh"><span data-day-label={g.k}>{dayLabel(g.k)}</span> <span class="meta">· <span data-day-count>{g.items.length}</span> haber</span></h2>
-        <ol class="river-list">
-          {g.items.map(({ n, story, Content }) => {
-            const d = n.data;
-            const id = slugOf(n);
-            return (
-              <li class={`river-item${Content ? ' is-short' : ''}`} id={id} data-item data-cat={d.category} data-kind={Content ? 'kisa' : 'haber'} data-ts={d.date.valueOf()}>
-                <div class="river-main">
-                  <p class="river-tags">
-                    <span class="cat">{S(`cat.${d.category}.name`, catName(d.category))}</span>
-                    {Content && <span class="river-kind">{T('Kısa not', 'Brief')}</span>}
-                    {story && <a class="river-chip" href={url(`/gelisme/${story.slug}/`)}>{T('Gelişen hikâye', 'Developing story')}</a>}
-                    {d.deal && <a class="river-chip" href={url('/yatirimlar/')}>{T(d.deal.type, ({ 'Yatırım turu': 'Funding round', 'Satın alma': 'Acquisition', 'Halka arz': 'IPO', 'Anlaşma': 'Deal', 'Tesis yatırımı': 'Facility investment' })[d.deal.type] ?? d.deal.type)}</a>}
-                    {d.newTool && <a class="river-chip" href={url('/yeni-araclar/')}>{T('Yeni araç', 'New tool')}</a>}
-                    <span class="river-newdot" hidden data-newdot>{T('Yeni', 'New')}</span>
-                  </p>
-                  <h3><a href={newsUrl(n)}>{d.title}</a></h3>
-                  {Content ? <div class="river-body"><Content /></div> : <p>{d.spot}</p>}
-                  {!Content && d.keyPoints && d.keyPoints.length >= 2 && (
-                    <details class="river-kp"><summary>{T('Kısaca', 'Key points')}</summary><ul>{d.keyPoints.map((k) => <li>{k}</li>)}</ul></details>
-                  )}
-                </div>
-              </li>
-            );
-          })}
-        </ol>
-      </section>
-    ))}
-    <p class="river-more"><button type="button" class="btn btn-ghost" data-more hidden>{T('Daha fazla göster', 'Show more')}</button></p>
-    <p class="empty" data-empty hidden>{T('Bu süzgece uyan haber yok.', 'No stories match this filter.')}</p>
-    <p class="ai-note">{T('Daha eski haberler için', 'For older stories, see the')} <a href={url('/sayfa/2/')}>{T('arşive', 'archive')}</a> {T('veya', 'or the')} <a href={url('/haftalik/')}>{T('haftalık özetlere', 'weekly digests')}</a>{T(' bakın.', '.')}</p>
   </section>
 </Base>
 
@@ -134,6 +163,16 @@ const latest = all[0]?.data.date;
       filter = b.dataset.f || ''; limit = PAGE; apply();
     }));
     moreBtn.addEventListener('click', () => { limit += PAGE; apply(); });
+
+    // Uzun kısa notlar: ilk birkaç satır, "Devamını oku" ile açılır
+    root.querySelectorAll<HTMLElement>('[data-clamp]').forEach((body) => {
+      const btn = body.nextElementSibling as HTMLButtonElement | null;
+      if (!btn || !btn.hasAttribute('data-expand')) return;
+      body.classList.add('is-clamped');
+      if (body.scrollHeight <= body.clientHeight + 24) { body.classList.remove('is-clamped'); return; }
+      btn.hidden = false;
+      btn.addEventListener('click', () => { const open = body.classList.toggle('is-clamped'); btn.setAttribute('aria-expanded', String(!open)); btn.textContent = open ? (document.documentElement.lang === 'en' ? 'Read more' : 'Devamını oku') : (document.documentElement.lang === 'en' ? 'Show less' : 'Daha az göster'); });
+    });
 
     // Kalıcı bağlantıyla gelindiyse o haberi göster
     const target = location.hash ? root.querySelector<HTMLElement>(location.hash.replace(/[^#\w-]/g, '')) : null;

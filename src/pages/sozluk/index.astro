@@ -14,6 +14,11 @@ const short = (d) => { const first = d.split(/(?<=[.!?])\s/)[0]; return first.le
 const letterOf = (t) => t.term[0].toLocaleUpperCase(lang);
 const letters = [...new Set(terms.map(letterOf))];
 const byCat = GLOSSARY_CATS.map((c) => ({ c, items: terms.filter((t) => t.cat === c) })).filter((g) => g.items.length);
+const byLetter = letters.map((l) => ({ l, items: terms.filter((t) => letterOf(t) === l) }));
+// Çok aranan terimler (editoryal seçim)
+const POPULAR = ['buyuk-dil-modeli', 'token', 'istem', 'halusinasyon', 'yapay-zeka-ajani', 'rag', 'baglam-penceresi', 'acik-agirlikli-model', 'ince-ayar', 'cok-modlu', 'agi', 'mcp'];
+const popular = POPULAR.map((sl) => terms.find((t) => t.slug === sl)).filter(Boolean);
+const catLabel = (c) => (lang === 'en' ? GL_CAT_EN[c] ?? c : c);
 const pageUrl = new URL(url('/sozluk/'), Astro.site).href;
 const jsonLd = {
   '@type': 'DefinedTermSet', '@id': `${pageUrl}#sozluk`, name: T('Yapay zeka terimleri sözlüğü', 'AI glossary'), inLanguage: L.locale,
@@ -23,51 +28,66 @@ const jsonLd = {
 ---
 <Base title={T('Yapay zeka terimleri sözlüğü', 'AI glossary: key terms explained')} description={T(`Yapay zeka sözlüğü: makine öğrenmesi, derin öğrenme, büyük dil modeli, token, istem, halüsinasyon, deepfake dahil ${terms.length} terimin sade Türkçe açıklaması.`, `AI glossary: plain-English explanations of ${terms.length} terms, from machine learning and LLMs to tokens, prompts, hallucination and deepfakes.`)}
   jsonLd={jsonLd} breadcrumbs={[{ name: 'Ana sayfa', path: '/' }, { name: T('Sözlük', 'Glossary'), path: '/sozluk/' }]}>
-  <section class="glossary" data-pagefind-body>
-    <span class="cat" data-pagefind-ignore>{T('Sözlük', 'Glossary')}</span>
-    <h1 class="page-h" data-pagefind-meta="title">{T('Yapay zeka terimleri sözlüğü', 'AI glossary')}</h1>
-    <p class="spot">{T('Haberlerde geçen teknik terimlerin sade Türkçe açıklamaları. Haber metinlerinde bu terimlerin altı noktalıdır; tıklayınca terimin ayrıntılı açıklamasına gidersiniz.', 'Plain-English explanations of the technical terms that come up in AI news, each with a detailed page.')}</p>
-    <section class="glossary-bycat" aria-labelledby="bycat-h" data-pagefind-ignore>
-      <h2 id="bycat-h" class="ev-h">{T('Konulara göre', 'By topic')}</h2>
-      {byCat.map((g) => (
-        <details class="glossary-cat">
-          <summary><h3>{lang === 'en' ? GL_CAT_EN[g.c] ?? g.c : g.c}</h3> <span class="meta">{g.items.length} {T('terim', 'terms')}</span></summary>
-          <p>{g.items.map((t, i) => <>{i > 0 && ' · '}<a href={url(`/sozluk/${t.slug}/`)}>{t.term}</a></>)}</p>
-        </details>
-      ))}
-    </section>
-    <div class="glossary-search" data-pagefind-ignore>
-      <label for="gl-q">{T('Sözlükte ara', 'Search the glossary')}</label>
-      <input id="gl-q" type="search" autocomplete="off" placeholder={T('ör. token, RAG, halüsinasyon', 'e.g. token, RAG, hallucination')} />
-      <p id="gl-count" class="meta" aria-live="polite"></p>
+  <section class="gl hub" data-pagefind-body data-gl>
+    <header class="hub-head">
+      <span class="cat" data-pagefind-ignore>{T('Sözlük', 'Glossary')}</span>
+      <h1 class="page-h" data-pagefind-meta="title">{T('Yapay zeka terimleri sözlüğü', 'AI glossary')}</h1>
+      <p class="spot">{T(`Haberlerde geçen ${terms.length} teknik terimin sade Türkçe açıklaması. Haber metinlerinde bu terimlerin altı noktalıdır; tıklayınca ayrıntılı açıklamaya gidersiniz.`, `Plain-English explanations of ${terms.length} technical terms that come up in AI news, each with a detailed page.`)}</p>
+      <div class="gl-search" data-pagefind-ignore>
+        <label for="gl-q" class="sr-only">{T('Sözlükte ara', 'Search the glossary')}</label>
+        <input id="gl-q" type="search" autocomplete="off" placeholder={T('Terim ara (ör. token, RAG)', 'Search terms (e.g. token, RAG)')} />
+        <p id="gl-count" class="meta" aria-live="polite"></p>
+      </div>
+      <p class="gl-pop" data-pagefind-ignore><span>{T('Çok aranan:', 'Popular:')}</span>{popular.map((t) => <a href={url(`/sozluk/${t.slug}/`)}>{t.term}</a>)}</p>
+    </header>
+
+    <div class="chip-row scroll-sm gl-cats" role="group" aria-label={T('Konuya göre süz', 'Filter by topic')} data-pagefind-ignore>
+      <button type="button" aria-pressed="true" data-gl-cat="">{T('Tüm konular', 'All topics')} <span class="meta">{terms.length}</span></button>
+      {byCat.map((g) => <button type="button" aria-pressed="false" data-gl-cat={g.c}>{catLabel(g.c)} <span class="meta">{g.items.length}</span></button>)}
     </div>
-    <h2 class="ev-h">{T("A'dan Z'ye tüm terimler", 'All terms A to Z')}</h2>
-    <nav class="glossary-az" aria-label={T('Harfe göre', 'By letter')} data-pagefind-ignore>
-      {letters.map((l) => <a href={`#harf-${l}`}>{l}</a>)}
+
+    <nav class="gl-az" aria-label={T('Harfe göre', 'By letter')} data-pagefind-ignore>
+      {letters.map((l) => <a href={`#harf-${l}`} data-az={l}>{l}</a>)}
     </nav>
-    <dl class="glossary-list">
-      {terms.map((t, i) => (
-        <div class="glossary-item" id={t.slug}>
-          {(i === 0 || letterOf(terms[i - 1]) !== letterOf(t)) && <span class="glossary-anchor" id={`harf-${letterOf(t)}`} aria-hidden="true"></span>}
-          <dt><a href={url(`/sozluk/${t.slug}/`)}>{t.term}</a> {lang === 'tr' && <span class="glossary-en" lang="en">{t.en}</span>}</dt>
-          <dd>{short(t.def)}</dd>
-        </div>
-      ))}
-    </dl>
+
+    {byLetter.map(({ l, items }) => (
+      <section class="gl-letter" id={`harf-${l}`} aria-labelledby={`h-${l}`} data-letter={l}>
+        <h2 id={`h-${l}`}>{l}</h2>
+        <dl class="glossary-list">
+          {items.map((t) => (
+            <div class="glossary-item" id={t.slug} data-cat={t.cat}>
+              <dt><a href={url(`/sozluk/${t.slug}/`)}>{t.term}</a> {lang === 'tr' && <span class="glossary-en" lang="en">{t.en}</span>}</dt>
+              <dd>{short(t.def)}</dd>
+            </div>
+          ))}
+        </dl>
+      </section>
+    ))}
+    <p class="empty" data-gl-empty hidden>{T('Aramanıza uyan terim bulunamadı.', 'No terms match your search.')} <a href={url('/hata-bildir/')}>{T('Terim önerin', 'Suggest a term')}</a></p>
   </section>
 </Base>
 <script>
-  // Sözlük içi süzme: yazılan metni terim adında, İngilizcesinde ve tanımda arar
+  // Sözlük içi süzme: arama (terim, İngilizcesi, tanım) + konu
   const q = document.getElementById('gl-q') as HTMLInputElement | null;
   const count = document.getElementById('gl-count');
   const items = [...document.querySelectorAll<HTMLElement>('.glossary-item')];
+  const letters = [...document.querySelectorAll<HTMLElement>('.gl-letter')];
+  const azLinks = [...document.querySelectorAll<HTMLAnchorElement>('[data-az]')];
+  const empty = document.querySelector<HTMLElement>('[data-gl-empty]');
+  const catBtns = [...document.querySelectorAll<HTMLButtonElement>('[data-gl-cat]')];
   const norm = (s: string) => s.toLocaleLowerCase('tr').replace(/ı/g, 'i').normalize('NFKD').replace(/[\u0300-\u036f]/g, '');
   const texts = items.map((el) => norm(el.textContent || ''));
-  const lang = document.documentElement.lang;
-  q?.addEventListener('input', () => {
-    const v = norm(q.value.trim());
+  const EN = document.documentElement.lang === 'en';
+  let cat = '';
+  const apply = () => {
+    const v = norm(q?.value.trim() || '');
     let n = 0;
-    items.forEach((el, i) => { const hit = !v || texts[i].includes(v); el.hidden = !hit; if (hit) n++; });
-    if (count) count.textContent = v ? (lang === 'en' ? `${n} terms found` : `${n} terim bulundu`) : '';
-  });
+    items.forEach((el, i) => { const hit = (!v || texts[i].includes(v)) && (!cat || el.dataset.cat === cat); el.hidden = !hit; if (hit) n++; });
+    letters.forEach((s) => { s.hidden = !s.querySelector('.glossary-item:not([hidden])'); });
+    azLinks.forEach((a) => { const sec = document.getElementById(`harf-${a.dataset.az}`); a.toggleAttribute('aria-disabled', !!sec?.hidden); a.tabIndex = sec?.hidden ? -1 : 0; });
+    if (count) count.textContent = v || cat ? (EN ? `${n} terms found` : `${n} terim bulundu`) : '';
+    if (empty) empty.hidden = n > 0;
+  };
+  q?.addEventListener('input', apply);
+  catBtns.forEach((b) => b.addEventListener('click', () => { cat = b.dataset.glCat || ''; catBtns.forEach((x) => x.setAttribute('aria-pressed', String(x === b))); apply(); }));
 </script>

@@ -20,33 +20,86 @@ const jsonLd = {
 ---
 <Base title={T('Yapay zeka rehberleri: adım adım Türkçe kullanım kılavuzları', 'AI guides: step-by-step how-tos for ChatGPT, Claude and Gemini')} description={T('ChatGPT, Claude ve Gemini gibi yapay zeka araçlarını işte, okulda ve günlük hayatta doğru kullanmak için adım adım Türkçe rehberler: istem yazma, CV, sunum, görsel üretme, güvenlik ve daha fazlası.', 'Step-by-step guides to using AI tools like ChatGPT, Claude and Gemini at work, at school and in daily life: prompting, resumes, presentations, image generation, safety and more.')}
   jsonLd={jsonLd} breadcrumbs={[{ name: 'Ana sayfa', path: '/' }, { name: T('Rehber', 'Guides'), path: '/rehber/' }]}>
-  <section class="glossary guides">
-    <span class="cat">{T('Rehber', 'Guides')}</span>
-    <h1 class="page-h">{T('Yapay zeka rehberleri', 'AI guides')}</h1>
-    <p class="spot">{lang === 'en' ? <>Step-by-step guides to using AI tools well, efficiently and safely. They focus on methods that work in any tool rather than one app's menus. For definitions, see our <a href={url('/sozluk/')}>AI glossary</a>.</> : <>Yapay zeka araçlarını doğru, verimli ve güvenli kullanmak için adım adım Türkçe kılavuzlar. Rehberler, belirli bir uygulamanın menülerine değil her araçta geçerli yöntemlere odaklanır. Terimlerin anlamı için <a href={url('/sozluk/')}>yapay zeka sözlüğüne</a> bakabilirsiniz.</>}</p>
-    <nav class="glossary-az guide-topics" aria-label={T('Konular', 'Topics')}>
-      {groups.map((g) => <a href={`#${g.id}`}>{tp(g.t)} <span class="meta">{g.items.length}</span></a>)}
-      {sectorGroups.length > 0 && <a href="#is-kollari">{T('Sektörler', 'Industries')} <span class="meta">{sectorGroups.reduce((a, x) => a + x.n, 0)}</span></a>}
-    </nav>
-    {sectorGroups.length > 0 && (
-      <section class="guide-group" id="is-kollari" aria-labelledby="is-kollari-h">
-        <h2 id="is-kollari-h" class="ev-h">{T('Sektörlerde yapay zeka', 'AI by industry')}</h2>
-        <ul class="sector-links">{sectorGroups.map(({ s, n }) => <li><a href={url(`/sektor/${s.slug}/`)}>{lang === 'en' ? s.en.title : s.title}</a> <span class="meta">{n} {T('rehber', n === 1 ? 'guide' : 'guides')}</span></li>)}</ul>
-      </section>
-    )}
-    {groups.map((grp) => (
-      <section class="guide-group" id={grp.id} aria-labelledby={`${grp.id}-h`}>
-        <h2 id={`${grp.id}-h`} class="ev-h">{tp(grp.t)}</h2>
-        <ul class="guide-list">
-          {grp.items.map((g) => (
-            <li class="guide-item">
-              <span class="guide-level">{lang === 'en' ? LEVEL_EN[g.data.level] ?? g.data.level : g.data.level}</span>
-              <h3><a href={url(`/rehber/${g.id}/`)}>{g.data.title}</a></h3>
-              <p>{g.data.description}</p>
-            </li>
-          ))}
-        </ul>
-      </section>
-    ))}
+  <section class="guides hub" data-guides>
+    <header class="hub-head">
+      <span class="cat">{T('Rehber', 'Guides')}</span>
+      <h1 class="page-h">{T('Yapay zeka rehberleri', 'AI guides')}</h1>
+      <p class="spot">{T('Yapay zeka araçlarını doğru, verimli ve güvenli kullanmak için adım adım Türkçe kılavuzlar. Belirli bir uygulamanın menülerine değil, her araçta geçerli yöntemlere odaklanır.', 'Step-by-step guides to using AI tools well, efficiently and safely, focused on methods that work in any tool rather than one app’s menus.')}</p>
+      <p class="hub-meta"><span><strong>{guides.filter((g) => !g.data.sector).length}</strong> {T('rehber', 'guides')}</span>{sectorGroups.length > 0 && <span><strong>{sectorGroups.reduce((a, x) => a + x.n, 0)}</strong> {T('sektör rehberi', 'industry guides')}</span>}</p>
+      <div class="guide-search">
+        <label for="gd-q" class="sr-only">{T('Rehberlerde ara', 'Search guides')}</label>
+        <input id="gd-q" type="search" autocomplete="off" placeholder={T('Rehber ara (ör. CV, sunum, gizlilik)', 'Search guides (e.g. resume, slides, privacy)')} data-gd-q />
+        <p class="meta" aria-live="polite" data-gd-count></p>
+      </div>
+    </header>
+
+    <div class="hub-grid">
+      <aside class="hub-side" aria-label={T('Konular', 'Topics')}>
+        <div class="side-box">
+          <h2 class="side-h">{T('Konular', 'Topics')}</h2>
+          <ul class="side-links">
+            {groups.map((g) => <li><a href={`#${g.id}`}>{tp(g.t)} <span class="meta">{g.items.length}</span></a></li>)}
+            {sectorGroups.length > 0 && <li><a href="#is-kollari">{T('Sektörlerde yapay zeka', 'AI by industry')} <span class="meta">{sectorGroups.length}</span></a></li>}
+          </ul>
+        </div>
+        <div class="side-box side-only-wide">
+          <h2 class="side-h">{T('İşinize yarayabilir', 'Useful next')}</h2>
+          <ul class="side-links">
+            <li><a href={url('/yapay-zeka-komutlari/')}>{T('Hazır komutlar', 'Prompt library')}</a></li>
+            <li><a href={url('/arac-secici/')}>{T('Bana uygun aracı bul', 'Tool finder')}</a></li>
+            <li><a href={url('/sozluk/')}>{T('Yapay zeka sözlüğü', 'AI glossary')}</a></li>
+          </ul>
+        </div>
+      </aside>
+
+      <div class="hub-main">
+        {groups.map((grp, gi) => (
+          <section class="guide-group" id={grp.id} aria-labelledby={`${grp.id}-h`} data-gd-group>
+            <h2 id={`${grp.id}-h`} class={gi === 0 ? 'ev-h ev-h-first' : 'ev-h'}>{tp(grp.t)}</h2>
+            <ul class="guide-cards">
+              {grp.items.map((g) => (
+                <li class="guide-card" data-gd-item>
+                  <a href={url(`/rehber/${g.id}/`)}>
+                    <span class={`lvl lvl-${g.data.level === 'Orta' ? 'orta' : g.data.level === 'İleri' ? 'ileri' : 'bas'}`}>{lang === 'en' ? LEVEL_EN[g.data.level] ?? g.data.level : g.data.level}</span>
+                    <h3>{g.data.title}</h3>
+                    <p>{g.data.description}</p>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </section>
+        ))}
+        {sectorGroups.length > 0 && (
+          <section class="guide-group" id="is-kollari" aria-labelledby="is-kollari-h" data-gd-sectors>
+            <h2 id="is-kollari-h" class="ev-h">{T('Sektörlerde yapay zeka', 'AI by industry')}</h2>
+            <ul class="sector-cards">{sectorGroups.map(({ s, n }) => <li><a href={url(`/sektor/${s.slug}/`)}>{lang === 'en' ? s.en.title : s.title} <span class="meta">{n}</span></a></li>)}</ul>
+          </section>
+        )}
+        <p class="empty" data-gd-empty hidden>{T('Aramanıza uyan rehber bulunamadı.', 'No guides match your search.')}</p>
+      </div>
+    </div>
   </section>
 </Base>
+
+<script>
+  const root = document.querySelector<HTMLElement>('[data-guides]');
+  if (root) {
+    const q = root.querySelector<HTMLInputElement>('[data-gd-q]')!;
+    const items = [...root.querySelectorAll<HTMLElement>('[data-gd-item]')];
+    const groups = [...root.querySelectorAll<HTMLElement>('[data-gd-group]')];
+    const sectors = root.querySelector<HTMLElement>('[data-gd-sectors]');
+    const count = root.querySelector<HTMLElement>('[data-gd-count]')!;
+    const empty = root.querySelector<HTMLElement>('[data-gd-empty]')!;
+    const norm = (s: string) => s.toLocaleLowerCase('tr').replace(/ı/g, 'i').normalize('NFKD').replace(/[\u0300-\u036f]/g, '');
+    const texts = new Map(items.map((el) => [el, norm(el.textContent || '')]));
+    q.addEventListener('input', () => {
+      const v = norm(q.value.trim());
+      let n = 0;
+      items.forEach((el) => { const ok = !v || texts.get(el)!.includes(v); el.hidden = !ok; if (ok) n++; });
+      groups.forEach((g) => { g.hidden = !g.querySelector('[data-gd-item]:not([hidden])'); });
+      if (sectors) sectors.hidden = !!v;
+      count.textContent = v ? (document.documentElement.lang === 'en' ? `${n} guides found` : `${n} rehber bulundu`) : '';
+      empty.hidden = n > 0 || !v;
+    });
+  }
+</script>

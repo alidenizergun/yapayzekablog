@@ -26,6 +26,7 @@ const jsonLd = { '@type': 'Dataset', name: T('Yapay zeka abonelik fiyatları', '
   description={T(`${new Set(rows.map((r) => r.tool.slug)).size} yapay zeka aracının ${rows.length} abonelik planı tek tabloda: aylık dolar fiyatı, yaklaşık TL karşılığı ve plan notları. Bütçenize ve kullanım alanınıza göre süzün.`, `${rows.length} subscription plans from ${new Set(rows.map((r) => r.tool.slug)).size} AI tools in one table: monthly dollar price, approximate lira equivalent and plan notes. Filter by budget and category.`)}
   jsonLd={jsonLd} breadcrumbs={[{ name: 'Ana sayfa', path: '/' }, { name: T('Yapay zeka araçları', 'AI tools'), path: '/arac/' }, { name: T('Abonelik fiyatları', 'Subscription prices'), path: '/yapay-zeka-abonelikleri/' }]}>
   <SubNav set="tools" />
+  <SubNav set="prices" />
   <section class="deals subs">
     <span class="cat">{T('Karşılaştırma', 'Comparison')}</span>
     <h1 class="page-h">{T('Yapay zeka abonelik fiyatları', 'AI subscription prices')}</h1>

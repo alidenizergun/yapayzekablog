@@ -2,37 +2,40 @@
 // Bölüm sekmeleri: birbirine yakın sayfaları tek çatı altında toplar (Araçlar, Türkiye).
 // Menüde yalnızca ana sayfa yer alır; alt sayfalara bu sekmelerden gidilir.
 import { i18n } from '../i18n/index.js';
-interface Props { set: 'tools' | 'turkey' }
+interface Props { set: 'tools' | 'turkey' | 'prices' }
 const { set } = Astro.props;
 const L = await i18n(Astro);
 const { T } = L;
+// [etiket, adres, bu sekmeyi seçili gösteren ek yol önekleri]
 const SETS = {
   tools: [
-    [T('Tüm araçlar', 'All tools'), '/arac/'],
-    [T('En iyi uygulamalar', 'Best apps'), '/en-iyi-yapay-zeka-uygulamalari/'],
-    [T('Ücretsiz', 'Free'), '/ucretsiz-yapay-zeka-araclari/'],
-    [T('Yeni çıkanlar', 'New'), '/yeni-araclar/'],
+    [T('Tüm araçlar', 'All tools'), '/arac/', ['/ucretsiz-yapay-zeka-araclari/', '/yeni-araclar/']],
+    [T('Bana uygun aracı bul', 'Tool finder'), '/arac-secici/'],
+    [T('En iyi listeler', 'Best-of lists'), '/en-iyi-yapay-zeka-uygulamalari/', ['/en-iyi/']],
     [T('Karşılaştırmalar', 'Comparisons'), '/karsilastir/'],
-    [T('Abonelik fiyatları', 'Subscriptions'), '/yapay-zeka-abonelikleri/'],
-    [T('Model fiyatları', 'Model pricing'), '/modeller-karsilastirma/'],
-    [T('API maliyeti', 'API cost'), '/api-maliyet-hesaplayici/'],
-    [T('Komutlar', 'Prompts'), '/yapay-zeka-komutlari/'],
-    [T('Kullanım payları', 'Usage share'), '/yapay-zeka-kullanim-paylari/'],
-    [T('Bana uygun aracı bul', 'Find the right tool'), '/arac-secici/'],
+    [T('Fiyatlar', 'Pricing'), '/yapay-zeka-abonelikleri/', ['/modeller-karsilastirma/', '/api-maliyet-hesaplayici/']],
+    [T('Hazır komutlar', 'Prompts'), '/yapay-zeka-komutlari/'],
+  ],
+  prices: [
+    [T('Abonelikler', 'Subscriptions'), '/yapay-zeka-abonelikleri/'],
+    [T('Model API fiyatları', 'Model API prices'), '/modeller-karsilastirma/'],
+    [T('API maliyet hesaplayıcı', 'API cost calculator'), '/api-maliyet-hesaplayici/'],
   ],
   turkey: [
     [T('Genel bakış', 'Overview'), '/turkiye-yapay-zeka/'],
     [T('Türkiye haberleri', 'Turkey news'), '/kategori/turkiye/'],
     [T('Yerli modeller', 'Turkish models'), '/yerli-yapay-zeka/'],
+    [T('Kullanım payları', 'Usage share'), '/yapay-zeka-kullanim-paylari/'],
     [T('Etkinlikler', 'Events'), '/etkinlikler/'],
   ],
 };
 const path = Astro.url.pathname;
-const items = SETS[set].map(([label, href]) => {
+const items = SETS[set].map(([label, href, extra = []]) => {
   const u = L.u(href);
-  return { label, href: u, current: href === '/arac/' ? path === u : path.startsWith(u) };
+  const hit = (h) => { const x = L.u(h); return h === '/arac/' ? path === x : path.startsWith(x); };
+  return { label, href: u, current: hit(href) || extra.some((e) => e !== '/en-iyi/' ? hit(e) : path.startsWith(L.u('/en-iyi/')) && !path.startsWith(L.u('/en-iyi-yapay'))) };
 });
 ---
-<nav class="subnav" aria-label={set === 'tools' ? T('Araç bölümleri', 'Tool sections') : T('Türkiye bölümleri', 'Turkey sections')} data-pagefind-ignore>
+<nav class={`subnav${set === 'prices' ? ' subnav-seg' : ''}`} aria-label={set === 'tools' ? T('Araç bölümleri', 'Tool sections') : set === 'prices' ? T('Fiyat sayfaları', 'Pricing pages') : T('Türkiye bölümleri', 'Turkey sections')} data-pagefind-ignore>
   <ul>{items.map((i) => <li><a href={i.href} aria-current={i.current ? 'page' : undefined}>{i.label}</a></li>)}</ul>
 </nav>
