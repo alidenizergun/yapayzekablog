@@ -12,6 +12,7 @@ const groups = [
   { id: 'sirketler', title: T('Şirketler', 'Companies'), list: idx.filter((x) => x.entity.type === 'company') },
   { id: 'kisiler', title: T('Kişiler', 'People'), list: idx.filter((x) => x.entity.type === 'person') },
 ].filter((g) => g.list.length);
+import { brandLogo } from '../lib/brand-logos.js';
 ---
 <Base title={T('Şirketler ve kişiler', 'AI companies and people')} description={T('Yapay zeka gündemindeki şirketler ve kişiler: OpenAI, Anthropic, Nvidia, Google ve daha fazlası hakkında YZ Gündemi haberleri.', 'The companies and people shaping AI: news on OpenAI, Anthropic, Nvidia, Google and more.')}
   breadcrumbs={[{ name: 'Ana sayfa', path: '/' }, { name: T('Şirketler ve kişiler', 'Companies and people'), path: '/konular/' }]}>
@@ -26,7 +27,7 @@ const groups = [
             const b = brandOf(e.brand);
             return (
               <li><a href={url(`/konu/${e.slug}/`)}>
-                {b ? (
+                {b && brandLogo(e.brand) ? <img class="entity-logo sm entity-img" src={url(brandLogo(e.brand))} alt="" width="48" height="48" loading="lazy" /> : b ? (
                   <span class:list={["entity-logo sm brandcard", `b-${e.brand}`, { wordmark: !b.path }]} aria-hidden="true">{b.path ? <svg viewBox="0 0 24 24"><path d={b.path} /></svg> : <span class="bn">{b.name}</span>}</span>
                 ) : <span class="entity-logo sm entity-initials" aria-hidden="true">{e.name.split(/\s+/).map((w) => w[0]).slice(0, 2).join('')}</span>}
                 <span class="entity-name">{e.name}</span>

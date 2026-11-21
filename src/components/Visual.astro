@@ -3,6 +3,8 @@
 // İllüstrasyon kullanılmaz; hiç görsel yoksa görselsiz, yalnızca bölüm adını gösteren yer tutucu.
 // choice verilmezse haberin kendi görseli kullanılır (bkz. defaultVisual).
 import { brandOf } from '../lib/brands.js';
+import { brandLogo } from '../lib/brand-logos.js';
+import { url } from '../lib/news.js';
 import { defaultVisual, photoSet, photoSource, catName } from '../lib/news.js';
 import { s as str } from '../i18n/index.js';
 
@@ -18,6 +20,7 @@ const { entry, choice = defaultVisual(entry), w = 400, h = 250, eager = false, c
 const d = entry.data;
 const brandKey = choice.kind === 'brand' ? (choice.b ?? d.brand) : undefined;
 const brand = brandKey ? brandOf(brandKey) : undefined;
+const logoImg = brandKey ? brandLogo(brandKey) : null;
 const photo = choice.kind === 'photo' ? (choice.pool ?? (choice.n === 2 ? d.photo2 : d.photo)) : undefined;
 const loading = eager ? 'eager' : 'lazy';
 const set = photo ? photoSet(photo, w, h) : undefined;
@@ -27,8 +30,8 @@ const catLabel = str(EN ? 'en' : 'tr', `cat.${d.category}.name`, catName(d.categ
 ---
 <span class="visual">
   {brand ? (
-    <span class:list={['brandcard', `b-${brandKey}`, { wordmark: !brand.path }]} role="img" aria-label={EN ? `${brand.name} logo` : `${brand.name} logosu`}>
-      {brand.path && <svg viewBox="0 0 24 24" aria-hidden="true"><path d={brand.path} /></svg>}
+    <span class:list={['brandcard', `b-${brandKey}`, { wordmark: !brand.path && !logoImg, 'has-img': !!logoImg }]} role="img" aria-label={EN ? `${brand.name} logo` : `${brand.name} logosu`}>
+      {logoImg ? <img class="bl-img" src={url(logoImg)} alt="" width="96" height="96" loading={loading} decoding="async" /> : brand.path && <svg viewBox="0 0 24 24" aria-hidden="true"><path d={brand.path} /></svg>}
       <span class="bn" aria-hidden="true">{brand.name}</span>
     </span>
   ) : photo ? (

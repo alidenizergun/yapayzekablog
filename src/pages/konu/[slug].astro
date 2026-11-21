@@ -25,6 +25,7 @@ const jsonLd = [
     ? { '@type': 'Person', '@id': `${pageUrl}#konu`, name: e.name, description: e.about, ...(e.org ? { affiliation: { '@type': 'Organization', name: e.org } } : {}) }
     : { '@type': 'Organization', '@id': `${pageUrl}#konu`, name: e.name, description: e.about, ...(e.url ? { url: e.url } : {}) },
 ];
+import { brandLogo } from '../../lib/brand-logos.js';
 ---
 <Base title={T(`${e.name} haberleri`, `${e.name} news and updates`)} description={T(`${e.about} ${e.name} ile ilgili ${items.length} haber.`, `${e.about} ${items.length} stories about ${e.name}.`).slice(0, 300)}
   noindex={items.length < 2} jsonLd={jsonLd}
@@ -34,9 +35,10 @@ const jsonLd = [
       <nav class="crumb" aria-label={T('Konum', 'Breadcrumb')}><a href={url('/')}>{T('Ana sayfa', 'Home')}</a><span aria-hidden="true">/</span><a href={url('/konular/')}>{T('Şirketler ve kişiler', 'Companies and people')}</a></nav>
       <header class="entity-head">
         {brand ? (
+          brandLogo(e.brand) ? <img class="entity-logo entity-img" src={url(brandLogo(e.brand))} alt={T(`${brand.name} logosu`, `${brand.name} logo`)} width="96" height="96" /> : (
           <span class:list={["entity-logo brandcard", `b-${e.brand}`, { wordmark: !brand.path }]} role="img" aria-label={T(`${brand.name} logosu`, `${brand.name} logo`)}>
             {brand.path ? <svg viewBox="0 0 24 24" aria-hidden="true"><path d={brand.path} /></svg> : <span class="bn">{brand.name}</span>}
-          </span>
+          </span>)
         ) : (
           <span class="entity-logo entity-initials" aria-hidden="true">{e.name.split(/\s+/).map((w) => w[0]).slice(0, 2).join('')}</span>
         )}

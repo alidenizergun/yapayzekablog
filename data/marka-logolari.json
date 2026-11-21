@@ -3,8 +3,16 @@
     "from": "https://www.google.com/s2/favicons?domain=www.adobe.com&sz=128",
     "fetched": "2026-11-21"
   },
+  "alibaba": {
+    "from": "Simple Icons (CC0)",
+    "fetched": "2026-11-21"
+  },
   "amazon": {
     "from": "https://www.google.com/s2/favicons?domain=www.amazon.com&sz=128",
+    "fetched": "2026-11-21"
+  },
+  "amd": {
+    "from": "Simple Icons (CC0)",
     "fetched": "2026-11-21"
   },
   "anthropic": {
@@ -75,6 +83,10 @@
     "from": "https://www.google.com/s2/favicons?domain=www.ibm.com&sz=128",
     "fetched": "2026-11-21"
   },
+  "intel": {
+    "from": "Simple Icons (CC0)",
+    "fetched": "2026-11-21"
+  },
   "lg": {
     "from": "https://www.lg.com/us/static-resources/favicons/152x152.png",
     "fetched": "2026-11-21"
@@ -107,8 +119,16 @@
     "from": "https://openai.com/apple-icon.png?apple-icon.3o0tf8iy4mx7y.png",
     "fetched": "2026-11-21"
   },
+  "palantir": {
+    "from": "Simple Icons (CC0)",
+    "fetched": "2026-11-21"
+  },
   "perplexity": {
     "from": "https://www.perplexity.ai/apple-touch-icon.png",
+    "fetched": "2026-11-21"
+  },
+  "qualcomm": {
+    "from": "Simple Icons (CC0)",
     "fetched": "2026-11-21"
   },
   "reddit": {
