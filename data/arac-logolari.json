@@ -1,0 +1,202 @@
+{
+  "adobe-firefly": {
+    "from": "https://firefly.adobe.com/releases/2655eae6e3ac7b1605eeefc5032eccd308238abf/assets/fi_touch_icon_180-BmBtoxt-.png",
+    "fetched": "2026-11-21"
+  },
+  "bolt": {
+    "from": "https://bolt.new/static/apple-touch-icon.png",
+    "fetched": "2026-11-21"
+  },
+  "canva": {
+    "from": "https://www.google.com/s2/favicons?domain=www.canva.com&sz=128",
+    "fetched": "2026-11-21"
+  },
+  "capcut": {
+    "from": "https://www.google.com/s2/favicons?domain=www.capcut.com&sz=128",
+    "fetched": "2026-11-21"
+  },
+  "character-ai": {
+    "from": "https://www.google.com/s2/favicons?domain=character.ai&sz=128",
+    "fetched": "2026-11-21"
+  },
+  "chatgpt": {
+    "from": "https://chatgpt.com/cdn/assets/favicon-180x180.9e0103ce69.png",
+    "fetched": "2026-11-21"
+  },
+  "claude": {
+    "from": "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/c129d018a-0ZbJsTbu.png",
+    "fetched": "2026-11-21"
+  },
+  "claude-code": {
+    "from": "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/c129d018a-0ZbJsTbu.png",
+    "fetched": "2026-11-21"
+  },
+  "codex": {
+    "from": "https://chatgpt.com/cdn/assets/favicon-180x180.9e0103ce69.png",
+    "fetched": "2026-11-21"
+  },
+  "comet": {
+    "from": "https://www.perplexity.ai/apple-touch-icon.png",
+    "fetched": "2026-11-21"
+  },
+  "cursor": {
+    "from": "https://cursor.com/marketing-static/apple-touch-icon-light.png",
+    "fetched": "2026-11-21"
+  },
+  "deepl": {
+    "from": "https://www.deepl.com/apple-icon?fb6f62776db8f84a",
+    "fetched": "2026-11-21"
+  },
+  "deepseek": {
+    "from": "https://www.google.com/s2/favicons?domain=chat.deepseek.com&sz=128",
+    "fetched": "2026-11-21"
+  },
+  "dia": {
+    "from": "https://www.diabrowser.com/apple-touch-icon.png",
+    "fetched": "2026-11-21"
+  },
+  "elevenlabs": {
+    "from": "https://elevenlabs.io/apple-icon.png?6592732ab34b1d42",
+    "fetched": "2026-11-21"
+  },
+  "fathom": {
+    "from": "https://cdn.prod.website-files.com/6899da9beccbdbe92be49b5d/6a4282cf896cae98018bfa8c_fathom_favicon.png",
+    "fetched": "2026-11-21"
+  },
+  "fireflies": {
+    "from": "https://fireflies.ai/apple-icon.png?apple-icon.0zim7nfg3coaw.png",
+    "fetched": "2026-11-21"
+  },
+  "gamma": {
+    "from": "https://www.google.com/s2/favicons?domain=gamma.app&sz=128",
+    "fetched": "2026-11-21"
+  },
+  "gemini": {
+    "from": "https://www.google.com/s2/favicons?domain=gemini.google.com&sz=128",
+    "fetched": "2026-11-21"
+  },
+  "genspark": {
+    "from": "https://www.google.com/s2/favicons?domain=www.genspark.ai&sz=128",
+    "fetched": "2026-11-21"
+  },
+  "github-copilot": {
+    "from": "https://github.githubassets.com/favicons/favicon.svg",
+    "fetched": "2026-11-21"
+  },
+  "google-flow": {
+    "from": "https://www.gstatic.com/aitestkitchen/website/flow/favicon/flow_icon_512.png",
+    "fetched": "2026-11-21"
+  },
+  "google-translate": {
+    "from": "https://www.google.com/s2/favicons?domain=translate.google.com&sz=128",
+    "fetched": "2026-11-21"
+  },
+  "gptzero": {
+    "from": "https://www.google.com/s2/favicons?domain=gptzero.me&sz=128",
+    "fetched": "2026-11-21"
+  },
+  "grammarly": {
+    "from": "https://static-web.grammarly.com/cms/master/public/favicon-32x32.png",
+    "fetched": "2026-11-21"
+  },
+  "granola": {
+    "from": "https://www.granola.ai/favicon/apple-touch-icon.png",
+    "fetched": "2026-11-21"
+  },
+  "grok": {
+    "from": "https://grok.com/images/apple-touch-icon.png",
+    "fetched": "2026-11-21"
+  },
+  "hailuo": {
+    "from": "https://cdn.hailuoai.video/open-hailuo-video-web/public_assets/favicon.png",
+    "fetched": "2026-11-21"
+  },
+  "heygen": {
+    "from": "https://www.google.com/s2/favicons?domain=www.heygen.com&sz=128",
+    "fetched": "2026-11-21"
+  },
+  "ideogram": {
+    "from": "https://ideogram.ai/favicon.png?v=new-brand-20261020",
+    "fetched": "2026-11-21"
+  },
+  "kickresume": {
+    "from": "https://www.kickresume.com/static/img/favicon/apple-icon-180x180.png",
+    "fetched": "2026-11-21"
+  },
+  "kimi": {
+    "from": "https://www.kimi.com/pwa-192.png",
+    "fetched": "2026-11-21"
+  },
+  "kling": {
+    "from": "https://s16-kling.klingai.com/kos/s101/nlav112918/kling-homepage-aio/logo-180x180.png",
+    "fetched": "2026-11-21"
+  },
+  "le-chat": {
+    "from": "https://www.google.com/s2/favicons?domain=chat.mistral.ai&sz=128",
+    "fetched": "2026-11-21"
+  },
+  "lovable": {
+    "from": "https://www.google.com/s2/favicons?domain=lovable.dev&sz=128",
+    "fetched": "2026-11-21"
+  },
+  "manus": {
+    "from": "https://manus.im/apple-icon.png?apple-icon.153es_5lvwth1.png",
+    "fetched": "2026-11-21"
+  },
+  "meta-ai": {
+    "from": "https://www.google.com/s2/favicons?domain=www.meta.ai&sz=128",
+    "fetched": "2026-11-21"
+  },
+  "microsoft-copilot": {
+    "from": "https://www.google.com/s2/favicons?domain=copilot.microsoft.com&sz=128",
+    "fetched": "2026-11-21"
+  },
+  "midjourney": {
+    "from": "https://www.google.com/s2/favicons?domain=www.midjourney.com&sz=128",
+    "fetched": "2026-11-21"
+  },
+  "notebooklm": {
+    "from": "https://www.gstatic.com/tailwind/_/static/branding/v6/light_mode/favicon/apple-touch-icon.png",
+    "fetched": "2026-11-21"
+  },
+  "notion": {
+    "from": "https://www.notion.com/front-static/logo-ios.png",
+    "fetched": "2026-11-21"
+  },
+  "otter": {
+    "from": "https://cdn.prod.website-files.com/618e9316785b3582a5178502/618e943a80919a98b5e9bf69_apple-icon.png",
+    "fetched": "2026-11-21"
+  },
+  "perplexity": {
+    "from": "https://www.perplexity.ai/apple-touch-icon.png",
+    "fetched": "2026-11-21"
+  },
+  "pixverse": {
+    "from": "https://www.google.com/s2/favicons?domain=app.pixverse.ai&sz=128",
+    "fetched": "2026-11-21"
+  },
+  "qwen": {
+    "from": "https://www.google.com/s2/favicons?domain=chat.qwen.ai&sz=128",
+    "fetched": "2026-11-21"
+  },
+  "replit": {
+    "from": "https://replit.com/public/icons/favicon-prompt-192-rebrand.png",
+    "fetched": "2026-11-21"
+  },
+  "runway": {
+    "from": "https://runway.com/icon.png?icon.35ps9bmugbe1e.png",
+    "fetched": "2026-11-21"
+  },
+  "suno": {
+    "from": "https://cdn-o.suno.com/apple-touch-icon.png",
+    "fetched": "2026-11-21"
+  },
+  "synthesia": {
+    "from": "https://cdn.prod.website-files.com/65e89895c5a4b8d764c0d710/6618fd69d436784c0bba5e9e_webclip.png",
+    "fetched": "2026-11-21"
+  },
+  "v0": {
+    "from": "https://v0.app/assets/apple-icon.png",
+    "fetched": "2026-11-21"
+  }
+}
