@@ -25,7 +25,7 @@
  *   NEWS_ENGINE       ajan: araştırma ve yazımı haber masası yapar (yayın yönetmeni, muhabirler,
  *                     doğrulama; scripts/news-agents.mjs). Boş/klasik: tek seferlik araştırma + yazım.
  *   AGENT_SHADOW      true: ajanlar çalışır, sonuçlar yalnızca tur özetine yazılır; siteye haber eklenmez
- *   AGENT_BUDGET_USD  ajan turunun harcama tavanı (varsayılan: tam tur 1,5 $, ara tur 0,6 $)
+ *   AGENT_BUDGET_USD  ajan turunun harcama tavanı (varsayılan: tam tur 2 $, ara tur 0,6 $)
  *   AGENT_MAX_TOPICS  turda en fazla kaç konu atanır (varsayılan 6) · EDITOR_MODEL yayın yönetmeni (varsayılan Haiku)
  */
 import fs from 'node:fs';
@@ -115,7 +115,7 @@ const SHADOW = ENGINE === 'ajan' && /^(1|true|yes|evet)$/i.test(process.env.AGEN
 const EDITOR_MODEL = process.env.EDITOR_MODEL || 'claude-haiku-5-5'; // yayın yönetmeni (konu seçimi; ucuz model yeterli)
 const AGENT_MODEL = process.env.AGENT_MODEL || MODEL; // muhabirler
 const VERIFY_MODEL = process.env.VERIFY_MODEL || MODEL; // doğrulama ajanı
-const AGENT_BUDGET = Number(process.env.AGENT_BUDGET_USD) || (MIDDAY ? 0.6 : 1.5);
+const AGENT_BUDGET = Number(process.env.AGENT_BUDGET_USD) || (MIDDAY ? 0.6 : 2);
 const AGENT_MAX_TOPICS = Number(process.env.AGENT_MAX_TOPICS) || 6; // turda en fazla kaç konu atanır
 
 const log = (...a) => console.log('[haber]', ...a);
