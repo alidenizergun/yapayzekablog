@@ -785,7 +785,8 @@ async function main() {
       });
       searches = room.searches;
       lastSearches = searches;
-      articles = room.articles;
+      // Yedek görsel anahtarı geçersizse kategoriye göre düzeltilir (haber bu yüzden elenmesin)
+      articles = room.articles.map((x) => (IMAGES[x.image] ? x : { ...x, image: IMAGES[x.category] ? x.category : Object.keys(IMAGES)[0] }));
       agentRejected.push(...room.rejected);
       agentNotes.push(...room.notes);
     } else {
@@ -912,7 +913,7 @@ function costLines(searches, articleCount) {
   const per = articleCount ? ` · haber başına ${usd(c.total / articleCount)}` : '';
   return {
     c,
-    log: `maliyet: ${tok(usage.input + usage.cacheWrite + usage.cacheRead)} giriş + ${tok(usage.output)} çıkış token (${usage.requests} istek) · `
+    log: `maliyet: ${tok(usage.input + usage.cacheWrite + usage.cacheRead)} giriş (önbellekten ${tok(usage.cacheRead)}) + ${tok(usage.output)} çıkış token (${usage.requests} istek) · `
       + `Claude ${usage.priced ? usd(c.claude) : 'fiyat bilinmiyor'} (token ${usd(usage.tokenCost)} + arama ${usd(c.searchCost)}) · `
       + `X ~${usd(c.xCost)} · toplam ~${usd(c.total)}${per}`,
     md: [
