@@ -260,7 +260,7 @@ async function researchTopic(anthropic, existing, xPosts, topic, seen, feedItems
 
 ${focus}
 
-Son ${LOOKBACK_HOURS} saat içinde yayınlanmış, yapay zeka alanındaki en önemli gelişmeleri bul; önem sırasına koy.${MIDDAY ? '\nARA TUR: Gün içi güncellemedir (günde 3 kez). Son ' + LOOKBACK_HOURS + ' saatte çıkan, geniş okur kitlesini ilgilendiren kayda değer gelişmeleri (lansman, yatırım, resmi karar, önemli açıklama, Türkiye gelişmesi) aday yap; niş ve teknik ayrıntıları gece turuna bırak. Böyle bir gelişme yoksa yalnızca "YENİ GELİŞME YOK" yaz.' : ''}
+Son ${LOOKBACK_HOURS} saat içinde yayınlanmış, yapay zeka alanındaki en önemli gelişmeleri bul; önem sırasına koy.${MIDDAY ? '\nARA TUR: Gün içi güncellemedir (günde 3 kez). Son ' + LOOKBACK_HOURS + ' saatte çıkan ve sitede henüz olmayan kayda değer gelişmeleri aday yap: yeni model ve ürün lansmanları (teknik olsalar da tanınmış şirketlerin ve laboratuvarların yeni modelleri dahil), yatırım ve satın almalar, resmi kararlar, önemli açıklamalar, dikkat çeken araştırma sonuçları ve Türkiye gelişmeleri. Yalnızca küçük güncellemeleri, tekrarları ve kişisel görüşleri ele. Böyle bir gelişme yoksa yalnızca "YENİ GELİŞME YOK" yaz.' : ''}
 
 Her aday için birincil kaynağı (resmi blog, duyuru, makale) veya tanınmış bir haber kuruluşunu bul. Yalnızca haber bülteni, derleme sitesi (ör. "AI'da bugün olan her şey"), Substack/Medium yazısı veya yatırım veri tabanında geçen adayı ELE; bunlar tek başına kaynak sayılmaz. Aynı konuyu farklı kelimelerle tekrar tekrar arama.
 
