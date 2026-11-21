@@ -8,7 +8,7 @@ import { CATEGORIES } from '../lib/site.js';
 import { SECTORS } from '../lib/sectors.js';
 import { getCollection } from 'astro:content';
 import { i18n, locNewsList } from '../i18n/index.js';
-import { getNews, pickLead, getTags, tagSlug, newsUrl, spreadVisuals, catName, catUrl, tagUrl, url, HOME_MAIN } from '../lib/news.js';
+import { getNews, pickLead, getTags, tagSlug, newsUrl, spreadVisuals, hasRealVisual, catName, catUrl, tagUrl, url, HOME_MAIN } from '../lib/news.js';
 
 // Ana sayfa önem sırası:
 // 1. Manşet + 3 yan haber   2. Öne çıkanlar (3 kart)   3. Son haberler listesi + kenar çubuğu
@@ -20,10 +20,12 @@ const cn = (slug) => S(`cat.${slug}.name`, catName(slug));
 
 // Manşet: son 24 saatin en yüksek puanlı haberi; hiçbir haber 24 saatten uzun manşette kalmaz (src/lib/news.js › pickLead)
 const lead = pickLead(news);
-const rest = news.filter((n) => n !== lead);
-const side = rest.slice(0, 3);
-const second = rest.slice(3, 6);
-const latest = rest.slice(6, HOME_MAIN - 1);
+// Manşet alanındaki yan haberler de görselli olmalı (illüstrasyon yok): görseli olan ilk 3 haber
+const others = news.filter((n) => n !== lead);
+const side = others.filter(hasRealVisual).slice(0, 3);
+const rest = others.filter((n) => !side.includes(n));
+const second = rest.slice(0, 3);
+const latest = rest.slice(3, HOME_MAIN - 4);
 const hasMore = news.length > HOME_MAIN;
 const shown = new Set([lead, ...side, ...second, ...latest].filter(Boolean).map((n) => n.id));
 
@@ -44,7 +46,7 @@ const blocks = CATEGORIES.map((c) => ({
   items: news.filter((n) => n.data.category === c.slug && n.data.date.valueOf() > monthAgo && !shown.has(n.id)).slice(0, 4),
 })).filter((b) => b.items.length >= 3).sort((a, b) => b.items[0].data.date - a.items[0].data.date).slice(0, 3);
 
-const heroV = spreadVisuals([lead, ...side].filter(Boolean), { largeFirst: true });
+const heroV = spreadVisuals([lead, ...side].filter(Boolean), { largeFirst: true, noIllus: true });
 const secondV = spreadVisuals(second);
 const listV = spreadVisuals(latest);
 ---

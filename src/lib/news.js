@@ -44,6 +44,9 @@ export function defaultVisual(entry, large = false) {
 }
 
 /** Haberde adı geçen, logosu olan diğer şirketler (illüstrasyon yerine logo kartı için yedek) */
+/** Haberin illüstrasyon dışında bir görseli var mı (fotoğraf, logo veya haberde geçen bir şirketin logosu) */
+export const hasRealVisual = (entry) => Boolean(entry.data.photo || entry.data.photo2 || entry.data.brand || otherBrands(entry).length);
+
 export function otherBrands(entry) {
   return entitiesOf(entry).map((e) => e.brand).filter((b) => b && b !== entry.data.brand && BRANDS[b]);
 }
@@ -70,7 +73,7 @@ export function ogImageFor(entry) {
  * @returns {Map<string, {kind: 'brand'|'photo'|'illus', v?: number}>}
  */
 const tagOf = (d, o) => o.kind === 'brand' ? `b:${o.b ?? d.brand}` : o.kind === 'photo' ? `p:${(o.n === 2 ? d.photo2 : d.photo).id}` : `i:${d.image}:${o.v}`;
-export function spreadVisuals(entries, { largeFirst = false } = {}) {
+export function spreadVisuals(entries, { largeFirst = false, noIllus = false } = {}) {
   const used = new Set();
   const out = new Map();
   let prev = null;
@@ -88,6 +91,8 @@ export function spreadVisuals(entries, { largeFirst = false } = {}) {
     if (d.photo2) opts.push({ kind: 'photo', n: 2 });
     for (const b of otherBrands(e)) opts.push({ kind: 'brand', b });
     choice = opts.find((o) => !used.has(tagOf(d, o))) ?? null;
+    // Manşet (noIllus): illüstrasyon yok; seçenekler bu sayfada kullanılmış olsa bile haberin kendi görseli tekrar kullanılır
+    if (!choice && noIllus && opts.length) choice = opts[0];
     if (!choice) {
       const key = d.image;
       const base = variantOf(e);
@@ -176,8 +181,10 @@ function hoursToNextBuild(now) {
 export function pickLead(news, now = Date.now()) {
   const limitH = LEAD_MAX_H - hoursToNextBuild(now);
   const ageH = (n) => (now - n.data.date.valueOf()) / 3600e3;
-  const pool = news.filter((n) => ageH(n) >= 0 && ageH(n) < limitH);
-  if (!pool.length) return news[0];
+  // Manşette illüstrasyon kullanılmaz: yalnızca fotoğrafı ya da logosu olan haberler manşete çıkabilir
+  const withVisual = news.filter(hasRealVisual);
+  const pool = withVisual.filter((n) => ageH(n) >= 0 && ageH(n) < limitH);
+  if (!pool.length) return withVisual[0] ?? news[0];
   const score = (n) => popularityOf(n) - ageH(n) * 1.5;
   return pool.reduce((best, n) => (score(n) > score(best) ? n : best));
 }
