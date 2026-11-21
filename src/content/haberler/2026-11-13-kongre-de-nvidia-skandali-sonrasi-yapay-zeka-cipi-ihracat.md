@@ -11,7 +11,7 @@ whyItMatters: "İhracat kontrolleri Nvidia'nın Çin satışlarını doğrudan e
 photo:
   id: "pixabay-516065"
   url: "/foto/px-516065"
-  alt: "capitol, building, architecture, usa, washington, united states, america, united states of america, sightseeing, senate, representative house, democracy, houses of parliament, capitol, senate, senate,"
+  alt: "capitol, building, architecture, usa, washington"
   author: "jensjunge"
   authorUrl: "https://pixabay.com/users/jensjunge-402508/"
   link: "https://pixabay.com/photos/capitol-building-architecture-usa-516065/"

@@ -160,7 +160,8 @@ async function pixabayFind(queries, used, opts = {}) {
     return {
       id,
       url: `/foto/${name}`,
-      alt: `${pick.tags || ''}`.slice(0, 200),
+      // Pixabay açıklama yerine etiket verir: yinelenmeyen ilk 5 etiket
+      alt: [...new Set(`${pick.tags || ''}`.split(',').map((t) => t.trim()).filter(Boolean))].slice(0, 5).join(', '),
       author: pick.user || 'Pixabay',
       authorUrl: pick.user && pick.user_id ? `https://pixabay.com/users/${pick.user}-${pick.user_id}/` : 'https://pixabay.com/',
       link: pick.pageURL || 'https://pixabay.com/',

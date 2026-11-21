@@ -19,7 +19,7 @@ whyItMatters: "Anlaşma, yapay zeka veri merkezi kapasitesine yönelik talebin s
 photo:
   id: "pixabay-2476783"
   url: "/foto/px-2476783"
-  alt: "electrical, data center, complete sets of cabinet, data center, data center, data center, data center, data center"
+  alt: "electrical, data center, complete sets of cabinet"
   author: "Akela999"
   authorUrl: "https://pixabay.com/users/Akela999-5825566/"
   link: "https://pixabay.com/photos/electrical-data-center-2476783/"

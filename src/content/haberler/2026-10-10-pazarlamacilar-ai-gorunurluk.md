@@ -11,7 +11,7 @@ whyItMatters: "Yapay zeka asistanlarında öneri olarak çıkmak, arama sonuçla
 photo:
   id: "pixabay-767776"
   url: "/foto/px-767776"
-  alt: "computer, summary, chart, business, seo, presentation, business presentation, screen, laptop screen, growth, notebook, laptop, digital notebook, computer, chart, business, business, seo, seo, seo, seo"
+  alt: "computer, summary, chart, business, seo"
   author: "Lalmch"
   authorUrl: "https://pixabay.com/users/Lalmch-1026205/"
   link: "https://pixabay.com/photos/computer-summary-chart-business-767776/"

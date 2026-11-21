@@ -12,7 +12,7 @@ whyItMatters: "Talep rakamı, yatırımcıların yapay zeka şirketlerine olan i
 photo:
   id: "pixabay-1730089"
   url: "/foto/px-1730089"
-  alt: "business, stock, finance, market, financial, stock market, investment, success, information, data, exchange, growth, trading, broker, economy, money, stock, stock market, stock market, stock market, s"
+  alt: "business, stock, finance, market, financial"
   author: "AhmadArdity"
   authorUrl: "https://pixabay.com/users/AhmadArdity-3112014/"
   link: "https://pixabay.com/photos/business-stock-finance-market-1730089/"

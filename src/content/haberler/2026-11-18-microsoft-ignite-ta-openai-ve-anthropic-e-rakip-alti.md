@@ -24,7 +24,7 @@ byNumbers:
 photo:
   id: "pixabay-7978588"
   url: "/foto/px-7978588"
-  alt: "laptop, conference table, mouse, work, business, online, remote, microphone, podcast, podcast, podcast, podcast, podcast, podcast"
+  alt: "laptop, conference table, mouse, work, business"
   author: "jhenning"
   authorUrl: "https://pixabay.com/users/jhenning-8658480/"
   link: "https://pixabay.com/photos/laptop-conference-table-mouse-work-7978588/"

@@ -21,7 +21,7 @@ byNumbers:
 photo:
   id: "pixabay-1841158"
   url: "/foto/px-1841158"
-  alt: "analysis, analytics, business, charts, computer, concept, data, desk, device, diagram, digital, documents, graphs, information, investment, job, management, marketing, modern, office, report, business"
+  alt: "analysis, analytics, business, charts, computer"
   author: "Pexels"
   authorUrl: "https://pixabay.com/users/Pexels-2286921/"
   link: "https://pixabay.com/photos/analysis-analytics-business-charts-1841158/"

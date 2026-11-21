@@ -25,7 +25,7 @@ byNumbers:
 photo:
   id: "pixabay-7736878"
   url: "/foto/px-7736878"
-  alt: "ai-generated, computer, artificial intelligence, ai, dall-e, chatgpt, laptop, technology, future, brain, robot, android, chatgpt, chatgpt, chatgpt, chatgpt, chatgpt"
+  alt: "ai-generated, computer, artificial intelligence, ai, dall-e"
   author: "Alexandra_Koch"
   authorUrl: "https://pixabay.com/users/Alexandra_Koch-621802/"
   link: "https://pixabay.com/photos/ai-generated-computer-7736878/"

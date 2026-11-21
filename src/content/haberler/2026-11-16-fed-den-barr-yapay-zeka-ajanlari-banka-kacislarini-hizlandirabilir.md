@@ -15,7 +15,7 @@ keyPoints:
 photo:
   id: "pixabay-2697683"
   url: "/foto/px-2697683"
-  alt: "robot, isolated, artificial intelligence, robot, robot, robot, robot, robot, artificial intelligence"
+  alt: "robot, isolated, artificial intelligence"
   author: "Janson_G"
   authorUrl: "https://pixabay.com/users/Janson_G-5907103/"
   link: "https://pixabay.com/photos/robot-isolated-2697683/"

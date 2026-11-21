@@ -22,7 +22,7 @@ byNumbers:
 photo:
   id: "pixabay-593312"
   url: "/foto/px-593312"
-  alt: "programming, developing, startup, start-up, notebooks, creative, computer, company, laptops, display, silicon valley, modern, home office, office, typing, coding, hacker, coder, freelancer, code, chro"
+  alt: "programming, developing, startup, start-up, notebooks"
   author: "StartupStockPhotos"
   authorUrl: "https://pixabay.com/users/StartupStockPhotos-690514/"
   link: "https://pixabay.com/photos/programming-developing-startup-593312/"

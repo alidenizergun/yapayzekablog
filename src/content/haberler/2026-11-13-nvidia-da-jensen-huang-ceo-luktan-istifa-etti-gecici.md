@@ -32,7 +32,7 @@ byNumbers:
 photo:
   id: "pixabay-2202279"
   url: "/foto/px-2202279"
-  alt: "nvidia, video, card, nvidia, nvidia, nvidia, nvidia, nvidia"
+  alt: "nvidia, video, card"
   author: "WikimediaImages"
   authorUrl: "https://pixabay.com/users/WikimediaImages-1185597/"
   link: "https://pixabay.com/photos/nvidia-video-card-2202279/"

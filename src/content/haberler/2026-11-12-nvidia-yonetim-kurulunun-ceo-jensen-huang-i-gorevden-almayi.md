@@ -12,7 +12,7 @@ whyItMatters: "Yapay zeka çiplerinin en büyük tedarikçisindeki liderlik beli
 photo:
   id: "pixabay-2181980"
   url: "/foto/px-2181980"
-  alt: "chairs, conference room, contemporary, empty, indoors, interior design, room, table, whiteboards, boardroom, furniture, interior decoration, conference room, conference room, conference room, interior"
+  alt: "chairs, conference room, contemporary, empty, indoors"
   author: "Pexels"
   authorUrl: "https://pixabay.com/users/Pexels-2286921/"
   link: "https://pixabay.com/photos/chairs-conference-room-contemporary-2181980/"

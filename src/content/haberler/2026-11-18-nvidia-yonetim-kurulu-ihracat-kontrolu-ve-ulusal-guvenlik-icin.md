@@ -18,7 +18,7 @@ format: kisa
 photo:
   id: "pixabay-3157431"
   url: "/foto/px-3157431"
-  alt: "trace, circuit board, technology, science, grid, light, just, round, easy, template, bright, creativity, waves, lines, shine, expansion, computer, futuristic, the main processor, technology, science,"
+  alt: "trace, circuit board, technology, science, grid"
   author: "geralt"
   authorUrl: "https://pixabay.com/users/geralt-9301/"
   link: "https://pixabay.com/photos/trace-circuit-board-technology-3157431/"

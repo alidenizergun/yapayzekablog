@@ -11,7 +11,7 @@ whyItMatters: "Açık ağırlıklı modellerin payının artması, şirketlerin 
 photo:
   id: "pixabay-7450797"
   url: "/foto/px-7450797"
-  alt: "artificial intelligence, ai, technology, robot eye, ai art, blue, colours, artificial intelligence, artificial intelligence, artificial intelligence, artificial intelligence, artificial intelligence"
+  alt: "artificial intelligence, ai, technology, robot eye, ai art"
   author: "BrianPenny"
   authorUrl: "https://pixabay.com/users/BrianPenny-29844978/"
   link: "https://pixabay.com/photos/artificial-intelligence-ai-7450797/"

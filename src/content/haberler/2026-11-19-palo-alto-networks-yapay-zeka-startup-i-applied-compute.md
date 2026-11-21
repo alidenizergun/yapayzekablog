@@ -30,7 +30,7 @@ byNumbers:
 photo:
   id: "pixabay-8004870"
   url: "/foto/px-8004870"
-  alt: "control center, internet, cybersecurity, science fiction, network, monitor, computer, technology, cybersecurity, cybersecurity, cybersecurity, cybersecurity, cybersecurity"
+  alt: "control center, internet, cybersecurity, science fiction, network"
   author: "cliff1126"
   authorUrl: "https://pixabay.com/users/cliff1126-2330376/"
   link: "https://pixabay.com/photos/control-center-internet-8004870/"

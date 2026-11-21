@@ -12,7 +12,7 @@ whyItMatters: "OpenAI, siber güvenlik modellerini açık tespitinden yama öner
 photo:
   id: "pixabay-2851245"
   url: "/foto/px-2851245"
-  alt: "cyber security, hacking, internet, network, information, cyber security, cyber security, cyber security, hacking, hacking, hacking, hacking, hacking"
+  alt: "cyber security, hacking, internet, network, information"
   author: "TheDigitalArtist"
   authorUrl: "https://pixabay.com/users/TheDigitalArtist-202249/"
   link: "https://pixabay.com/photos/cyber-security-hacking-internet-2851245/"

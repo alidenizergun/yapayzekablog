@@ -25,7 +25,7 @@ byNumbers:
 photo:
   id: "pixabay-1853262"
   url: "/foto/px-1853262"
-  alt: "blur, chart, computer, data, finance, graph, growth, line graph, stock exchange, stock market, technology, trading, data, finance, finance, graph, stock market, stock market, stock market, stock marke"
+  alt: "blur, chart, computer, data, finance"
   author: "Pexels"
   authorUrl: "https://pixabay.com/users/Pexels-2286921/"
   link: "https://pixabay.com/photos/blur-chart-computer-data-finance-1853262/"

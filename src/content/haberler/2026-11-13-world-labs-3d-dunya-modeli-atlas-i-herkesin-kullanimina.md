@@ -11,7 +11,7 @@ whyItMatters: "Üç boyutlu dünya modelleri, oyun ve robotik gibi alanlarda gel
 photo:
   id: "pixabay-4560230"
   url: "/foto/px-4560230"
-  alt: "headphones, simulator, virtual reality, artificial intelligence, ai gamer, games, gaming, metaverse, computer, robot, thinking digital, human programming, controlled, remote projection, visual effects"
+  alt: "headphones, simulator, virtual reality, artificial intelligence, ai gamer"
   author: "ArtisticOperations"
   authorUrl: "https://pixabay.com/users/ArtisticOperations-4161274/"
   link: "https://pixabay.com/photos/headphones-simulator-virtual-reality-4560230/"

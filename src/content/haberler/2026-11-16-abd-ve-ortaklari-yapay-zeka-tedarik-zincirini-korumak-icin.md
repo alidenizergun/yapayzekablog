@@ -15,7 +15,7 @@ keyPoints:
 photo:
   id: "pixabay-876099"
   url: "/foto/px-876099"
-  alt: "integrated circuit, device, chip, technology, electronic, computer, hardware, component, engineering, brown computer, brown technology, brown laptop, integrated circuit, integrated circuit, integrated"
+  alt: "integrated circuit, device, chip, technology, electronic"
   author: "WikimediaImages"
   authorUrl: "https://pixabay.com/users/WikimediaImages-1185597/"
   link: "https://pixabay.com/photos/integrated-circuit-device-chip-876099/"

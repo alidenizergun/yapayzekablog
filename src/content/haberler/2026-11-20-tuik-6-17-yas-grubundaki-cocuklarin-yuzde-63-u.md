@@ -10,7 +10,7 @@ imageQuery: "child using smartphone"
 photo:
   id: "pixabay-1869510"
   url: "/foto/px-1869510"
-  alt: "phone, android, apps, world map, applications, cellphone, communication, display, electronics, mobile phone, screen, smartphone, technology, touch screen, wireless, wireless technology, phone, phone,"
+  alt: "phone, android, apps, world map, applications"
   author: "Pexels"
   authorUrl: "https://pixabay.com/users/Pexels-2286921/"
   link: "https://pixabay.com/photos/phone-android-apps-world-map-1869510/"
@@ -30,7 +30,7 @@ byNumbers:
 photo2:
   id: "pixabay-6105750"
   url: "/foto/px-6105750"
-  alt: "keyboard, computer, laptop, technology, keys, close up, communication, internet, digital, digital notebook, keyboard, keyboard, keyboard, keyboard, keyboard, computer, internet"
+  alt: "keyboard, computer, laptop, technology, keys"
   author: "webandi"
   authorUrl: "https://pixabay.com/users/webandi-1460261/"
   link: "https://pixabay.com/photos/keyboard-computer-laptop-technology-6105750/"

@@ -15,7 +15,7 @@ keyPoints:
 photo:
   id: "pixabay-5319462"
   url: "/foto/px-5319462"
-  alt: "international, flags, un, world, global, meeting, countries, politics, globe, worldwide, diversity, country, globalization, earth, nations, united, political, population, geography, unity, wind, fly,"
+  alt: "international, flags, un, world, global"
   author: "JoshuaWoroniecki"
   authorUrl: "https://pixabay.com/users/JoshuaWoroniecki-12734309/"
   link: "https://pixabay.com/photos/international-flags-un-world-5319462/"

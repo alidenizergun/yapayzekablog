@@ -16,7 +16,7 @@ format: kisa
 photo:
   id: "pixabay-2907728"
   url: "/foto/px-2907728"
-  alt: "bank, money, shares, save up, capital, financing, banking crisis, credit, banks house, building, architecture, rent, bank building, facade, stone relief, columns, sculptures, historical, monument, sto"
+  alt: "bank, money, shares, save up, capital"
   author: "JamesQube"
   authorUrl: "https://pixabay.com/users/JamesQube-6733902/"
   link: "https://pixabay.com/photos/bank-money-shares-save-up-capital-2907728/"

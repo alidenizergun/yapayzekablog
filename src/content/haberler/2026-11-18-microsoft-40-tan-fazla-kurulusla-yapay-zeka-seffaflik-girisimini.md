@@ -17,7 +17,7 @@ format: kisa
 photo:
   id: "pixabay-3685829"
   url: "/foto/px-3685829"
-  alt: "hand, robot, human, keyboard, networks, industry, internet, social, social network, logo, marketing, analysis, concept, implementation, work, success, successful, idea, competence, solution, solutions"
+  alt: "hand, robot, human, keyboard, networks"
   author: "geralt"
   authorUrl: "https://pixabay.com/users/geralt-9301/"
   link: "https://pixabay.com/photos/hand-robot-human-keyboard-networks-3685829/"

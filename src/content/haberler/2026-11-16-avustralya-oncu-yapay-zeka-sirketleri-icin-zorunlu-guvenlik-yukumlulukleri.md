@@ -17,7 +17,7 @@ whatsNext: "Avustralya Yapay Zeka Standartları mevzuatının ayrıntılarının
 photo:
   id: "pixabay-168300"
   url: "/foto/px-168300"
-  alt: "parliament house, canberra, australia, capital, act, government, politics, federal, democracy, structure, commonwealth, govern, chambers, civic, senate, representatives, political, legislature, state,"
+  alt: "parliament house, canberra, australia, capital, act"
   author: "helen35"
   authorUrl: "https://pixabay.com/users/helen35-45431/"
   link: "https://pixabay.com/photos/parliament-house-canberra-australia-168300/"

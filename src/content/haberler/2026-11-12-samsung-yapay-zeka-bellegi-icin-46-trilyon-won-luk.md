@@ -19,7 +19,7 @@ whyItMatters: "Yapay zeka sunucularındaki HBM talebi, gelişmiş paketleme kapa
 photo:
   id: "pixabay-8141642"
   url: "/foto/px-8141642"
-  alt: "memory, ram, computer, technology, electronics, component, laptop, digital, ram, ram, ram, ram, computer, computer, computer, computer, computer, laptop"
+  alt: "memory, ram, computer, technology, electronics"
   author: "cliffsmith23"
   authorUrl: "https://pixabay.com/users/cliffsmith23-38386472/"
   link: "https://pixabay.com/photos/memory-ram-computer-technology-8141642/"

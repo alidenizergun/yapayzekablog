@@ -24,7 +24,7 @@ byNumbers:
 photo:
   id: "pixabay-1905225"
   url: "/foto/px-1905225"
-  alt: "chart, trading, courses, forex, analysis, shares, stock exchange, chart, trading, trading, trading, trading, trading, forex, forex, forex, stock exchange"
+  alt: "chart, trading, courses, forex, analysis"
   author: "PIX1861"
   authorUrl: "https://pixabay.com/users/PIX1861-468748/"
   link: "https://pixabay.com/photos/chart-trading-courses-forex-1905225/"

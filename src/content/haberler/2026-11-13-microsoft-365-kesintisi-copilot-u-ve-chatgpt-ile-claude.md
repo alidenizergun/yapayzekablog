@@ -12,7 +12,7 @@ whyItMatters: "Yapay zeka asistanları e-posta ve takvim erişimini üçüncü t
 photo:
   id: "pixabay-2237920"
   url: "/foto/px-2237920"
-  alt: "broken business, monitor, broken display, bad seo, internet, online, hacking, technology, computer, display, screen, pc, communication, desktop, digital, crash, imac, apple, fixing, recovery, data los"
+  alt: "broken business, monitor, broken display, bad seo, internet"
   author: "Mediamodifier"
   authorUrl: "https://pixabay.com/users/Mediamodifier-1567646/"
   link: "https://pixabay.com/photos/broken-business-monitor-2237920/"

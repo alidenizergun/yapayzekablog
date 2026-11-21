@@ -16,7 +16,7 @@ whatsNext: "Senatör Jerry McNerney, rapordaki önerileri uygulayacak yasa tasar
 photo:
   id: "pixabay-7977960"
   url: "/foto/px-7977960"
-  alt: "ai, robot, artificial intelligence, computer science, digital, future, chatgpt, technology, cybot, ai generated, artificial intelligence, artificial intelligence, artificial intelligence, artificial i"
+  alt: "ai, robot, artificial intelligence, computer science, digital"
   author: "Alexandra_Koch"
   authorUrl: "https://pixabay.com/users/Alexandra_Koch-621802/"
   link: "https://pixabay.com/photos/ai-robot-artificial-intelligence-7977960/"

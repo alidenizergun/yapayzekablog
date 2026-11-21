@@ -19,7 +19,7 @@ whatsNext: "Bessent, Nvidia yönetim kurulundan 10 gün içinde yanıt bekliyor;
 photo:
   id: "pixabay-3389904"
   url: "/foto/px-3389904"
-  alt: "technology, developer, touch, finger, artificial intelligence, think, steering, computer science, electrical engineering, computer, intelligent, controlled, circuit board, circuit, data, function, mic"
+  alt: "technology, developer, touch, finger, artificial intelligence"
   author: "geralt"
   authorUrl: "https://pixabay.com/users/geralt-9301/"
   link: "https://pixabay.com/photos/technology-developer-touch-finger-3389904/"

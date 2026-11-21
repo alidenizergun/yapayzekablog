@@ -16,7 +16,7 @@ whatsNext: "Bağlayıcı bir belge müzakeresinin başlayıp başlamayacağını
 photo:
   id: "pixabay-4984799"
   url: "/foto/px-4984799"
-  alt: "un, united nations, organization of the united nations, cloth, texture, textile, sign, flag, symbol, country, patriot, nation, national, emblem, world, international, united nations, united nations, u"
+  alt: "un, united nations, organization of the united nations, cloth, texture"
   author: "padrinan"
   authorUrl: "https://pixabay.com/users/padrinan-1694659/"
   link: "https://pixabay.com/photos/un-united-nations-4984799/"

@@ -11,7 +11,7 @@ whyItMatters: "Ülkelerin yerli yapay zeka çipi üretme çabaları, Nvidia'ya b
 photo:
   id: "pixabay-2660914"
   url: "/foto/px-2660914"
-  alt: "system, web, network, connection, connected, with each other, together, neurons, brain cells, points, lines, interfaces, contact, relationship, cooperation structure of the brain, brain, wattle, yarn,"
+  alt: "system, web, network, connection, connected"
   author: "geralt"
   authorUrl: "https://pixabay.com/users/geralt-9301/"
   link: "https://pixabay.com/photos/system-web-network-connection-2660914/"

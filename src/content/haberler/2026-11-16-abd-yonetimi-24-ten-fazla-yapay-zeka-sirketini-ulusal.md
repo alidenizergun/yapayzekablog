@@ -17,7 +17,7 @@ whatsNext: "Açıklamanın bir hafta içinde Ticaret Bakanı Howard Lutnick tara
 photo:
   id: "pixabay-7772914"
   url: "/foto/px-7772914"
-  alt: "technology, circuit, board, head, light, burst, artificial intelligence, ai, networking, digital, computer, internet, business, connected, communication, artificial intelligence, artificial intelligen"
+  alt: "technology, circuit, board, head, light"
   author: "flutie8211"
   authorUrl: "https://pixabay.com/users/flutie8211-17475707/"
   link: "https://pixabay.com/photos/technology-circuit-board-head-7772914/"

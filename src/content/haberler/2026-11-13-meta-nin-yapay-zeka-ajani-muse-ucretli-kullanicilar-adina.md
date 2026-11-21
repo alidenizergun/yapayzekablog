@@ -13,7 +13,7 @@ turkeyAngle: "Muse'un telefonla arama özelliği şimdilik yalnızca ABD'deki i�
 photo:
   id: "pixabay-4668542"
   url: "/foto/px-4668542"
-  alt: "voicemail, desk phone, landline, telephone, phone, call, voip, gray phone, gray desk, gray telephone, voicemail, landline, voip, voip, voip, voip, voip"
+  alt: "voicemail, desk phone, landline, telephone, phone"
   author: "Media_Visuals"
   authorUrl: "https://pixabay.com/users/Media_Visuals-13388979/"
   link: "https://pixabay.com/photos/voicemail-desk-phone-landline-4668542/"

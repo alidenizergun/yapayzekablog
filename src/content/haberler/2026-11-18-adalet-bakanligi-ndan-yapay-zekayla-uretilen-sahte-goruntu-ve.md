@@ -16,7 +16,7 @@ keyPoints:
 photo:
   id: "pixabay-719066"
   url: "/foto/px-719066"
-  alt: "hammer, books, law, dish, lawyer, paragraphs, regulation, court of justice, a book, §, code, law books, judge, order, rule, disposal, auction, law, law, law, law, law, lawyer, lawyer"
+  alt: "hammer, books, law, dish, lawyer"
   author: "succo"
   authorUrl: "https://pixabay.com/users/succo-96729/"
   link: "https://pixabay.com/photos/hammer-books-law-dish-lawyer-719066/"
