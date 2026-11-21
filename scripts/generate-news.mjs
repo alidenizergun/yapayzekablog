@@ -25,7 +25,8 @@
  *   NEWS_ENGINE       ajan: araştırma ve yazımı haber masası yapar (yayın yönetmeni, muhabirler,
  *                     doğrulama; scripts/news-agents.mjs). Boş/klasik: tek seferlik araştırma + yazım.
  *   AGENT_SHADOW      true: ajanlar çalışır, sonuçlar yalnızca tur özetine yazılır; siteye haber eklenmez
- *   AGENT_BUDGET_USD  ajan turunun harcama tavanı (varsayılan: tam tur 2,5 $, ara tur 0,8 $)
+ *   AGENT_BUDGET_USD  ajan turunun harcama tavanı (varsayılan: tam tur 1,5 $, ara tur 0,6 $)
+ *   AGENT_MAX_TOPICS  turda en fazla kaç konu atanır (varsayılan 6) · EDITOR_MODEL yayın yönetmeni (varsayılan Haiku)
  */
 import fs from 'node:fs';
 import path from 'node:path';
@@ -111,9 +112,11 @@ const tok = (n) => (n >= 1000 ? `${Math.round(n / 1000).toLocaleString('tr-TR')}
 const REQUIRE_REVIEW = /^(1|true|yes|evet)$/i.test(process.env.REQUIRE_REVIEW || '');
 const ENGINE = /^(ajan|agent|agents)$/i.test(process.env.NEWS_ENGINE || '') ? 'ajan' : 'klasik';
 const SHADOW = ENGINE === 'ajan' && /^(1|true|yes|evet)$/i.test(process.env.AGENT_SHADOW || '');
-const AGENT_MODEL = process.env.AGENT_MODEL || MODEL; // yayın yönetmeni ve muhabirler
+const EDITOR_MODEL = process.env.EDITOR_MODEL || 'claude-haiku-5-5'; // yayın yönetmeni (konu seçimi; ucuz model yeterli)
+const AGENT_MODEL = process.env.AGENT_MODEL || MODEL; // muhabirler
 const VERIFY_MODEL = process.env.VERIFY_MODEL || MODEL; // doğrulama ajanı
-const AGENT_BUDGET = Number(process.env.AGENT_BUDGET_USD) || (MIDDAY ? 0.8 : 2.5);
+const AGENT_BUDGET = Number(process.env.AGENT_BUDGET_USD) || (MIDDAY ? 0.6 : 1.5);
+const AGENT_MAX_TOPICS = Number(process.env.AGENT_MAX_TOPICS) || 6; // turda en fazla kaç konu atanır
 
 const log = (...a) => console.log('[haber]', ...a);
 
@@ -736,7 +739,7 @@ async function main() {
     log(`fotoğraf havuzuna eklenen: ${photoNote.pool || 0} · fotoğraf eklenen eski haber: ${photoNote.backfilled}${photoNote.error ? ' (hata: ' + photoNote.error + ')' : ''}`);
     return summary([], [], 0);
   }
-  log(`motor: ${ENGINE === 'ajan' ? `haber masası (ajanlar ${AGENT_MODEL}, doğrulama ${VERIFY_MODEL}, tavan $${AGENT_BUDGET})${SHADOW ? ' · DENEME: siteye yazılmaz' : ''}` : 'klasik'}`);
+  log(`motor: ${ENGINE === 'ajan' ? `haber masası (yayın yönetmeni ${EDITOR_MODEL}, muhabir ${AGENT_MODEL}, doğrulama ${VERIFY_MODEL}, en fazla ${Math.min(MAX_ARTICLES, AGENT_MAX_TOPICS)} konu, tavan $${AGENT_BUDGET})${SHADOW ? ' · DENEME: siteye yazılmaz' : ''}` : 'klasik'}`);
   log(`model: araştırma ${RESEARCH_MODEL}, yazım ${MODEL}${USE_BATCH ? ' (Batch API)' : ''} · mevcut haber: ${existing.length} · en fazla ${MAX_ARTICLES} yeni haber · en fazla ${MAX_SEARCHES} arama${IS_WEEKEND ? ' (hafta sonu)' : ''} · ${REQUIRE_REVIEW ? 'editör onayı AÇIK (taslak)' : 'otomatik yayın'}`);
 
   let articles, seen, searches = 0;
@@ -779,8 +782,8 @@ async function main() {
         feedText: formatFeedsForPrompt(feedItems), xText: xPosts.length ? formatPostsForPrompt(xPosts) : '',
         guidelines: GUIDELINES, articleSchema: ARTICLE_SCHEMA, styleBrief: styleBrief(),
         track, costOf: (n) => usage.tokenCost + n * SEARCH_PRICE, log: (m) => log(m),
-        now: istanbulIso(), lookbackHours: LOOKBACK_HOURS, midday: MIDDAY, maxArticles: MAX_ARTICLES,
-        editorModel: AGENT_MODEL, reporterModel: AGENT_MODEL, verifierModel: VERIFY_MODEL, budgetUsd: AGENT_BUDGET,
+        now: istanbulIso(), lookbackHours: LOOKBACK_HOURS, midday: MIDDAY, maxArticles: Math.min(MAX_ARTICLES, AGENT_MAX_TOPICS),
+        editorModel: EDITOR_MODEL, reporterModel: AGENT_MODEL, verifierModel: VERIFY_MODEL, budgetUsd: AGENT_BUDGET,
         editorSearches: Math.max(1, Math.round(MAX_SEARCHES / 2)), interest: readerInterest(), stories: STORIES,
       });
       searches = room.searches;

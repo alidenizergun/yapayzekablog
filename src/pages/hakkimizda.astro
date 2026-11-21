@@ -46,17 +46,17 @@ import { BLOCKED_DOMAINS } from '../lib/blocked-sources.js';
         <li>
           <span class="step-n" aria-hidden="true">1</span>
           <h3>{T('Tarama', 'Scanning')}</h3>
-          <p>{T("Son saatlerdeki gelişmeler web aramasıyla bulunur; şirketlerin resmi duyuruları ve tanınmış haber kuruluşları öncelikli kaynaktır. Aramaların bir kısmı her zaman Türkiye'deki gelişmelere ayrılır.", 'Web searches surface the latest developments, with official company announcements and established news organizations as the primary sources. Some searches are always reserved for developments in Turkey.')}</p>
+          <p>{T("Son saatlerdeki gelişmeler haber akışları ve web aramasıyla taranır; sitenin arşivine bakılarak daha önce yazılan konular ayıklanır ve günün gündemi çıkarılır. Türkiye'deki gelişmeler ayrıca aranır.", 'The latest developments are scanned through news feeds and web searches; the site’s archive is checked so topics already covered are set aside, and the day’s agenda is drawn up. Developments in Turkey are searched for separately.')}</p>
         </li>
         <li>
           <span class="step-n" aria-hidden="true">2</span>
           <h3>{T('Seçme ve yazma', 'Selecting and writing')}</h3>
-          <p>{T('Haber değeri taşıyan gelişmeler seçilir, daha önce yayınlananlar ve tekrarlar elenir. Yalnızca bülten, derleme sitesi veya kişisel blog yazısına dayanan gelişmeler elenir; şirketin kendi duyurusu ya da tanınmış bir haber kuruluşu aranır. Haberler kaynak metin kopyalanmadan, kendi cümlelerimizle Türkçe yazılır ve her habere okura bağlam veren bir "Bu ne anlama geliyor?" notu eklenir.', 'Newsworthy developments are selected, and anything already covered or duplicated is dropped. Developments that rest only on newsletters, aggregators or personal blogs are dropped in favour of the company’s own announcement or an established news organization. Stories are written in our own words without copying source text, and each one gets a “Why it matters” note that gives the reader context.')}</p>
+          <p>{T('Her konu ayrı ayrı araştırılır: şirketin resmi duyurusu, kurum açıklaması veya makale gibi birincil kaynaklar açılıp okunur. Yalnızca bülten, derleme sitesi veya kişisel blog yazısına dayanan gelişmeler elenir; şirketin kendi duyurusu ya da tanınmış bir haber kuruluşu aranır. Haberler kaynak metin kopyalanmadan, kendi cümlelerimizle Türkçe yazılır ve her habere okura bağlam veren bir "Bu ne anlama geliyor?" notu eklenir.', 'Each topic is researched on its own: primary sources such as the company’s announcement, an official statement or the paper itself are opened and read. Developments that rest only on newsletters, aggregators or personal blogs are dropped in favour of the company’s own announcement or an established news organization. Stories are written in our own words without copying source text, and each one gets a “Why it matters” note that gives the reader context.')}</p>
         </li>
         <li>
           <span class="step-n" aria-hidden="true">3</span>
           <h3>{T('Kaynak doğrulama', 'Source checks')}</h3>
-          <p>{T('Haberdeki her kaynak adresi, araştırma sırasında gerçekten görülen adreslerle karşılaştırılır. Doğrulanmış kaynağı kalmayan haber yayınlanmaz.', 'Every source link in a story is checked against the pages actually seen during research. A story with no verified source left is not published.')}</p>
+          <p>{T('Haberi yazan adımdan bağımsız bir doğrulama adımı, metindeki rakamları, tarihleri ve isimleri kaynak sayfalarla tek tek karşılaştırır; hata bulunursa haber düzeltilir, düzeltilemezse ya da gelişme güncel değilse yayınlanmaz. Ayrıca haberdeki her kaynak adresi araştırma sırasında gerçekten görülen adreslerle karşılaştırılır.', 'A check that runs independently of the writing step compares every figure, date and name in the story with the source pages; if something is wrong the story is corrected, and if it can’t be, or the development isn’t recent, it isn’t published. Every source link is also checked against the pages actually seen during research.')}</p>
         </li>
         <li>
           <span class="step-n" aria-hidden="true">4</span>

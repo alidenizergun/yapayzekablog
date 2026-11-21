@@ -86,6 +86,8 @@ jobs:
           AGENT_SHADOW: ${{ inputs.shadow && 'true' || vars.AGENT_SHADOW || 'false' }}
           AGENT_BUDGET_USD: ${{ vars.AGENT_BUDGET_USD }}
           AGENT_MODEL: ${{ vars.AGENT_MODEL }}
+          EDITOR_MODEL: ${{ vars.EDITOR_MODEL }}
+          AGENT_MAX_TOPICS: ${{ vars.AGENT_MAX_TOPICS }}
           VERIFY_MODEL: ${{ vars.VERIFY_MODEL }}
           PHOTOS_ONLY: ${{ inputs.only_photos || 'false' }}
           PHOTO_BACKFILL: ${{ vars.PHOTO_BACKFILL || '15' }}
