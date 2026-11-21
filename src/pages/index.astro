@@ -8,7 +8,7 @@ import { CATEGORIES } from '../lib/site.js';
 import { SECTORS } from '../lib/sectors.js';
 import { getCollection } from 'astro:content';
 import { i18n, locNewsList } from '../i18n/index.js';
-import { getNews, pickLead, getTags, tagSlug, newsUrl, spreadVisuals, hasRealVisual, catName, catUrl, tagUrl, url, HOME_MAIN } from '../lib/news.js';
+import { getNews, pickLead, getTags, tagSlug, newsUrl, spreadVisuals, hasRealVisual, photoSet, catName, catUrl, tagUrl, url, HOME_MAIN } from '../lib/news.js';
 
 // Ana sayfa önem sırası:
 // 1. Manşet + 3 yan haber   2. Öne çıkanlar (3 kart)   3. Son haberler listesi + kenar çubuğu
@@ -47,10 +47,14 @@ const blocks = CATEGORIES.map((c) => ({
 })).filter((b) => b.items.length >= 3).sort((a, b) => b.items[0].data.date - a.items[0].data.date).slice(0, 3);
 
 const heroV = spreadVisuals([lead, ...side].filter(Boolean), { largeFirst: true, noIllus: true });
+// Manşet fotoğrafı sayfanın en büyük görseli (LCP): <head> içinde erkenden yüklenir
+const leadV = lead ? heroV.get(lead.id) : undefined;
+const leadPhoto = leadV?.kind === 'photo' ? (leadV.n === 2 ? lead.data.photo2 : lead.data.photo) : undefined;
+const preloadImage = leadPhoto ? photoSet(leadPhoto, 820, 420) : undefined;
 const secondV = spreadVisuals(second);
 const listV = spreadVisuals(latest);
 ---
-<Base>
+<Base preloadImage={preloadImage}>
   {lead ? (
     <div class="home">
       <section class="hero" aria-label={T('Manşet', 'Top story')}>

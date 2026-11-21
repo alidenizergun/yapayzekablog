@@ -28,7 +28,7 @@ const read = (f, d) => { try { return JSON.parse(fs.readFileSync(f, 'utf8')); } 
 const write = (f, v) => { fs.mkdirSync(path.dirname(f), { recursive: true }); fs.writeFileSync(f, JSON.stringify(v, null, 2) + '\n'); };
 
 function siteBase() {
-  const site = (process.env.SITE_URL || 'https://yzgundemi.com').replace(/\/$/, '');
+  const site = (process.env.SITE_URL || 'https://www.yzgundemi.com').replace(/\/$/, '');
   const base = process.env.BASE_PATH || '';
   return site + base.replace(/\/$/, '');
 }

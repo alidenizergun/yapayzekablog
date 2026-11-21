@@ -95,7 +95,7 @@ jobs:
       - name: Arama motorlarına bildir (IndexNow)
         continue-on-error: true
         env:
-          HOST: yzgundemi.com
+          HOST: www.yzgundemi.com
           KEY: 0c0c22361c000ab306b8057c0f807962
         run: |
           sleep 60

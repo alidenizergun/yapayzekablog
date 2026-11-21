@@ -8,8 +8,9 @@ import glossaryLinks from './scripts/glossary-integration.mjs';
 import i18nLinks from './scripts/i18n-integration.mjs';
 
 // Sitenin kendi domaini; repo değişkeni SITE_URL verilirse o kullanılır.
-const DEFAULT_SITE = 'https://yzgundemi.com';
-const site = process.env.SITE_URL || DEFAULT_SITE;
+const DEFAULT_SITE = 'https://www.yzgundemi.com';
+// Asıl adres www'lu: yzgundemi.com → www.yzgundemi.com yönlendirir. Değişken eski (www'suz) adresi verse bile www kullanılır.
+const site = (process.env.SITE_URL || DEFAULT_SITE).replace('://yzgundemi.com', '://www.yzgundemi.com');
 const base = process.env.BASE_PATH || '/';
 
 export default defineConfig({
@@ -17,5 +18,5 @@ export default defineConfig({
   base,
   trailingSlash: 'ignore',
   integrations: [sitemap({ filter: (page) => !page.includes('/hata-bildir') }), contentGuard(), glossaryLinks(), nofollowExternalLinks(), seoPostBuild(), i18nLinks({ site, base }), securityHeaders()],
-  build: { format: 'directory', inlineStylesheets: 'never' }, // satır içi <style> yok: CSP style-src 'self'
+  build: { format: 'directory', inlineStylesheets: 'always' }, // CSS sayfaya gömülür (oluşturmayı engelleyen istek yok); CSP'de <style> özetle izinli
 });

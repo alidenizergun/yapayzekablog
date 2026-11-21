@@ -103,7 +103,7 @@ if (GA4) {
     const rows = (pages.rows || []).map((r) => ({ path: r.dimensionValues[0].value.replace(/[?#].*$/, ''), views: Number(r.metricValues[0].value), users: Number(r.metricValues[1].value) }));
     const news = rows.filter((r) => metaOf(r.path));
     report.push('### En çok okunan haberler', '', '| Haber | Görüntüleme | Kullanıcı |', '|---|---:|---:|',
-      ...news.slice(0, 10).map((r) => `| [${md(metaOf(r.path).title)}](https://yzgundemi.com${r.path}) | ${nf(r.views)} | ${nf(r.users)} |`), '');
+      ...news.slice(0, 10).map((r) => `| [${md(metaOf(r.path).title)}](https://www.yzgundemi.com${r.path}) | ${nf(r.views)} | ${nf(r.users)} |`), '');
     const others = rows.filter((r) => !metaOf(r.path)).slice(0, 8);
     if (others.length) report.push('### En çok açılan diğer sayfalar', '', ...others.map((r) => `- \`${md(r.path)}\`: ${nf(r.views)}`), '');
 

@@ -1,31 +1,11 @@
 ---
 import { GLOSSARY } from '../lib/glossary.js';
 // Yazı tipleri sitenin kendi sunucusundan verilir (Google'a ziyaretçi IP'si gitmez, KVKK; CSP daha sıkı)
-// Yalnızca Latin ve Latin Genişletilmiş (Türkçe) alt kümeleri: CSS küçülür, gereksiz @font-face kalmaz
-import '@fontsource/inter/latin-400.css';
-import '@fontsource/inter/latin-ext-400.css';
-import '@fontsource/inter/latin-500.css';
-import '@fontsource/inter/latin-ext-500.css';
-import '@fontsource/inter/latin-600.css';
-import '@fontsource/inter/latin-ext-600.css';
-import '@fontsource/inter/latin-700.css';
-import '@fontsource/inter/latin-ext-700.css';
-import '@fontsource/schibsted-grotesk/latin-600.css';
-import '@fontsource/schibsted-grotesk/latin-ext-600.css';
-import '@fontsource/schibsted-grotesk/latin-700.css';
-import '@fontsource/schibsted-grotesk/latin-ext-700.css';
-import '@fontsource/schibsted-grotesk/latin-800.css';
-import '@fontsource/schibsted-grotesk/latin-ext-800.css';
-import '@fontsource/source-serif-4/latin-400.css';
-import '@fontsource/source-serif-4/latin-ext-400.css';
-import '@fontsource/source-serif-4/latin-400-italic.css';
-import '@fontsource/source-serif-4/latin-ext-400-italic.css';
-import '@fontsource/source-serif-4/latin-600.css';
-import '@fontsource/source-serif-4/latin-ext-600.css';
+import '../styles/fonts.css';
 import '../styles/marka-renkleri.css';
 // LCP metni (başlıklar ve gövde) için en çok kullanılan iki yazı tipi önceden yüklenir
-import fontDisplay from '@fontsource/schibsted-grotesk/files/schibsted-grotesk-latin-800-normal.woff2?url';
-import fontBody from '@fontsource/inter/files/inter-latin-400-normal.woff2?url';
+import fontDisplay from '../fonts/schibsted-latin-wght.woff2?url';
+import fontBody from '../fonts/inter-latin-wght.woff2?url';
 import '../styles/global.css';
 import { SITE, NAV, CATEGORIES, categoryBySlug } from '../lib/site.js';
 import { getNews, newsUrl, catUrl, url, slugOf } from '../lib/news.js';
@@ -45,12 +25,14 @@ interface Props {
   article?: { published: Date; modified?: Date; section?: string; tags?: string[] };
   // Konum (breadcrumb) şeması: [{ name, path }]
   breadcrumbs?: { name: string; path: string }[];
+  // En büyük görsel (LCP) için erken yükleme: { src, srcset, sizes }
+  preloadImage?: { src: string; srcset?: string; sizes?: string };
 }
 const L = await i18n(Astro);
 const { lang, T, alternates, S } = L;
 const SITE_TITLE = T(SITE.title, 'YZ Gündemi · AI News from Turkey and the World');
 const SITE_DESC = T(SITE.description, SITE_DESC_EN);
-const { title, description: rawDescription = SITE_DESC, ogImage, ogType = 'website', currentCat, jsonLd, noindex = false, article, breadcrumbs } = Astro.props;
+const { title, description: rawDescription = SITE_DESC, ogImage, ogType = 'website', currentCat, jsonLd, noindex = false, article, breadcrumbs, preloadImage } = Astro.props;
 // Başlık: "Haber başlığı · YZ Gündemi"; çok uzun başlıklarda (70+) marka eki atılır, arama sonucunda kesilmesin
 const fullTitle = title ? (`${title} · ${SITE.name}`.length > 70 ? title : `${title} · ${SITE.name}`) : SITE_TITLE;
 // Açıklama en fazla 160 karakter, kelime ortasında kesilmez
@@ -210,6 +192,7 @@ const isBreaking = latest && Date.now() - latest.data.date.valueOf() < BREAKING_
   <link rel="apple-touch-icon" href={url('/apple-touch-icon.png')} />
   <!-- Haber fotoğrafları (en büyük görsel, LCP) için bağlantıyı erkenden kur -->
   <link rel="preconnect" href="https://images.unsplash.com" />
+  {preloadImage && <link rel="preload" as="image" href={preloadImage.src} imagesrcset={preloadImage.srcset} imagesizes={preloadImage.sizes} fetchpriority="high" />}
   <link rel="preload" href={fontDisplay} as="font" type="font/woff2" crossorigin />
   <link rel="preload" href={fontBody} as="font" type="font/woff2" crossorigin />
   <meta property="og:site_name" content={SITE.name} />

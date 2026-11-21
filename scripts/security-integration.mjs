@@ -50,7 +50,7 @@ export default function securityHeaders() {
             // Satır içi style özniteliği ve <style> kullanılmıyor (marka renkleri /marka-renkleri.css'te); kalan <style> blokları özetle izinli
             `style-src 'self' ${[...styleHashes].join(' ')}`.trim(),
             `img-src 'self' https://images.unsplash.com data: ${ga.img}`.trim(),
-            "font-src 'self'",
+            "font-src 'self' data:",
             `connect-src 'self' ${ga.connect} ${forms.join(' ')}`.replace(/\s+/g, ' ').trim(),
             `form-action 'self' https://github.com ${forms.join(' ')}`.trim(),
             "object-src 'none'",

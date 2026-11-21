@@ -3,7 +3,7 @@
 // choice verilmezse haberin kendi görseli kullanılır (bkz. defaultVisual).
 import { IMAGES } from '../lib/site.js';
 import { brandOf } from '../lib/brands.js';
-import { defaultVisual, photoSrc, imageFor } from '../lib/news.js';
+import { defaultVisual, photoSet, imageFor } from '../lib/news.js';
 
 interface Props {
   entry: any;
@@ -19,12 +19,7 @@ const brandKey = choice.kind === 'brand' ? (choice.b ?? d.brand) : undefined;
 const brand = brandKey ? brandOf(brandKey) : undefined;
 const photo = choice.kind === 'photo' ? (choice.n === 2 ? d.photo2 : d.photo) : undefined;
 const loading = eager ? 'eager' : 'lazy';
-// Duyarlı görsel: telefonda kartlar tam genişlikte gösterilir; tarayıcı ekrana uygun boyutu seçer
-// (küçük küçük resimlerde yalnızca 1x/2x yeterli)
-const small = w <= 160;
-const steps = small ? [] : [...new Set([360, 480, 640, w, 960, 1280, w * 2].filter((x) => x <= w * 2))].sort((a, b) => a - b);
-const srcset = (p) => (small ? `${photoSrc(p, w, h)} 1x, ${photoSrc(p, w * 2, h * 2)} 2x` : steps.map((x) => `${photoSrc(p, x, Math.round((x * h) / w))} ${x}w`).join(', '));
-const sizes = small ? undefined : `(max-width: 760px) calc(100vw - 32px), ${w}px`;
+const set = photo ? photoSet(photo, w, h) : undefined;
 import { langOf } from '../i18n/index.js';
 const EN = langOf(Astro.url) === 'en';
 const IMG_EN = { arama: 'Chat bubble and magnifier illustration', gemini: 'Star constellation illustration', benchmark: 'Bar chart illustration', kod: 'Code editor and cursor illustration', rss: 'Crossed-out RSS icon illustration', modeller: 'Neural network illustration', gozluk: 'Smart glasses illustration', guvenlik: 'Locked shield illustration', regulasyon: 'Scales of justice illustration', pazarlama: 'Megaphone illustration', altyapi: 'Server racks illustration', girisim: 'Rocket illustration', odul: 'Trophy illustration' };
@@ -37,7 +32,7 @@ const IMG_EN = { arama: 'Chat bubble and magnifier illustration', gemini: 'Star 
     </span>
   ) : photo ? (
     <>
-      <img class="thumb photo" src={photoSrc(photo, w, h)} srcset={srcset(photo)} sizes={sizes} alt={photo.alt || ''} lang={!EN && photo.alt ? 'en' : undefined} loading={loading} fetchpriority={eager ? 'high' : undefined} decoding={eager ? undefined : 'async'} width={w} height={h} />
+      <img class="thumb photo" src={set.src} srcset={set.srcset} sizes={set.sizes} alt={photo.alt || ''} lang={!EN && photo.alt ? 'en' : undefined} loading={loading} fetchpriority={eager ? 'high' : undefined} decoding={eager ? undefined : 'async'} width={w} height={h} />
       {credit && <span class="credit" aria-hidden="true">{photo.author} / Unsplash</span>}
     </>
   ) : (
