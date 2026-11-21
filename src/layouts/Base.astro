@@ -250,6 +250,8 @@ const isBreaking = latest && Date.now() - latest.data.date.valueOf() < BREAKING_
   <script is:inline>
     // Sayfa çizilmeden önce kayıtlı temayı uygula (beyaz yanıp sönmeyi önler)
     try { var t = localStorage.getItem('theme'); if (t === 'dark' || t === 'light') document.documentElement.dataset.theme = t; } catch (e) {}
+    // Çerez tercihi daha önce verildiyse bant hiç çizilmez; verilmediyse ilk çizimde görünür (sonradan belirip sayfayı kaydırmaz)
+    try { var c = localStorage.getItem('yz-cerez-izni'); if (c === 'granted' || c === 'denied') document.documentElement.classList.add('cerez-secildi'); } catch (e) {}
     // Çerçeveleme koruması: site başka bir sitenin çerçevesinde açılırsa içerik gizlenir ve kendi penceresine taşınmaya çalışılır
     // (GitHub Pages frame-ancestors / X-Frame-Options başlığı ayarlatmadığı için)
     if (window.top !== window.self) { document.documentElement.style.visibility = 'hidden'; try { window.top.location.replace(window.self.location.href); } catch (e) {} }
@@ -376,7 +378,7 @@ const isBreaking = latest && Date.now() - latest.data.date.valueOf() < BREAKING_
   </footer>
 
   {SITE.analytics?.ga4 && (
-    <div class="consent" data-consent data-ga={SITE.analytics.ga4} role="region" aria-label={T('Çerez tercihi', 'Cookie consent')} hidden>
+    <div class="consent" data-consent data-ga={SITE.analytics.ga4} role="region" aria-label={T('Çerez tercihi', 'Cookie consent')}>
       <div class="wrap">
         <p>{T('Hangi haberlerin okunduğunu Google Analytics ile ölçüyoruz. İzin verirseniz tarayıcınıza istatistik çerezleri yerleştirilir; izin vermezseniz yalnızca çerezsiz, anonim sayım yapılır. Reklam çerezi kullanılmaz.', 'We measure which stories are read with Google Analytics. If you allow it, statistics cookies are set in your browser; if not, only cookieless, anonymous counting is used. No advertising cookies.')} <a href={L.u('/gizlilik/')}>{T('Ayrıntılar', 'Details')}</a></p>
         <div class="consent-actions">
@@ -401,8 +403,6 @@ const isBreaking = latest && Date.now() - latest.data.date.valueOf() < BREAKING_
           for (const d of ['', `; domain=${host}`, `; domain=.${host}`]) document.cookie = `${n}=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/${d}`;
         });
       };
-      const choice = read();
-      if (choice !== 'granted' && choice !== 'denied') consentBox.hidden = false;
       consentBox.querySelectorAll<HTMLButtonElement>('[data-consent-choice]').forEach((b) => b.addEventListener('click', () => {
         const v = b.dataset.consentChoice!;
         save(v);
@@ -410,7 +410,7 @@ const isBreaking = latest && Date.now() - latest.data.date.valueOf() < BREAKING_
         g('consent', 'update', { analytics_storage: v });
         if (v === 'denied') clearGA();
       }));
-      document.querySelectorAll('[data-consent-open]').forEach((b) => b.addEventListener('click', () => { consentBox.hidden = false; consentBox.querySelector('button')?.focus(); }));
+      document.querySelectorAll('[data-consent-open]').forEach((b) => b.addEventListener('click', () => { document.documentElement.classList.remove('cerez-secildi'); consentBox.hidden = false; consentBox.querySelector('button')?.focus(); }));
     }
     // "Son dakika" etiketi: haber 6 saatten eskiyse ziyaret anında "Son haber"e döner
     const EN = document.documentElement.lang === 'en';

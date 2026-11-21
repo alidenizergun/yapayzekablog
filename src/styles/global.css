@@ -369,6 +369,7 @@ footer.site .wm-sub { color: var(--band-accent); }
 .hp { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
 
 /* ---------------------------------------------------------------- çerez bandı */
+.cerez-secildi .consent { display: none; }
 .consent { position: fixed; left: 0; right: 0; bottom: 0; z-index: 20; background: var(--bg); border-top: 1px solid var(--line); box-shadow: 0 -6px 24px rgba(0,0,0,.08); }
 .consent .wrap { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 24px; padding-block: 16px; }
 .consent p { margin: 0; flex: 1 1 420px; font-size: 14px; line-height: 1.5; color: var(--fg); }
