@@ -1284,3 +1284,4 @@ img.thumb { color: transparent; font-size: 0; }
 .tool-head h1 { margin: 0; }
 .tool-logo-lg { width: 64px; height: 64px; border-radius: 14px; padding: 6px; }
 .tool-logo, .tool-logo-lg { padding: 0; object-fit: cover; }
+.tools-index .tool-grid { grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr)); }
