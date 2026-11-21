@@ -1,0 +1,151 @@
+{
+  "source": "Statcounter Global Stats — AI Chatbot Market Share, Türkiye (masaüstü + mobil + tablet)",
+  "sourceUrl": "https://gs.statcounter.com/ai-chatbot-market-share/all/turkey",
+  "license": "CC BY-SA 3.0",
+  "fetched": "2026-11-21",
+  "months": [
+    {
+      "month": "2025-10",
+      "shares": {
+        "ChatGPT": 91.23,
+        "Google Gemini": 4.88,
+        "Microsoft Copilot": 1.77,
+        "Perplexity": 1.64,
+        "Claude": 0.48,
+        "Other": 0
+      }
+    },
+    {
+      "month": "2025-11",
+      "shares": {
+        "ChatGPT": 90.24,
+        "Google Gemini": 5.62,
+        "Microsoft Copilot": 1.57,
+        "Perplexity": 2.02,
+        "Claude": 0.55,
+        "Other": 0
+      }
+    },
+    {
+      "month": "2025-12",
+      "shares": {
+        "ChatGPT": 83.76,
+        "Google Gemini": 11.35,
+        "Microsoft Copilot": 2.21,
+        "Perplexity": 2.02,
+        "Claude": 0.65,
+        "Other": 0.02
+      }
+    },
+    {
+      "month": "2026-01",
+      "shares": {
+        "ChatGPT": 81.67,
+        "Google Gemini": 14.48,
+        "Microsoft Copilot": 1.65,
+        "Perplexity": 1.69,
+        "Claude": 0.51,
+        "Other": 0
+      }
+    },
+    {
+      "month": "2026-02",
+      "shares": {
+        "ChatGPT": 80.59,
+        "Google Gemini": 16.05,
+        "Microsoft Copilot": 1.07,
+        "Perplexity": 1.54,
+        "Claude": 0.75,
+        "Other": 0
+      }
+    },
+    {
+      "month": "2026-03",
+      "shares": {
+        "ChatGPT": 75.09,
+        "Google Gemini": 19.19,
+        "Microsoft Copilot": 1.21,
+        "Perplexity": 1.79,
+        "Claude": 2.72,
+        "Other": 0
+      }
+    },
+    {
+      "month": "2026-04",
+      "shares": {
+        "ChatGPT": 68.18,
+        "Google Gemini": 24.43,
+        "Microsoft Copilot": 2.99,
+        "Perplexity": 1.9,
+        "Claude": 2.49,
+        "Other": 0.01
+      }
+    },
+    {
+      "month": "2026-05",
+      "shares": {
+        "ChatGPT": 76.62,
+        "Google Gemini": 16.12,
+        "Microsoft Copilot": 2.62,
+        "Perplexity": 1.76,
+        "Claude": 2.86,
+        "Other": 0.02
+      }
+    },
+    {
+      "month": "2026-06",
+      "shares": {
+        "ChatGPT": 76.3,
+        "Google Gemini": 15.86,
+        "Microsoft Copilot": 2.93,
+        "Perplexity": 1.68,
+        "Claude": 3.11,
+        "Other": 0.12
+      }
+    },
+    {
+      "month": "2026-07",
+      "shares": {
+        "ChatGPT": 76.43,
+        "Google Gemini": 18.07,
+        "Microsoft Copilot": 1.8,
+        "Perplexity": 0.97,
+        "Claude": 2.71,
+        "Other": 0.02
+      }
+    },
+    {
+      "month": "2026-08",
+      "shares": {
+        "ChatGPT": 77.06,
+        "Google Gemini": 19.21,
+        "Microsoft Copilot": 1.17,
+        "Perplexity": 0.8,
+        "Claude": 1.76,
+        "Other": 0
+      }
+    },
+    {
+      "month": "2026-09",
+      "shares": {
+        "ChatGPT": 75.51,
+        "Google Gemini": 21.77,
+        "Microsoft Copilot": 1.12,
+        "Perplexity": 0.85,
+        "Claude": 0.74,
+        "Other": 0.01
+      }
+    },
+    {
+      "month": "2026-10",
+      "shares": {
+        "ChatGPT": 31.59,
+        "Google Gemini": 60.89,
+        "Microsoft Copilot": 1.52,
+        "Perplexity": 3.28,
+        "Claude": 2.73,
+        "Other": 0
+      }
+    }
+  ]
+}
