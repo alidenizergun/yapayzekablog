@@ -16,6 +16,13 @@ photo:
   author: "NASA"
   authorUrl: "https://unsplash.com/@nasa"
   link: "https://unsplash.com/photos/view-of-earth-and-satellite-yZygONrUBe8"
+photo2:
+  id: "HsqBGASgXJA"
+  url: "https://images.unsplash.com/photo-1708738793054-32b71e3fc822?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8Mnx8c2F0ZWxsaXRlJTIwZWFydGglMjBjbG91ZHMlMjB3ZWF0aGVyfGVufDF8MHx8fDE3OTUyOTE3OTh8MA&ixlib=rb-4.1.0"
+  alt: "Two satellites with solar panels orbiting above the blue Earth with white clouds"
+  author: "Kevin Stadnyk"
+  authorUrl: "https://unsplash.com/@obruta"
+  link: "https://unsplash.com/photos/satellites-orbiting-above-blue-earth-HsqBGASgXJA"
 sources:
   - title: "PARDIG & SatWeave: Foundational Datasets for Earth Science"
     url: "https://deepmind.google/blog/opening-the-datasets-behind-our-ai-weather-models/"

@@ -16,6 +16,13 @@ photo:
   authorUrl: "https://pixabay.com/users/ArtisticOperations-4161274/"
   link: "https://pixabay.com/photos/headphones-simulator-virtual-reality-4560230/"
   source: "pixabay"
+photo2:
+  id: "npTT9rD8wd4"
+  url: "https://images.unsplash.com/photo-1626379961798-54f819ee896a?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8NHx8dmlydHVhbCUyMHJlYWxpdHklMjBoZWFkc2V0fGVufDF8MHx8fDE3OTUyOTE3NzB8MA&ixlib=rb-4.1.0"
+  alt: "blue and black digital device"
+  author: "James Yarema"
+  authorUrl: "https://unsplash.com/@jamesyarema"
+  link: "https://unsplash.com/photos/blue-and-black-digital-device-npTT9rD8wd4"
 sources:
   - title: "@drfeifei X gönderisi"
     url: "https://x.com/drfeifei/status/2120942509786558671"

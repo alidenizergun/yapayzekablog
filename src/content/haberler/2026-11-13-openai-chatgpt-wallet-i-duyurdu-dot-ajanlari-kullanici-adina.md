@@ -17,6 +17,13 @@ photo:
   author: "Vitaly Gariev"
   authorUrl: "https://unsplash.com/@silverkblack"
   link: "https://unsplash.com/photos/young-woman-smiling-while-holding-phone-and-credit-card-BKq_7oEvFN4"
+photo2:
+  id: "dEmlP20lTo8"
+  url: "https://images.unsplash.com/photo-1758612215034-02c23a576afc?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8NXx8b25saW5lJTIwc2hvcHBpbmclMjBwYXltZW50JTIwcGhvbmV8ZW58MXwwfHx8MTc5NTI5MTc3OHww&ixlib=rb-4.1.0"
+  alt: "Teenager using phone and credit card for online shopping"
+  author: "Vitaly Gariev"
+  authorUrl: "https://unsplash.com/@silverkblack"
+  link: "https://unsplash.com/photos/teenager-using-phone-and-credit-card-for-online-shopping-dEmlP20lTo8"
 sources:
   - title: "@gdb X gönderisi"
     url: "https://x.com/gdb/status/2121295213025194172"

@@ -16,6 +16,14 @@ photo:
   author: "FlyD"
   authorUrl: "https://unsplash.com/@flyd2069"
   link: "https://unsplash.com/photos/red-padlock-on-black-computer-keyboard-mT7lXZPjk7U"
+photo2:
+  id: "pixabay-2296269"
+  url: "/foto/px-2296269"
+  alt: "cyber security, global, network, online, computer"
+  author: "VISHNU_KV"
+  authorUrl: "https://pixabay.com/users/VISHNU_KV-3192151/"
+  link: "https://pixabay.com/photos/cyber-security-global-network-2296269/"
+  source: "pixabay"
 sources:
   - title: "Building strong safety evaluations"
     url: "https://www.anthropic.com/research/building-strong-safety-evaluations"

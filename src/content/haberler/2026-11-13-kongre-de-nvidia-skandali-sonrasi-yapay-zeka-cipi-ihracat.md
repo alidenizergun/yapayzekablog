@@ -16,6 +16,13 @@ photo:
   authorUrl: "https://pixabay.com/users/jensjunge-402508/"
   link: "https://pixabay.com/photos/capitol-building-architecture-usa-516065/"
   source: "pixabay"
+photo2:
+  id: "gbJsH-zTqU0"
+  url: "https://images.unsplash.com/photo-1653410772359-0ef817e04207?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8MTB8fHVzJTIwY2FwaXRvbCUyMGJ1aWxkaW5nJTIwd2FzaGluZ3RvbnxlbnwxfDB8fHwxNzk1MjkxNzk1fDA&ixlib=rb-4.1.0"
+  alt: "the united states capitol building in washington dc"
+  author: "Wilmer Olano"
+  authorUrl: "https://unsplash.com/@idesigncebu"
+  link: "https://unsplash.com/photos/the-united-states-capitol-building-in-washington-dc-gbJsH-zTqU0"
 sources:
   - title: "'A high probability': Congress pushes tighter export controls following Nvidia scandal"
     url: "https://www.semafor.com/article/11/12/2026/a-high-probability-congress-pushes-tighter-export-controls-following-nvidia-scandal"

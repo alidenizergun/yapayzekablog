@@ -24,6 +24,13 @@ photo:
   authorUrl: "https://pixabay.com/users/Akela999-5825566/"
   link: "https://pixabay.com/photos/electrical-data-center-2476783/"
   source: "pixabay"
+photo2:
+  id: "oZPwn40zCK4"
+  url: "https://images.unsplash.com/photo-1484557052118-f32bd25b45b5?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8MTJ8fGRhdGElMjBjZW50ZXIlMjBzZXJ2ZXIlMjByYWNrc3xlbnwxfDB8fHwxNzk1Mjg4OTAxfDA&ixlib=rb-4.1.0"
+  alt: "photo of computer cables"
+  author: "Kvistholt Photography"
+  authorUrl: "https://unsplash.com/@freeche"
+  link: "https://unsplash.com/photos/photo-of-computer-cables-oZPwn40zCK4"
 sources:
   - title: "Naver clinches $1.5 bill. AI computing deal with US firm"
     url: "https://www.koreatimes.co.kr/business/tech-science/20261112/naver-clinches-15-bill-ai-computing-deal-with-us-firm"

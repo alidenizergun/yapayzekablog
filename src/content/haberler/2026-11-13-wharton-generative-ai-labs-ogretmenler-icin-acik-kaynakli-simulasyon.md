@@ -15,6 +15,13 @@ photo:
   author: "Vitaly Gariev"
   authorUrl: "https://unsplash.com/@silverkblack"
   link: "https://unsplash.com/photos/a-female-teacher-smiling-at-the-desk-with-a-laptop-TOuMSV0Nqjk"
+photo2:
+  id: "fTYbq_2B97s"
+  url: "https://images.unsplash.com/photo-1758685848174-e061c6486651?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8Nnx8dGVhY2hlciUyMGNsYXNzcm9vbSUyMGxhcHRvcHxlbnwxfDB8fHwxNzk1MjkxNzczfDA&ixlib=rb-4.1.0"
+  alt: "Teacher working on laptop in front of chalkboard"
+  author: "Vitaly Gariev"
+  authorUrl: "https://unsplash.com/@silverkblack"
+  link: "https://unsplash.com/photos/teacher-working-on-laptop-in-front-of-chalkboard-fTYbq_2B97s"
 sources:
   - title: "@emollick X gönderisi"
     url: "https://x.com/emollick/status/2121001056637431873"

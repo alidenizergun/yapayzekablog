@@ -366,5 +366,37 @@
     "importance": 68,
     "featured": false,
     "date": "2026-11-21T09:02:57+03:00"
+  },
+  {
+    "slug": "amazon-yapay-zeka-girisimi-decart-i-7-5-milyar",
+    "title": "Amazon, yapay zeka girişimi Decart'ı 7,5 milyar dolara almaya yaklaştı",
+    "text": "FT'ye göre Amazon, yapay zeka girişimi Decart'ı yaklaşık 7,5 milyar dolara almak için ileri aşamada görüşüyor. Anlaşma henüz resmen duyurulmadı; görüşmeler hâlâ çökebilir.",
+    "importance": 66,
+    "featured": false,
+    "date": "2026-11-21T23:09:29+03:00"
+  },
+  {
+    "slug": "anthropic-ten-riemann-hipotezi-iddiasi-stanford-dan-insan-yazimi",
+    "title": "Anthropic'ten Riemann hipotezi iddiası, Stanford'dan insan yazımı rakip taslak",
+    "text": "Anthropic matematikçisi Levent Alpöge, Claude ile Riemann hipotezinin Lean ile biçimlendirilmiş kanıtını bulduğunu söyledi. Stanford'dan Ravi Vakil ise yapay zekasız rakip bir taslak paylaştı. Doğrulama sürüyor.",
+    "importance": 72,
+    "featured": false,
+    "date": "2026-11-21T23:08:29+03:00"
+  },
+  {
+    "slug": "trump-abd-disinda-veri-merkezi-kuran-sirketlere-muazzam-vergi",
+    "title": "Trump: ABD dışında veri merkezi kuran şirketlere \"muazzam vergi\" uygulanacak",
+    "text": "Trump, ABD'li şirketlerin yurt dışında veri merkezi kurmasına izin vermeyeceğini ve kuranlara \"muazzam bir vergi\" uygulayacağını söyledi. Oran, kapsam ve yasal dayanak açıklanmadı.",
+    "importance": 58,
+    "featured": false,
+    "date": "2026-11-21T23:07:29+03:00"
+  },
+  {
+    "slug": "google-ana-sayfasinda-google-search-dugmesi-kalkti-yapay-zeka",
+    "title": "Google ana sayfasında \"Google Search\" düğmesi kalktı, yapay zeka sohbet geçmişi yan paneli geldi",
+    "text": "Google, masaüstü ana sayfasında \"Google Search\" düğmesini kaldırdı; yerine görsel oluşturma, dosya analizi ve fikir üretme kısayolları ile AI Mode sohbet geçmişi yan paneli geldi. #Google",
+    "importance": 60,
+    "featured": false,
+    "date": "2026-11-21T23:06:29+03:00"
   }
 ]

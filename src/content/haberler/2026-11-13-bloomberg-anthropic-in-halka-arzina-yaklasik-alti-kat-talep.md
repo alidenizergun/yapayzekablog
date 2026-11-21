@@ -17,6 +17,14 @@ photo:
   authorUrl: "https://pixabay.com/users/AhmadArdity-3112014/"
   link: "https://pixabay.com/photos/business-stock-finance-market-1730089/"
   source: "pixabay"
+photo2:
+  id: "pixabay-1905224"
+  url: "/foto/px-1905224"
+  alt: "chart, trading, courses, forex, analysis"
+  author: "PIX1861"
+  authorUrl: "https://pixabay.com/users/PIX1861-468748/"
+  link: "https://pixabay.com/photos/chart-trading-courses-forex-1905224/"
+  source: "pixabay"
 sources:
   - title: "Anthropic's IPO Is Said to Be About Six Times Oversubscribed"
     url: "https://www.bloomberg.com/news/articles/2026-11-12/anthropic-s-ipo-is-said-to-be-about-six-times-oversubscribed"

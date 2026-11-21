@@ -16,6 +16,13 @@ photo:
   author: "Solen Feyissa"
   authorUrl: "https://unsplash.com/@solenfeyissa"
   link: "https://unsplash.com/photos/smartphone-displaying-google-search-engine-UWVJaDvXW_c"
+photo2:
+  id: "0uMU42uRw28"
+  url: "https://images.unsplash.com/photo-1675352161828-c07170f1b114?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8Mnx8Z29vZ2xlJTIwc2VhcmNoJTIwcGhvbmV8ZW58MXwwfHx8MTc5NTI5MTc5N3ww&ixlib=rb-4.1.0"
+  alt: "a close up of a cell phone with the google logo in the background"
+  author: "Shutter Speed"
+  authorUrl: "https://unsplash.com/@shutter_speed_"
+  link: "https://unsplash.com/photos/a-close-up-of-a-cell-phone-with-the-google-logo-in-the-background-0uMU42uRw28"
 sources:
   - title: "Introducing Gemini 4 Hydrogen for Agentic Workflows"
     url: "https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-hydrogen/"

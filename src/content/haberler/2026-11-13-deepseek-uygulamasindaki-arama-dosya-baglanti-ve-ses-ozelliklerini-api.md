@@ -16,6 +16,13 @@ photo:
   author: "Rami Al-zayat"
   authorUrl: "https://unsplash.com/@rami_alzayat"
   link: "https://unsplash.com/photos/silver-android-smartphone-w33-zg-dNL4"
+photo2:
+  id: "0rXUP7Tg7nQ"
+  url: "https://images.unsplash.com/photo-1604478373812-0ef15d185d90?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8OXx8c21hcnRwaG9uZSUyMGFwcCUyMHZvaWNlfGVufDF8MHx8fDE3OTUyOTE4MDB8MA&ixlib=rb-4.1.0"
+  alt: "black and gray computer keyboard"
+  author: "Brett Jordan"
+  authorUrl: "https://unsplash.com/@brett_jordan"
+  link: "https://unsplash.com/photos/black-and-gray-computer-keyboard-0rXUP7Tg7nQ"
 sources:
   - title: "The full DeepSeek App experience, now via API"
     url: "https://api-docs.deepseek.com/news/news261113/"

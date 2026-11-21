@@ -15,6 +15,13 @@ photo:
   author: "Chris Ried"
   authorUrl: "https://unsplash.com/@cdr6934"
   link: "https://unsplash.com/photos/a-computer-screen-with-a-bunch-of-code-on-it-ieic5Tq8YMk"
+photo2:
+  id: "MPKQiDpMyqU"
+  url: "https://images.unsplash.com/photo-1608742213509-815b97c30b36?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8MTV8fHRlcm1pbmFsJTIwY29kZSUyMG9wZW4lMjBzb3VyY2V8ZW58MXwwfHx8MTc5NTI5MTc5M3ww&ixlib=rb-4.1.0"
+  alt: "Green computer code text scrolling on a dark screen during a software installation"
+  author: "Jake Walker"
+  authorUrl: "https://unsplash.com/@jakewalker"
+  link: "https://unsplash.com/photos/green-computer-code-on-screen-MPKQiDpMyqU"
 sources:
   - title: "Georgi Gerganov on X: llama.cpp v1.0.0 is now available"
     url: "https://x.com/ggerganov/status/2121246103312212124"

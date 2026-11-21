@@ -18,6 +18,13 @@ photo:
   authorUrl: "https://pixabay.com/users/Media_Visuals-13388979/"
   link: "https://pixabay.com/photos/voicemail-desk-phone-landline-4668542/"
   source: "pixabay"
+photo2:
+  id: "Ml2Tfl6qmKc"
+  url: "https://images.unsplash.com/photo-1782927510642-8bf07656edd2?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8MTV8fGxhcHRvcCUyMGF1dG9tYXRpb24lMjB3b3JrZmxvd3xlbnwxfDB8fHwxNzk1MjkxNzkwfDA&ixlib=rb-4.1.0"
+  alt: "Red digital interface on smartphone and laptop with beauty products"
+  author: "Vagaro"
+  authorUrl: "https://unsplash.com/@vagaro"
+  link: "https://unsplash.com/photos/red-digital-interface-on-smartphone-and-laptop-with-beauty-products-Ml2Tfl6qmKc"
 sources:
   - title: "Muse can now place calls to US businesses — if you pay"
     url: "https://techcrunch.com/2026/11/12/muse-can-now-place-calls-to-u-s-businesses-if-you-pay/"

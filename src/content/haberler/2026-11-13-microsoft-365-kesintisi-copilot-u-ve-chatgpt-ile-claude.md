@@ -17,6 +17,13 @@ photo:
   authorUrl: "https://pixabay.com/users/Mediamodifier-1567646/"
   link: "https://pixabay.com/photos/broken-business-monitor-2237920/"
   source: "pixabay"
+photo2:
+  id: "bMvuh0YQQ68"
+  url: "https://images.unsplash.com/photo-1601119479271-21ca92049c81?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8NHx8b2ZmaWNlJTIwbGFwdG9wJTIwZXJyb3IlMjBzY3JlZW58ZW58MXwwfHx8MTc5NTI5MTc4NHww&ixlib=rb-4.1.0"
+  alt: "black flat screen computer monitor"
+  author: "Markus Spiske"
+  authorUrl: "https://unsplash.com/@markusspiske"
+  link: "https://unsplash.com/photos/black-flat-screen-computer-monitor-bMvuh0YQQ68"
 sources:
   - title: "Microsoft Cloud Outage Hits Outlook, Teams, Copilot and AI Services"
     url: "https://securityaffairs.com/202932/security/microsoft-cloud-outage-hits-outlook-teams-copilot-and-ai-services.html"
