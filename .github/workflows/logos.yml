@@ -1,0 +1,61 @@
+# Araç logoları: araçların kendi sitelerindeki uygulama simgelerini indirir (yalnızca eksik olanlar; "force" ile hepsi).
+# API ücreti yoktur. Elle çalıştırılır.
+name: Araç logoları
+
+on:
+  workflow_dispatch:
+    inputs:
+      force:
+        description: 'Tüm logoları yeniden indir'
+        type: boolean
+        default: false
+      only:
+        description: 'Yalnızca bu araçlar (virgülle, ör. chatgpt,canva)'
+        required: false
+
+permissions:
+  contents: read
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: write
+    outputs:
+      changed: ${{ steps.l.outputs.changed }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: Logoları indir
+        id: l
+        env:
+          ONLY: ${{ inputs.only }}
+        run: node scripts/tool-logos.mjs ${{ inputs.force && '--force' || '' }} ${ONLY:+--only=$ONLY}
+      - name: Kaydet
+        if: steps.l.outputs.changed == '1'
+        env:
+          BRANCH: ${{ github.ref_name }}
+        run: |
+          git config user.name "yzgundemi-bot"
+          git config user.email "yzgundemi-bot@users.noreply.github.com"
+          git add public/logo/arac data/arac-logolari.json
+          git diff --cached --quiet && exit 0
+          git commit -m "Araç logoları güncellendi"
+          git pull --rebase origin "$BRANCH"
+          git push
+
+  deploy:
+    needs: fetch
+    if: needs.fetch.outputs.changed == '1'
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    uses: ./.github/workflows/deploy.yml
+    with:
+      ref: ${{ github.ref_name }}
