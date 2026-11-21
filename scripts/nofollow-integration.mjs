@@ -1,6 +1,6 @@
 /**
  * Derleme sonunda bütün HTML sayfalarını tarar ve siteden dışarıya giden her linke
- * rel="nofollow" ekler (yeni sekmede açılanlara ayrıca "noopener").
+ * rel="nofollow noopener" ve target="_blank" ekler: dış bağlantılar her zaman yeni sekmede açılır.
  * Şablonlardaki, haber metinlerindeki (Markdown) ve ileride eklenecek bütün linkleri kapsar.
  * Sitenin kendi adresine giden linklere dokunmaz.
  */
@@ -31,11 +31,15 @@ export function addNofollow(html, siteHost) {
     const vals = new Set((rel ? rel[1] ?? rel[2] ?? '' : '').split(/\s+/).filter(Boolean));
     const before = vals.size;
     vals.add('nofollow');
-    if (/\starget\s*=\s*["']?_blank/i.test(tag)) vals.add('noopener');
-    if (vals.size === before) return tag;
+    vals.add('noopener');
+    const hasBlank = /\starget\s*=\s*["']?_blank/i.test(tag);
+    if (vals.size === before && hasBlank) return tag;
     changed++;
     const relAttr = ` rel="${[...vals].join(' ')}"`;
-    return rel ? tag.replace(rel[0], relAttr) : tag.replace(/^<a\b/i, `<a${relAttr}`);
+    let t = rel ? tag.replace(rel[0], relAttr) : tag.replace(/^<a\b/i, `<a${relAttr}`);
+    // Dış bağlantı her zaman yeni sekmede (başka bir target varsa değiştirilir)
+    if (!hasBlank) t = /\starget\s*=/i.test(t) ? t.replace(/\starget\s*=\s*(?:"[^"]*"|'[^']*'|\S+)/i, ' target="_blank"') : t.replace(/^<a\b/i, '<a target="_blank"');
+    return t;
   });
   return { html: out, changed };
 }
@@ -56,7 +60,7 @@ export default function nofollowExternalLinks() {
           const { html, changed } = addNofollow(src, siteHost);
           if (changed) { fs.writeFileSync(f, html); files++; links += changed; }
         }
-        logger.info(`dış linklere nofollow eklendi: ${links} link, ${files} sayfa`);
+        logger.info(`dış linkler (nofollow, yeni sekme): ${links} link, ${files} sayfa`);
       },
     },
   };
