@@ -13,7 +13,6 @@
     { "ad": "OpenAI", "url": "https://openai.com/news/rss.xml" },
     { "ad": "Google DeepMind", "url": "https://deepmind.google/blog/rss.xml" },
     { "ad": "Google AI", "url": "https://blog.google/technology/ai/rss/" },
-    { "ad": "Microsoft AI", "url": "https://blogs.microsoft.com/ai/feed/" },
     { "ad": "NVIDIA", "url": "https://blogs.nvidia.com/feed/", "filtre": true },
     { "ad": "Hugging Face", "url": "https://huggingface.co/blog/feed.xml" }
   ]

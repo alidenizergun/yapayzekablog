@@ -46,6 +46,20 @@ export function parseFeed(xml) {
   return items;
 }
 
+// Paylaşım/izleme parametrelerini (hediye bağlantısı, erişim anahtarı vb.) atar
+const DROP_PARAM = /^(utm_|smid$|unlocked_article_code$|accesstoken$|sharetoken$|gift|ref$|fbclid$|gclid$|src$)/i;
+function cleanUrl(u) {
+  if (!u) return u;
+  try {
+    const x = new URL(u);
+    for (const k of [...x.searchParams.keys()]) if (DROP_PARAM.test(k)) x.searchParams.delete(k);
+    x.hash = '';
+    return x.toString();
+  } catch {
+    return u;
+  }
+}
+
 async function fetchText(url, timeoutMs = 12000) {
   const ctrl = new AbortController();
   const t = setTimeout(() => ctrl.abort(), timeoutMs);
@@ -86,7 +100,7 @@ export async function fetchFeeds({ root, lookbackHours = 26, known = new Set(), 
               // Derleyicinin işaret ettiği asıl haber adresi (Techmeme açıklamasındaki ilk dış bağlantı)
               const hrefs = [...i.raw.matchAll(/href=["'](https?:\/\/[^"']+)["']/gi)].map((m) => m[1]);
               const host = new URL(f.url).hostname.replace(/^www\./, '');
-              item.origin = hrefs.find((h) => !h.includes(host));
+              item.origin = cleanUrl(hrefs.find((h) => !h.includes(host)));
             }
             return item;
           });
