@@ -26,12 +26,13 @@ export const imageFor = (entry, v) => imgUrl(entry.data.image, v ?? variantOf(en
 const UTM = 'utm_source=yzgundemi&utm_medium=referral';
 export const withUtm = (u) => `${u}${u.includes('?') ? '&' : '?'}${UTM}`;
 export const photoSrc = (photo, w, h) =>
-  `${photo.url}${photo.url.includes('?') ? '&' : '?'}w=${w}&h=${h}&fit=crop&crop=entropy&auto=format&q=${w > 700 ? 60 : 65}`;
+  `${photo.url}${photo.url.includes('?') ? '&' : '?'}w=${w}&h=${h}&fit=crop&crop=entropy&auto=format&q=${w > 400 ? 55 : 65}`;
 
 /** Duyarlı görsel: telefonda kartlar tam genişlikte; tarayıcı ekrana uygun boyutu seçer (küçük resimlerde yalnızca 1x/2x) */
 export function photoSet(photo, w, h) {
   if (w <= 160) return { src: photoSrc(photo, w, h), srcset: `${photoSrc(photo, w, h)} 1x, ${photoSrc(photo, w * 2, h * 2)} 2x` };
-  const steps = [...new Set([360, 480, 640, w, 960, 1280, w * 2].filter((x) => x <= w * 2))].sort((a, b) => a - b);
+  // İnce basamaklar: telefonlar (360-430 px, 2-3x yoğunluk) gereğinden büyük dosya indirmesin
+  const steps = [...new Set([360, 420, 480, 560, 640, 720, 800, w, 960, 1120, 1280, w * 2].filter((x) => x <= w * 2))].sort((a, b) => a - b);
   return {
     src: photoSrc(photo, w, h),
     srcset: steps.map((x) => `${photoSrc(photo, x, Math.round((x * h) / w))} ${x}w`).join(', '),
