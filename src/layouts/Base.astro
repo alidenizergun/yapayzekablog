@@ -3,9 +3,6 @@ import { GLOSSARY } from '../lib/glossary.js';
 // Yazı tipleri sitenin kendi sunucusundan verilir (Google'a ziyaretçi IP'si gitmez, KVKK; CSP daha sıkı)
 import '../styles/fonts.css';
 import '../styles/marka-renkleri.css';
-// LCP metni (başlıklar ve gövde) için en çok kullanılan iki yazı tipi önceden yüklenir
-import fontDisplay from '../fonts/schibsted-latin-wght.woff2?url';
-import fontBody from '../fonts/inter-latin-wght.woff2?url';
 import '../styles/global.css';
 import { SITE, NAV, CATEGORIES, categoryBySlug } from '../lib/site.js';
 import { getNews, newsUrl, catUrl, url, slugOf } from '../lib/news.js';
@@ -193,8 +190,6 @@ const isBreaking = latest && Date.now() - latest.data.date.valueOf() < BREAKING_
   <!-- Haber fotoğrafları (en büyük görsel, LCP) için bağlantıyı erkenden kur -->
   <link rel="preconnect" href="https://images.unsplash.com" />
   {preloadImage && <link rel="preload" as="image" href={preloadImage.src} imagesrcset={preloadImage.srcset} imagesizes={preloadImage.sizes} fetchpriority="high" />}
-  <link rel="preload" href={fontDisplay} as="font" type="font/woff2" crossorigin />
-  <link rel="preload" href={fontBody} as="font" type="font/woff2" crossorigin />
   <meta property="og:site_name" content={SITE.name} />
   <meta property="og:locale" content={OG_LOCALE[lang]} />
   {altTr && altEn && <meta property="og:locale:alternate" content={OG_LOCALE[lang === 'en' ? 'tr' : 'en']} />}
