@@ -56,6 +56,8 @@ const jsonLd = [
   { '@type': 'FAQPage', mainEntity: faq.map(([q, a]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a } })) },
 ];
 const title = T(`${t.name} nedir, ücretsiz mi, fiyatı ne kadar? Özellikler ve alternatifler`, `${t.name}: pricing, free plan, features and alternatives`);
+import { toolLogo } from '../../lib/tool-logos.js';
+const logoSrc = toolLogo(t.slug);
 ---
 <Base title={title} description={T(`${t.desc.split('. ')[0]}. ${t.name} fiyatları, ücretsiz planı, Türkçe desteği, kimler için uygun olduğu ve alternatifleri.`, `${t.desc.split('. ')[0]}. ${t.name} pricing, free plan, who it's for and alternatives.`).slice(0, 300)}
   jsonLd={jsonLd} breadcrumbs={[{ name: 'Ana sayfa', path: '/' }, { name: T('Yapay zeka araçları', 'AI tools'), path: '/arac/' }, { name: t.name, path: toolUrl(t.slug) }]}>
@@ -63,7 +65,7 @@ const title = T(`${t.name} nedir, ücretsiz mi, fiyatı ne kadar? Özellikler ve
     <article class="article term tool-page" data-pagefind-body data-pagefind-meta={`date:${T('Araç', 'Tool')}`}>
       <nav class="crumb" aria-label={T('Konum', 'Breadcrumb')} data-pagefind-ignore><a href={url('/')}>{T('Ana sayfa', 'Home')}</a><span aria-hidden="true">/</span><a href={url('/arac/')}>{T('Yapay zeka araçları', 'AI tools')}</a></nav>
       <span class="badge" data-pagefind-ignore>{t.cats.map((c) => toolCat(c, lang)).join(' · ')}</span>
-      <h1 data-pagefind-meta="title">{t.name}</h1>
+      <div class="tool-head">{logoSrc && <img class="tool-logo tool-logo-lg" src={url(logoSrc)} alt={`${t.name} logosu`} width="64" height="64" />}<h1 data-pagefind-meta="title">{t.name}</h1></div>
       <p class="spot">{t.desc}</p>
       <ul class="tool-badges" aria-label={T('Özet bilgiler', 'At a glance')}>
         <li>{t.company}</li>

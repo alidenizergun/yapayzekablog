@@ -33,6 +33,7 @@ import { makeJudge } from './photo-judge.mjs';
 import { fetchXPosts, formatPostsForPrompt } from './x-feed.mjs';
 import { fetchFeeds, formatFeedsForPrompt } from './news-feeds.mjs';
 import { STORIES } from '../src/lib/stories.js';
+import { BLOCKED_DOMAINS, isBlockedSource } from '../src/lib/blocked-sources.js';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const CONTENT_DIR = path.join(ROOT, 'src/content/haberler');
@@ -228,7 +229,7 @@ async function research(anthropic, existing, xPosts = [], feedItems = []) {
   // Haber akışlarından gelen adresler gerçektir; derleyici (Techmeme) sayfası değil, işaret ettiği asıl haber izinlidir
   for (const f of feedItems) {
     const u = f.discovery ? f.origin : f.url;
-    if (u && normalizeUrl(u)) seen.set(normalizeUrl(u), { url: u, title: f.discovery ? f.source + ' üzerinden' : f.title });
+    if (u && normalizeUrl(u) && !isBlockedSource(u)) seen.set(normalizeUrl(u), { url: u, title: f.discovery ? f.source + ' üzerinden' : f.title });
   }
   // X API'den gelen gönderi adresleri gerçek olduğu için izinli kaynaklara eklenir
   for (const p of xPosts) seen.set(normalizeUrl(p.url), { url: p.url, title: `@${p.username} X gönderisi` });
@@ -296,7 +297,7 @@ Kurallar: Yalnızca arama sonuçlarında gördüğün bilgileri yaz. Tarihi ${LO
       max_tokens: 8000,
       system,
       messages,
-      tools: [{ type: 'web_search_20250305', name: 'web_search', max_uses: topic.uses }],
+      tools: [{ type: 'web_search_20250305', name: 'web_search', max_uses: topic.uses, blocked_domains: BLOCKED_DOMAINS }],
     });
     track(res, RESEARCH_MODEL);
     searches += res.usage?.server_tool_use?.web_search_requests ?? 0;
@@ -304,14 +305,14 @@ Kurallar: Yalnızca arama sonuçlarında gördüğün bilgileri yaz. Tarihi ${LO
       if (block.type === 'web_search_tool_result' && Array.isArray(block.content)) {
         for (const r of block.content) {
           const k = normalizeUrl(r.url);
-          if (k && !seen.has(k)) seen.set(k, { url: r.url, title: r.title, pageAge: r.page_age });
+          if (k && !seen.has(k) && !isBlockedSource(r.url)) seen.set(k, { url: r.url, title: r.title, pageAge: r.page_age });
         }
       }
       if (block.type === 'text') {
         text += block.text;
         for (const c of block.citations ?? []) {
           const k = normalizeUrl(c.url);
-          if (k && !seen.has(k)) seen.set(k, { url: c.url, title: c.title });
+          if (k && !seen.has(k) && !isBlockedSource(c.url)) seen.set(k, { url: c.url, title: c.title });
         }
       }
     }

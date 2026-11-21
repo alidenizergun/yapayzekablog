@@ -31,9 +31,6 @@ sources:
   - title: "ABD'nin yapay zeka çip kısıtlamaları Asya borsalarını vurdu"
     url: "https://tr.investing.com/news/stock-market-news/abdnin-yapay-zeka-cip-kstlamalar-asya-borsalarn-vurdu-4160453"
     publisher: "Investing.com"
-  - title: "Ekonomi gündeminde öne çıkan gelişmeler ve piyasalarda kritik seviyeler"
-    url: "https://www.urfadabugun.com/haber/271603/ekonomi-gundeminde-one-cikan-gelismeler-ve-piyasalarda-kritik-seviyeler.html"
-    publisher: "urfadabugun"
 ---
 
 ABD Ticaret Bakanlığı, gelişmiş yapay zeka çiplerine ve sunucularına üçüncü ülkeler üzerinden uzaktan erişim sağlanarak ihracat kısıtlamalarının aşılmasını önlemeye yönelik yeni bir düzenleme yayımladı. Gelişme 17 Kasım 2026'da duyuruldu.

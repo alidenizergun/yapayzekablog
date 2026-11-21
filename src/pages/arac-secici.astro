@@ -3,6 +3,7 @@ import SubNav from '../components/SubNav.astro';
 import Base from '../layouts/Base.astro';
 import { TOOLS, TASKS, freeLabel, toolUrl, catName } from '../lib/tools.js';
 import { url } from '../lib/news.js';
+import { toolLogo } from '../lib/tool-logos.js';
 import { i18n, locTool, locTask, toolCat, freeL } from '../i18n/index.js';
 const L = await i18n(Astro);
 const { lang, T, u } = L;
@@ -13,7 +14,7 @@ const data = {
   en: lang === 'en',
   tasks: tasksL.map((k) => ({ slug: k.slug, short: k.short, picks: k.picks })),
   tools: Object.fromEntries(TOOLS.map((t0) => { const t = locTool(t0, lang); return [t.slug, { name: t.name, company: t.company, cats: t.cats.map((c) => toolCat(c, lang)).join(', '), desc: t.desc,
-    free: t.free, freeText: t.free ? freeL(t.free, lang) : '', from: t.price?.from ?? null, turkish: !!t.turkish, href: u(toolUrl(t.slug)) }]; })),
+    free: t.free, freeText: t.free ? freeL(t.free, lang) : '', from: t.price?.from ?? null, turkish: !!t.turkish, href: u(toolUrl(t.slug)), logo: toolLogo(t.slug) ? url(toolLogo(t.slug)) : '' }]; })),
 };
 ---
 <Base title={T('Yapay zeka araç seçici: size uygun aracı bulun', 'AI tool finder: find the right AI tool for you')} description={T('Ne yapmak istediğinizi, bütçenizi ve Türkçe ihtiyacınızı seçin; size uygun yapay zeka araçlarını fiyat ve ücretsiz plan bilgisiyle görün.', 'Pick your task, budget and whether you need Turkish, and see matching AI tools with pricing and free-plan details.')}
@@ -57,7 +58,7 @@ const data = {
 </Base>
 
 <script>
-  type T = { name: string; company: string; cats: string; desc: string; free: string | null; freeText: string; from: number | null; turkish: boolean; href: string };
+  type T = { name: string; company: string; cats: string; desc: string; free: string | null; freeText: string; from: number | null; turkish: boolean; href: string; logo: string };
   const data = JSON.parse(document.getElementById('pick-data')!.textContent || '{}') as { en: boolean; tasks: { slug: string; short: string; picks: [string, string][] }[]; tools: Record<string, T> };
   const form = document.querySelector<HTMLFormElement>('[data-picker]')!;
   const out = document.querySelector<HTMLElement>('[data-pick-results]')!;
@@ -79,7 +80,7 @@ const data = {
     empty.hidden = list.length > 0;
     out.innerHTML = list.map(({ t, note }, i) => {
       const price = [t.freeText, t.from != null ? (data.en ? `from $${t.from}/mo` : `${t.from} $/ay'dan`) : ''].filter(Boolean).join(' · ') || (data.en ? 'Price: see official site' : 'Fiyat: resmi sayfada');
-      return `<article class="tool-card"><div class="tool-mono" aria-hidden="true">${esc(t.name.slice(0, 1))}</div><div class="tool-card-body">
+      return `<article class="tool-card">${t.logo ? `<img class="tool-logo" src="${t.logo}" alt="" width="44" height="44" loading="lazy">` : `<div class="tool-mono" aria-hidden="true">${esc(t.name.slice(0, 1))}</div>`}<div class="tool-card-body">
         <h3><span class="tool-rank">${i + 1}.</span><a href="${t.href}">${esc(t.name)}</a></h3><p class="tool-co">${esc(t.company)} · ${esc(t.cats)}</p>
         <p class="tool-desc">${esc(note)}</p><p class="tool-facts"><span>${esc(price)}</span>${t.turkish ? (data.en ? '<span>Works in Turkish</span>' : '<span>Türkçe kullanılabiliyor</span>') : ''}</p></div></article>`;
     }).join('');

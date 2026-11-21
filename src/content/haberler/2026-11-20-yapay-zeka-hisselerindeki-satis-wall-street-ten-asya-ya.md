@@ -44,9 +44,6 @@ sources:
   - title: "Küresel piyasalarda yapay zeka endişesi satışları artırdı"
     url: "https://hibya.com/kuresel-piyasalarda-yapay-zeka-endisesi-satislari-artirdi-1099821"
     publisher: "Hibya Haber Ajansı"
-  - title: "Küresel piyasalarda yapay zeka yatırımları etkisi derinleşti"
-    url: "https://www.urfadabugun.com/haber/272859/kuresel-piyasalarda-yapay-zeka-yatirimlari-etkisi-derinlesti.html"
-    publisher: "Urfadabugün"
 ---
 
 Wall Street, yapay zeka hisselerindeki satışla 19 Kasım'da yüzde 2'nin üzerinde değer kaybetti. Japonya ve Güney Kore borsaları 20 Kasım sabahı yüzde 4'ten fazla geriledi.

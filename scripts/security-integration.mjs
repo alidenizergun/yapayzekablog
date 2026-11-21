@@ -24,7 +24,7 @@ export default function securityHeaders() {
     hooks: {
       'astro:build:done': ({ dir, logger }) => {
         const root = fileURLToPath(dir);
-        const forms = [process.env.PUBLIC_NEWSLETTER_ACTION, process.env.PUBLIC_REPORT_FORM_ACTION].map(origin).filter(Boolean);
+        const forms = [process.env.PUBLIC_NEWSLETTER_ACTION, process.env.PUBLIC_REPORT_FORM_ACTION, process.env.PUBLIC_REPORT_FORM_KEY && 'https://api.web3forms.com'].map(origin).filter(Boolean);
         // Google Analytics (yalnızca izin verilince yüklenir) için gereken adresler
         const ga = SITE.analytics?.ga4 ? {
           script: 'https://www.googletagmanager.com',

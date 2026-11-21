@@ -1279,3 +1279,8 @@ img.thumb { color: transparent; font-size: 0; }
   .tool-toolbar .chip-row.scroll-sm { margin-inline: -12px; padding-inline: 12px; }
   .gl-pop a:nth-of-type(n+7) { display: none; }
 }
+.tool-logo { flex: none; width: 44px; height: 44px; border-radius: 10px; background: #fff; border: 1px solid var(--line); object-fit: contain; padding: 4px; }
+.tool-head { display: flex; align-items: center; gap: 14px; }
+.tool-head h1 { margin: 0; }
+.tool-logo-lg { width: 64px; height: 64px; border-radius: 14px; padding: 6px; }
+.tool-logo, .tool-logo-lg { padding: 0; object-fit: cover; }

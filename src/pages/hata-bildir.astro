@@ -5,11 +5,13 @@ import { i18n, locNews } from '../i18n/index.js';
 const L = await i18n(Astro);
 const { lang, T, u } = L;
 
-// Bildirimler nereye gider?
-// - PUBLIC_REPORT_FORM_ACTION tanımlıysa (Formspree, Getform vb. form adresi) form oraya gönderilir
-//   ve bildirim e-postanıza düşer. Ziyaretçinin hiçbir hesaba ihtiyacı olmaz.
-// - Tanımlı değilse bildirim, sitenin GitHub reposunda hazır doldurulmuş bir "issue" olarak açılır.
-const formAction = import.meta.env.PUBLIC_REPORT_FORM_ACTION || '';
+// Bildirimler nereye gider? (ziyaretçinin hiçbir hesaba ihtiyacı olmaz, bildirim e-postanıza düşer)
+// - PUBLIC_REPORT_FORM_KEY tanımlıysa: Web3Forms (ücretsiz, ayda 250 bildirim). Erişim anahtarı herkese açık
+//   olacak şekilde tasarlanmıştır; yalnızca bildirimin hangi e-postaya gideceğini belirtir.
+// - PUBLIC_REPORT_FORM_ACTION tanımlıysa: Formspree, Getform vb. bir form adresi.
+// - İkisi de yoksa (geçici): bildirim GitHub'da hazır doldurulmuş "issue" olarak açılır.
+const formKey = import.meta.env.PUBLIC_REPORT_FORM_KEY || '';
+const formAction = formKey ? 'https://api.web3forms.com/submit' : import.meta.env.PUBLIC_REPORT_FORM_ACTION || '';
 const repo = process.env.GITHUB_REPOSITORY || 'alidenizergun/yapayzekablog';
 
 const news = (await getNews()).slice(0, 400).map((n) => locNews(n, lang, L.m) ?? n);
@@ -62,7 +64,9 @@ const index = Object.fromEntries(news.map((n) => [slugOf(n), { t: n.data.title, 
           </div>
         )}
         {/* Bal küpü: insanlar görmez, botlar doldurur; doluysa form servisi bildirimi spam sayar */}
-        {formAction && <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" class="hp" />}
+        {formAction && <input type="text" name={formKey ? 'botcheck' : '_gotcha'} tabindex="-1" autocomplete="off" aria-hidden="true" class="hp" />}
+        {formKey && <input type="hidden" name="access_key" value={formKey} />}
+        {formKey && <input type="hidden" name="from_name" value="YZ Gündemi hata bildirimi" />}
 
         {!formAction && (
           <p class="hint">{T("Gönder'e bastığınızda bildiriminiz GitHub'da hazır doldurulmuş olarak açılır. Göndermek için ücretsiz bir GitHub hesabıyla oturum açmanız gerekir. GitHub bildirimleri herkese açıktır; kişisel bilgi eklemeyin.", 'When you submit, your report opens pre-filled on GitHub. You need a free GitHub account to send it. GitHub reports are public, so don’t include personal information.')}</p>
@@ -136,14 +140,17 @@ const index = Object.fromEntries(news.map((n) => [slugOf(n), { t: n.data.title, 
       const action = form.dataset.action;
 
       if (action) {
-        if (String(fd.get('_gotcha') || '')) return; // bot
+        if (String(fd.get('_gotcha') || fd.get('botcheck') || '')) return; // bot
         fd.set('haber', n ? `${n.t} — ${n.u}` : 'Genel bildirim');
-        fd.set('_subject', `Hata bildirimi: ${tur}${n ? ' — ' + n.t : ''}`);
+        const subject = `Hata bildirimi: ${tur}${n ? ' — ' + n.t : ''}`;
+        fd.set(fd.has('access_key') ? 'subject' : '_subject', subject);
+        if (fd.has('access_key')) { fd.delete('botcheck'); const em = String(fd.get('email') || ''); if (em) fd.set('replyto', em); }
         const btn = form.querySelector('button[type=submit]') as HTMLButtonElement;
         btn.disabled = true; btn.textContent = document.documentElement.lang === 'en' ? 'Sending…' : 'Gönderiliyor…';
         try {
           const res = await fetch(action, { method: 'POST', body: fd, headers: { Accept: 'application/json' } });
-          if (!res.ok) throw new Error(String(res.status));
+          const j = await res.json().catch(() => ({}));
+          if (!res.ok || j.success === false) throw new Error(String(res.status));
           form.querySelectorAll('.field, .report-submit').forEach((el) => ((el as HTMLElement).hidden = true));
           ok.hidden = false;
         } catch {

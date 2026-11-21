@@ -18,9 +18,10 @@ for (const s of sources) {
   e.n++;
   byHost.set(h, e);
 }
-const publishers = [...byHost.values()].sort((a, b) => b.n - a.n);
+const publishers = [...byHost.values()].filter((p) => !BLOCKED_DOMAINS.includes(p.host.replace(/^www\./, ''))).sort((a, b) => b.n - a.n);
 const topPublishers = publishers.filter((p) => p.host !== 'x.com').slice(0, 12);
 const xCount = byHost.get('x.com')?.n ?? 0;
+import { BLOCKED_DOMAINS } from '../lib/blocked-sources.js';
 ---
 <Base title={T('Hakkımızda', 'About us')} description={T("YZ Gündemi'nin yapay zeka haberlerini nasıl hazırladığı, kaynak kuralları ve yayın ilkeleri.", 'How YZ Gündemi produces its AI news, our sourcing rules and editorial standards.')}>
   <div class="about">
