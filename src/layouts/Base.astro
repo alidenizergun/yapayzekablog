@@ -232,7 +232,7 @@ const isBreaking = latest && Date.now() - latest.data.date.valueOf() < BREAKING_
         gtag('js', new Date());
         gtag('config', GA, { allow_google_signals: false, allow_ad_personalization_signals: false });
       </script>
-      {/* gtag.js sayfa açılışını yavaşlatmasın: ilk etkileşimde ya da yüklemeden 3 sn sonra eklenir (veri kaybı olmaz, olaylar dataLayer'da bekler) */}
+      {/* gtag.js sayfa açılışını yavaşlatmasın: ilk etkileşimde ya da yüklemeden 7 sn sonra eklenir (veri kaybı olmaz, olaylar dataLayer'da bekler) */}
       <script is:inline define:vars={{ GA: SITE.analytics.ga4 }}>
         (function () {
           var done = false;
@@ -242,7 +242,7 @@ const isBreaking = latest && Date.now() - latest.data.date.valueOf() < BREAKING_
             document.head.appendChild(s);
           }
           ['pointerdown', 'keydown', 'scroll', 'touchstart'].forEach(function (ev) { addEventListener(ev, load, { once: true, passive: true }); });
-          addEventListener('load', function () { setTimeout(load, 3000); });
+          addEventListener('load', function () { setTimeout(load, 7000); });
         })();
       </script>
     </>
@@ -427,13 +427,15 @@ const isBreaking = latest && Date.now() - latest.data.date.valueOf() < BREAKING_
       ticker.addEventListener('mouseleave', pause(false));
       ticker.addEventListener('focusin', pause(true));
       ticker.addEventListener('focusout', pause(false));
-      setInterval(() => {
+      const step = () => {
         if (paused || document.hidden) return;
         items[i].hidden = true;
         i = (i + 1) % items.length;
         items[i].hidden = false;
         if (badge) badge.textContent = badgeText(items[i].dataset.date!);
-      }, 3000);
+      };
+      // Sayfa yüklenirken görüntü değişmesin (hız ölçümü ve okuma kolaylığı): ilk geçiş 8 sn sonra, sonra 4 sn'de bir
+      setTimeout(() => { step(); setInterval(step, 4000); }, 8000);
     }
     // Bölüm çubuğu: üstte yapışınca küçük logo görünür; yana kayan listede devamı varsa kenar solar; seçili bölüm görünür alana kaydırılır
     const catbar = document.querySelector<HTMLElement>('[data-catbar]');
