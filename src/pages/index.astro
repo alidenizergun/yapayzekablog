@@ -110,7 +110,7 @@ const listV = spreadVisuals(latest);
         <section class="main" aria-labelledby="latest-h">
           <div class="sechead"><h2 id="latest-h">{T('Son haberler', 'Latest news')}</h2></div>
           {latest.length ? latest.map((n) => <NewsRow item={n} choice={listV.get(n.id)} />) : <p class="empty">{T('Yeni haberler bir sonraki güncellemede burada olacak.', 'New stories will appear here after the next update.')}</p>}
-          {hasMore && <div class="pager"><span></span><a href={url('/sayfa/2/')}>{T('Daha eski haberler →', 'Older news →')}</a></div>}
+          {hasMore && <div class="pager"><a href={url('/sayfa/2/')}>{T('Daha eski haberler →', 'Older news →')}</a></div>}
         </section>
         <Sidebar exclude={[...shown]} />
       </div>
