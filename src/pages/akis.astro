@@ -30,7 +30,7 @@ const latest = all[0]?.data.date;
 const activeStories = [...new Map(all.map((n) => storyOf(n)).filter(Boolean).map((st) => [st.slug, st])).values()].slice(0, 5)
   .map((st) => ({ ...st, title: S(`story.${st.slug}.title`, st.title), count: all.filter((n) => storyOf(n)?.slug === st.slug).length }));
 ---
-<Base title={T('Son haberler: yapay zeka gündemi', 'Latest AI news')} description={T("YZ Gündemi'nde yayımlanan tüm yapay zeka haberleri ve kısa notlar, en yeniden eskiye, saatleriyle; kategoriye göre süzülebilir.", 'Every AI story and brief we publish, newest first, with times; filter by section.')}
+<Base title={T('Son haberler: yapay zeka gündemi', 'Latest AI news')} description={T("YZ Gündemi'nde yayımlanan tüm yapay zeka haberleri ve kısa notlar, en yeniden eskiye; bölüme göre süzülebilir.", 'Every AI story and brief we publish, newest first; filter by section.')}
   breadcrumbs={[{ name: 'Ana sayfa', path: '/' }, { name: T('Son haberler', 'Latest'), path: '/akis/' }]}>
   <section class="river hub" data-river>
     <header class="hub-head">
@@ -39,7 +39,6 @@ const activeStories = [...new Map(all.map((n) => storyOf(n)).filter(Boolean).map
       <p class="spot">{T('Yayımladığımız tüm haberler ve kısa notlar, en yeniden eskiye.', 'Every story and brief we publish, newest first.')}</p>
       <div class="river-status hub-meta" aria-live="polite">
         {latest && <span>{T('Son güncelleme', 'Last updated')}: <time datetime={latest.toISOString()}>{dayLabel(dayKey(latest))}</time></span>}
-        <span>{T('Günde 4 kez güncellenir', 'Updated 4 times a day')}</span>
         <span class="river-new" data-new-count hidden></span>
       </div>
     </header>
