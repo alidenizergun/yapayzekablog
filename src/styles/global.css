@@ -1074,3 +1074,7 @@ img.thumb { color: transparent; font-size: 0; }
   .catbar .catbar-search { margin-left: 4px; }
 }
 .catbar:has(.nav-all[open]) { z-index: 40; }
+/* Sadeleştirilmiş menü: üç sütun; arama kutusu yalnızca telefonda (geniş ekranda üst bilgide zaten var) */
+.mega { grid-template-columns: 1.3fr 1fr 1fr; max-width: 900px; right: auto; width: calc(100% - 32px); }
+.mega .menu-search { display: none; }
+@media (max-width: 760px) { .mega { grid-template-columns: minmax(0, 1fr); max-width: none; width: auto; right: max(12px, env(safe-area-inset-right, 0px)); } .mega .menu-search { display: flex; } }

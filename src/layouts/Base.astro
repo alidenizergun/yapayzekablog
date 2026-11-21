@@ -139,27 +139,35 @@ const navGroups = [
 // Menü çubuğunda ayrıca kısayolu olan sayfalar (Son haberler) açıldığında grup başlığı da işaretlenmesin
 const groupCur = (i) => i.current && i.href !== L.u('/akis/');
 const groupOf = (k) => navGroups.find((g) => g.key === k)?.items ?? [];
-// Menü çubuğu: doğrudan bağlantılar (haberler → en çok haber çıkan bölümler → okur araçları)
-const TOP_CATS = ['modeller', 'ajanlar', 'girisim-yatirim', 'regulasyon', 'donanim', 'turkiye'].filter((c) => counts.get(c));
+// Menü çubuğu: yalnızca dört doğrudan bağlantı; geri kalan her şey "Menü" panelinde
+const onNews = ['/akis/', '/kategori/', '/haber/', '/haftalik/', '/gelisme/'].some((p) => path.startsWith(L.u(p)));
 const topLinks = [
-  item(T('Son haberler', 'Latest'), '/akis/'),
-  ...TOP_CATS.map((slug) => ({ ...item(S(`cat.${slug}.name`, categoryBySlug(slug)?.name), `/kategori/${slug}/`), current: slug === currentCat })),
-  { ...item(T('Araçlar', 'AI tools'), '/arac/'), sep: true },
+  { ...item(T('Haberler', 'News'), '/akis/'), current: onNews },
+  item(T('Araçlar', 'AI tools'), '/arac/'),
   item(T('Rehberler', 'Guides'), '/rehber/'),
   item(T('Sözlük', 'Glossary'), '/sozluk/'),
 ];
-// "Menü" paneli: dört sütun, her başlık okurun aradığı şeyi söyler
+// "Menü" paneli: üç kısa sütun
 const megaCols = [
-  { label: T('Haberler', 'News'), items: groupOf('news'), groups: [{ items: groupOf('news').filter((i) => !i.href.includes('/kategori/')) }, { label: T('Konular', 'Topics'), cls: 'two', items: groupOf('news').filter((i) => i.href.includes('/kategori/')) }] },
-  { label: T('Yapay zeka araçları', 'AI tools'), items: groupOf('tools'), groups: [{ items: [...groupOf('tools'), ...groupOf('data').filter((i) => i.href.includes('modeller-karsilastirma'))] }] },
-  { label: T('Öğren', 'Learn'), items: [...groupOf('learn'), ...groupOf('sectors')], groups: [
-    { items: groupOf('learn') },
-    ...(groupOf('sectors').length ? [{ label: T('Sektörlere göre', 'By industry'), items: groupOf('sectors') }] : []),
-  ] },
-  { label: T('Türkiye ve veriler', 'Turkey and data'), items: [...groupOf('turkey'), ...groupOf('data')], groups: [
-    { label: T('Türkiye', 'Turkey'), items: groupOf('turkey') },
-    { label: T('Veriler', 'Data'), items: groupOf('data').filter((i) => !i.href.includes('modeller-karsilastirma')) },
-  ] },
+  { label: T('Haber bölümleri', 'News sections'), groups: [{ cls: 'two', items: [item(T('Tüm haberler', 'All news'), '/akis/'), ...groupOf('news').filter((i) => i.href.includes('/kategori/'))] }] },
+  { label: T('Keşfet', 'Explore'), groups: [{ items: [
+    item(T('Haftanın özeti', 'Week in review'), '/haftalik/'),
+    item(T('Süren olaylar', 'Ongoing stories'), '/gelisme/'),
+    item(T("Türkiye'de yapay zeka", 'AI in Turkey'), '/turkiye-yapay-zeka/'),
+    item(T('Yatırımlar ve satın almalar', 'Funding and acquisitions'), '/yatirimlar/'),
+    item(T('Raporlar', 'Reports'), '/raporlar/'),
+    item(T('Şirketler ve kişiler', 'Companies and people'), '/konular/'),
+    item(T('Etkinlikler', 'Events'), '/etkinlikler/'),
+  ] }] },
+  { label: T('Araçlar ve öğren', 'Tools and learning'), groups: [{ items: [
+    item(T('Yapay zeka araçları', 'AI tools'), '/arac/'),
+    item(T('Bana uygun aracı bul', 'Find the right tool'), '/arac-secici/'),
+    item(T('Karşılaştırmalar', 'Comparisons'), '/karsilastir/'),
+    item(T('Model fiyatları', 'Model pricing'), '/modeller-karsilastirma/'),
+    item(T('Rehberler', 'Guides'), '/rehber/'),
+    item(T('Sözlük', 'Glossary'), '/sozluk/'),
+    ...(liveSectors.length ? [item(T('Sektörlere göre yapay zeka', 'AI by industry'), '/sektor/')] : []),
+  ] }] },
 ];
 const isHome = Astro.url.pathname.replace(/\/$/, '') === L.u('/').replace(/\/$/, '');
 const footerCats = CATEGORIES.filter((c) => counts.get(c.slug));
@@ -311,7 +319,7 @@ const isBreaking = latest && Date.now() - latest.data.date.valueOf() < BREAKING_
     <div class="wrap">
       <a class="catbar-logo" href={L.u('/')} aria-label={T('YZ Gündemi ana sayfa', 'YZ Gündemi home')} tabindex="-1"><span class="wm-badge" aria-hidden="true">YZ</span></a>
       {/* Menü: en çok okunan bölümler doğrudan bağlantı (açılır menü yok); tüm bölümler tek "Menü" panelinde, sütunlar hâlinde */}
-      <details class={`nav-all${megaCols.some((c) => c.items.some(groupCur)) && !topLinks.some((l) => l.current) ? ' has-current' : ''}`} data-nav-group>
+      <details class={`nav-all${''}`} data-nav-group>
         <summary><svg class="nav-all-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>{T('Menü', 'Menu')}</summary>
         <div class="mega" role="region" aria-label={T('Tüm bölümler', 'All sections')}>
           <form class="menu-search" role="search" action={L.u('/ara/')} method="get">
