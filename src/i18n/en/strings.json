@@ -144,24 +144,24 @@
   "en": "Turkey"
  },
  "cmp.chatgpt-vs-claude": {
-  "h": "c21ee679dd",
-  "en": "Both are strong general-purpose assistants and start at the same price ($20 per month). ChatGPT is more versatile, with image generation, voice and broad integrations. Claude stands out for working with long documents, quality writing and coding; it does not generate images."
+  "h": "8271aa4ebf",
+  "en": "Both are strong general-purpose assistants, and their main paid plans cost the same ($20 per month). ChatGPT has a cheaper Go plan as well. ChatGPT is more versatile, with image generation, voice and broad integrations. Claude stands out for working with long documents, quality writing and coding, but it does not generate images."
  },
  "cmp.chatgpt-vs-deepseek": {
   "h": "0b6412ef13",
   "en": "DeepSeek's chat app is free and strong at tasks such as math and coding. ChatGPT offers more features (images, voice, agents) and broader integrations. If you will work with personal or company data, consider where DeepSeek processes data."
  },
  "cmp.chatgpt-vs-gemini": {
-  "h": "d50e586c4a",
-  "en": "Both are versatile assistants, and their paid plans start at around $20 per month. If you rely heavily on Gmail, Drive and Android, Gemini's integrations are an advantage; if you want a broad feature set and ecosystem, ChatGPT is the more common choice."
+  "h": "cfd901d7f4",
+  "en": "Both are versatile assistants. Their main paid plans cost about $20 per month, and both have a cheaper entry-level plan (ChatGPT Go, Google AI Plus). If you use Gmail, Drive and Android heavily, Gemini's integrations are an advantage. If you want a broad feature set and ecosystem, ChatGPT is the more widespread choice."
  },
  "cmp.chatgpt-vs-grok": {
-  "h": "fc6a0b9487",
-  "en": "Grok is integrated with X and can access current posts on X; its paid plan starts at $8 per month. ChatGPT, with a broader feature set and integrations, is more widely used for general-purpose tasks; its paid plan starts at $20 per month."
+  "h": "19c0d2e98e",
+  "en": "Grok is integrated with X and can access current posts on the platform; its paid plan starts at $8 per month. ChatGPT is more widely used for general-purpose tasks, with a broader feature set and integrations. Its main paid plan (Plus) costs $20 per month, and there is also a cheaper Go plan."
  },
  "cmp.chatgpt-vs-meta-ai": {
-  "h": "22c06e4cf7",
-  "en": "Meta AI is free and works inside apps you already use, such as WhatsApp and Instagram, making it practical for quick Q&A. ChatGPT is stronger for more comprehensive tasks such as long documents, file analysis, coding and agents; its paid plan starts at $20 per month."
+  "h": "f47842eee3",
+  "en": "Meta AI is free and works inside apps you already use, such as WhatsApp and Instagram, making it practical for quick questions and answers. ChatGPT is stronger for more comprehensive work such as long documents, file analysis, coding and agents. Its main paid plan (Plus) costs $20 per month, and there is also a cheaper Go plan."
  },
  "cmp.chatgpt-vs-microsoft-copilot": {
   "h": "28b838da0a",
@@ -180,8 +180,8 @@
   "en": "DeepSeek's chat app is free and strong in tasks such as math and coding. Claude stands out for working with long documents, high-quality writing and coding; its paid plan starts at $20 per month. If you will work with personal or company data, consider where DeepSeek processes its data."
  },
  "cmp.claude-vs-gemini": {
-  "h": "39af05923c",
-  "en": "Claude stands out in long-document analysis, writing and coding; Gemini in integration with Google services and in image and video generation. Both have a free plan and a paid plan at around $20 per month."
+  "h": "9fc1ac2553",
+  "en": "Claude excels at long-document analysis, writing and coding, while Gemini stands out for its integration with Google services and for image and video generation. Both have a free plan and a main paid plan of about $20 per month. Google also offers a cheaper Google AI Plus plan."
  },
  "cmp.comet-vs-dia": {
   "h": "014a29b0d3",
@@ -208,8 +208,8 @@
   "en": "Gamma focuses on producing presentations and documents in minutes from a text or outline. Canva, in addition to presentations, lets you create all kinds of designs such as social media graphics, posters and videos using templates; its paid plan starts at $18 per month."
  },
  "cmp.gemini-vs-perplexity": {
-  "h": "9dd3a9a4c5",
-  "en": "Perplexity works like an AI search engine that shows web sources in every answer, making it strong for current information and sourced research. Gemini, meanwhile, covers broader tasks thanks to its integration with Google services such as Gmail, Drive and YouTube, and its ability to generate images and video. Both have a free plan and a paid plan at $20 per month."
+  "h": "ea84478e79",
+  "en": "Perplexity works like an AI search engine that shows web sources for every answer, making it strong for current information and sourced research. Gemini, by contrast, reaches a wider range of tasks through its integration with Google services such as Gmail, Drive and YouTube, and its ability to generate images and video. Both have a free plan and a main paid plan of about $20 per month. Google also offers a cheaper Google AI Plus plan."
  },
  "cmp.granola-vs-fathom": {
   "h": "40f3fce61c",
@@ -22212,12 +22212,12 @@
   "en": "Work where data must not leave the company (requires an enterprise plan or a local model)"
  },
  "tool.chatgpt.plan.1.note": {
-  "h": "39f7a5ec2d",
-  "en": "price varies by country"
+  "h": "0f145bc30e",
+  "en": "US price; varies by country"
  },
  "tool.chatgpt.plan.3.note": {
-  "h": "afbc4f962c",
-  "en": "a $200 tier is also available"
+  "h": "e33392989f",
+  "en": "$200 and $500 tiers are also available"
  },
  "tool.chatgpt.plan.4.note": {
   "h": "65869e45e2",
@@ -22579,9 +22579,17 @@
   "h": "79915f0ff6",
   "en": "The integration advantage shrinks for those who don't use the Google ecosystem"
  },
+ "tool.gemini.plan.1.note": {
+  "h": "aa08239e97",
+  "en": "US list price"
+ },
  "tool.gemini.plan.2.note": {
   "h": "afbc4f962c",
   "en": "a $200 tier is also available"
+ },
+ "tool.gemini.plan.3.note": {
+  "h": "f5a756302d",
+  "en": "A $199.99 tier is also available"
  },
  "tool.genspark.desc": {
   "h": "bde589c7c6",
