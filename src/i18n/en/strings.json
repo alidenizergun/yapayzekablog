@@ -171,6 +171,10 @@
   "h": "bd4819ddfa",
   "en": "Perplexity works like an AI search engine that searches the web and cites sources; it is strong for up-to-date information and research. ChatGPT is used for a broader range of tasks such as writing, analysis, images and code, and can also search the web."
  },
+ "cmp.claude-code-vs-codex": {
+  "h": "39b5173337",
+  "en": "Both are coding agents that work in the terminal, in the editor and in a desktop app, and both are included in subscriptions. Claude Code comes with Claude Pro ($20 per month) and higher plans, while Codex comes with ChatGPT plans; a limited version of Codex is also available for free and on the Go plan. If you already use one of these assistants, starting with its agent is the most practical route."
+ },
  "cmp.claude-vs-deepseek": {
   "h": "51f36c7e5c",
   "en": "DeepSeek's chat app is free and strong in tasks such as math and coding. Claude stands out for working with long documents, high-quality writing and coding; its paid plan starts at $20 per month. If you will work with personal or company data, consider where DeepSeek processes its data."
@@ -178,6 +182,14 @@
  "cmp.claude-vs-gemini": {
   "h": "39af05923c",
   "en": "Claude stands out in long-document analysis, writing and coding; Gemini in integration with Google services and in image and video generation. Both have a free plan and a paid plan at around $20 per month."
+ },
+ "cmp.comet-vs-dia": {
+  "h": "014a29b0d3",
+  "en": "Both are AI browsers and can be used for free. Comet is more comprehensive, with Perplexity's search and agent features that can take actions on websites for you; it is available on Windows, macOS, iOS and Android. Dia offers a simple experience for tasks such as chatting with and summarizing tabs; its Windows version is still at an early stage."
+ },
+ "cmp.cursor-vs-claude-code": {
+  "h": "b8afce71d4",
+  "en": "Cursor is a code editor built around AI, suited to people who like to see the code and approve changes. Claude Code is an agent that works in the terminal and in your existing editor, and it is strong for describing a task and handing multi-file changes over to it. Many developers use both together."
  },
  "cmp.cursor-vs-github-copilot": {
   "h": "ad5333342e",
@@ -199,9 +211,29 @@
   "h": "9dd3a9a4c5",
   "en": "Perplexity works like an AI search engine that shows web sources in every answer, making it strong for current information and sourced research. Gemini, meanwhile, covers broader tasks thanks to its integration with Google services such as Gmail, Drive and YouTube, and its ability to generate images and video. Both have a free plan and a paid plan at $20 per month."
  },
+ "cmp.granola-vs-fathom": {
+  "h": "40f3fce61c",
+  "en": "Fathom joins meetings as a bot to record and transcribe them, and its free plan offers unlimited recording. Granola does not send a bot to meetings. Instead, it listens to your computer's audio and combines it with your own notes, and its free plan keeps 30 days of history. With both tools, inform participants before recording."
+ },
  "cmp.heygen-vs-synthesia": {
   "h": "6e4749326f",
   "en": "Both produce videos with avatars that speak text. HeyGen, with its voiceover and translation features, focuses on individual creators and marketing, while Synthesia focuses on internal training and corporate communication videos. Both offer a free trial."
+ },
+ "cmp.kling-vs-hailuo": {
+  "h": "aefd7ef69c",
+  "en": "Both are China-based tools that generate realistic video from text and images, and both work on a credit system. Hailuo stands out for its affordable plans and realistic physics, while Kling leads on motion quality and longer scene options. Before buying, test the same prompt with the trial credits of both tools."
+ },
+ "cmp.lovable-vs-bolt": {
+  "h": "9d4bcfdd2e",
+  "en": "Both build websites and apps through chat, and their paid plans start at $25 per month. Lovable offers a more guided experience for people who don't code, while Bolt makes it easier to run the app instantly in the browser and view and manually edit the code."
+ },
+ "cmp.lovable-vs-replit": {
+  "h": "83710f7f50",
+  "en": "Lovable focuses on building apps and prototypes quickly without coding. Replit offers a full development environment in the browser and an agent that writes and publishes the app, making it more flexible for people learning to code and those looking to scale a project. Replit's Core plan costs $20 per month, and Lovable's Pro plan costs $25."
+ },
+ "cmp.manus-vs-genspark": {
+  "h": "9ea2276cf5",
+  "en": "Both are general-purpose AI agents that carry out tasks for you and operate on a credit system. Manus focuses on running multi-step work such as research, reports and websites in the background, while Genspark focuses on producing presentations, tables, images and videos from a single screen. Manus's paid plan starts at $20 per month, and Genspark's at $24.99."
  },
  "cmp.midjourney-vs-adobe-firefly": {
   "h": "d67b3c63ae",
@@ -214,6 +246,10 @@
  "cmp.otter-vs-fireflies": {
   "h": "e59be53b7f",
   "en": "Both record online meetings, transcribe them, and produce summaries and task lists. Otter's paid plan starts at $16.99 per month. For Turkish meetings, check language support in both before purchasing."
+ },
+ "cmp.runway-vs-google-flow": {
+  "h": "bd355daa5b",
+  "en": "Runway is a professional platform that offers comprehensive editing tools alongside video generation. Google Flow is a filmmaking tool that generates and combines scenes using Google's Veo models. It starts with 50 free credits per day, and its paid tiers are included in Google AI subscriptions."
  },
  "cmp.runway-vs-kling": {
   "h": "90b323a3fa",
@@ -20603,6 +20639,318 @@
   "h": "a664775b85",
   "en": "Türkiye AI Action Plan (2026-2030) takes effect"
  },
+ "prompt.arti-eksi.text": {
+  "h": "eaa2bcb008",
+  "en": "I am trying to decide between [OPTION A] and [OPTION B]. The criteria that matter to me are: [CRITERIA]. List the pros and cons of each option, then prepare a decision table in which you score each criterion from 1 to 5. Do not make the decision for me; instead, point out which information could change the decision."
+ },
+ "prompt.arti-eksi.title": {
+  "h": "7a42a75dc4",
+  "en": "Pros and cons analysis and decision matrix"
+ },
+ "prompt.blog-taslak.text": {
+  "h": "741dcd1300",
+  "en": "Prepare an outline for a blog post titled \"[TITLE]\". Reader: [READER]. First suggest 3 alternative titles. Then write an introduction paragraph, a section plan with H2 and H3 headings, and the main points to cover in each section. Mark places where figures and statistics are needed with [SOURCE NEEDED]; do not invent numbers."
+ },
+ "prompt.blog-taslak.title": {
+  "h": "f4da4eb4a3",
+  "en": "Blog post outline"
+ },
+ "prompt.calisma-plani.text": {
+  "h": "2e7219e06c",
+  "en": "I have [TIME LEFT] until the [EXAM] exam. I can study [HOURS] hours per day. Topics: [TOPIC LIST]. Topics I struggle with: [DIFFICULT TOPICS]. Prepare a day-by-day study plan for me, and include review days and practice exams. The plan should be realistic, so include break times as well."
+ },
+ "prompt.calisma-plani.title": {
+  "h": "0b0c69d5fc",
+  "en": "Study plan for an exam"
+ },
+ "prompt.ceviri-uyarla.text": {
+  "h": "71801cb15c",
+  "en": "Translate the text below into [TARGET LANGUAGE]. Do not translate word for word; adapt it so it reads naturally for [TARGET AUDIENCE]. Replace idioms and cultural expressions with equivalents in the target language, and separately list the changes you made below the translation.\n\nText: [TEXT]"
+ },
+ "prompt.ceviri-uyarla.title": {
+  "h": "7a5ef0a315",
+  "en": "Context-appropriate translation"
+ },
+ "prompt.cv-uyarla.text": {
+  "h": "4186cfc8ad",
+  "en": "Below are a job posting and my resume. List the skills the posting asks for and match them against my resume. Point out any that are missing. Then rewrite the experience items on my resume as measurable achievement statements tailored to the posting. Do not add experience I haven't had.\n\nJob posting: [JOB POSTING]\n\nResume: [RESUME]"
+ },
+ "prompt.cv-uyarla.title": {
+  "h": "c2a60f63af",
+  "en": "Tailoring a CV to a job posting"
+ },
+ "prompt.dil-pratik.text": {
+  "h": "73a4095e95",
+  "en": "I want to practice [LANGUAGE] with you. My level: [A1-C1]. Topic: [TOPIC, e.g., ordering at a restaurant]. You play [ROLE], and I will be the customer. After each of my messages, first reply in character, then briefly correct my mistakes and suggest more natural phrasing in Turkish, in parentheses."
+ },
+ "prompt.dil-pratik.title": {
+  "h": "9ceda4827f",
+  "en": "Foreign language conversation practice"
+ },
+ "prompt.eposta-yanit.text": {
+  "h": "4b9f770b29",
+  "en": "I need to reply to the email below. First, list the requests and hidden concerns in the email as bullet points. Then write two different reply drafts: one conciliatory and one that sets clear boundaries. Both should be respectful and no more than 120 words.\n\nEmail: [PASTE THE EMAIL]"
+ },
+ "prompt.eposta-yanit.title": {
+  "h": "4be2ae7108",
+  "en": "Replying to a difficult email"
+ },
+ "prompt.eposta-yaz.text": {
+  "h": "82baa26142",
+  "en": "Write a short business email to [RECIPIENT ROLE] for the situation below. Tone: polite, clear and professional. Suggest a subject line. Keep it under 150 words and end with a clear next step.\n\nSituation: [DESCRIBE THE SITUATION]"
+ },
+ "prompt.eposta-yaz.title": {
+  "h": "938c4a5368",
+  "en": "A polite but clear business email"
+ },
+ "prompt.excel-formul.text": {
+  "h": "8214e9f624",
+  "en": "Write an Excel formula that does the following: [WHAT YOU WANT TO DO]. My data is in these columns: [COLUMNS]. I use Turkish Excel, so give the formula with Turkish function names and semicolon separators. Explain step by step how the formula works."
+ },
+ "prompt.excel-formul.title": {
+  "h": "7ab3cc5cba",
+  "en": "Excel / Google Sheets formula"
+ },
+ "prompt.gorsel-istem.text": {
+  "h": "e7e2904cf4",
+  "en": "Write a detailed prompt for an image generation tool. My idea: [IDEA]. The prompt should specify: main subject, setting, lighting, camera angle and lens, color palette, style (photo, illustration, 3D, etc.) and aspect ratio. Give me two versions, in Turkish and in English; the English version should be more detailed."
+ },
+ "prompt.gorsel-istem.title": {
+  "h": "cb5d0a7965",
+  "en": "Detailed image prompt creation"
+ },
+ "prompt.hata-ayikla.text": {
+  "h": "6ab13b978e",
+  "en": "When I run this code, I get the error below. List the possible causes of the error in order of likelihood, give code that fixes the most likely cause, and explain why it works. If you are not sure, ask me what information I should provide.\n\nCode: [CODE]\n\nError message: [ERROR]"
+ },
+ "prompt.hata-ayikla.title": {
+  "h": "e0ac23ca0c",
+  "en": "Debugging"
+ },
+ "prompt.icerik-takvimi.text": {
+  "h": "e42c98ff56",
+  "en": "Prepare a 4-week content calendar for the [PLATFORM] account of [BRAND]. [NUMBER] posts per week. Present it as a table: Date | Content type (Reels, carousel, stories) | Topic | Hook sentence | Goal (awareness, engagement, sales). Take into account Turkey's special days and seasonal opportunities for the [SECTOR] sector."
+ },
+ "prompt.icerik-takvimi.title": {
+  "h": "5b2940a026",
+  "en": "Monthly social media content calendar"
+ },
+ "prompt.instagram-gonderi.text": {
+  "h": "d3a92303f9",
+  "en": "Write an Instagram post caption for [PRODUCT/SERVICE]. Target audience: [TARGET AUDIENCE]. Tone: [friendly / witty / professional]. Give 3 different options. Each should open with an attention-grabbing hook on the first line, have a 2-3 sentence body and include a call to action. End each with 5 relevant Turkish-language hashtags."
+ },
+ "prompt.instagram-gonderi.title": {
+  "h": "e14bcd38b3",
+  "en": "Instagram post caption"
+ },
+ "prompt.kaynak-ozet.text": {
+  "h": "58541dd73e",
+  "en": "Summarize the article below for a student: the main idea (1 sentence), key concepts and their definitions, the arguments put forward, the evidence used, and the article's weaknesses. At the end, suggest 3 research questions that could be asked when writing an assignment on this topic.\n\nArticle: [TEXT]"
+ },
+ "prompt.kaynak-ozet.title": {
+  "h": "7503e7bf62",
+  "en": "Summarizing an article for a student"
+ },
+ "prompt.kisalt.text": {
+  "h": "9e4a313602",
+  "en": "Cut the text below to half its length while preserving its meaning. Remove repetitions, filler phrases and unnecessary adjectives. Keep important figures and names.\n\nText: [TEXT]"
+ },
+ "prompt.kisalt.title": {
+  "h": "c123dd3394",
+  "en": "Shortening a text"
+ },
+ "prompt.kod-acikla.text": {
+  "h": "27e2a28b5f",
+  "en": "First, summarize in two sentences what the code below does, then explain it section by section. List possible errors, security vulnerabilities and performance issues under a separate heading. Do not change the code; only explain it and make suggestions.\n\nCode: [CODE]"
+ },
+ "prompt.kod-acikla.title": {
+  "h": "7b4f37c4f0",
+  "en": "Line-by-line code explanation"
+ },
+ "prompt.konu-anlatim.text": {
+  "h": "c83e28286a",
+  "en": "Explain [TOPIC] to me at a [GRADE/LEVEL] level. Start with an analogy from everyday life, then explain the topic step by step. At the end, to check my understanding, ask me 3 questions and wait for my answers; do not give the answers right away."
+ },
+ "prompt.konu-anlatim.title": {
+  "h": "fba3c85a4c",
+  "en": "Explaining a topic simply"
+ },
+ "prompt.linkedin.text": {
+  "h": "19ee58de21",
+  "en": "Write an \"About\" section for my LinkedIn profile. My occupation: [OCCUPATION]. Experience: [YEARS] years. My areas of expertise: [AREAS]. My key achievements: [ACHIEVEMENTS]. Write in the first person, in a warm but professional tone, with a maximum of 200 words. In the last sentence, explain how people can get in touch."
+ },
+ "prompt.linkedin.title": {
+  "h": "dd8106d460",
+  "en": "LinkedIn \"About\" section"
+ },
+ "prompt.logo-fikir.text": {
+  "h": "cf8b94f24a",
+  "en": "Suggest 5 logo ideas for a brand called [BRAND NAME] that operates in the [INDUSTRY] sector. For each idea, explain the concept, the shapes and colors to be used, and why it suits this brand. Then write prompts for an image generation tool for the 2 strongest ideas."
+ },
+ "prompt.logo-fikir.title": {
+  "h": "f694554331",
+  "en": "Logo ideas and image prompts"
+ },
+ "prompt.metin-duzelt.text": {
+  "h": "709d962060",
+  "en": "Correct the text below according to the spelling rules of the Turkish Language Association (TDK); fix awkward expressions and improve fluency. Do not change the meaning or style. First give the corrected text, then list the 5 most important changes you made and the reason for each.\n\nText: [TEXT]"
+ },
+ "prompt.metin-duzelt.title": {
+  "h": "9d744a6682",
+  "en": "Spelling, punctuation and fluency correction"
+ },
+ "prompt.mulakat.text": {
+  "h": "ea03fc3853",
+  "en": "Run a mock interview with me for the [POSITION] role. You are the hiring manager at a [COMPANY TYPE]. Ask me one question at a time. After each of my answers, point out its strengths and weaknesses, suggest how to give a better answer, and then move on to the next question. Ask 8 questions in total, mixing behavioral and technical questions."
+ },
+ "prompt.mulakat.title": {
+  "h": "e8a601e773",
+  "en": "Interview practice"
+ },
+ "prompt.on-yazi.text": {
+  "h": "e3a952c41c",
+  "en": "Write a cover letter for the [POSITION] role at [COMPANY]. The two experiences I want to highlight are: [EXPERIENCES]. What I know about the company: [INFO]. Keep it to 250 words at most; avoid clichés, and in the first sentence, say why I am applying to this company."
+ },
+ "prompt.on-yazi.title": {
+  "h": "3af4850260",
+  "en": "Cover letter"
+ },
+ "prompt.rapor-ozet.text": {
+  "h": "0947060eeb",
+  "en": "Summarize the report below for a busy executive. Start with a one-sentence main message. Then list the 5 most important findings with their figures. At the end, under the heading \"Matters requiring a decision,\" write the decisions expected from the executive. Do not exceed 250 words in total.\n\nReport: [PASTE THE TEXT or UPLOAD THE FILE]"
+ },
+ "prompt.rapor-ozet.title": {
+  "h": "673c1157e0",
+  "en": "Turning a long report into an executive summary"
+ },
+ "prompt.reels-senaryo.text": {
+  "h": "83d07ca6a5",
+  "en": "Write a 30-second vertical video script about [TOPIC]. The first 3 seconds should include a hook that stops viewers from scrolling. Present it scene by scene: Duration | Visual | On-screen text | Voiceover. In the final scene, make a [CALL TO ACTION: follow / click the link / leave a comment] request."
+ },
+ "prompt.reels-senaryo.title": {
+  "h": "36c60d6102",
+  "en": "30-second Reels/TikTok script"
+ },
+ "prompt.reklam-metni.text": {
+  "h": "42a29439e9",
+  "en": "Write digital ad copy for [PRODUCT]. Key benefit: [BENEFIT]. Target audience: [AUDIENCE]. Produce 5 headlines (up to 30 characters) and 5 descriptions (up to 90 characters). Write each one using a different psychological trigger (curiosity, gain, fear of missing out, social proof, convenience) and state which trigger each one uses. Do not use unverifiable claims or figures."
+ },
+ "prompt.reklam-metni.title": {
+  "h": "7d5592f91f",
+  "en": "Ad headline and copy variations"
+ },
+ "prompt.soru-uret.text": {
+  "h": "04c9d13561",
+  "en": "Prepare 10 practice questions from the lecture notes below: 5 multiple-choice (4 options each), 3 short-answer and 2 discussion questions. Add the answer key at the end with brief explanations. The questions should be based only on information covered in the notes.\n\nNotes: [PASTE THE NOTES]"
+ },
+ "prompt.soru-uret.title": {
+  "h": "0203fbf7b4",
+  "en": "Practice questions from lecture notes"
+ },
+ "prompt.sunum-akisi.text": {
+  "h": "54548bc8f6",
+  "en": "I am preparing a [DURATION]-minute presentation on [TOPIC]. Audience: [AUDIENCE]. My goal: [GOAL]. Suggest a flow of 8-10 slides: for each slide, write a title, 3 bullet points and speaker notes. The first slide should be an attention-grabbing opening, and the last slide should be a clear call to action."
+ },
+ "prompt.sunum-akisi.title": {
+  "h": "ae5a65b8ea",
+  "en": "Presentation flow and slide titles"
+ },
+ "prompt.swot.text": {
+  "h": "2a04d20558",
+  "en": "Perform a SWOT analysis for [COMPANY/PROJECT]. Context: [SECTOR, MARKET, GOAL]. Each heading should have at least 4 points. Then suggest 3 strategies that match strengths with opportunities, and 2 measures that protect weaknesses against threats. Label any information you are unsure of as an assumption."
+ },
+ "prompt.swot.title": {
+  "h": "a864044a41",
+  "en": "SWOT analysis"
+ },
+ "prompt.tablo-analiz.text": {
+  "h": "0a9c679c38",
+  "en": "Analyze the table I have uploaded. 1) Briefly explain what the data contains, 2) list the 5 most notable findings with their figures, 3) flag values that appear outlying or erroneous, 4) suggest 3 charts that could be made from this data. Show how each figure you calculate was computed."
+ },
+ "prompt.tablo-analiz.title": {
+  "h": "f8cb749bee",
+  "en": "Interpreting data in a table"
+ },
+ "prompt.ters-sav.text": {
+  "h": "e799187d57",
+  "en": "Critique the idea/plan below harshly but constructively. Identify the 5 weakest points, the risks I may have overlooked, and make the strongest objection to this idea. Then suggest an improvement for each weak point. Do not try to please me.\n\nIdea: [IDEA]"
+ },
+ "prompt.ters-sav.title": {
+  "h": "05eef706d7",
+  "en": "Critique my idea (devil's advocate)"
+ },
+ "prompt.test-yaz.text": {
+  "h": "be12553e3e",
+  "en": "Write unit tests for the function below using [TEST FRAMEWORK]. Include separate tests for normal cases, boundary values and invalid inputs. Add a one-line comment to each test stating what it checks.\n\nFunction: [CODE]"
+ },
+ "prompt.test-yaz.title": {
+  "h": "41ed688663",
+  "en": "Writing unit tests"
+ },
+ "prompt.ton-degistir.text": {
+  "h": "6606e665ca",
+  "en": "Rewrite the text below in a [formal / friendly / persuasive / plain] tone. Target reader: [READER]. Keep the length roughly the same, and rewrite it without adding or removing information.\n\nText: [TEXT]"
+ },
+ "prompt.ton-degistir.title": {
+  "h": "55237a1c94",
+  "en": "Changing the tone of a text"
+ },
+ "prompt.toplanti-ozet.text": {
+  "h": "4b427c2aab",
+  "en": "Organize the meeting notes below. Output: 1) a 3-sentence summary, 2) decisions made, 3) a task table showing who will do what and by when (Task | Owner | Date), 4) unanswered questions. Do not add information that is not in the notes; where something is unclear, write \"not specified.\"\n\nNotes: [PASTE THE NOTES]"
+ },
+ "prompt.toplanti-ozet.title": {
+  "h": "c4bfd8fe69",
+  "en": "Summary and task list from meeting notes"
+ },
+ "prompt.urun-aciklama.text": {
+  "h": "aa67e150dc",
+  "en": "Using the product information below, write a product description for an e-commerce site: an attention-grabbing opening sentence, 3 short paragraphs describing the benefits, technical specifications as bullet points, and 3 frequently asked questions with answers. Naturally use the phrase \"[KEYWORD]\" for search engines. Do not invent features that are not in the information provided.\n\nProduct information: [INFORMATION]"
+ },
+ "prompt.urun-aciklama.title": {
+  "h": "5ab82862ed",
+  "en": "E-commerce product description"
+ },
+ "prompt.urun-fotografi.text": {
+  "h": "d37c08f84c",
+  "en": "Design 4 different product photo scenes for [PRODUCT] to be used in e-commerce and on social media: studio (white background), lifestyle, seasonal and minimalist. For each one, write an English prompt for an image generation tool, specifying the lighting, background and composition."
+ },
+ "prompt.urun-fotografi.title": {
+  "h": "190168ac56",
+  "en": "Product photo scene"
+ },
+ "promptcat.analiz": {
+  "h": "4c9282601c",
+  "en": "Analysis and decision-making"
+ },
+ "promptcat.egitim": {
+  "h": "a66e898208",
+  "en": "Education and studying"
+ },
+ "promptcat.gorsel": {
+  "h": "7dc8287b3e",
+  "en": "Image generation"
+ },
+ "promptcat.is": {
+  "h": "77259dff5d",
+  "en": "Work and email"
+ },
+ "promptcat.kariyer": {
+  "h": "dca5cfc196",
+  "en": "Career and job applications"
+ },
+ "promptcat.kod": {
+  "h": "d3486b3315",
+  "en": "Coding"
+ },
+ "promptcat.pazarlama": {
+  "h": "583fbd41ae",
+  "en": "Marketing and social media"
+ },
+ "promptcat.yazi": {
+  "h": "41ee73381c",
+  "en": "Writing and editing"
+ },
  "round.0.amount": {
   "h": "2292941d61",
   "en": "$4 million"
@@ -20703,6 +21051,54 @@
   "h": "5b54482496",
   "en": "Best AI tools for translation"
  },
+ "task.chatgpt-alternatifleri.intro": {
+  "h": "193cf1bea2",
+  "en": "AI assistants that can be used instead of, or alongside, ChatGPT. Some stand out for long documents, others for Google or Office integration, others for sourced search or free use; the right choice depends mostly on what you need them to do."
+ },
+ "task.chatgpt-alternatifleri.pick.claude": {
+  "h": "6312716dd4",
+  "en": "Strong with long documents, quality Turkish writing and coding."
+ },
+ "task.chatgpt-alternatifleri.pick.deepseek": {
+  "h": "49a5105bce",
+  "en": "Free and powerful; pay attention to where data is processed."
+ },
+ "task.chatgpt-alternatifleri.pick.gemini": {
+  "h": "2022ae2166",
+  "en": "Integrated with Google services; one of the most widely used assistants in Turkey."
+ },
+ "task.chatgpt-alternatifleri.pick.grok": {
+  "h": "e30e9a339b",
+  "en": "Integrated with X; accesses current posts."
+ },
+ "task.chatgpt-alternatifleri.pick.le-chat": {
+  "h": "8a6e89d031",
+  "en": "The assistant from Europe-based Mistral."
+ },
+ "task.chatgpt-alternatifleri.pick.microsoft-copilot": {
+  "h": "12d5e0cf17",
+  "en": "Works inside Word, Excel and Outlook; the basic version is free."
+ },
+ "task.chatgpt-alternatifleri.pick.perplexity": {
+  "h": "cdec587d10",
+  "en": "A search-focused assistant that provides source links with every answer."
+ },
+ "task.chatgpt-alternatifleri.pick.qwen": {
+  "h": "2d8e45a247",
+  "en": "Alibaba's free assistant."
+ },
+ "task.chatgpt-alternatifleri.q": {
+  "h": "3598e38ced",
+  "en": "chatgpt alternatives"
+ },
+ "task.chatgpt-alternatifleri.short": {
+  "h": "feb6044196",
+  "en": "ChatGPT alternatives"
+ },
+ "task.chatgpt-alternatifleri.title": {
+  "h": "47607e86bf",
+  "en": "Best ChatGPT alternatives"
+ },
  "task.cv-hazirlama.intro": {
   "h": "1b6b9ff3ba",
   "en": "Tools for writing a résumé, tailoring it to a job posting and drafting a cover letter. General-purpose assistants help with the text, while template tools speed up design."
@@ -20734,6 +21130,42 @@
  "task.cv-hazirlama.title": {
   "h": "90be03872c",
   "en": "Best AI tools for writing a résumé"
+ },
+ "task.fotograf-duzenleme.intro": {
+  "h": "eb8d426ab9",
+  "en": "Tools that remove objects from photos, replace backgrounds, improve lighting and quality, and edit images from text descriptions. Altering photos of real people without permission can create legal problems."
+ },
+ "task.fotograf-duzenleme.pick.adobe-firefly": {
+  "h": "1dbe268da0",
+  "en": "Generative fill and object removal integrated with Photoshop."
+ },
+ "task.fotograf-duzenleme.pick.canva": {
+  "h": "08725fe718",
+  "en": "Background removal and quick editing tools."
+ },
+ "task.fotograf-duzenleme.pick.capcut": {
+  "h": "69873ffe94",
+  "en": "Quick photo and video fixes on mobile."
+ },
+ "task.fotograf-duzenleme.pick.chatgpt": {
+  "h": "ce083c4ae7",
+  "en": "Step-by-step image editing through conversation."
+ },
+ "task.fotograf-duzenleme.pick.gemini": {
+  "h": "73ebe7bb36",
+  "en": "Editing a photo by describing the change in text (Nano Banana model)."
+ },
+ "task.fotograf-duzenleme.q": {
+  "h": "e974beb40d",
+  "en": "AI that edits photos"
+ },
+ "task.fotograf-duzenleme.short": {
+  "h": "924386a81e",
+  "en": "Photo editing"
+ },
+ "task.fotograf-duzenleme.title": {
+  "h": "3332662baa",
+  "en": "Best AI tools for photo editing"
  },
  "task.gorsel-olusturma.intro": {
   "h": "f53139a76a",
@@ -20867,6 +21299,46 @@
   "h": "ccbf90df2f",
   "en": "Best AI tools for making music and songs"
  },
+ "task.ogrenciler-icin.intro": {
+  "h": "b61abfe94a",
+  "en": "Tools that can be used for studying, summarizing notes, exam preparation, researching homework, and learning to code. Important: having AI write homework is against the rules at most schools; use these tools to understand concepts and practice, and verify your sources."
+ },
+ "task.ogrenciler-icin.pick.chatgpt": {
+  "h": "1f2808d5d0",
+  "en": "Topic explanations, practice questions and study plans."
+ },
+ "task.ogrenciler-icin.pick.claude": {
+  "h": "efc2a17e57",
+  "en": "Feedback to help understand long readings and improve writing."
+ },
+ "task.ogrenciler-icin.pick.gemini": {
+  "h": "c5fbcbeb9f",
+  "en": "Homework preparation with Google Docs and Drive."
+ },
+ "task.ogrenciler-icin.pick.github-copilot": {
+  "h": "de9ecd0e0c",
+  "en": "Offered free to students learning to code."
+ },
+ "task.ogrenciler-icin.pick.notebooklm": {
+  "h": "3329f9c6e3",
+  "en": "Summaries, Q&A and audio overviews from class notes and books; free."
+ },
+ "task.ogrenciler-icin.pick.perplexity": {
+  "h": "6861320d07",
+  "en": "Sourced research; open the sources and verify them."
+ },
+ "task.ogrenciler-icin.q": {
+  "h": "a33e3efd41",
+  "en": "ai for students"
+ },
+ "task.ogrenciler-icin.short": {
+  "h": "6cabc19e0f",
+  "en": "For students"
+ },
+ "task.ogrenciler-icin.title": {
+  "h": "6d4008dde9",
+  "en": "Best AI tools for students"
+ },
  "task.ozet-cikarma.intro": {
   "h": "91a6b364fe",
   "en": "Tools that summarize PDFs, articles, reports and videos."
@@ -20967,6 +21439,50 @@
   "h": "59f608c6a7",
   "en": "Best AI assistants for chat and everyday tasks"
  },
+ "task.sosyal-medya.intro": {
+  "h": "e107374dac",
+  "en": "Tools for drafting post copy, visuals, short videos, captions and voiceovers for Instagram, TikTok, YouTube and LinkedIn. For brand content, check the usage rights for images and music."
+ },
+ "task.sosyal-medya.pick.canva": {
+  "h": "4c1b39c82a",
+  "en": "Posts, stories and cover visuals with ready-made templates."
+ },
+ "task.sosyal-medya.pick.capcut": {
+  "h": "cf95c8d185",
+  "en": "Short video editing, automatic captions and effects."
+ },
+ "task.sosyal-medya.pick.chatgpt": {
+  "h": "2b72f10311",
+  "en": "Post copy, content calendars and idea generation."
+ },
+ "task.sosyal-medya.pick.elevenlabs": {
+  "h": "30a79dc7dd",
+  "en": "Natural-sounding Turkish voiceovers for videos."
+ },
+ "task.sosyal-medya.pick.heygen": {
+  "h": "48181eb03c",
+  "en": "Promo videos with talking avatars."
+ },
+ "task.sosyal-medya.pick.ideogram": {
+  "h": "8b0b2dbd94",
+  "en": "Images with clearly readable text."
+ },
+ "task.sosyal-medya.pick.pixverse": {
+  "h": "b273e755bd",
+  "en": "Turning a photo into a short video with effects."
+ },
+ "task.sosyal-medya.q": {
+  "h": "936891f76f",
+  "en": "AI for social media"
+ },
+ "task.sosyal-medya.short": {
+  "h": "384b2d6860",
+  "en": "Social media content"
+ },
+ "task.sosyal-medya.title": {
+  "h": "48f9094190",
+  "en": "Best AI tools for social media content"
+ },
  "task.sunum-hazirlama.intro": {
   "h": "dd514fd676",
   "en": "Tools that generate slides from a topic or text, or help structure the flow of a presentation."
@@ -21035,6 +21551,86 @@
   "h": "7a3eab636d",
   "en": "Best AI tools for meeting notes"
  },
+ "task.turkce-yapay-zeka.intro": {
+  "h": "6b467060c6",
+  "en": "Assistants that correctly understand Turkish questions, respond in fluent Turkish, and offer a Turkish interface. Major assistants all understand Turkish; the differences show in writing quality, Turkey-specific knowledge, and language nuances such as idioms and suffixes. For domestic models, see our page on Turkish AI models."
+ },
+ "task.turkce-yapay-zeka.pick.chatgpt": {
+  "h": "5d2cbb1518",
+  "en": "Turkish interface and voice chat; the broadest feature set."
+ },
+ "task.turkce-yapay-zeka.pick.claude": {
+  "h": "3612d95d6e",
+  "en": "Stands out for natural, careful Turkish text writing."
+ },
+ "task.turkce-yapay-zeka.pick.deepl": {
+  "h": "de93be4390",
+  "en": "Document translation between Turkish and other languages."
+ },
+ "task.turkce-yapay-zeka.pick.gemini": {
+  "h": "87855e10c6",
+  "en": "Strong with Turkish search and Google services."
+ },
+ "task.turkce-yapay-zeka.pick.microsoft-copilot": {
+  "h": "239972c738",
+  "en": "For working with Turkish Office documents."
+ },
+ "task.turkce-yapay-zeka.pick.perplexity": {
+  "h": "b2561983f5",
+  "en": "Sourced answers to Turkish questions."
+ },
+ "task.turkce-yapay-zeka.q": {
+  "h": "84a2ae3b98",
+  "en": "turkish ai"
+ },
+ "task.turkce-yapay-zeka.short": {
+  "h": "a9146d301f",
+  "en": "Turkish use"
+ },
+ "task.turkce-yapay-zeka.title": {
+  "h": "b9a15a0933",
+  "en": "Best AI assistants for Turkish"
+ },
+ "task.uygulama-yapma.intro": {
+  "h": "cfa61421ac",
+  "en": "Tools that create websites, landing pages or apps from a text description (\"vibe coding\"). They are very fast for prototypes and simple products; for growing projects, consult a developer on code quality, security and credit costs."
+ },
+ "task.uygulama-yapma.pick.bolt": {
+  "h": "5bbab42e65",
+  "en": "Apps that run instantly in the browser; you can view and edit the code."
+ },
+ "task.uygulama-yapma.pick.claude-code": {
+  "h": "7309c14448",
+  "en": "An agent for people with some coding skills, working on real projects."
+ },
+ "task.uygulama-yapma.pick.cursor": {
+  "h": "e6cac9c723",
+  "en": "For those who want developer control as the project grows."
+ },
+ "task.uygulama-yapma.pick.lovable": {
+  "h": "c8d0840008",
+  "en": "Full apps built through chat for non-coders, including database and publishing."
+ },
+ "task.uygulama-yapma.pick.replit": {
+  "h": "3eac46d200",
+  "en": "An agent that writes the app, sets up the database and publishes it."
+ },
+ "task.uygulama-yapma.pick.v0": {
+  "h": "6c34c6fefd",
+  "en": "Polished web interfaces and landing pages."
+ },
+ "task.uygulama-yapma.q": {
+  "h": "03624ff786",
+  "en": "building apps with AI"
+ },
+ "task.uygulama-yapma.short": {
+  "h": "480da04ebe",
+  "en": "Building sites and apps"
+ },
+ "task.uygulama-yapma.title": {
+  "h": "d42bc44a75",
+  "en": "Best AI tools for building websites and apps without coding"
+ },
  "task.video-olusturma.intro": {
   "h": "094b5176c8",
   "en": "Tools that generate video from text or images and produce presentation videos with avatars. Most run on a credit system; costs rise quickly as video length increases."
@@ -21071,6 +21667,46 @@
   "h": "c57daa80b2",
   "en": "Best AI tools for creating videos"
  },
+ "task.yapay-zeka-ajanlari.intro": {
+  "h": "1d83541f5e",
+  "en": "Tools that go beyond answering questions to carry out tasks themselves: researching on the web, preparing files and presentations, and navigating websites to take actions. Be mindful of what access you give agents; do not let them make payments or handle sensitive actions without your approval."
+ },
+ "task.yapay-zeka-ajanlari.pick.chatgpt": {
+  "h": "4f3e46d2e8",
+  "en": "Web actions and file preparation with agent mode."
+ },
+ "task.yapay-zeka-ajanlari.pick.claude": {
+  "h": "ad33c79a03",
+  "en": "Agent features that work with files and applications on your computer."
+ },
+ "task.yapay-zeka-ajanlari.pick.comet": {
+  "h": "a7455eec99",
+  "en": "An assistant that takes actions for you inside the browser."
+ },
+ "task.yapay-zeka-ajanlari.pick.genspark": {
+  "h": "2b84f20261",
+  "en": "An agent that produces research, presentations and tables in one place."
+ },
+ "task.yapay-zeka-ajanlari.pick.manus": {
+  "h": "2d091e944f",
+  "en": "A general-purpose agent that carries out a task from start to finish."
+ },
+ "task.yapay-zeka-ajanlari.pick.perplexity": {
+  "h": "990c39b036",
+  "en": "Sourced reports through deep research."
+ },
+ "task.yapay-zeka-ajanlari.q": {
+  "h": "c1103d0f98",
+  "en": "AI agent"
+ },
+ "task.yapay-zeka-ajanlari.short": {
+  "h": "693f175ef5",
+  "en": "AI agents"
+ },
+ "task.yapay-zeka-ajanlari.title": {
+  "h": "fd6181b9d5",
+  "en": "Best AI agents: tools that do the work for you"
+ },
  "task.yapay-zeka-dedektoru.intro": {
   "h": "474d6a73cc",
   "en": "Tools that try to estimate whether a text was written by AI. Important warning: No detection tool gives definitive results; they can be wrong, especially on Turkish and edited text."
@@ -21091,6 +21727,38 @@
   "h": "be0d4da4b4",
   "en": "AI detectors: text detection tools and their limits"
  },
+ "task.yapay-zeka-tarayicilari.intro": {
+  "h": "bc095f5e42",
+  "en": "Web browsers that summarize tabs, answer questions about pages and can handle some tasks for you. OpenAI's Atlas browser was shut down in August 2026; the leading options in this category are listed below."
+ },
+ "task.yapay-zeka-tarayicilari.pick.comet": {
+  "h": "6d45c71844",
+  "en": "Free; the most comprehensive AI browser in terms of agent features."
+ },
+ "task.yapay-zeka-tarayicilari.pick.dia": {
+  "h": "18c5b7e53e",
+  "en": "Chatting with and summarizing tabs; simple to use."
+ },
+ "task.yapay-zeka-tarayicilari.pick.gemini": {
+  "h": "816fd24ef9",
+  "en": "Asking questions about a page with Gemini in Chrome."
+ },
+ "task.yapay-zeka-tarayicilari.pick.microsoft-copilot": {
+  "h": "258950956c",
+  "en": "Page summaries with Copilot in the Edge browser."
+ },
+ "task.yapay-zeka-tarayicilari.q": {
+  "h": "17d954d2b9",
+  "en": "AI browser"
+ },
+ "task.yapay-zeka-tarayicilari.short": {
+  "h": "7ebf4ab584",
+  "en": "AI browsers"
+ },
+ "task.yapay-zeka-tarayicilari.title": {
+  "h": "5d0e93fb68",
+  "en": "Best AI browsers"
+ },
  "tool.adobe-firefly.desc": {
   "h": "ab2178fe5a",
   "en": "Adobe's AI tool that generates images, video and audio. It integrates with Photoshop and other Adobe apps; Adobe says it trains its own models on licensed content."
@@ -21106,6 +21774,46 @@
  "tool.adobe-firefly.notFor.0": {
   "h": "0fd5b2c047",
   "en": "The credit system may feel complicated for those who don't use the Adobe ecosystem"
+ },
+ "tool.bolt.desc": {
+  "h": "150b06be07",
+  "en": "An AI tool that builds websites and apps through conversation, running and publishing the result instantly in the browser. You can view and edit the code, or use it without touching any code."
+ },
+ "tool.bolt.good.0": {
+  "h": "3303066a82",
+  "en": "Quick prototypes and landing pages without coding"
+ },
+ "tool.bolt.good.1": {
+  "h": "848f876dcf",
+  "en": "Turning an idea into a working app within minutes"
+ },
+ "tool.bolt.good.2": {
+  "h": "38ad85b809",
+  "en": "People who want to see the code and fix it by hand if needed"
+ },
+ "tool.bolt.notFor.0": {
+  "h": "f0dcce5738",
+  "en": "Large, complex projects (token consumption rises quickly)"
+ },
+ "tool.bolt.notFor.1": {
+  "h": "45eb40f1f1",
+  "en": "Production-ready products on the free plan (Bolt branding appears on sites)"
+ },
+ "tool.bolt.plan.0.note": {
+  "h": "6d5b5be35c",
+  "en": "1 million tokens per month, 300,000 daily limit"
+ },
+ "tool.bolt.plan.1.note": {
+  "h": "aa1d6b1da5",
+  "en": "starts at 10 million tokens per month; unused tokens roll over"
+ },
+ "tool.bolt.plan.2.note": {
+  "h": "bc1c98f0e6",
+  "en": "per user"
+ },
+ "tool.bolt.plan.3.note": {
+  "h": "16fc6defca",
+  "en": "custom pricing"
  },
  "tool.canva.desc": {
   "h": "c614f208c9",
@@ -21175,6 +21883,38 @@
   "h": "bc1c98f0e6",
   "en": "per user"
  },
+ "tool.character-ai.desc": {
+  "h": "2f2ed0a3b2",
+  "en": "An entertainment-focused AI app where users chat with millions of user-created characters. It offers role-play, storytelling and voice chat."
+ },
+ "tool.character-ai.good.0": {
+  "h": "a7708e265b",
+  "en": "Entertainment chat and role-play"
+ },
+ "tool.character-ai.good.1": {
+  "h": "0447e7edac",
+  "en": "Generating ideas for stories and character writing"
+ },
+ "tool.character-ai.good.2": {
+  "h": "832dc04151",
+  "en": "Chat for language practice"
+ },
+ "tool.character-ai.notFor.0": {
+  "h": "09ff4ab84b",
+  "en": "Information and research (characters favor fiction over fact)"
+ },
+ "tool.character-ai.notFor.1": {
+  "h": "b7967ded2e",
+  "en": "Children: check the platform's age limits and parental controls"
+ },
+ "tool.character-ai.plan.0.note": {
+  "h": "b5b44f87e8",
+  "en": "Ad-supported; may have waits during peak hours"
+ },
+ "tool.character-ai.plan.1.note": {
+  "h": "c1cc850319",
+  "en": "$94.99 per year; ad-free"
+ },
  "tool.chatgpt.desc": {
   "h": "cfc595859a",
   "en": "OpenAI's general-purpose AI assistant. It offers writing, analysis, coding, image generation, file reading and web search in a single app, and is the most widely used chat assistant in the world."
@@ -21211,6 +21951,42 @@
   "h": "65869e45e2",
   "en": "per user, billed monthly"
  },
+ "tool.claude-code.desc": {
+  "h": "8d0cee25ff",
+  "en": "Anthropic's coding agent. It runs in the terminal, code editor, desktop app and on the web. It reads your codebase, edits multiple files, runs tests and fixes bugs."
+ },
+ "tool.claude-code.good.0": {
+  "h": "8f4ae230e7",
+  "en": "Multi-file changes, debugging and refactoring in real projects"
+ },
+ "tool.claude-code.good.1": {
+  "h": "a81d471079",
+  "en": "Developers who work in the terminal"
+ },
+ "tool.claude-code.good.2": {
+  "h": "5185d5c05a",
+  "en": "Writing tests and code review"
+ },
+ "tool.claude-code.notFor.0": {
+  "h": "bf90be441b",
+  "en": "People who want to build apps without knowing how to code (tools like Lovable and Bolt are a better fit)"
+ },
+ "tool.claude-code.notFor.1": {
+  "h": "6735468e19",
+  "en": "Pro plan limits may feel tight for heavy use"
+ },
+ "tool.claude-code.plan.0.note": {
+  "h": "cd808a6655",
+  "en": "$17/month, billed annually"
+ },
+ "tool.claude-code.plan.2.note": {
+  "h": "65869e45e2",
+  "en": "per user, billed monthly"
+ },
+ "tool.claude-code.priceNote": {
+  "h": "dc76864489",
+  "en": "Included with Claude subscriptions; with API key use, it is billed per token."
+ },
  "tool.claude.desc": {
   "h": "8ed7654376",
   "en": "Anthropic's AI assistant. It stands out for working with long documents, quality writing, analysis and coding; with Claude Code, it gives developers a coding agent that runs in the terminal and editor."
@@ -21242,6 +22018,78 @@
  "tool.claude.plan.3.note": {
   "h": "65869e45e2",
   "en": "per user, billed monthly"
+ },
+ "tool.codex.desc": {
+  "h": "791932b953",
+  "en": "OpenAI's coding agent. It works through a desktop app, terminal (CLI), code editor extension and the web. It runs tasks in parallel in the cloud and suggests ready-to-review changes."
+ },
+ "tool.codex.good.0": {
+  "h": "eea00d4de0",
+  "en": "Developers who already subscribe to ChatGPT"
+ },
+ "tool.codex.good.1": {
+  "h": "8e5a0a4b25",
+  "en": "Running multiple tasks at the same time in the cloud"
+ },
+ "tool.codex.good.2": {
+  "h": "d00e804ff3",
+  "en": "Code review and bug fixing"
+ },
+ "tool.codex.notFor.0": {
+  "h": "daa62745c1",
+  "en": "Expecting full features on the Free and Go plans (terminal and editor access starts at Plus)"
+ },
+ "tool.codex.notFor.1": {
+  "h": "3699dcbcd6",
+  "en": "People who want to build apps without knowing how to code"
+ },
+ "tool.codex.plan.0.note": {
+  "h": "0d2b53b4d8",
+  "en": "desktop app only, limited"
+ },
+ "tool.codex.plan.1.note": {
+  "h": "30c62d4224",
+  "en": "desktop app only"
+ },
+ "tool.codex.plan.2.note": {
+  "h": "dc8b01be80",
+  "en": "includes web, terminal and editor extension"
+ },
+ "tool.codex.plan.3.note": {
+  "h": "e33392989f",
+  "en": "$200 and $500 tiers are also available"
+ },
+ "tool.codex.plan.4.note": {
+  "h": "65869e45e2",
+  "en": "per user, billed monthly"
+ },
+ "tool.comet.desc": {
+  "h": "3faeb046d7",
+  "en": "Perplexity's AI-powered web browser. It summarizes open tabs, answers questions about pages, and offers an assistant that can fill in forms, compare options and perform similar tasks on your behalf."
+ },
+ "tool.comet.good.0": {
+  "h": "35b2d2704e",
+  "en": "Researchers working across many tabs"
+ },
+ "tool.comet.good.1": {
+  "h": "777fc59552",
+  "en": "Handing repetitive web tasks (comparisons, form filling) to the assistant"
+ },
+ "tool.comet.good.2": {
+  "h": "12f3dec470",
+  "en": "Perplexity users"
+ },
+ "tool.comet.notFor.0": {
+  "h": "7cdd9627a6",
+  "en": "Running the agent unsupervised on sensitive pages such as banking and payments"
+ },
+ "tool.comet.notFor.1": {
+  "h": "a8908dbd26",
+  "en": "Those who don't want browser data processed by AI"
+ },
+ "tool.comet.priceNote": {
+  "h": "efd3caaea5",
+  "en": "The browser has been free since October 2025; some features, such as the background assistant, are part of Perplexity's paid plans."
  },
  "tool.cursor.desc": {
   "h": "e3c4940cf9",
@@ -21307,6 +22155,34 @@
   "h": "76099b3785",
   "en": "The chat app is free; see our model comparison table for API prices."
  },
+ "tool.dia.desc": {
+  "h": "6fd6682de3",
+  "en": "The AI browser from The Browser Company, maker of Arc; the company was acquired by Atlassian in 2025. It lets you chat with your open tabs, summarize pages and draft text."
+ },
+ "tool.dia.good.0": {
+  "h": "ed7e289531",
+  "en": "Chatting with tab content and getting summaries"
+ },
+ "tool.dia.good.1": {
+  "h": "b1f6370ab9",
+  "en": "Arc users (a browser that replaces Arc)"
+ },
+ "tool.dia.good.2": {
+  "h": "14381e4ef3",
+  "en": "People who want a simple, fast AI browser"
+ },
+ "tool.dia.notFor.0": {
+  "h": "31657dca8d",
+  "en": "Daily use on Windows (the version is still in early stages)"
+ },
+ "tool.dia.notFor.1": {
+  "h": "9d76733f5d",
+  "en": "Those who want the agent to act on their behalf (Comet is more comprehensive in this respect)"
+ },
+ "tool.dia.priceNote": {
+  "h": "fdce504e56",
+  "en": "The free version has limited usage. The paid plan structure has changed several times in 2026, so check the official site for current details. The Windows version launched as an early release in October 2026."
+ },
  "tool.elevenlabs.desc": {
   "h": "78023ab434",
   "en": "An AI platform that turns text into natural-sounding human speech, with voice cloning and voiceover. Offers multilingual voiceover, dubbing and voice assistant infrastructure."
@@ -21334,6 +22210,46 @@
  "tool.elevenlabs.plan.2.note": {
   "h": "d707434286",
   "en": "$11 for the first month"
+ },
+ "tool.fathom.desc": {
+  "h": "0b9504b11b",
+  "en": "An AI note-taker that records Zoom, Google Meet and Microsoft Teams meetings, transcribes them, and produces summaries and action item lists. Known for its generous free plan."
+ },
+ "tool.fathom.good.0": {
+  "h": "f9cacc596d",
+  "en": "Free meeting recording and transcripts"
+ },
+ "tool.fathom.good.1": {
+  "h": "256fd30545",
+  "en": "Syncing sales calls to a CRM"
+ },
+ "tool.fathom.good.2": {
+  "h": "f3061f73cc",
+  "en": "Users of Zoom, Meet and Teams"
+ },
+ "tool.fathom.notFor.0": {
+  "h": "85473f4f86",
+  "en": "Deciding without testing language support for Turkish meetings"
+ },
+ "tool.fathom.notFor.1": {
+  "h": "c975affdce",
+  "en": "Using it without informing participants before recording"
+ },
+ "tool.fathom.plan.0.note": {
+  "h": "17258261f0",
+  "en": "Unlimited recordings and transcripts"
+ },
+ "tool.fathom.plan.1.note": {
+  "h": "a6d96422ab",
+  "en": "$16 per month when paid annually"
+ },
+ "tool.fathom.plan.2.note": {
+  "h": "c74e8cade9",
+  "en": "Per user, minimum of 2 people"
+ },
+ "tool.fathom.plan.3.note": {
+  "h": "dcdbb86f01",
+  "en": "Per user; CRM integration"
  },
  "tool.fireflies.desc": {
   "h": "253dcef8d6",
@@ -21395,6 +22311,42 @@
   "h": "afbc4f962c",
   "en": "a $200 tier is also available"
  },
+ "tool.genspark.desc": {
+  "h": "bde589c7c6",
+  "en": "An 'all-in-one' AI agent that handles research, presentations, tables, images and video from a single screen. It uses multiple AI models together."
+ },
+ "tool.genspark.good.0": {
+  "h": "34acacf74c",
+  "en": "Quickly drafting documents such as presentations and reports"
+ },
+ "tool.genspark.good.1": {
+  "h": "cf65f11683",
+  "en": "Trying different models with a single subscription"
+ },
+ "tool.genspark.good.2": {
+  "h": "68f88afb52",
+  "en": "Doing research and content creation in one place"
+ },
+ "tool.genspark.notFor.0": {
+  "h": "bbcf5c96f5",
+  "en": "Regular use on the free plan (usage stops once the total limit is reached)"
+ },
+ "tool.genspark.notFor.1": {
+  "h": "39e2ff724e",
+  "en": "Publishing results directly without checking sources"
+ },
+ "tool.genspark.plan.0.note": {
+  "h": "36214dd614",
+  "en": "100 credits per day, up to an overall cap"
+ },
+ "tool.genspark.plan.1.note": {
+  "h": "b8a8525e94",
+  "en": "$19.99 per month billed annually; 10,000 credits per month"
+ },
+ "tool.genspark.plan.2.note": {
+  "h": "3a0e8bf0d3",
+  "en": "$199.99 per month billed annually"
+ },
  "tool.github-copilot.desc": {
   "h": "03c4ebd8ce",
   "en": "GitHub's AI coding assistant. It offers code completion, chat and coding agent features in VS Code, JetBrains and other editors."
@@ -21418,6 +22370,50 @@
  "tool.github-copilot.plan.0.note": {
   "h": "0dcbf38116",
   "en": "2,000 code completions per month"
+ },
+ "tool.google-flow.desc": {
+  "h": "ddcde93327",
+  "en": "A filmmaking tool powered by Google's Veo video models and the Nano Banana image model. It generates scenes from text and images, and you can join and extend scenes."
+ },
+ "tool.google-flow.good.0": {
+  "h": "550f769e76",
+  "en": "Short films, ads and social media video scenes"
+ },
+ "tool.google-flow.good.1": {
+  "h": "4e8ace3b29",
+  "en": "People who already have a Google AI subscription"
+ },
+ "tool.google-flow.good.2": {
+  "h": "ee4155b803",
+  "en": "Combining scenes with consistent characters"
+ },
+ "tool.google-flow.notFor.0": {
+  "h": "73504877c8",
+  "en": "Long videos (credits run out quickly)"
+ },
+ "tool.google-flow.notFor.1": {
+  "h": "4b8b917082",
+  "en": "Free use during peak hours (video generation may be restricted)"
+ },
+ "tool.google-flow.plan.0.note": {
+  "h": "283f07a5ce",
+  "en": "50 credits per day"
+ },
+ "tool.google-flow.plan.1.note": {
+  "h": "85b04f8744",
+  "en": "200 extra credits per month"
+ },
+ "tool.google-flow.plan.2.note": {
+  "h": "a04a0083f6",
+  "en": "1,000 extra credits per month"
+ },
+ "tool.google-flow.plan.3.note": {
+  "h": "6b861bf0e5",
+  "en": "10,000 extra credits; a $199.99 tier is also available"
+ },
+ "tool.google-flow.priceNote": {
+  "h": "ef3acb3d42",
+  "en": "Prices are US list prices; prices in Turkey may differ. Paid plans cover the entire Google AI subscription, including Gemini."
  },
  "tool.google-translate.desc": {
   "h": "c29d9a0a19",
@@ -21487,6 +22483,42 @@
   "h": "a24b0d16a7",
   "en": "price on request"
  },
+ "tool.granola.desc": {
+  "h": "ac6901fbd7",
+  "en": "An AI notepad that takes notes by listening to your computer's audio, without sending a bot into the meeting. Combines your own notes with AI-generated summaries."
+ },
+ "tool.granola.good.0": {
+  "h": "d5d1f9d53c",
+  "en": "Those who don't want a bot joining their meetings"
+ },
+ "tool.granola.good.1": {
+  "h": "e722f4686d",
+  "en": "Those who want to enrich their own notes with AI"
+ },
+ "tool.granola.good.2": {
+  "h": "8d9f0b5011",
+  "en": "In-person meetings and phone calls"
+ },
+ "tool.granola.notFor.0": {
+  "h": "c975affdce",
+  "en": "Using it without informing participants before recording"
+ },
+ "tool.granola.notFor.1": {
+  "h": "6e885effab",
+  "en": "Long-term archiving with the free plan (only 30 days)"
+ },
+ "tool.granola.plan.0.note": {
+  "h": "44f7a5c3d2",
+  "en": "Meeting history for the last 30 days"
+ },
+ "tool.granola.plan.1.note": {
+  "h": "6b9bd34259",
+  "en": "Per user; unlimited history and integrations"
+ },
+ "tool.granola.plan.2.note": {
+  "h": "bc1c98f0e6",
+  "en": "Per user"
+ },
  "tool.grok.desc": {
   "h": "b9358d49eb",
   "en": "The assistant from xAI, the AI company founded by Elon Musk. It is integrated with X (Twitter) and stands out for its access to current posts on X."
@@ -21502,6 +22534,46 @@
  "tool.grok.notFor.0": {
   "h": "1d390b36cb",
   "en": "Work that requires verification, since posts on X are not always accurate"
+ },
+ "tool.hailuo.desc": {
+  "h": "2231b86bb7",
+  "en": "China's MiniMax tool that generates video from text and images. It stands out for realistic motion and physics, character consistency and affordable pricing."
+ },
+ "tool.hailuo.good.0": {
+  "h": "fe4b46e18e",
+  "en": "Short scenes with realistic motion"
+ },
+ "tool.hailuo.good.1": {
+  "h": "cf0b721aeb",
+  "en": "Video creators on a limited budget"
+ },
+ "tool.hailuo.good.2": {
+  "h": "1eff001827",
+  "en": "Turning images into video"
+ },
+ "tool.hailuo.notFor.0": {
+  "h": "5c6fa2bb9f",
+  "en": "Commercial work on the free version (outputs are watermarked)"
+ },
+ "tool.hailuo.notFor.1": {
+  "h": "74453b3230",
+  "en": "Working with personal data: review the company's data policy"
+ },
+ "tool.hailuo.plan.0.note": {
+  "h": "b0cf5cdb54",
+  "en": "one-time credits on sign-up; watermarked"
+ },
+ "tool.hailuo.plan.1.note": {
+  "h": "ed03ab3c1c",
+  "en": "1,000 credits per month"
+ },
+ "tool.hailuo.plan.2.note": {
+  "h": "50ff50f048",
+  "en": "4,500 credits per month"
+ },
+ "tool.hailuo.plan.3.note": {
+  "h": "15bfb80976",
+  "en": "10,500 credits per month"
  },
  "tool.heygen.desc": {
   "h": "2713f1c7af",
@@ -21562,6 +22634,34 @@
  "tool.kickresume.notFor.0": {
   "h": "0eec168861",
   "en": "Turkish résumés: you may need to use the template and write the text yourself"
+ },
+ "tool.kimi.desc": {
+  "h": "d7a27af7e4",
+  "en": "The chat assistant and open-weight Kimi models from China's Moonshot AI. Stands out for long document reading, deep research, presentation creation and agent features."
+ },
+ "tool.kimi.good.0": {
+  "h": "3ce27b33d0",
+  "en": "Working with long documents and reports"
+ },
+ "tool.kimi.good.1": {
+  "h": "1f9da62011",
+  "en": "Those seeking a strong free or low-cost alternative"
+ },
+ "tool.kimi.good.2": {
+  "h": "1766ab6b9d",
+  "en": "Developers who want to try open-weight models"
+ },
+ "tool.kimi.notFor.0": {
+  "h": "3f4e7f00fd",
+  "en": "Work involving personal or company data: check where the data is processed"
+ },
+ "tool.kimi.notFor.1": {
+  "h": "70391c3cdc",
+  "en": "Expecting a Turkish interface (priority is Chinese and English)"
+ },
+ "tool.kimi.priceNote": {
+  "h": "f9817a536e",
+  "en": "Paid membership tiers are available; dollar prices are on the official page. API pricing is listed separately."
  },
  "tool.kling.desc": {
   "h": "49a0ed253b",
@@ -21642,6 +22742,46 @@
  "tool.lovable.plan.3.note": {
   "h": "9338242467",
   "en": "pricing based on usage"
+ },
+ "tool.manus.desc": {
+  "h": "eea1131513",
+  "en": "A general-purpose AI agent that carries out a task you give it from start to finish. It researches on the web and produces reports, presentations, tables and websites, and it can run multiple tasks in the background at the same time."
+ },
+ "tool.manus.good.0": {
+  "h": "07e7f0c060",
+  "en": "Handing off multi-step research and report writing"
+ },
+ "tool.manus.good.1": {
+  "h": "003edaf340",
+  "en": "Turning a topic into a presentation, table or simple website"
+ },
+ "tool.manus.good.2": {
+  "h": "6e4f76987e",
+  "en": "Running several jobs in the background at once"
+ },
+ "tool.manus.notFor.0": {
+  "h": "4837122651",
+  "en": "Heavy use without tracking credit consumption (complex tasks use a lot of credits)"
+ },
+ "tool.manus.notFor.1": {
+  "h": "e7ba4f9841",
+  "en": "Working with personal or confidential documents (the agent acts on the web, so be careful about what access you grant)"
+ },
+ "tool.manus.plan.0.note": {
+  "h": "6d1dd3d747",
+  "en": "300 credits per day, lightweight model only"
+ },
+ "tool.manus.plan.1.note": {
+  "h": "e4144e5a5a",
+  "en": "$17 per month billed annually; 4,000 credits per month"
+ },
+ "tool.manus.plan.2.note": {
+  "h": "df6cebe4af",
+  "en": "up to $140, depending on credit amount"
+ },
+ "tool.manus.plan.3.note": {
+  "h": "17e53a5f8f",
+  "en": "40,000 credits per month"
  },
  "tool.meta-ai.desc": {
   "h": "367cea8abe",
@@ -21823,6 +22963,106 @@
   "h": "bc1c98f0e6",
   "en": "per user"
  },
+ "tool.pixverse.desc": {
+  "h": "51dd52cfcc",
+  "en": "An AI tool that creates short, effects-driven videos for social media. Using ready-made templates and effects, it turns a photo into a moving video within seconds."
+ },
+ "tool.pixverse.good.0": {
+  "h": "9987a34873",
+  "en": "Short videos with effects for Instagram, TikTok and Reels"
+ },
+ "tool.pixverse.good.1": {
+  "h": "21575a9777",
+  "en": "Bringing photos to life"
+ },
+ "tool.pixverse.good.2": {
+  "h": "9fd846db26",
+  "en": "Fast production with templates"
+ },
+ "tool.pixverse.notFor.0": {
+  "h": "9654ce53b0",
+  "en": "Long, story-driven videos"
+ },
+ "tool.pixverse.notFor.1": {
+  "h": "e137c47f6a",
+  "en": "Irregular use, since credits expire after 30 days"
+ },
+ "tool.pixverse.plan.0.note": {
+  "h": "8215fc1b6b",
+  "en": "30 credits per day"
+ },
+ "tool.pixverse.plan.1.note": {
+  "h": "cb4182d28d",
+  "en": "$8/month, billed annually"
+ },
+ "tool.pixverse.plan.2.note": {
+  "h": "809debdbd5",
+  "en": "$24/month, billed annually"
+ },
+ "tool.pixverse.plan.3.note": {
+  "h": "a0d494be3a",
+  "en": "$48/month, billed annually"
+ },
+ "tool.qwen.desc": {
+  "h": "d68a1bdad0",
+  "en": "Alibaba's chat assistant and the open-weight Qwen model family. Offers chat, coding, image generation and deep research features for free."
+ },
+ "tool.qwen.good.0": {
+  "h": "0989c715af",
+  "en": "Those looking for a free, versatile assistant"
+ },
+ "tool.qwen.good.1": {
+  "h": "4d124eeb93",
+  "en": "Developers who want to run open-weight models on their own servers"
+ },
+ "tool.qwen.good.2": {
+  "h": "bc90d476b1",
+  "en": "Coding questions"
+ },
+ "tool.qwen.notFor.0": {
+  "h": "3f4e7f00fd",
+  "en": "Work involving personal or company data: check where the data is processed"
+ },
+ "tool.qwen.priceNote": {
+  "h": "867bd9357f",
+  "en": "The chat app is offered free of charge; API pricing is on Alibaba Cloud."
+ },
+ "tool.replit.desc": {
+  "h": "a04c6e8b6d",
+  "en": "A browser-based software development environment and AI agent that builds apps (Replit Agent). You describe what you want; it writes the app, sets up the database and publishes it."
+ },
+ "tool.replit.good.0": {
+  "h": "c557d68366",
+  "en": "Building and publishing apps in the browser with no installation"
+ },
+ "tool.replit.good.1": {
+  "h": "36ddbe7614",
+  "en": "Setting up apps that need a database and server with the agent"
+ },
+ "tool.replit.good.2": {
+  "h": "63252ecdb4",
+  "en": "People learning to code"
+ },
+ "tool.replit.notFor.0": {
+  "h": "9e7e0399b6",
+  "en": "Working with the agent for long periods without tracking usage credits"
+ },
+ "tool.replit.notFor.1": {
+  "h": "dcc5b4c160",
+  "en": "Work where the code must stay entirely on your own computer"
+ },
+ "tool.replit.plan.0.note": {
+  "h": "51d10054fb",
+  "en": "limited daily AI usage"
+ },
+ "tool.replit.plan.1.note": {
+  "h": "1dad051ba1",
+  "en": "$20 monthly usage credit included"
+ },
+ "tool.replit.plan.2.note": {
+  "h": "a3b21573f8",
+  "en": "tiered credits for teams"
+ },
  "tool.runway.desc": {
   "h": "0c03098635",
   "en": "A platform that generates video from text and images and offers AI tools for video editing. Widely used in advertising, film and content production."
@@ -21895,6 +23135,46 @@
   "h": "63fcd38165",
   "en": "Cinematic and creative video production"
  },
+ "tool.v0.desc": {
+  "h": "bb055ddc1b",
+  "en": "Vercel's AI tool that generates interfaces, websites and apps from text. It is especially strong at designing modern web interfaces, and results can be published on Vercel with one click."
+ },
+ "tool.v0.good.0": {
+  "h": "142752c744",
+  "en": "Designing polished web interfaces and landing pages"
+ },
+ "tool.v0.good.1": {
+  "h": "8be0d8817e",
+  "en": "Developers using Vercel and Next.js"
+ },
+ "tool.v0.good.2": {
+  "h": "a373b9be2c",
+  "en": "Quickly turning design ideas into code"
+ },
+ "tool.v0.notFor.0": {
+  "h": "0e2c98c4d2",
+  "en": "Apps that are heavy on backend and databases"
+ },
+ "tool.v0.notFor.1": {
+  "h": "66aa5d9eca",
+  "en": "Heavy use without tracking the credit system"
+ },
+ "tool.v0.plan.0.note": {
+  "h": "1991ade678",
+  "en": "limited credits"
+ },
+ "tool.v0.plan.1.note": {
+  "h": "dca9ade48c",
+  "en": "per user; new name of the Team plan as of July 2026"
+ },
+ "tool.v0.plan.2.note": {
+  "h": "16fc6defca",
+  "en": "custom pricing"
+ },
+ "toolcat.ajan": {
+  "h": "ae2cc4ec68",
+  "en": "Agents and AI browsers"
+ },
  "toolcat.arastirma": {
   "h": "5dcab81964",
   "en": "Research and analysis"
@@ -21914,6 +23194,10 @@
  "toolcat.ses": {
   "h": "8801b42fd1",
   "en": "Audio and music"
+ },
+ "toolcat.uygulama": {
+  "h": "3251928272",
+  "en": "Building apps without coding"
  },
  "toolcat.verimlilik": {
   "h": "2988fe36d8",
