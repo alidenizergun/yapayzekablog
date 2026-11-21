@@ -9,13 +9,6 @@ featured: true
 popularity: 82
 brand: nvidia
 imageQuery: "government building washington columns"
-photo:
-  id: "pgwyDpaSp3I"
-  url: "https://images.unsplash.com/photo-1625486375096-73d6f9037605?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8M3x8Z292ZXJubWVudCUyMGJ1aWxkaW5nJTIwd2FzaGluZ3RvbiUyMGNvbHVtbnN8ZW58MXwwfHx8MTc5NDgwODE0Mnww&ixlib=rb-4.1.0"
-  alt: "us a flag on top of building"
-  author: "Andy Feliciotti"
-  authorUrl: "https://unsplash.com/@someguy"
-  link: "https://unsplash.com/photos/us-a-flag-on-top-of-building-pgwyDpaSp3I"
 whyItMatters: "Bir ABD kabine üyesi, dünyanın en büyük yapay zeka çip üreticisinin yönetim kurulundan alenen yanıt ve CEO tercihi talep etti. Bu da ihracat kontrolü tartışmasını şirketin yönetişimine taşıyor."
 story: nvidia-jensen-huang-krizi
 keyPoints:

@@ -8,13 +8,6 @@ image: modeller
 popularity: 68
 brand: nvidia
 imageQuery: "software developers working laptops"
-photo:
-  id: "QckxruozjRg"
-  url: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8MXx8c29mdHdhcmUlMjBkZXZlbG9wZXJzJTIwd29ya2luZyUyMGxhcHRvcHN8ZW58MXwwfHx8MTc5NDk2NTYyM3ww&ixlib=rb-4.1.0"
-  alt: "group of people using laptop computer"
-  author: "Annie Spratt"
-  authorUrl: "https://unsplash.com/@anniespratt"
-  link: "https://unsplash.com/photos/group-of-people-using-laptop-computer-QckxruozjRg"
 whyItMatters: "Huang'ın ayrılmasının ardından Nvidia'nın açık model ve Hugging Face stratejisinin sürüp sürmeyeceği sorusuna şirketten gelen ilk yanıt bu oldu."
 story: nvidia-jensen-huang-krizi
 keyPoints:

@@ -10,13 +10,6 @@ brand: meta
 imageQuery: "phone call small business"
 whyItMatters: "Tüketici ajanları metin üretmenin ötesinde, kullanıcı adına gerçek dünyada işlem yapmaya geçiyor. Ücretli abonelik modeli de özelliğin bir gelir kalemi olarak konumlandığını gösteriyor."
 turkeyAngle: "Muse'un telefonla arama özelliği şimdilik yalnızca ABD'deki işletmeler için çalışıyor; Türkiye'deki işletmeleri kapsamıyor."
-photo:
-  id: "kk4J92iaSBk"
-  url: "https://images.unsplash.com/photo-1753164597612-5e71b83fda91?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8MXx8cGhvbmUlMjBjYWxsJTIwc21hbGwlMjBidXNpbmVzc3xlbnwxfDB8fHwxNzk0NzYxODM4fDA&ixlib=rb-4.1.0"
-  alt: "Fashion designer on the phone, working on a laptop"
-  author: "Vitaly Gariev"
-  authorUrl: "https://unsplash.com/@silverkblack"
-  link: "https://unsplash.com/photos/fashion-designer-on-the-phone-working-on-a-laptop-kk4J92iaSBk"
 sources:
   - title: "Muse can now place calls to US businesses — if you pay"
     url: "https://techcrunch.com/2026/11/12/muse-can-now-place-calls-to-u-s-businesses-if-you-pay/"

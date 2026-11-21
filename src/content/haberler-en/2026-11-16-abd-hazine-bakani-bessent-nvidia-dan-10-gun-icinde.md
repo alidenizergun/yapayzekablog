@@ -9,7 +9,6 @@ keyPoints:
   - "The secretary said the next CEO should be chosen from outside the company."
   - "Nvidia will make its first major public statement with its earnings report on Tuesday."
 whatsNext: "Bessent expects a response from Nvidia's board within 10 days; Nvidia will make its first major public statement with its earnings report on Tuesday."
-photoAlt: "us a flag on top of building"
 ---
 
 U.S. Treasury Secretary Scott Bessent said in a Fox News appearance on Sunday, November 15, that Nvidia should choose its next CEO from outside the company. Bessent said he expects a response within 10 days from Nvidia's board and its outside legal counsel.

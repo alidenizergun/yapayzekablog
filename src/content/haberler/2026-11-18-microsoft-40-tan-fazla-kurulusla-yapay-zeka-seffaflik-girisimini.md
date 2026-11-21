@@ -8,13 +8,6 @@ image: guvenlik
 popularity: 42
 brand: microsoft
 imageQuery: "corporate meeting boardroom"
-photo:
-  id: "GWe0dlVD9e0"
-  url: "https://images.unsplash.com/photo-1431540015161-0bf868a2d407?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8MXx8Y29ycG9yYXRlJTIwbWVldGluZyUyMGJvYXJkcm9vbXxlbnwxfDB8fHwxNzk0OTUxMDQ5fDA&ixlib=rb-4.1.0"
-  alt: "oval brown wooden conference table and chairs inside conference room"
-  author: "Benjamin Child"
-  authorUrl: "https://unsplash.com/@bchild311"
-  link: "https://unsplash.com/photos/oval-brown-wooden-conference-table-and-chairs-inside-conference-room-GWe0dlVD9e0"
 whyItMatters: "Kurumsal yapay zeka kullanımında hesap verebilirlik ve güvenlik risklerine yönelik ortak bir standart çabası, şirketlerin ajan tabanlı sistemleri nasıl denetleyeceğini etkileyebilir."
 keyPoints:
   - "Microsoft, Ignite'ta yapay zeka şeffaflık girişimini duyurdu."

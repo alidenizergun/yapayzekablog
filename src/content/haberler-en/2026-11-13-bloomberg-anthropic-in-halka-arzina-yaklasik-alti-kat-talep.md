@@ -4,7 +4,6 @@ slug: "bloomberg-anthropic-s-ipo-draws-roughly-six-times-demand"
 title: "Bloomberg: Anthropic's IPO draws roughly six times demand"
 spot: "Anthropic's IPO has drawn orders for roughly six times the shares on offer, according to a Bloomberg report citing people familiar with the matter. Bloomberg had reported a day earlier that demand was several times oversubscribed."
 whyItMatters: "The demand figure points to investor appetite for AI companies and to the possibility that the IPO sets a record."
-photoAlt: "graphical user interface, application"
 ---
 
 Bloomberg, citing sources familiar with the matter, reported that Anthropic's IPO has drawn orders for roughly six times the shares on offer. The company did not confirm the figure. Bloomberg had reported a day earlier that demand had reached several times the size of the offering.

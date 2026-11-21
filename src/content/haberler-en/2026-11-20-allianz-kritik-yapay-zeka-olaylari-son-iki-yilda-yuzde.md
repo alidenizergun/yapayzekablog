@@ -13,7 +13,6 @@ byNumbers:
     label: "Increase in critical AI incidents (past two years)"
   - value: "$100 million"
     label: "Possible insurance sector losses in some cases"
-photoAlt: "people working at desks in open office"
 ---
 
 Allianz Commercial has published a report showing that AI is creating new risks for businesses. According to the report, critical AI incidents have risen by more than 150% over the past two years.

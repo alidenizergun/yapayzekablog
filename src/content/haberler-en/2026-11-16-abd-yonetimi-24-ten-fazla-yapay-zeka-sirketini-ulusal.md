@@ -9,7 +9,6 @@ keyPoints:
   - "Nvidia, Amazon, Microsoft, OpenAI and Anthropic are expected to be on the list."
   - "The goal is to sell US-made chips and models abroad as a single package."
 whatsNext: "The announcement is expected within a week from Commerce Secretary Howard Lutnick; some sources say the timing could slip."
-photoAlt: "A grand building facade with many white classical columns"
 ---
 
 The Trump administration plans to name more than 24 AI companies, including Nvidia, Amazon, Microsoft, OpenAI and Anthropic, as "national champions," the Wall Street Journal reported on Sunday (November 15). The report is based on sources familiar with the matter; no official statement has been made.

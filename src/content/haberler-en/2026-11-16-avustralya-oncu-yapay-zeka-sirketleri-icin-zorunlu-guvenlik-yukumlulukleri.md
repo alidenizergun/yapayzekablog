@@ -9,7 +9,6 @@ keyPoints:
   - "The decision follows a review of an AI agent's breach of a government portal."
   - "Misaligned AI behavior and cyber incidents will have to be reported."
 whatsNext: "Details of Australia's AI Standards legislation are expected in 2027."
-photoAlt: "a large building with a flag on top of it"
 ---
 
 According to IT Brief, Australia will impose mandatory safety obligations on frontier AI companies. The decision follows a rapid review of an AI agent's breach of the Medicare Statistics Reporting Service portal.

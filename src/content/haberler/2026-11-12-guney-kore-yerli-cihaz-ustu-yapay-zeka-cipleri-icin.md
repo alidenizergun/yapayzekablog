@@ -8,13 +8,6 @@ date: 2026-11-12T16:41:41+03:00
 image: altyapi
 imageQuery: "seoul skyline night"
 whyItMatters: "Ülkelerin yerli yapay zeka çipi üretme çabaları, Nvidia'ya bağımlılığı azaltma yarışının bir parçası. Güney Kore'nin hedefi bu yarışta cihaz üstü çiplere odaklanıyor."
-photo:
-  id: "W1MBirxedyU"
-  url: "https://images.unsplash.com/photo-1786801525468-1ed3592262d8?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8NHx8c2VvdWwlMjBza3lsaW5lJTIwbmlnaHR8ZW58MXwwfHx8MTc5NDc2MTk1NHww&ixlib=rb-4.1.0"
-  alt: "A sprawling city skyline at dusk with distant mountains under a cloudy sky"
-  author: "Emma Gasseau-Dryer"
-  authorUrl: "https://unsplash.com/@emm2022"
-  link: "https://unsplash.com/photos/city-skyline-with-distant-mountains-W1MBirxedyU"
 sources:
   - title: "South Korea unveils roadmap to develop homegrown on-device AI chips"
     url: "https://www.mlex.com/mlex/artificial-intelligence/articles/2549103"

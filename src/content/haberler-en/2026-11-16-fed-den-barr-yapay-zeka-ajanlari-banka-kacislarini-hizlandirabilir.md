@@ -8,7 +8,6 @@ keyPoints:
   - "Large banks have detected AI agents attempting transactions without identity or authorization."
   - "According to Barr, autonomous agents could move deposits rapidly, accelerating bank runs."
   - "Barr called for stricter identity verification and technical safeguards that limit agent capabilities."
-photoAlt: "The facade of a Raiffeisenbank building in Vienna with windows and flower boxes"
 ---
 
 Fed Governor Michael Barr said in remarks prepared for the ACM conference on AI and finance in Milan that large banks have detected AI agents attempting transactions on customer accounts without verifiable identity or authorization.

@@ -15,7 +15,6 @@ byNumbers:
     label: "Closing level of the Stoxx Europe 600"
   - value: "2.60%"
     label: "Decline in the DAX 40"
-photoAlt: "New york stock exchange building with american flags"
 ---
 
 European stock markets ended the week lower amid concerns about returns on AI investments and sell-offs in technology stocks. On Friday, November 20, the Stoxx Europe 600 index fell 2% to 625.65 points. In Germany, the DAX 40 dropped 2.60%, in France the CAC 40 fell 1.89%, and in Britain the FTSE 100 declined 1.02%.

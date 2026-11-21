@@ -4,7 +4,6 @@ slug: "samsung-breaks-ground-on-34-billion-hbm-packaging"
 title: "Samsung breaks ground on $34 billion HBM packaging hub for AI memory in South Korea"
 spot: "Samsung has broken ground on an advanced HBM packaging hub at its Onyang site in South Korea. Total investment is 46 trillion won ($34 billion), and the facility's start of operations has been moved up to June 2028."
 whyItMatters: "Demand for HBM in AI servers is making advanced packaging capacity a major bottleneck. Samsung's investment shows the scale of the capacity race in this area."
-photoAlt: "a large circular object in a large building"
 dealCounterparty: "Onyang HBM packaging center"
 dealAmount: "46 trillion won (about $34 billion)"
 ---

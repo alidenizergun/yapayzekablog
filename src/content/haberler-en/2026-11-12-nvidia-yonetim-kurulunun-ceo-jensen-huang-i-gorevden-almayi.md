@@ -4,7 +4,6 @@ slug: "nvidia-board-reportedly-discussed-removing-ceo-jensen-huang"
 title: "Nvidia board reportedly discussed removing CEO Jensen Huang"
 spot: "According to reports citing the Wall Street Journal and Reuters, Nvidia's board discussed removing Jensen Huang. Shares fell more than 8%; as of Thursday morning, no decision had been announced."
 whyItMatters: "Leadership uncertainty at the largest supplier of AI chips could directly affect the industry's infrastructure chain and market valuations."
-photoAlt: "long table with Eiffel chair inside room"
 ---
 
 Nvidia shares lost more than 8% after the market close on Wednesday following reports that the board was considering removing CEO Jensen Huang. The drop is based on a Wall Street Journal report. Reuters, citing a source, reported that the board met Wednesday evening to discuss whether to remove Huang. As of Thursday morning, no decision had been announced.

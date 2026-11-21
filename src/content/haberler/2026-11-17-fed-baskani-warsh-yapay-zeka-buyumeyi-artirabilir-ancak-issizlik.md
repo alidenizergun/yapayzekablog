@@ -7,13 +7,6 @@ date: 2026-11-17T02:51:11+03:00
 image: benchmark
 popularity: 55
 imageQuery: "central bank building columns"
-photo:
-  id: "lZluagF71lc"
-  url: "https://images.unsplash.com/photo-1792680016699-e441a5408c9d?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8M3x8Y2VudHJhbCUyMGJhbmslMjBidWlsZGluZyUyMGNvbHVtbnN8ZW58MXwwfHx8MTc5NDg3MzA3MXww&ixlib=rb-4.1.0"
-  alt: "The Banca Națională a României sign on a stone pillar at the entrance of the bank building"
-  author: "Stefan Vibes"
-  authorUrl: "https://unsplash.com/@eusuntvibes"
-  link: "https://unsplash.com/photos/banca-na%C8%9Bionala-a-romaniei-bank-entrance-lZluagF71lc"
 whyItMatters: "Bir merkez bankası başkanının yapay zekayı ekonomik bir güç olarak ele alması, konunun finans dünyasındaki ağırlığını gösteriyor."
 keyPoints:
   - "Warsh, verimlilik ve istihdamı inceleyen görev gücü önünde San Francisco'da konuştu."

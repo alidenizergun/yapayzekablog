@@ -4,7 +4,6 @@ slug: "petition-urging-jensen-huang-s-return-to-nvidia-tops"
 title: "Petition urging Jensen Huang's return to Nvidia tops 136,000 signatures"
 spot: "A petition calling for Jensen Huang to return to Nvidia has surpassed 136,000 signatures, according to the SCMP. Singapore-based Megaspeed, at the center of chip smuggling allegations, said its executive Alice Huang left the company in August 2025."
 whyItMatters: "The world's largest supplier of AI chips remains without clear leadership, and pressure on its board is growing. But because the signatures are self-reported, it is unclear how much they will influence the board's decision."
-photoAlt: "Modern glass building with a curved path and trees"
 ---
 
 Following the resignation of Nvidia CEO Jensen Huang, a petition calling for his return continues to grow. According to a report by the South China Morning Post (SCMP), the campaign had reached more than 136,000 signatures as of 2:00 p.m. on Sunday, November 15. South Korea's Financial News also cites roughly 136,000 participants.

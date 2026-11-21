@@ -15,7 +15,6 @@ byNumbers:
     label: "MAI Code 2's price relative to GPT-6.1 Sol for the same performance"
   - value: "96%"
     label: "MAI Code 2's performance relative to Claude Opus 5.5"
-photoAlt: "man in black crew neck shirt standing on stage"
 ---
 
 Microsoft unveiled new MAI models on November 17 at its Ignite conference, in coding, cybersecurity, image editing, transcription and real-time voice. Axios reports that the company is positioning the models as cheaper, more specialized alternatives to OpenAI and Anthropic offerings. Axios puts the number of models at six, while MLQ says seven.

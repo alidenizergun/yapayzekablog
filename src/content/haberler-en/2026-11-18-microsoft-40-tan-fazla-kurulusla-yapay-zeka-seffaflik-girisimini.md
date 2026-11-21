@@ -8,7 +8,6 @@ keyPoints:
   - "Microsoft announced an AI transparency initiative at Ignite."
   - "More than 40 organizations, including Accenture, Adobe, KPMG, Mastercard and Volvo Cars, have joined the initiative."
   - "Microsoft will expand its participation in the National Institute of Standards and Technology's (NIST) AI Agent Standards Initiative."
-photoAlt: "oval brown wooden conference table and chairs inside conference room"
 ---
 
 Microsoft announced the AI Transparency Initiative at its Ignite conference. Satya Nadella made the announcement. More than 40 organizations, including Accenture, Adobe, KPMG, Mastercard and Volvo Cars, have joined the initiative.

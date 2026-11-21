@@ -4,7 +4,6 @@ slug: "world-labs-opens-atlas-3d-world-model-to"
 title: "World Labs opens Atlas 3D world model to everyone, Fei-Fei Li announces"
 spot: "Fei-Fei Li announced on X that World Labs' Atlas world model is now available to everyone. The model was unveiled in September in early access with select partners."
 whyItMatters: "Three-dimensional world models are becoming a tool developers can access directly in fields such as gaming and robotics. Because the performance claims rest on company statements, independent evaluations should be awaited."
-photoAlt: "blue and black digital device"
 ---
 
 Fei-Fei Li announced on X on November 12 that World Labs' Atlas world model is now available to everyone. World Labs unveiled Atlas on September 1, 2026; at that time, the model was in early access with select partners.

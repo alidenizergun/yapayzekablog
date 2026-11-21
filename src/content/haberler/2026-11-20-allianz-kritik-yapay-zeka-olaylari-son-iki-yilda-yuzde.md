@@ -7,13 +7,6 @@ date: 2026-11-20T04:30:41+03:00
 image: guvenlik
 popularity: 38
 imageQuery: "office building insurance documents"
-photo:
-  id: "kN_kViDchA0"
-  url: "https://images.unsplash.com/photo-1560264280-88b68371db39?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8MXx8b2ZmaWNlJTIwYnVpbGRpbmclMjBpbnN1cmFuY2UlMjBkb2N1bWVudHN8ZW58MXwwfHx8MTc5NTEzODQyMXww&ixlib=rb-4.1.0"
-  alt: "people working at desks in open office"
-  author: "Arlington Research"
-  authorUrl: "https://unsplash.com/@arlington_research"
-  link: "https://unsplash.com/photos/people-working-at-desks-in-open-office-kN_kViDchA0"
 whyItMatters: "Sigorta sektörünün yapay zeka riskini ciddiye alması, şirketlerin güvenlik ve yönetişim yatırımlarını artırabilir."
 keyPoints:
   - "Kritik yapay zeka olayları son iki yılda yüzde 150'den fazla arttı."

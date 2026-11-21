@@ -9,7 +9,6 @@ keyPoints:
   - "Companies would be subject to continuous oversight by licensed independent auditors and to emergency shutdown orders."
   - "Sen. McNerney announced he will draft a bill to implement the proposals."
 whatsNext: "State Sen. Jerry McNerney announced he will draft a bill to implement the recommendations in the report."
-photoAlt: "beige concrete building"
 ---
 
 The California Government Operations Agency published its "AI Safety in 2026 and Beyond" report on November 18, after preparing it on November 16. The report recommends that major frontier AI developers meet state-defined safety standards.

@@ -13,7 +13,6 @@ byNumbers:
     label: "Developers served by Hugging Face (on the platform)"
   - value: "200,000"
     label: "Companies using the platform"
-photoAlt: "group of people using laptop computer"
 ---
 
 Nvidia's interim CEO Colette Kress reaffirmed the company's open-source AI commitment on Tuesday during an earnings call with analysts. The call was the first earnings call held since CEO Jensen Huang's resignation.

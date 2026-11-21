@@ -9,7 +9,6 @@ keyPoints:
   - "Outside experts will get deep access to the company's internal models and systems."
   - "Transluce plans to expand the pilot in 2027."
 whatsNext: "Transluce plans to expand the pilot work in 2027."
-photoAlt: "Hacker in hoodie working on multiple computer screens"
 ---
 
 OpenAI says it has started "embedded assessment" work with Apollo Research, METR, Transluce and Goodfire. The outside experts will get deep access to the company's internal models and systems, with the aim of reviewing its alignment work and testing its safety safeguards.

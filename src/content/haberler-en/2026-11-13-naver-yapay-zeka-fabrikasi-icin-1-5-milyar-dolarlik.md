@@ -4,7 +4,6 @@ slug: "naver-signs-1-5-billion-first-customer-deal-for"
 title: "Naver signs $1.5 billion first customer deal for its AI factory"
 spot: "Naver has signed a computing services contract worth 2 trillion won ($1.5 billion) with a U.S. AI inference company. The deal is the first customer contract for the company's AI factory project."
 whyItMatters: "The deal is a concrete sign of demand for AI data center capacity. It also marks the first commercial validation for Naver's AI factory business."
-photoAlt: "cable network"
 dealCounterparty: "Unnamed US inference company"
 dealAmount: "2 trillion won ($1.5 billion)"
 ---

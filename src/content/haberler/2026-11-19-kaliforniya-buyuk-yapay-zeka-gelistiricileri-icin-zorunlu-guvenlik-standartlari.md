@@ -7,13 +7,6 @@ date: 2026-11-19T04:31:48+03:00
 image: regulasyon
 popularity: 52
 imageQuery: "state capitol building"
-photo:
-  id: "3U-0SEoE0v0"
-  url: "https://images.unsplash.com/photo-1573181759662-1c146525b21f?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8MXx8c3RhdGUlMjBjYXBpdG9sJTIwYnVpbGRpbmd8ZW58MXwwfHx8MTc5NTA1MjAyN3ww&ixlib=rb-4.1.0"
-  alt: "beige concrete building"
-  author: "Karson"
-  authorUrl: "https://unsplash.com/@karson_"
-  link: "https://unsplash.com/photos/beige-concrete-building-3U-0SEoE0v0"
 whyItMatters: "Bir ABD eyaletinin büyük yapay zeka modelleri için zorunlu denetim ve acil durdurma yetkisi önermesi, federal düzeyde süren tartışmayı da etkileyebilir."
 keyPoints:
   - "Rapor, sınır model geliştiricileri için devletçe belirlenen güvenlik standartlarını öneriyor."

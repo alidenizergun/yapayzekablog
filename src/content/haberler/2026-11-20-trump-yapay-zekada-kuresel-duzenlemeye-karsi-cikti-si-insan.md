@@ -12,20 +12,6 @@ keyPoints:
   - "Trump, yapay zekanın her türlü küresel düzenlemesine karşı çıktı."
   - "Şi, ABD ile Çin'in yapay zekayı insan kontrolü altında tutmak için iş birliği yapmasını istedi."
   - "Carney, küresel yönetişimin olmamasının muazzam bir risk olduğunu söyledi."
-photo:
-  id: "bAQH53VquTc"
-  url: "https://images.unsplash.com/photo-1436450412740-6b988f486c6b?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8MXx8Z292ZXJubWVudCUyMGJ1aWxkaW5nJTIwbGF3fGVufDF8MHx8fDE3OTUyNTEyNTJ8MA&ixlib=rb-4.1.0"
-  alt: "low angle photography of beige building"
-  author: "Sebastian Pichler"
-  authorUrl: "https://unsplash.com/@pichler_sebastian"
-  link: "https://unsplash.com/photos/low-angle-photography-of-beige-building-bAQH53VquTc"
-photo2:
-  id: "E94nZORR5qc"
-  url: "https://images.unsplash.com/photo-1624417963912-8532660d9de8?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8NHx8Z292ZXJubWVudCUyMGJ1aWxkaW5nJTIwbGF3fGVufDF8MHx8fDE3OTUyNTEyNTJ8MA&ixlib=rb-4.1.0"
-  alt: "white concrete building under blue sky during daytime"
-  author: "Elijah Mears"
-  authorUrl: "https://unsplash.com/@elijahjmears"
-  link: "https://unsplash.com/photos/white-concrete-building-under-blue-sky-during-daytime-E94nZORR5qc"
 sources:
   - title: "US President Trump rejects global AI regulation as China's Xi calls for cooperation on safety"
     url: "https://www.euronews.com/2026/11/19/us-president-trump-rejects-global-ai-regulation-as-chinas-xi-calls-for-cooperation-on-safe"

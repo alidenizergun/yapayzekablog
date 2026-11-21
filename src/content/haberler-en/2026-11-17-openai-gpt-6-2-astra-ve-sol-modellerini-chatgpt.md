@@ -15,7 +15,6 @@ byNumbers:
     label: "Astra standard price per million output tokens"
   - value: "20%"
     label: "Price cut on Astra tokens"
-photoAlt: "a futuristic city at night with neon lights"
 ---
 
 OpenAI announced GPT-6.2 Astra and GPT-6.2 Sol on November 17, 2026. The announcement came a week after the release of Anthropic's Claude 5.2 and Google's Gemini 4 Hydrogen. Astra is a frontier model designed for the most demanding projects, while Sol is presented as an efficient, versatile model for everyday tasks.

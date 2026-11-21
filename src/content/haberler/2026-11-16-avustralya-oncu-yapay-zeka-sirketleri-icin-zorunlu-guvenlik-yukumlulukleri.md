@@ -7,13 +7,6 @@ date: 2026-11-16T17:25:51+03:00
 image: regulasyon
 popularity: 35
 imageQuery: "parliament house exterior"
-photo:
-  id: "WWVLdFbTiVk"
-  url: "https://images.unsplash.com/photo-1672264597620-d792bb6de88d?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8MXx8cGFybGlhbWVudCUyMGhvdXNlJTIwZXh0ZXJpb3J8ZW58MXwwfHx8MTc5NDgzOTQ1MXww&ixlib=rb-4.1.0"
-  alt: "a large building with a flag on top of it"
-  author: "Marcus Reubenstein"
-  authorUrl: "https://unsplash.com/@reubenstein"
-  link: "https://unsplash.com/photos/a-large-building-with-a-flag-on-top-of-it-WWVLdFbTiVk"
 whyItMatters: "Bir hükümet, yapay zeka olaylarının bildirimini zorunlu hale getireceğini duyuruyor."
 keyPoints:
   - "Avustralya, öncü yapay zeka şirketlerine zorunlu güvenlik yükümlülükleri getirecek."

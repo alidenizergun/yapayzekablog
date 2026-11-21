@@ -8,13 +8,6 @@ date: 2026-11-13T00:26:30+03:00
 image: regulasyon
 imageQuery: "us capitol building washington"
 whyItMatters: "İhracat kontrolleri Nvidia'nın Çin satışlarını doğrudan etkiliyor. Yasalaşma ihtimalinin artması, şirketin liderlik değişikliğiyle birlikte düzenleyici tarafta da belirsizlikle karşı karşıya olduğunu gösteriyor."
-photo:
-  id: "6xafY_AE1LM"
-  url: "https://images.unsplash.com/photo-1581097543550-b3cbe2e6ea6e?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8MXx8dXMlMjBjYXBpdG9sJTIwYnVpbGRpbmclMjB3YXNoaW5ndG9ufGVufDF8MHx8fDE3OTQ3NjE4Mzl8MA&ixlib=rb-4.1.0"
-  alt: "white concrete building under cloudy sky during daytime"
-  author: "Harold Mendoza"
-  authorUrl: "https://unsplash.com/@haroldrmendoza"
-  link: "https://unsplash.com/photos/white-concrete-building-under-cloudy-sky-during-daytime-6xafY_AE1LM"
 sources:
   - title: "'A high probability': Congress pushes tighter export controls following Nvidia scandal"
     url: "https://www.semafor.com/article/11/12/2026/a-high-probability-congress-pushes-tighter-export-controls-following-nvidia-scandal"

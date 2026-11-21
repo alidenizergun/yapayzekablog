@@ -8,13 +8,6 @@ image: regulasyon
 popularity: 50
 brand: nvidia
 imageQuery: "corporate boardroom meeting"
-photo:
-  id: "5txln04Cx7I"
-  url: "https://images.unsplash.com/photo-1758518730037-a16581a040e8?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8MXx8Y29ycG9yYXRlJTIwYm9hcmRyb29tJTIwbWVldGluZ3xlbnwxfDB8fHwxNzk0OTY1NjIzfDA&ixlib=rb-4.1.0"
-  alt: "Business professionals in a meeting around a table"
-  author: "Vitaly Gariev"
-  authorUrl: "https://unsplash.com/@silverkblack"
-  link: "https://unsplash.com/photos/business-professionals-in-a-meeting-around-a-table-5txln04Cx7I"
 whyItMatters: "Çip ihracatına yönelik denetim baskısı sürerken Nvidia, bu alandaki yönetişim yapısını kurul düzeyine taşıyarak düzenleyicilere karşı tutumunu netleştiriyor."
 story: nvidia-jensen-huang-krizi
 keyPoints:

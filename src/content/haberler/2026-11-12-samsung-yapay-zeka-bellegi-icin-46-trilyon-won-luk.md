@@ -16,13 +16,6 @@ image: altyapi
 brand: samsung
 imageQuery: "semiconductor wafer factory"
 whyItMatters: "Yapay zeka sunucularındaki HBM talebi, gelişmiş paketleme kapasitesini önemli bir darboğaz haline getiriyor. Samsung'un yatırımı bu alandaki kapasite yarışının ölçeğini gösteriyor."
-photo:
-  id: "3iZ5u1rEEr8"
-  url: "https://images.unsplash.com/photo-1717386255893-59c0846cdef0?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8MXx8c2VtaWNvbmR1Y3RvciUyMHdhZmVyJTIwZmFjdG9yeXxlbnwxfDB8fHwxNzk0NzYxOTUzfDA&ixlib=rb-4.1.0"
-  alt: "a large circular object in a large building"
-  author: "Homa Appliances"
-  authorUrl: "https://unsplash.com/@homaappliances"
-  link: "https://unsplash.com/photos/a-large-circular-object-in-a-large-building-3iZ5u1rEEr8"
 sources:
   - title: "'Megaproject' breaks ground at Samsung HBM plant"
     url: "https://www.koreaherald.com/article/10935341"

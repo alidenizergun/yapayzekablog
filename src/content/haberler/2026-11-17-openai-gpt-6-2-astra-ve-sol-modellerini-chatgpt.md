@@ -9,13 +9,6 @@ featured: true
 popularity: 80
 brand: openai
 imageQuery: "futuristic neural network lights"
-photo:
-  id: "dA0-qxdbyyY"
-  url: "https://images.unsplash.com/photo-1672872476232-da16b45c9001?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8NHx8ZnV0dXJpc3RpYyUyMG5ldXJhbCUyMG5ldHdvcmslMjBsaWdodHN8ZW58MXwwfHx8MTc5NDk0MTQyNnww&ixlib=rb-4.1.0"
-  alt: "a futuristic city at night with neon lights"
-  author: "Nat"
-  authorUrl: "https://unsplash.com/@nattgw"
-  link: "https://unsplash.com/photos/a-futuristic-city-at-night-with-neon-lights-dA0-qxdbyyY"
 whyItMatters: "Bir ay önce çıkan GPT-6 Astra'nın yerini alan sürüm hem performans hem de API fiyatı açısından değişiklik getiriyor; ChatGPT kullanıcılarını doğrudan ilgilendiriyor."
 keyPoints:
   - "Astra zorlu projeler, Sol günlük işler için tasarlandı."

@@ -8,7 +8,6 @@ keyPoints:
   - "Nvidia has created a permanent oversight committee within its board of directors."
   - "The committee will oversee national security and export control issues at the board level."
   - "Reuters reported the move came in response to security concerns raised after a scandal involving Huang."
-photoAlt: "Business professionals in a meeting around a table"
 ---
 
 Nvidia said on Tuesday, November 17, 2026, that it had set up a permanent committee within its board of directors. Called the "National Security and Export Control Oversight Committee," the body will oversee the company's national security issues at the board level.

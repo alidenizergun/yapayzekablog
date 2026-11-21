@@ -8,7 +8,6 @@ keyPoints:
   - "Warsh spoke in San Francisco before a task force examining productivity and employment."
   - "He pointed to AI's benefits but also stressed the risks of widespread unemployment and unmet expectations."
   - "According to Bloomberg HT, Warsh laid out three scenarios for AI's impact on the economy."
-photoAlt: "The Banca Națională a României sign on a stone pillar at the entrance of the bank building"
 ---
 
 Fed Chair Kevin Warsh highlighted the economic benefits of artificial intelligence in a speech on Monday, November 16, 2026, in San Francisco, before a task force he set up to examine productivity and employment. In the same speech, he warned that the technology could lead to widespread unemployment or fail to meet expectations.

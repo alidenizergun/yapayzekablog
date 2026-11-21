@@ -4,7 +4,6 @@ slug: "south-korea-unveils-roadmap-for-homegrown-on-device-ai"
 title: "South Korea unveils roadmap for homegrown on-device AI chips"
 spot: "South Korea's Ministry of Trade, Industry and Resources announced a roadmap aiming to secure the technology and production capacity for at least 10 types of domestic AI chips by 2030."
 whyItMatters: "Countries' efforts to produce their own AI chips are part of a race to reduce dependence on Nvidia. South Korea's goal in this race focuses on on-device chips."
-photoAlt: "A sprawling city skyline at dusk with distant mountains under a cloudy sky"
 ---
 
 According to MLex, South Korea's Ministry of Trade, Industry and Resources announced a roadmap for homegrown on-device AI chips at a meeting of the "Manufacturing AI Transformation Alliance." The ministry aims to secure the technology and production capacity for at least 10 types of AI chips by 2030 for autonomous vehicles, smart home appliances, robots and semiconductor design.

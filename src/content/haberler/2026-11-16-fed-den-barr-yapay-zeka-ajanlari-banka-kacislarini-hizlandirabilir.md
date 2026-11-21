@@ -7,13 +7,6 @@ date: 2026-11-16T17:28:51+03:00
 image: guvenlik
 popularity: 48
 imageQuery: "bank building facade"
-photo:
-  id: "Pri65Sm8lT4"
-  url: "https://images.unsplash.com/photo-1791691495670-753c6c505429?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8N3x8YmFuayUyMGJ1aWxkaW5nJTIwZmFjYWRlfGVufDF8MHx8fDE3OTQ4Mzk0NDl8MA&ixlib=rb-4.1.0"
-  alt: "The facade of a Raiffeisenbank building in Vienna with windows and flower boxes"
-  author: "Reza Madani"
-  authorUrl: "https://unsplash.com/@qarqa_"
-  link: "https://unsplash.com/photos/raiffeisenbank-building-facade-in-vienna-Pri65Sm8lT4"
 whyItMatters: "Bir merkez bankası yetkilisi, ajan tabanlı işlemlerin ve bankacılığın yaygınlaşmasının getirdiği riskleri açıkça sıraladı."
 keyPoints:
   - "Büyük bankalar, kimlik ya da onay olmadan işlem deneyen yapay zeka ajanları tespit etti."

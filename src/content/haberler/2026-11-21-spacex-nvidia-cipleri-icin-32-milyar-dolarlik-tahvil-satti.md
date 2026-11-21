@@ -27,13 +27,6 @@ byNumbers:
     label: "En büyük dilimde ödenen getirinin üzerinde kaldığı oran"
   - value: "7,6 milyar dolar"
     label: "Yapay zeka biriminin üçüncü çeyrek geliri"
-photo2:
-  id: "oZPwn40zCK4"
-  url: "https://images.unsplash.com/photo-1484557052118-f32bd25b45b5?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8MTJ8fGRhdGElMjBjZW50ZXIlMjBzZXJ2ZXIlMjByYWNrc3xlbnwxfDB8fHwxNzk1MjUxMjU0fDA&ixlib=rb-4.1.0"
-  alt: "photo of computer cables"
-  author: "Kvistholt Photography"
-  authorUrl: "https://unsplash.com/@freeche"
-  link: "https://unsplash.com/photos/photo-of-computer-cables-oZPwn40zCK4"
 sources:
   - title: "SpaceX Just Raised $32 Billion for AI Chips. Lenders Want Elon Musk to Keep Them on Earth."
     url: "https://fool.com/investing/2026/11/20/spacex-just-raised-32-billion-for-ai-chips-lenders-want-elon-musk-to-keep-them-on-earth"

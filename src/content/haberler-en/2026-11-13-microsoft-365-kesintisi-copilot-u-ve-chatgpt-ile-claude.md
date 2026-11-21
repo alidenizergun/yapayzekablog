@@ -4,7 +4,6 @@ slug: "microsoft-365-outage-hits-copilot-and-microsoft-connectors"
 title: "Microsoft 365 outage hits Copilot and Microsoft connectors used by ChatGPT and Claude"
 spot: "An outage affecting Microsoft 365, Outlook and Teams also spilled over to Microsoft connectors used by OpenAI and Anthropic services. The problem extended into Friday, and Microsoft will publish a root cause report."
 whyItMatters: "AI assistants get access to email and calendars through third-party connectors. As a result, a cloud outage directly affects AI services as well."
-photoAlt: "black asus laptop computer showing 3 00"
 ---
 
 According to Reuters, Microsoft 365, Outlook and Teams were down for thousands of users in the U.S. on Thursday. The outage also affected the connectors used by OpenAI and Anthropic services. The Next Web reported that the outage lasted more than 12 hours, with the problem extending into Friday.

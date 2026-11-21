@@ -8,13 +8,6 @@ image: guvenlik
 popularity: 48
 brand: openai
 imageQuery: "security audit team computer screens"
-photo:
-  id: "hLAmfdxGlls"
-  url: "https://images.unsplash.com/photo-1760199789455-49098afd02f0?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8OXx8c2VjdXJpdHklMjBhdWRpdCUyMHRlYW0lMjBjb21wdXRlciUyMHNjcmVlbnN8ZW58MXwwfHx8MTc5NDg2MTM4M3ww&ixlib=rb-4.1.0"
-  alt: "Hacker in hoodie working on multiple computer screens"
-  author: "Julio Lopez"
-  authorUrl: "https://unsplash.com/@juliolopez"
-  link: "https://unsplash.com/photos/hacker-in-hoodie-working-on-multiple-computer-screens-hLAmfdxGlls"
 whyItMatters: "Bağımsız uzmanların bir şirketin iç modellerine bu kadar derin erişimle bakması, güvenlik iddialarının dışarıdan denetlenmesi açısından dikkat çekici bir adım."
 keyPoints:
   - "OpenAI dört dış kuruluşla gömülü değerlendirme çalışmalarına başladı."

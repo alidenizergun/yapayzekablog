@@ -8,13 +8,6 @@ image: modeller
 popularity: 68
 brand: microsoft
 imageQuery: "conference stage keynote technology"
-photo:
-  id: "dgbIfH9FR5I"
-  url: "https://images.unsplash.com/photo-1592758080692-b6a5dbe9c725?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8OXx8Y29uZmVyZW5jZSUyMHN0YWdlJTIwa2V5bm90ZSUyMHRlY2hub2xvZ3l8ZW58MXwwfHx8MTc5NDk1MTA0OXww&ixlib=rb-4.1.0"
-  alt: "man in black crew neck shirt standing on stage"
-  author: "Cosmin Serban"
-  authorUrl: "https://unsplash.com/@cosminserban"
-  link: "https://unsplash.com/photos/man-in-black-crew-neck-shirt-standing-on-stage-dgbIfH9FR5I"
 whyItMatters: "Microsoft'un kendi geliştirdiği modellerle rekabete girmesi, büyük bir bulut sağlayıcısının model tedarikinde dış laboratuvarlara bağımlılığını azaltma yönündeki adımı olarak öne çıkıyor."
 keyPoints:
   - "Microsoft, Ignite'ta kodlama, siber güvenlik, görsel düzenleme ve ses alanlarında yeni MAI modelleri tanıttı."

@@ -7,13 +7,6 @@ date: 2026-11-16T17:30:51+03:00
 image: regulasyon
 popularity: 72
 imageQuery: "government building columns"
-photo:
-  id: "eH-j6fLFZc4"
-  url: "https://images.unsplash.com/photo-1784900020716-740cef2892ce?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8NHx8Z292ZXJubWVudCUyMGJ1aWxkaW5nJTIwY29sdW1uc3xlbnwxfDB8fHwxNzk0ODM5NDQ5fDA&ixlib=rb-4.1.0"
-  alt: "A grand building facade with many white classical columns"
-  author: "Valentin Tatarnikov"
-  authorUrl: "https://unsplash.com/@valenen"
-  link: "https://unsplash.com/photos/a-grand-building-facade-with-many-white-classical-columns-eH-j6fLFZc4"
 whyItMatters: "Liste, ABD'nin yapay zeka politikasında ihracatı kısıtlamaktan teşvik etmeye kaymasının işareti olabilir."
 story: nvidia-jensen-huang-krizi
 keyPoints:
