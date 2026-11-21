@@ -81,8 +81,8 @@ jobs:
           MIN_GAP_MIN: ${{ inputs.force && '0' || vars.MIN_GAP_MIN || '90' }}
           WEEKEND_SEARCHES: ${{ vars.WEEKEND_SEARCHES }}
           REQUIRE_REVIEW: ${{ vars.REQUIRE_REVIEW || 'false' }}
-          # Haber masası (ajanlar): repo değişkeni NEWS_ENGINE=ajan ile açılır
-          NEWS_ENGINE: ${{ inputs.engine || vars.NEWS_ENGINE || 'klasik' }}
+          # Haber masası (ajanlar) varsayılan; eski yönteme dönmek için repo değişkeni NEWS_ENGINE=klasik
+          NEWS_ENGINE: ${{ inputs.engine || vars.NEWS_ENGINE || 'ajan' }}
           AGENT_SHADOW: ${{ inputs.shadow && 'true' || vars.AGENT_SHADOW || 'false' }}
           AGENT_BUDGET_USD: ${{ vars.AGENT_BUDGET_USD }}
           AGENT_MODEL: ${{ vars.AGENT_MODEL }}
