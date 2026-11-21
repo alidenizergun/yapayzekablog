@@ -5,7 +5,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { parse } from 'yaml';
-import { findPhoto, usedPhotoIds, replacePhotoInFile, readPool } from './photos.mjs';
+import { findPhoto, usedPhotoIds, replacePhotoInFile, readPool, photoDebugState } from './photos.mjs';
 import { makeJudge, rateFit } from './photo-judge.mjs';
 
 const DRY = process.argv.includes('--dry-run');
@@ -73,6 +73,19 @@ for (const n of news) {
     }
   }
 }
+// Fotoğrafı hiç olmayan haberler (ya da yukarıda kaldırılanlar): içerikle uyumlu yeni fotoğraf ara
+let filled = 0;
+if (!DRY) for (const n of news) {
+  const file = path.join(DIR, n.f);
+  if (/^photo:/m.test(fs.readFileSync(file, 'utf8'))) continue;
+  const r = [...scores.entries()].find(([k]) => k.startsWith(`${n.f}|`))?.[1];
+  try {
+    const photo = await findPhoto([...(r?.queries || []), n.fm.imageQuery].filter(Boolean), used, { judge, context: n.context });
+    if (photo) { replacePhotoInFile(file, photo, 'photo'); filled++; report.push(`- ${n.fm.title}: yeni fotoğraf "${photo.alt}" (${photo.source || 'unsplash'})`); }
+  } catch (err) { errors = err.message; }
+}
+log('kaynak durumu', JSON.stringify(photoDebugState()), '· boş habere eklenen', filled);
+replaced += filled;
 const dist = [1, 2, 3, 4, 5].map((k) => `${k}: ${[...scores.values()].filter((v) => v.score === k).length}`).join(', ');
 log(`puan dağılımı (${dist}) · değiştirilen ${replaced}, kaldırılan ${removed}${errors ? ' · hata: ' + errors : ''} · model maliyeti ~$${cost.toFixed(3)}`);
 for (const l of report) console.log(l);

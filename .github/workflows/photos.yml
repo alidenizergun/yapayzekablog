@@ -39,6 +39,7 @@ jobs:
           UNSPLASH_ACCESS_KEY: ${{ secrets.UNSPLASH_ACCESS_KEY }}
           PEXELS_API_KEY: ${{ secrets.PEXELS_API_KEY }}
           PIXABAY_API_KEY: ${{ secrets.PIXABAY_API_KEY }}
+          PHOTO_DEBUG: '1'
         run: node scripts/photo-review.mjs ${{ inputs.dry_run && '--dry-run' || '' }}
       - name: Derleme denetimi
         if: steps.rev.outputs.changed != '0' && steps.rev.outputs.changed != ''

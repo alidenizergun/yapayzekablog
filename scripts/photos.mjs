@@ -12,6 +12,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 
 const API = 'https://api.unsplash.com';
+const dbg = (...a) => { if (process.env.PHOTO_DEBUG) console.log('[foto]', ...a); };
 
 async function uget(key, url) {
   const res = await fetch(url, { headers: { Authorization: `Client-ID ${key}`, 'Accept-Version': 'v1' } });
@@ -58,6 +59,7 @@ async function unsplashFind(queries, used, opts = {}) {
       const top = candidates.slice(0, 10);
       const k = await opts.judge(opts.context, top.map((p) => ({ text: text(p) })));
       pick = k >= 0 ? top[k] : null;
+      dbg('unsplash', JSON.stringify(query), 'aday', top.length, 'seçim', k, k >= 0 ? text(top[k]).slice(0, 80) : '');
     } else for (const p of candidates) { const sc = score(p); if (sc > best) { best = sc; pick = p; } }
     if (!pick) continue;
     used.add(pick.id);
@@ -100,6 +102,7 @@ async function pexelsFind(queries, used, opts = {}) {
       const top = candidates.slice(0, 10);
       const k = await opts.judge(opts.context, top.map((p) => ({ text: text(p) })));
       pick = k >= 0 ? top[k] : null;
+      dbg('pexels', JSON.stringify(query), 'aday', top.length, 'seçim', k, k >= 0 ? text(top[k]).slice(0, 80) : '');
     } else for (const p of candidates) { const sc = score(p); if (sc > best) { best = sc; pick = p; } }
     if (!pick) continue;
     const id = `pexels-${pick.id}`;
@@ -140,6 +143,7 @@ async function pixabayFind(queries, used, opts = {}) {
       const top = candidates.slice(0, 10);
       const k = await opts.judge(opts.context, top.map((p) => ({ text: text(p) })));
       pick = k >= 0 ? top[k] : null;
+      dbg('pixabay', JSON.stringify(query), 'aday', top.length, 'seçim', k, k >= 0 ? text(top[k]).slice(0, 80) : '');
     } else for (const p of candidates) { const sc = score(p); if (sc > best) { best = sc; pick = p; } }
     if (!pick) continue;
     // İndir ve 3 boyutta WebP olarak kaydet (16:9'a yakın kırpma yok; sayfada object-fit: cover ile yerleşir)
@@ -190,6 +194,9 @@ export async function findPhoto(queries, used, opts = {}) {
     }
   }
   return pixabayFind(queries, used, opts);
+}
+export function photoDebugState() {
+  return { unsplashBlocked, pexelsBlocked, keys: { unsplash: !!process.env.UNSPLASH_ACCESS_KEY, pexels: !!process.env.PEXELS_API_KEY, pixabay: !!process.env.PIXABAY_API_KEY } };
 }
 
 const yamlStr = (s) => JSON.stringify(String(s ?? '').trim());

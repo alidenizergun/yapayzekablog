@@ -18,7 +18,9 @@ export function makeJudge(anthropic, { onUsage } = {}) {
       messages: [{ role: 'user', content: `Bir haber sitesinde haberin üstünde gösterilecek fotoğrafı seçiyorsun.\n\nHaber: ${context}\n\nAday fotoğrafların açıklamaları:\n${list}\n\n${RULES}\n\nYalnızca en uygun adayın numarasını yaz. Hiçbiri haberle açıkça uyumlu değilse -1 yaz.` }],
     });
     onUsage?.(res);
-    const n = Number(((res.content || []).find((c) => c.type === 'text')?.text || '').match(/-?\d+/)?.[0]);
+    const raw = ((res.content || []).find((c) => c.type === 'text')?.text || '');
+    if (process.env.PHOTO_DEBUG) console.log('[hakem]', JSON.stringify(raw.slice(0, 60)), res.stop_reason);
+    const n = Number(raw.match(/-?\d+/)?.[0]);
     return Number.isInteger(n) && n >= 0 && n < candidates.length ? n : -1;
   };
 }
