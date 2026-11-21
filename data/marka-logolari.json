@@ -1,0 +1,134 @@
+{
+  "adobe": {
+    "from": "https://www.google.com/s2/favicons?domain=www.adobe.com&sz=128",
+    "fetched": "2026-11-21"
+  },
+  "anthropic": {
+    "from": "https://www.anthropic.com/images/icons/apple-touch-icon.png",
+    "fetched": "2026-11-21"
+  },
+  "apple": {
+    "from": "https://www.apple.com/apple-touch-icon.png",
+    "fetched": "2026-11-21"
+  },
+  "arm": {
+    "from": "https://www.arm.com/shared/common/img/favicon/apple-touch-icon.png?v=1.0.9810.21293",
+    "fetched": "2026-11-21"
+  },
+  "baidu": {
+    "from": "https://psstatic.cdn.bcebos.com/video/wiseindex/aa6eef91f8b5b1a33b454c401_1660835115000.png",
+    "fetched": "2026-11-21"
+  },
+  "bytedance": {
+    "from": "https://lf3-static.bytednsdoc.com/obj/eden-cn/shjpmmv_ljuhklafi/ljhwZthlaukjlkulzlp/images/Pn04bTfD5oKbB3x1NFLcQ3Bxn1b-20261029135132-20261029150506.png",
+    "fetched": "2026-11-21"
+  },
+  "claude": {
+    "from": "https://assets-proxy.anthropic.com/claude-ai/v2/assets/v1/c129d018a-0ZbJsTbu.png",
+    "fetched": "2026-11-21"
+  },
+  "cloudflare": {
+    "from": "https://www.cloudflare.com/favicon.ico",
+    "fetched": "2026-11-21"
+  },
+  "cursor": {
+    "from": "https://cursor.com/marketing-static/apple-touch-icon-light.png",
+    "fetched": "2026-11-21"
+  },
+  "databricks": {
+    "from": "https://www.databricks.com/en-website-assets/icons/icon-512x512.png?v=c9b9916c3b27dc51866c46b79a6e9b88",
+    "fetched": "2026-11-21"
+  },
+  "deepmind": {
+    "from": "https://www.google.com/s2/favicons?domain=deepmind.google&sz=128",
+    "fetched": "2026-11-21"
+  },
+  "deepseek": {
+    "from": "https://www.google.com/s2/favicons?domain=www.deepseek.com&sz=128",
+    "fetched": "2026-11-21"
+  },
+  "gemini": {
+    "from": "https://www.google.com/s2/favicons?domain=gemini.google.com&sz=128",
+    "fetched": "2026-11-21"
+  },
+  "github": {
+    "from": "https://github.githubassets.com/favicons/favicon.svg",
+    "fetched": "2026-11-21"
+  },
+  "google": {
+    "from": "https://www.google.com/s2/favicons?domain=www.google.com&sz=128",
+    "fetched": "2026-11-21"
+  },
+  "huawei": {
+    "from": "https://www.huawei.com/-/media/htemplate-home/1.0.1.20251205144752/components/assets/img/apple-touch-icon-precomposed-180.png",
+    "fetched": "2026-11-21"
+  },
+  "huggingface": {
+    "from": "https://www.google.com/s2/favicons?domain=huggingface.co&sz=128",
+    "fetched": "2026-11-21"
+  },
+  "ibm": {
+    "from": "https://www.google.com/s2/favicons?domain=www.ibm.com&sz=128",
+    "fetched": "2026-11-21"
+  },
+  "lg": {
+    "from": "https://www.lg.com/us/static-resources/favicons/152x152.png",
+    "fetched": "2026-11-21"
+  },
+  "meta": {
+    "from": "https://www.google.com/s2/favicons?domain=www.meta.com&sz=128",
+    "fetched": "2026-11-21"
+  },
+  "microsoft": {
+    "from": "https://www.google.com/s2/favicons?domain=www.microsoft.com&sz=128",
+    "fetched": "2026-11-21"
+  },
+  "mistral": {
+    "from": "https://www.google.com/s2/favicons?domain=mistral.ai&sz=128",
+    "fetched": "2026-11-21"
+  },
+  "naver": {
+    "from": "https://s.pstatic.net/static/www/u/2014/0328/mma_204243574.png",
+    "fetched": "2026-11-21"
+  },
+  "ollama": {
+    "from": "https://ollama.com/public/apple-touch-icon.png",
+    "fetched": "2026-11-21"
+  },
+  "openai": {
+    "from": "https://openai.com/apple-icon.png?apple-icon.3o0tf8iy4mx7y.png",
+    "fetched": "2026-11-21"
+  },
+  "perplexity": {
+    "from": "https://www.perplexity.ai/apple-touch-icon.png",
+    "fetched": "2026-11-21"
+  },
+  "reddit": {
+    "from": "https://www.google.com/s2/favicons?domain=www.reddit.com&sz=128",
+    "fetched": "2026-11-21"
+  },
+  "samsung": {
+    "from": "https://resources.samsung.com/etc.clientlibs/samsung/clientlibs/consumer/global/clientlib-common/resources/images/app_ico.png",
+    "fetched": "2026-11-21"
+  },
+  "snowflake": {
+    "from": "https://www.google.com/s2/favicons?domain=www.snowflake.com&sz=128",
+    "fetched": "2026-11-21"
+  },
+  "tesla": {
+    "from": "https://www.google.com/s2/favicons?domain=www.tesla.com&sz=128",
+    "fetched": "2026-11-21"
+  },
+  "x": {
+    "from": "https://abs.twimg.com/responsive-web/client-web/icon-ios.77d25eba.png",
+    "fetched": "2026-11-21"
+  },
+  "xai": {
+    "from": "https://www.google.com/s2/favicons?domain=x.ai&sz=128",
+    "fetched": "2026-11-21"
+  },
+  "xiaomi": {
+    "from": "https://i02.appmifile.com/i18n/images/pwa/maskable-192x192.png",
+    "fetched": "2026-11-21"
+  }
+}
