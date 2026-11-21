@@ -13,6 +13,14 @@ keyPoints:
   - "ABD beş yıllık, toplantı başkanı ise iki yıllık müzakere yetkisi önerdi."
   - "BM Genel Sekreteri devletleri bağlayıcı bir belge müzakeresine çağırdı."
 whatsNext: "Bağlayıcı bir belge müzakeresinin başlayıp başlamayacağının bu hafta netleşebileceği belirtiliyor."
+photo:
+  id: "pixabay-4984799"
+  url: "/foto/px-4984799"
+  alt: "un, united nations, organization of the united nations, cloth, texture, textile, sign, flag, symbol, country, patriot, nation, national, emblem, world, international, united nations, united nations, u"
+  author: "padrinan"
+  authorUrl: "https://pixabay.com/users/padrinan-1694659/"
+  link: "https://pixabay.com/photos/un-united-nations-4984799/"
+  source: "pixabay"
 sources:
   - title: "US and Russia to oppose talks on limiting autonomous weapons"
     url: "https://www.cnbcafrica.com/2026/us-and-russia-to-oppose-talks-on-limiting-autonomous-weapons"

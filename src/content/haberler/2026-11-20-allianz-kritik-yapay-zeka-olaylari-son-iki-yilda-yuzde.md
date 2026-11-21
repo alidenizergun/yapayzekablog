@@ -18,6 +18,14 @@ byNumbers:
     label: "Kritik yapay zeka olaylarındaki artış (son iki yıl)"
   - value: "100 milyon dolar"
     label: "Bazı davalarda olası sigorta sektörü kaybı"
+photo:
+  id: "pixabay-1841158"
+  url: "/foto/px-1841158"
+  alt: "analysis, analytics, business, charts, computer, concept, data, desk, device, diagram, digital, documents, graphs, information, investment, job, management, marketing, modern, office, report, business"
+  author: "Pexels"
+  authorUrl: "https://pixabay.com/users/Pexels-2286921/"
+  link: "https://pixabay.com/photos/analysis-analytics-business-charts-1841158/"
+  source: "pixabay"
 sources:
   - title: "Allianz: Reported AI losses understate the true risk and are only the tip of the iceberg"
     url: "https://manilatimes.net/2026/11/19/tmt-newswire/media-outreach-newswire/allianz-reported-ai-losses-understate-the-true-risk-and-are-only-the-tip-of-the-iceberg/2473762"

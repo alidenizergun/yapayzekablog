@@ -8,6 +8,14 @@ date: 2026-11-10T19:10:00+03:00
 image: modeller
 imageQuery: "programmer code screen dark"
 whyItMatters: "Açık ağırlıklı modellerin payının artması, şirketlerin modelleri kendi altyapılarında çalıştırma ve özelleştirme seçeneklerini genişletiyor."
+photo:
+  id: "pixabay-7450797"
+  url: "/foto/px-7450797"
+  alt: "artificial intelligence, ai, technology, robot eye, ai art, blue, colours, artificial intelligence, artificial intelligence, artificial intelligence, artificial intelligence, artificial intelligence"
+  author: "BrianPenny"
+  authorUrl: "https://pixabay.com/users/BrianPenny-29844978/"
+  link: "https://pixabay.com/photos/artificial-intelligence-ai-7450797/"
+  source: "pixabay"
 sources:
   - title: "AF.net — Yapay zeka gelişmeleri akışı"
     url: "https://af.net/realtime/page/201/?news_page=12"

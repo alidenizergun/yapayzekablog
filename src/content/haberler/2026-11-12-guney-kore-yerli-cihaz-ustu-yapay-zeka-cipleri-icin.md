@@ -8,6 +8,14 @@ date: 2026-11-12T16:41:41+03:00
 image: altyapi
 imageQuery: "seoul skyline night"
 whyItMatters: "Ülkelerin yerli yapay zeka çipi üretme çabaları, Nvidia'ya bağımlılığı azaltma yarışının bir parçası. Güney Kore'nin hedefi bu yarışta cihaz üstü çiplere odaklanıyor."
+photo:
+  id: "pixabay-2660914"
+  url: "/foto/px-2660914"
+  alt: "system, web, network, connection, connected, with each other, together, neurons, brain cells, points, lines, interfaces, contact, relationship, cooperation structure of the brain, brain, wattle, yarn,"
+  author: "geralt"
+  authorUrl: "https://pixabay.com/users/geralt-9301/"
+  link: "https://pixabay.com/photos/system-web-network-connection-2660914/"
+  source: "pixabay"
 sources:
   - title: "South Korea unveils roadmap to develop homegrown on-device AI chips"
     url: "https://www.mlex.com/mlex/artificial-intelligence/articles/2549103"

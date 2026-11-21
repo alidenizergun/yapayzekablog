@@ -13,6 +13,14 @@ keyPoints:
   - "Yapay zekanın faydalarına değindi, ancak yaygın işsizlik ve karşılanmayan beklenti riskini de vurguladı."
   - "Bloomberg HT'ye göre Warsh yapay zekanın ekonomiye etkisi için üç senaryo sundu."
 format: kisa
+photo:
+  id: "pixabay-2907728"
+  url: "/foto/px-2907728"
+  alt: "bank, money, shares, save up, capital, financing, banking crisis, credit, banks house, building, architecture, rent, bank building, facade, stone relief, columns, sculptures, historical, monument, sto"
+  author: "JamesQube"
+  authorUrl: "https://pixabay.com/users/JamesQube-6733902/"
+  link: "https://pixabay.com/photos/bank-money-shares-save-up-capital-2907728/"
+  source: "pixabay"
 sources:
   - title: "Fed Chairman Kevin Warsh stresses importance of AI to economy, but says it could 'disappoint'"
     url: "https://cnbc.com/2026/11/16/fed-ai-task-force-kevin-warsh.html"

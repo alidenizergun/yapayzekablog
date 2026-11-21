@@ -19,6 +19,14 @@ byNumbers:
     label: "Hugging Face'in hizmet verdiği geliştirici (üzerinde)"
   - value: "200.000"
     label: "Platformu kullanan şirket"
+photo:
+  id: "pixabay-593312"
+  url: "/foto/px-593312"
+  alt: "programming, developing, startup, start-up, notebooks, creative, computer, company, laptops, display, silicon valley, modern, home office, office, typing, coding, hacker, coder, freelancer, code, chro"
+  author: "StartupStockPhotos"
+  authorUrl: "https://pixabay.com/users/StartupStockPhotos-690514/"
+  link: "https://pixabay.com/photos/programming-developing-startup-593312/"
+  source: "pixabay"
 sources:
   - title: "Nvidia says its open source AI strategy remains intact after Jensen Huang's exit"
     url: "https://techcrunch.com/2026/11/17/nvidia-says-its-open-source-ai-strategy-remains-intact-after-jensen-huangs-exit"

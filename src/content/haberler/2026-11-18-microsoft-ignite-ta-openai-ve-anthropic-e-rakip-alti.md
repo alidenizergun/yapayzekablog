@@ -21,6 +21,14 @@ byNumbers:
     label: "Aynı performans için GPT-6.1 Sol fiyatına oranı"
   - value: "yüzde 96"
     label: "MAI Code 2'nin Claude Opus 5.5'e göre performans oranı"
+photo:
+  id: "pixabay-7978588"
+  url: "/foto/px-7978588"
+  alt: "laptop, conference table, mouse, work, business, online, remote, microphone, podcast, podcast, podcast, podcast, podcast, podcast"
+  author: "jhenning"
+  authorUrl: "https://pixabay.com/users/jhenning-8658480/"
+  link: "https://pixabay.com/photos/laptop-conference-table-mouse-work-7978588/"
+  source: "pixabay"
 sources:
   - title: "Microsoft aims to challenge OpenAI, Anthropic with cheaper, specialized AI models"
     url: "https://www.axios.com/2026/11/17/microsoft-ai-models-openai-anthropic-ignite"

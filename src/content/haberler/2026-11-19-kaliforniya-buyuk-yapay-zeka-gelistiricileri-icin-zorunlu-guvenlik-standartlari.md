@@ -13,6 +13,14 @@ keyPoints:
   - "Şirketler lisanslı bağımsız denetçilerin sürekli gözetimine ve acil durdurma emirlerine tabi olacak."
   - "Senatör McNerney, önerileri uygulayacak yasa tasarısı hazırlayacağını açıkladı."
 whatsNext: "Senatör Jerry McNerney, rapordaki önerileri uygulayacak yasa tasarısını hazırlayacağını açıkladı."
+photo:
+  id: "pixabay-7977960"
+  url: "/foto/px-7977960"
+  alt: "ai, robot, artificial intelligence, computer science, digital, future, chatgpt, technology, cybot, ai generated, artificial intelligence, artificial intelligence, artificial intelligence, artificial i"
+  author: "Alexandra_Koch"
+  authorUrl: "https://pixabay.com/users/Alexandra_Koch-621802/"
+  link: "https://pixabay.com/photos/ai-robot-artificial-intelligence-7977960/"
+  source: "pixabay"
 sources:
   - title: "Governor Newsom's nation-leading AI safety framework is getting even stronger as California releases next steps on mandatory safety standards and oversight"
     url: "https://www.gov.ca.gov/2026/11/18/governor-newsoms-nation-leading-ai-safety-framework-is-getting-even-stronger-as-california-releases-next-steps-on-mandatory-safety-standards-and-oversight/"

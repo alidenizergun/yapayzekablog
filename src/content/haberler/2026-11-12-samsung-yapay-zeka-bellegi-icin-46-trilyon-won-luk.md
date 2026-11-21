@@ -16,6 +16,14 @@ image: altyapi
 brand: samsung
 imageQuery: "semiconductor wafer factory"
 whyItMatters: "Yapay zeka sunucularındaki HBM talebi, gelişmiş paketleme kapasitesini önemli bir darboğaz haline getiriyor. Samsung'un yatırımı bu alandaki kapasite yarışının ölçeğini gösteriyor."
+photo:
+  id: "pixabay-8141642"
+  url: "/foto/px-8141642"
+  alt: "memory, ram, computer, technology, electronics, component, laptop, digital, ram, ram, ram, ram, computer, computer, computer, computer, computer, laptop"
+  author: "cliffsmith23"
+  authorUrl: "https://pixabay.com/users/cliffsmith23-38386472/"
+  link: "https://pixabay.com/photos/memory-ram-computer-technology-8141642/"
+  source: "pixabay"
 sources:
   - title: "'Megaproject' breaks ground at Samsung HBM plant"
     url: "https://www.koreaherald.com/article/10935341"

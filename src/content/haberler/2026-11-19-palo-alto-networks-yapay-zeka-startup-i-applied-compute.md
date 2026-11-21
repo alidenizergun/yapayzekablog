@@ -27,6 +27,14 @@ byNumbers:
     label: "Applied Compute'un önceki fonlaması (üzerinde)"
   - value: "3,45 milyar dolar"
     label: "Palo Alto'nun bildirdiği gelir"
+photo:
+  id: "pixabay-8004870"
+  url: "/foto/px-8004870"
+  alt: "control center, internet, cybersecurity, science fiction, network, monitor, computer, technology, cybersecurity, cybersecurity, cybersecurity, cybersecurity, cybersecurity"
+  author: "cliff1126"
+  authorUrl: "https://pixabay.com/users/cliff1126-2330376/"
+  link: "https://pixabay.com/photos/control-center-internet-8004870/"
+  source: "pixabay"
 sources:
   - title: "Palo Alto Networks bets $4.5B on AI startup Applied Compute as earnings top forecasts"
     url: "https://siliconangle.com/2026/11/18/palo-alto-networks-bets-4-5b-on-ai-startup-applied-compute-as-earnings-top-forecasts/"

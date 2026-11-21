@@ -14,7 +14,6 @@ byNumbers:
     label: "Share of children using AI"
   - value: "80.1%"
     label: "Share of children using a mobile phone"
-photoAlt: "a man, woman and child sitting on a couch looking at their cell phones"
 ---
 
 According to TÜİK's survey, 80.1% of children aged 6-17 in Turkey use a mobile phone or smartphone. Of these children, 63% use AI. In other words, 8 out of every 10 children use a mobile phone or smartphone, and 6 out of every 10 use AI.

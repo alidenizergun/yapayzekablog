@@ -12,6 +12,14 @@ keyPoints:
   - "Trump, yapay zekanın her türlü küresel düzenlemesine karşı çıktı."
   - "Şi, ABD ile Çin'in yapay zekayı insan kontrolü altında tutmak için iş birliği yapmasını istedi."
   - "Carney, küresel yönetişimin olmamasının muazzam bir risk olduğunu söyledi."
+photo:
+  id: "pixabay-5319462"
+  url: "/foto/px-5319462"
+  alt: "international, flags, un, world, global, meeting, countries, politics, globe, worldwide, diversity, country, globalization, earth, nations, united, political, population, geography, unity, wind, fly,"
+  author: "JoshuaWoroniecki"
+  authorUrl: "https://pixabay.com/users/JoshuaWoroniecki-12734309/"
+  link: "https://pixabay.com/photos/international-flags-un-world-5319462/"
+  source: "pixabay"
 sources:
   - title: "US President Trump rejects global AI regulation as China's Xi calls for cooperation on safety"
     url: "https://www.euronews.com/2026/11/19/us-president-trump-rejects-global-ai-regulation-as-chinas-xi-calls-for-cooperation-on-safe"

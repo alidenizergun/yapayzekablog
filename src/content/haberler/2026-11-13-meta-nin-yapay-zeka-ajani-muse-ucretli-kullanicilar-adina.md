@@ -10,6 +10,14 @@ brand: meta
 imageQuery: "phone call small business"
 whyItMatters: "Tüketici ajanları metin üretmenin ötesinde, kullanıcı adına gerçek dünyada işlem yapmaya geçiyor. Ücretli abonelik modeli de özelliğin bir gelir kalemi olarak konumlandığını gösteriyor."
 turkeyAngle: "Muse'un telefonla arama özelliği şimdilik yalnızca ABD'deki işletmeler için çalışıyor; Türkiye'deki işletmeleri kapsamıyor."
+photo:
+  id: "pixabay-4668542"
+  url: "/foto/px-4668542"
+  alt: "voicemail, desk phone, landline, telephone, phone, call, voip, gray phone, gray desk, gray telephone, voicemail, landline, voip, voip, voip, voip, voip"
+  author: "Media_Visuals"
+  authorUrl: "https://pixabay.com/users/Media_Visuals-13388979/"
+  link: "https://pixabay.com/photos/voicemail-desk-phone-landline-4668542/"
+  source: "pixabay"
 sources:
   - title: "Muse can now place calls to US businesses — if you pay"
     url: "https://techcrunch.com/2026/11/12/muse-can-now-place-calls-to-u-s-businesses-if-you-pay/"

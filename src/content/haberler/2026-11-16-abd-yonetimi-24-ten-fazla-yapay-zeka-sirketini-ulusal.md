@@ -14,6 +14,14 @@ keyPoints:
   - "Listede Nvidia, Amazon, Microsoft, OpenAI ve Anthropic'in de bulunması bekleniyor."
   - "Hedef, ABD yapımı çip ve modellerin yurt dışına tek paket satılması."
 whatsNext: "Açıklamanın bir hafta içinde Ticaret Bakanı Howard Lutnick tarafından yapılması bekleniyor; bazı kaynaklar zamanlamanın gecikebileceğini söylüyor."
+photo:
+  id: "pixabay-7772914"
+  url: "/foto/px-7772914"
+  alt: "technology, circuit, board, head, light, burst, artificial intelligence, ai, networking, digital, computer, internet, business, connected, communication, artificial intelligence, artificial intelligen"
+  author: "flutie8211"
+  authorUrl: "https://pixabay.com/users/flutie8211-17475707/"
+  link: "https://pixabay.com/photos/technology-circuit-board-head-7772914/"
+  source: "pixabay"
 sources:
   - title: "Trump administration to name Nvidia, other AI firms as US 'national champions', WSJ reports"
     url: "https://www.investing.com/news/stock-market-news/trump-administration-to-name-nvidia-other-ai-firms-as-us-national-champions-wsj-reports-5028349"

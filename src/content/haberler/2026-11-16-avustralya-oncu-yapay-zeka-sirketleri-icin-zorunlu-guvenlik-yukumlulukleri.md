@@ -14,6 +14,14 @@ keyPoints:
   - "Uyumsuz yapay zeka davranışları ve siber olaylar zorunlu olarak bildirilecek."
 format: kisa
 whatsNext: "Avustralya Yapay Zeka Standartları mevzuatının ayrıntılarının 2027'de gelmesi bekleniyor."
+photo:
+  id: "pixabay-168300"
+  url: "/foto/px-168300"
+  alt: "parliament house, canberra, australia, capital, act, government, politics, federal, democracy, structure, commonwealth, govern, chambers, civic, senate, representatives, political, legislature, state,"
+  author: "helen35"
+  authorUrl: "https://pixabay.com/users/helen35-45431/"
+  link: "https://pixabay.com/photos/parliament-house-canberra-australia-168300/"
+  source: "pixabay"
 sources:
   - title: "Australia to legislate safety rules for frontier AI"
     url: "https://itbrief.com.au/story/australia-to-legislate-safety-rules-for-frontier-ai"

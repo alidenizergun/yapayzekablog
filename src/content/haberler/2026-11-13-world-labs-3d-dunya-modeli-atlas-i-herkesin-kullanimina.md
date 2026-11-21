@@ -8,6 +8,14 @@ date: 2026-11-13T00:24:30+03:00
 image: modeller
 imageQuery: "virtual reality headset"
 whyItMatters: "Üç boyutlu dünya modelleri, oyun ve robotik gibi alanlarda geliştiricilerin doğrudan erişebildiği bir araca dönüşüyor. Performans iddiaları şirket beyanına dayandığından bağımsız değerlendirmeler beklenmeli."
+photo:
+  id: "pixabay-4560230"
+  url: "/foto/px-4560230"
+  alt: "headphones, simulator, virtual reality, artificial intelligence, ai gamer, games, gaming, metaverse, computer, robot, thinking digital, human programming, controlled, remote projection, visual effects"
+  author: "ArtisticOperations"
+  authorUrl: "https://pixabay.com/users/ArtisticOperations-4161274/"
+  link: "https://pixabay.com/photos/headphones-simulator-virtual-reality-4560230/"
+  source: "pixabay"
 sources:
   - title: "@drfeifei X gönderisi"
     url: "https://x.com/drfeifei/status/2120942509786558671"

@@ -12,6 +12,14 @@ keyPoints:
   - "ABD ve ortakları, Pax Silica kapsamında San Francisco Bildirgesi'ni imzaladı."
   - "İmzacılar, korunacak kritik yapay zeka teknolojileri için ortak bir liste oluşturmayı kabul etti."
   - "Kapsamda yarı iletkenler, kritik mineraller ve enerji altyapısı var."
+photo:
+  id: "pixabay-876099"
+  url: "/foto/px-876099"
+  alt: "integrated circuit, device, chip, technology, electronic, computer, hardware, component, engineering, brown computer, brown technology, brown laptop, integrated circuit, integrated circuit, integrated"
+  author: "WikimediaImages"
+  authorUrl: "https://pixabay.com/users/WikimediaImages-1185597/"
+  link: "https://pixabay.com/photos/integrated-circuit-device-chip-876099/"
+  source: "pixabay"
 sources:
   - title: "US, 8 Partners Sign AI Supply Pact Before Trump-Xi Talks"
     url: "https://fourweekmba.com/ai-us-8-partners-sign-ai-supply-pact-before-trump-xi-talks/"

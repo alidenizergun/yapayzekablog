@@ -8,6 +8,14 @@ date: 2026-11-05T12:00:00+03:00
 image: odul
 brand: lg
 imageQuery: "award ceremony trophy stage"
+photo:
+  id: "pixabay-710169"
+  url: "/foto/px-710169"
+  alt: "trophies, show, award, trophy, prize, trophies, trophies, award, award, award, trophy, trophy, trophy, trophy, trophy"
+  author: "pohjakroon"
+  authorUrl: "https://pixabay.com/users/pohjakroon-165862/"
+  link: "https://pixabay.com/photos/trophies-show-award-trophy-prize-710169/"
+  source: "pixabay"
 sources:
   - title: "Veille IA du 4 novembre 2026"
     url: "https://www.actuia.com/veille/2026-11-04/"

@@ -22,6 +22,14 @@ byNumbers:
     label: "Astra, milyon çıktı tokenı başına standart fiyat"
   - value: "yüzde 20"
     label: "Astra token fiyatlarındaki indirim"
+photo:
+  id: "pixabay-7736878"
+  url: "/foto/px-7736878"
+  alt: "ai-generated, computer, artificial intelligence, ai, dall-e, chatgpt, laptop, technology, future, brain, robot, android, chatgpt, chatgpt, chatgpt, chatgpt, chatgpt"
+  author: "Alexandra_Koch"
+  authorUrl: "https://pixabay.com/users/Alexandra_Koch-621802/"
+  link: "https://pixabay.com/photos/ai-generated-computer-7736878/"
+  source: "pixabay"
 sources:
   - title: "OpenAI X gönderisi"
     url: "https://x.com/OpenAI/status/2122750124543926515"

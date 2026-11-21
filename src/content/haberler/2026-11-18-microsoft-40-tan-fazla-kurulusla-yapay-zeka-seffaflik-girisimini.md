@@ -14,6 +14,14 @@ keyPoints:
   - "Girişime Accenture, Adobe, KPMG, Mastercard ve Volvo Cars dahil 40'tan fazla kuruluş katıldı."
   - "Microsoft, NIST'in Yapay Zeka Ajanı Standartları Girişimi'ne katılımını genişletecek."
 format: kisa
+photo:
+  id: "pixabay-3685829"
+  url: "/foto/px-3685829"
+  alt: "hand, robot, human, keyboard, networks, industry, internet, social, social network, logo, marketing, analysis, concept, implementation, work, success, successful, idea, competence, solution, solutions"
+  author: "geralt"
+  authorUrl: "https://pixabay.com/users/geralt-9301/"
+  link: "https://pixabay.com/photos/hand-robot-human-keyboard-networks-3685829/"
+  source: "pixabay"
 sources:
   - title: "Microsoft 40'tan fazla ortakla yapay zeka şeffaflık girişimini başlattı"
     url: "https://tr.investing.com/news/company-news/microsoft-40tan-fazla-ortakla-yapay-zeka-seffaflk-girisimini-baslatt-93CH-4162171"

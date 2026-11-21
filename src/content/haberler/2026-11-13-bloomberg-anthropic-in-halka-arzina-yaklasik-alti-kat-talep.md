@@ -9,6 +9,14 @@ image: girisim
 brand: anthropic
 imageQuery: "stock market chart screen"
 whyItMatters: "Talep rakamı, yatırımcıların yapay zeka şirketlerine olan ilgisini ve halka arzın rekor kırma ihtimalini gösteriyor."
+photo:
+  id: "pixabay-1730089"
+  url: "/foto/px-1730089"
+  alt: "business, stock, finance, market, financial, stock market, investment, success, information, data, exchange, growth, trading, broker, economy, money, stock, stock market, stock market, stock market, s"
+  author: "AhmadArdity"
+  authorUrl: "https://pixabay.com/users/AhmadArdity-3112014/"
+  link: "https://pixabay.com/photos/business-stock-finance-market-1730089/"
+  source: "pixabay"
 sources:
   - title: "Anthropic's IPO Is Said to Be About Six Times Oversubscribed"
     url: "https://www.bloomberg.com/news/articles/2026-11-12/anthropic-s-ipo-is-said-to-be-about-six-times-oversubscribed"

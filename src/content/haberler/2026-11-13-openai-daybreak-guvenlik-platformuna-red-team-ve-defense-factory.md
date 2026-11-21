@@ -9,6 +9,14 @@ image: guvenlik
 brand: openai
 imageQuery: "cyber security hacker screen"
 whyItMatters: "OpenAI, siber güvenlik modellerini açık tespitinden yama önerisine uzanan ticari ürünlere dönüştürüyor. Ajan tabanlı güvenlik araçları kurumsal pazarda rekabet alanı olmaya başlıyor."
+photo:
+  id: "pixabay-2851245"
+  url: "/foto/px-2851245"
+  alt: "cyber security, hacking, internet, network, information, cyber security, cyber security, cyber security, hacking, hacking, hacking, hacking, hacking"
+  author: "TheDigitalArtist"
+  authorUrl: "https://pixabay.com/users/TheDigitalArtist-202249/"
+  link: "https://pixabay.com/photos/cyber-security-hacking-internet-2851245/"
+  source: "pixabay"
 sources:
   - title: "@gdb X gönderisi"
     url: "https://x.com/gdb/status/2121004237413142656"

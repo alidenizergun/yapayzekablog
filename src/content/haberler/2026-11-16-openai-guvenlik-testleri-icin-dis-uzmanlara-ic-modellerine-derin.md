@@ -15,6 +15,14 @@ keyPoints:
   - "Transluce pilotu 2027'de genişletmeyi planlıyor."
 format: kisa
 whatsNext: "Transluce pilot çalışmayı 2027'de genişletmeyi planlıyor."
+photo:
+  id: "pixabay-924920"
+  url: "/foto/px-924920"
+  alt: "coding, programming, working, macbook, laptop, technology, office, desk, business, coding, coding, coding, coding, coding, programming, programming, programming"
+  author: "StockSnap"
+  authorUrl: "https://pixabay.com/users/StockSnap-894430/"
+  link: "https://pixabay.com/photos/coding-programming-working-macbook-924920/"
+  source: "pixabay"
 sources:
   - title: "@OpenAI X gönderisi"
     url: "https://x.com/OpenAI/status/2122359930628063248"

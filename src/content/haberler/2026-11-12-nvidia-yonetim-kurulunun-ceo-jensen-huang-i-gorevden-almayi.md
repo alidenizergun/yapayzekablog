@@ -9,6 +9,14 @@ image: altyapi
 brand: nvidia
 imageQuery: "boardroom meeting table"
 whyItMatters: "Yapay zeka çiplerinin en büyük tedarikçisindeki liderlik belirsizliği, sektörün altyapı zincirini ve piyasa değerlemelerini doğrudan etkileyebilir."
+photo:
+  id: "pixabay-2181980"
+  url: "/foto/px-2181980"
+  alt: "chairs, conference room, contemporary, empty, indoors, interior design, room, table, whiteboards, boardroom, furniture, interior decoration, conference room, conference room, conference room, interior"
+  author: "Pexels"
+  authorUrl: "https://pixabay.com/users/Pexels-2286921/"
+  link: "https://pixabay.com/photos/chairs-conference-room-contemporary-2181980/"
+  source: "pixabay"
 sources:
   - title: "Nvidia board meeting to decide CEO Jensen Huang's fate stretches into evening"
     url: "https://www.cnbc.com/2026/11/11/nvidia-jensen-huang-affair-employee.html"

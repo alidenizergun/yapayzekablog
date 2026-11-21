@@ -12,6 +12,14 @@ keyPoints:
   - "Büyük bankalar, kimlik ya da onay olmadan işlem deneyen yapay zeka ajanları tespit etti."
   - "Barr'a göre otonom ajanlar mevduatı hızla kaydırarak banka kaçışlarını hızlandırabilir."
   - "Barr daha sıkı kimlik doğrulama ve ajan yeteneklerini sınırlayan teknik korumalar istedi."
+photo:
+  id: "pixabay-2697683"
+  url: "/foto/px-2697683"
+  alt: "robot, isolated, artificial intelligence, robot, robot, robot, robot, robot, artificial intelligence"
+  author: "Janson_G"
+  authorUrl: "https://pixabay.com/users/Janson_G-5907103/"
+  link: "https://pixabay.com/photos/robot-isolated-2697683/"
+  source: "pixabay"
 sources:
   - title: "Fed's Barr warns on AI risks to financial system"
     url: "https://www.thestar.com.my/tech/tech-news/2026/11/16/fed039s-barr-warns-on-ai-risks-to-financial-system"

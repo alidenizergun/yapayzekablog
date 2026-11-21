@@ -22,6 +22,14 @@ byNumbers:
     label: "S&P 500'ün geldiği seviye"
   - value: "yüzde 10"
     label: "Rekor kapanışların altına inen Dow Jones ve S&P 500"
+photo:
+  id: "pixabay-1853262"
+  url: "/foto/px-1853262"
+  alt: "blur, chart, computer, data, finance, graph, growth, line graph, stock exchange, stock market, technology, trading, data, finance, finance, graph, stock market, stock market, stock market, stock marke"
+  author: "Pexels"
+  authorUrl: "https://pixabay.com/users/Pexels-2286921/"
+  link: "https://pixabay.com/photos/blur-chart-computer-data-finance-1853262/"
+  source: "pixabay"
 sources:
   - title: "Altın ve ABD borsalarında yapay zeka depremi"
     url: "https://www.ensonhaber.com/altin-ve-abd-borsalarinda-yapay-zeka-depremi-h1584248"
