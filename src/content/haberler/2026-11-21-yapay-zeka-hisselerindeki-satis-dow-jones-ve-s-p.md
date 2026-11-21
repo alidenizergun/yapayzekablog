@@ -23,6 +23,13 @@ byNumbers:
   - value: "yüzde 10"
     label: "Rekor kapanışların altına inen Dow Jones ve S&P 500"
 photo:
+  id: "xnzSgqyP8Hs"
+  url: "https://images.unsplash.com/photo-1770461846516-b7e5993a8e4f?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8Mnx8c3RvY2slMjBleGNoYW5nZSUyMHRyYWRpbmclMjBmbG9vcnxlbnwxfDB8fHwxNzk1MjU1MjgyfDA&ixlib=rb-4.1.0"
+  alt: "New york stock exchange building with american flags"
+  author: "David Vives"
+  authorUrl: "https://unsplash.com/@davidvives"
+  link: "https://unsplash.com/photos/new-york-stock-exchange-building-with-american-flags-xnzSgqyP8Hs"
+photo2:
   id: "pixabay-1853262"
   url: "/foto/px-1853262"
   alt: "blur, chart, computer, data, finance"
@@ -30,13 +37,6 @@ photo:
   authorUrl: "https://pixabay.com/users/Pexels-2286921/"
   link: "https://pixabay.com/photos/blur-chart-computer-data-finance-1853262/"
   source: "pixabay"
-photo2:
-  id: "xnzSgqyP8Hs"
-  url: "https://images.unsplash.com/photo-1770461846516-b7e5993a8e4f?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8Mnx8c3RvY2slMjBleGNoYW5nZSUyMHRyYWRpbmclMjBmbG9vcnxlbnwxfDB8fHwxNzk1MjU1MjgyfDA&ixlib=rb-4.1.0"
-  alt: "New york stock exchange building with american flags"
-  author: "David Vives"
-  authorUrl: "https://unsplash.com/@davidvives"
-  link: "https://unsplash.com/photos/new-york-stock-exchange-building-with-american-flags-xnzSgqyP8Hs"
 sources:
   - title: "Altın ve ABD borsalarında yapay zeka depremi"
     url: "https://www.ensonhaber.com/altin-ve-abd-borsalarinda-yapay-zeka-depremi-h1584248"
