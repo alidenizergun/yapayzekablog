@@ -62,7 +62,7 @@ jobs:
           BASE_PATH: ${{ vars.BASE_PATH }}
           PUBLIC_NEWSLETTER_ACTION: ${{ vars.NEWSLETTER_ACTION }}
           PUBLIC_REPORT_FORM_ACTION: ${{ vars.REPORT_FORM_ACTION }}
-          PUBLIC_REPORT_FORM_KEY: ${{ vars.REPORT_FORM_KEY }}
+          PUBLIC_REPORT_FORM_KEY: ${{ vars.REPORT_FORM_KEY || secrets.REPORT_FORM_KEY }}
         run: npm run build
 
       - name: Özel domain dosyası
