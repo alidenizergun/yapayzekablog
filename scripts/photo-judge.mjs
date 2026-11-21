@@ -14,7 +14,7 @@ export function makeJudge(anthropic, { onUsage } = {}) {
     if (!candidates.length) return -1;
     const list = candidates.map((c, i) => `${i}. ${c.text || '(açıklama yok)'}`).join('\n');
     const res = await anthropic.messages.create({
-      model: MODEL, max_tokens: 20,
+      model: MODEL, max_tokens: 1500,
       messages: [{ role: 'user', content: `Bir haber sitesinde haberin üstünde gösterilecek fotoğrafı seçiyorsun.\n\nHaber: ${context}\n\nAday fotoğrafların açıklamaları:\n${list}\n\n${RULES}\n\nYalnızca en uygun adayın numarasını yaz. Hiçbiri haberle açıkça uyumlu değilse -1 yaz.` }],
     });
     onUsage?.(res);
