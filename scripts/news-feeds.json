@@ -1,7 +1,8 @@
 {
-  "_aciklama": "Haber hattının doğrudan okuduğu RSS/Atom akışları. 'kesif' türündekiler (derleyiciler) yalnızca haberi bulmak içindir; habere kaynak olarak konmaz. 'filtre: true' olan genel akışlarda yalnızca yapay zeka ile ilgili başlıklar alınır.",
+  "_aciklama": "Haber hattının doğrudan okuduğu RSS/Atom akışları. 'kesif' türündekiler (derleyiciler) yalnızca haberi bulmak içindir; habere kaynak olarak konmaz. 'filtre: true' olan genel akışlarda yalnızca yapay zeka ile ilgili başlıklar alınır. 'yol' verilirse yalnızca o yolla başlayan adresler, 'en_fazla' ile akış başına üst sınır (varsayılan 15). Google Haber site haritaları da okunur.",
   "akislar": [
     { "ad": "Techmeme", "url": "https://www.techmeme.com/feed.xml", "tur": "kesif", "filtre": true },
+    { "ad": "Digg AI", "url": "https://digg.com/news-sitemap.xml", "tur": "kesif", "yol": "/ai/", "en_fazla": 20 },
     { "ad": "TestingCatalog", "url": "https://www.testingcatalog.com/rss/" },
     { "ad": "The Decoder", "url": "https://the-decoder.com/feed/" },
     { "ad": "TechCrunch AI", "url": "https://techcrunch.com/category/artificial-intelligence/feed/" },

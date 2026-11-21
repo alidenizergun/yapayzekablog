@@ -28,6 +28,16 @@ const tag = (block, name) => {
 export function parseFeed(xml) {
   const items = [];
   const blocks = xml.match(/<item[\s>][\s\S]*?<\/item>/gi) || xml.match(/<entry[\s>][\s\S]*?<\/entry>/gi) || [];
+  // Google Haber site haritası (<url><loc> + <news:title>): RSS'i olmayan siteler için
+  if (!blocks.length && /<news:news/i.test(xml)) {
+    for (const b of xml.match(/<url>[\s\S]*?<\/url>/gi) || []) {
+      const title = stripTags(tag(b, 'news:title'));
+      const url = decode(tag(b, 'loc')).trim();
+      const d = new Date(stripTags(tag(b, 'news:publication_date')));
+      if (title && /^https?:\/\//.test(url)) items.push({ title, url, date: isNaN(d) ? null : d, summary: '', raw: '' });
+    }
+    return items;
+  }
   for (const b of blocks) {
     const title = stripTags(tag(b, 'title'));
     let url = decode(tag(b, 'link')).trim();
@@ -93,7 +103,10 @@ export async function fetchFeeds({ root, lookbackHours = 26, known = new Set(), 
         return parsed
           .filter((i) => !i.date || i.date.valueOf() >= since)
           .filter((i) => !i.date || i.date.valueOf() <= Date.now() + 3600e3)
+          .filter((i) => !f.yol || new URL(i.url).pathname.startsWith(f.yol))
           .filter((i) => !f.filtre || AI_RE.test(`${i.title} ${i.summary}`))
+          .sort((a, b) => (b.date?.valueOf() ?? 0) - (a.date?.valueOf() ?? 0))
+          .slice(0, f.en_fazla ?? 15)
           .map((i) => {
             const item = { source: f.ad, title: i.title, url: i.url, date: i.date, summary: i.summary, discovery: f.tur === 'kesif' };
             if (item.discovery) {

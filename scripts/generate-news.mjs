@@ -539,7 +539,7 @@ ${JSON.stringify(input, null, 1)}` }],
 // ---------------------------------------------------------------- doğrulama
 
 // Tek başına yeterli sayılmayan kaynaklar: haber bültenleri, derleme siteleri, kişisel bloglar, veri tabanı kayıtları
-const WEAK_SOURCE = /(techmeme\.com|substack\.com|beehiiv\.com|medium\.com|ghost\.io|theneuron\.ai|therundown\.ai|bensbites|tldr\.tech|superhuman\.ai|fundz\.net|crunchbase\.com\/(organization|funding_round)|linkedin\.com\/pulse|news\.ycombinator\.com|reddit\.com|\/digest\/|\/newsletter\/|aggregat|daily-ai|ai-news-today)/i;
+const WEAK_SOURCE = /(techmeme\.com|digg\.com|di\.gg|substack\.com|beehiiv\.com|medium\.com|ghost\.io|theneuron\.ai|therundown\.ai|bensbites|tldr\.tech|superhuman\.ai|fundz\.net|crunchbase\.com\/(organization|funding_round)|linkedin\.com\/pulse|news\.ycombinator\.com|reddit\.com|\/digest\/|\/newsletter\/|aggregat|daily-ai|ai-news-today)/i;
 const isWeakSource = (u) => WEAK_SOURCE.test(String(u));
 
 /** Güvenlik: haber metninden HTML'i ve kaynak listesinde olmayan linkleri temizler.
