@@ -1,8 +1,8 @@
 # Günde 4 güncelleme: gece tam turu + 3 ara tur. Haberleri üretir, İngilizcesini çevirir, siteyi derleyip yayınlar.
 # Turları cron-job.org başlatır (GitHub'ın kendi zamanlayıcısı yoğunlukta saatlerce gecikip turları atladığı için kaldırıldı):
-#   04:53 İstanbul  gece turu (tam haber, 12 arama)        gövde: {"ref":"main"}
-#   09:23, 13:23, 18:23 İstanbul  ara turlar (kısa not, 4 arama, en fazla 3 haber)   gövde: {"ref":"main","inputs":{"mode":"ogle"}}
-# Yedek: "Haber motoru uyarısı" iki saatte bir son turu denetler; tur atlanmışsa ara turu kendisi başlatır ve konu açar.
+#   00:00 İstanbul  gece turu (tam haber, 12 arama)        gövde: {"ref":"main"}
+#   06:00, 12:00, 18:00 İstanbul  ara turlar (kısa not, 4 arama, en fazla 3 haber)   gövde: {"ref":"main","inputs":{"mode":"ogle"}}
+# Denetim: "Haber motoru uyarısı" iki saatte bir son turu denetler; tur atlanmışsa yalnızca uyarı açar (turu kendisi başlatmaz).
 # cron-job.org'daki GitHub anahtarının süresi dolarsa turlar durur; yeni anahtarı cron-job.org'daki iki işe girin.
 name: Haber güncellemesi
 

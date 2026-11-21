@@ -113,8 +113,8 @@ jobs:
           [ -z "$last" ] && { echo "son-tur.json yok"; exit 0; }
           age_min=$(( ( $(date +%s) - $(date -d "$last" +%s) ) / 60 ))
           hour=$(TZ=Europe/Istanbul date +%H)
-          # Gündüz turlar en çok ~5 saat arayla, gece (18:23 → 04:53) 10,5 saat arayla çalışır.
-          if [ "$hour" -ge 7 ] && [ "$hour" -le 22 ]; then limit=360; else limit=720; fi
+          # Turlar 6 saatte bir (00:00, 06:00, 12:00, 18:00 İstanbul); 7,5 saati geçen sessizlik atlanmış tur sayılır
+          limit=450
           echo "son tur $age_min dakika önce; sınır $limit"
           num=$(gh issue list --label haber-motoru --state open --search "\"$title\" in:title" --json number,title --jq ".[] | select(.title == \"$title\") | .number" | head -n1)
           if [ "$age_min" -lt "$limit" ]; then
