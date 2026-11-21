@@ -797,18 +797,19 @@ async function backfillPhotos() {
   if (DRY || !process.env.UNSPLASH_ACCESS_KEY || photoNote.error) return;
   const used = usedPhotoIds(CONTENT_DIR);
   const files = fs.readdirSync(CONTENT_DIR).filter((f) => f.endsWith('.md')).sort().reverse();
-  for (const f of files) {
+  // Önce fotoğrafı hiç olmayan haberler (manşet ve listelerde illüstrasyon görünmesin), sonra ikinci fotoğraflar
+  const jobs = [];
+  for (const pass of ['photo', 'photo2']) for (const f of files) jobs.push([pass, f]);
+  for (const [field, f] of jobs) {
     if (photoNote.backfilled >= BACKFILL_LIMIT) break;
     const file = path.join(CONTENT_DIR, f);
-    const raw = fs.readFileSync(file, 'utf8');
-    const fm = raw.split(/^---$/m)[1] || '';
+    const fm = fs.readFileSync(file, 'utf8').split(/^---$/m)[1] || '';
     const hasPhoto = /^photo:/m.test(fm), hasPhoto2 = /^photo2:/m.test(fm);
-    if (hasPhoto && hasPhoto2) continue;
+    if (field === 'photo' ? hasPhoto : (!hasPhoto || hasPhoto2)) continue;
     const qs = [fm.match(/^imageQuery:\s*"?([^"\n]+)"?/m)?.[1], CATEGORY_QUERIES[fm.match(/^category:\s*(\S+)/m)?.[1]]];
     try {
-      // Önce eksik ana fotoğraf, sonra ikinci fotoğraf (aynı sayfada tekrar olacaksa illüstrasyon yerine gösterilir)
-      if (!hasPhoto) { const photo = await findPhoto(qs, used); if (photo && addPhotoToFile(file, photo)) photoNote.backfilled++; }
-      else { const photo = await findPhoto(qs, used); if (photo && addPhotoToFile(file, photo, 'photo2')) photoNote.backfilled++; }
+      const photo = await findPhoto(qs, used);
+      if (photo && addPhotoToFile(file, photo, field)) photoNote.backfilled++;
     } catch (err) { photoNote.error = err.message; break; }
   }
 }

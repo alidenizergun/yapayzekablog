@@ -18,7 +18,7 @@ const { lang, T, S } = L;
 const news = locNewsList(await getNews(), lang, L.m);
 const cn = (slug) => S(`cat.${slug}.name`, catName(slug));
 
-// Manşet: son 24 saatin en yüksek puanlı haberi; hiçbir haber 24 saatten uzun manşette kalmaz (src/lib/news.js › pickLead)
+// Manşet: en son 5 haberden fotoğraflı ya da logolu olanların en yüksek puanlısı (src/lib/news.js › pickLead)
 const lead = pickLead(news);
 // Manşet alanındaki yan haberler de görselli olmalı (illüstrasyon yok): görseli olan ilk 3 haber
 const others = news.filter((n) => n !== lead);

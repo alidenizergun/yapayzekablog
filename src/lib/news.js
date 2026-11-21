@@ -174,29 +174,16 @@ export const HOME_MAIN = 15;
 // Okunma potansiyeli: puanı olmayan eski haberlerde manşet işaretliyse 80, değilse 50
 export const popularityOf = (n) => n.data.popularity ?? (n.data.featured ? 80 : 50);
 
-// Site günde dört kez yeniden derlenir (İstanbul 04:53, 09:23, 13:23, 18:23). Manşet derleme anında seçildiği için
-// bir haber, bir sonraki derlemeye kadar da manşette kalır; bu süre hesaba katılır.
-const BUILD_SLOTS_MIN = [4 * 60 + 53, 9 * 60 + 23, 13 * 60 + 23, 18 * 60 + 23];
-const LEAD_MAX_H = 24;      // bir haber en fazla bu kadar saat manşette kalır
-const BUILD_DELAY_H = 1;    // zamanlayıcı gecikmesi payı
-function hoursToNextBuild(now) {
-  const t = new Date(now + 3 * 3600e3); // İstanbul (UTC+3, yaz saati yok)
-  const m = t.getUTCHours() * 60 + t.getUTCMinutes();
-  const next = BUILD_SLOTS_MIN.find((s) => s > m) ?? BUILD_SLOTS_MIN[0] + 1440;
-  return (next - m) / 60 + BUILD_DELAY_H;
-}
-
-/** Manşet: yayınlanmasının üzerinden 24 saat geçmemiş haberlerin en yüksek puanlısı.
- *  Puan = okunma potansiyeli (1-100) − saat başına 1,5 puan; böylece yeni gelişmeler manşete daha çabuk çıkar.
- *  Bir sonraki derlemede 24 saati dolduracak haber aday olmaz; bu yüzden hiçbir haber 24 saatten uzun manşette kalmaz.
- *  Uygun haber yoksa (uzun süre yeni haber çıkmadıysa) en yeni haber. */
+/** Manşet: her zaman en son yayınlanan 5 haberden biri.
+ *  Bu 5 haber içinden fotoğrafı ya da logosu olanlar adaydır (manşette illüstrasyon yok); aralarından
+ *  puanı en yüksek olan seçilir. Puan = okunma potansiyeli (1-100) − saat başına 1,5 puan.
+ *  Son 5 haberin hiçbirinde gerçek görsel yoksa yine bu 5 haberin en yüksek puanlısı seçilir
+ *  (haber hattı her yeni habere fotoğraf bulmaya çalıştığı için bu çok nadirdir). */
 export function pickLead(news, now = Date.now()) {
-  const limitH = LEAD_MAX_H - hoursToNextBuild(now);
-  const ageH = (n) => (now - n.data.date.valueOf()) / 3600e3;
-  // Manşette illüstrasyon kullanılmaz: yalnızca fotoğrafı ya da logosu olan haberler manşete çıkabilir
-  const withVisual = news.filter(hasRealVisual);
-  const pool = withVisual.filter((n) => ageH(n) >= 0 && ageH(n) < limitH);
-  if (!pool.length) return withVisual[0] ?? news[0];
+  const ageH = (n) => Math.max(0, (now - n.data.date.valueOf()) / 3600e3);
+  const latest = [...news].sort((a, b) => b.data.date - a.data.date).slice(0, 5);
+  if (!latest.length) return undefined;
+  const pool = latest.filter(hasRealVisual).length ? latest.filter(hasRealVisual) : latest;
   const score = (n) => popularityOf(n) - ageH(n) * 1.5;
   return pool.reduce((best, n) => (score(n) > score(best) ? n : best));
 }
