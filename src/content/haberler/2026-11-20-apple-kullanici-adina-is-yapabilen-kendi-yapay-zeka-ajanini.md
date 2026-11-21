@@ -8,19 +8,12 @@ image: kod
 popularity: 62
 brand: apple
 imageQuery: "software engineer laptop office"
-photo:
-  id: "64YrPKiguAE"
-  url: "https://images.unsplash.com/photo-1580894908361-967195033215?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8NHx8c29mdHdhcmUlMjBlbmdpbmVlciUyMGxhcHRvcCUyMG9mZmljZXxlbnwxfDB8fHwxNzk1MTM4NDIwfDA&ixlib=rb-4.1.0"
-  alt: "woman in green shirt sitting in front of computer"
-  author: "ThisisEngineering"
-  authorUrl: "https://unsplash.com/@thisisengineering"
-  link: "https://unsplash.com/photos/woman-in-green-shirt-sitting-in-front-of-computer-64YrPKiguAE"
 whyItMatters: "Apple'ın ajan alanındaki hazırlığı iş ilanları üzerinden görünür oldu; ancak bu henüz bir ürün duyurusu değil, ilanlardan çıkarılan bir plan."
 keyPoints:
   - "Apple, kullanıcılar adına iş yapabilen otonom bir yapay zeka ajanı geliştiriyor."
   - "Plan, şirketin web sitesine bu hafta eklenen iş ilanlarında yer alıyor."
   - "Sistemin kod yazması, web'de gezinmesi ve uygulamaları kontrol etmesi bekleniyor."
-photo2:
+photo:
   id: "mcSDtbWXUZU"
   url: "https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8Mnx8bGFwdG9wJTIwYXV0b21hdGlvbiUyMHdvcmtmbG93fGVufDF8MHx8fDE3OTUyNTEyNTd8MA&ixlib=rb-4.1.0"
   alt: "turned on black and grey laptop computer"

@@ -8,7 +8,6 @@ keyPoints:
   - "Apple is developing an autonomous AI agent that can perform tasks on users' behalf."
   - "The plan appears in job postings added to the company's website this week."
   - "The system is expected to write code, browse the web and control apps."
-photoAlt: "woman in green shirt sitting in front of computer"
 ---
 
 According to Bloomberg's report dated November 19, 2026, Apple is developing its own autonomous AI agent that can perform tasks on users' behalf. The information is based on job postings added to the company's website this week.

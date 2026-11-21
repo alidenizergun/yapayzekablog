@@ -16,7 +16,6 @@ byNumbers:
     label: "Stock drop in morning trading (more than)"
   - value: "$12.9 billion"
     label: "Pending Hugging Face acquisition"
-photoAlt: "selective focus photography of GEFORCE RTX graphics card"
 dealCounterparty: "Hugging Face"
 dealAmount: "$12.9 billion"
 ---

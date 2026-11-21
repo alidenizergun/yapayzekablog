@@ -8,7 +8,6 @@ keyPoints:
   - "The US and its partners signed the San Francisco Declaration under Pax Silica."
   - "Signatories agreed to create a joint list of critical AI technologies to be protected."
   - "The scope covers semiconductors, critical minerals and energy infrastructure."
-photoAlt: "a group of people working in a factory"
 ---
 
 The US and its partners signed the San Francisco Declaration under the US-led Pax Silica initiative. The Financial Times reported it on November 15, citing Jacob Helberg, the State Department's Under Secretary for Economic Affairs.

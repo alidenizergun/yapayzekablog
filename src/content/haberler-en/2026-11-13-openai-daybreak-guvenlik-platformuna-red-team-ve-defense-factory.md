@@ -4,7 +4,6 @@ slug: "openai-adds-red-team-and-defense-factory-products"
 title: "OpenAI adds Red Team and Defense Factory products to its Daybreak security platform"
 spot: "OpenAI has added two products to its Daybreak cybersecurity platform: Red Team, which runs penetration tests on web applications, and Defense Factory, which focuses on fixing vulnerabilities. Red Team is in early access; Defense Factory is in preview."
 whyItMatters: "OpenAI is turning its cybersecurity models into commercial products that span vulnerability detection to patch recommendations. Agent-based security tools are starting to become a competitive arena in the enterprise market."
-photoAlt: "person using laptop computers"
 ---
 
 OpenAI has added two new products to its Daybreak security platform. Daybreak Red Team consists of a group of AI agents that work together to run penetration tests on web applications. Daybreak Defense Factory focuses on fixing the security vulnerabilities that are found.
