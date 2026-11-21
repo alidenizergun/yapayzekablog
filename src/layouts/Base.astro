@@ -139,6 +139,28 @@ const navGroups = [
 // Menü çubuğunda ayrıca kısayolu olan sayfalar (Son haberler) açıldığında grup başlığı da işaretlenmesin
 const groupCur = (i) => i.current && i.href !== L.u('/akis/');
 const groupOf = (k) => navGroups.find((g) => g.key === k)?.items ?? [];
+// Menü çubuğu: doğrudan bağlantılar (haberler → en çok haber çıkan bölümler → okur araçları)
+const TOP_CATS = ['modeller', 'ajanlar', 'girisim-yatirim', 'regulasyon', 'donanim', 'turkiye'].filter((c) => counts.get(c));
+const topLinks = [
+  item(T('Son haberler', 'Latest'), '/akis/'),
+  ...TOP_CATS.map((slug) => ({ ...item(S(`cat.${slug}.name`, categoryBySlug(slug)?.name), `/kategori/${slug}/`), current: slug === currentCat })),
+  { ...item(T('Araçlar', 'AI tools'), '/arac/'), sep: true },
+  item(T('Rehberler', 'Guides'), '/rehber/'),
+  item(T('Sözlük', 'Glossary'), '/sozluk/'),
+];
+// "Menü" paneli: dört sütun, her başlık okurun aradığı şeyi söyler
+const megaCols = [
+  { label: T('Haberler', 'News'), items: groupOf('news'), groups: [{ items: groupOf('news').filter((i) => !i.href.includes('/kategori/')) }, { label: T('Konular', 'Topics'), cls: 'two', items: groupOf('news').filter((i) => i.href.includes('/kategori/')) }] },
+  { label: T('Yapay zeka araçları', 'AI tools'), items: groupOf('tools'), groups: [{ items: [...groupOf('tools'), ...groupOf('data').filter((i) => i.href.includes('modeller-karsilastirma'))] }] },
+  { label: T('Öğren', 'Learn'), items: [...groupOf('learn'), ...groupOf('sectors')], groups: [
+    { items: groupOf('learn') },
+    ...(groupOf('sectors').length ? [{ label: T('Sektörlere göre', 'By industry'), items: groupOf('sectors') }] : []),
+  ] },
+  { label: T('Türkiye ve veriler', 'Turkey and data'), items: [...groupOf('turkey'), ...groupOf('data')], groups: [
+    { label: T('Türkiye', 'Turkey'), items: groupOf('turkey') },
+    { label: T('Veriler', 'Data'), items: groupOf('data').filter((i) => !i.href.includes('modeller-karsilastirma')) },
+  ] },
+];
 const isHome = Astro.url.pathname.replace(/\/$/, '') === L.u('/').replace(/\/$/, '');
 const footerCats = CATEGORIES.filter((c) => counts.get(c.slug));
 // Alt bilgi menüsü: telefonda açılır kapanır gruplar, geniş ekranda hepsi açık
@@ -288,42 +310,43 @@ const isBreaking = latest && Date.now() - latest.data.date.valueOf() < BREAKING_
   <nav class="catbar" aria-label={T('Ana menü', 'Main menu')} data-catbar>
     <div class="wrap">
       <a class="catbar-logo" href={L.u('/')} aria-label={T('YZ Gündemi ana sayfa', 'YZ Gündemi home')} tabindex="-1"><span class="wm-badge" aria-hidden="true">YZ</span></a>
-      <ul class="nav-main" data-nav>
-        <li class="nav-quick"><a href={L.u('/akis/')} aria-current={path.startsWith(L.u('/akis/')) ? 'page' : undefined}>{T('Son haberler', 'Latest')}</a></li>
-        {navGroups.map((g) => (
-          <li class="nav-group-item">
-            <details class={`nav-group${g.items.some(groupCur) ? ' has-current' : ''}`} data-nav-group>
-              <summary>{g.label}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
-              <div class={`nav-panel${g.cols ? ' nav-panel-cols' : ''}${g.right ? ' nav-panel-right' : ''}`}>
-                <ul>{g.items.map((i) => <li><a href={i.href} aria-current={i.current ? 'page' : undefined}>{i.label}{i.desc && <span>{i.desc}</span>}</a></li>)}</ul>
-              </div>
-            </details>
-          </li>
-        ))}
-        <li class="nav-mobile">
-          <details class={`nav-group nav-all${navGroups.some((g) => g.items.some(groupCur)) ? ' has-current' : ''}`} data-nav-group>
-            <summary>{T('Menü', 'Menu')}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
-            <div class="nav-panel nav-panel-full">
-              <form class="menu-search" role="search" action={L.u('/ara/')} method="get">
-                <label class="sr-only" for="menu-q">{T('Sitede ara', 'Search the site')}</label>
-                <input id="menu-q" name="q" type="search" autocomplete="off" placeholder={T('Haber, araç veya terim ara', 'Search news, tools, terms')} />
-                <button type="submit">{T('Ara', 'Search')}</button>
-              </form>
-              <ul class="menu-quick">
-                <li><a href={L.u('/haftalik/')}>{T('Haftanın özeti', 'Week in review')}</a></li>
-                <li><a href={L.u('/arac/')}>{T('Araçlar', 'Tools')}</a></li>
-                <li><a href={L.u('/rehber/')}>{T('Rehberler', 'Guides')}</a></li>
-                <li><a href={L.u('/sozluk/')}>{T('Sözlük', 'Glossary')}</a></li>
-              </ul>
-              {navGroups.map((g) => (
-                <section>
-                  <h2>{g.label}</h2>
-                  <ul>{g.items.map((i) => <li><a href={i.href} aria-current={i.current ? 'page' : undefined}>{i.label}</a></li>)}</ul>
-                </section>
+      {/* Menü: en çok okunan bölümler doğrudan bağlantı (açılır menü yok); tüm bölümler tek "Menü" panelinde, sütunlar hâlinde */}
+      <details class={`nav-all${megaCols.some((c) => c.items.some(groupCur)) && !topLinks.some((l) => l.current) ? ' has-current' : ''}`} data-nav-group>
+        <summary><svg class="nav-all-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>{T('Menü', 'Menu')}</summary>
+        <div class="mega" role="region" aria-label={T('Tüm bölümler', 'All sections')}>
+          <form class="menu-search" role="search" action={L.u('/ara/')} method="get">
+            <label class="sr-only" for="menu-q">{T('Sitede ara', 'Search the site')}</label>
+            <input id="menu-q" name="q" type="search" autocomplete="off" placeholder={T('Haber, araç veya terim ara', 'Search news, tools, terms')} />
+            <button type="submit">{T('Ara', 'Search')}</button>
+          </form>
+          {megaCols.map((c) => (
+            <section>
+              <h2>{c.label}</h2>
+              {c.groups.map((g) => (
+                <>
+                  {g.label && <h3>{g.label}</h3>}
+                  <ul class={g.cls}>{g.items.map((i) => <li><a href={i.href} aria-current={i.current ? 'page' : undefined}>{i.label}</a></li>)}</ul>
+                </>
               ))}
-            </div>
-          </details>
-        </li>
+            </section>
+          ))}
+          {/* Telefonda menü çubuğunda yer kalsın diye dil ve tema seçimi burada */}
+          <div class="mega-foot">
+            <a class="mega-lang" href={switchHref} hreflang={lang === 'en' ? 'tr' : 'en'} lang={lang === 'en' ? 'tr' : 'en'}>{lang === 'en' ? 'Türkçe' : 'English'}</a>
+            <button type="button" class="theme-btn" role="switch" aria-checked="false" aria-label={T('Koyu tema', 'Dark theme')} title={T('Koyu temaya geç', 'Switch to dark theme')} data-theme-toggle>
+              <span class="tb-track" aria-hidden="true">
+                <svg class="tb-ico tb-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+                <svg class="tb-ico tb-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></svg>
+                <span class="tb-knob"></span>
+              </span>
+            </button>
+          </div>
+        </div>
+      </details>
+      <ul class="nav-links" data-catbar-scroll>
+        {topLinks.map((l, i) => (
+          <li class={l.sep ? 'nav-sep-before' : undefined}><a href={l.href} aria-current={l.current ? 'page' : undefined}>{l.label}</a></li>
+        ))}
       </ul>
       <a class="catbar-search" href={L.u('/ara/')} aria-label={T('Haberlerde ara', 'Search')} title={T('Haberlerde ara', 'Search')} aria-current={Astro.url.pathname.startsWith(L.u('/ara/')) ? 'page' : undefined}>
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
