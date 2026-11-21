@@ -31,6 +31,7 @@ import { BRANDS, BRAND_SLUGS } from '../src/lib/brands.js';
 import { findPhoto, usedPhotoIds, photoYaml, addPhotoToFile, CATEGORY_QUERIES, fillPool, readPool } from './photos.mjs';
 import { makeJudge } from './photo-judge.mjs';
 import { fetchXPosts, formatPostsForPrompt } from './x-feed.mjs';
+import { fetchFeeds, formatFeedsForPrompt } from './news-feeds.mjs';
 import { STORIES } from '../src/lib/stories.js';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
@@ -222,15 +223,20 @@ const TOPICS = [
 ];
 
 /** Araştırma adımı: konulara bölünmüş web aramaları; bulunan gelişmeleri ve görülen tüm adresleri döndürür. */
-async function research(anthropic, existing, xPosts = []) {
+async function research(anthropic, existing, xPosts = [], feedItems = []) {
   const seen = new Map(); // normalizeUrl -> { url, title }
+  // Haber akışlarından gelen adresler gerçektir; derleyici (Techmeme) sayfası değil, işaret ettiği asıl haber izinlidir
+  for (const f of feedItems) {
+    const u = f.discovery ? f.origin : f.url;
+    if (u && normalizeUrl(u)) seen.set(normalizeUrl(u), { url: u, title: f.discovery ? f.source + ' üzerinden' : f.title });
+  }
   // X API'den gelen gönderi adresleri gerçek olduğu için izinli kaynaklara eklenir
   for (const p of xPosts) seen.set(normalizeUrl(p.url), { url: p.url, title: `@${p.username} X gönderisi` });
   // Ara tur tek istek; tam tur konulara bölünür (arama bütçesi konulara paylaştırılır)
   const plan = MIDDAY
     ? [{ id: 'ogle', title: 'tüm alanlar', hint: 'büyük şirketlerin duyuruları, yatırımlar, regülasyon, Türkiye', x: true, uses: MAX_SEARCHES }]
     : TOPICS.map((t) => ({ ...t, uses: Math.max(t.min ?? 1, Math.round(MAX_SEARCHES / TOPICS.length)) }));
-  const results = await Promise.all(plan.map((t) => researchTopic(anthropic, existing, t.x ? xPosts : [], t, seen)));
+  const results = await Promise.all(plan.map((t) => researchTopic(anthropic, existing, t.x ? xPosts : [], t, seen, t.id === 'turkiye' ? [] : feedItems)));
   const searches = results.reduce((n, r) => n + r.searches, 0);
   lastSearches = searches;
   const notes = results.map((r, i) => (r.text && !/^\s*YENİ GELİŞME YOK\s*$/i.test(r.text) ? `## Araştırma: ${plan[i].title}\n${r.text}` : '')).filter(Boolean).join('\n\n');
@@ -238,7 +244,7 @@ async function research(anthropic, existing, xPosts = []) {
   return { notes: notes || 'YENİ GELİŞME YOK', seen, searches };
 }
 
-async function researchTopic(anthropic, existing, xPosts, topic, seen) {
+async function researchTopic(anthropic, existing, xPosts, topic, seen, feedItems = []) {
   const recent = existing
     .filter((e) => e.date.valueOf() > Date.now() - 7 * 86400e3)
     .sort((a, b) => b.date - a.date)
@@ -264,6 +270,11 @@ X'TEKİ TAKİP LİSTESİNDEN YENİ GÖNDERİLER (resmi X API'den alındı; adres
 ${formatPostsForPrompt(xPosts)}
 
 Bu gönderilerden haber değeri taşıyanları (lansman, resmi duyuru, önemli açıklama, yeni araştırma) aday olarak değerlendir. Kişisel görüş, şaka, tanıtım ve sohbet niteliğindeki gönderileri ele. Seçtiğin gönderinin adresini kaynaklara ekle ve mümkünse web aramasıyla resmi blog veya güvenilir bir haber kaynağından doğrula. Bir kişinin gönderisi tek başına olgu değildir: notta "X, şunu söyledi/duyurdu" diye belirt.
+` : ''}${feedItems.length ? `
+HIZLI HABER AKIŞLARINDAN SON BAŞLIKLAR (RSS ile doğrudan okundu; adresler gerçektir, en yenisi üstte):
+${formatFeedsForPrompt(feedItems)}
+
+Bu listeyi ÖNCE tara: bu araştırmanın konusuna giren ve haber değeri taşıyan başlıkları aday yap. Listedeki adresleri kaynak olarak doğrudan kullanabilirsin; ancak özet kısa olduğu için önemli adaylarda ayrıntı ve doğrulama için web araması yap, resmi duyuruyu bulmaya çalış. "YALNIZCA İPUCU" yazan adresleri kaynağa koyma. Listede olmayan gelişmeler için her zamanki gibi ara.
 ` : ''}
 Her aday için şu biçimde not yaz:
 ### <kısa başlık>
@@ -528,7 +539,7 @@ ${JSON.stringify(input, null, 1)}` }],
 // ---------------------------------------------------------------- doğrulama
 
 // Tek başına yeterli sayılmayan kaynaklar: haber bültenleri, derleme siteleri, kişisel bloglar, veri tabanı kayıtları
-const WEAK_SOURCE = /(substack\.com|beehiiv\.com|medium\.com|ghost\.io|theneuron\.ai|therundown\.ai|bensbites|tldr\.tech|superhuman\.ai|fundz\.net|crunchbase\.com\/(organization|funding_round)|linkedin\.com\/pulse|news\.ycombinator\.com|reddit\.com|\/digest\/|\/newsletter\/|aggregat|daily-ai|ai-news-today)/i;
+const WEAK_SOURCE = /(techmeme\.com|substack\.com|beehiiv\.com|medium\.com|ghost\.io|theneuron\.ai|therundown\.ai|bensbites|tldr\.tech|superhuman\.ai|fundz\.net|crunchbase\.com\/(organization|funding_round)|linkedin\.com\/pulse|news\.ycombinator\.com|reddit\.com|\/digest\/|\/newsletter\/|aggregat|daily-ai|ai-news-today)/i;
 const isWeakSource = (u) => WEAK_SOURCE.test(String(u));
 
 /** Güvenlik: haber metninden HTML'i ve kaynak listesinde olmayan linkleri temizler.
@@ -658,6 +669,7 @@ function dryRunData() {
 }
 
 let xNote = 'X takibi kapalı';
+let feedNote = 'Haber akışları okunmadı';
 
 // Aynı tur iki kez tetiklenirse (GitHub zamanlayıcısı + dış zamanlayıcı) ikincisi ücret çıkarmadan atlanır
 const LAST_RUN_FILE = path.join(ROOT, 'data/son-tur.json');
@@ -722,7 +734,17 @@ async function main() {
       xNote = `X takibi bu çalışmada atlandı: ${err.message}`;
     }
     log(xNote);
-    const r = await research(anthropic, existing, xPosts);
+    let feedItems = [];
+    try {
+      const known = new Set(existing.flatMap((e) => e.urls.map(normalizeUrl)).filter(Boolean));
+      const f = await fetchFeeds({ root: ROOT, lookbackHours: LOOKBACK_HOURS, known, normalize: normalizeUrl, max: MIDDAY ? 40 : 60, log: (m) => log(m) });
+      feedItems = f.items;
+      feedNote = f.note;
+    } catch (err) {
+      feedNote = `Haber akışları atlandı: ${err.message}`;
+      log(feedNote);
+    }
+    const r = await research(anthropic, existing, xPosts, feedItems);
     seen = r.seen;
     searches = r.searches;
     if (!r.notes || /YENİ GELİŞME YOK/i.test(r.notes) && r.notes.length < 200) {
@@ -881,6 +903,7 @@ function summary(written, rejected, searches) {
     ...editorNotes.map((n) => `  - ${n}`),
     `- Web araması: ${searches}${IS_WEEKEND ? ' (hafta sonu sınırı: ' + MAX_SEARCHES + ')' : ''}`,
     `- ${xNote}`,
+    `- ${feedNote}`,
     `- Fotoğraf (Unsplash/Pexels/Pixabay): ${(process.env.UNSPLASH_ACCESS_KEY || process.env.PEXELS_API_KEY || process.env.PIXABAY_API_KEY) ? `${photoNote.added} yeni habere, ${photoNote.backfilled} eski habere fotoğraf eklendi${photoNote.error ? ' (hata: ' + photoNote.error + ')' : ''}` : 'kapalı (UNSPLASH_ACCESS_KEY / PEXELS_API_KEY yok)'}`,
     ...written.map((w) => `  - ✅ ${w.title} (${w.sources} kaynak)`),
     ...rejected.map((r) => `  - ❌ ${r.title} — ${r.reasons.join(', ')}`),

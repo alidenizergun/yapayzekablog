@@ -1,0 +1,20 @@
+{
+  "_aciklama": "Haber hattının doğrudan okuduğu RSS/Atom akışları. 'kesif' türündekiler (derleyiciler) yalnızca haberi bulmak içindir; habere kaynak olarak konmaz. 'filtre: true' olan genel akışlarda yalnızca yapay zeka ile ilgili başlıklar alınır.",
+  "akislar": [
+    { "ad": "Techmeme", "url": "https://www.techmeme.com/feed.xml", "tur": "kesif", "filtre": true },
+    { "ad": "TestingCatalog", "url": "https://www.testingcatalog.com/rss/" },
+    { "ad": "The Decoder", "url": "https://the-decoder.com/feed/" },
+    { "ad": "TechCrunch AI", "url": "https://techcrunch.com/category/artificial-intelligence/feed/" },
+    { "ad": "The Verge AI", "url": "https://www.theverge.com/rss/ai-artificial-intelligence/index.xml" },
+    { "ad": "VentureBeat AI", "url": "https://venturebeat.com/category/ai/feed/" },
+    { "ad": "Ars Technica AI", "url": "https://arstechnica.com/ai/feed/" },
+    { "ad": "MarkTechPost", "url": "https://www.marktechpost.com/feed/" },
+    { "ad": "Simon Willison", "url": "https://simonwillison.net/atom/everything/", "filtre": true },
+    { "ad": "OpenAI", "url": "https://openai.com/news/rss.xml" },
+    { "ad": "Google DeepMind", "url": "https://deepmind.google/blog/rss.xml" },
+    { "ad": "Google AI", "url": "https://blog.google/technology/ai/rss/" },
+    { "ad": "Microsoft AI", "url": "https://blogs.microsoft.com/ai/feed/" },
+    { "ad": "NVIDIA", "url": "https://blogs.nvidia.com/feed/", "filtre": true },
+    { "ad": "Hugging Face", "url": "https://huggingface.co/blog/feed.xml" }
+  ]
+}
