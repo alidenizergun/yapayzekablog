@@ -5,7 +5,7 @@ import Base from '../../layouts/Base.astro';
 import Sidebar from '../../components/Sidebar.astro';
 import Time from '../../components/Time.astro';
 import { IMAGES } from '../../lib/site.js';
-import { tagUrl, getNews, slugOf, newsUrl, spreadVisuals, defaultVisual, ogImageFor, cardFor, withUtm, catName, catUrl, url, readingMinutes, hostOf, photoSrc, formatDate } from '../../lib/news.js';
+import { tagUrl, getNews, slugOf, newsUrl, spreadVisuals, defaultVisual, ogImageFor, cardFor, withUtm, photoSource, catName, catUrl, url, readingMinutes, hostOf, photoSrc, formatDate } from '../../lib/news.js';
 import { brandOf } from '../../lib/brands.js';
 import { entitiesOf } from '../../lib/entities.js';
 import { storyOf, storyIndex } from '../../lib/stories.js';
@@ -123,7 +123,7 @@ const crumbs = [{ name: 'Ana sayfa', path: '/' }, { name: cat, path: `/kategori/
           <Visual entry={entry} choice={main} w={780} h={420} eager credit={false} />
           <figcaption>
             {mainPhoto ? (
-              <>{T('Fotoğraf', 'Photo')}: <a href={withUtm(mainPhoto.authorUrl)} target="_blank" rel="noopener">{mainPhoto.author}</a> / <a href={withUtm('https://unsplash.com/')} target="_blank" rel="noopener">Unsplash</a> · {T('Temsili görseldir', 'Illustrative image')}</>
+              <>{T('Fotoğraf', 'Photo')}: <a href={withUtm(mainPhoto.authorUrl)} target="_blank" rel="noopener">{mainPhoto.author}</a> / <a href={withUtm(photoSource(mainPhoto).url)} target="_blank" rel="noopener">{photoSource(mainPhoto).name}</a> · {T('Temsili görseldir', 'Illustrative image')}</>
             ) : (
               <>{T(`${brandOf(main.b ?? d.brand)?.name} logosu. Logolar sahiplerinin tescilli markalarıdır.`, `${brandOf(main.b ?? d.brand)?.name} logo. Logos are registered trademarks of their owners.`)}</>
             )}

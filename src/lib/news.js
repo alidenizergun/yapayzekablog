@@ -23,8 +23,15 @@ export const variantOf = (entry) => hash(slugOf(entry)) % IMAGE_VARIANTS;
 
 const UTM = 'utm_source=yzgundemi&utm_medium=referral';
 export const withUtm = (u) => `${u}${u.includes('?') ? '&' : '?'}${UTM}`;
-export const photoSrc = (photo, w, h) =>
-  `${photo.url}${photo.url.includes('?') ? '&' : '?'}w=${w}&h=${h}&fit=crop&crop=entropy&auto=format&q=${w > 400 ? 55 : 65}`;
+export const photoSrc = (photo, w, h) => {
+  const q = photo.url.includes('?') ? '&' : '?';
+  const quality = w > 400 ? 55 : 65;
+  // Pexels: görsel sunucusu imgix benzeri parametreler alır
+  if (photo.source === 'pexels') return `${photo.url}${q}auto=compress&cs=tinysrgb&fit=crop&w=${w}&h=${h}`;
+  return `${photo.url}${q}w=${w}&h=${h}&fit=crop&crop=entropy&auto=format&q=${quality}`;
+};
+/** Fotoğraf kaynağının adı ve ana sayfası (künye satırları için) */
+export const photoSource = (photo) => (photo?.source === 'pexels' ? { name: 'Pexels', url: 'https://www.pexels.com/' } : { name: 'Unsplash', url: 'https://unsplash.com/' });
 
 /** Duyarlı görsel: telefonda kartlar tam genişlikte; tarayıcı ekrana uygun boyutu seçer (küçük resimlerde yalnızca 1x/2x) */
 export function photoSet(photo, w, h) {

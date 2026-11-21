@@ -1,9 +1,9 @@
 ---
-// Haber görseli: şirket logo kartı ya da Unsplash fotoğrafı (haberin kendi fotoğrafı veya kategori havuzundan).
+// Haber görseli: şirket logo kartı ya da Unsplash/Pexels fotoğrafı (haberin kendi fotoğrafı veya kategori havuzundan).
 // İllüstrasyon kullanılmaz; hiç görsel yoksa görselsiz, yalnızca bölüm adını gösteren yer tutucu.
 // choice verilmezse haberin kendi görseli kullanılır (bkz. defaultVisual).
 import { brandOf } from '../lib/brands.js';
-import { defaultVisual, photoSet, catName } from '../lib/news.js';
+import { defaultVisual, photoSet, photoSource, catName } from '../lib/news.js';
 import { s as str } from '../i18n/index.js';
 
 interface Props {
@@ -34,7 +34,7 @@ const catLabel = str(EN ? 'en' : 'tr', `cat.${d.category}.name`, catName(d.categ
   ) : photo ? (
     <>
       <img class="thumb photo" src={set.src} srcset={set.srcset} sizes={set.sizes} alt={photo.alt || ''} lang={!EN && photo.alt ? 'en' : undefined} loading={loading} fetchpriority={eager ? 'high' : undefined} decoding={eager ? undefined : 'async'} width={w} height={h} />
-      {credit && <span class="credit" aria-hidden="true">{photo.author} / Unsplash</span>}
+      {credit && <span class="credit" aria-hidden="true">{photo.author} / {photoSource(photo).name}</span>}
     </>
   ) : (
     <span class="thumb noimg" aria-hidden="true"><span>{catLabel}</span></span>

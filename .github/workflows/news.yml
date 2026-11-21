@@ -60,6 +60,7 @@ jobs:
           # X takip listesi okuması KAPALI (tur başına ~0,13 $). Açmak için repo değişkeni X_FEED'i true yapın.
           X_BEARER_TOKEN: ${{ vars.X_FEED == 'true' && secrets.X_BEARER_TOKEN || '' }}
           UNSPLASH_ACCESS_KEY: ${{ secrets.UNSPLASH_ACCESS_KEY }}
+          PEXELS_API_KEY: ${{ secrets.PEXELS_API_KEY }}
           NEWS_MODEL: ${{ vars.NEWS_MODEL }}
           NEWS_MODE: ${{ inputs.mode == 'ogle' && 'ogle' || '' }}
           MAX_ARTICLES: ${{ inputs.mode == 'ogle' && (vars.MIDDAY_ARTICLES || '3') || inputs.max_articles || vars.MAX_ARTICLES || '10' }}

@@ -40,7 +40,7 @@ const GENERIC_QUERIES = ['artificial intelligence technology', 'technology abstr
  * Böylece fotoğraf bulunamayıp illüstrasyona düşme çok azalır.
  * @returns {Promise<null | {id, url, alt, author, authorUrl, link}>}
  */
-export async function findPhoto(queries, used, { key = process.env.UNSPLASH_ACCESS_KEY, generic = true } = {}) {
+async function unsplashFind(queries, used, { key = process.env.UNSPLASH_ACCESS_KEY, generic = true } = {}) {
   if (!key) return null;
   const list = [...new Set([...(Array.isArray(queries) ? queries : [queries]), ...(generic ? GENERIC_QUERIES : [])].filter(Boolean).map((q) => q.trim()))];
   const text = (p) => `${p.alt_description || ''} ${p.description || ''} ${(p.tags || []).map((t) => t.title).join(' ')}`.toLowerCase();
@@ -69,6 +69,59 @@ export async function findPhoto(queries, used, { key = process.env.UNSPLASH_ACCE
   return null;
 }
 
+// ---------------------------------------------------------------- Pexels (yedek kaynak)
+// https://www.pexels.com/api/ — saatte 200, ayda 20.000 istek. Fotoğrafçı ve Pexels adı bağlantısıyla belirtilir.
+// Unsplash anahtarı yoksa, istek sınırı dolduysa ya da uygun fotoğraf bulunamazsa kullanılır.
+const PEXELS_API = 'https://api.pexels.com/v1';
+let unsplashBlocked = false;
+async function pexelsFind(queries, used, { key = process.env.PEXELS_API_KEY, generic = true } = {}) {
+  if (!key) return null;
+  const list = [...new Set([...(Array.isArray(queries) ? queries : [queries]), ...(generic ? GENERIC_QUERIES : [])].filter(Boolean).map((q) => q.trim()))];
+  for (const [qi, query] of list.entries()) {
+    const q = new URLSearchParams({ query, orientation: 'landscape', per_page: '20' });
+    const res = await fetch(`${PEXELS_API}/search?${q}`, { headers: { Authorization: key } });
+    if (res.status === 429) throw new Error('Pexels istek sınırı (429)');
+    if (!res.ok) throw new Error(`Pexels hatası ${res.status}`);
+    const r = await res.json();
+    const text = (p) => `${p.alt || ''}`.toLowerCase();
+    const candidates = (r.photos || []).filter((p) => !used.has(`pexels-${p.id}`) && !/\b(portrait|selfie|face|headshot|woman|man|girl|boy|person)\b/i.test(text(p)));
+    const words = query.toLowerCase().split(/\s+/).filter((w) => w.length > 2).map((w) => w.replace(/s$/, ''));
+    const score = (p) => words.filter((w) => text(p).includes(w)).length;
+    let pick = null; let best = qi === 0 ? 0 : -1;
+    for (const p of candidates) { const sc = score(p); if (sc > best) { best = sc; pick = p; } }
+    if (!pick) continue;
+    const id = `pexels-${pick.id}`;
+    used.add(id);
+    return {
+      id,
+      url: pick.src.original,
+      alt: (pick.alt || '').slice(0, 200),
+      author: pick.photographer || 'Pexels',
+      authorUrl: pick.photographer_url || 'https://www.pexels.com',
+      link: pick.url || 'https://www.pexels.com',
+      source: 'pexels',
+    };
+  }
+  return null;
+}
+
+/**
+ * Habere uygun, daha önce kullanılmamış yatay bir fotoğraf bulur: önce Unsplash, olmazsa Pexels.
+ * queries: öncelik sırasıyla sorgular (habere özel → kategori); sonunda genel teknoloji sorguları denenir.
+ */
+export async function findPhoto(queries, used, opts = {}) {
+  if (!unsplashBlocked) {
+    try {
+      const p = await unsplashFind(queries, used, opts);
+      if (p) return p;
+    } catch (err) {
+      if (!/istek sınırı/.test(err.message) || !process.env.PEXELS_API_KEY) throw err;
+      unsplashBlocked = true; // bu çalışmada Unsplash'e bir daha sorulmaz
+    }
+  }
+  return pexelsFind(queries, used, opts);
+}
+
 const yamlStr = (s) => JSON.stringify(String(s ?? '').trim());
 
 /** Fotoğraf bilgisini Markdown ön bilgisine (frontmatter) yazılacak satırlara çevirir */
@@ -81,6 +134,7 @@ export function photoYaml(photo, field = 'photo') {
     `  author: ${yamlStr(photo.author)}`,
     `  authorUrl: ${yamlStr(photo.authorUrl)}`,
     `  link: ${yamlStr(photo.link)}`,
+    ...(photo.source ? [`  source: ${yamlStr(photo.source)}`] : []),
   ];
 }
 
@@ -119,7 +173,7 @@ export function readPool(root = '.') {
 }
 /** Havuzdaki eksikleri tamamlar; en fazla `limit` fotoğraf ekler. Eklenen sayıyı döndürür. */
 export async function fillPool(used, { root = '.', limit = 12 } = {}) {
-  if (!process.env.UNSPLASH_ACCESS_KEY) return 0;
+  if (!process.env.UNSPLASH_ACCESS_KEY && !process.env.PEXELS_API_KEY) return 0;
   const pool = readPool(root);
   for (const list of Object.values(pool)) for (const p of list) used.add(p.id);
   let added = 0;

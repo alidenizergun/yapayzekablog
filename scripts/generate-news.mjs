@@ -795,7 +795,7 @@ const BACKFILL_LIMIT = Number(process.env.PHOTO_BACKFILL || 10);
 
 /** Fotoğrafı olmayan eski haberlere fotoğraf ekler (her çalışmada en fazla BACKFILL_LIMIT haber) */
 async function backfillPhotos() {
-  if (DRY || !process.env.UNSPLASH_ACCESS_KEY || photoNote.error) return;
+  if (DRY || !(process.env.UNSPLASH_ACCESS_KEY || process.env.PEXELS_API_KEY) || photoNote.error) return;
   const used = usedPhotoIds(CONTENT_DIR);
   for (const list of Object.values(readPool())) for (const p of list) used.add(p.id);
   // Kategori havuzu (illüstrasyon yerine yedek gerçek fotoğraflar)
@@ -870,7 +870,7 @@ function summary(written, rejected, searches) {
     ...editorNotes.map((n) => `  - ${n}`),
     `- Web araması: ${searches}${IS_WEEKEND ? ' (hafta sonu sınırı: ' + MAX_SEARCHES + ')' : ''}`,
     `- ${xNote}`,
-    `- Unsplash: ${process.env.UNSPLASH_ACCESS_KEY ? `${photoNote.added} yeni habere, ${photoNote.backfilled} eski habere fotoğraf eklendi${photoNote.error ? ' (hata: ' + photoNote.error + ')' : ''}` : 'kapalı (UNSPLASH_ACCESS_KEY yok)'}`,
+    `- Fotoğraf (Unsplash/Pexels): ${(process.env.UNSPLASH_ACCESS_KEY || process.env.PEXELS_API_KEY) ? `${photoNote.added} yeni habere, ${photoNote.backfilled} eski habere fotoğraf eklendi${photoNote.error ? ' (hata: ' + photoNote.error + ')' : ''}` : 'kapalı (UNSPLASH_ACCESS_KEY / PEXELS_API_KEY yok)'}`,
     ...written.map((w) => `  - ✅ ${w.title} (${w.sources} kaynak)`),
     ...rejected.map((r) => `  - ❌ ${r.title} — ${r.reasons.join(', ')}`),
     '',

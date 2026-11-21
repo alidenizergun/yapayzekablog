@@ -83,7 +83,7 @@ function background(d) {
     ? `<div style="position:absolute;inset:0;overflow:hidden">${fs.readFileSync(svgFile, 'utf8').replace('<svg ', '<svg preserveAspectRatio="xMidYMid slice" style="width:1200px;height:630px" ')}</div>`
     : '';
   const fallback = brandBg || illus;
-  const photo = d.photo?.url ? `<img data-photo src="${esc(`${d.photo.url}${d.photo.url.includes('?') ? '&' : '?'}w=1200&h=630&fit=crop&crop=entropy&q=80&fm=jpg`)}" style="position:absolute;inset:0;width:1200px;height:630px;object-fit:cover">` : '';
+  const photo = d.photo?.url ? `<img data-photo src="${esc((d.photo.source === 'pexels' ? `${d.photo.url}${d.photo.url.includes('?') ? '&' : '?'}auto=compress&cs=tinysrgb&fit=crop&w=1200&h=630` : `${d.photo.url}${d.photo.url.includes('?') ? '&' : '?'}w=1200&h=630&fit=crop&crop=entropy&q=80&fm=jpg`))}" style="position:absolute;inset:0;width:1200px;height:630px;object-fit:cover">` : '';
   return { fallback, photo };
 }
 
