@@ -65,7 +65,7 @@ function iconLinks(html, base) {
 async function toWebp(buf) {
   const img = sharp(buf, { density: 300 });
   const meta = await img.metadata();
-  if ((meta.width || 0) < (SET === 'brands' ? 64 : 32) && meta.format !== 'svg') throw new Error(`çok küçük (${meta.width}px)`);
+  if ((meta.width || 0) < (SET === 'brands' ? 48 : 32) && meta.format !== 'svg') throw new Error(`çok küçük (${meta.width}px)`);
   return img.resize(SIZE, SIZE, { fit: 'contain', background: { r: 255, g: 255, b: 255, alpha: 0 } }).webp({ quality: 90 }).toBuffer();
 }
 
@@ -80,6 +80,7 @@ async function fetchIcon(t) {
   } catch (e) { console.log(`  ${t.slug}: sayfa alınamadı (${e.message})`); }
   const host = new URL(home).hostname;
   tries.push(`https://www.google.com/s2/favicons?domain=${host}&sz=128`);
+  tries.push(`https://www.google.com/s2/favicons?domain=${host.replace(/^www\./, '')}&sz=256`, `https://icons.duckduckgo.com/ip3/${host}.ico`, `https://${host}/favicon.ico`);
   for (const u of [...new Set(tries)]) {
     try {
       const buf = Buffer.from(await (await get(u)).arrayBuffer());
