@@ -6,16 +6,16 @@ import { BRAND_SLUGS } from './lib/brands.js';
 
 // Güvenlik: yalnızca http(s) adresleri (javascript:, data: vb. reddedilir); fotoğraflar yalnızca Unsplash'ten
 const httpUrl = z.string().url().refine((u) => /^https?:\/\//i.test(u), 'Yalnızca http(s) adresi');
-const unsplashUrl = (hosts: RegExp) => z.string().url().refine((u) => { try { return hosts.test(new URL(u).hostname); } catch { return false; } }, 'Yalnızca Unsplash ya da Pexels adresi');
-// Fotoğraflar yalnızca Unsplash ya da Pexels'ten (görsel doğrudan onların sunucusundan gösterilir)
+const unsplashUrl = (hosts: RegExp) => z.string().url().refine((u) => { try { return hosts.test(new URL(u).hostname); } catch { return false; } }, 'Yalnızca Unsplash, Pexels ya da Pixabay adresi');
+// Fotoğraflar yalnızca Unsplash, Pexels (görsel onların sunucusundan) ya da Pixabay'den (indirilip /foto/ altında sunulur)
 const photoSchema = z.object({
   id: z.string(),
-  url: unsplashUrl(/^images\.(unsplash|pexels)\.com$/),
+  url: z.union([unsplashUrl(/^images\.(unsplash|pexels)\.com$/), z.string().regex(/^\/foto\/px-\d+$/)]),
   alt: z.string().optional(),
   author: z.string(),
-  authorUrl: unsplashUrl(/^(www\.)?(unsplash|pexels)\.com$/),
-  link: unsplashUrl(/^(www\.)?(unsplash|pexels)\.com$/),
-  source: z.enum(['unsplash', 'pexels']).optional(),
+  authorUrl: unsplashUrl(/^(www\.)?(unsplash|pexels|pixabay)\.com$/),
+  link: unsplashUrl(/^(www\.)?(unsplash|pexels|pixabay)\.com$/),
+  source: z.enum(['unsplash', 'pexels', 'pixabay']).optional(),
 });
 
 const categorySlugs = CATEGORIES.map((c) => c.slug) as [string, ...string[]];

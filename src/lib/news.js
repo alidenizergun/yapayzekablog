@@ -26,16 +26,24 @@ export const withUtm = (u) => `${u}${u.includes('?') ? '&' : '?'}${UTM}`;
 export const photoSrc = (photo, w, h) => {
   const q = photo.url.includes('?') ? '&' : '?';
   const quality = w > 400 ? 55 : 65;
+  // Pixabay: indirilen fotoğraf sitenin kendi sunucusunda üç boyutta (480/800/1280 px WebP)
+  if (photo.source === 'pixabay') return url(`${photo.url}-${[480, 800, 1280].find((x) => x >= w) ?? 1280}.webp`);
   // Pexels: görsel sunucusu imgix benzeri parametreler alır
   if (photo.source === 'pexels') return `${photo.url}${q}auto=compress&cs=tinysrgb&fit=crop&w=${w}&h=${h}`;
   return `${photo.url}${q}w=${w}&h=${h}&fit=crop&crop=entropy&auto=format&q=${quality}`;
 };
 /** Fotoğraf kaynağının adı ve ana sayfası (künye satırları için) */
-export const photoSource = (photo) => (photo?.source === 'pexels' ? { name: 'Pexels', url: 'https://www.pexels.com/' } : { name: 'Unsplash', url: 'https://unsplash.com/' });
+export const photoSource = (photo) => (photo?.source === 'pexels' ? { name: 'Pexels', url: 'https://www.pexels.com/' }
+  : photo?.source === 'pixabay' ? { name: 'Pixabay', url: 'https://pixabay.com/' } : { name: 'Unsplash', url: 'https://unsplash.com/' });
 
 /** Duyarlı görsel: telefonda kartlar tam genişlikte; tarayıcı ekrana uygun boyutu seçer (küçük resimlerde yalnızca 1x/2x) */
 export function photoSet(photo, w, h) {
   if (w <= 160) return { src: photoSrc(photo, w, h), srcset: `${photoSrc(photo, w, h)} 1x, ${photoSrc(photo, w * 2, h * 2)} 2x` };
+  if (photo.source === 'pixabay') return {
+    src: photoSrc(photo, w, h),
+    srcset: [480, 800, 1280].map((x) => `${url(`${photo.url}-${x}.webp`)} ${x}w`).join(', '),
+    sizes: `(max-width: 760px) calc(100vw - 32px), ${w}px`,
+  };
   // İnce basamaklar: telefonlar (360-430 px, 2-3x yoğunluk) gereğinden büyük dosya indirmesin
   const steps = [...new Set([360, 420, 480, 560, 640, 720, 800, w, 960, 1120, 1280, w * 2].filter((x) => x <= w * 2))].sort((a, b) => a - b);
   return {

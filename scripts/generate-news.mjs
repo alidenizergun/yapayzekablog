@@ -29,6 +29,7 @@ import { fileURLToPath } from 'node:url';
 import { CATEGORIES, IMAGES } from '../src/lib/site.js';
 import { BRANDS, BRAND_SLUGS } from '../src/lib/brands.js';
 import { findPhoto, usedPhotoIds, photoYaml, addPhotoToFile, CATEGORY_QUERIES, fillPool, readPool } from './photos.mjs';
+import { makeJudge } from './photo-judge.mjs';
 import { fetchXPosts, formatPostsForPrompt } from './x-feed.mjs';
 import { STORIES } from '../src/lib/stories.js';
 
@@ -750,8 +751,9 @@ async function main() {
   for (const a of ok) {
     try {
       const qs = [a.image_query, CATEGORY_QUERIES[a.category]];
-      a.photo = await findPhoto(qs, usedPhotos);
-      if (a.photo) { photoNote.added++; a.photo2 = await findPhoto(qs, usedPhotos); }
+      const po = await photoOpts(`${a.title} — ${a.spot}`);
+      a.photo = await findPhoto(qs, usedPhotos, po);
+      if (a.photo) { photoNote.added++; a.photo2 = await findPhoto(qs, usedPhotos, po); }
     } catch (err) { photoNote.error = err.message; break; }
   }
 
@@ -794,8 +796,16 @@ const photoNote = { added: 0, backfilled: 0, error: '' };
 const BACKFILL_LIMIT = Number(process.env.PHOTO_BACKFILL || 10);
 
 /** Fotoğrafı olmayan eski haberlere fotoğraf ekler (her çalışmada en fazla BACKFILL_LIMIT haber) */
+// Fotoğraf seçimi: model haberin başlık ve özetine en uygun adayı seçer (uygun aday yoksa fotoğraf eklenmez)
+let judgeFn = null;
+async function photoOpts(context) {
+  if (!process.env.ANTHROPIC_API_KEY || DRY) return {};
+  judgeFn ??= makeJudge(await client(), { onUsage: (r) => track(r, 'claude-haiku-5-5') });
+  return { judge: judgeFn, context };
+}
+
 async function backfillPhotos() {
-  if (DRY || !(process.env.UNSPLASH_ACCESS_KEY || process.env.PEXELS_API_KEY) || photoNote.error) return;
+  if (DRY || !(process.env.UNSPLASH_ACCESS_KEY || process.env.PEXELS_API_KEY || process.env.PIXABAY_API_KEY) || photoNote.error) return;
   const used = usedPhotoIds(CONTENT_DIR);
   for (const list of Object.values(readPool())) for (const p of list) used.add(p.id);
   // Kategori havuzu (illüstrasyon yerine yedek gerçek fotoğraflar)
@@ -811,8 +821,9 @@ async function backfillPhotos() {
     const hasPhoto = /^photo:/m.test(fm), hasPhoto2 = /^photo2:/m.test(fm);
     if (field === 'photo' ? hasPhoto : (!hasPhoto || hasPhoto2)) continue;
     const qs = [fm.match(/^imageQuery:\s*"?([^"\n]+)"?/m)?.[1], CATEGORY_QUERIES[fm.match(/^category:\s*(\S+)/m)?.[1]]];
+    const ctx = `${(fm.match(/^title:\s*"?(.+?)"?$/m) || [])[1] || ''} — ${(fm.match(/^spot:\s*"?(.+?)"?$/m) || [])[1] || ''}`;
     try {
-      const photo = await findPhoto(qs, used);
+      const photo = await findPhoto(qs, used, await photoOpts(ctx));
       if (photo && addPhotoToFile(file, photo, field)) photoNote.backfilled++;
     } catch (err) { photoNote.error = err.message; break; }
   }
@@ -870,7 +881,7 @@ function summary(written, rejected, searches) {
     ...editorNotes.map((n) => `  - ${n}`),
     `- Web araması: ${searches}${IS_WEEKEND ? ' (hafta sonu sınırı: ' + MAX_SEARCHES + ')' : ''}`,
     `- ${xNote}`,
-    `- Fotoğraf (Unsplash/Pexels): ${(process.env.UNSPLASH_ACCESS_KEY || process.env.PEXELS_API_KEY) ? `${photoNote.added} yeni habere, ${photoNote.backfilled} eski habere fotoğraf eklendi${photoNote.error ? ' (hata: ' + photoNote.error + ')' : ''}` : 'kapalı (UNSPLASH_ACCESS_KEY / PEXELS_API_KEY yok)'}`,
+    `- Fotoğraf (Unsplash/Pexels/Pixabay): ${(process.env.UNSPLASH_ACCESS_KEY || process.env.PEXELS_API_KEY || process.env.PIXABAY_API_KEY) ? `${photoNote.added} yeni habere, ${photoNote.backfilled} eski habere fotoğraf eklendi${photoNote.error ? ' (hata: ' + photoNote.error + ')' : ''}` : 'kapalı (UNSPLASH_ACCESS_KEY / PEXELS_API_KEY yok)'}`,
     ...written.map((w) => `  - ✅ ${w.title} (${w.sources} kaynak)`),
     ...rejected.map((r) => `  - ❌ ${r.title} — ${r.reasons.join(', ')}`),
     '',

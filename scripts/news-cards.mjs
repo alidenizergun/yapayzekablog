@@ -54,15 +54,14 @@ let todo = jobs.filter((j) => FORCE || !fs.existsSync(j.out));
 if (LIMIT) todo = todo.slice(0, LIMIT);
 if (!todo.length) { log('yeni kart yok'); process.exit(0); }
 
-// Yazı tipleri (sitedekilerle aynı)
-const fontDir = path.join(ROOT, 'node_modules/@fontsource');
-const font = (fam, file, w) => `@font-face{font-family:'${fam}';font-weight:${w};src:url(data:font/woff2;base64,${fs.readFileSync(path.join(fontDir, file)).toString('base64')}) format('woff2');}`;
-const css = ['latin', 'latin-ext'].flatMap((sub) => [
-  font('S', `schibsted-grotesk/files/schibsted-grotesk-${sub}-800-normal.woff2`, 800),
-  font('S', `schibsted-grotesk/files/schibsted-grotesk-${sub}-700-normal.woff2`, 700),
-  font('I', `inter/files/inter-${sub}-600-normal.woff2`, 600),
-  font('I', `inter/files/inter-${sub}-700-normal.woff2`, 700),
-]).join('') + `*{margin:0;box-sizing:border-box}body{width:1200px;height:630px;overflow:hidden;font-family:S;background:#141414}`;
+// Yazı tipleri (sitedekilerle aynı değişken yazı tipleri: src/fonts)
+const fontDir = path.join(ROOT, 'src/fonts');
+const LAT = 'U+0000-00FF,U+0131,U+0152-0153,U+2000-206F,U+20AC,U+2122,U+2212', TRR = 'U+011E-011F,U+0130,U+015E-015F,U+20BA';
+const font = (fam, file, range) => `@font-face{font-family:'${fam}';font-weight:100 900;src:url(data:font/woff2;base64,${fs.readFileSync(path.join(fontDir, file)).toString('base64')}) format('woff2');unicode-range:${range};}`;
+const css = [
+  font('S', 'schibsted-latin-wght.woff2', LAT), font('S', 'schibsted-tr-wght.woff2', TRR),
+  font('I', 'inter-latin-wght.woff2', LAT), font('I', 'inter-tr-wght.woff2', TRR),
+].join('') + `*{margin:0;box-sizing:border-box}body{width:1200px;height:630px;overflow:hidden;font-family:S;background:#141414}`;
 
 // Logo (sitedeki rozet ve yazı ile aynı oranlar)
 const wm = (px, main = '#fff', sub = '#FF7A62') => `<span style="display:inline-flex;align-items:stretch;gap:${px * .28}px;line-height:1;white-space:nowrap">
@@ -72,18 +71,25 @@ const wm = (px, main = '#fff', sub = '#FF7A62') => `<span style="display:inline-
     <span style="font:800 ${px * .82}px/.86 S;letter-spacing:-.03em;color:${main}">Gündemi</span></span></span>`;
 const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 
-// Arka plan: fotoğraf > şirket rengi + logo > illüstrasyon
+// Arka plan: fotoğraf > şirket rengi + logo > koyu düz zemin
 function background(d) {
   const brand = d.brand && BRANDS[d.brand];
   const brandBg = brand
     ? `<div style="position:absolute;inset:0;background:${brand.bg}"></div>${brand.path ? `<svg viewBox="0 0 24 24" style="position:absolute;right:-60px;top:-40px;height:560px;width:auto;fill:${brand.fg};opacity:.16"><path d="${brand.path}"/></svg>` : ''}`
     : '';
-  const svgFile = path.join(ROOT, 'public/img', `${d.image || 'altyapi'}.svg`);
-  const illus = fs.existsSync(svgFile)
-    ? `<div style="position:absolute;inset:0;overflow:hidden">${fs.readFileSync(svgFile, 'utf8').replace('<svg ', '<svg preserveAspectRatio="xMidYMid slice" style="width:1200px;height:630px" ')}</div>`
-    : '';
-  const fallback = brandBg || illus;
-  const photo = d.photo?.url ? `<img data-photo src="${esc((d.photo.source === 'pexels' ? `${d.photo.url}${d.photo.url.includes('?') ? '&' : '?'}auto=compress&cs=tinysrgb&fit=crop&w=1200&h=630` : `${d.photo.url}${d.photo.url.includes('?') ? '&' : '?'}w=1200&h=630&fit=crop&crop=entropy&q=80&fm=jpg`))}" style="position:absolute;inset:0;width:1200px;height:630px;object-fit:cover">` : '';
+  // İllüstrasyon yok: şirket rengi/logosu yoksa koyu düz zemin
+  const fallback = brandBg || '<div style="position:absolute;inset:0;background:#161616"></div>';
+  let src = '';
+  if (d.photo?.url) {
+    const q = d.photo.url.includes('?') ? '&' : '?';
+    if (d.photo.source === 'pixabay') {
+      // Kart sayfası boş bir sayfada çizilir; yerel dosya data: adresi olarak gömülür
+      const f = path.join(ROOT, 'public', `${d.photo.url}-1280.webp`);
+      if (fs.existsSync(f)) src = `data:image/webp;base64,${fs.readFileSync(f).toString('base64')}`;
+    } else if (d.photo.source === 'pexels') src = `${d.photo.url}${q}auto=compress&cs=tinysrgb&fit=crop&w=1200&h=630`;
+    else src = `${d.photo.url}${q}w=1200&h=630&fit=crop&crop=entropy&q=80&fm=jpg`;
+  }
+  const photo = src ? `<img data-photo src="${esc(src)}" style="position:absolute;inset:0;width:1200px;height:630px;object-fit:cover">` : '';
   return { fallback, photo };
 }
 

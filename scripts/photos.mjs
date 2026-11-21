@@ -40,7 +40,8 @@ const GENERIC_QUERIES = ['artificial intelligence technology', 'technology abstr
  * Böylece fotoğraf bulunamayıp illüstrasyona düşme çok azalır.
  * @returns {Promise<null | {id, url, alt, author, authorUrl, link}>}
  */
-async function unsplashFind(queries, used, { key = process.env.UNSPLASH_ACCESS_KEY, generic = true } = {}) {
+async function unsplashFind(queries, used, opts = {}) {
+  const { key = process.env.UNSPLASH_ACCESS_KEY, generic = true } = opts;
   if (!key) return null;
   const list = [...new Set([...(Array.isArray(queries) ? queries : [queries]), ...(generic ? GENERIC_QUERIES : [])].filter(Boolean).map((q) => q.trim()))];
   const text = (p) => `${p.alt_description || ''} ${p.description || ''} ${(p.tags || []).map((t) => t.title).join(' ')}`.toLowerCase();
@@ -52,7 +53,12 @@ async function unsplashFind(queries, used, { key = process.env.UNSPLASH_ACCESS_K
     const words = query.toLowerCase().split(/\s+/).filter((w) => w.length > 2).map((w) => w.replace(/s$/, ''));
     const score = (p) => { const t = text(p); return words.filter((w) => t.includes(w)).length; };
     let pick = null; let best = qi === 0 ? 0 : -1;
-    for (const p of candidates) { const sc = score(p); if (sc > best) { best = sc; pick = p; } }
+    if (opts.judge && opts.context) {
+      // İçerik uyumu: model, adayların açıklamalarından haberle en uyumlu olanı seçer (yoksa sonraki sorgu)
+      const top = candidates.slice(0, 10);
+      const k = await opts.judge(opts.context, top.map((p) => ({ text: text(p) })));
+      pick = k >= 0 ? top[k] : null;
+    } else for (const p of candidates) { const sc = score(p); if (sc > best) { best = sc; pick = p; } }
     if (!pick) continue;
     used.add(pick.id);
     // Kullanım bildirimi (Unsplash kuralı); başarısız olursa fotoğrafı yine kullan
@@ -74,7 +80,9 @@ async function unsplashFind(queries, used, { key = process.env.UNSPLASH_ACCESS_K
 // Unsplash anahtarı yoksa, istek sınırı dolduysa ya da uygun fotoğraf bulunamazsa kullanılır.
 const PEXELS_API = 'https://api.pexels.com/v1';
 let unsplashBlocked = false;
-async function pexelsFind(queries, used, { key = process.env.PEXELS_API_KEY, generic = true } = {}) {
+let pexelsBlocked = false;
+async function pexelsFind(queries, used, opts = {}) {
+  const { key = process.env.PEXELS_API_KEY, generic = true } = opts;
   if (!key) return null;
   const list = [...new Set([...(Array.isArray(queries) ? queries : [queries]), ...(generic ? GENERIC_QUERIES : [])].filter(Boolean).map((q) => q.trim()))];
   for (const [qi, query] of list.entries()) {
@@ -88,7 +96,11 @@ async function pexelsFind(queries, used, { key = process.env.PEXELS_API_KEY, gen
     const words = query.toLowerCase().split(/\s+/).filter((w) => w.length > 2).map((w) => w.replace(/s$/, ''));
     const score = (p) => words.filter((w) => text(p).includes(w)).length;
     let pick = null; let best = qi === 0 ? 0 : -1;
-    for (const p of candidates) { const sc = score(p); if (sc > best) { best = sc; pick = p; } }
+    if (opts.judge && opts.context) {
+      const top = candidates.slice(0, 10);
+      const k = await opts.judge(opts.context, top.map((p) => ({ text: text(p) })));
+      pick = k >= 0 ? top[k] : null;
+    } else for (const p of candidates) { const sc = score(p); if (sc > best) { best = sc; pick = p; } }
     if (!pick) continue;
     const id = `pexels-${pick.id}`;
     used.add(id);
@@ -105,8 +117,57 @@ async function pexelsFind(queries, used, { key = process.env.PEXELS_API_KEY, gen
   return null;
 }
 
+// ---------------------------------------------------------------- Pixabay (üçüncü kaynak)
+// https://pixabay.com/api/docs/ — dakikada 100 istek. Pixabay görsellerin kendi adreslerinden kalıcı gösterilmesine
+// izin vermez: fotoğraf indirilir, WebP olarak 3 boyutta public/foto/ klasörüne kaydedilir ve siteden sunulur.
+export const LOCAL_WIDTHS = [480, 800, 1280];
+async function pixabayFind(queries, used, opts = {}) {
+  const { key = process.env.PIXABAY_API_KEY, generic = true, root = '.' } = opts;
+  if (!key) return null;
+  const list = [...new Set([...(Array.isArray(queries) ? queries : [queries]), ...(generic ? GENERIC_QUERIES : [])].filter(Boolean).map((q) => q.trim()))];
+  for (const [qi, query] of list.entries()) {
+    const q = new URLSearchParams({ key, q: query.slice(0, 100), image_type: 'photo', orientation: 'horizontal', safesearch: 'true', per_page: '30', min_width: '1200', lang: 'en' });
+    const res = await fetch(`https://pixabay.com/api/?${q}`);
+    if (res.status === 429) throw new Error('Pixabay istek sınırı (429)');
+    if (!res.ok) throw new Error(`Pixabay hatası ${res.status}`);
+    const r = await res.json();
+    const text = (p) => `${p.tags || ''}`.toLowerCase();
+    const candidates = (r.hits || []).filter((p) => !used.has(`pixabay-${p.id}`) && p.largeImageURL && !/\b(portrait|selfie|face|headshot|woman|man|girl|boy|person|people|model)\b/i.test(text(p)));
+    const words = query.toLowerCase().split(/\s+/).filter((w) => w.length > 2).map((w) => w.replace(/s$/, ''));
+    const score = (p) => words.filter((w) => text(p).includes(w)).length;
+    let pick = null; let best = qi === 0 ? 0 : -1;
+    if (opts.judge && opts.context) {
+      const top = candidates.slice(0, 10);
+      const k = await opts.judge(opts.context, top.map((p) => ({ text: text(p) })));
+      pick = k >= 0 ? top[k] : null;
+    } else for (const p of candidates) { const sc = score(p); if (sc > best) { best = sc; pick = p; } }
+    if (!pick) continue;
+    // İndir ve 3 boyutta WebP olarak kaydet (16:9'a yakın kırpma yok; sayfada object-fit: cover ile yerleşir)
+    const img = await fetch(pick.largeImageURL);
+    if (!img.ok) continue;
+    const buf = Buffer.from(await img.arrayBuffer());
+    const { default: sharp } = await import('sharp');
+    const name = `px-${pick.id}`;
+    const dir = path.join(root, 'public/foto');
+    fs.mkdirSync(dir, { recursive: true });
+    for (const w of LOCAL_WIDTHS) await sharp(buf).rotate().resize({ width: w, withoutEnlargement: true }).webp({ quality: 72 }).toFile(path.join(dir, `${name}-${w}.webp`));
+    const id = `pixabay-${pick.id}`;
+    used.add(id);
+    return {
+      id,
+      url: `/foto/${name}`,
+      alt: `${pick.tags || ''}`.slice(0, 200),
+      author: pick.user || 'Pixabay',
+      authorUrl: pick.user && pick.user_id ? `https://pixabay.com/users/${pick.user}-${pick.user_id}/` : 'https://pixabay.com/',
+      link: pick.pageURL || 'https://pixabay.com/',
+      source: 'pixabay',
+    };
+  }
+  return null;
+}
+
 /**
- * Habere uygun, daha önce kullanılmamış yatay bir fotoğraf bulur: önce Unsplash, olmazsa Pexels.
+ * Habere uygun, daha önce kullanılmamış yatay bir fotoğraf bulur: önce Unsplash, olmazsa Pexels, o da olmazsa Pixabay.
  * queries: öncelik sırasıyla sorgular (habere özel → kategori); sonunda genel teknoloji sorguları denenir.
  */
 export async function findPhoto(queries, used, opts = {}) {
@@ -115,11 +176,20 @@ export async function findPhoto(queries, used, opts = {}) {
       const p = await unsplashFind(queries, used, opts);
       if (p) return p;
     } catch (err) {
-      if (!/istek sınırı/.test(err.message) || !process.env.PEXELS_API_KEY) throw err;
+      if (!/istek sınırı/.test(err.message) || !(process.env.PEXELS_API_KEY || process.env.PIXABAY_API_KEY)) throw err;
       unsplashBlocked = true; // bu çalışmada Unsplash'e bir daha sorulmaz
     }
   }
-  return pexelsFind(queries, used, opts);
+  if (!pexelsBlocked) {
+    try {
+      const p = await pexelsFind(queries, used, opts);
+      if (p) return p;
+    } catch (err) {
+      if (!process.env.PIXABAY_API_KEY) throw err;
+      pexelsBlocked = true;
+    }
+  }
+  return pixabayFind(queries, used, opts);
 }
 
 const yamlStr = (s) => JSON.stringify(String(s ?? '').trim());
@@ -136,6 +206,15 @@ export function photoYaml(photo, field = 'photo') {
     `  link: ${yamlStr(photo.link)}`,
     ...(photo.source ? [`  source: ${yamlStr(photo.source)}`] : []),
   ];
+}
+
+/** Haber dosyasındaki fotoğrafı (photo ya da photo2) yenisiyle değiştirir */
+export function replacePhotoInFile(file, photo, field = 'photo') {
+  const s = fs.readFileSync(file, 'utf8');
+  const re = new RegExp(`^${field}:\\n(?:  .*\\n)+`, 'm');
+  const block = photoYaml(photo, field).join('\n') + '\n';
+  if (re.test(s)) { fs.writeFileSync(file, s.replace(re, block)); return true; }
+  return addPhotoToFile(file, photo, field);
 }
 
 /** Var olan bir haber dosyasına fotoğraf ekler ("sources:" satırının önüne) */
@@ -173,7 +252,7 @@ export function readPool(root = '.') {
 }
 /** Havuzdaki eksikleri tamamlar; en fazla `limit` fotoğraf ekler. Eklenen sayıyı döndürür. */
 export async function fillPool(used, { root = '.', limit = 12 } = {}) {
-  if (!process.env.UNSPLASH_ACCESS_KEY && !process.env.PEXELS_API_KEY) return 0;
+  if (!process.env.UNSPLASH_ACCESS_KEY && !process.env.PEXELS_API_KEY && !process.env.PIXABAY_API_KEY) return 0;
   const pool = readPool(root);
   for (const list of Object.values(pool)) for (const p of list) used.add(p.id);
   let added = 0;
