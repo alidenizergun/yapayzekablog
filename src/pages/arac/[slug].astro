@@ -55,7 +55,7 @@ const jsonLd = [
     ...(p ? { offers: { '@type': 'Offer', price: String(p.from), priceCurrency: 'USD', description: T(`${p.plan} planı, aylık`, `${p.plan} plan, monthly`) } } : {}) },
   { '@type': 'FAQPage', mainEntity: faq.map(([q, a]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a } })) },
 ];
-const title = T(`${t.name} nedir, ücretsiz mi, fiyatı ne kadar? Özellikler ve alternatifler`, `${t.name}: pricing, free plan, features and alternatives`);
+const title = T(`${t.name} nedir, ücretsiz mi? Fiyatı ve alternatifleri`, `${t.name}: pricing, free plan, features and alternatives`);
 import { toolLogo } from '../../lib/tool-logos.js';
 const logoSrc = toolLogo(t.slug);
 ---

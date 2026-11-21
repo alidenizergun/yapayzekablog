@@ -31,7 +31,7 @@ const SITE_TITLE = T(SITE.title, 'YZ Gündemi · AI News from Turkey and the Wor
 const SITE_DESC = T(SITE.description, SITE_DESC_EN);
 const { title, description: rawDescription = SITE_DESC, ogImage, ogType = 'website', currentCat, jsonLd, noindex = false, article, breadcrumbs, preloadImage } = Astro.props;
 // Başlık: "Haber başlığı · YZ Gündemi"; çok uzun başlıklarda (70+) marka eki atılır, arama sonucunda kesilmesin
-const fullTitle = title ? (`${title} · ${SITE.name}`.length > 70 ? title : `${title} · ${SITE.name}`) : SITE_TITLE;
+const fullTitle = title ? (`${title} · ${SITE.name}`.length > 60 ? title : `${title} · ${SITE.name}`) : SITE_TITLE;
 // Açıklama en fazla 160 karakter, kelime ortasında kesilmez
 const description = rawDescription.length > 160 ? rawDescription.slice(0, 157).replace(/[\s,;:.]+\S*$/, '') + '…' : rawDescription;
 const canonical = new URL(Astro.url.pathname, Astro.site);
