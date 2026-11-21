@@ -33,7 +33,7 @@ const faq = [
 ];
 const jsonLd = { '@type': 'FAQPage', mainEntity: faq.map(([q, ans]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: ans } })) };
 ---
-<Base title={T(`${vsTr(a, b)} Fiyat, özellik ve kullanım karşılaştırması`, `${a.name} vs ${b.name}: pricing, features and which to choose`)} description={T(`${a.name} ve ${b.name} karşılaştırması: fiyatlar, ücretsiz planlar, Türkçe desteği, güçlü yanlar ve hangisinin kimin için uygun olduğu.`, `${a.name} vs ${b.name}: pricing, free plans, strengths and who each one is for.`)}
+<Base title={T(`${vsTr(a, b)} Fiyat ve özellik karşılaştırması`, `${a.name} vs ${b.name}: pricing, features and which to choose`)} description={T(`${a.name} ve ${b.name} karşılaştırması: fiyatlar, ücretsiz planlar, Türkçe desteği, güçlü yanlar ve hangisinin kimin için uygun olduğu.`, `${a.name} vs ${b.name} compared: pricing and free plans, Turkish support, platforms, strengths, and which one suits whom.`)}
   jsonLd={jsonLd} breadcrumbs={[{ name: 'Ana sayfa', path: '/' }, { name: T('Yapay zeka araçları', 'AI tools'), path: '/arac/' }, { name: T('Karşılaştırmalar', 'Comparisons'), path: '/karsilastir/' }, { name: vs(a, b), path: `/karsilastir/${compareSlug(a.slug, b.slug)}/` }]}>
   <section class="deals compare" data-pagefind-body>
     <nav class="crumb" aria-label={T('Konum', 'Breadcrumb')} data-pagefind-ignore><a href={url('/')}>{T('Ana sayfa', 'Home')}</a><span aria-hidden="true">/</span><a href={url('/arac/')}>{T('Yapay zeka araçları', 'AI tools')}</a><span aria-hidden="true">/</span><a href={url('/karsilastir/')}>{T('Karşılaştırmalar', 'Comparisons')}</a></nav>

@@ -45,7 +45,7 @@ The [how to write a good prompt](/rehber/iyi-istem-nasil-yazilir/) guide can hel
 
 The safest sequence for solving problems is this: try it yourself first, identify where you get stuck, then ask the AI for a hint only for that step. Writing out your solution and saying "where is my mistake? Guide me without giving the solution" is far more productive than reading a ready-made answer.
 
-OpenAI has built this approach into its product. According to the company's announcement, the study mode it added to ChatGPT in July 2025 [](https://openai.com/index/chatgpt-study-mode/) works step by step, asks guiding questions and encourages thinking instead of giving direct answers. It is recommended for test prep and homework help. If the tool you use doesn't have such a mode, you can request the same behavior with a prompt: "Don't tell me the answer. Give me one hint, and after I try, give me the next one."
+OpenAI has built this approach into its product. According to the company's announcement, the study mode it added to ChatGPT in July 2025 ([announcement](https://openai.com/index/chatgpt-study-mode/)) works step by step, asks guiding questions and encourages thinking instead of giving direct answers. It is recommended for test prep and homework help. If the tool you use doesn't have such a mode, you can request the same behavior with a prompt: "Don't tell me the answer. Give me one hint, and after I try, give me the next one."
 
 ## Study plans and mock exam analysis
 

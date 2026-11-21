@@ -7,7 +7,7 @@ const L = await i18n(Astro);
 const { lang, T } = L;
 const digests = (await getDigests()).map((g) => locDigest(g, lang, L.m)).filter(Boolean);
 ---
-<Base title={T('Haftalık özet', 'Weekly AI roundup')} description={T('Yapay zeka dünyasında haftanın öne çıkan gelişmeleri, her pazartesi tek sayfada.', 'The week’s most important AI developments, on one page every Monday.')}
+<Base title={T('Haftalık özet', 'Weekly AI roundup')} description={T('Yapay zeka dünyasında haftanın öne çıkan gelişmeleri, her pazartesi tek sayfada.', 'Every Monday, the week’s most important AI developments on one page: model launches, funding, regulation and Turkey, with sources.')}
   breadcrumbs={[{ name: 'Ana sayfa', path: '/' }, { name: T('Haftalık özet', 'Weekly roundup'), path: '/haftalik/' }]}>
   <section class="digest-index">
     <h1 class="page-h">{T('Haftalık özet', 'Weekly AI roundup')}</h1>

@@ -179,7 +179,7 @@ const index = Object.fromEntries(news.map((n) => [slugOf(n), { t: n.data.title, 
       ok.hidden = false;
       const EN = document.documentElement.lang === 'en';
       ok.querySelector('strong')!.textContent = EN ? 'Your report opened on GitHub in a new tab.' : 'Bildiriminiz GitHub\'da yeni sekmede açıldı.';
-      ok.querySelector('p')!.innerHTML = EN ? 'Press <b>Create</b> on that page to submit. If no tab opened, <a target="_blank" rel="nofollow noopener">click here</a>.' : 'Göndermek için açılan sayfada <b>Create</b> butonuna basın. Sekme açılmadıysa <a target="_blank" rel="nofollow noopener">buraya tıklayın</a>.';
+      ok.querySelector('p')!.innerHTML = EN ? 'Press <b>Create</b> on that page to submit. If no tab opened, <a target="_blank" rel="nofollow noopener">open the report on GitHub</a>.' : 'Göndermek için açılan sayfada <b>Create</b> butonuna basın. Sekme açılmadıysa <a target="_blank" rel="nofollow noopener">bildirimi GitHub\'da açın</a>.';
       (ok.querySelector('p a') as HTMLAnchorElement).href = ghUrl;
     });
   </script>
