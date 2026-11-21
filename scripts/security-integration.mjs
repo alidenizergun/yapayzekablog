@@ -52,7 +52,7 @@ export default function securityHeaders() {
             `img-src 'self' https://images.unsplash.com https://images.pexels.com data: ${ga.img}`.trim(),
             "font-src 'self'",
             `connect-src 'self' ${ga.connect} ${forms.join(' ')}`.replace(/\s+/g, ' ').trim(),
-            `form-action 'self' https://github.com ${forms.join(' ')}`.trim(),
+            `form-action 'self' ${process.env.PUBLIC_REPORT_FORM_KEY || process.env.PUBLIC_REPORT_FORM_ACTION ? '' : 'https://github.com'} ${forms.join(' ')}`.replace(/\s+/g, ' ').trim(),
             "object-src 'none'",
             "base-uri 'self'",
             "frame-src 'none'",

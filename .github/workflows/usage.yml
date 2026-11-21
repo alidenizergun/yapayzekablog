@@ -11,7 +11,7 @@ permissions:
   contents: read
 
 concurrency:
-  group: news
+  group: aux
   cancel-in-progress: false
 
 jobs:

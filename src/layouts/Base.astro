@@ -138,7 +138,7 @@ const groupOf = (k) => navGroups.find((g) => g.key === k)?.items ?? [];
 const onNews = ['/akis/', '/kategori/', '/haber/', '/haftalik/', '/gelisme/'].some((p) => path.startsWith(L.u(p)));
 const topLinks = [
   { ...item(T('Haberler', 'News'), '/akis/'), current: onNews },
-  { ...item(T('Araçlar', 'AI tools'), '/arac/'), current: ['/arac/', '/arac-secici/', '/en-iyi', '/ucretsiz-yapay-zeka-araclari/', '/yeni-araclar/', '/karsilastir/', '/modeller-karsilastirma/', '/yapay-zeka-abonelikleri/', '/api-maliyet-hesaplayici/', '/yapay-zeka-komutlari/', '/yapay-zeka-kullanim-paylari/'].some((p) => path.startsWith(L.u(p))) },
+  { ...item(T('Araçlar', 'AI tools'), '/arac/'), current: ['/arac/', '/arac-secici/', '/en-iyi', '/ucretsiz-yapay-zeka-araclari/', '/yeni-araclar/', '/karsilastir/', '/modeller-karsilastirma/', '/yapay-zeka-abonelikleri/', '/api-maliyet-hesaplayici/', '/yapay-zeka-komutlari/'].some((p) => path.startsWith(L.u(p))) },
   { ...item(T('Rehber', 'Guides'), '/rehber/'), current: ['/rehber/', '/sektor/', '/yapay-zeka-egitimleri/'].some((p) => path.startsWith(L.u(p))) },
   item(T('Sözlük', 'Glossary'), '/sozluk/'),
 ];
@@ -375,7 +375,7 @@ const isBreaking = latest && Date.now() - latest.data.date.valueOf() < BREAKING_
     </div>
     <div class="foot-bottom"><div class="wrap">
       <p>© {year} {SITE.name} · {SITE.domain}</p>
-      <p class="foot-credits">{T('Fotoğraflar', 'Photos from')} <a href="https://unsplash.com/?utm_source=yzgundemi&utm_medium=referral">Unsplash</a>{T(' ve ', ' and ')}<a href="https://www.pexels.com/">Pexels</a>{T(', şirket logoları ', ', company logos from ')}<a href="https://simpleicons.org/">Simple Icons</a>{T(' kaynaklıdır; logolar sahiplerinin markasıdır.', '; logos are trademarks of their owners.')}</p>
+      <p class="foot-credits">{T('Fotoğraflar', 'Photos from')} <a href="https://unsplash.com/?utm_source=yzgundemi&utm_medium=referral">Unsplash</a>, <a href="https://www.pexels.com/">Pexels</a>{T(' ve ', ' and ')}<a href="https://pixabay.com/">Pixabay</a>{T(', şirket logoları ', ', company logos from ')}<a href="https://simpleicons.org/">Simple Icons</a>{T(' ve şirketlerin kendi sitelerinden alınmıştır; logolar sahiplerinin markasıdır.', ' and the companies’ own sites; logos are trademarks of their owners.')}</p>
       <span class="foot-links"><a href={L.u('/kunye/')}>{T('Künye', 'Masthead')}</a><a href={L.u('/kullanim-kosullari/')}>{T('Kullanım koşulları', 'Terms of use')}</a><a href={L.u('/gizlilik/')}>{T('Gizlilik ve çerezler', 'Privacy and cookies')}</a>{SITE.analytics?.ga4 && <button type="button" class="linkish" data-consent-open>{T('Çerez tercihleri', 'Cookie settings')}</button>}</span>
       <a class="foot-top" href="#icerik">{T('Başa dön', 'Back to top')} <span aria-hidden="true">↑</span></a>
     </div></div>
