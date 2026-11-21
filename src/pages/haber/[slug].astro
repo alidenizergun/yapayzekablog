@@ -38,6 +38,7 @@ const related = all
 // İlgili haberler: bu haberin kendi çizimiyle ve birbirleriyle aynı görünmesin
 const relV = spreadVisuals([entry, ...related]);
 const main = defaultVisual(entry, true);
+const mainPhoto = main.kind === 'photo' ? (main.pool ?? (main.n === 2 ? d.photo2 : d.photo)) : undefined;
 const ents = entitiesOf(entry);
 // Daha fazlası: haberden kalıcı sayfalara (sektör, rehber, karşılaştırma, takipçi) bağlantı. Eşleştirme Türkçe metinle.
 const trGuides = await getCollection('rehberler', (g) => !g.data.draft);
@@ -117,18 +118,18 @@ const crumbs = [{ name: 'Ana sayfa', path: '/' }, { name: cat, path: `/kategori/
         </div>
       </div>
 
-      <figure data-pagefind-ignore>
-        <Visual entry={entry} choice={main} w={780} h={420} eager credit={false} />
-        <figcaption>
-          {main.kind === 'photo' && d.photo ? (
-            <>{T('Fotoğraf', 'Photo')}: <a href={withUtm(d.photo.authorUrl)} target="_blank" rel="noopener">{d.photo.author}</a> / <a href={withUtm('https://unsplash.com/')} target="_blank" rel="noopener">Unsplash</a> · {T('Temsili görseldir', 'Illustrative image')}</>
-          ) : main.kind === 'brand' ? (
-            <>{T(`${brandOf(d.brand)?.name} logosu. Logolar sahiplerinin tescilli markalarıdır.`, `${brandOf(d.brand)?.name} logo. Logos are registered trademarks of their owners.`)}</>
-          ) : (
-            <>{T('İllüstrasyon', 'Illustration')}: YZ Gündemi</>
-          )}
-        </figcaption>
-      </figure>
+      {main.kind !== 'none' && (
+        <figure data-pagefind-ignore>
+          <Visual entry={entry} choice={main} w={780} h={420} eager credit={false} />
+          <figcaption>
+            {mainPhoto ? (
+              <>{T('Fotoğraf', 'Photo')}: <a href={withUtm(mainPhoto.authorUrl)} target="_blank" rel="noopener">{mainPhoto.author}</a> / <a href={withUtm('https://unsplash.com/')} target="_blank" rel="noopener">Unsplash</a> · {T('Temsili görseldir', 'Illustrative image')}</>
+            ) : (
+              <>{T(`${brandOf(main.b ?? d.brand)?.name} logosu. Logolar sahiplerinin tescilli markalarıdır.`, `${brandOf(main.b ?? d.brand)?.name} logo. Logos are registered trademarks of their owners.`)}</>
+            )}
+          </figcaption>
+        </figure>
+      )}
 
       {d.keyPoints && d.keyPoints.length >= 2 && (
         <aside class="why guide-summary key-points" aria-label={T('Kısaca', 'Key points')}>

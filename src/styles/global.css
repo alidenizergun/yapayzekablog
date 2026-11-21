@@ -228,8 +228,8 @@ a.tag { display: inline-flex; align-items: center; gap: 4px; }
 .breaking .when { font-weight: 600; }
 
 /* 9) Koyu temada illüstrasyonları hafifçe karart */
-@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) img.thumb.illus { filter: brightness(.82) saturate(.9); } :root:not([data-theme="light"]) img.thumb.photo { filter: brightness(.92); } }
-:root[data-theme="dark"] img.thumb.illus { filter: brightness(.82) saturate(.9); } :root[data-theme="dark"] img.thumb.photo { filter: brightness(.92); }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) img.thumb.photo { filter: brightness(.92); } }
+:root[data-theme="dark"] img.thumb.photo { filter: brightness(.92); }
 
 /* 10) Hata bildirim formu: seçili haberin tam başlığı */
 .report-form .picked { margin: 0; font-size: 14px; color: var(--muted); display: flex; flex-wrap: wrap; gap: 4px 10px; }
@@ -1019,3 +1019,7 @@ img.thumb { color: transparent; font-size: 0; }
 .nav-panel-cols li:has(a > span) { grid-column: 1 / -1; }
 .nav-panel-cols li:has(a > span):has(+ li:not(:has(a > span))) { border-bottom: 1px solid var(--line); margin-bottom: 6px; padding-bottom: 6px; }
 @media (max-width: 520px) { .nav-panel-full section:first-of-type li:nth-child(-n+3) { grid-column: 1 / -1; } }
+/* Görseli olmayan haber (havuz fotoğrafı da yoksa): illüstrasyon yerine bölüm adını gösteren sade yer tutucu */
+.thumb.noimg { height: 100%; min-height: 84px; display: flex; align-items: flex-end; padding: 12px; background: var(--soft); border: 1px solid var(--line); }
+.thumb.noimg span { font: 700 13px/1.2 var(--body); letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+.side a:not(:first-child) .thumb.noimg span { display: none; }

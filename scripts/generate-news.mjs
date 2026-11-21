@@ -28,7 +28,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { CATEGORIES, IMAGES } from '../src/lib/site.js';
 import { BRANDS, BRAND_SLUGS } from '../src/lib/brands.js';
-import { findPhoto, usedPhotoIds, photoYaml, addPhotoToFile, CATEGORY_QUERIES } from './photos.mjs';
+import { findPhoto, usedPhotoIds, photoYaml, addPhotoToFile, CATEGORY_QUERIES, fillPool, readPool } from './photos.mjs';
 import { fetchXPosts, formatPostsForPrompt } from './x-feed.mjs';
 import { STORIES } from '../src/lib/stories.js';
 
@@ -699,7 +699,7 @@ async function main() {
   if (/^(1|true)$/i.test(process.env.PHOTOS_ONLY || '')) {
     log('yalnızca fotoğraf doldurma modu');
     await backfillPhotos();
-    log(`fotoğraf eklenen eski haber: ${photoNote.backfilled}${photoNote.error ? ' (hata: ' + photoNote.error + ')' : ''}`);
+    log(`fotoğraf havuzuna eklenen: ${photoNote.pool || 0} · fotoğraf eklenen eski haber: ${photoNote.backfilled}${photoNote.error ? ' (hata: ' + photoNote.error + ')' : ''}`);
     return summary([], [], 0);
   }
   log(`model: araştırma ${RESEARCH_MODEL}, yazım ${MODEL}${USE_BATCH ? ' (Batch API)' : ''} · mevcut haber: ${existing.length} · en fazla ${MAX_ARTICLES} yeni haber · en fazla ${MAX_SEARCHES} arama${IS_WEEKEND ? ' (hafta sonu)' : ''} · ${REQUIRE_REVIEW ? 'editör onayı AÇIK (taslak)' : 'otomatik yayın'}`);
@@ -790,12 +790,16 @@ const editorNotes = [];
 
 // ---------------------------------------------------------------- fotoğraf doldurma
 const photoNote = { added: 0, backfilled: 0, error: '' };
-const BACKFILL_LIMIT = Number(process.env.PHOTO_BACKFILL || 15);
+// Unsplash istek sınırı (saatte 50) aşılmasın: havuz 8 + eski haber 10 + yeni haberler
+const BACKFILL_LIMIT = Number(process.env.PHOTO_BACKFILL || 10);
 
 /** Fotoğrafı olmayan eski haberlere fotoğraf ekler (her çalışmada en fazla BACKFILL_LIMIT haber) */
 async function backfillPhotos() {
   if (DRY || !process.env.UNSPLASH_ACCESS_KEY || photoNote.error) return;
   const used = usedPhotoIds(CONTENT_DIR);
+  for (const list of Object.values(readPool())) for (const p of list) used.add(p.id);
+  // Kategori havuzu (illüstrasyon yerine yedek gerçek fotoğraflar)
+  try { photoNote.pool = await fillPool(used, { limit: 8 }); } catch (err) { photoNote.error = err.message; return; }
   const files = fs.readdirSync(CONTENT_DIR).filter((f) => f.endsWith('.md')).sort().reverse();
   // Önce fotoğrafı hiç olmayan haberler (manşet ve listelerde illüstrasyon görünmesin), sonra ikinci fotoğraflar
   const jobs = [];
@@ -873,7 +877,7 @@ function summary(written, rejected, searches) {
     cost.md,
   ].join('\n');
   if (process.env.GITHUB_STEP_SUMMARY) fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY, md + '\n');
-  if (process.env.GITHUB_OUTPUT) fs.appendFileSync(process.env.GITHUB_OUTPUT, `count=${written.length}\nchanged=${written.length + photoNote.backfilled}\n`);
+  if (process.env.GITHUB_OUTPUT) fs.appendFileSync(process.env.GITHUB_OUTPUT, `count=${written.length}\nchanged=${written.length + photoNote.backfilled + (photoNote.pool || 0)}\n`);
 }
 
 main().catch((err) => {

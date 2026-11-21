@@ -1,13 +1,14 @@
 ---
-// Haber görseli: şirket logo kartı, Unsplash fotoğrafı veya illüstrasyon.
+// Haber görseli: şirket logo kartı ya da Unsplash fotoğrafı (haberin kendi fotoğrafı veya kategori havuzundan).
+// İllüstrasyon kullanılmaz; hiç görsel yoksa görselsiz, yalnızca bölüm adını gösteren yer tutucu.
 // choice verilmezse haberin kendi görseli kullanılır (bkz. defaultVisual).
-import { IMAGES } from '../lib/site.js';
 import { brandOf } from '../lib/brands.js';
-import { defaultVisual, photoSet, imageFor } from '../lib/news.js';
+import { defaultVisual, photoSet, catName } from '../lib/news.js';
+import { s as str } from '../i18n/index.js';
 
 interface Props {
   entry: any;
-  choice?: { kind: 'brand' | 'photo' | 'illus'; v?: number; n?: number; b?: string };
+  choice?: { kind: 'brand' | 'photo' | 'none'; n?: number; b?: string; pool?: any };
   w?: number; // fotoğrafın gösterim genişliği (px)
   h?: number;
   eager?: boolean;
@@ -17,12 +18,12 @@ const { entry, choice = defaultVisual(entry), w = 400, h = 250, eager = false, c
 const d = entry.data;
 const brandKey = choice.kind === 'brand' ? (choice.b ?? d.brand) : undefined;
 const brand = brandKey ? brandOf(brandKey) : undefined;
-const photo = choice.kind === 'photo' ? (choice.n === 2 ? d.photo2 : d.photo) : undefined;
+const photo = choice.kind === 'photo' ? (choice.pool ?? (choice.n === 2 ? d.photo2 : d.photo)) : undefined;
 const loading = eager ? 'eager' : 'lazy';
 const set = photo ? photoSet(photo, w, h) : undefined;
 import { langOf } from '../i18n/index.js';
 const EN = langOf(Astro.url) === 'en';
-const IMG_EN = { arama: 'Chat bubble and magnifier illustration', gemini: 'Star constellation illustration', benchmark: 'Bar chart illustration', kod: 'Code editor and cursor illustration', rss: 'Crossed-out RSS icon illustration', modeller: 'Neural network illustration', gozluk: 'Smart glasses illustration', guvenlik: 'Locked shield illustration', regulasyon: 'Scales of justice illustration', pazarlama: 'Megaphone illustration', altyapi: 'Server racks illustration', girisim: 'Rocket illustration', odul: 'Trophy illustration' };
+const catLabel = str(EN ? 'en' : 'tr', `cat.${d.category}.name`, catName(d.category));
 ---
 <span class="visual">
   {brand ? (
@@ -36,6 +37,6 @@ const IMG_EN = { arama: 'Chat bubble and magnifier illustration', gemini: 'Star 
       {credit && <span class="credit" aria-hidden="true">{photo.author} / Unsplash</span>}
     </>
   ) : (
-    <img class="thumb illus" src={imageFor(entry, choice.v)} alt={EN ? IMG_EN[d.image] : IMAGES[d.image]} loading={loading} width={w} height={h} />
+    <span class="thumb noimg" aria-hidden="true"><span>{catLabel}</span></span>
   )}
 </span>

@@ -94,6 +94,50 @@ export function addPhotoToFile(file, photo, field = 'photo') {
   return true;
 }
 
+/**
+ * Kategori fotoğraf havuzu (data/foto-havuzu.json): fotoğrafı olmayan ya da fotoğrafı sayfada zaten kullanılmış
+ * haberlerde illüstrasyon yerine gösterilen gerçek fotoğraflar. Her kategoride en az POOL_MIN fotoğraf tutulur.
+ */
+export const POOL_FILE = 'data/foto-havuzu.json';
+const POOL_MIN = 6;
+const POOL_QUERIES = {
+  modeller: ['artificial intelligence neural network', 'computer code screen', 'data center server'],
+  ajanlar: ['robot hand laptop', 'automation workflow', 'laptop typing'],
+  araclar: ['software developer laptop', 'smartphone app screen', 'computer desk workspace'],
+  'girisim-yatirim': ['startup office team', 'stock market chart', 'business meeting'],
+  regulasyon: ['government building', 'law books justice', 'parliament'],
+  arastirma: ['research laboratory', 'scientist computer', 'microscope lab'],
+  platformlar: ['smartphone apps', 'social media phone', 'search engine laptop'],
+  pazarlama: ['marketing team meeting', 'advertising billboard', 'analytics dashboard'],
+  donanim: ['computer chip semiconductor', 'circuit board', 'server rack'],
+  guvenlik: ['cyber security', 'padlock computer', 'server room'],
+  turkiye: ['istanbul skyline', 'ankara city', 'istanbul bosphorus'],
+  genel: ['artificial intelligence technology', 'technology abstract', 'futuristic computer'],
+};
+export function readPool(root = '.') {
+  try { return JSON.parse(fs.readFileSync(path.join(root, POOL_FILE), 'utf8')); } catch { return {}; }
+}
+/** Havuzdaki eksikleri tamamlar; en fazla `limit` fotoğraf ekler. Eklenen sayıyı döndürür. */
+export async function fillPool(used, { root = '.', limit = 12 } = {}) {
+  if (!process.env.UNSPLASH_ACCESS_KEY) return 0;
+  const pool = readPool(root);
+  for (const list of Object.values(pool)) for (const p of list) used.add(p.id);
+  let added = 0;
+  outer: for (const [cat, queries] of Object.entries(POOL_QUERIES)) {
+    pool[cat] ??= [];
+    let qi = 0;
+    while (pool[cat].length < POOL_MIN) {
+      if (added >= limit) break outer;
+      const q = queries[qi % queries.length]; qi++;
+      const photo = await findPhoto([q], used, { generic: false });
+      if (photo) { pool[cat].push(photo); added++; }
+      if (qi >= queries.length * 3) break;
+    }
+  }
+  if (added) fs.writeFileSync(path.join(root, POOL_FILE), JSON.stringify(pool, null, 1) + '\n');
+  return added;
+}
+
 /** Kategoriye göre yedek arama sorgusu (haberde imageQuery yoksa) */
 export const CATEGORY_QUERIES = {
   modeller: 'computer code screen',

@@ -13,12 +13,10 @@ export const newsUrl = (entry) => url(`/haber/${slugOf(entry)}/`);
 export const catUrl = (slug) => url(`/kategori/${slug}/`);
 // Her illüstrasyonun 3 varyantı var: anahtar.svg, anahtar-2.svg, anahtar-3.svg
 export const IMAGE_VARIANTS = 3;
-export const imgUrl = (key, v = 0) => url(`/img/${key}${v ? `-${v + 1}` : ''}.svg`);
 
 const hash = (s) => [...s].reduce((h, c) => (h * 31 + c.charCodeAt(0)) >>> 0, 7);
 /** Bir haberin kendi varyantı: haber adresine göre sabit */
 export const variantOf = (entry) => hash(slugOf(entry)) % IMAGE_VARIANTS;
-export const imageFor = (entry, v) => imgUrl(entry.data.image, v ?? variantOf(entry));
 
 // ---------------------------------------------------------------- haber görselleri
 // Öncelik: şirket logo kartı (brand) > Unsplash fotoğrafı (photo) > illüstrasyon (image)
@@ -52,12 +50,25 @@ export function defaultVisual(entry, large = false) {
   if (d.photo2) return { kind: 'photo', n: 2 };
   const other = otherBrands(entry)[0];
   if (other) return { kind: 'brand', b: other };
-  return { kind: 'illus', v: variantOf(entry) };
+  const pool = poolPhotos(d.category)[variantOf(entry) % Math.max(1, poolPhotos(d.category).length)];
+  if (pool) return { kind: 'photo', pool };
+  return { kind: 'none' };
+}
+
+// Kategori fotoğraf havuzu (data/foto-havuzu.json, haber hattı Unsplash'ten doldurur): fotoğrafı olmayan ya da
+// fotoğrafı sayfada zaten kullanılmış haberler için yedek gerçek fotoğraf. İllüstrasyon hiçbir yerde kullanılmaz.
+let POOL = null;
+export function poolPhotos(category) {
+  if (!POOL) {
+    try { POOL = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'data/foto-havuzu.json'), 'utf8')); } catch { POOL = {}; }
+  }
+  return [...(POOL[category] ?? []), ...(POOL.genel ?? [])];
 }
 
 /** Haberde adı geçen, logosu olan diğer şirketler (illüstrasyon yerine logo kartı için yedek) */
 /** Haberin illüstrasyon dışında bir görseli var mı (fotoğraf, logo veya haberde geçen bir şirketin logosu) */
 export const hasRealVisual = (entry) => Boolean(entry.data.photo || entry.data.photo2 || entry.data.brand || otherBrands(entry).length);
+/** Haberin kendine ait görseli (havuz fotoğrafı sayılmaz) */
 
 export function otherBrands(entry) {
   return entitiesOf(entry).map((e) => e.brand).filter((b) => b && b !== entry.data.brand && BRANDS[b]);
@@ -75,50 +86,37 @@ export function ogImageFor(entry) {
   const d = entry.data;
   if (d.photo) return photoSrc(d.photo, 1200, 630);
   if (d.brand) return url(`/og/marka/${d.brand}.png`);
-  return url(`/og/gorsel/${d.image}.png`);
+  return url('/og/site.png');
 }
 
 /**
  * Aynı bölümde gösterilen haberler için görsel seçer; aynı logo, fotoğraf veya çizim
  * bir bölümde iki kez görünmesin. Logosu zaten kullanılmış bir şirket haberinde
  * fotoğraf varsa fotoğraf gösterilir.
- * @returns {Map<string, {kind: 'brand'|'photo'|'illus', v?: number}>}
+ * @returns {Map<string, {kind: 'brand'|'photo'|'none', n?: number, b?: string, pool?: object}>}
  */
-const tagOf = (d, o) => o.kind === 'brand' ? `b:${o.b ?? d.brand}` : o.kind === 'photo' ? `p:${(o.n === 2 ? d.photo2 : d.photo).id}` : `i:${d.image}:${o.v}`;
-export function spreadVisuals(entries, { largeFirst = false, noIllus = false } = {}) {
+const tagOf = (d, o) => o.kind === 'brand' ? `b:${o.b ?? d.brand}` : o.kind === 'photo' ? `p:${(o.pool ?? (o.n === 2 ? d.photo2 : d.photo)).id}` : 'none';
+export function spreadVisuals(entries, { largeFirst = false } = {}) {
   const used = new Set();
   const out = new Map();
-  let prev = null;
   for (const [i, e] of entries.entries()) {
     const d = e.data;
     let choice = null;
     // largeFirst: listenin ilk öğesi büyük gösterilir (manşet) -> fotoğraf önce
     const photoFirst = largeFirst && i === 0;
-    // Sıra: (manşette fotoğraf) → logo → fotoğraf → ikinci fotoğraf → haberde geçen başka şirketin logosu → illüstrasyon.
-    // İllüstrasyon yalnızca hiçbir seçenek kalmadığında (ya da hepsi bu sayfada zaten kullanıldığında) gösterilir.
+    // Sıra: (manşette fotoğraf) → logo → fotoğraf → ikinci fotoğraf → haberde geçen başka şirketin logosu → kategori havuzundan fotoğraf
     const opts = [];
     if (photoFirst && d.photo) opts.push({ kind: 'photo' });
     if (d.brand) opts.push({ kind: 'brand' });
     if (d.photo) opts.push({ kind: 'photo' });
     if (d.photo2) opts.push({ kind: 'photo', n: 2 });
     for (const b of otherBrands(e)) opts.push({ kind: 'brand', b });
-    choice = opts.find((o) => !used.has(tagOf(d, o))) ?? null;
-    // Manşet (noIllus): illüstrasyon yok; seçenekler bu sayfada kullanılmış olsa bile haberin kendi görseli tekrar kullanılır
-    if (!choice && noIllus && opts.length) choice = opts[0];
-    if (!choice) {
-      const key = d.image;
-      const base = variantOf(e);
-      let v = base;
-      for (let i = 0; i < IMAGE_VARIANTS; i++) {
-        const cand = (base + i) % IMAGE_VARIANTS;
-        if (!used.has(`i:${key}:${cand}`)) { v = cand; break; }
-      }
-      if (prev === `i:${key}:${v}`) v = (v + 1) % IMAGE_VARIANTS;
-      choice = { kind: 'illus', v };
-    }
+    for (const p of poolPhotos(d.category)) opts.push({ kind: 'photo', pool: p });
+    // İllüstrasyon yok: önce bu sayfada kullanılmamış bir seçenek; hepsi kullanıldıysa haberin kendi görseli
+    // (fotoğraf/logo) tekrar edilir; hiç görsel yoksa görselsiz kart (yalnızca metin)
+    choice = opts.find((o) => !used.has(tagOf(d, o))) ?? opts[0] ?? { kind: 'none' };
     const tag = tagOf(d, choice);
     used.add(tag);
-    prev = tag;
     out.set(e.id, choice);
   }
   return out;

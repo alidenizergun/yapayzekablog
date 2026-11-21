@@ -46,10 +46,10 @@ const blocks = CATEGORIES.map((c) => ({
   items: news.filter((n) => n.data.category === c.slug && n.data.date.valueOf() > monthAgo && !shown.has(n.id)).slice(0, 4),
 })).filter((b) => b.items.length >= 3).sort((a, b) => b.items[0].data.date - a.items[0].data.date).slice(0, 3);
 
-const heroV = spreadVisuals([lead, ...side].filter(Boolean), { largeFirst: true, noIllus: true });
+const heroV = spreadVisuals([lead, ...side].filter(Boolean), { largeFirst: true });
 // Manşet fotoğrafı sayfanın en büyük görseli (LCP): <head> içinde erkenden yüklenir
 const leadV = lead ? heroV.get(lead.id) : undefined;
-const leadPhoto = leadV?.kind === 'photo' ? (leadV.n === 2 ? lead.data.photo2 : lead.data.photo) : undefined;
+const leadPhoto = leadV?.kind === 'photo' ? (leadV.pool ?? (leadV.n === 2 ? lead.data.photo2 : lead.data.photo)) : undefined;
 const preloadImage = leadPhoto ? photoSet(leadPhoto, 820, 420) : undefined;
 const secondV = spreadVisuals(second);
 const listV = spreadVisuals(latest);
