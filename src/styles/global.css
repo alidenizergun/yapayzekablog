@@ -1351,3 +1351,4 @@ img.thumb { color: transparent; font-size: 0; }
 .brandcard .bl-img + .bn { margin-top: 5cqh; font-size: clamp(12px, 11cqh, 36px); }
 @container (max-height: 100px) { .brandcard .bl-img { width: 70cqh; height: 70cqh; } }
 .entity-img { object-fit: cover; background: #fff; border: 1px solid var(--line); }
+.brandcard.has-img { background: color-mix(in srgb, var(--soft) 45%, var(--bg)); }
