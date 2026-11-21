@@ -1,0 +1,89 @@
+---
+import SubNav from '../components/SubNav.astro';
+import Base from '../layouts/Base.astro';
+import { PROMPTS, PROMPT_CATS, PROMPTS_UPDATED } from '../lib/prompts.js';
+import { trDate } from '../lib/tools.js';
+import { url } from '../lib/news.js';
+import { i18n, dateL } from '../i18n/index.js';
+const L = await i18n(Astro);
+const { lang, T, S } = L;
+const EN = lang === 'en';
+const cats = PROMPT_CATS.map((c) => ({ ...c, name: S(`promptcat.${c.slug}`, c.name) }));
+const items = PROMPTS.map((p) => ({ ...p, title: S(`prompt.${p.id}.title`, p.title), text: S(`prompt.${p.id}.text`, p.text) }));
+const pageUrl = new URL(url('/yapay-zeka-komutlari/'), Astro.site).href;
+const updated = EN ? dateL(PROMPTS_UPDATED, 'en') : trDate(PROMPTS_UPDATED);
+const jsonLd = { '@type': 'CollectionPage', name: T('Türkçe yapay zeka komutları', 'AI prompt library'), url: pageUrl, inLanguage: L.locale, dateModified: PROMPTS_UPDATED,
+  mainEntity: { '@type': 'ItemList', numberOfItems: items.length, itemListElement: items.map((p, i) => ({ '@type': 'ListItem', position: i + 1, name: p.title, url: `${pageUrl}#${p.id}` })) } };
+---
+<Base title={T(`Yapay zeka komutları: ${items.length} hazır Türkçe prompt (ChatGPT, Gemini, Claude)`, `AI prompt library: ${items.length} ready-to-use prompts for ChatGPT, Gemini and Claude`)}
+  description={T('İş, pazarlama, eğitim, kariyer, kodlama ve görsel üretme için kopyalayıp kullanabileceğiniz hazır Türkçe yapay zeka komutları. ChatGPT, Gemini, Claude ve Copilot ile çalışır.', 'Copy-and-use AI prompts for work, marketing, study, careers, coding and image generation. They work with ChatGPT, Gemini, Claude and Copilot.')}
+  jsonLd={jsonLd} breadcrumbs={[{ name: 'Ana sayfa', path: '/' }, { name: T('Yapay zeka araçları', 'AI tools'), path: '/arac/' }, { name: T('Komut kütüphanesi', 'Prompt library'), path: '/yapay-zeka-komutlari/' }]}>
+  <SubNav set="tools" />
+  <section class="glossary prompts">
+    <span class="cat">{T('Komut kütüphanesi', 'Prompt library')}</span>
+    <h1 class="page-h">{T('Hazır yapay zeka komutları', 'Ready-to-use AI prompts')}</h1>
+    <p class="spot">{T('Her genel asistanda (ChatGPT, Gemini, Claude, Copilot) çalışan, kopyalayıp kullanabileceğiniz komutlar. Köşeli parantez içindeki [ALANLARI] kendi bilgilerinizle doldurun. Kişisel ve şirket verisi paylaşmadan önce aracın gizlilik ayarlarını kontrol edin.', 'Prompts you can copy into any general assistant (ChatGPT, Gemini, Claude, Copilot). Fill in the [FIELDS] in square brackets with your own details. Check the tool’s privacy settings before sharing personal or company data.')}</p>
+    <p class="models-checked">{T('Son güncelleme', 'Last updated')}: <time datetime={PROMPTS_UPDATED}>{updated}</time></p>
+
+    <div class="glossary-search"><label for="pr-q" class="sr-only">{T('Komutlarda ara', 'Search prompts')}</label><input id="pr-q" type="search" placeholder={T('Komutlarda ara (ör. e-posta, Instagram, CV)', 'Search prompts (e.g. email, Instagram, resume)')} autocomplete="off" data-pr-q /></div>
+    <div class="deal-filters" role="group" aria-label={T('Kategoriye göre süz', 'Filter by category')} data-pr-filters>
+      <button type="button" aria-pressed="true" data-c="">{T('Tümü', 'All')}</button>
+      {cats.map((c) => <button type="button" aria-pressed="false" data-c={c.slug}>{c.name}</button>)}
+    </div>
+
+    {cats.map((c) => (
+      <section class="pr-group" aria-labelledby={`pc-${c.slug}`} data-group={c.slug}>
+        <h2 id={`pc-${c.slug}`} class="ev-h">{c.name}</h2>
+        <div class="pr-list">
+          {items.filter((p) => p.cat === c.slug).map((p) => (
+            <article class="pr-card" id={p.id} data-cat={c.slug}>
+              <h3>{p.title}</h3>
+              <pre class="pr-text" data-pr-text>{p.text}</pre>
+              <button type="button" class="btn cta-secondary pr-copy" data-pr-copy data-done={T('Kopyalandı ✓', 'Copied ✓')}>{T('Kopyala', 'Copy')}</button>
+            </article>
+          ))}
+        </div>
+      </section>
+    ))}
+    <p class="empty" data-pr-empty hidden>{T('Aramanıza uyan komut bulunamadı.', 'No prompts match your search.')}</p>
+
+    <section class="models-faq" aria-labelledby="pr-tips">
+      <h2 id="pr-tips">{T('Daha iyi sonuç için 5 ipucu', '5 tips for better results')}</h2>
+      <ol class="pr-tips">
+        <li>{T('Rol ve bağlam verin: kim olduğunuzu, kimin için yazdığınızı ve amacınızı söyleyin.', 'Give a role and context: say who you are, who it’s for and what you want.')}</li>
+        <li>{T('Biçimi belirtin: tablo, madde listesi, kelime sınırı gibi.', 'Specify the format: a table, a bullet list, a word limit.')}</li>
+        <li>{T('Örnek gösterin: beğendiğiniz bir metni örnek olarak ekleyin.', 'Show an example: paste a piece you like as a model.')}</li>
+        <li>{T('Uydurma bilgi istemeyin: "bilmediğin yerde belirt" deyin ve rakamları kontrol edin.', 'Ask it not to make things up: say “flag what you don’t know” and check the numbers.')}</li>
+        <li>{T('Tek seferde mükemmel beklemeyin: ilk yanıtı düzelterek ilerleyin.', 'Don’t expect perfection in one go: refine the first answer.')}</li>
+      </ol>
+      <p>{T('Hangi aracı kullanacağınızdan emin değil misiniz?', 'Not sure which tool to use?')} <a href={url('/arac-secici/')}>{T('Araç seçici', 'Tool finder')}</a> · <a href={url('/en-iyi/chatgpt-alternatifleri/')}>{T('ChatGPT alternatifleri', 'ChatGPT alternatives')}</a> · <a href={url('/rehber/')}>{T('Rehberler', 'Guides')}</a></p>
+    </section>
+  </section>
+</Base>
+
+<script>
+  const q = document.querySelector<HTMLInputElement>('[data-pr-q]')!;
+  const btns = [...document.querySelectorAll<HTMLButtonElement>('[data-pr-filters] button')];
+  const cards = [...document.querySelectorAll<HTMLElement>('.pr-card')];
+  const groups = [...document.querySelectorAll<HTMLElement>('.pr-group')];
+  const empty = document.querySelector<HTMLElement>('[data-pr-empty]')!;
+  const norm = (s: string) => s.toLocaleLowerCase('tr').normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/ı/g, 'i');
+  let cat = '';
+  const apply = () => {
+    const term = norm(q.value.trim());
+    let shown = 0;
+    cards.forEach((c) => { const ok = (!cat || c.dataset.cat === cat) && (!term || norm(c.textContent || '').includes(term)); c.hidden = !ok; if (ok) shown++; });
+    groups.forEach((g) => { g.hidden = ![...g.querySelectorAll<HTMLElement>('.pr-card')].some((c) => !c.hidden); });
+    empty.hidden = shown > 0;
+  };
+  btns.forEach((b) => b.addEventListener('click', () => { cat = b.dataset.c || ''; btns.forEach((x) => x.setAttribute('aria-pressed', String(x === b))); apply(); }));
+  q.addEventListener('input', apply);
+  document.querySelectorAll<HTMLButtonElement>('[data-pr-copy]').forEach((b) => b.addEventListener('click', async () => {
+    const pre = b.parentElement!.querySelector<HTMLElement>('[data-pr-text]')!;
+    const label = b.textContent;
+    try { await navigator.clipboard.writeText(pre.textContent || ''); b.textContent = b.dataset.done || label; }
+    catch { const r = document.createRange(); r.selectNodeContents(pre); const s = getSelection(); s?.removeAllRanges(); s?.addRange(r); }
+    setTimeout(() => { b.textContent = label; }, 1800);
+  }));
+  if (location.hash) document.getElementById(location.hash.slice(1))?.classList.add('pr-target');
+</script>

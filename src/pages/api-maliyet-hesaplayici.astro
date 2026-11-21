@@ -1,0 +1,103 @@
+---
+import SubNav from '../components/SubNav.astro';
+import Base from '../layouts/Base.astro';
+import { MODELS, MODELS_CHECKED } from '../lib/models.js';
+import { usdTry } from '../lib/fx.js';
+import { url, formatDate } from '../lib/news.js';
+import { i18n } from '../i18n/index.js';
+const L = await i18n(Astro);
+const { lang, T } = L;
+const EN = lang === 'en';
+const fx = await usdTry();
+const checked = formatDate(new Date(`${MODELS_CHECKED}T12:00:00+03:00`), false, L.locale);
+// Hazır senaryolar: istek başına ortalama girdi/çıktı token ve günlük istek sayısı (yuvarlak, örnek değerler)
+const PRESETS = [
+  { id: 'chatbot', tr: 'Müşteri destek botu', en: 'Customer support bot', req: 1000, inTok: 1500, outTok: 300 },
+  { id: 'ozet', tr: 'Belge özetleme', en: 'Document summaries', req: 200, inTok: 12000, outTok: 600 },
+  { id: 'icerik', tr: 'İçerik üretimi', en: 'Content generation', req: 100, inTok: 800, outTok: 1500 },
+  { id: 'kod', tr: 'Kodlama ajanı', en: 'Coding agent', req: 300, inTok: 30000, outTok: 2000 },
+  { id: 'siniflandirma', tr: 'Sınıflandırma / etiketleme', en: 'Classification / tagging', req: 10000, inTok: 400, outTok: 20 },
+];
+const data = { en: EN, fx: fx?.rate ?? null, models: MODELS.map((m) => ({ model: m.model, company: m.company, i: m.input, o: m.output })), presets: PRESETS };
+const faq = EN ? [
+  ['How is API cost calculated?', 'Each request is billed for the tokens you send (input) and the tokens the model returns (output), at the per-million-token prices in the table. Monthly cost = requests × days × (input tokens × input price + output tokens × output price) ÷ 1,000,000.'],
+  ['How many tokens is a page of text?', 'It depends on the language and the model’s tokenizer. Turkish text usually uses more tokens than the same English text. To get a reliable figure, send a sample of your real data and read the token count from the API response.'],
+  ['How can I lower the bill?', 'Use a smaller model for simple tasks, keep prompts short, cache repeated context (prompt caching) and send non-urgent work through batch APIs, which many providers discount by around half.'],
+] : [
+  ['API maliyeti nasıl hesaplanır?', 'Her istekte modele gönderilen (girdi) ve modelin ürettiği (çıktı) token sayısı, tablodaki milyon token başına fiyatlarla ücretlendirilir. Aylık maliyet = istek sayısı × gün × (girdi token × girdi fiyatı + çıktı token × çıktı fiyatı) ÷ 1.000.000.'],
+  ['Bir sayfa metin kaç token eder?', 'Dile ve modelin token ayırıcısına göre değişir; Türkçe metin aynı içerikteki İngilizce metinden genellikle daha fazla token tutar. Güvenilir rakam için gerçek verinizden bir örneği API\'ye gönderip yanıttaki token sayısına bakın.'],
+  ['Faturayı nasıl düşürürüm?', 'Basit işlerde küçük model kullanın, istemleri kısa tutun, tekrar eden bağlamı önbelleğe alın (prompt caching) ve acil olmayan işleri toplu işlem (batch) API\'leriyle gönderin; birçok şirket bunlarda yaklaşık yarı fiyat uyguluyor.'],
+];
+const jsonLd = [
+  { '@type': 'WebApplication', name: T('Yapay zeka API maliyet hesaplayıcı', 'AI API cost calculator'), applicationCategory: 'BusinessApplication', operatingSystem: 'Web',
+    offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' }, url: new URL(url('/api-maliyet-hesaplayici/'), Astro.site).href, inLanguage: L.locale },
+  { '@type': 'FAQPage', mainEntity: faq.map(([q, a]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a } })) },
+];
+---
+<Base title={T('Yapay zeka API maliyet hesaplayıcı: ChatGPT, Claude, Gemini, DeepSeek (TL ve $)', 'AI API cost calculator: OpenAI, Claude, Gemini, DeepSeek')}
+  description={T('Günlük istek sayısını ve istek başına token miktarını girin; OpenAI, Anthropic Claude, Google Gemini ve DeepSeek modellerinin aylık API maliyetini dolar ve TL olarak karşılaştırın.', 'Enter daily requests and tokens per request to compare the monthly API cost of OpenAI, Anthropic Claude, Google Gemini and DeepSeek models.')}
+  jsonLd={jsonLd} breadcrumbs={[{ name: 'Ana sayfa', path: '/' }, { name: T('Model API fiyatları', 'AI model API pricing'), path: '/modeller-karsilastirma/' }, { name: T('API maliyet hesaplayıcı', 'API cost calculator'), path: '/api-maliyet-hesaplayici/' }]}>
+  <SubNav set="tools" />
+  <section class="glossary picker apicalc">
+    <span class="cat">{T('Hesaplayıcı', 'Calculator')}</span>
+    <h1 class="page-h">{T('Yapay zeka API maliyet hesaplayıcı', 'AI API cost calculator')}</h1>
+    <p class="spot">{T('Uygulamanızın yapay zeka modeline ayda kaça mal olacağını hesaplayın. Bir senaryo seçin veya kendi değerlerinizi girin; sonuçlar en ucuzdan pahalıya sıralanır.', 'Estimate what an AI model will cost your app each month. Pick a scenario or enter your own numbers; results are sorted from cheapest to most expensive.')}</p>
+    <p class="models-checked">{T('Fiyatların son kontrolü', 'Prices last checked')}: <time datetime={MODELS_CHECKED}>{checked}</time> · <a href={url('/modeller-karsilastirma/')}>{T('Fiyat tablosu ve kaynaklar', 'Price table and sources')}</a></p>
+
+    <form class="pick-form" data-ac>
+      <fieldset>
+        <legend>{T('1. Senaryo', '1. Scenario')}</legend>
+        <div class="pick-opts">{PRESETS.map((p, i) => <label><input type="radio" name="preset" value={p.id} checked={i === 0} /><span>{EN ? p.en : p.tr}</span></label>)}</div>
+      </fieldset>
+      <fieldset>
+        <legend>{T('2. Kullanım', '2. Usage')}</legend>
+        <div class="calc-in calc-in-3">
+          <label>{T('Günlük istek sayısı', 'Requests per day')}<input type="number" min="0" step="1" inputmode="numeric" data-req /></label>
+          <label>{T('İstek başına girdi (token)', 'Input per request (tokens)')}<input type="number" min="0" step="1" inputmode="numeric" data-in /></label>
+          <label>{T('İstek başına çıktı (token)', 'Output per request (tokens)')}<input type="number" min="0" step="1" inputmode="numeric" data-out /></label>
+        </div>
+        <p class="ac-total" data-total aria-live="polite"></p>
+      </fieldset>
+    </form>
+
+    <div class="deal-table-wrap">
+      <table class="deal-table ac-table">
+        <thead><tr><th scope="col">Model</th><th scope="col" class="num">{T('Aylık', 'Monthly')}</th>{fx && <th scope="col" class="num">{T('TL karşılığı', 'In lira')}</th>}<th scope="col" class="num hide-sm">{T('İstek başına', 'Per request')}</th></tr></thead>
+        <tbody data-ac-rows></tbody>
+      </table>
+    </div>
+    <p class="ai-note">{T('Hesap 30 günlük ay ve standart fiyatlarla yapılır; önbellek, toplu işlem, yoğun saat dışı ve uzun istem fiyatları dahil değildir.', 'Assumes a 30-day month and standard prices; caching, batch, off-peak and long-prompt pricing are not included.')} {fx && T(`TL karşılığı TCMB döviz satış kuruyla (${fx.date}) hesaplanmıştır; vergiler dahil değildir.`, `Lira amounts use the TCMB selling rate (${fx.date}), excluding taxes.`)}</p>
+
+    <section class="models-faq" aria-labelledby="ac-faq">
+      <h2 id="ac-faq">{T('Sık sorulanlar', 'FAQ')}</h2>
+      {faq.map(([q, a]) => <details><summary>{q}</summary><p>{a}</p></details>)}
+      <p><a href={url('/sozluk/token/')}>{T('Token nedir?', 'What is a token?')}</a> · <a href={url('/rehber/hangi-yapay-zeka-modelini-secmeliyim/')}>{T('Hangi modeli seçmeliyim?', 'Which model should I choose?')}</a></p>
+    </section>
+    <script type="application/json" id="ac-data" set:html={JSON.stringify(data).replace(/</g, '\\u003c')}></script>
+  </section>
+</Base>
+
+<script>
+  type M = { model: string; company: string; i: number; o: number };
+  type P = { id: string; req: number; inTok: number; outTok: number };
+  const d = JSON.parse(document.getElementById('ac-data')!.textContent || '{}') as { en: boolean; fx: number | null; models: M[]; presets: P[] };
+  const form = document.querySelector<HTMLFormElement>('[data-ac]')!;
+  const req = form.querySelector<HTMLInputElement>('[data-req]')!, inp = form.querySelector<HTMLInputElement>('[data-in]')!, out = form.querySelector<HTMLInputElement>('[data-out]')!;
+  const rows = document.querySelector<HTMLElement>('[data-ac-rows]')!, total = document.querySelector<HTMLElement>('[data-total]')!;
+  const loc = d.en ? 'en-US' : 'tr-TR';
+  const usd = (n: number) => { const s = new Intl.NumberFormat(loc, { minimumFractionDigits: n < 1 ? 4 : 2, maximumFractionDigits: n < 1 ? 4 : 2 }).format(n); return d.en ? `$${s}` : `${s} $`; };
+  const tl = (n: number) => `≈ ${Math.round(n).toLocaleString(loc)} TL`;
+  const int = (n: number) => Math.round(n).toLocaleString(loc);
+  const setPreset = (id: string) => { const p = d.presets.find((x) => x.id === id); if (!p) return; req.value = String(p.req); inp.value = String(p.inTok); out.value = String(p.outTok); };
+  const calc = () => {
+    const r = Math.max(0, Number(req.value) || 0), i = Math.max(0, Number(inp.value) || 0), o = Math.max(0, Number(out.value) || 0);
+    const monthIn = r * 30 * i, monthOut = r * 30 * o;
+    total.textContent = d.en ? `Monthly: ${int(r * 30)} requests · ${int(monthIn)} input + ${int(monthOut)} output tokens` : `Aylık: ${int(r * 30)} istek · ${int(monthIn)} girdi + ${int(monthOut)} çıktı token`;
+    const list = d.models.map((m) => { const per = (i * m.i + o * m.o) / 1e6; return { m, per, month: per * r * 30 }; }).sort((a, b) => a.month - b.month);
+    rows.innerHTML = list.map(({ m, per, month }) => `<tr><td><strong>${m.model}</strong><span class="meta ac-co">${m.company}</span></td><td class="num"><strong>${usd(month)}</strong></td>${d.fx ? `<td class="num">${tl(month * d.fx)}</td>` : ''}<td class="num hide-sm">${usd(per)}</td></tr>`).join('');
+  };
+  form.addEventListener('change', (e) => { const t = e.target as HTMLInputElement; if (t.name === 'preset') setPreset(t.value); calc(); });
+  form.addEventListener("input", calc);
+  form.addEventListener("submit", (e) => e.preventDefault());
+  setPreset(d.presets[0].id); calc();
+</script>

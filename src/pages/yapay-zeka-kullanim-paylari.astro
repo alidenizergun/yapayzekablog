@@ -1,0 +1,103 @@
+---
+import Base from '../layouts/Base.astro';
+import SubNav from '../components/SubNav.astro';
+import data from '../../data/yz-kullanim-tr.json';
+import { toolBySlug, toolUrl } from '../lib/tools.js';
+import { url } from '../lib/news.js';
+import { i18n } from '../i18n/index.js';
+const L = await i18n(Astro);
+const { lang, T } = L;
+const EN = lang === 'en';
+const MONTHS_TR = ['Ocak', 'Şubat', 'Mart', 'Nisan', 'Mayıs', 'Haziran', 'Temmuz', 'Ağustos', 'Eylül', 'Ekim', 'Kasım', 'Aralık'];
+const mLabel = (ym, short = false) => { const [y, m] = ym.split('-').map(Number); const d = new Date(Date.UTC(y, m - 1, 15));
+  return EN ? d.toLocaleDateString('en-US', { month: short ? 'short' : 'long', year: 'numeric', timeZone: 'UTC' }) : `${short ? MONTHS_TR[m - 1].slice(0, 3) : MONTHS_TR[m - 1]} ${y}`; };
+const NAME = { 'Google Gemini': 'Gemini' };
+const SLUG = { ChatGPT: 'chatgpt', 'Google Gemini': 'gemini', 'Microsoft Copilot': 'microsoft-copilot', Perplexity: 'perplexity', Claude: 'claude', DeepSeek: 'deepseek', Grok: 'grok' };
+const months = data.months;
+const last = months.at(-1), prev = months.at(-2), yearAgo = months.find((m) => m.month === `${Number(last.month.slice(0, 4)) - 1}${last.month.slice(4)}`);
+const names = Object.keys(last.shares).filter((n) => n !== 'Other').sort((a, b) => last.shares[b] - last.shares[a]);
+const top = names.slice(0, 5);
+const num = (n) => n.toLocaleString(L.locale, { minimumFractionDigits: 1, maximumFractionDigits: 1 });
+const pct = (n) => (EN ? `${num(n)}%` : `%${num(n)}`);
+const delta = (a, b) => (b == null ? '' : `${a - b >= 0 ? '+' : '−'}${num(Math.abs(a - b))} ${EN ? 'pts' : 'puan'}`);
+// Çizgi grafik (SVG): x = ay, y = %
+const W = 720, H = 280, P = { l: 40, r: 16, t: 12, b: 28 };
+const x = (i) => P.l + (i * (W - P.l - P.r)) / Math.max(1, months.length - 1);
+const y = (v) => P.t + (1 - v / 100) * (H - P.t - P.b);
+const COLORS = ['var(--c1)', 'var(--c2)', 'var(--c3)', 'var(--c4)', 'var(--c5)'];
+const series = top.map((n, k) => ({ n, color: COLORS[k], d: months.map((m, i) => `${i ? 'L' : 'M'}${x(i).toFixed(1)},${y(m.shares[n] ?? 0).toFixed(1)}`).join('') }));
+const leader = names[0];
+const pageUrl = new URL(url('/yapay-zeka-kullanim-paylari/'), Astro.site).href;
+const summary = EN
+  ? `In ${mLabel(last.month)}, ${NAME[leader] ?? leader} had the largest share of AI chatbot traffic in Turkey at ${pct(last.shares[leader])}, followed by ${top.slice(1, 3).map((n) => `${NAME[n] ?? n} (${pct(last.shares[n])})`).join(' and ')}.`
+  : `${mLabel(last.month)} itibarıyla Türkiye'de yapay zeka sohbet asistanı trafiğinde en büyük pay ${pct(last.shares[leader])} ile ${NAME[leader] ?? leader}'${leader === 'ChatGPT' ? 'nin' : 'nin'}; onu ${top.slice(1, 3).map((n) => `${NAME[n] ?? n} (${pct(last.shares[n])})`).join(' ve ')} izliyor.`;
+const faq = EN ? [
+  ['What is the most used AI chatbot in Turkey?', summary],
+  ['Where does this data come from?', `From Statcounter Global Stats’ “AI Chatbot Market Share” series for Turkey (desktop, mobile and tablet combined). Statcounter estimates shares from the traffic its network of websites receives from each chatbot; it is not a count of users. The data is licensed CC BY-SA 3.0.`],
+  ['How often is this page updated?', 'Every month, after Statcounter publishes the previous month’s figures. Statcounter can revise past months, so small differences from earlier reports are normal.'],
+] : [
+  ['Türkiye\'de en çok kullanılan yapay zeka hangisi?', summary],
+  ['Bu veri nereden geliyor?', 'Statcounter Global Stats\'ın Türkiye için "AI Chatbot Market Share" serisinden (masaüstü, mobil ve tablet toplamı). Statcounter payları, ölçüm ağındaki sitelere her asistandan gelen trafiğe göre tahmin eder; kullanıcı sayısı değildir. Veri CC BY-SA 3.0 lisanslıdır.'],
+  ['Sayfa ne sıklıkla güncelleniyor?', 'Statcounter bir önceki ayın verisini yayımladıktan sonra her ay. Statcounter geçmiş ayları düzeltebildiği için önceki haberlerde geçen rakamlarla küçük farklar olabilir.'],
+];
+const jsonLd = [
+  { '@type': 'Dataset', name: T('Türkiye yapay zeka sohbet asistanı kullanım payları', 'AI chatbot market share in Turkey'), description: summary, url: pageUrl, inLanguage: L.locale,
+    dateModified: data.fetched, temporalCoverage: `${months[0].month}/${last.month}`, spatialCoverage: 'Türkiye', isBasedOn: data.sourceUrl, license: 'https://creativecommons.org/licenses/by-sa/3.0/',
+    creator: { '@id': new URL(url('/#organization'), Astro.site).href } },
+  { '@type': 'FAQPage', mainEntity: faq.map(([q, a]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a } })) },
+];
+---
+<Base title={T(`Türkiye'de en çok kullanılan yapay zeka: ${mLabel(last.month)} kullanım payları`, `Most used AI chatbots in Turkey: ${mLabel(last.month)} market share`)}
+  description={summary + T(' Aylık güncellenen Statcounter verisi, son 12 ayın grafiği ve tablo.', ' Monthly Statcounter data with a 12-month chart and table.')}
+  jsonLd={jsonLd} breadcrumbs={[{ name: 'Ana sayfa', path: '/' }, { name: T('Yapay zeka araçları', 'AI tools'), path: '/arac/' }, { name: T('Türkiye kullanım payları', 'Turkey usage share'), path: '/yapay-zeka-kullanim-paylari/' }]}>
+  <SubNav set="tools" />
+  <section class="deals usage">
+    <span class="cat">{T('Veri', 'Data')}</span>
+    <h1 class="page-h">{T("Türkiye'de en çok kullanılan yapay zeka asistanları", 'Most used AI chatbots in Turkey')}</h1>
+    <p class="spot">{summary}</p>
+    <p class="models-checked">{T('Son veri', 'Latest data')}: {mLabel(last.month)} · {T('Kaynak', 'Source')}: <a href={data.sourceUrl} rel="noopener">Statcounter Global Stats</a></p>
+
+    <ol class="usage-bars" aria-label={T(`${mLabel(last.month)} payları`, `${mLabel(last.month)} shares`)}>
+      {names.map((n) => { const t = SLUG[n] && toolBySlug(SLUG[n]); return (
+        <li>
+          <span class="ub-name">{t ? <a href={url(toolUrl(t.slug))}>{NAME[n] ?? n}</a> : (NAME[n] ?? n)}</span>
+          <span class="ub-track"><span class="ub-fill" data-w={Math.round(last.shares[n] * 10) / 10}></span></span>
+          <span class="ub-val">{pct(last.shares[n])}<span class="meta">{delta(last.shares[n], prev?.shares[n])}</span></span>
+        </li>
+      ); })}
+    </ol>
+    <p class="ai-note">{T(`Değişim bir önceki aya (${mLabel(prev.month)}) göredir.`, `Change is versus the previous month (${mLabel(prev.month)}).`)}{yearAgo && ' ' + T(`Bir yıl önce (${mLabel(yearAgo.month)}) ilk sırada ${pct(yearAgo.shares.ChatGPT)} ile ChatGPT vardı.`, `A year earlier (${mLabel(yearAgo.month)}) ChatGPT led with ${pct(yearAgo.shares.ChatGPT)}.`)}</p>
+
+    <figure class="usage-chart">
+      <figcaption><h2 class="ev-h">{T('Son 12 ayda değişim', 'Change over 12 months')}</h2></figcaption>
+      <div class="usage-svg-wrap">
+        <svg viewBox={`0 0 ${W} ${H}`} role="img" aria-label={T('Aylık kullanım payları çizgi grafiği', 'Monthly market share line chart')}>
+          {[0, 25, 50, 75, 100].map((v) => <g><line x1={P.l} x2={W - P.r} y1={y(v)} y2={y(v)} class="grid" /><text x={P.l - 6} y={y(v) + 4} class="ax" text-anchor="end">{v}</text></g>)}
+          {months.map((m, i) => (i % 2 === 0 || i === months.length - 1) && <text x={x(i)} y={H - 8} class="ax" text-anchor="middle">{mLabel(m.month, true).replace(/ 20(\d\d)/, " '$1")}</text>)}
+          {series.map((s, k) => <path d={s.d} class={`ln ln${k}`} />)}
+        </svg>
+      </div>
+      <ul class="usage-legend">{series.map((s) => <li><span class="dot" data-c={COLORS.indexOf(s.color)}></span>{NAME[s.n] ?? s.n}</li>)}</ul>
+    </figure>
+
+    <div class="deal-table-wrap">
+      <table class="deal-table usage-table">
+        <caption class="sr-only">{T('Aylara göre kullanım payları (%)', 'Market share by month (%)')}</caption>
+        <thead><tr><th scope="col">{T('Ay', 'Month')}</th>{top.map((n) => <th scope="col" class="num">{NAME[n] ?? n}</th>)}</tr></thead>
+        <tbody>{[...months].reverse().map((m) => <tr><td>{mLabel(m.month)}</td>{top.map((n) => <td class="num">{m.shares[n] != null ? num(m.shares[n]) : '—'}</td>)}</tr>)}</tbody>
+      </table>
+    </div>
+    <p class="ai-note">{T('Statcounter, payları ölçüm ağındaki sitelere her asistandan gelen trafiğe göre tahmin eder; bu rakamlar kullanıcı sayısını değil göreli trafiği gösterir. Ölçüm yöntemindeki değişiklikler ani sıçramalara yol açabilir. Veri: Statcounter Global Stats, CC BY-SA 3.0.', 'Statcounter estimates shares from the traffic its network of websites receives from each chatbot; the figures show relative traffic, not user counts. Changes in measurement can cause sudden jumps. Data: Statcounter Global Stats, CC BY-SA 3.0.')}</p>
+
+    <section class="models-faq" aria-labelledby="u-faq">
+      <h2 id="u-faq">{T('Sık sorulanlar', 'FAQ')}</h2>
+      {faq.map(([q, a]) => <details><summary>{q}</summary><p>{a}</p></details>)}
+      <p><a href={url('/en-iyi/chatgpt-alternatifleri/')}>{T('ChatGPT alternatifleri', 'ChatGPT alternatives')}</a> · <a href={url('/karsilastir/chatgpt-vs-gemini/')}>{T('ChatGPT mi Gemini mi?', 'ChatGPT vs Gemini')}</a> · <a href={url('/turkiye-yapay-zeka/')}>{T("Türkiye'de yapay zeka", 'AI in Turkey')}</a></p>
+    </section>
+  </section>
+</Base>
+
+<script>
+  // Çubuk genişlikleri (satır içi style CSP'ye takıldığı için betikle)
+  document.querySelectorAll<HTMLElement>('.ub-fill').forEach((el) => { el.style.width = `${el.dataset.w}%`; });
+</script>

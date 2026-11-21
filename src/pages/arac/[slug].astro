@@ -84,6 +84,7 @@ const title = T(`${t.name} nedir, ücretsiz mi, fiyatı ne kadar? Özellikler ve
               ))}</tbody>
             </table>
           </div>
+          {t.priceNote && <p class="price-src">{t.priceNote}</p>}
           {EN ? <p class="price-src">Source: <a href={p.source.url} rel="noopener">{p.source.label}</a> · checked {dateL(p.source.checked, 'en')}{!p.source.official && ' · secondary source'}. {fx && `Lira amounts use the TCMB selling rate (${fx.date}); taxes and local pricing may change what you pay. `}Check the <a href={p.pricingUrl} rel="noopener">official pricing page</a> before you buy.</p> : <p class="price-src">Kaynak: <a href={p.source.url} rel="noopener">{p.source.label}</a> · kontrol: {trDate(p.source.checked)}{!p.source.official && ' · ikincil kaynak'}. {fx && `TL karşılığı TCMB döviz satış kuruyla (${fx.date}) hesaplanmıştır; vergiler ve yerel fiyatlandırma nedeniyle ödenen tutar farklı olabilir. `}Satın almadan önce <a href={p.pricingUrl} rel="noopener">resmi fiyat sayfasını</a> kontrol edin.</p>}
         </>
       ) : (

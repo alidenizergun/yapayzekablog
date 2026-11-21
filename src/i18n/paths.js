@@ -8,7 +8,7 @@ import { SECTOR_EN } from '../lib/sectors.js';
 export const SEG = {
   haber: 'news', kategori: 'category', sozluk: 'glossary', rehber: 'guides', arac: 'tools', 'arac-secici': 'tool-finder',
   'en-iyi': 'best', karsilastir: 'compare', 'ucretsiz-yapay-zeka-araclari': 'free-ai-tools', 'en-iyi-yapay-zeka-uygulamalari': 'best-ai-apps',
-  'yeni-araclar': 'new-ai-tools', 'modeller-karsilastirma': 'ai-model-pricing', akis: 'latest', haftalik: 'weekly', gelisme: 'stories',
+  'yeni-araclar': 'new-ai-tools', 'modeller-karsilastirma': 'ai-model-pricing', 'api-maliyet-hesaplayici': 'ai-api-cost-calculator', 'yapay-zeka-abonelikleri': 'ai-subscription-prices', 'yapay-zeka-komutlari': 'ai-prompts', 'yapay-zeka-kullanim-paylari': 'ai-chatbot-market-share-turkey', akis: 'latest', haftalik: 'weekly', gelisme: 'stories',
   yatirimlar: 'funding-tracker', raporlar: 'ai-reports', etkinlikler: 'events', 'turkiye-yapay-zeka': 'ai-in-turkey', 'yerli-yapay-zeka': 'turkish-ai-models',
   hakkimizda: 'about', gizlilik: 'privacy', 'hata-bildir': 'report-error', kunye: 'masthead', 'kullanim-kosullari': 'terms', duzeltmeler: 'corrections', sektor: 'industries', ara: 'search', sayfa: 'page', konu: 'topic', konular: 'topics',
 };
@@ -18,7 +18,9 @@ const GL_OVERRIDE = { gpu: 'gpu', api: 'api', 'tpu-npu': 'tpu-and-npu', hbm: 'hb
 export const GL_EN = Object.fromEntries(GLOSSARY.map((g) => [g.slug, GL_OVERRIDE[g.slug] || tagSlug(g.en.replace(/\(.*?\)/g, ''))]));
 export const TASK_EN = { sohbet: 'ai-chatbots', 'cv-hazirlama': 'resume-writing', 'gorsel-olusturma': 'image-generation', 'video-olusturma': 'video-generation',
   'muzik-yapma': 'music-generation', seslendirme: 'voice-generation', 'logo-tasarim': 'logo-design', 'sunum-hazirlama': 'presentations',
-  'kod-yazma': 'coding', ceviri: 'translation', 'ozet-cikarma': 'summarization', 'toplanti-notu': 'meeting-notes', 'yapay-zeka-dedektoru': 'ai-detectors' };
+  'kod-yazma': 'coding', ceviri: 'translation', 'ozet-cikarma': 'summarization', 'toplanti-notu': 'meeting-notes', 'yapay-zeka-dedektoru': 'ai-detectors',
+  'chatgpt-alternatifleri': 'chatgpt-alternatives', 'turkce-yapay-zeka': 'ai-in-turkish', 'ogrenciler-icin': 'ai-for-students', 'sosyal-medya': 'social-media',
+  'fotograf-duzenleme': 'photo-editing', 'uygulama-yapma': 'app-builders', 'yapay-zeka-ajanlari': 'ai-agents', 'yapay-zeka-tarayicilari': 'ai-browsers' };
 
 
 const SLUG_MAPS = (m) => ({

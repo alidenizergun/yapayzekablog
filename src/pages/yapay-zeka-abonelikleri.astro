@@ -1,0 +1,89 @@
+---
+import SubNav from '../components/SubNav.astro';
+import Base from '../layouts/Base.astro';
+import { TOOLS, TOOL_CATS, TOOLS_CHECKED, trDate, toolUrl } from '../lib/tools.js';
+import { usdTry } from '../lib/fx.js';
+import { url } from '../lib/news.js';
+import { i18n, locTool, toolCat, dateL, usdL, tryL } from '../i18n/index.js';
+const L = await i18n(Astro);
+const { lang, T } = L;
+const EN = lang === 'en';
+const fx = await usdTry();
+// Bireysel aylık abonelikler: kullanıcı başına ekip planları ve fiyatı yazmayan kurumsal planlar ayrıca işaretlenir
+const isTeam = (name, note) => /team|business|enterprise|ekip|kurumsal/i.test(name) || /kullanıcı başına/.test(note || '');
+const rows = TOOLS.filter((t) => t.price?.plans?.length).flatMap((t0) => {
+  const t = locTool(t0, lang);
+  return t.price.plans.filter(([, usd]) => usd != null).map(([name, usd, note]) => ({ tool: t, name, usd, note: note || '', team: isTeam(name, t0.price.plans.find((p) => p[0] === name)?.[2]), cat: t.cats[0] }));
+}).sort((a, b) => a.usd - b.usd || a.tool.name.localeCompare(b.tool.name));
+const cats = TOOL_CATS.filter((c) => rows.some((r) => r.cat === c.slug));
+const checked = EN ? dateL(TOOLS_CHECKED, 'en') : trDate(TOOLS_CHECKED);
+const pageUrl = new URL(url('/yapay-zeka-abonelikleri/'), Astro.site).href;
+const jsonLd = { '@type': 'Dataset', name: T('Yapay zeka abonelik fiyatları', 'AI subscription prices'), url: pageUrl, inLanguage: L.locale, dateModified: TOOLS_CHECKED,
+  description: T('ChatGPT, Claude, Gemini, Copilot, Perplexity ve diğer yapay zeka araçlarının aylık abonelik planları; dolar fiyatı ve yaklaşık TL karşılığı.', 'Monthly subscription plans for ChatGPT, Claude, Gemini, Copilot, Perplexity and other AI tools, in dollars with approximate lira equivalents.'),
+  creator: { '@id': new URL(url('/#organization'), Astro.site).href } };
+---
+<Base title={T('Yapay zeka abonelik fiyatları: ChatGPT Plus, Claude Pro, Gemini ve diğerleri (TL)', 'AI subscription prices compared: ChatGPT Plus, Claude Pro, Gemini and more')}
+  description={T(`${new Set(rows.map((r) => r.tool.slug)).size} yapay zeka aracının ${rows.length} abonelik planı tek tabloda: aylık dolar fiyatı, yaklaşık TL karşılığı ve plan notları. Bütçenize ve kullanım alanınıza göre süzün.`, `${rows.length} subscription plans from ${new Set(rows.map((r) => r.tool.slug)).size} AI tools in one table: monthly dollar price, approximate lira equivalent and plan notes. Filter by budget and category.`)}
+  jsonLd={jsonLd} breadcrumbs={[{ name: 'Ana sayfa', path: '/' }, { name: T('Yapay zeka araçları', 'AI tools'), path: '/arac/' }, { name: T('Abonelik fiyatları', 'Subscription prices'), path: '/yapay-zeka-abonelikleri/' }]}>
+  <SubNav set="tools" />
+  <section class="deals subs">
+    <span class="cat">{T('Karşılaştırma', 'Comparison')}</span>
+    <h1 class="page-h">{T('Yapay zeka abonelik fiyatları', 'AI subscription prices')}</h1>
+    <p class="spot">{T('Hangi yapay zeka aboneliği bütçenize uyuyor? Araçların aylık planlarını ucuzdan pahalıya sıraladık. Fiyatlar ABD doları liste fiyatıdır; Türkiye\'de uygulama mağazası ve vergiler nedeniyle ödenen tutar farklı olabilir.', 'Which AI subscription fits your budget? We list each tool’s monthly plans from cheapest to most expensive. Prices are US list prices; app-store pricing and taxes can change what you pay locally.')}</p>
+    <p class="models-checked">{T('Son kontrol', 'Last checked')}: <time datetime={TOOLS_CHECKED}>{checked}</time></p>
+
+    <div class="deal-filters" role="group" aria-label={T('Bütçeye göre süz', 'Filter by budget')} data-s-budget>
+      <button type="button" aria-pressed="false" data-b="0">{T('Ücretsiz', 'Free')}</button>
+      <button type="button" aria-pressed="false" data-b="10">{T("10 $'a kadar", 'Up to $10')}</button>
+      <button type="button" aria-pressed="true" data-b="25">{T("25 $'a kadar", 'Up to $25')}</button>
+      <button type="button" aria-pressed="false" data-b="">{T('Tümü', 'All')}</button>
+    </div>
+    <div class="deal-filters deal-filters-2" role="group" aria-label={T('Türe göre süz', 'Filter by type')} data-s-cat>
+      <button type="button" aria-pressed="true" data-c="">{T('Tüm türler', 'All types')}</button>
+      {cats.map((c) => <button type="button" aria-pressed="false" data-c={c.slug}>{toolCat(c.slug, lang)}</button>)}
+    </div>
+    <label class="subs-team"><input type="checkbox" data-s-team /> {T('Ekip ve kurumsal planları da göster', 'Also show team and business plans')}</label>
+
+    <div class="deal-table-wrap">
+      <table class="deal-table subs-table">
+        <thead><tr><th scope="col">{T('Araç ve plan', 'Tool and plan')}</th><th scope="col" class="num">{T('Aylık', 'Monthly')}</th>{fx && <th scope="col" class="num">{T('TL karşılığı', 'In lira')}</th>}<th scope="col" class="hide-sm">{T('Not', 'Note')}</th></tr></thead>
+        <tbody>
+          {rows.map((r) => (
+            <tr data-usd={r.usd} data-cat={r.cat} data-team={r.team ? '1' : ''}>
+              <td><a href={url(toolUrl(r.tool.slug))}><strong>{r.tool.name}</strong></a> <span class="sub-plan">{r.name}</span><span class="meta ac-co">{toolCat(r.cat, lang)}</span></td>
+              <td class="num"><strong>{r.usd === 0 ? T('Ücretsiz', 'Free') : usdL(r.usd, lang)}</strong></td>
+              {fx && <td class="num">{r.usd ? tryL(r.usd, fx, lang) : '—'}</td>}
+              <td class="meta hide-sm">{r.note}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+    <p class="empty" data-s-empty hidden>{T('Bu ölçütlere uyan plan yok.', 'No plans match these filters.')}</p>
+    <p class="ai-note">{T('Fiyatlar her aracın sayfasında kaynağı ve kontrol tarihiyle verilir; bazıları ikincil kaynaklıdır. Fiyatı doğrulanamayan araçlar tabloda yer almaz.', 'Each price is listed with its source and check date on the tool’s page; some come from secondary sources. Tools whose prices we couldn’t verify are left out.')} {fx && T(`TL karşılığı TCMB döviz satış kuruyla (${fx.date}) hesaplanmıştır; vergiler dahil değildir.`, `Lira amounts use the TCMB selling rate (${fx.date}), excluding taxes.`)} <a href={url('/arac-secici/')}>{T('Size uygun aracı bulun →', 'Find the right tool →')}</a></p>
+  </section>
+</Base>
+
+<script>
+  const rows = [...document.querySelectorAll<HTMLTableRowElement>('.subs-table tbody tr')];
+  const empty = document.querySelector<HTMLElement>('[data-s-empty]')!;
+  const team = document.querySelector<HTMLInputElement>('[data-s-team]')!;
+  let budget = '25', cat = '';
+  const apply = () => {
+    let n = 0;
+    rows.forEach((r) => {
+      const usd = Number(r.dataset.usd);
+      const ok = (budget === '' || usd <= Number(budget)) && (!cat || r.dataset.cat === cat) && (team.checked || !r.dataset.team);
+      r.hidden = !ok; if (ok) n++;
+    });
+    empty.hidden = n > 0;
+  };
+  const group = (sel: string, key: 'b' | 'c', set: (v: string) => void) => {
+    const btns = [...document.querySelectorAll<HTMLButtonElement>(`${sel} button`)];
+    btns.forEach((b) => b.addEventListener('click', () => { set(b.dataset[key] || ''); btns.forEach((x) => x.setAttribute('aria-pressed', String(x === b))); apply(); }));
+  };
+  group('[data-s-budget]', 'b', (v) => { budget = v; });
+  group('[data-s-cat]', 'c', (v) => { cat = v; });
+  team.addEventListener('change', apply);
+  apply();
+</script>

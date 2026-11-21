@@ -5,6 +5,7 @@
   --display: 'Schibsted Grotesk', 'Helvetica Neue', Arial, system-ui, sans-serif;
   --serif: 'Source Serif 4', Georgia, 'Times New Roman', serif;
   --body: Inter, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --c1: #CF2E13; --c2: #1F5FBF; --c3: #2E8540; --c4: #B07A00; --c5: #6B4FB3;
   color-scheme: light;
 }
 /* Karanlık tema: ziyaretçi seçim yapmadıysa cihaz ayarı, yaptıysa data-theme geçerli */
@@ -12,12 +13,14 @@
   :root:not([data-theme="light"]) {
     --bg: #121212; --fg: #F2F1EE; --muted: #A9A6A0; --soft: #1D1C1B; --line: #2E2D2B;
     --accent: #E5452A; --accent-text: #FF7A62; --accent-fill: #C2321A; --band: #000000; --band-muted: #BDBDBD; --input: #1A1A1A;
+    --c1: #FF7A62; --c2: #6EA8FF; --c3: #5CC47A; --c4: #E3B341; --c5: #A98BFF;
     color-scheme: dark;
   }
 }
 :root[data-theme="dark"] {
   --bg: #121212; --fg: #F2F1EE; --muted: #A9A6A0; --soft: #1D1C1B; --line: #2E2D2B;
   --accent: #E5452A; --accent-text: #FF7A62; --accent-fill: #C2321A; --band: #000000; --band-muted: #BDBDBD; --input: #1A1A1A;
+  --c1: #FF7A62; --c2: #6EA8FF; --c3: #5CC47A; --c4: #E3B341; --c5: #A98BFF;
   color-scheme: dark;
 }
 
@@ -1086,3 +1089,50 @@ img.thumb { color: transparent; font-size: 0; }
 .subnav a { display: inline-flex; align-items: center; min-height: 44px; font-weight: 600; font-size: 14px; color: var(--muted); white-space: nowrap; box-shadow: inset 0 -2px 0 transparent; }
 .subnav a:hover { color: var(--fg); }
 .subnav a[aria-current="page"] { color: var(--fg); box-shadow: inset 0 -2px 0 var(--accent); }
+
+/* Komut kütüphanesi */
+.pr-group { margin-top: 32px; }
+.pr-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr)); gap: 16px; }
+.pr-card { display: flex; flex-direction: column; gap: 10px; padding: 18px; border: 1px solid var(--line); border-radius: 8px; background: var(--bg); min-width: 0; }
+.pr-card h3 { margin: 0; font-size: 17px; line-height: 1.3; }
+.pr-text { margin: 0; padding: 12px; border-radius: 6px; background: var(--soft); font: 14px/1.55 var(--body); white-space: pre-wrap; overflow-wrap: anywhere; flex: 1; }
+.pr-copy { align-self: flex-start; min-height: 40px; }
+.pr-card.pr-target { border-color: var(--accent); }
+.pr-tips { margin: 12px 0 0; padding-left: 20px; display: grid; gap: 8px; line-height: 1.55; }
+/* API maliyet hesaplayıcı ve abonelikler */
+.calc-in-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+@media (max-width: 640px) { .calc-in-3 { grid-template-columns: 1fr; } }
+.ac-total { margin: 12px 0 0; font-size: 14px; color: var(--muted); font-variant-numeric: tabular-nums; }
+.apicalc .deal-table-wrap, .subs .deal-table-wrap, .usage .deal-table-wrap { margin-top: 20px; }
+.subs-team { display: inline-flex; align-items: center; gap: 8px; margin-top: 14px; min-height: 44px; font-size: 14px; font-weight: 600; cursor: pointer; }
+.subs-team input { width: 18px; height: 18px; accent-color: var(--accent); }
+/* Kullanım payları */
+.usage-bars { list-style: none; margin: 24px 0 0; padding: 0; display: grid; gap: 10px; max-width: 760px; }
+.usage-bars li { display: grid; grid-template-columns: minmax(90px, 160px) minmax(0, 1fr) auto; align-items: center; gap: 12px; }
+.ub-name { font-weight: 700; }
+.ub-name a { color: inherit; }
+.ub-track { height: 14px; border-radius: 7px; background: var(--soft); overflow: hidden; }
+.ub-fill { display: block; height: 100%; width: 0; border-radius: 7px; background: var(--accent-fill); }
+.ub-val { font-variant-numeric: tabular-nums; font-weight: 700; text-align: right; display: grid; }
+.ub-val .meta { font-weight: 500; font-size: 12px; }
+.usage-chart { margin: 40px 0 0; max-width: 760px; }
+.usage-chart figcaption h2 { margin: 0 0 12px; }
+.usage-svg-wrap { overflow-x: auto; }
+.usage-svg-wrap svg { width: 100%; min-width: 520px; height: auto; display: block; }
+.usage-svg-wrap .grid { stroke: var(--line); stroke-width: 1; }
+.usage-svg-wrap .ax { fill: var(--muted); font: 11px var(--body); }
+.usage-legend { list-style: none; display: flex; flex-wrap: wrap; gap: 8px 18px; margin: 12px 0 0; padding: 0; font-size: 14px; font-weight: 600; }
+.usage-legend .dot { display: inline-block; width: 12px; height: 12px; border-radius: 50%; margin-right: 6px; vertical-align: -1px; }
+.usage-legend .dot[data-c="0"] { background: var(--c1); } .usage-legend .dot[data-c="1"] { background: var(--c2); } .usage-legend .dot[data-c="2"] { background: var(--c3); }
+.usage-legend .dot[data-c="3"] { background: var(--c4); } .usage-legend .dot[data-c="4"] { background: var(--c5); }
+.usage-svg-wrap .ln { fill: none; stroke-width: 2.5; stroke-linejoin: round; stroke-linecap: round; }
+.usage-svg-wrap .ln0 { stroke: var(--c1); } .usage-svg-wrap .ln1 { stroke: var(--c2); } .usage-svg-wrap .ln2 { stroke: var(--c3); } .usage-svg-wrap .ln3 { stroke: var(--c4); } .usage-svg-wrap .ln4 { stroke: var(--c5); }
+.ac-co { display: block; font-size: 13px; }
+@media (max-width: 640px) { .hide-sm { display: none; } }
+.usage-bars li { grid-template-columns: minmax(84px, 150px) minmax(0, 1fr) 84px; }
+.usage-table th { text-transform: none; }
+.sub-plan { display: inline-block; padding: 1px 8px; border-radius: 999px; background: var(--soft); font-size: 13px; font-weight: 600; }
+@media (max-width: 640px) { .subs .deal-filters, .prompts .deal-filters { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; padding-bottom: 4px; } .subs .deal-filters button, .prompts .deal-filters button { flex: none; } }
+.ac-table, .subs-table { min-width: 0; }
+.ac-table td.num, .subs-table td.num, .ac-table th.num, .subs-table th.num { white-space: nowrap; }
+@media (max-width: 640px) { .ac-table td, .subs-table td, .ac-table th, .subs-table th { padding: 12px 10px; } .usage-table { min-width: 560px; } }

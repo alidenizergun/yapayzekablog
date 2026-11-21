@@ -9,6 +9,7 @@ import { EVENTS } from '../lib/events.js';
 import { MODELS } from '../lib/models.js';
 import { ENTITIES } from '../lib/entities.js';
 import { STORIES } from '../lib/stories.js';
+import { PROMPTS, PROMPT_CATS } from '../lib/prompts.js';
 
 export function sourceStrings() {
   const out = {};
@@ -41,5 +42,7 @@ export function sourceStrings() {
   MODELS.forEach((m, i) => put(`model.${i}.note`, m.note));
   for (const e of ENTITIES) put(`entity.${e.slug}.about`, e.about);
   for (const s of STORIES) { put(`story.${s.slug}.title`, s.title); put(`story.${s.slug}.intro`, s.intro); }
+  for (const c of PROMPT_CATS) put(`promptcat.${c.slug}`, c.name);
+  for (const p of PROMPTS) { put(`prompt.${p.id}.title`, p.title); put(`prompt.${p.id}.text`, p.text); }
   return out;
 }
