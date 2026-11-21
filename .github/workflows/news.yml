@@ -25,6 +25,14 @@ on:
         description: 'Yalnızca eksik fotoğrafları doldur (haber üretme, Claude kullanma)'
         type: boolean
         default: false
+      engine:
+        description: 'Motor: boş = repo ayarı (NEWS_ENGINE), klasik, ajan = haber masası'
+        required: false
+        default: ''
+      shadow:
+        description: 'Deneme: ajanlar çalışır, sonuç yalnızca tur özetinde görünür, siteye haber eklenmez'
+        type: boolean
+        default: false
 
 # Varsayılan: yalnızca okuma. Yazma yetkisi yalnızca gereken işlere tek tek verilir.
 permissions:
@@ -73,6 +81,12 @@ jobs:
           MIN_GAP_MIN: ${{ inputs.force && '0' || vars.MIN_GAP_MIN || '90' }}
           WEEKEND_SEARCHES: ${{ vars.WEEKEND_SEARCHES }}
           REQUIRE_REVIEW: ${{ vars.REQUIRE_REVIEW || 'false' }}
+          # Haber masası (ajanlar): repo değişkeni NEWS_ENGINE=ajan ile açılır
+          NEWS_ENGINE: ${{ inputs.engine || vars.NEWS_ENGINE || 'klasik' }}
+          AGENT_SHADOW: ${{ inputs.shadow && 'true' || vars.AGENT_SHADOW || 'false' }}
+          AGENT_BUDGET_USD: ${{ vars.AGENT_BUDGET_USD }}
+          AGENT_MODEL: ${{ vars.AGENT_MODEL }}
+          VERIFY_MODEL: ${{ vars.VERIFY_MODEL }}
           PHOTOS_ONLY: ${{ inputs.only_photos || 'false' }}
           PHOTO_BACKFILL: ${{ vars.PHOTO_BACKFILL || '15' }}
         run: node scripts/generate-news.mjs
