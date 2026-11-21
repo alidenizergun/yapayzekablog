@@ -34,6 +34,13 @@ byNumbers:
     label: "Mayıs ayındaki Series B"
   - value: "50 milyar dolar"
     label: "Bloomberg'in bildirdiği değerleme hedefi"
+photo2:
+  id: "XknuBmnjbKg"
+  url: "https://images.unsplash.com/photo-1581594549595-35f6edc7b762?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8NHx8YmlvdGVjaCUyMGxhYm9yYXRvcnklMjByZXNlYXJjaHxlbnwxfDB8fHwxNzk1MjcyNjQ2fDA&ixlib=rb-4.1.0"
+  alt: "gloved hands drawing vaccine from vial with syringe"
+  author: "National Cancer Institute"
+  authorUrl: "https://unsplash.com/@nci"
+  link: "https://unsplash.com/photos/gloved-hands-drawing-vaccine-from-vial-with-syringe-XknuBmnjbKg"
 sources:
   - title: "@demishassabis X gönderisi"
     url: "https://x.com/demishassabis/status/2122662616367853670"

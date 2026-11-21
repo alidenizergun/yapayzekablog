@@ -30,6 +30,13 @@ photo:
   authorUrl: "https://pixabay.com/users/Alexandra_Koch-621802/"
   link: "https://pixabay.com/photos/ai-generated-computer-7736878/"
   source: "pixabay"
+photo2:
+  id: "uyp98NTsuDg"
+  url: "https://images.unsplash.com/photo-1791158669960-c0aaa261f9d7?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8Nnx8ZnV0dXJpc3RpYyUyMG5ldXJhbCUyMG5ldHdvcmslMjBsaWdodHN8ZW58MXwwfHx8MTc5NTI3MjY0MXww&ixlib=rb-4.1.0"
+  alt: "A wireframe human brain with glowing red and blue neural connections on black"
+  author: "Mirella Callage"
+  authorUrl: "https://unsplash.com/@mcallage"
+  link: "https://unsplash.com/photos/wireframe-brain-with-glowing-neural-connections-uyp98NTsuDg"
 sources:
   - title: "OpenAI X gönderisi"
     url: "https://x.com/OpenAI/status/2122750124543926515"

@@ -132,6 +132,74 @@
    "author": "Goran Ivos",
    "authorUrl": "https://unsplash.com/@goran_ivos",
    "link": "https://unsplash.com/photos/turned-on-macbook-air-on-desk-iOykDIkZLQw"
+  },
+  {
+   "id": "pixabay-1853305",
+   "url": "/foto/px-1853305",
+   "alt": "coding, programming, css, software development, computer",
+   "author": "Pexels",
+   "authorUrl": "https://pixabay.com/users/Pexels-2286921/",
+   "link": "https://pixabay.com/photos/coding-programming-css-1853305/",
+   "source": "pixabay"
+  },
+  {
+   "id": "A6qNzfJXRGQ",
+   "url": "https://images.unsplash.com/photo-1596558450268-9c27524ba856?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8N3x8c21hcnRwaG9uZSUyMGFwcCUyMHNjcmVlbnxlbnwxfDB8fHwxNzk1MjcyNjE5fDA&ixlib=rb-4.1.0",
+   "alt": "A smartphone with a home screen full of app icons on a wooden surface",
+   "author": "Thom Bradley",
+   "authorUrl": "https://unsplash.com/@thombradley",
+   "link": "https://unsplash.com/photos/smartphone-with-app-icons-on-wood-A6qNzfJXRGQ"
   }
- ]
+ ],
+ "girisim-yatirim": [
+  {
+   "id": "QckxruozjRg",
+   "url": "https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8MXx8c3RhcnR1cCUyMG9mZmljZSUyMHRlYW18ZW58MXwwfHx8MTc5NTI3MjYxOXww&ixlib=rb-4.1.0",
+   "alt": "group of people using laptop computer",
+   "author": "Annie Spratt",
+   "authorUrl": "https://unsplash.com/@anniespratt",
+   "link": "https://unsplash.com/photos/group-of-people-using-laptop-computer-QckxruozjRg"
+  },
+  {
+   "id": "fiXLQXAhCfk",
+   "url": "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8MXx8c3RvY2slMjBtYXJrZXQlMjBjaGFydHxlbnwxfDB8fHwxNzk1MjcyNjIwfDA&ixlib=rb-4.1.0",
+   "alt": "stock market candlestick chart on dark screen",
+   "author": "Maxim Hopman",
+   "authorUrl": "https://unsplash.com/@nampoh",
+   "link": "https://unsplash.com/photos/stock-market-candlestick-chart-on-dark-screen-fiXLQXAhCfk"
+  },
+  {
+   "id": "ONe-snuCaqQ",
+   "url": "https://images.unsplash.com/photo-1606836591695-4d58a73eba1e?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8NHx8YnVzaW5lc3MlMjBtZWV0aW5nfGVufDF8MHx8fDE3OTUyNzI2MjB8MA&ixlib=rb-4.1.0",
+   "alt": "people sitting on chair inside building",
+   "author": "Rodeo Project Management Software",
+   "authorUrl": "https://unsplash.com/@getrodeo",
+   "link": "https://unsplash.com/photos/people-sitting-on-chair-inside-building-ONe-snuCaqQ"
+  },
+  {
+   "id": "hCb3lIB8L8E",
+   "url": "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8OXx8c3RhcnR1cCUyMG9mZmljZSUyMHRlYW18ZW58MXwwfHx8MTc5NTI3MjYxOXww&ixlib=rb-4.1.0",
+   "alt": "sittin people beside table inside room",
+   "author": "Annie Spratt",
+   "authorUrl": "https://unsplash.com/@anniespratt",
+   "link": "https://unsplash.com/photos/sittin-people-beside-table-inside-room-hCb3lIB8L8E"
+  },
+  {
+   "id": "Wb63zqJ5gnE",
+   "url": "https://images.unsplash.com/photo-1560221328-12fe60f83ab8?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8NHx8c3RvY2slMjBtYXJrZXQlMjBjaGFydHxlbnwxfDB8fHwxNzk1MjcyNjIwfDA&ixlib=rb-4.1.0",
+   "alt": "close-up photo of monitor displaying graph",
+   "author": "Nicholas Cappello",
+   "authorUrl": "https://unsplash.com/@bash__profile",
+   "link": "https://unsplash.com/photos/close-up-photo-of-monitor-displaying-graph-Wb63zqJ5gnE"
+  },
+  {
+   "id": "3fPXt37X6UQ",
+   "url": "https://images.unsplash.com/39/lIZrwvbeRuuzqOoWJUEn_Photoaday_CSD%20%281%20of%201%29-5.jpg?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8Mnx8YnVzaW5lc3MlMjBtZWV0aW5nfGVufDF8MHx8fDE3OTUyNzI2MjB8MA&ixlib=rb-4.1.0",
+   "alt": "people standing inside city building",
+   "author": "Charles Forerunner",
+   "authorUrl": "https://unsplash.com/@charles_forerunner",
+   "link": "https://unsplash.com/photos/people-standing-inside-city-building-3fPXt37X6UQ"
+  }
+ ],
+ "regulasyon": []
 }

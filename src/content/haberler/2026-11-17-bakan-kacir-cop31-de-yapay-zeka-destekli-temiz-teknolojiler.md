@@ -21,6 +21,13 @@ keyPoints:
   - "Platform, teknoloji geliştiricilerini sanayi ortakları ve yatırımcılarla buluşturacak."
   - "Kacır, yapay zeka destekli şebeke yönetiminin 175 gigavata kadar ek iletim kapasitesi açabileceğini söyledi."
 format: kisa
+photo2:
+  id: "JRUVbgJJTBM"
+  url: "https://images.unsplash.com/photo-1562519990-50eb51e282b2?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8Mnx8d2luZCUyMHR1cmJpbmVzJTIwcG93ZXIlMjBncmlkfGVufDF8MHx8fDE3OTUyNzI2NTh8MA&ixlib=rb-4.1.0"
+  alt: "white windmill during daytime"
+  author: "Thomas Réaubourg"
+  authorUrl: "https://unsplash.com/@thomasreaubourg"
+  link: "https://unsplash.com/photos/white-windmill-during-daytime-JRUVbgJJTBM"
 sources:
   - title: "COP31'de Yapay Zeka Destekli Temiz Teknolojiler Girişimi Lansmanı yapıldı"
     url: "https://www.aa.com.tr/tr/ekonomi/cop31de-yapay-zeka-destekli-temiz-teknolojiler-girisimi-lansmani-yapildi/4126954"

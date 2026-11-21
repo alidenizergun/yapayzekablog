@@ -20,6 +20,13 @@ keyPoints:
   - "Singapur, Malezya, Tayland, Endonezya ve Brezilya'daki veri merkezi operatörleri lisans alacak."
   - "Haberde, kuralın Asya borsalarını aşağı çektiği belirtiliyor."
 format: kisa
+photo2:
+  id: "tebFqdANuxs"
+  url: "https://images.unsplash.com/photo-1507333199169-84fd735371fb?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8MTV8fGRhdGElMjBjZW50ZXIlMjBzZXJ2ZXIlMjByYWNrc3xlbnwxfDB8fHwxNzk1MjcyNjYyfDA&ixlib=rb-4.1.0"
+  alt: "a close up of a bunch of wires in a rack"
+  author: "imgix"
+  authorUrl: "https://unsplash.com/@imgix"
+  link: "https://unsplash.com/photos/a-close-up-of-a-bunch-of-wires-in-a-rack-tebFqdANuxs"
 sources:
   - title: "ABD'nin yapay zeka çip kısıtlamaları Asya borsalarını vurdu"
     url: "https://tr.investing.com/news/stock-market-news/abdnin-yapay-zeka-cip-kstlamalar-asya-borsalarn-vurdu-4160453"

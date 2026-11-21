@@ -21,6 +21,13 @@ photo:
   authorUrl: "https://pixabay.com/users/JamesQube-6733902/"
   link: "https://pixabay.com/photos/bank-money-shares-save-up-capital-2907728/"
   source: "pixabay"
+photo2:
+  id: "Fa9b57hffnM"
+  url: "https://images.unsplash.com/photo-1629904853716-f0bc54eea481?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8MTB8fHN0YXJ0dXAlMjBvZmZpY2UlMjB0ZWFtfGVufDF8MHx8fDE3OTUyNzI2MTl8MA&ixlib=rb-4.1.0"
+  alt: "people sitting on chair in front of computer monitor"
+  author: "Compagnons"
+  authorUrl: "https://unsplash.com/@sigmund"
+  link: "https://unsplash.com/photos/people-sitting-on-chair-in-front-of-computer-monitor-Fa9b57hffnM"
 sources:
   - title: "Fed Chairman Kevin Warsh stresses importance of AI to economy, but says it could 'disappoint'"
     url: "https://cnbc.com/2026/11/16/fed-ai-task-force-kevin-warsh.html"

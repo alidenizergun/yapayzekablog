@@ -21,6 +21,13 @@ keyPoints:
   - "Blended Agents, Zia Agents platformu üzerinde geliştirildi ve Express paketinden itibaren kullanılabiliyor."
   - "Blended Agents şu aşamada yalnızca İngilizceyi destekliyor."
 format: kisa
+photo2:
+  id: "BeVGrXEktIk"
+  url: "https://images.unsplash.com/photo-1553775282-20af80779df7?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8Mnx8Y3VzdG9tZXIlMjBzdXBwb3J0JTIwY2FsbCUyMGNlbnRlcnxlbnwxfDB8fHwxNzk1MjcyNjQwfDA&ixlib=rb-4.1.0"
+  alt: "black and brown headset near laptop computer"
+  author: "Petr Macháček"
+  authorUrl: "https://unsplash.com/@machec"
+  link: "https://unsplash.com/photos/black-and-brown-headset-near-laptop-computer-BeVGrXEktIk"
 sources:
   - title: "Zoho Desk'te Yapay Zekâ Ajanları Devrede"
     url: "https://www.patronrehberi.com/teknoloji/60082/zoho-deskte-yapay-zeka-ajanlari-devrede/"

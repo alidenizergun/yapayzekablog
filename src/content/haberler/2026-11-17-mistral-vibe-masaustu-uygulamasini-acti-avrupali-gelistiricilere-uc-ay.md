@@ -21,6 +21,13 @@ keyPoints:
   - "Uygulamada ajanlar birden fazla görev üzerinde yan yana çalışıyor."
   - "Vibe Pro, Avrupa'daki geliştiricilere üç ay ücretsiz sunuluyor."
 format: kisa
+photo2:
+  id: "f77Bh3inUpE"
+  url: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8Nnx8ZGV2ZWxvcGVyJTIwbGFwdG9wJTIwY29kZSUyMHNjcmVlbnxlbnwxfDB8fHwxNzk1MjcyNjQzfDA&ixlib=rb-4.1.0"
+  alt: "turned-on MacBook Pro wit programming codes display"
+  author: "Arnold Francisca"
+  authorUrl: "https://unsplash.com/@clark_fransa"
+  link: "https://unsplash.com/photos/turned-on-macbook-pro-wit-programming-codes-display-f77Bh3inUpE"
 sources:
   - title: "@MistralAI X gönderisi"
     url: "https://x.com/MistralAI/status/2122713540666806397"

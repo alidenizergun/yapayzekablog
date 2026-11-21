@@ -29,6 +29,13 @@ photo:
   authorUrl: "https://pixabay.com/users/jhenning-8658480/"
   link: "https://pixabay.com/photos/laptop-conference-table-mouse-work-7978588/"
   source: "pixabay"
+photo2:
+  id: "qzO9a6oQ8AM"
+  url: "https://images.unsplash.com/photo-1773829020694-413e879d2957?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8N3x8Y29uZmVyZW5jZSUyMHN0YWdlJTIwa2V5bm90ZSUyMHRlY2hub2xvZ3l8ZW58MXwwfHx8MTc5NTI3MjYyMXww&ixlib=rb-4.1.0"
+  alt: "Speaker presenting to a large audience in an auditorium"
+  author: "Marwen Larafa"
+  authorUrl: "https://unsplash.com/@marwen_larafa"
+  link: "https://unsplash.com/photos/speaker-presenting-to-a-large-audience-in-an-auditorium-qzO9a6oQ8AM"
 sources:
   - title: "Microsoft aims to challenge OpenAI, Anthropic with cheaper, specialized AI models"
     url: "https://www.axios.com/2026/11/17/microsoft-ai-models-openai-anthropic-ignite"

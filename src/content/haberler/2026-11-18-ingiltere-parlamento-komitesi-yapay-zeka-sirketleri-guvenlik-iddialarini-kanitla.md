@@ -19,6 +19,13 @@ keyPoints:
   - "Komite, yapay zeka firmalarının güvenlik iddialarını kanıtlamak zorunda olmasını istiyor."
   - "Bağımsız uzmanlar iddiaları inceleyebilmeli; risk kontrol edilemezse düzenleyici müdahale etmeli."
   - "Rapor, Çinli geliştiricilerin açık ağırlıklı modellerinin yayımlandıktan sonra kontrolünün zor olduğunu belirtiyor."
+photo2:
+  id: "JPHziu6-MA4"
+  url: "https://images.unsplash.com/photo-1773395663928-0198e2c487fa?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8NXx8cGFybGlhbWVudCUyMGJ1aWxkaW5nJTIwbG9uZG9ufGVufDF8MHx8fDE3OTUyNzI2MzR8MA&ixlib=rb-4.1.0"
+  alt: "The houses of parliament and big ben in london"
+  author: "Dust Studio"
+  authorUrl: "https://unsplash.com/@dustcreativestudio"
+  link: "https://unsplash.com/photos/the-houses-of-parliament-and-big-ben-in-london-JPHziu6-MA4"
 sources:
   - title: "UK government warned that lax AI safety undermines GDP boost"
     url: "https://www.computerweekly.com/news/366654649/UK-government-warned-that-lax-AI-safety-undermines-GDP-boost"

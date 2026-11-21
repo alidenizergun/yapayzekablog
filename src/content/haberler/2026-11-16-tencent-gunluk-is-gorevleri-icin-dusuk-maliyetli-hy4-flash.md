@@ -27,6 +27,13 @@ byNumbers:
     label: "Her geçişte etkinleştirilen parametre"
   - value: "0,07 dolar"
     label: "Milyon token başına girdi fiyatı"
+photo2:
+  id: "eqd0f78u9nI"
+  url: "https://images.unsplash.com/photo-1680992046615-065f58bcb4d8?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8NXx8c2VydmVyJTIwcm9vbSUyMGJsdWUlMjBsaWdodHN8ZW58MXwwfHx8MTc5NTI3MjY2NHww&ixlib=rb-4.1.0"
+  alt: "a close up of a rack of computer equipment"
+  author: "Tyler"
+  authorUrl: "https://unsplash.com/@tylergm"
+  link: "https://unsplash.com/photos/a-close-up-of-a-rack-of-computer-equipment-eqd0f78u9nI"
 sources:
   - title: "Tencent launches Hy4 flash, cutting AI task costs by 95% in internal tests"
     url: "https://technode.com/2026/11/16/tencent-launches-hy4-flash-cutting-ai-task-costs-by-95-in-internal-tests/"

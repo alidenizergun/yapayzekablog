@@ -21,6 +21,13 @@ keyPoints:
   - "Özellik daha önce AI Pro aboneliği gerektiriyordu."
   - "Aramalar ve ödemeler gibi işlemler önce yalnızca ABD'de başlıyor."
 format: kisa
+photo2:
+  id: "iDqNlr1Y1_w"
+  url: "https://images.unsplash.com/photo-1759752393975-7ca7b302fcc6?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8Nnx8bGFwdG9wJTIwYXV0b21hdGlvbiUyMHdvcmtmbG93fGVufDF8MHx8fDE3OTUyNzI2NTB8MA&ixlib=rb-4.1.0"
+  alt: "Hands typing on a laptop with a spreadsheet on screen"
+  author: "Bluestonex"
+  authorUrl: "https://unsplash.com/@bluestonex_apphaus"
+  link: "https://unsplash.com/photos/hands-typing-on-a-laptop-with-a-spreadsheet-on-screen-iDqNlr1Y1_w"
 sources:
   - title: "You can now assign Gemini 'tasks' for free in six countries"
     url: "https://9to5google.com/2026/11/17/gemini-tasks-free/"

@@ -21,6 +21,13 @@ photo:
   authorUrl: "https://pixabay.com/users/succo-96729/"
   link: "https://pixabay.com/photos/hammer-books-law-dish-lawyer-719066/"
   source: "pixabay"
+photo2:
+  id: "w69Z8K-HGQU"
+  url: "https://images.unsplash.com/photo-1744640326166-433469d102f2?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8MTF8fGFydGlmaWNpYWwlMjBpbnRlbGxpZ2VuY2UlMjB0ZWNobm9sb2d5fGVufDF8MHx8fDE3OTUyNzI2MzB8MA&ixlib=rb-4.1.0"
+  alt: "Glowing ai chip on a circuit board"
+  author: "Immo Wegmann"
+  authorUrl: "https://unsplash.com/@tinkerman"
+  link: "https://unsplash.com/photos/glowing-ai-chip-on-a-circuit-board-w69Z8K-HGQU"
 sources:
   - title: "Adalet Bakanlığı yapay zeka suçları için düğmeye bastı! 13. Yargı Paketi ile deepfake doğrudan suç sayılacak"
     url: "https://www.ahaber.com.tr/gundem/2026/11/17/yapay-zekayla-uretilen-sahte-goruntulere-ceza-geliyor"
