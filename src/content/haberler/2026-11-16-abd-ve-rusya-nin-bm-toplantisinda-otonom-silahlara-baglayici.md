@@ -13,6 +13,13 @@ keyPoints:
   - "ABD beş yıllık, toplantı başkanı ise iki yıllık müzakere yetkisi önerdi."
   - "BM Genel Sekreteri devletleri bağlayıcı bir belge müzakeresine çağırdı."
 whatsNext: "Bağlayıcı bir belge müzakeresinin başlayıp başlamayacağının bu hafta netleşebileceği belirtiliyor."
+photo:
+  id: "o0kbc907i20"
+  url: "https://images.unsplash.com/photo-1523292562811-8fa7962a78c8?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8M3x8Z292ZXJubWVudCUyMGJ1aWxkaW5nJTIwbGF3fGVufDF8MHx8fDE3OTUyNTEyNTJ8MA&ixlib=rb-4.1.0"
+  alt: "white concrete building under sky"
+  author: "Katie Moum"
+  authorUrl: "https://unsplash.com/@katiemoum"
+  link: "https://unsplash.com/photos/white-concrete-building-under-sky-o0kbc907i20"
 sources:
   - title: "US and Russia to oppose talks on limiting autonomous weapons"
     url: "https://www.cnbcafrica.com/2026/us-and-russia-to-oppose-talks-on-limiting-autonomous-weapons"

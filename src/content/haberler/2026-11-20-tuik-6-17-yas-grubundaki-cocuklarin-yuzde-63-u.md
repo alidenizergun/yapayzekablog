@@ -26,6 +26,13 @@ byNumbers:
     label: "Yapay zeka kullanan çocukların oranı"
   - value: "yüzde 80,1"
     label: "Cep telefonu kullanan çocukların oranı"
+photo2:
+  id: "6ElKf30Z9rA"
+  url: "https://images.unsplash.com/photo-1752652012189-6b7954b13908?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8MTR8fGNoaWxkJTIwdXNpbmclMjBzbWFydHBob25lfGVufDF8MHx8fDE3OTUyNTEyNTZ8MA&ixlib=rb-4.1.0"
+  alt: "Mom and daughter look at a phone together on bed"
+  author: "Vitaly Gariev"
+  authorUrl: "https://unsplash.com/@silverkblack"
+  link: "https://unsplash.com/photos/mom-and-daughter-look-at-a-phone-together-on-bed-6ElKf30Z9rA"
 sources:
   - title: "TÜİK açıkladı: Her 10 çocuktan 8'i cep telefonu, 6'sı yapay zeka kullanıyor"
     url: "https://haber.doviz.com/gundem-haberleri/tuik-acikladi-her-10-cocuktan-8-i-cep-telefonu-6-si-yapay-zeka-kullaniyor/954880"

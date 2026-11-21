@@ -1,1 +1,70 @@
-{}
+{
+ "modeller": [
+  {
+   "id": "7F9PhBM1gFM",
+   "url": "https://images.unsplash.com/photo-1770233621425-5d9ee7a0a700?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8Nnx8YXJ0aWZpY2lhbCUyMGludGVsbGlnZW5jZSUyMG5ldXJhbCUyMG5ldHdvcmt8ZW58MXwwfHx8MTc5NTI1MTI0OHww&ixlib=rb-4.1.0",
+   "alt": "Artificial intelligence concept within a human head",
+   "author": "Zach M",
+   "authorUrl": "https://unsplash.com/@zachmmalin",
+   "link": "https://unsplash.com/photos/artificial-intelligence-concept-within-a-human-head-7F9PhBM1gFM"
+  },
+  {
+   "id": "oXlXu2qukGE",
+   "url": "https://images.unsplash.com/photo-1607706189992-eae578626c86?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8NHx8Y29tcHV0ZXIlMjBjb2RlJTIwc2NyZWVufGVufDF8MHx8fDE3OTUyNTEyNDh8MA&ixlib=rb-4.1.0",
+   "alt": "Computer screen displaying HTML code for a web development project",
+   "author": "Mohammad Rahmani",
+   "authorUrl": "https://unsplash.com/@afgprogrammer",
+   "link": "https://unsplash.com/photos/computer-screen-displaying-web-code-oXlXu2qukGE"
+  },
+  {
+   "id": "pgdaAwf6IJg",
+   "url": "https://images.unsplash.com/photo-1506399309177-3b43e99fead2?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8NXx8ZGF0YSUyMGNlbnRlciUyMHNlcnZlcnxlbnwxfDB8fHwxNzk1MjUxMjQ5fDA&ixlib=rb-4.1.0",
+   "alt": "black ImgIX server system",
+   "author": "imgix",
+   "authorUrl": "https://unsplash.com/@imgix",
+   "link": "https://unsplash.com/photos/black-imgix-server-system-pgdaAwf6IJg"
+  },
+  {
+   "id": "sv2SuTA-9ug",
+   "url": "https://images.unsplash.com/photo-1753513291124-4f615bf1f6de?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8OHx8YXJ0aWZpY2lhbCUyMGludGVsbGlnZW5jZSUyMG5ldXJhbCUyMG5ldHdvcmt8ZW58MXwwfHx8MTc5NTI1MTI0OHww&ixlib=rb-4.1.0",
+   "alt": "A brain over cpu represents artificial intelligence",
+   "author": "Sumaid pal Singh Bakshi",
+   "authorUrl": "https://unsplash.com/@sumaidsingh",
+   "link": "https://unsplash.com/photos/a-brain-over-cpu-represents-artificial-intelligence-sv2SuTA-9ug"
+  },
+  {
+   "id": "cYyqhdbJ9TI",
+   "url": "https://images.unsplash.com/photo-1610563166150-b34df4f3bcd6?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8MTV8fGNvbXB1dGVyJTIwY29kZSUyMHNjcmVlbnxlbnwxfDB8fHwxNzk1MjUxMjQ4fDA&ixlib=rb-4.1.0",
+   "alt": "black flat screen computer monitor",
+   "author": "Radowan Nakif Rehan",
+   "authorUrl": "https://unsplash.com/@radowanrehan",
+   "link": "https://unsplash.com/photos/black-flat-screen-computer-monitor-cYyqhdbJ9TI"
+  },
+  {
+   "id": "eVWWr6nmDf8",
+   "url": "https://images.unsplash.com/photo-1594915440248-1e419eba6611?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8N3x8ZGF0YSUyMGNlbnRlciUyMHNlcnZlcnxlbnwxfDB8fHwxNzk1MjUxMjQ5fDA&ixlib=rb-4.1.0",
+   "alt": "Fiber optic cables connected to a network switch in a server rack",
+   "author": "Kirill Sh",
+   "authorUrl": "https://unsplash.com/@kirill2020",
+   "link": "https://unsplash.com/photos/fiber-optic-cables-in-network-switch-eVWWr6nmDf8"
+  }
+ ],
+ "ajanlar": [
+  {
+   "id": "jIBMSMs4_kA",
+   "url": "https://images.unsplash.com/photo-1531746790731-6c087fecd65a?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8MXx8cm9ib3QlMjBoYW5kJTIwbGFwdG9wfGVufDF8MHx8fDE3OTUyNTEyNTB8MA&ixlib=rb-4.1.0",
+   "alt": "closeup photo of white robot arm",
+   "author": "Franck V.",
+   "authorUrl": "https://unsplash.com/@possessedphotography",
+   "link": "https://unsplash.com/photos/closeup-photo-of-white-robot-arm-jIBMSMs4_kA"
+  },
+  {
+   "id": "IBgpSXU6jjA",
+   "url": "https://images.unsplash.com/photo-1782712819441-bdd182c29340?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8MTJ8fGF1dG9tYXRpb24lMjB3b3JrZmxvd3xlbnwxfDB8fHwxNzk1MjUxMjUwfDA&ixlib=rb-4.1.0",
+   "alt": "Rockwell automation logo on red square with abstract shapes",
+   "author": "Brecht Corbeel",
+   "authorUrl": "https://unsplash.com/@brechtcorbeel",
+   "link": "https://unsplash.com/photos/rockwell-automation-logo-on-red-square-with-abstract-shapes-IBgpSXU6jjA"
+  }
+ ]
+}

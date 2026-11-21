@@ -22,6 +22,20 @@ byNumbers:
     label: "S&P 500'ün geldiği seviye"
   - value: "yüzde 10"
     label: "Rekor kapanışların altına inen Dow Jones ve S&P 500"
+photo:
+  id: "QBpZGqEMsKg"
+  url: "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8M3x8c3RhcnR1cCUyMG9mZmljZSUyMHRlYW18ZW58MXwwfHx8MTc5NTI1MTI1MXww&ixlib=rb-4.1.0"
+  alt: "people doing office works"
+  author: "Alex Kotliarskyi"
+  authorUrl: "https://unsplash.com/@frantic"
+  link: "https://unsplash.com/photos/people-doing-office-works-QBpZGqEMsKg"
+photo2:
+  id: "rtD_lcsN6_U"
+  url: "https://images.unsplash.com/photo-1690378820474-b468b8ee64d3?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8MTF8fHN0YXJ0dXAlMjBvZmZpY2UlMjB0ZWFtfGVufDF8MHx8fDE3OTUyNTEyNTF8MA&ixlib=rb-4.1.0"
+  alt: "a group of people sitting around a table with laptops"
+  author: "Lyubomyr Reverchuk"
+  authorUrl: "https://unsplash.com/@lreverchuk"
+  link: "https://unsplash.com/photos/a-group-of-people-sitting-around-a-table-with-laptops-rtD_lcsN6_U"
 sources:
   - title: "Altın ve ABD borsalarında yapay zeka depremi"
     url: "https://www.ensonhaber.com/altin-ve-abd-borsalarinda-yapay-zeka-depremi-h1584248"

@@ -30,6 +30,13 @@ byNumbers:
     label: "BIST 100'ün açılıştaki düşüşü"
   - value: "11.261,44"
     label: "BIST 100'ün açılış puanı"
+photo2:
+  id: "lmV3gJSAgbo"
+  url: "https://images.unsplash.com/photo-1648275913341-7973ae7bc9b3?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8NXx8c3RvY2slMjBtYXJrZXQlMjBzY3JlZW4lMjByZWR8ZW58MXwwfHx8MTc5NTI1MTI1NXww&ixlib=rb-4.1.0"
+  alt: "A digital stock market ticker display showing SPY data with a green trend line"
+  author: "Tyler Prahm"
+  authorUrl: "https://unsplash.com/@tprahm"
+  link: "https://unsplash.com/photos/stock-market-ticker-with-green-trend-lmV3gJSAgbo"
 sources:
   - title: "BIST 100, ABD'deki yapay zeka satışı sonrası yüzde 1,22 düşüşle başladı"
     url: "https://www.endeks24.com/bist-100-abd-deki-yapay-zeka-satisi-sonrasi-yuzde-1-22-dususle-basladi"

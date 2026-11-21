@@ -20,6 +20,13 @@ keyPoints:
   - "Talepler Malezya, Endonezya ve Tayland'daki veri merkezlerine yönelikti."
   - "Komitenin 19 Kasım'da yayımladığı kayıtlara göre hiçbir talep onaylanmadı."
 format: kisa
+photo2:
+  id: "cTkE_AJXCPA"
+  url: "https://images.unsplash.com/photo-1782155789445-fe884c451d14?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8NXx8c2VtaWNvbmR1Y3RvciUyMGNoaXAlMjBjbG9zZXVwfGVufDF8MHx8fDE3OTUyNTEyNTV8MA&ixlib=rb-4.1.0"
+  alt: "A computer chip rests on a detailed circuit board"
+  author: "Brecht Corbeel"
+  authorUrl: "https://unsplash.com/@brechtcorbeel"
+  link: "https://unsplash.com/photos/a-computer-chip-rests-on-a-detailed-circuit-board-cTkE_AJXCPA"
 sources:
   - title: "Chinese tech giants sought 1.1 million US AI chips for Southeast Asian data centers, license records show"
     url: "https://www.digitimes.com/news/a20261120VL205/ai-chip-alibaba-bytedance-nvidia-usa-china.html"

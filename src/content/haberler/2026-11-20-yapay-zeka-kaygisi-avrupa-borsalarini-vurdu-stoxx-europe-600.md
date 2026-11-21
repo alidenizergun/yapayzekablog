@@ -28,6 +28,13 @@ byNumbers:
     label: "Stoxx Europe 600'ün kapanış seviyesi"
   - value: "yüzde 2,60"
     label: "DAX 40'taki düşüş"
+photo2:
+  id: "sggw4-qDD54"
+  url: "https://images.unsplash.com/photo-1521737852567-6949f3f9f2b5?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8MTN8fHN0YXJ0dXAlMjBvZmZpY2UlMjB0ZWFtfGVufDF8MHx8fDE3OTUyNTEyNTF8MA&ixlib=rb-4.1.0"
+  alt: "selective focus photography of people sits in front of table inside room"
+  author: "Annie Spratt"
+  authorUrl: "https://unsplash.com/@anniespratt"
+  link: "https://unsplash.com/photos/selective-focus-photography-of-people-sits-in-front-of-table-inside-room-sggw4-qDD54"
 sources:
   - title: "Yapay zeka endişesi Avrupa borsalarını vurdu; Stoxx Europe 600 yüzde 2 düştü - Haberler"
     url: "https://www.haberler.com/ekonomi/yapay-zeka-endisesi-avrupa-borsalarini-vurdu-stoxx-20447310-haberi/"

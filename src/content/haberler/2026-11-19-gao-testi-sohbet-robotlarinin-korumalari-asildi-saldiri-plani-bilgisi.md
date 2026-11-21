@@ -13,6 +13,13 @@ keyPoints:
   - "12 saat içinde saldırıya yardımcı olabilecek uygulanabilir bilgi elde edildi."
   - "Senatör Maggie Hassan'ın Ocak ayında bir duruşma planladığı bildirildi."
 whatsNext: "Senatör Maggie Hassan'ın Ocak ayında bir duruşma planladığı bildirildi."
+photo:
+  id: "C5pXRFEjq3w"
+  url: "https://images.unsplash.com/photo-1614064548237-096f735f344f?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8Mnx8Y3liZXIlMjBzZWN1cml0eSUyMHNlcnZlcnxlbnwxfDB8fHwxNzk1MjUxMjUzfDA&ixlib=rb-4.1.0"
+  alt: "padlock on laptop with light trails"
+  author: "FlyD"
+  authorUrl: "https://unsplash.com/@flyd2069"
+  link: "https://unsplash.com/photos/padlock-on-laptop-with-light-trails-C5pXRFEjq3w"
 sources:
   - title: "AI models used to plan 'viable' attack plots in test despite safeguards: Government report"
     url: "https://abcnews.com/Technology/ai-models-plan-viable-attack-plots-test-despite/story?id=138229892"

@@ -26,6 +26,13 @@ byNumbers:
     label: "Katalogdaki yaratıcı yapay zeka modeli"
   - value: "20-22 Kasım"
     label: "Wan 3.0'a sınırsız erişim dönemi"
+photo2:
+  id: "vpOeXr5wmR4"
+  url: "https://images.unsplash.com/photo-1587620962725-abab7fe55159?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8NXx8ZGV2ZWxvcGVyJTIwbGFwdG9wJTIwY29kZSUyMHNjcmVlbnxlbnwxfDB8fHwxNzk1MjUxMjU0fDA&ixlib=rb-4.1.0"
+  alt: "black laptop computer turned on on table"
+  author: "James Harrison"
+  authorUrl: "https://unsplash.com/@jstrippa"
+  link: "https://unsplash.com/photos/black-laptop-computer-turned-on-on-table-vpOeXr5wmR4"
 sources:
   - title: "Picsart Platform Puts 250+ Creative AI Models Behind One API"
     url: "https://dev.to/paullovelace/picsart-platform-puts-250-creative-ai-models-behind-one-api-3n18"

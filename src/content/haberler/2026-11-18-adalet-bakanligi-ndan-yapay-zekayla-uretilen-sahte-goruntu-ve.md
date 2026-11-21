@@ -13,6 +13,13 @@ keyPoints:
   - "Adalet Bakanlığı, 13. Yargı Paketi'ne deepfake düzenlemesi eklemeye hazırlanıyor."
   - "Taslağa göre izinsiz üretilen sahte görüntü ve ses kayıtları doğrudan suç sayılacak."
   - "İçeriklerin etiketlenmesi zorunluluğu ve yapay zeka araçlarına yaş sınırı da tartışılıyor."
+photo:
+  id: "rj9H-W3q4Oo"
+  url: "https://images.unsplash.com/photo-1791222992949-166ae5ef279a?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8OXx8aXN0YW5idWwlMjBza3lsaW5lfGVufDF8MHx8fDE3OTUyNTEyNTN8MA&ixlib=rb-4.1.0"
+  alt: "Two people on a ferry deck overlooking the Istanbul skyline at golden hour"
+  author: "M K"
+  authorUrl: "https://unsplash.com/@mateokartuzzo1"
+  link: "https://unsplash.com/photos/people-on-ferry-overlooking-istanbul-skyline-rj9H-W3q4Oo"
 sources:
   - title: "Adalet Bakanlığı yapay zeka suçları için düğmeye bastı! 13. Yargı Paketi ile deepfake doğrudan suç sayılacak"
     url: "https://www.ahaber.com.tr/gundem/2026/11/17/yapay-zekayla-uretilen-sahte-goruntulere-ceza-geliyor"

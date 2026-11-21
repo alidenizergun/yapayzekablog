@@ -20,6 +20,13 @@ keyPoints:
   - "Apple, kullanıcılar adına iş yapabilen otonom bir yapay zeka ajanı geliştiriyor."
   - "Plan, şirketin web sitesine bu hafta eklenen iş ilanlarında yer alıyor."
   - "Sistemin kod yazması, web'de gezinmesi ve uygulamaları kontrol etmesi bekleniyor."
+photo2:
+  id: "mcSDtbWXUZU"
+  url: "https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8Mnx8bGFwdG9wJTIwYXV0b21hdGlvbiUyMHdvcmtmbG93fGVufDF8MHx8fDE3OTUyNTEyNTd8MA&ixlib=rb-4.1.0"
+  alt: "turned on black and grey laptop computer"
+  author: "Lukas Blazek"
+  authorUrl: "https://unsplash.com/@goumbik"
+  link: "https://unsplash.com/photos/turned-on-black-and-grey-laptop-computer-mcSDtbWXUZU"
 sources:
   - title: "Apple Is Working on AI Agent for Device Control, Apps, Browsing and Coding"
     url: "https://www.bloomberg.com/news/articles/2026-11-19/apple-is-working-on-ai-agent-for-device-control-apps-browsing-and-coding"
