@@ -1,16 +1,31 @@
 ---
 import { GLOSSARY } from '../lib/glossary.js';
 // Yazı tipleri sitenin kendi sunucusundan verilir (Google'a ziyaretçi IP'si gitmez, KVKK; CSP daha sıkı)
-import '@fontsource/inter/400.css';
-import '@fontsource/inter/500.css';
-import '@fontsource/inter/600.css';
-import '@fontsource/inter/700.css';
-import '@fontsource/schibsted-grotesk/600.css';
-import '@fontsource/schibsted-grotesk/700.css';
-import '@fontsource/schibsted-grotesk/800.css';
-import '@fontsource/source-serif-4/400.css';
-import '@fontsource/source-serif-4/400-italic.css';
-import '@fontsource/source-serif-4/600.css';
+// Yalnızca Latin ve Latin Genişletilmiş (Türkçe) alt kümeleri: CSS küçülür, gereksiz @font-face kalmaz
+import '@fontsource/inter/latin-400.css';
+import '@fontsource/inter/latin-ext-400.css';
+import '@fontsource/inter/latin-500.css';
+import '@fontsource/inter/latin-ext-500.css';
+import '@fontsource/inter/latin-600.css';
+import '@fontsource/inter/latin-ext-600.css';
+import '@fontsource/inter/latin-700.css';
+import '@fontsource/inter/latin-ext-700.css';
+import '@fontsource/schibsted-grotesk/latin-600.css';
+import '@fontsource/schibsted-grotesk/latin-ext-600.css';
+import '@fontsource/schibsted-grotesk/latin-700.css';
+import '@fontsource/schibsted-grotesk/latin-ext-700.css';
+import '@fontsource/schibsted-grotesk/latin-800.css';
+import '@fontsource/schibsted-grotesk/latin-ext-800.css';
+import '@fontsource/source-serif-4/latin-400.css';
+import '@fontsource/source-serif-4/latin-ext-400.css';
+import '@fontsource/source-serif-4/latin-400-italic.css';
+import '@fontsource/source-serif-4/latin-ext-400-italic.css';
+import '@fontsource/source-serif-4/latin-600.css';
+import '@fontsource/source-serif-4/latin-ext-600.css';
+import '../styles/marka-renkleri.css';
+// LCP metni (başlıklar ve gövde) için en çok kullanılan iki yazı tipi önceden yüklenir
+import fontDisplay from '@fontsource/schibsted-grotesk/files/schibsted-grotesk-latin-800-normal.woff2?url';
+import fontBody from '@fontsource/inter/files/inter-latin-400-normal.woff2?url';
 import '../styles/global.css';
 import { SITE, NAV, CATEGORIES, categoryBySlug } from '../lib/site.js';
 import { getNews, newsUrl, catUrl, url, slugOf } from '../lib/news.js';
@@ -184,19 +199,19 @@ const isBreaking = latest && Date.now() - latest.data.date.valueOf() < BREAKING_
   <meta name="theme-color" content="#FFFFFF" media="(prefers-color-scheme: light)" />
   <meta name="theme-color" content="#121212" media="(prefers-color-scheme: dark)" />
   <meta name="format-detection" content="telephone=no" />
-  <link rel="preconnect" href="https://images.unsplash.com" crossorigin />
   {altTr && altEn && <link rel="alternate" hreflang="tr" href={altTr} />}
   {altTr && altEn && <link rel="alternate" hreflang="en" href={altEn} />}
   {altTr && altEn && <link rel="alternate" hreflang="x-default" href={altTr} />}
   <link rel="sitemap" href={url('/sitemap-index.xml')} />
-  <link rel="stylesheet" href={url('/marka-renkleri.css')} />
   <link rel="icon" href={url('/favicon.ico')} sizes="48x48" />
   <link rel="icon" href={url('/favicon-96.png')} sizes="96x96" type="image/png" />
   <link rel="icon" href={url('/favicon.svg')} type="image/svg+xml" />
   <link rel="manifest" href={url('/site.webmanifest')} />
   <link rel="apple-touch-icon" href={url('/apple-touch-icon.png')} />
   <!-- Haber fotoğrafları (en büyük görsel, LCP) için bağlantıyı erkenden kur -->
-  <link rel="preconnect" href="https://images.unsplash.com" crossorigin />
+  <link rel="preconnect" href="https://images.unsplash.com" />
+  <link rel="preload" href={fontDisplay} as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href={fontBody} as="font" type="font/woff2" crossorigin />
   <meta property="og:site_name" content={SITE.name} />
   <meta property="og:locale" content={OG_LOCALE[lang]} />
   {altTr && altEn && <meta property="og:locale:alternate" content={OG_LOCALE[lang === 'en' ? 'tr' : 'en']} />}
@@ -234,7 +249,19 @@ const isBreaking = latest && Date.now() - latest.data.date.valueOf() < BREAKING_
         gtag('js', new Date());
         gtag('config', GA, { allow_google_signals: false, allow_ad_personalization_signals: false });
       </script>
-      <script is:inline async src={`https://www.googletagmanager.com/gtag/js?id=${SITE.analytics.ga4}`}></script>
+      {/* gtag.js sayfa açılışını yavaşlatmasın: ilk etkileşimde ya da yüklemeden 3 sn sonra eklenir (veri kaybı olmaz, olaylar dataLayer'da bekler) */}
+      <script is:inline define:vars={{ GA: SITE.analytics.ga4 }}>
+        (function () {
+          var done = false;
+          function load() {
+            if (done) return; done = true;
+            var s = document.createElement('script'); s.async = true; s.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA;
+            document.head.appendChild(s);
+          }
+          ['pointerdown', 'keydown', 'scroll', 'touchstart'].forEach(function (ev) { addEventListener(ev, load, { once: true, passive: true }); });
+          addEventListener('load', function () { setTimeout(load, 3000); });
+        })();
+      </script>
     </>
   )}
   <script is:inline>

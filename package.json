@@ -9,6 +9,7 @@
   },
   "scripts": {
     "dev": "astro dev",
+    "prebuild": "node scripts/brand-css.mjs",
     "build": "astro build && pagefind --site dist --silent",
     "preview": "astro preview",
     "news": "node scripts/generate-news.mjs",
