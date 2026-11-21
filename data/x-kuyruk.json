@@ -334,5 +334,29 @@
     "importance": 55,
     "featured": false,
     "date": "2026-11-20T21:23:00+03:00"
+  },
+  {
+    "slug": "spacex-nvidia-cipleri-icin-32-milyar-dolarlik-tahvil-satti",
+    "title": "SpaceX, Nvidia çipleri için 32 milyar dolarlık tahvil sattı; getiri yüzde 8'i aştı",
+    "text": "SpaceX, Nvidia çipleri için 32 milyar dolarlık tahvil sattı; en büyük dilimde getiri yüzde 8'in üzerine çıktı. Finansman bilanço dışı bir trust üzerinden yürüyor.",
+    "importance": 55,
+    "featured": false,
+    "date": "2026-11-21T04:33:30+03:00"
+  },
+  {
+    "slug": "bytedance-ve-alibaba-nin-1-1-milyon-nvidia-cipi",
+    "title": "ByteDance ve Alibaba'nın 1,1 milyon Nvidia çipi talebinin hiçbiri onaylanmadı",
+    "text": "ByteDance ve Alibaba, Güneydoğu Asya veri merkezleri için 1,1 milyondan fazla Nvidia çipi ihracatı istedi. İhracat lisansı kayıtlarına göre taleplerin hiçbiri onaylanmadı. #Nvidia",
+    "importance": 50,
+    "featured": false,
+    "date": "2026-11-21T04:32:30+03:00"
+  },
+  {
+    "slug": "picsart-250-den-fazla-yaratici-yapay-zeka-modelini-tek",
+    "title": "Picsart, 250'den fazla yaratıcı yapay zeka modelini tek API üzerinden sunuyor",
+    "text": "Picsart, platformunun arkasındaki 250'den fazla yaratıcı yapay zeka modelini geliştiricilere ve işletmelere tek bir API üzerinden açtı.",
+    "importance": 25,
+    "featured": false,
+    "date": "2026-11-21T04:31:30+03:00"
   }
 ]
