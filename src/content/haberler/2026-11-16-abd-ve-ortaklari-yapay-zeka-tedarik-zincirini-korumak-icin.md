@@ -20,6 +20,13 @@ photo:
   authorUrl: "https://pixabay.com/users/WikimediaImages-1185597/"
   link: "https://pixabay.com/photos/integrated-circuit-device-chip-876099/"
   source: "pixabay"
+photo2:
+  id: "P8rgDtEFn7s"
+  url: "https://images.unsplash.com/photo-1603119761708-9252f043c139?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8NXx8Z292ZXJubWVudCUyMGJ1aWxkaW5nJTIwbGF3fGVufDF8MHx8fDE3OTUyODg4ODV8MA&ixlib=rb-4.1.0"
+  alt: "white concrete building during daytime"
+  author: "Ian Hutchinson"
+  authorUrl: "https://unsplash.com/@ianhutchinson92"
+  link: "https://unsplash.com/photos/white-concrete-building-during-daytime-P8rgDtEFn7s"
 sources:
   - title: "US, 8 Partners Sign AI Supply Pact Before Trump-Xi Talks"
     url: "https://fourweekmba.com/ai-us-8-partners-sign-ai-supply-pact-before-trump-xi-talks/"

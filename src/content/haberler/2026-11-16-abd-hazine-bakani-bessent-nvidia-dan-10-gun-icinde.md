@@ -24,6 +24,13 @@ photo:
   authorUrl: "https://pixabay.com/users/geralt-9301/"
   link: "https://pixabay.com/photos/technology-developer-touch-finger-3389904/"
   source: "pixabay"
+photo2:
+  id: "S4jSvcHYcOs"
+  url: "https://images.unsplash.com/photo-1494083306499-e22e4a457632?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8NHx8Y29tcHV0ZXIlMjBjaGlwJTIwc2VtaWNvbmR1Y3RvcnxlbnwxfDB8fHwxNzk1Mjg4ODk5fDA&ixlib=rb-4.1.0"
+  alt: "A computer processor held by black tweezers against a neutral background"
+  author: "Brian Kostiuk"
+  authorUrl: "https://unsplash.com/@briankost"
+  link: "https://unsplash.com/photos/computer-processor-held-by-tweezers-S4jSvcHYcOs"
 sources:
   - title: "Bessent questions did Nvidia \"goose\" earnings with suspect China chip sales"
     url: "https://www.axios.com/2026/11/15/bessent-nvidia-earnings-china-chip-sales-ceo"

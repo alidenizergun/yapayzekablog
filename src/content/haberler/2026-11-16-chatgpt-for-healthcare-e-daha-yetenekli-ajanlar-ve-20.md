@@ -21,6 +21,13 @@ keyPoints:
   - "20'den fazla yeni sağlık eklentisi sunuldu."
   - "Abridge, Cigna ve CVS Health gibi kuruluşlar modelleri iş akışlarında kullanıyor."
 format: kisa
+photo2:
+  id: "h-a12dGaJrI"
+  url: "https://images.unsplash.com/photo-1758691461957-13aff0c37c6f?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8MTV8fGhvc3BpdGFsJTIwZG9jdG9yJTIwdGFibGV0fGVufDF8MHx8fDE3OTUyODg4NzB8MA&ixlib=rb-4.1.0"
+  alt: "Doctor pointing at x-ray on tablet screen"
+  author: "Vitaly Gariev"
+  authorUrl: "https://unsplash.com/@silverkblack"
+  link: "https://unsplash.com/photos/doctor-pointing-at-x-ray-on-tablet-screen-h-a12dGaJrI"
 sources:
   - title: "@OpenAI X gönderisi"
     url: "https://x.com/OpenAI/status/2122419941756531150"

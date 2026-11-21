@@ -22,6 +22,13 @@ photo:
   authorUrl: "https://pixabay.com/users/flutie8211-17475707/"
   link: "https://pixabay.com/photos/technology-circuit-board-head-7772914/"
   source: "pixabay"
+photo2:
+  id: "j3VuKymcjwc"
+  url: "https://images.unsplash.com/photo-1773433360391-9ae08cf87b4a?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8NXx8Z292ZXJubWVudCUyMGJ1aWxkaW5nJTIwY29sdW1uc3xlbnwxfDB8fHwxNzk1Mjg4ODgyfDA&ixlib=rb-4.1.0"
+  alt: "Grand building with columns and american flag banner"
+  author: "Margaret Giatras"
+  authorUrl: "https://unsplash.com/@margaretann110"
+  link: "https://unsplash.com/photos/grand-building-with-columns-and-american-flag-banner-j3VuKymcjwc"
 sources:
   - title: "Trump administration to name Nvidia, other AI firms as US 'national champions', WSJ reports"
     url: "https://www.investing.com/news/stock-market-news/trump-administration-to-name-nvidia-other-ai-firms-as-us-national-champions-wsj-reports-5028349"

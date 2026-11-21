@@ -29,6 +29,13 @@ byNumbers:
     label: "Verimlilik ve kalitede hedeflenen asgari artış"
   - value: "yüzde 50"
     label: "Veri merkezlerinin elektrik tüketimindeki artış (2025)"
+photo2:
+  id: "NjzeSMC2PEE"
+  url: "https://images.unsplash.com/photo-1778877036599-9a7aa57a160b?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8M3x8Y29uZmVyZW5jZSUyMGhhbGwlMjBkZWxlZ2F0ZXN8ZW58MXwwfHx8MTc5NTI4ODg3Mnww&ixlib=rb-4.1.0"
+  alt: "People attending a conference in a large auditorium"
+  author: "Ufoma Ojo"
+  authorUrl: "https://unsplash.com/@ladyufoma001"
+  link: "https://unsplash.com/photos/people-attending-a-conference-in-a-large-auditorium-NjzeSMC2PEE"
 sources:
   - title: "Bakan Kacır Antalya'dan duyurdu: Yapay zeka için 271 somut taahhüt"
     url: "https://www.haberantalya.com/bakan-kacir-antalyadan-duyurdu-yapay-zeka-icin-271-somut-taahhut/533659"

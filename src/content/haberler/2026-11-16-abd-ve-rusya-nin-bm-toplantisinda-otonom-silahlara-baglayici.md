@@ -21,6 +21,13 @@ photo:
   authorUrl: "https://pixabay.com/users/padrinan-1694659/"
   link: "https://pixabay.com/photos/un-united-nations-4984799/"
   source: "pixabay"
+photo2:
+  id: "_0iV9LmPDn0"
+  url: "https://images.unsplash.com/photo-1677442135703-1787eea5ce01?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8M3x8YXJ0aWZpY2lhbCUyMGludGVsbGlnZW5jZSUyMHRlY2hub2xvZ3l8ZW58MXwwfHx8MTc5NTI4ODg4OHww&ixlib=rb-4.1.0"
+  alt: "a computer circuit board with a brain on it"
+  author: "Steve A Johnson"
+  authorUrl: "https://unsplash.com/@steve_j"
+  link: "https://unsplash.com/photos/a-computer-circuit-board-with-a-brain-on-it-_0iV9LmPDn0"
 sources:
   - title: "US and Russia to oppose talks on limiting autonomous weapons"
     url: "https://www.cnbcafrica.com/2026/us-and-russia-to-oppose-talks-on-limiting-autonomous-weapons"

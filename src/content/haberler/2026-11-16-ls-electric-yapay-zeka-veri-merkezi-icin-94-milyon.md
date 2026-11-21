@@ -31,6 +31,13 @@ byNumbers:
     label: "Sözleşme değeri (130 milyar won)"
   - value: "38 kilovolt"
     label: "Teslim edilecek şalt ekipmanı"
+photo2:
+  id: "RPqSaXajfO4"
+  url: "https://images.unsplash.com/photo-1792419764801-582dd74454d9?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8MTR8fGRhdGElMjBjZW50ZXIlMjBwb3dlciUyMGVxdWlwbWVudHxlbnwxfDB8fHwxNzk1Mjg4ODYzfDA&ixlib=rb-4.1.0"
+  alt: "A 3D render of a power purchase agreement document, electricity meter, computer chip, and various industrial components"
+  author: "Brecht Corbeel"
+  authorUrl: "https://unsplash.com/@brechtcorbeel"
+  link: "https://unsplash.com/photos/power-purchase-agreement-and-industrial-components-RPqSaXajfO4"
 sources:
   - title: "LS Electric wins $94m US AI data center equipment deal - The Korea Herald"
     url: "https://www.koreaherald.com/article/10938560"

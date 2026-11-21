@@ -16,6 +16,13 @@ photo:
   authorUrl: "https://unsplash.com/@ismailenesayhan"
   link: "https://unsplash.com/photos/server-room-aisle-with-metal-equipment-racks-lVZjvw-u9V8"
 whyItMatters: "Haber, ABD'nin ihracat kontrollerinin Çin dışındaki veri merkezlerinden bilgi işlem gücü kiralanarak aşılabildiği tartışmasını belgelere dayandırarak yeniden gündeme taşıyor."
+photo2:
+  id: "40XgDxBfYXM"
+  url: "https://images.unsplash.com/photo-1544197150-b99a580bb7a8?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8OXx8ZGF0YSUyMGNlbnRlciUyMHNlcnZlciUyMHJhY2tzfGVufDF8MHx8fDE3OTUyODg5MDF8MA&ixlib=rb-4.1.0"
+  alt: "blue UTP cord"
+  author: "Jordan Harrison"
+  authorUrl: "https://unsplash.com/@jouwdan"
+  link: "https://unsplash.com/photos/blue-utp-cord-40XgDxBfYXM"
 sources:
   - title: "WSJ: Huang personally built Asia route feeding Nvidia GPUs to China"
     url: "https://aiweekly.co/alerts/wsj-huang-personally-built-asia-route-feeding-nvidia-gpus-to-china"

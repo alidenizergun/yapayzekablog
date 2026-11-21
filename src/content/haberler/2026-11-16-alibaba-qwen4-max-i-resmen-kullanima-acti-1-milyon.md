@@ -20,6 +20,13 @@ keyPoints:
   - "Qwen4-Max, 2,4 trilyon toplam parametreye ve 1 milyon token bağlam penceresine sahip."
   - "API fiyatı milyon token başına girdide 1,5 dolar, çıktıda 4,5 dolar."
   - "Alibaba modelin ağırlıklarını açmadı; küçük Qwen4 modellerinin açılacağını doğruladı."
+photo2:
+  id: "cvBBO4PzWPg"
+  url: "https://images.unsplash.com/photo-1516259762381-22954d7d3ad2?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8OHx8Y29tcHV0ZXIlMjBjb2RlJTIwc2NyZWVufGVufDF8MHx8fDE3OTUyODg4Nzl8MA&ixlib=rb-4.1.0"
+  alt: "Lines of colorful JavaScript code displayed on a dark screen"
+  author: "Markus Spiske"
+  authorUrl: "https://unsplash.com/@markusspiske"
+  link: "https://unsplash.com/photos/javascript-code-on-dark-screen-cvBBO4PzWPg"
 sources:
   - title: "Alibaba Releases Qwen4-Max: 2.4 Trillion Parameters, Per-Task Cost Slashed by 60%"
     url: "https://finance.biggo.com/news/357f82fc-873e-4025-8c0e-f2b920922b2b"

@@ -20,6 +20,13 @@ photo:
   authorUrl: "https://pixabay.com/users/Janson_G-5907103/"
   link: "https://pixabay.com/photos/robot-isolated-2697683/"
   source: "pixabay"
+photo2:
+  id: "Skfy8ljB7X4"
+  url: "https://images.unsplash.com/photo-1633059050703-0f1b50828402?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8Mnx8YmFuayUyMGJ1aWxkaW5nJTIwZmFjYWRlfGVufDF8MHx8fDE3OTUyODg4Njd8MA&ixlib=rb-4.1.0"
+  alt: "a large building with columns and a flag on the corner"
+  author: "Joshua Woroniecki"
+  authorUrl: "https://unsplash.com/@joshuaworoniecki"
+  link: "https://unsplash.com/photos/a-large-building-with-columns-and-a-flag-on-the-corner-Skfy8ljB7X4"
 sources:
   - title: "Fed's Barr warns on AI risks to financial system"
     url: "https://www.thestar.com.my/tech/tech-news/2026/11/16/fed039s-barr-warns-on-ai-risks-to-financial-system"

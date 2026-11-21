@@ -22,6 +22,13 @@ photo:
   authorUrl: "https://pixabay.com/users/helen35-45431/"
   link: "https://pixabay.com/photos/parliament-house-canberra-australia-168300/"
   source: "pixabay"
+photo2:
+  id: "WWVLdFbTiVk"
+  url: "https://images.unsplash.com/photo-1672264597620-d792bb6de88d?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8MXx8cGFybGlhbWVudCUyMGhvdXNlJTIwZXh0ZXJpb3J8ZW58MXwwfHx8MTc5NTI4ODg3NHww&ixlib=rb-4.1.0"
+  alt: "a large building with a flag on top of it"
+  author: "Marcus Reubenstein"
+  authorUrl: "https://unsplash.com/@reubenstein"
+  link: "https://unsplash.com/photos/a-large-building-with-a-flag-on-top-of-it-WWVLdFbTiVk"
 sources:
   - title: "Australia to legislate safety rules for frontier AI"
     url: "https://itbrief.com.au/story/australia-to-legislate-safety-rules-for-frontier-ai"

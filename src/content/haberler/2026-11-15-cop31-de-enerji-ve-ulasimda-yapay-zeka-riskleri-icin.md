@@ -15,6 +15,13 @@ photo:
   authorUrl: "https://unsplash.com/@matthewhenry"
   link: "https://unsplash.com/photos/photo-of-truss-towers-yETqkLnhsUI"
 whyItMatters: "Yapay zekanın kritik altyapılardaki olası riskleri, iklim zirvesinin gündemine girmiş durumda. Bu alanda öne çıkan sorunlar, sistemlerin nasıl yönetileceği ve ülkeler arasındaki yasal farkların nasıl uyumlu hale getirileceği."
+photo2:
+  id: "FXw3zkbqd0w"
+  url: "https://images.unsplash.com/photo-1644567103258-6da3857faab4?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8Nnx8cG93ZXIlMjBncmlkJTIwZWxlY3RyaWNpdHklMjBweWxvbnN8ZW58MXwwfHx8MTc5NTI4ODkxMHww&ixlib=rb-4.1.0"
+  alt: "a couple of power lines sitting next to each other"
+  author: "Evgeniy Alyoshin"
+  authorUrl: "https://unsplash.com/@oqtave"
+  link: "https://unsplash.com/photos/a-couple-of-power-lines-sitting-next-to-each-other-FXw3zkbqd0w"
 sources:
   - title: "COP31'de enerji ve ulaşımda yapay zeka kaynaklı risklere karşı iş birliği çağrısı - Son Dakika Haberleri"
     url: "https://hurriyet.com.tr/gundem/cop31de-enerji-ve-ulasimda-yapay-zeka-kaynakli-risklere-karsi-isbirligi-cagrisi-43379395"

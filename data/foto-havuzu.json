@@ -201,5 +201,72 @@
    "link": "https://unsplash.com/photos/people-standing-inside-city-building-3fPXt37X6UQ"
   }
  ],
- "regulasyon": []
+ "regulasyon": [
+  {
+   "id": "bpgIRNgNahI",
+   "url": "https://images.unsplash.com/photo-1760872646618-13594fc00567?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8MTN8fGdvdmVybm1lbnQlMjBidWlsZGluZ3xlbnwxfDB8fHwxNzk1Mjg4ODU4fDA&ixlib=rb-4.1.0",
+   "alt": "Grand sandstone building with columns and dome",
+   "author": "Zoshua Colah",
+   "authorUrl": "https://unsplash.com/@zoshuacolah",
+   "link": "https://unsplash.com/photos/grand-sandstone-building-with-columns-and-dome-bpgIRNgNahI"
+  },
+  {
+   "id": "YFz39MOmxnQ",
+   "url": "https://images.unsplash.com/photo-1774898988393-5c752e4d55e9?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8NXx8bGF3JTIwYm9va3MlMjBqdXN0aWNlfGVufDF8MHx8fDE3OTUyODg4NTh8MA&ixlib=rb-4.1.0",
+   "alt": "Statue of justice, gavel, and open book on table",
+   "author": "Sasun Bughdaryan",
+   "authorUrl": "https://unsplash.com/@sasun1990",
+   "link": "https://unsplash.com/photos/statue-of-justice-gavel-and-open-book-on-table-YFz39MOmxnQ"
+  },
+  {
+   "id": "iXqTqC-f6jI",
+   "url": "https://images.unsplash.com/photo-1486299267070-83823f5448dd?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8M3x8cGFybGlhbWVudHxlbnwxfDB8fHwxNzk1Mjg4ODU4fDA&ixlib=rb-4.1.0",
+   "alt": "Big Ben, London",
+   "author": "Marcin Nowak",
+   "authorUrl": "https://unsplash.com/@marcin",
+   "link": "https://unsplash.com/photos/big-ben-london-iXqTqC-f6jI"
+  },
+  {
+   "id": "o0kbc907i20",
+   "url": "https://images.unsplash.com/photo-1523292562811-8fa7962a78c8?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8MXx8Z292ZXJubWVudCUyMGJ1aWxkaW5nfGVufDF8MHx8fDE3OTUyODg4NTh8MA&ixlib=rb-4.1.0",
+   "alt": "white concrete building under sky",
+   "author": "Katie Moum",
+   "authorUrl": "https://unsplash.com/@katiemoum",
+   "link": "https://unsplash.com/photos/white-concrete-building-under-sky-o0kbc907i20"
+  },
+  {
+   "id": "NB1dUts3ROU",
+   "url": "https://images.unsplash.com/photo-1767972159871-b9f5d320be2b?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8Nnx8bGF3JTIwYm9va3MlMjBqdXN0aWNlfGVufDF8MHx8fDE3OTUyODg4NTh8MA&ixlib=rb-4.1.0",
+   "alt": "A wooden gavel rests on a closed book",
+   "author": "Sasun Bughdaryan",
+   "authorUrl": "https://unsplash.com/@sasun1990",
+   "link": "https://unsplash.com/photos/a-wooden-gavel-rests-on-a-closed-book-NB1dUts3ROU"
+  },
+  {
+   "id": "Nv1-l_xZnV4",
+   "url": "https://images.unsplash.com/photo-1610026378085-15d0e8f685db?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8NXx8cGFybGlhbWVudHxlbnwxfDB8fHwxNzk1Mjg4ODU4fDA&ixlib=rb-4.1.0",
+   "alt": "brown concrete building near body of water during daytime",
+   "author": "paul silvan",
+   "authorUrl": "https://unsplash.com/@paulsilvan",
+   "link": "https://unsplash.com/photos/brown-concrete-building-near-body-of-water-during-daytime-Nv1-l_xZnV4"
+  }
+ ],
+ "arastirma": [
+  {
+   "id": "_9xRHrMOjeg",
+   "url": "https://images.unsplash.com/photo-1602052577122-f73b9710adba?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8Mnx8cmVzZWFyY2glMjBsYWJvcmF0b3J5fGVufDF8MHx8fDE3OTUyODg4NTl8MA&ixlib=rb-4.1.0",
+   "alt": "A laboratory workbench with a microscope and analytical equipment in a bright room",
+   "author": "Trnava University",
+   "authorUrl": "https://unsplash.com/@trnavskauni",
+   "link": "https://unsplash.com/photos/laboratory-workbench-with-microscope-and-equipment-_9xRHrMOjeg"
+  },
+  {
+   "id": "83udtzyaTS4",
+   "url": "https://images.unsplash.com/photo-1581092333203-42374bcf7d89?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8MTF8fHNjaWVudGlzdCUyMGNvbXB1dGVyfGVufDF8MHx8fDE3OTUyODg4NTl8MA&ixlib=rb-4.1.0",
+   "alt": "black flat screen computer monitor",
+   "author": "ThisisEngineering",
+   "authorUrl": "https://unsplash.com/@thisisengineering",
+   "link": "https://unsplash.com/photos/black-flat-screen-computer-monitor-83udtzyaTS4"
+  }
+ ]
 }

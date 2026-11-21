@@ -24,6 +24,13 @@ byNumbers:
     label: "Yapay zeka şirketleri arasındaki döngüsel finansman"
   - value: "1 trilyon doların üzerinde"
     label: "Nvidia'nın son bir ayda kaybettiği piyasa değeri"
+photo2:
+  id: "3r8rcSy0Ffg"
+  url: "https://images.unsplash.com/photo-1649003515353-c58a239cf662?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8OHx8c3RvY2slMjBtYXJrZXQlMjB0cmFkaW5nJTIwc2NyZWVuc3xlbnwxfDB8fHwxNzk1Mjg4ODY0fDA&ixlib=rb-4.1.0"
+  alt: "A digital financial candlestick chart showing market trends on a dark screen"
+  author: "Tötös Ádám"
+  authorUrl: "https://unsplash.com/@toti1996"
+  link: "https://unsplash.com/photos/financial-candlestick-chart-market-trends-3r8rcSy0Ffg"
 sources:
   - title: "'Standing on one leg': IMF chief warns about global economy as AI circular financing hits $1 trillion"
     url: "https://www.cnbcafrica.com/2026/standing-on-one-leg-imf-chief-warns-about-global-economy-as-ai-circular-financing-hits-1-trillion"

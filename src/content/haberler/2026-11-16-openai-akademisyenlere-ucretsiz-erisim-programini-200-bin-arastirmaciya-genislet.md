@@ -29,6 +29,13 @@ byNumbers:
     label: "23 Kasım'da açılacak yeni hibe"
   - value: "33"
     label: "Programa katılan ülke sayısı"
+photo2:
+  id: "RAcNSUPk3b4"
+  url: "https://images.unsplash.com/photo-1766297248160-87aca6fa59ef?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8NXx8dW5pdmVyc2l0eSUyMHJlc2VhcmNoJTIwbGFib3JhdG9yeSUyMHNjaWVudGlzdHN8ZW58MXwwfHx8MTc5NTI4ODg1OXww&ixlib=rb-4.1.0"
+  alt: "Scientist points to microscopic view on computer screen"
+  author: "Chidera Faustina Okeke"
+  authorUrl: "https://unsplash.com/@thefourthwxll"
+  link: "https://unsplash.com/photos/scientist-points-to-microscopic-view-on-computer-screen-RAcNSUPk3b4"
 sources:
   - title: "OpenAI expands free access to 200,000 researchers"
     url: "https://casrai.org/news/openai-academic-researchers-200000-free-access-2026"
