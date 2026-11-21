@@ -25,6 +25,13 @@ byNumbers:
     label: "Test edilen GPT-6.2 Astra ön sürümü"
   - value: "17 Kasım"
     label: "OpenAI'nin sistem kartını yayımladığı tarih"
+photo2:
+  id: "4MNuO-rJnA8"
+  url: "https://images.unsplash.com/photo-1614064744856-63503e865a23?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8NXx8cGFkbG9jayUyMGNpcmN1aXQlMjBib2FyZHxlbnwxfDB8fHwxNzk1MjU1MzE2fDA&ixlib=rb-4.1.0"
+  alt: "green and silver padlock with keys"
+  author: "FlyD"
+  authorUrl: "https://unsplash.com/@flyd2069"
+  link: "https://unsplash.com/photos/green-and-silver-padlock-with-keys-4MNuO-rJnA8"
 sources:
   - title: "OpenAI's pre-release GPT-6.2 Astra was easier to jailbreak than its predecessor, UK government testers found"
     url: "https://venturebeat.com/security/openais-pre-release-gpt-6-2-astra-was-easier-to-jailbreak-than-its-predecessor-uk-government-testers-found"

@@ -27,6 +27,13 @@ byNumbers:
     label: "En büyük dilimde ödenen getirinin üzerinde kaldığı oran"
   - value: "7,6 milyar dolar"
     label: "Yapay zeka biriminin üçüncü çeyrek geliri"
+photo2:
+  id: "OnI_TNcIv9U"
+  url: "https://images.unsplash.com/photo-1680992046626-418f7e910589?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8MTB8fGRhdGElMjBjZW50ZXIlMjBzZXJ2ZXIlMjByYWNrc3xlbnwxfDB8fHwxNzk1MjU1Mjg0fDA&ixlib=rb-4.1.0"
+  alt: "a rack of electronic equipment in a dark room"
+  author: "Tyler"
+  authorUrl: "https://unsplash.com/@tylergm"
+  link: "https://unsplash.com/photos/a-rack-of-electronic-equipment-in-a-dark-room-OnI_TNcIv9U"
 sources:
   - title: "SpaceX Just Raised $32 Billion for AI Chips. Lenders Want Elon Musk to Keep Them on Earth."
     url: "https://fool.com/investing/2026/11/20/spacex-just-raised-32-billion-for-ai-chips-lenders-want-elon-musk-to-keep-them-on-earth"

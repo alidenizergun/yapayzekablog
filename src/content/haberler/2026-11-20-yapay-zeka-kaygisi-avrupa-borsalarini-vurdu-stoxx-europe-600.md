@@ -29,6 +29,13 @@ photo:
   authorUrl: "https://pixabay.com/users/PIX1861-468748/"
   link: "https://pixabay.com/photos/chart-trading-courses-forex-1905225/"
   source: "pixabay"
+photo2:
+  id: "QBpZGqEMsKg"
+  url: "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8M3x8c3RhcnR1cCUyMG9mZmljZSUyMHRlYW18ZW58MXwwfHx8MTc5NTI1NTI4Nnww&ixlib=rb-4.1.0"
+  alt: "people doing office works"
+  author: "Alex Kotliarskyi"
+  authorUrl: "https://unsplash.com/@frantic"
+  link: "https://unsplash.com/photos/people-doing-office-works-QBpZGqEMsKg"
 sources:
   - title: "Yapay zeka endişesi Avrupa borsalarını vurdu; Stoxx Europe 600 yüzde 2 düştü - Haberler"
     url: "https://www.haberler.com/ekonomi/yapay-zeka-endisesi-avrupa-borsalarini-vurdu-stoxx-20447310-haberi/"

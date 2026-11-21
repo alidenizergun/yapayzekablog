@@ -21,6 +21,13 @@ keyPoints:
   - "Senatör Warner, yapay zekayla bağlantılı finansmanın açıklanmasını isteyen yasa önerisini tanıttı."
   - "Bir Demokrat temsilci, kritik sistem kesintilerine rağmen halka arzın sürmesinden endişeli."
   - "Anthropic, ilk işlem gününde 1,8 trilyon dolarlık piyasa değeriyle açıldı."
+photo2:
+  id: "CDsAkr_mBeg"
+  url: "https://images.unsplash.com/photo-1597335586198-e31434d3a856?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8MTF8fGNhcGl0b2wlMjBidWlsZGluZyUyMHdhc2hpbmd0b258ZW58MXwwfHx8MTc5NTI1NTI5N3ww&ixlib=rb-4.1.0"
+  alt: "white dome building under blue sky during daytime"
+  author: "Florian Pintar"
+  authorUrl: "https://unsplash.com/@minimouche"
+  link: "https://unsplash.com/photos/white-dome-building-under-blue-sky-during-daytime-CDsAkr_mBeg"
 sources:
   - title: "Anthropic IPO takeaways: ANT debuts with $1.8 trillion market cap in landmark moment for AI"
     url: "https://www.cnbc.com/2026/11/19/anthropic-ipo-ant-live-updates.html"

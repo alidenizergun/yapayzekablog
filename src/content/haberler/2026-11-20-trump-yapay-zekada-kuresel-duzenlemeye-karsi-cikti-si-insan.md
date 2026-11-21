@@ -20,6 +20,13 @@ photo:
   authorUrl: "https://pixabay.com/users/JoshuaWoroniecki-12734309/"
   link: "https://pixabay.com/photos/international-flags-un-world-5319462/"
   source: "pixabay"
+photo2:
+  id: "FHgWFzDDAOs"
+  url: "https://images.unsplash.com/photo-1694903089438-bf28d4697d9a?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8NHx8YXJ0aWZpY2lhbCUyMGludGVsbGlnZW5jZSUyMHRlY2hub2xvZ3l8ZW58MXwwfHx8MTc5NTI1NTI5M3ww&ixlib=rb-4.1.0"
+  alt: "robot and human hands reaching toward ai text"
+  author: "Igor Omilaev"
+  authorUrl: "https://unsplash.com/@omilaev"
+  link: "https://unsplash.com/photos/robot-and-human-hands-reaching-toward-ai-text-FHgWFzDDAOs"
 sources:
   - title: "US President Trump rejects global AI regulation as China's Xi calls for cooperation on safety"
     url: "https://www.euronews.com/2026/11/19/us-president-trump-rejects-global-ai-regulation-as-chinas-xi-calls-for-cooperation-on-safe"

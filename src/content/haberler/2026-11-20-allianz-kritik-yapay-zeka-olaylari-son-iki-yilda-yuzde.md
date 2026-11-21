@@ -26,6 +26,13 @@ photo:
   authorUrl: "https://pixabay.com/users/Pexels-2286921/"
   link: "https://pixabay.com/photos/analysis-analytics-business-charts-1841158/"
   source: "pixabay"
+photo2:
+  id: "OQptsc4P3NM"
+  url: "https://images.unsplash.com/photo-1614064642261-3ccbfafa481b?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8MTR8fGN5YmVyJTIwc2VjdXJpdHklMjBzZXJ2ZXJ8ZW58MXwwfHx8MTc5NTI1NTMwMXww&ixlib=rb-4.1.0"
+  alt: "red padlock on black computer keyboard"
+  author: "FlyD"
+  authorUrl: "https://unsplash.com/@flyd2069"
+  link: "https://unsplash.com/photos/red-padlock-on-black-computer-keyboard-OQptsc4P3NM"
 sources:
   - title: "Allianz: Reported AI losses understate the true risk and are only the tip of the iceberg"
     url: "https://manilatimes.net/2026/11/19/tmt-newswire/media-outreach-newswire/allianz-reported-ai-losses-understate-the-true-risk-and-are-only-the-tip-of-the-iceberg/2473762"

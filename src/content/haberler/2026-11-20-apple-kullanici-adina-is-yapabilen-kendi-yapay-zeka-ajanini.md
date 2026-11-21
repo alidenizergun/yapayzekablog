@@ -20,6 +20,13 @@ photo:
   author: "Lukas Blazek"
   authorUrl: "https://unsplash.com/@goumbik"
   link: "https://unsplash.com/photos/turned-on-black-and-grey-laptop-computer-mcSDtbWXUZU"
+photo2:
+  id: "m_HRfLhgABo"
+  url: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8MXx8c29mdHdhcmUlMjBlbmdpbmVlciUyMGxhcHRvcCUyMG9mZmljZXxlbnwxfDB8fHwxNzk1MjU1Mjk1fDA&ixlib=rb-4.1.0"
+  alt: "A MacBook with lines of code on its screen on a busy desk"
+  author: "Christopher Gower"
+  authorUrl: "https://unsplash.com/@cgower"
+  link: "https://unsplash.com/photos/a-macbook-with-lines-of-code-on-its-screen-on-a-busy-desk-m_HRfLhgABo"
 sources:
   - title: "Apple Is Working on AI Agent for Device Control, Apps, Browsing and Coding"
     url: "https://www.bloomberg.com/news/articles/2026-11-19/apple-is-working-on-ai-agent-for-device-control-apps-browsing-and-coding"

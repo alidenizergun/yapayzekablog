@@ -35,6 +35,13 @@ photo:
   authorUrl: "https://pixabay.com/users/cliff1126-2330376/"
   link: "https://pixabay.com/photos/control-center-internet-8004870/"
   source: "pixabay"
+photo2:
+  id: "llNtovr7ctk"
+  url: "https://images.unsplash.com/photo-1709120395858-92f1c7c577f5?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8Nnx8YXJ0aWZpY2lhbCUyMGludGVsbGlnZW5jZSUyMHRlY2hub2xvZ3l8ZW58MXwwfHx8MTc5NTI1NTI5M3ww&ixlib=rb-4.1.0"
+  alt: "The letters AI in white 3D block font on a dark teal circuit board"
+  author: "Numan Ali"
+  authorUrl: "https://unsplash.com/@king_designer99"
+  link: "https://unsplash.com/photos/ai-letters-on-circuit-board-llNtovr7ctk"
 sources:
   - title: "Palo Alto Networks bets $4.5B on AI startup Applied Compute as earnings top forecasts"
     url: "https://siliconangle.com/2026/11/18/palo-alto-networks-bets-4-5b-on-ai-startup-applied-compute-as-earnings-top-forecasts/"

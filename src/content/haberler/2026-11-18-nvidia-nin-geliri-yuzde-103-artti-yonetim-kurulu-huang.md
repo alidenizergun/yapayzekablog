@@ -31,6 +31,13 @@ byNumbers:
     label: "Veri merkezi geliri"
   - value: "150 milyar dolar"
     label: "Hisse geri alım programı"
+photo2:
+  id: "i_JUAdanGH0"
+  url: "https://images.unsplash.com/photo-1597138768744-9f97be8cdd64?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8OHx8ZGF0YSUyMGNlbnRlciUyMHNlcnZlcnN8ZW58MXwwfHx8MTc5NTI1NTMyNXww&ixlib=rb-4.1.0"
+  alt: "a close up of a server's nameplates on the side of a"
+  author: "Marc PEZIN"
+  authorUrl: "https://unsplash.com/@fennings"
+  link: "https://unsplash.com/photos/a-close-up-of-a-servers-nameplates-on-the-side-of-a-i_JUAdanGH0"
 sources:
   - title: "Nvidia earnings live: Nvidia posts Q3 beat as revenue rose 103% YOY to $115.8B, board says it will not reinstate Jensen Huang as CEO"
     url: "https://finance.yahoo.com/technology/live/nvidia-live-updates-interim-ceo-kress-prepares-for-q3-earnings-with-huang-reportedly-planning-comeback-153114076.html"

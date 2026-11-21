@@ -23,6 +23,13 @@ photo:
   authorUrl: "https://pixabay.com/users/geralt-9301/"
   link: "https://pixabay.com/photos/trace-circuit-board-technology-3157431/"
   source: "pixabay"
+photo2:
+  id: "8ZGZYOLeYz0"
+  url: "https://images.unsplash.com/photo-1794415287131-2b8bbb5e06b5?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8MTB8fGNvcnBvcmF0ZSUyMGJvYXJkcm9vbSUyMG1lZXRpbmd8ZW58MXwwfHx8MTc5NTI1NTMyNHww&ixlib=rb-4.1.0"
+  alt: "A conference room with a long black table, black chairs, and framed pictures on the wall"
+  author: "David Marquez"
+  authorUrl: "https://unsplash.com/@mark_ez_estudio"
+  link: "https://unsplash.com/photos/conference-room-with-black-table-8ZGZYOLeYz0"
 sources:
   - title: "News Archive"
     url: "https://nvidianews.nvidia.com/news"

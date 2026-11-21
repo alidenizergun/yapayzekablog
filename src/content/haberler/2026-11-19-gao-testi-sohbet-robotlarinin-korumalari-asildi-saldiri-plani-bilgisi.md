@@ -20,6 +20,13 @@ photo:
   author: "FlyD"
   authorUrl: "https://unsplash.com/@flyd2069"
   link: "https://unsplash.com/photos/padlock-on-laptop-with-light-trails-C5pXRFEjq3w"
+photo2:
+  id: "-nBClEqKKVM"
+  url: "https://images.unsplash.com/photo-1751448555253-f39c06e29d82?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8OHx8Y3liZXIlMjBzZWN1cml0eSUyMHNlcnZlcnxlbnwxfDB8fHwxNzk1MjU1MzAxfDA&ixlib=rb-4.1.0"
+  alt: "A security and privacy dashboard with its status"
+  author: "Zulfugar Karimov"
+  authorUrl: "https://unsplash.com/@zulfugarkarimov"
+  link: "https://unsplash.com/photos/a-security-and-privacy-dashboard-with-its-status--nBClEqKKVM"
 sources:
   - title: "AI models used to plan 'viable' attack plots in test despite safeguards: Government report"
     url: "https://abcnews.com/Technology/ai-models-plan-viable-attack-plots-test-despite/story?id=138229892"

@@ -27,6 +27,13 @@ photo:
   authorUrl: "https://pixabay.com/users/StartupStockPhotos-690514/"
   link: "https://pixabay.com/photos/programming-developing-startup-593312/"
   source: "pixabay"
+photo2:
+  id: "Im_cQ6hQo10"
+  url: "https://images.unsplash.com/photo-1629904853893-c2c8981a1dc5?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8Mnx8c29mdHdhcmUlMjBkZXZlbG9wZXJzJTIwd29ya2luZyUyMGxhcHRvcHN8ZW58MXwwfHx8MTc5NTI1NTMyOHww&ixlib=rb-4.1.0"
+  alt: "Two people working on computer code at monitors in a bright office workspace"
+  author: "Compagnons"
+  authorUrl: "https://unsplash.com/@sigmund"
+  link: "https://unsplash.com/photos/people-coding-at-monitors-in-workspace-Im_cQ6hQo10"
 sources:
   - title: "Nvidia says its open source AI strategy remains intact after Jensen Huang's exit"
     url: "https://techcrunch.com/2026/11/17/nvidia-says-its-open-source-ai-strategy-remains-intact-after-jensen-huangs-exit"

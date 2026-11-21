@@ -65,6 +65,73 @@
    "author": "Brecht Corbeel",
    "authorUrl": "https://unsplash.com/@brechtcorbeel",
    "link": "https://unsplash.com/photos/rockwell-automation-logo-on-red-square-with-abstract-shapes-IBgpSXU6jjA"
+  },
+  {
+   "id": "-0xMiYQmk8g",
+   "url": "https://images.unsplash.com/photo-1684369175833-4b445ad6bfb5?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8Mnx8cm9ib3QlMjBoYW5kJTIwbGFwdG9wfGVufDF8MHx8fDE3OTUyNTUyNzl8MA&ixlib=rb-4.1.0",
+   "alt": "a white robot with blue eyes and a laptop",
+   "author": "Mohamed Nohassi",
+   "authorUrl": "https://unsplash.com/@coopery",
+   "link": "https://unsplash.com/photos/a-white-robot-with-blue-eyes-and-a-laptop--0xMiYQmk8g"
+  },
+  {
+   "id": "ZG83on5l0hY",
+   "url": "https://images.unsplash.com/photo-1782712819372-8c9082cf6bfb?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8MTJ8fGF1dG9tYXRpb24lMjB3b3JrZmxvd3xlbnwxfDB8fHwxNzk1MjU1MjgwfDA&ixlib=rb-4.1.0",
+   "alt": "Rockwell automation logo on a red square with abstract shapes",
+   "author": "Brecht Corbeel",
+   "authorUrl": "https://unsplash.com/@brechtcorbeel",
+   "link": "https://unsplash.com/photos/rockwell-automation-logo-on-a-red-square-with-abstract-shapes-ZG83on5l0hY"
+  },
+  {
+   "id": "pixabay-1850613",
+   "url": "/foto/px-1850613",
+   "alt": "notebook, typing, coffee, computer, hands",
+   "author": "Pexels",
+   "authorUrl": "https://pixabay.com/users/Pexels-2286921/",
+   "link": "https://pixabay.com/photos/notebook-typing-coffee-computer-1850613/",
+   "source": "pixabay"
+  },
+  {
+   "id": "mgJQ3aV1LWE",
+   "url": "https://images.unsplash.com/photo-1564320925351-a3c1e0008028?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8MTF8fHJvYm90JTIwaGFuZCUyMGxhcHRvcHxlbnwxfDB8fHwxNzk1MjU1Mjc5fDA&ixlib=rb-4.1.0",
+   "alt": "robot using laptop",
+   "author": "Brett Jordan",
+   "authorUrl": "https://unsplash.com/@brett_jordan",
+   "link": "https://unsplash.com/photos/robot-using-laptop-mgJQ3aV1LWE"
+  }
+ ],
+ "araclar": [
+  {
+   "id": "LrxSl4ZxoRs",
+   "url": "https://images.unsplash.com/photo-1607705703571-c5a8695f18f6?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8OHx8c29mdHdhcmUlMjBkZXZlbG9wZXIlMjBsYXB0b3B8ZW58MXwwfHx8MTc5NTI1NTI4MXww&ixlib=rb-4.1.0",
+   "alt": "A laptop screen displaying code and a steaming mug on a desk",
+   "author": "Mohammad Rahmani",
+   "authorUrl": "https://unsplash.com/@afgprogrammer",
+   "link": "https://unsplash.com/photos/laptop-displaying-code-and-steaming-mug-LrxSl4ZxoRs"
+  },
+  {
+   "id": "ZVhbwDfLtYU",
+   "url": "https://images.unsplash.com/photo-1601034913836-a1f43e143611?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8M3x8c21hcnRwaG9uZSUyMGFwcCUyMHNjcmVlbnxlbnwxfDB8fHwxNzk1MjU1MjgyfDA&ixlib=rb-4.1.0",
+   "alt": "blue and white logo guessing game",
+   "author": "Brett Jordan",
+   "authorUrl": "https://unsplash.com/@brett_jordan",
+   "link": "https://unsplash.com/photos/blue-and-white-logo-guessing-game-ZVhbwDfLtYU"
+  },
+  {
+   "id": "PgoNjR2tlpw",
+   "url": "https://images.unsplash.com/photo-1606223226391-c267641c318c?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8NHx8Y29tcHV0ZXIlMjBkZXNrJTIwd29ya3NwYWNlfGVufDF8MHx8fDE3OTUyNTUyODJ8MA&ixlib=rb-4.1.0",
+   "alt": "silver flat screen computer monitor on white wooden desk",
+   "author": "Arthur Lambillotte",
+   "authorUrl": "https://unsplash.com/@artlambi",
+   "link": "https://unsplash.com/photos/silver-flat-screen-computer-monitor-on-white-wooden-desk-PgoNjR2tlpw"
+  },
+  {
+   "id": "iOykDIkZLQw",
+   "url": "https://images.unsplash.com/photo-1499673610122-01c7122c5dcb?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8MTV8fHNvZnR3YXJlJTIwZGV2ZWxvcGVyJTIwbGFwdG9wfGVufDF8MHx8fDE3OTUyNTUyODF8MA&ixlib=rb-4.1.0",
+   "alt": "turned on MacBook Air on desk",
+   "author": "Goran Ivos",
+   "authorUrl": "https://unsplash.com/@goran_ivos",
+   "link": "https://unsplash.com/photos/turned-on-macbook-air-on-desk-iOykDIkZLQw"
   }
  ]
 }

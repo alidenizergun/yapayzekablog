@@ -21,6 +21,13 @@ photo:
   authorUrl: "https://pixabay.com/users/Alexandra_Koch-621802/"
   link: "https://pixabay.com/photos/ai-robot-artificial-intelligence-7977960/"
   source: "pixabay"
+photo2:
+  id: "eGGFZ5X2LnA"
+  url: "https://images.unsplash.com/photo-1697577418970-95d99b5a55cf?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8MXx8YXJ0aWZpY2lhbCUyMGludGVsbGlnZW5jZSUyMHRlY2hub2xvZ3l8ZW58MXwwfHx8MTc5NTI1NTI5M3ww&ixlib=rb-4.1.0"
+  alt: "a computer chip with the letter a on top of it"
+  author: "Igor Omilaev"
+  authorUrl: "https://unsplash.com/@omilaev"
+  link: "https://unsplash.com/photos/a-computer-chip-with-the-letter-a-on-top-of-it-eGGFZ5X2LnA"
 sources:
   - title: "Governor Newsom's nation-leading AI safety framework is getting even stronger as California releases next steps on mandatory safety standards and oversight"
     url: "https://www.gov.ca.gov/2026/11/18/governor-newsoms-nation-leading-ai-safety-framework-is-getting-even-stronger-as-california-releases-next-steps-on-mandatory-safety-standards-and-oversight/"
