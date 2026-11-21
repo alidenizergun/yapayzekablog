@@ -3,9 +3,11 @@ import SubNav from '../../components/SubNav.astro';
 import Base from '../../layouts/Base.astro';
 import { COMPARISONS, toolBySlug, compareSlug, vsTr, withGen } from '../../lib/tools.js';
 import { url } from '../../lib/news.js';
+import { toolLogo } from '../../lib/tool-logos.js';
 import { i18n } from '../../i18n/index.js';
 const L = await i18n(Astro);
 const { T, S } = L;
+const logo = (slug) => toolLogo(slug) && url(toolLogo(slug));
 ---
 <Base title={T('Yapay zeka araçları karşılaştırmaları', 'AI tool comparisons')} description={T('ChatGPT, Claude, Gemini, DeepSeek, Perplexity, Copilot, Cursor ve diğer yapay zeka araçlarının fiyat, özellik ve kullanım karşılaştırmaları.', 'Head-to-head comparisons of ChatGPT, Claude, Gemini, DeepSeek, Perplexity, Copilot, Cursor and other AI tools: pricing, features and use cases.')}
   breadcrumbs={[{ name: 'Ana sayfa', path: '/' }, { name: T('Yapay zeka araçları', 'AI tools'), path: '/arac/' }, { name: T('Karşılaştırmalar', 'Comparisons'), path: '/karsilastir/' }]}>
@@ -16,7 +18,7 @@ const { T, S } = L;
     <p class="spot">{T('En çok merak edilen yapay zeka araçlarını fiyat, ücretsiz kullanım, Türkçe desteği ve güçlü yanlarına göre yan yana inceliyoruz.', 'The most popular AI tools side by side: pricing, free use, Turkish support and strengths.')}</p>
     <ul class="guide-list">
       {COMPARISONS.map(([a, b, ans]) => (
-        <li class="guide-item"><h2><a href={url(`/karsilastir/${compareSlug(a, b)}/`)}>{T(vsTr(toolBySlug(a), toolBySlug(b)), `${toolBySlug(a).name} vs ${toolBySlug(b).name}`)}</a></h2><p>{S(`cmp.${a}-vs-${b}`, ans)}</p></li>
+        <li class="guide-item cmp-item"><span class="pair" aria-hidden="true">{[a, b].map((x) => logo(x) ? <img class="tool-logo" src={logo(x)} alt="" width="36" height="36" loading="lazy" /> : <span class="tool-mono">{toolBySlug(x).name.slice(0, 1)}</span>)}</span><h2><a href={url(`/karsilastir/${compareSlug(a, b)}/`)}>{T(vsTr(toolBySlug(a), toolBySlug(b)), `${toolBySlug(a).name} vs ${toolBySlug(b).name}`)}</a></h2><p>{S(`cmp.${a}-vs-${b}`, ans)}</p></li>
       ))}
     </ul>
   </section>

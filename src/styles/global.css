@@ -1285,3 +1285,23 @@ img.thumb { color: transparent; font-size: 0; }
 .tool-logo-lg { width: 64px; height: 64px; border-radius: 14px; padding: 6px; }
 .tool-logo, .tool-logo-lg { padding: 0; object-fit: cover; }
 .tools-index .tool-grid { grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr)); }
+/* Karşılaştırma sayfaları: logolar */
+.vs-hero { display: flex; align-items: center; gap: 16px; margin: 10px 0 14px; }
+.vs-side { display: flex; flex-direction: column; align-items: center; gap: 6px; }
+.vs-logo { width: 72px; height: 72px; border-radius: 16px; font-size: 30px; }
+.vs-name { font-size: 13px; font-weight: 700; color: var(--muted); }
+.vs-mark { font-family: var(--display); font-weight: 800; font-size: 20px; color: var(--muted); padding-bottom: 20px; }
+.th-tool { display: inline-flex; align-items: center; gap: 8px; text-transform: none; letter-spacing: 0; font-size: 15px; color: var(--fg); }
+.th-logo { width: 28px; height: 28px; border-radius: 7px; }
+.cc-h { display: flex; align-items: center; gap: 10px; }
+.cc-logo { width: 32px; height: 32px; border-radius: 8px; }
+.pair { display: inline-flex; flex: none; }
+.pair .tool-logo, .pair .tool-mono { width: 28px; height: 28px; border-radius: 7px; font-size: 14px; }
+.pair > * + * { margin-left: -6px; box-shadow: 0 0 0 2px var(--bg); }
+.cmp-cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 260px), 1fr)); gap: 10px; list-style: none; margin: 14px 0 0; padding: 0; }
+.cmp-cards a { display: flex; align-items: center; gap: 10px; min-height: 56px; padding: 10px 14px; border: 1px solid var(--line); border-radius: 10px; font-weight: 600; font-size: 15px; }
+.cmp-cards a:hover { border-color: var(--fg); color: var(--accent-text); }
+.cmp-item { display: grid; grid-template-columns: auto minmax(0, 1fr); column-gap: 14px; align-items: start; }
+.cmp-item .pair { grid-row: span 2; margin-top: 4px; }
+.cmp-item .pair .tool-logo, .cmp-item .pair .tool-mono { width: 36px; height: 36px; border-radius: 9px; }
+.cmp-item > h2, .cmp-item > p { grid-column: 2; }

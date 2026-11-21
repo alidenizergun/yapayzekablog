@@ -3,6 +3,7 @@ import Base from '../../layouts/Base.astro';
 import { COMPARISONS, toolBySlug, compareSlug, freeLabel, trDate, toolUrl, catName, vsTr, withQ } from '../../lib/tools.js';
 import { usdTry, fmtUsd, fmtTry } from '../../lib/fx.js';
 import { url } from '../../lib/news.js';
+import { toolLogo } from '../../lib/tool-logos.js';
 import { i18n, locTool, toolCat, freeL, dateL, usdL, tryL } from '../../i18n/index.js';
 
 export function getStaticPaths() {
@@ -15,6 +16,7 @@ const answer = S(`cmp.${a.slug}-vs-${b.slug}`, Astro.props.answer);
 const vs = (x, y) => T(vsTr(x, y), `${x.name} vs ${y.name}`);
 const fx = await usdTry();
 const both = [a, b];
+const logo = (t) => toolLogo(t.slug) && url(toolLogo(t.slug));
 const priceCell = (t) => t.price?.from ? `${t.price.plan}: ${usdL(t.price.from, lang)}/${T('ay', 'mo')}${fx ? ` (${tryL(t.price.from, fx, lang)})` : ''}` : T('Resmi sayfada', 'See official site');
 const rows = [
   [T('Şirket', 'Company'), (t) => t.company],
@@ -36,12 +38,15 @@ const jsonLd = { '@type': 'FAQPage', mainEntity: faq.map(([q, ans]) => ({ '@type
   <section class="deals compare" data-pagefind-body>
     <nav class="crumb" aria-label={T('Konum', 'Breadcrumb')} data-pagefind-ignore><a href={url('/')}>{T('Ana sayfa', 'Home')}</a><span aria-hidden="true">/</span><a href={url('/arac/')}>{T('Yapay zeka araçları', 'AI tools')}</a><span aria-hidden="true">/</span><a href={url('/karsilastir/')}>{T('Karşılaştırmalar', 'Comparisons')}</a></nav>
     <span class="cat">{T('Karşılaştırma', 'Comparison')}</span>
+    <div class="vs-hero" aria-hidden="true">
+      {both.map((t, i) => <>{i === 1 && <span class="vs-mark">vs</span>}<span class="vs-side">{logo(t) ? <img class="tool-logo vs-logo" src={logo(t)} alt="" width="72" height="72" /> : <span class="tool-mono vs-logo">{t.name.slice(0, 1)}</span>}<span class="vs-name">{t.name}</span></span></>)}
+    </div>
     <h1 class="page-h">{vs(a, b)}</h1>
     <aside class="why guide-summary" aria-label={T('Kısa cevap', 'Short answer')}><strong>{T('Kısa cevap', 'Short answer')}</strong><p>{answer}</p></aside>
 
     <div class="deal-table-wrap">
       <table class="deal-table compare-table">
-        <thead><tr><th scope="col"><span class="sr-only">{T('Özellik', 'Feature')}</span></th>{both.map((t) => <th scope="col"><a href={url(toolUrl(t.slug))}>{t.name}</a></th>)}</tr></thead>
+        <thead><tr><th scope="col"><span class="sr-only">{T('Özellik', 'Feature')}</span></th>{both.map((t) => <th scope="col"><a class="th-tool" href={url(toolUrl(t.slug))}>{logo(t) && <img class="tool-logo th-logo" src={logo(t)} alt="" width="28" height="28" />}{t.name}</a></th>)}</tr></thead>
         <tbody>{rows.map(([label, f]) => <tr><th scope="row">{label}</th>{both.map((t) => <td>{f(t)}</td>)}</tr>)}</tbody>
       </table>
     </div>
@@ -50,7 +55,7 @@ const jsonLd = { '@type': 'FAQPage', mainEntity: faq.map(([q, ans]) => ({ '@type
     <div class="compare-cols">
       {both.map((t) => (
         <section aria-labelledby={`c-${t.slug}`}>
-          <h2 id={`c-${t.slug}`}>{T(`${t.name} kimler için?`, `Who ${t.name} is for`)}</h2>
+          <h2 id={`c-${t.slug}`} class="cc-h">{logo(t) && <img class="tool-logo cc-logo" src={logo(t)} alt="" width="32" height="32" loading="lazy" />}{T(`${t.name} kimler için?`, `Who ${t.name} is for`)}</h2>
           <ul class="tool-list tool-good">{t.good.map((g) => <li>{g}</li>)}</ul>
           <h3>{T('Ne zaman uygun değil?', 'When to skip it')}</h3>
           <ul class="tool-list tool-bad">{t.notFor.map((g) => <li>{g}</li>)}</ul>
@@ -66,6 +71,6 @@ const jsonLd = { '@type': 'FAQPage', mainEntity: faq.map(([q, ans]) => ({ '@type
     </section>
 
     <h2 class="ev-h">{T('Diğer karşılaştırmalar', 'More comparisons')}</h2>
-    <ul class="task-chips">{others.map(([x, y]) => <li><a href={url(`/karsilastir/${compareSlug(x, y)}/`)}>{vs(toolBySlug(x), toolBySlug(y))}</a></li>)}</ul>
+    <ul class="cmp-cards">{others.map(([x, y]) => { const tx = toolBySlug(x), ty = toolBySlug(y); return <li><a href={url(`/karsilastir/${compareSlug(x, y)}/`)}><span class="pair" aria-hidden="true">{[tx, ty].map((t) => logo(t) ? <img class="tool-logo" src={logo(t)} alt="" width="28" height="28" loading="lazy" /> : <span class="tool-mono">{t.name.slice(0, 1)}</span>)}</span>{vs(tx, ty)}</a></li>; })}</ul>
   </section>
 </Base>
