@@ -14,8 +14,8 @@ on:
       ses:
         description: 'Piper sesi'
         type: choice
-        default: fahrettin
-        options: [fahrettin, dfki, fettah]
+        default: dfki
+        options: [dfki]
       hiz:
         description: 'Konuşma hızı (1.0 normal)'
         default: '1.0'
@@ -39,7 +39,7 @@ jobs:
         env:
           SES: ${{ inputs.ses }}
         run: |
-          case "$SES" in fahrettin|dfki|fettah) ;; *) echo "geçersiz ses"; exit 1;; esac
+          case "$SES" in dfki) ;; *) echo "geçersiz ses"; exit 1;; esac
           base="https://huggingface.co/rhasspy/piper-voices/resolve/main/tr/tr_TR/$SES/medium"
           curl -fsSL -o voice.onnx "$base/tr_TR-$SES-medium.onnx"
           curl -fsSL -o voice.onnx.json "$base/tr_TR-$SES-medium.onnx.json"
