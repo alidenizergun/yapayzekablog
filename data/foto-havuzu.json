@@ -539,6 +539,75 @@
    "author": "Julien Goettelmann",
    "authorUrl": "https://unsplash.com/@juliengoettelmann",
    "link": "https://unsplash.com/photos/a-vast-blue-ocean-stretches-towards-a-distant-city-skyline-9sKCBdNgadA"
+  },
+  {
+   "id": "3gL8gZi5T0Y",
+   "url": "https://images.unsplash.com/photo-1743455860891-bba956cb8948?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8MTJ8fGlzdGFuYnVsJTIwc2t5bGluZXxlbnwxfDB8fHwxNzk1MzgxNDA2fDA&ixlib=rb-4.1.0",
+   "alt": "City skyline with a fountain and cloudy sky",
+   "author": "همَّام",
+   "authorUrl": "https://unsplash.com/@pkseva",
+   "link": "https://unsplash.com/photos/city-skyline-with-a-fountain-and-cloudy-sky-3gL8gZi5T0Y"
+  },
+  {
+   "id": "sA8fFeOzAZI",
+   "url": "https://images.unsplash.com/photo-1647677733072-b12f2bd6eb18?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8MTF8fGFua2FyYSUyMGNpdHl8ZW58MXwwfHx8MTc5NTM4MTQwNnww&ixlib=rb-4.1.0",
+   "alt": "an aerial view of a city from an airplane",
+   "author": "Asep Bagja Priandana",
+   "authorUrl": "https://unsplash.com/@asepbagja",
+   "link": "https://unsplash.com/photos/an-aerial-view-of-a-city-from-an-airplane-sA8fFeOzAZI"
+  }
+ ],
+ "genel": [
+  {
+   "id": "pixabay-2301646",
+   "url": "/foto/px-2301646",
+   "alt": "robot, machine, technology, mecha, ai",
+   "author": "Computerizer",
+   "authorUrl": "https://pixabay.com/users/Computerizer-4588466/",
+   "link": "https://pixabay.com/photos/robot-machine-technology-mecha-ai-2301646/",
+   "source": "pixabay"
+  },
+  {
+   "id": "FAlYVtV1kRg",
+   "url": "https://images.unsplash.com/photo-1668681919287-7367677cdc4c?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8Nnx8dGVjaG5vbG9neSUyMGFic3RyYWN0fGVufDF8MHx8fDE3OTUzODE0MDh8MA&ixlib=rb-4.1.0",
+   "alt": "purple and pink curved abstract shapes",
+   "author": "Pawel Czerwinski",
+   "authorUrl": "https://unsplash.com/@pawel_czerwinski",
+   "link": "https://unsplash.com/photos/purple-and-pink-curved-abstract-shapes-FAlYVtV1kRg"
+  },
+  {
+   "id": "MERDjcUqFI0",
+   "url": "https://images.unsplash.com/photo-1733844982998-f31a1111c74d?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8MTV8fGZ1dHVyaXN0aWMlMjBjb21wdXRlcnxlbnwxfDB8fHwxNzk1MzgxNDA4fDA&ixlib=rb-4.1.0",
+   "alt": "A computer generated image of a futuristic city",
+   "author": "Logan Voss",
+   "authorUrl": "https://unsplash.com/@loganvoss",
+   "link": "https://unsplash.com/photos/a-computer-generated-image-of-a-futuristic-city-MERDjcUqFI0"
+  },
+  {
+   "id": "pixabay-5288034",
+   "url": "/foto/px-5288034",
+   "alt": "mockup, typewriter, word, artificial intelligence, computer",
+   "author": "viarami",
+   "authorUrl": "https://pixabay.com/users/viarami-13458823/",
+   "link": "https://pixabay.com/photos/mockup-typewriter-word-5288034/",
+   "source": "pixabay"
+  },
+  {
+   "id": "pixabay-5090539",
+   "url": "/foto/px-5090539",
+   "alt": "circle, tech, technology, abstract, science",
+   "author": "xresch",
+   "authorUrl": "https://pixabay.com/users/xresch-7410129/",
+   "link": "https://pixabay.com/photos/circle-tech-technology-abstract-5090539/",
+   "source": "pixabay"
+  },
+  {
+   "id": "yP89apz2TAA",
+   "url": "https://images.unsplash.com/flagged/photo-1569144654912-5f146d08b98b?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8Mnx8ZnV0dXJpc3RpYyUyMGNvbXB1dGVyfGVufDF8MHx8fDE3OTUzODE0MDh8MA&ixlib=rb-4.1.0",
+   "alt": "white monitor illustration",
+   "author": "Lorenzo Herrera",
+   "authorUrl": "https://unsplash.com/@lorenzoherrera",
+   "link": "https://unsplash.com/photos/white-monitor-illustration-yP89apz2TAA"
   }
  ]
 }
