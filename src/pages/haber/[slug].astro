@@ -199,7 +199,7 @@ const crumbs = [{ name: 'Ana sayfa', path: '/' }, { name: cat, path: `/kategori/
           ))}
         </ul>
         {d.generated
-          ? <p class="ai-note">{T('Bu haber, yukarıdaki kaynaklardan yapay zeka desteğiyle derlenmiştir.', 'This article was compiled with AI assistance from the sources above')}{lang === 'en' && ' and translated from our Turkish edition.'} <a href={`${u('/hakkimizda/')}#how-h`}>{T('Haberlerimizi nasıl hazırlıyoruz?', 'How we make our stories')}</a> {T('Bir hata görürseniz', 'Spotted an error?')} <a href={`${u('/hata-bildir/')}?haber=${slugOf(entry)}`}>{T('bize bildirin', 'Let us know')}</a>.</p>
+          ? <p class="ai-note">{d.sources.length === 1 ? T('Bu haber, yukarıdaki kaynaktan yapay zeka desteğiyle derlenmiştir.', 'This article was compiled with AI assistance from the source above') : T('Bu haber, yukarıdaki kaynaklardan yapay zeka desteğiyle derlenmiştir.', 'This article was compiled with AI assistance from the sources above')}{lang === 'en' && ' and translated from our Turkish edition.'}<br /><a href={`${u('/hakkimizda/')}#how-h`}>{T('Haberlerimizi nasıl hazırlıyoruz?', 'How we make our stories')}</a> {T('Bir hata görürseniz', 'Spotted an error?')} <a href={`${u('/hata-bildir/')}?haber=${slugOf(entry)}`}>{T('bize bildirin', 'Let us know')}</a>.</p>
           : <p class="ai-note">{T('Bir hata görürseniz', 'Spotted an error?')} <a href={`${u('/hata-bildir/')}?haber=${slugOf(entry)}`}>{T('bize bildirin', 'Let us know')}</a>.</p>}
       </section>
 
