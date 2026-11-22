@@ -359,10 +359,7 @@ const isBreaking = latest && Date.now() - latest.data.date.valueOf() < BREAKING_
         <ul class="foot-follow" aria-label={T('Bağlantılar', 'Links')}>
           <li><a href="https://www.google.com/preferences/source?q=yzgundemi.com" rel="noopener" target="_blank"><svg viewBox="0 0 24 24" aria-hidden="true" fill="currentColor"><path d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.4l-5.9 3.1 1.2-6.5-4.8-4.6 6.6-.9z"/></svg>{T("Google'da tercih et", 'Prefer on Google')}</a></li>
           {newsletterOn && <li><a href={L.u('/') + '#bulten'}>{T('E-posta bülteni', 'Newsletter')}</a></li>}
-          {SITE.social?.x && <li><a href={`https://x.com/${SITE.social.x}`}>X</a></li>}
-          {SITE.social?.instagram && <li><a href={`https://www.instagram.com/${SITE.social.instagram}/`}>Instagram</a></li>}
           {SITE.social?.linkedin && <li><a href={`https://www.linkedin.com/company/${SITE.social.linkedin}/`}>LinkedIn</a></li>}
-          <li><a href={switchHref} hreflang={lang === 'en' ? 'tr' : 'en'} lang={lang === 'en' ? 'tr' : 'en'}>{lang === 'en' ? 'Türkçe' : 'English'}</a></li>
         </ul>
       </div>
       {footGroups.map((g) => (
