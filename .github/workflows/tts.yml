@@ -1,0 +1,71 @@
+# Seslendirme: video dış sesleri için Türkçe metni Piper (açık kaynak, çevrimdışı, ücretsiz) ile sese çevirir.
+# Ses dosyaları "medya" dalına yazılır; ana dal ve site etkilenmez.
+name: Seslendirme
+
+on:
+  workflow_dispatch:
+    inputs:
+      metin:
+        description: 'Okunacak cümleler, JSON dizisi: ["Birinci cümle.", "İkinci cümle."]'
+        required: true
+      klasor:
+        description: 'medya dalında çıktı klasörü (ör. video/2026-11-22)'
+        required: true
+      ses:
+        description: 'Piper sesi'
+        type: choice
+        default: fahrettin
+        options: [fahrettin, dfki, fettah]
+      hiz:
+        description: 'Konuşma hızı (1.0 normal)'
+        default: '1.0'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: medya
+  cancel-in-progress: false
+
+jobs:
+  tts:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - name: Piper'ı kur
+        run: python3 -m pip install --quiet piper-tts==1.6.1
+      - name: Sesi indir
+        env:
+          SES: ${{ inputs.ses }}
+        run: |
+          case "$SES" in fahrettin|dfki|fettah) ;; *) echo "geçersiz ses"; exit 1;; esac
+          base="https://huggingface.co/rhasspy/piper-voices/resolve/main/tr/tr_TR/$SES/medium"
+          curl -fsSL -o voice.onnx "$base/tr_TR-$SES-medium.onnx"
+          curl -fsSL -o voice.onnx.json "$base/tr_TR-$SES-medium.onnx.json"
+          curl -fsSL -o MODEL_CARD.txt "$base/MODEL_CARD" || true
+          cat MODEL_CARD.txt || true
+      - name: Seslendir
+        env:
+          METIN: ${{ inputs.metin }}
+          HIZ: ${{ inputs.hiz }}
+        run: python3 scripts/tts.py voice.onnx "$RUNNER_TEMP/ses" "$HIZ"
+      - name: medya dalına kaydet
+        env:
+          KLASOR: ${{ inputs.klasor }}
+          SES: ${{ inputs.ses }}
+        run: |
+          case "$KLASOR" in *..*|/*|"") echo "geçersiz klasör"; exit 1;; esac
+          git config user.name "yzgundemi-bot"
+          git config user.email "yzgundemi-bot@users.noreply.github.com"
+          if git ls-remote --exit-code origin medya >/dev/null; then
+            git fetch -q origin medya && git switch -q medya
+          else
+            git switch -q --orphan medya && git rm -rq --cached . 2>/dev/null || true; find . -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf {} +
+          fi
+          mkdir -p "$KLASOR" && rm -f "$KLASOR"/*.wav
+          cp "$RUNNER_TEMP"/ses/*.wav "$KLASOR"/
+          cp MODEL_CARD.txt "$KLASOR/SES_LISANSI.txt" 2>/dev/null || true
+          git add "$KLASOR"
+          git commit -q -m "Seslendirme: $KLASOR ($SES)"
+          git push -q origin medya
