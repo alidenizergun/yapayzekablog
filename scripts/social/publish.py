@@ -1,10 +1,10 @@
-"""Günlük sosyal medya videosu: paylaşım adımı.
+"""Haftalık sosyal medya videosu: paylaşım adımı.
 
 <OUT>/video.mp4 dosyasını plan.json'daki açıklamalarla paylaşır:
   Instagram: Reels (Graph API, dosya doğrudan yüklenir; barındırma gerekmez)
   X:         video gönderisi (X API v2 medya yükleme, linksiz metin)
 Anahtarları tanımlı olmayan platform atlanır; bir platformdaki hata diğerini durdurmaz.
-Sonuçlar <OUT>/yayin.json dosyasına yazılır (aynı gün ikinci kez paylaşımı önlemek için).
+Sonuçlar <OUT>/yayin.json dosyasına yazılır (aynı videoyu ikinci kez paylaşmamak için).
 
 Anahtarlar (GitHub secrets; hiçbir yere yazılmaz):
   IG_ACCESS_TOKEN (Instagram ile giriş, App Dashboard > Instagram > API setup with Instagram login > Generate token)
@@ -31,7 +31,7 @@ plan = json.load(open(os.path.join(OUT, 'plan.json'), encoding='utf8'))
 
 def instagram_caption():
     """Açıklama videodaki haberlerden kurulur (süre için düşülen haber açıklamada da yer almaz)."""
-    lines = ['Yapay zeka gündeminde son 24 saat', ''] + [f"• {s['caption_line']}" for s in plan.get('stories', [])]
+    lines = [f"Yapay zeka gündeminde bu hafta ({plan.get('date_label', '')})", ''] + [f"• {s['caption_line']}" for s in plan.get('stories', [])]
     lines += ['', 'Haberlerin tamamı ve kaynakları: yzgundemi.com (profildeki bağlantı)', '', ' '.join(plan.get('hashtags') or ['#yapayzeka', '#YZGündemi'])]
     return '\n'.join(lines)
 VIDEO = os.path.join(OUT, 'video.mp4')
@@ -178,7 +178,7 @@ def main():
     failed = False
     for name, fn in (('instagram', instagram), ('x', x_post)):
         if result.get(name):
-            log(f'{name}: bugün zaten paylaşıldı ({result[name]}); atlandı.')
+            log(f'{name}: bu video zaten paylaşıldı ({result[name]}); atlandı.')
             continue
         try:
             pid = fn()

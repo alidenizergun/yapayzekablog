@@ -1,6 +1,6 @@
-"""Günlük sosyal medya videosu: plan adımı.
+"""Haftalık sosyal medya videosu: plan adımı.
 
-Son 24 saatin (gerekirse 36 saatin) en önemli haberlerini okunma potansiyeline göre seçer ve
+Son 7 günün en önemli haberlerini okunma potansiyeline göre seçer ve
 Claude'a ekran metinlerini, dış ses metnini ve paylaşım açıklamalarını yazdırır.
 
 Çıktılar (OUT klasörü):
@@ -26,10 +26,21 @@ MAX_STORIES = int(os.environ.get('VIDEO_MAX_STORIES', '6'))
 MIN_STORIES = 3
 TZ = dt.timezone(dt.timedelta(hours=3))
 
-INTRO = 'Yapay zeka gündeminde son 24 saatte neler oldu? İşte öne çıkanlar.'
+INTRO = 'Yapay zeka gündeminde bu hafta neler oldu? İşte öne çıkanlar.'
+DAYS = int(os.environ.get('VIDEO_DAYS', '7'))  # kapsanan dönem (gün)
 # Kapanış okunuşu kullanıcının kararıdır: "Ye Zegündemi nokta kom"
 OUTRO = "Haberlerin tamamı ve kaynakları, Ye Zegündemi nokta kom'da."
 MAX_SAY_CHARS = 760  # haber cümlelerinin toplamı; giriş ve kapanışla birlikte ~55-60 sn (render gerekirse hızlandırır)
+
+
+AYLAR = ['Ocak', 'Şubat', 'Mart', 'Nisan', 'Mayıs', 'Haziran', 'Temmuz', 'Ağustos', 'Eylül', 'Ekim', 'Kasım', 'Aralık']
+
+
+def week_label(a, b):
+    """'16-22 Kasım 2026' ya da '28 Ekim - 3 Kasım 2026'"""
+    if a.month == b.month:
+        return f'{a.day}-{b.day} {AYLAR[b.month - 1]} {b.year}'
+    return f'{a.day} {AYLAR[a.month - 1]} - {b.day} {AYLAR[b.month - 1]} {b.year}'
 
 
 def tr_upper(t):
@@ -66,10 +77,11 @@ def load_news():
 
 
 def pick(items, now):
-    for hours in (24, 36):
-        recent = [x for x in items if now - dt.timedelta(hours=hours) <= x['_date'] <= now]
-        if len(recent) >= MIN_STORIES:
-            break
+    # Pazartesi sabahı çalışır: dönem, önceki 7 tam gündür (Pazartesi 00:00 - Pazar 24:00)
+    end = now.replace(hour=0, minute=0, second=0, microsecond=0)
+    start = end - dt.timedelta(days=DAYS)
+    recent = [x for x in items if start <= x['_date'] < end]
+    hours = DAYS * 24
     recent.sort(key=lambda x: (-(x.get('popularity') or 0), -x['_date'].timestamp()))
     # Aynı konudan (aynı hikâye / aynı şirket) en fazla bir haber
     out, seen = [], set()
@@ -159,7 +171,7 @@ def main():
     now = dt.datetime.now(TZ)
     chosen, hours = pick(load_news(), now)
     if len(chosen) < MIN_STORIES:
-        print(f'Son 36 saatte yalnızca {len(chosen)} haber var; bugün video üretilmeyecek.')
+        print(f'Son {DAYS} günde yalnızca {len(chosen)} haber var; video üretilmeyecek.')
         open(os.path.join(OUT, 'plan.json'), 'w').write(json.dumps({'skip': True}))
         return
     cats = categories()
@@ -183,16 +195,17 @@ def main():
     # Dış ses toplamı sınırı aşarsa sondan haber düşülür
     while len(stories) > MIN_STORIES and sum(len(s['say']) for s in stories) > MAX_SAY_CHARS:
         stories.pop()
-    start = (now - dt.timedelta(hours=hours))
+    end = now.replace(hour=0, minute=0, second=0, microsecond=0)
+    start, last = end - dt.timedelta(days=DAYS), end - dt.timedelta(days=1)
     plan = {
         'skip': False, 'created': now.isoformat(timespec='minutes'), 'hours': hours,
-        'date_label': now.strftime('%d.%m.%Y'), 'intro': INTRO, 'outro': OUTRO, 'stories': stories,
+        'date_label': week_label(start, last), 'seed': int(now.strftime('%Y%m%d')), 'intro': INTRO, 'outro': OUTRO, 'stories': stories,
         'hashtags': [h.strip() for h in res['hashtags'] if h.strip().startswith('#')][:5] or ['#yapayzeka', '#YZGündemi'],
         'caption_x': res['caption_x'].strip()[:270],
     }
     json.dump(plan, open(os.path.join(OUT, 'plan.json'), 'w'), ensure_ascii=False, indent=1)
     json.dump([INTRO] + [s['say'] for s in stories] + [OUTRO], open(os.path.join(OUT, 'metin.json'), 'w'), ensure_ascii=False)
-    print(f"{len(stories)} haber seçildi (son {hours} saat):")
+    print(f"{len(stories)} haber seçildi (son {DAYS} gün, {plan['date_label']}):")
     for s in stories:
         print(f"  - [{s['cat']}] {s['headline']}  ·  {s['image']['type']}")
 

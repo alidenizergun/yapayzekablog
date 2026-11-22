@@ -1,13 +1,13 @@
-# Günlük sosyal medya videosu: son 24 saatin haberlerinden dikey video (dış ses + müzik) üretir,
-# Instagram'da Reels ve X'te video gönderisi olarak paylaşır (tam otomatik; kullanıcı kararı, Kasım 2026).
-# Video, açıklamalar ve paylaşım kaydı "medya" dalında gunluk/<tarih>/ altında arşivlenir (site etkilenmez).
+# Haftalık sosyal medya videosu: son 7 günün öne çıkan haberlerinden dikey video (dış ses + müzik) üretir,
+# Instagram'da Reels ve X'te video gönderisi olarak paylaşır (tam otomatik; kullanıcı kararı, Kasım 2026; 22 Kasım'da günlükten haftalığa alındı).
+# Video, açıklamalar ve paylaşım kaydı "medya" dalında haftalik-video/<tarih>/ altında arşivlenir (site etkilenmez).
 # Anahtarlar: ANTHROPIC_API_KEY, ELEVENLABS_API_KEY, IG_USER_ID, IG_ACCESS_TOKEN, X_API_KEY, X_API_SECRET,
 # X_ACCESS_TOKEN, X_ACCESS_SECRET. Ses: repo değişkeni ELEVENLABS_VOICE_ID (varsayılan aşağıda).
-name: Günlük sosyal medya videosu
+name: Haftalık sosyal medya videosu
 
 on:
   schedule:
-    - cron: '30 5 * * *' # 08:30 İstanbul (GitHub zamanlaması birkaç dakika gecikebilir)
+    - cron: '30 6 * * 1' # Pazartesi 09:30 İstanbul, haftalık özetten sonra (GitHub zamanlaması birkaç dakika gecikebilir)
   workflow_dispatch:
     inputs:
       yayinla:
@@ -27,7 +27,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 40
     env:
-      OUT: ${{ github.workspace }}/../gunluk
+      OUT: ${{ github.workspace }}/../haftalik-video
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
@@ -37,9 +37,9 @@ jobs:
           D=$(TZ=Europe/Istanbul date +%F); echo "tarih=$D" >> "$GITHUB_OUTPUT"
           mkdir -p "$OUT"
           if git ls-remote --exit-code origin medya >/dev/null && git fetch -q origin medya:refs/remotes/origin/medya \
-             && git cat-file -e "origin/medya:gunluk/$D/video.mp4" 2>/dev/null; then
-            git archive origin/medya "gunluk/$D" | tar -x -C "$OUT" --strip-components=2
-            echo "Bugünün videosu zaten üretilmiş; yalnızca eksik paylaşımlar denenecek."
+             && git cat-file -e "origin/medya:haftalik-video/$D/video.mp4" 2>/dev/null; then
+            git archive origin/medya "haftalik-video/$D" | tar -x -C "$OUT" --strip-components=2
+            echo "Bu haftanın videosu zaten üretilmiş; yalnızca eksik paylaşımlar denenecek."
             echo "hazir=1" >> "$GITHUB_OUTPUT"
           fi
 
@@ -96,9 +96,9 @@ jobs:
           else
             git switch -q --orphan medya; find . -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf {} +
           fi
-          mkdir -p "gunluk/$D"
-          for f in video.mp4 kapak.jpg plan.json metin.json yayin.json; do [ -f "$OUT/$f" ] && cp "$OUT/$f" "gunluk/$D/"; done
-          git add "gunluk/$D"
+          mkdir -p "haftalik-video/$D"
+          for f in video.mp4 kapak.jpg plan.json metin.json yayin.json; do [ -f "$OUT/$f" ] && cp "$OUT/$f" "haftalik-video/$D/"; done
+          git add "haftalik-video/$D"
           git diff --cached --quiet && exit 0
-          git commit -q -m "Günlük video: $D"
+          git commit -q -m "Haftalık video: $D"
           git push -q origin medya

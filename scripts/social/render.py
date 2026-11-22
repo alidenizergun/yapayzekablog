@@ -1,4 +1,4 @@
-"""Günlük sosyal medya videosu: video adımı.
+"""Haftalık sosyal medya videosu: video adımı.
 
 plan.json ve ses/NN.mp3 dosyalarından dikey (1080x1920, 30 fps) video üretir:
 giriş sahnesi, her haber için fotoğraf/logo + metin sahnesi (yavaş yakınlaşma), kapanış sahnesi.
@@ -153,8 +153,8 @@ with sync_playwright() as pw:
         bars = ''.join(f'<i class="{"on" if j <= i else ""}"></i>' for j in range(1, n + 1))
         shot(f"""<div class=topfade></div><div class=bars>{bars}</div><div class=wm><span class=b>YZ</span>Gündemi</div><div class=fade></div>
 <div class=txt><span class=cat>{i}/{n} · {esc(s['cat'])}</span><h1>{esc(s['headline'])}</h1><p>{esc(s['sub'])}</p></div>""", os.path.join(TMP, f'tx{i}.png'), True)
-    shot(f"""<div class=full></div><div class=big><span class=b>YZ</span>Gündemi</div><div class=c><div class=k>SON 24 SAAT</div>
-<h1>Yapay zeka gündeminde bugün</h1><div class=d>{plan['date_label']}</div></div>""", os.path.join(TMP, 'intro.png'), False)
+    shot(f"""<div class=full></div><div class=big><span class=b>YZ</span>Gündemi</div><div class=c><div class=k>HAFTANIN ÖZETİ</div>
+<h1>Yapay zeka gündeminde bu hafta</h1><div class=d>{plan['date_label']}</div></div>""", os.path.join(TMP, 'intro.png'), False)
     shot("""<div class=full></div><div class=big><span class=b>YZ</span>Gündemi</div><div class="c o"><h1>Haberlerin tamamı ve kaynakları</h1>
 <div class=d>Yapay zeka gelişmeleri<br>Her gün ve Türkçe</div><div class=u>yzgundemi.com</div></div>""", os.path.join(TMP, 'outro.png'), False)
     br.close()
@@ -220,7 +220,7 @@ def music(path, dur, seed):
         w.setnchannels(2); w.setsampwidth(2); w.setframerate(sr); w.writeframes((st * 32767).astype('<i2').tobytes())
 
 
-music(os.path.join(TMP, 'muzik.wav'), total + 1, seed=int(plan['date_label'].replace('.', '')))
+music(os.path.join(TMP, 'muzik.wav'), total + 1, seed=plan.get('seed') or 1)
 
 # ---------------------------------------------------------------- dış ses + karışım
 ins, parts, t = [], [], 0.0
