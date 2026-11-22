@@ -263,6 +263,19 @@ const isBreaking = latest && Date.now() - latest.data.date.valueOf() < BREAKING_
 </head>
 <body>
   <a class="skip-link" href="#icerik">{T('İçeriğe geç', 'Skip to content')}</a>
+  <aside class="ticker" aria-label={T('Son haber', 'Latest story')}><div class="wrap">
+    {latest ? (
+      <>
+        <span class="badge" data-breaking={latest.data.date.toISOString()}>{isBreaking ? T('Son dakika', 'Breaking') : T('Son haber', 'Latest')}</span>
+        <div class="tick-items" data-ticker aria-live="off">
+          {tickerNews.map((n, i) => (
+            <a href={L.u(`/haber/${slugOf(n)}/`)} data-date={n.data.date.toISOString()} hidden={i > 0 ? true : undefined}>{n.data.title}</a>
+          ))}
+        </div>
+      </>
+    ) : <span>{T('Yeni haberler yakında.', 'News coming soon.')}</span>}
+  </div></aside>
+
   <header class="site">
     <div class="wrap masthead">
       <a class="logo" href={L.u('/')} aria-label={T('YZ Gündemi ana sayfa', 'YZ Gündemi home')}>
@@ -334,19 +347,6 @@ const isBreaking = latest && Date.now() - latest.data.date.valueOf() < BREAKING_
       </button>
     </div>
   </nav>
-  <!-- Son haber şeridi: menü çubuğunun altında -->
-  <aside class="ticker" aria-label={T('Son haber', 'Latest story')}><div class="wrap">
-    {latest ? (
-      <>
-        <span class="badge" data-breaking={latest.data.date.toISOString()}>{isBreaking ? T('Son dakika', 'Breaking') : T('Son haber', 'Latest')}</span>
-        <div class="tick-items" data-ticker aria-live="off">
-          {tickerNews.map((n, i) => (
-            <a href={L.u(`/haber/${slugOf(n)}/`)} data-date={n.data.date.toISOString()} hidden={i > 0 ? true : undefined}>{n.data.title}</a>
-          ))}
-        </div>
-      </>
-    ) : <span>{T('Yeni haberler yakında.', 'News coming soon.')}</span>}
-  </div></aside>
 
   <main class="wrap" id="icerik" tabindex="-1"><slot /></main>
 
