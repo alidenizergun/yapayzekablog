@@ -10,7 +10,7 @@ export const SITE = {
   timeZone: 'Europe/Istanbul',
   updatesPerDay: 1,
   // Sosyal hesaplar: kullanıcı adı yazılırsa alt bilgide "Takip et" altında görünür (boşsa gizli)
-  social: { x: '', instagram: '', linkedin: '' },
+  social: { x: 'yz_gundemi', instagram: 'yz_gundemi', linkedin: '' },
   // Google Analytics 4 ölçüm kimliği. Yalnızca ziyaretçi çerez bandında izin verirse yüklenir (KVKK). Boş bırakılırsa kapalı.
   analytics: { ga4: 'G-N6Q0G7X4GB' },
 };
