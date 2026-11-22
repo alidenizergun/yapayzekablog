@@ -1,0 +1,5 @@
+# Xcode projesi project.yml dosyasından üretilir
+*.xcodeproj/
+xcuserdata/
+DerivedData/
+build/
