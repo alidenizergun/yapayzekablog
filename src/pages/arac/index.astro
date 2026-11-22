@@ -24,53 +24,71 @@ const jsonLd = { '@type': 'CollectionPage', name: T('Yapay zeka araçları', 'AI
 <Base title={T('Yapay zeka araçları: fiyatlar, ücretsiz planlar ve alternatifler', 'AI tools directory: pricing, free plans and alternatives')} description={T(`ChatGPT, Claude, Gemini, Midjourney, ElevenLabs ve ${TOOLS.length} yapay zeka aracının fiyatları, ücretsiz planları, Türkçe desteği ve alternatifleri; görevlere göre en iyi araçlar ve karşılaştırmalar.`, `Pricing, free plans and alternatives for ${TOOLS.length} AI tools including ChatGPT, Claude, Gemini, Midjourney and ElevenLabs, plus the best tools by task and head-to-head comparisons.`)}
   jsonLd={jsonLd} breadcrumbs={[{ name: 'Ana sayfa', path: '/' }, { name: T('Yapay zeka araçları', 'AI tools'), path: '/arac/' }]}>
   <SubNav set="tools" />
-  <section class="tools-index hub" data-tools>
-    <header class="hub-head">
-      <span class="cat">{T('Araçlar', 'Tools')}</span>
+  <section class="tools-index tx" data-tools>
+    <header class="tx-head">
       <h1 class="page-h">{T('Yapay zeka araçları', 'AI tools')}</h1>
-      <p class="spot">{T('En çok kullanılan yapay zeka araçlarının ne işe yaradığı, fiyatları, ücretsiz planları ve alternatifleri. Fiyatlar kaynağıyla verilir; puanlama ve ücretli sıralama yapmıyoruz.', 'What the most widely used AI tools do, what they cost, their free plans and alternatives. Prices come with sources; we don’t score tools or sell placement.')}</p>
-      <p class="hub-meta"><span><strong>{TOOLS.length}</strong> {T('araç', 'tools')}</span><span><strong>{freeN}</strong> {T('ücretsiz kullanılabilir', 'with a free option')}</span><span>{T('Son kontrol', 'Last checked')}: {checkedL}</span></p>
+      <p class="tx-lead">{T(`${TOOLS.length} aracın ne işe yaradığı, ne kadar tuttuğu ve ücretsiz kullanılıp kullanılamadığı tek sayfada.`, `What ${TOOLS.length} AI tools do, what they cost and whether you can use them for free, on one page.`)}</p>
+      <div class="tx-search" role="search">
+        <label for="tl-q" class="sr-only">{T('Araçlarda ara', 'Search tools')}</label>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+        <input id="tl-q" type="search" autocomplete="off" placeholder={T('Araç adı ya da iş yazın: video, sunum, Claude…', 'Type a tool or a task: video, slides, Claude…')} data-tl-q />
+      </div>
+      <p class="tx-help">{T('Hangisini seçeceğinizi bilmiyor musunuz?', 'Not sure which one to pick?')} <a href={url('/arac-secici/')}>{T('3 soruda size uygun aracı bulun →', 'Find the right tool in 3 questions →')}</a></p>
     </header>
 
-    <nav class="tool-shortcuts" aria-label={T('Kısayollar', 'Shortcuts')}>
-      <a href={url('/arac-secici/')}><strong>{T('Bana uygun aracı bul', 'Find the right tool')}</strong><span>{T('Üç soruyu yanıtlayın, ihtiyacınıza uyan araçları görün.', 'Answer three questions and see tools that fit.')}</span></a>
-      <a href={url('/yapay-zeka-abonelikleri/')}><strong>{T('Abonelik fiyatları', 'Subscription prices')}</strong><span>{T('Tüm planlar tek tabloda, dolar ve TL.', 'Every plan in one table, in dollars and lira.')}</span></a>
-      <a href={url('/karsilastir/')}><strong>{T('Karşılaştırmalar', 'Comparisons')}</strong><span>{T(`${COMPARISONS.length} araç ikilisi yan yana.`, `${COMPARISONS.length} head-to-head comparisons.`)}</span></a>
-      <a href={url('/yapay-zeka-komutlari/')}><strong>{T('Hazır komutlar', 'Prompt library')}</strong><span>{T(`${PROMPTS.length} kopyalanabilir Türkçe komut.`, `${PROMPTS.length} ready-to-use prompts.`)}</span></a>
-    </nav>
-
-    <div class="sec-h"><h2>{T('Ne yapmak istiyorsunuz?', 'What do you want to do?')}</h2><a href={url('/en-iyi-yapay-zeka-uygulamalari/')}>{T(`Tüm listeler (${TASKS.length}) →`, `All lists (${TASKS.length}) →`)}</a></div>
-    <ul class="chip-row scroll-sm">{topTasks.map((k) => <li><a href={url(`/en-iyi/${k.slug}/`)}>{locTask(k, lang).short}</a></li>)}</ul>
-
-    <div class="tool-toolbar" role="search">
-      <label for="tl-q" class="sr-only">{T('Araçlarda ara', 'Search tools')}</label>
-      <input id="tl-q" type="search" autocomplete="off" placeholder={T('Araç ara (ör. video, Claude, sunum)', 'Search tools (e.g. video, Claude, slides)')} data-tl-q />
-      <div class="chip-row scroll-sm" role="group" aria-label={T('Özelliğe göre süz', 'Filter by feature')}>
-        <button type="button" aria-pressed="false" data-tl-flag="free">{T('Ücretsiz kullanılabilir', 'Free to try')} <span class="meta">{freeN}</span></button>
-        <button type="button" aria-pressed="false" data-tl-flag="tr">{T('Türkçe kullanılabiliyor', 'Works in Turkish')} <span class="meta">{trN}</span></button>
-        {newN > 0 && <button type="button" aria-pressed="false" data-tl-flag="new" data-cut={FIRST}>{T('Yeni eklenenler', 'Recently added')} <span class="meta">{newN}</span></button>}
-      </div>
-      <div class="chip-row scroll-sm" role="group" aria-label={T('Türe göre süz', 'Filter by type')}>
-        <button type="button" aria-pressed="true" data-tl-cat="">{T('Tüm türler', 'All types')}</button>
+    <div class="tx-bar" data-tx-bar>
+      <div class="tx-tabs" role="group" aria-label={T('Türe göre süz', 'Filter by type')}>
+        <button type="button" aria-pressed="true" data-tl-cat="">{T('Tümü', 'All')} <span class="meta">{TOOLS.length}</span></button>
         {groups.map((g) => <button type="button" aria-pressed="false" data-tl-cat={g.slug}>{toolCat(g.slug, lang)} <span class="meta">{g.items.length}</span></button>)}
       </div>
-      <p class="tb-count" aria-live="polite" data-tl-count></p>
+      <div class="tx-row">
+        <div class="tx-flags" role="group" aria-label={T('Özelliğe göre süz', 'Filter by feature')}>
+          <button type="button" aria-pressed="false" data-tl-flag="free"><span class="tx-box" aria-hidden="true"></span>{T('Ücretsiz kullanılabilir', 'Free to try')} <span class="meta">{freeN}</span></button>
+          <button type="button" aria-pressed="false" data-tl-flag="tr"><span class="tx-box" aria-hidden="true"></span>{T('Türkçe kullanılabiliyor', 'Works in Turkish')} <span class="meta">{trN}</span></button>
+          {newN > 0 && <button type="button" aria-pressed="false" data-tl-flag="new" data-cut={FIRST}><span class="tx-box" aria-hidden="true"></span>{T('Yeni eklenenler', 'Recently added')} <span class="meta">{newN}</span></button>}
+        </div>
+        <p class="tx-count" aria-live="polite"><span data-tl-count>{T(`${TOOLS.length} araç`, `${TOOLS.length} tools`)}</span> <button type="button" class="tx-reset" data-tl-reset hidden>{T('Süzgeçleri temizle', 'Clear filters')}</button></p>
+      </div>
     </div>
 
     {groups.map((g) => (
       <section class="tool-group" aria-labelledby={`tc-${g.slug}`} data-group={g.slug}>
-        <h2 id={`tc-${g.slug}`} class="ev-h">{toolCat(g.slug, lang)}<span class="meta" data-g-count>{g.items.length}</span></h2>
+        <h2 id={`tc-${g.slug}`} class="tx-gh">{toolCat(g.slug, lang)}<span class="meta" data-g-count>{g.items.length}</span></h2>
         <div class="tool-grid">{g.items.map((t) => <ToolCard tool={t} />)}</div>
       </section>
     ))}
-    <p class="empty" data-tl-empty hidden>{T('Bu ölçütlere uyan araç yok. Süzgeçleri gevşetmeyi deneyin.', 'No tools match. Try loosening the filters.')}</p>
+    <div class="tx-empty" data-tl-empty hidden>
+      <p>{T('Bu ölçütlere uyan araç yok.', 'No tools match these filters.')}</p>
+      <button type="button" class="btn" data-tl-reset>{T('Süzgeçleri temizle', 'Clear filters')}</button>
+    </div>
 
-    <div class="sec-h"><h2>{T('Karşılaştırmalar', 'Comparisons')}</h2><a href={url('/karsilastir/')}>{T('Tümü →', 'All →')}</a></div>
-    <ul class="cmp-links">{COMPARISONS.map(([a, b]) => <li><a href={url(`/karsilastir/${compareSlug(a, b)}/`)}>{T(vsTr(toolBySlug(a), toolBySlug(b)), `${toolBySlug(a).name} vs ${toolBySlug(b).name}`)}</a></li>)}</ul>
+    <section class="tx-more" aria-labelledby="tx-more-h">
+      <h2 id="tx-more-h" class="tx-gh">{T('Karar vermenize yardımcı olacaklar', 'Help deciding')}</h2>
+      <div class="tx-more-grid">
+        <div>
+          <h3>{T('İşe göre en iyi araçlar', 'Best tools by task')}</h3>
+          <ul class="chip-row">{topTasks.map((k) => <li><a href={url(`/en-iyi/${k.slug}/`)}>{locTask(k, lang).short}</a></li>)}</ul>
+          <a class="tx-all" href={url('/en-iyi-yapay-zeka-uygulamalari/')}>{T(`Tüm listeler (${TASKS.length}) →`, `All lists (${TASKS.length}) →`)}</a>
+        </div>
+        <div>
+          <h3>{T('Karşılaştırmalar', 'Comparisons')}</h3>
+          <ul class="cmp-links">{COMPARISONS.slice(0, 6).map(([a, b]) => <li><a href={url(`/karsilastir/${compareSlug(a, b)}/`)}>{T(vsTr(toolBySlug(a), toolBySlug(b)), `${toolBySlug(a).name} vs ${toolBySlug(b).name}`)}</a></li>)}</ul>
+          <a class="tx-all" href={url('/karsilastir/')}>{T(`Tüm karşılaştırmalar (${COMPARISONS.length}) →`, `All comparisons (${COMPARISONS.length}) →`)}</a>
+        </div>
+        <div>
+          <h3>{T('Fiyatlar ve komutlar', 'Prices and prompts')}</h3>
+          <ul class="cmp-links">
+            <li><a href={url('/yapay-zeka-abonelikleri/')}>{T('Tüm abonelik fiyatları, dolar ve TL', 'All subscription prices')}</a></li>
+            <li><a href={url('/ucretsiz-yapay-zeka-araclari/')}>{T('Ücretsiz yapay zeka araçları', 'Free AI tools')}</a></li>
+            <li><a href={url('/yapay-zeka-komutlari/')}>{T(`${PROMPTS.length} hazır Türkçe komut`, `${PROMPTS.length} ready-to-use prompts`)}</a></li>
+          </ul>
+        </div>
+      </div>
+    </section>
 
     {lang === 'en' ? (
-    <section class="method" id="yontem" aria-labelledby="ym-h">
-      <h2 id="ym-h" class="ev-h">How we compile this</h2>
+    <details class="method tx-method" id="yontem">
+      <summary>How we compile this · last checked {checkedL}</summary>
       <ul>
         <li><strong>Prices:</strong> Taken from each tool's official pricing page wherever possible; when that isn't reachable we use a dated secondary source and label it as such. We don't publish prices we can't verify.</li>
         <li><strong>Lira equivalents:</strong> Dollar prices are converted at the Central Bank of Turkey (TCMB) selling rate; taxes and local pricing may change what you actually pay.</li>
@@ -78,10 +96,10 @@ const jsonLd = { '@type': 'CollectionPage', name: T('Yapay zeka araçları', 'AI
         <li><strong>Rankings and picks:</strong> We don't score tools. Picks on our "best" pages are editorial, based on adoption, fit for the job and features the companies disclose. No tool pays to be listed, and our links are not affiliate links.</li>
         <li><strong>Updates:</strong> Last full check: {dateL(TOOLS_CHECKED, 'en')}. Spotted an error? <a href={url('/hata-bildir/')}>Let us know</a>.</li>
       </ul>
-    </section>
+    </details>
     ) : (
-    <section class="method" id="yontem" aria-labelledby="ym-h">
-      <h2 id="ym-h" class="ev-h">Bu bilgileri nasıl derliyoruz?</h2>
+    <details class="method tx-method" id="yontem">
+      <summary>Bu bilgileri nasıl derliyoruz? · Son kontrol: {checkedL}</summary>
       <ul>
         <li><strong>Fiyatlar:</strong> Mümkün olduğunca aracın resmi fiyat sayfasından alınır; resmi sayfaya ulaşılamadığında tarihli ikincil kaynak kullanılır ve sayfada "ikincil kaynak" olarak belirtilir. Doğrulayamadığımız fiyatı yazmayız.</li>
         <li><strong>TL karşılıkları:</strong> Dolar fiyatları TCMB döviz satış kuruyla çevrilir; vergiler ve yerel fiyatlandırma nedeniyle ödenen tutar farklı olabilir.</li>
@@ -89,7 +107,7 @@ const jsonLd = { '@type': 'CollectionPage', name: T('Yapay zeka araçları', 'AI
         <li><strong>Sıralama ve seçim:</strong> Araçlara puan vermeyiz. "En iyi" sayfalarındaki seçimler; yaygınlık, işe uygunluk ve şirketlerin açıkladığı özelliklere dayanan editoryal seçimdir. Hiçbir araç bu listelerde yer almak için ödeme yapmaz; bağlantılarımız satış ortaklığı (affiliate) bağlantısı değildir.</li>
         <li><strong>Güncelleme:</strong> Son genel kontrol: {trDate(TOOLS_CHECKED)}. Hata görürseniz <a href={url('/hata-bildir/')}>bildirin</a>.</li>
       </ul>
-    </section>
+    </details>
     )}
   </section>
 </Base>
@@ -102,12 +120,20 @@ const jsonLd = { '@type': 'CollectionPage', name: T('Yapay zeka araçları', 'AI
     const groups = [...root.querySelectorAll<HTMLElement>('.tool-group')];
     const count = root.querySelector<HTMLElement>('[data-tl-count]')!;
     const empty = root.querySelector<HTMLElement>('[data-tl-empty]')!;
+    const resets = [...root.querySelectorAll<HTMLButtonElement>('[data-tl-reset]')];
+    const bar = root.querySelector<HTMLElement>('[data-tx-bar]');
+    const catbar = document.querySelector<HTMLElement>('[data-catbar]');
+    // Süzgeç çubuğu menü çubuğunun hemen altında yapışık kalır
+    const stick = () => { if (bar && catbar) bar.style.top = `${catbar.offsetHeight - 1}px`; };
+    stick(); addEventListener('resize', stick);
     const flags = new Set<string>();
     let cat = '';
     const norm = (s: string) => s.toLocaleLowerCase('tr').replace(/ı/g, 'i').normalize('NFKD').replace(/[\u0300-\u036f]/g, '');
     const texts = new Map(cards.map((c) => [c, norm(c.textContent || '')]));
     const cut = root.querySelector<HTMLElement>('[data-tl-flag="new"]')?.dataset.cut || '9999';
     const EN = document.documentElement.lang === 'en';
+    const catBtns = [...root.querySelectorAll<HTMLButtonElement>('[data-tl-cat]')];
+    const flagBtns = [...root.querySelectorAll<HTMLButtonElement>('[data-tl-flag]')];
     const apply = () => {
       const v = norm(q.value.trim());
       let n = 0;
@@ -120,16 +146,23 @@ const jsonLd = { '@type': 'CollectionPage', name: T('Yapay zeka araçları', 'AI
         g.hidden = gn === 0; n += gn;
         const gc = g.querySelector('[data-g-count]'); if (gc) gc.textContent = String(gn);
       });
-      const filtered = v || cat || flags.size;
-      count.textContent = filtered ? (EN ? `${n} tools shown` : `${n} araç gösteriliyor`) : '';
+      const filtered = Boolean(v || cat || flags.size);
+      count.textContent = EN ? `${n} ${filtered ? 'of ' + cards.length + ' tools shown' : 'tools'}` : (filtered ? `${cards.length} araçtan ${n} tanesi gösteriliyor` : `${n} araç`);
+      resets[0].hidden = !filtered;
       empty.hidden = n > 0;
     };
-    root.querySelectorAll<HTMLButtonElement>('[data-tl-flag]').forEach((b) => b.addEventListener('click', () => {
+    const scrollToList = () => { const top = bar ? bar.getBoundingClientRect().top + scrollY - parseFloat(bar.style.top || '0') : 0; if (scrollY > top) scrollTo({ top, behavior: 'smooth' }); };
+    flagBtns.forEach((b) => b.addEventListener('click', () => {
       const f = b.dataset.tlFlag!; if (flags.has(f)) flags.delete(f); else flags.add(f);
-      b.setAttribute('aria-pressed', String(flags.has(f))); apply();
+      b.setAttribute('aria-pressed', String(flags.has(f))); apply(); scrollToList();
     }));
-    const catBtns = [...root.querySelectorAll<HTMLButtonElement>('[data-tl-cat]')];
-    catBtns.forEach((b) => b.addEventListener('click', () => { cat = b.dataset.tlCat || ''; catBtns.forEach((x) => x.setAttribute('aria-pressed', String(x === b))); apply(); }));
+    catBtns.forEach((b) => b.addEventListener('click', () => { cat = b.dataset.tlCat || ''; catBtns.forEach((x) => x.setAttribute('aria-pressed', String(x === b))); apply(); scrollToList(); }));
+    resets.forEach((r) => r.addEventListener('click', () => {
+      q.value = ''; cat = ''; flags.clear();
+      catBtns.forEach((x, i) => x.setAttribute('aria-pressed', String(i === 0)));
+      flagBtns.forEach((x) => x.setAttribute('aria-pressed', 'false'));
+      apply(); q.focus();
+    }));
     q.addEventListener('input', apply);
   }
 </script>
