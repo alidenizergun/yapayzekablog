@@ -815,6 +815,42 @@
   "h": "d9976ac9f0",
   "en": "Making 3D content for games, film, e-commerce, architecture and augmented reality is expensive and slow, and these approaches promise to speed it up. Output quality and how ready it is for direct use vary, though. Views differ on whether the technology will replace artists or serve as a tool that helps them."
  },
+ "gl.a-b-testi.def": {
+  "h": "d1166e3067",
+  "en": "An experiment method in which users are randomly split into two groups, one seeing the current version and the other a modified version (a new model, a different prompt, or a new feature), and the results are compared."
+ },
+ "gl.a-b-testi.example": {
+  "h": "651919b2f9",
+  "en": "A team building a chat assistant shows two different system prompts to separate halves of its users and checks which one earns more positive feedback."
+ },
+ "gl.a-b-testi.faq.0.a": {
+  "h": "3128b00e62",
+  "en": "There is no fixed number. The smaller the difference you want to detect and the noisier the metric, the more users you need. Teams usually work this out in advance with a statistical power calculation."
+ },
+ "gl.a-b-testi.faq.0.q": {
+  "h": "1efcd0d583",
+  "en": "How many users does an A/B test need?"
+ },
+ "gl.a-b-testi.faq.1.a": {
+  "h": "67e262e60f",
+  "en": "Outputs change from run to run, there is no single measure of a good answer, and user satisfaction can shift over time. That is why teams track human review and longer-term indicators alongside metrics like thumbs-up rates."
+ },
+ "gl.a-b-testi.faq.1.q": {
+  "h": "cbbd8f164c",
+  "en": "Why is A/B testing harder for AI features?"
+ },
+ "gl.a-b-testi.how": {
+  "h": "a98eff1121",
+  "en": "Users are randomly divided into two groups. One group gets the current version and the other a changed version, which could be a new model, a different prompt, or a new interface. Metrics chosen in advance, such as task completion rate, thumbs-up clicks, satisfaction, response time, and cost, are compared across the two groups. To make sure the difference is not just chance, the test needs enough users and enough time. With AI, picking metrics is especially hard because outputs vary from one run to the next and what counts as a good answer is fuzzy."
+ },
+ "gl.a-b-testi.term": {
+  "h": "792cbf06ce",
+  "en": "A/B testing (AI features)"
+ },
+ "gl.a-b-testi.why": {
+  "h": "fab3e1a364",
+  "en": "A model looking good in lab tests does not mean real users will find it more useful. A/B testing bases the decision on observation rather than intuition. Still, fixating on a single short-term metric can mislead; for example, longer answers may be liked more yet cost more."
+ },
  "gl.ab-yapay-zeka-yasasi.def": {
   "h": "1f9f80d8c3",
   "en": "The European Union's comprehensive law, adopted in 2024, that regulates AI systems according to their level of risk. It is widely described as one of the first broad legal frameworks of its kind."
@@ -1391,6 +1427,78 @@
   "h": "74ca625714",
   "en": "Frameworks speed up agent development, but choosing one is a trade-off: ready-made structure is convenient, while heavy abstraction can make debugging harder. That is why some teams use a framework and others write their own loops directly against model interfaces. The term comes up often when news stories describe the agent ecosystem."
  },
+ "gl.ajan-degerlendirmesi.def": {
+  "h": "cb534b6bcc",
+  "en": "A way of measuring multi-step AI agents that use tools, judging not only their final result but also the sequence of steps they took to get there, known as the trajectory."
+ },
+ "gl.ajan-degerlendirmesi.example": {
+  "h": "3ec8276ceb",
+  "en": "A travel-booking agent finds the right flight but tries the payment step without asking the user for approval; the result looks fine, but trajectory evaluation catches the violation."
+ },
+ "gl.ajan-degerlendirmesi.faq.0.a": {
+  "h": "54ab0f55f6",
+  "en": "It is the sequence of steps an agent follows while solving a task: which tool it called with which input, what response it got, and how it decided on the next step."
+ },
+ "gl.ajan-degerlendirmesi.faq.0.q": {
+  "h": "7b2ee8d38a",
+  "en": "What is a trajectory?"
+ },
+ "gl.ajan-degerlendirmesi.faq.1.a": {
+  "h": "f86e5f07f8",
+  "en": "A chatbot is usually judged on the quality of a single reply. An agent takes many linked steps with side effects, so both the outcome and the process are measured."
+ },
+ "gl.ajan-degerlendirmesi.faq.1.q": {
+  "h": "f7d8d4d345",
+  "en": "How does agent evaluation differ from evaluating a chatbot?"
+ },
+ "gl.ajan-degerlendirmesi.how": {
+  "h": "422965a361",
+  "en": "While the agent works, its tool calls, the inputs it gave them and the responses it received are recorded, and this record forms the trajectory. Evaluation happens on two levels: was the outcome correct, and was the path correct? The second asks whether the right tools were chosen, whether there were unnecessary or repeated steps, whether the agent got stuck in a loop, and whether it went beyond its permitted limits. The trajectory can be compared with a reference trajectory or scored by a judge model. Tests are often run in a sandbox so they have no real-world consequences."
+ },
+ "gl.ajan-degerlendirmesi.term": {
+  "h": "70a9f48b76",
+  "en": "Agent evaluation (trajectory evaluation)"
+ },
+ "gl.ajan-degerlendirmesi.why": {
+  "h": "c644ea9c8b",
+  "en": "Agents do not just produce text; they send emails, change records and start payments. Reaching a correct result by a wrong path can be a serious problem for safety and cost. Reviewing the trajectory also shows at which step an error began, which makes the agent easier to fix."
+ },
+ "gl.ajan-dongusu.def": {
+  "h": "145f55c15b",
+  "en": "The repeating cycle in which an AI agent assesses the situation, chooses an action, carries it out, looks at the result and decides again, until it reaches its goal."
+ },
+ "gl.ajan-dongusu.example": {
+  "h": "228397b87d",
+  "en": "A coding assistant runs the tests, reads the error message, fixes the code and runs the tests again, repeating this until every test passes."
+ },
+ "gl.ajan-dongusu.faq.0.a": {
+  "h": "24ff4791d3",
+  "en": "If no safeguards are in place, yes; an agent can keep retrying the same mistake. That is why applications usually set a maximum number of steps, a time limit or a cost limit."
+ },
+ "gl.ajan-dongusu.faq.0.q": {
+  "h": "cdcfe24a47",
+  "en": "Can an agent loop run forever?"
+ },
+ "gl.ajan-dongusu.faq.1.a": {
+  "h": "1210c002e0",
+  "en": "Not exactly. The agent loop is the general operating pattern. ReAct is a well-known prompting approach, interleaving reasoning and action steps, that can be used to build such a loop."
+ },
+ "gl.ajan-dongusu.faq.1.q": {
+  "h": "0121358680",
+  "en": "Is an agent loop the same as ReAct?"
+ },
+ "gl.ajan-dongusu.how": {
+  "h": "541e29fd88",
+  "en": "The agent gives the language model the user’s goal and a list of the tools available. The model picks the next step, for example suggesting a web search, reading a file or calling a software interface. The application runs that tool and passes the output back to the model. The model then assesses the result and either calls another tool or decides the goal is met and writes the final answer. The loop ends when the task is done, a step limit is reached or a human steps in."
+ },
+ "gl.ajan-dongusu.term": {
+  "h": "e9877fe3c8",
+  "en": "Agent loop"
+ },
+ "gl.ajan-dongusu.why": {
+  "h": "89a4218a96",
+  "en": "This loop is the key difference between a one-shot question-and-answer exchange and an agent that does multi-step work. It lets the agent make mistakes and correct itself, but every turn adds cost and time, and an unchecked model can keep circling down a wrong path. That is why step limits, monitoring and human approval are part of the design."
+ },
  "gl.ajan-guvenligi.def": {
   "h": "9bcc903bbf",
   "en": "Work to prevent AI agents, which use tools and take actions on a user's behalf, from carrying out unauthorized, mistaken or harmful operations or from being abused by others."
@@ -1931,6 +2039,42 @@
   "h": "992bd64dde",
   "en": "Dividing the work can improve speed and quality on long, complex tasks, because each subagent focuses on a narrow topic. The main agent's context also stays clean. The cost is more model calls, which means higher expense and more coordination to manage."
  },
+ "gl.altin-veri-seti.def": {
+  "h": "2b0d9b9369",
+  "en": "A small, carefully curated collection of examples with expert-verified correct answers, used as a fixed reference to measure how well an AI system performs."
+ },
+ "gl.altin-veri-seti.example": {
+  "h": "8619db9d68",
+  "en": "For a bank's customer support bot, staff write correct answers to a few hundred questions picked from real conversations, and the bot is tested against them after every update."
+ },
+ "gl.altin-veri-seti.faq.0.a": {
+  "h": "23cea4b87b",
+  "en": "No. Training data teaches the model, while a golden dataset exists only for measurement. For the results to be trustworthy, the model should not have seen these examples during training."
+ },
+ "gl.altin-veri-seti.faq.0.q": {
+  "h": "7bcc3ae07f",
+  "en": "Is a golden dataset the same as training data?"
+ },
+ "gl.altin-veri-seti.faq.1.a": {
+  "h": "fef26f4964",
+  "en": "There is no fixed number. Dozens or a few hundred examples can be enough to start. Coverage of real usage and of difficult cases matters more than sheer size."
+ },
+ "gl.altin-veri-seti.faq.1.q": {
+  "h": "af0a5b3f1b",
+  "en": "How many examples should a golden dataset have?"
+ },
+ "gl.altin-veri-seti.how": {
+  "h": "077c76af10",
+  "en": "The team collects a sample of the inputs the product will actually face, such as customer questions, documents or code snippets. Domain experts write the expected output for each one, or the criteria a good answer must meet. Whenever the model, prompt or system changes, it is run on the same set and the results are compared with the previous version. Because the set stays fixed, a score difference reflects a change in the system rather than in the test data. Hard and edge cases are added too, and the set grows as new kinds of failures show up in real use."
+ },
+ "gl.altin-veri-seti.term": {
+  "h": "2efc052851",
+  "en": "Golden dataset"
+ },
+ "gl.altin-veri-seti.why": {
+  "h": "c2107c760a",
+  "en": "AI outputs can look good one at a time, and without a systematic reference, claims of improvement rest on gut feeling. A golden dataset helps catch regressions between versions and compare different models on equal footing. If the labels are wrong or the set does not reflect real usage, high scores can be misleading."
+ },
  "gl.anayasal-yapay-zeka.def": {
   "h": "46194d3d06",
   "en": "A training approach that shapes an AI model's behavior using a written list of principles, a constitution, by having the model critique, revise and compare its own answers against those principles."
@@ -2399,6 +2543,42 @@
   "h": "49a2ad0ba4",
   "en": "Much of a machine learning project goes into trial and tuning; AutoML reduces that burden and makes it easier for small teams to build prediction models. Defining the problem correctly, understanding the data and interpreting the results still fall to people. Automation does not fix bad data."
  },
+ "gl.baglam-curumesi.def": {
+  "h": "aaeb76be24",
+  "en": "The gradual drop in a language model's answer quality and consistency as its input grows longer, even when everything still fits inside the context window. It shows up often in long chats and multi-document tasks."
+ },
+ "gl.baglam-curumesi.example": {
+  "h": "304f7a3e04",
+  "en": "In a coding chat that has run for hours, if the assistant starts ignoring the constraints given at the beginning, the fix is often to open a new chat and carry over a short summary."
+ },
+ "gl.baglam-curumesi.faq.0.a": {
+  "h": "9ae86b7860",
+  "en": "No. When the window is full, part of the text no longer fits, gets cut off, or triggers an error. With context rot the input still fits, but the quality of the model's answers declines."
+ },
+ "gl.baglam-curumesi.faq.0.q": {
+  "h": "92523412cd",
+  "en": "Is context rot the same as filling up the context window?"
+ },
+ "gl.baglam-curumesi.faq.1.a": {
+  "h": "04b45577a0",
+  "en": "Not completely. Keeping the context short and relevant, splitting long jobs into stages, and restating key instructions can still reduce its effect noticeably."
+ },
+ "gl.baglam-curumesi.faq.1.q": {
+  "h": "d8f33f86cb",
+  "en": "Can context rot be avoided completely?"
+ },
+ "gl.baglam-curumesi.how": {
+  "h": "c00c72ae47",
+  "en": "A model cannot pay equal attention to every part of its input. As the text grows, important details can get buried among irrelevant ones, early instructions can lose weight, and conflicting passages can confuse the model. It is a bit like trying to recall the first decision made in a meeting that has run for hours. How strong the effect is depends on the model and the task, and there is no single threshold everyone agrees on. Common countermeasures include summarizing a chat and starting fresh, putting only relevant passages into the context, and repeating critical instructions."
+ },
+ "gl.baglam-curumesi.term": {
+  "h": "dc7d40949f",
+  "en": "Context rot"
+ },
+ "gl.baglam-curumesi.why": {
+  "h": "1bbbd80900",
+  "en": "Model announcements often highlight a long context window, but a large window does not mean every piece of information is used equally reliably. Understanding context rot helps teams that work with long documents or build agent systems keep realistic expectations, and it guides them toward design choices such as summarization and retrieval."
+ },
  "gl.baglam-muhendisligi.def": {
   "h": "0f2e3eab19",
   "en": "The work of designing and managing what a language model is given at each step: information, instructions, tools and conversation history. The aim is to fill the model's working window with the right content."
@@ -2866,6 +3046,42 @@
  "gl.bilgi-grafigi.why": {
   "h": "e5fe82e0f2",
   "en": "Knowledge graphs have long been behind information boxes in search engines, recommendation systems and enterprise data integration. In AI, they can give language models reliable and traceable context, which may help reduce made-up answers. Building and maintaining them correctly takes real effort, though."
+ },
+ "gl.bilgi-tabani.def": {
+  "h": "6fdf16d1cb",
+  "en": "An organized, searchable store of documents, frequently asked questions and other sources that an AI system can consult when it answers."
+ },
+ "gl.bilgi-tabani.example": {
+  "h": "a6fc3a6df1",
+  "en": "A telecom operator’s customer assistant looks up the relevant section in a knowledge base of plan terms and troubleshooting guides and bases its answer on it."
+ },
+ "gl.bilgi-tabani.faq.0.a": {
+  "h": "29efc0a149",
+  "en": "A traditional database usually stores structured records in tables. A knowledge base in AI is mostly made of text documents prepared so they can be searched by meaning."
+ },
+ "gl.bilgi-tabani.faq.0.q": {
+  "h": "2ea16c3e7a",
+  "en": "How is a knowledge base different from a traditional database?"
+ },
+ "gl.bilgi-tabani.faq.1.a": {
+  "h": "c7cb74b9a0",
+  "en": "No. The model itself does not change; when a question arrives, the system just finds relevant chunks and gives them to the model as extra information. That is why content can be updated without retraining."
+ },
+ "gl.bilgi-tabani.faq.1.q": {
+  "h": "cf12c0b76e",
+  "en": "Does adding documents to a knowledge base mean training the model?"
+ },
+ "gl.bilgi-tabani.how": {
+  "h": "9bb81a1a73",
+  "en": "Company documents, manuals, emails or web pages are collected, cleaned and split into chunks. Each chunk is converted into an embedding vector and stored in a structure such as a vector database or a search index. When a user asks a question, the system finds the relevant chunks and hands them to the language model as source material for its answer. This lets the model rely on company-specific or recent information that was not in its training data, and changing the knowledge base does not require retraining the model."
+ },
+ "gl.bilgi-tabani.term": {
+  "h": "5192bb8835",
+  "en": "Knowledge base"
+ },
+ "gl.bilgi-tabani.why": {
+  "h": "1354eb2169",
+  "en": "Language models do not know private or recent information outside their training data, and they sometimes make things up. A knowledge base ties answers to concrete sources, which reduces that risk and makes citing sources possible. But if the content is outdated or wrong, the answers will suffer too, so maintaining the knowledge base is a critical task."
  },
  "gl.bilgi-teorisi.def": {
   "h": "e79eeda9b2",
@@ -3407,6 +3623,42 @@
   "h": "037f7cac58",
   "en": "GANs delivered the first big successes in realistic image generation and laid the technical groundwork for the deepfake debate. They can be unstable to train and may produce outputs with limited variety. For that reason diffusion models took the lead in image generation, though GANs are still used where fast generation matters."
  },
+ "gl.cevrimdisi-ve-cevrimici-degerlendirme.def": {
+  "h": "517b2c2506",
+  "en": "Offline evaluation tests an AI system on prepared data before release, while online evaluation measures it in the live environment as real users interact with it."
+ },
+ "gl.cevrimdisi-ve-cevrimici-degerlendirme.example": {
+  "h": "d700637f36",
+  "en": "An e-commerce company first tests its new shopping assistant offline on recorded customer questions, then opens it to a small share of users and compares how often chats end in a purchase against the old version."
+ },
+ "gl.cevrimdisi-ve-cevrimici-degerlendirme.faq.0.a": {
+  "h": "13479da460",
+  "en": "Neither replaces the other. Offline evaluation gives quick screening before release, and online evaluation shows real user behavior. Mature teams use both together."
+ },
+ "gl.cevrimdisi-ve-cevrimici-degerlendirme.faq.0.q": {
+  "h": "1ee898b2b4",
+  "en": "Which is better, offline or online evaluation?"
+ },
+ "gl.cevrimdisi-ve-cevrimici-degerlendirme.faq.1.a": {
+  "h": "322ba246de",
+  "en": "A flawed version can reach real users. That is why teams usually start with a small group of users and roll the version back if problems appear."
+ },
+ "gl.cevrimdisi-ve-cevrimici-degerlendirme.faq.1.q": {
+  "h": "62313864fd",
+  "en": "What is the risk of online evaluation?"
+ },
+ "gl.cevrimdisi-ve-cevrimici-degerlendirme.how": {
+  "h": "09a9b2b282",
+  "en": "In offline evaluation, the system is tested on a prepared dataset before it ships, and the results are fast, cheap and repeatable. In online evaluation, the system is measured while real users work with it. Signals such as A/B tests, user feedback, task completion rates and error logs are tracked. The offline stage filters out weak versions, and the online stage catches real-world behavior that the prepared dataset missed."
+ },
+ "gl.cevrimdisi-ve-cevrimici-degerlendirme.term": {
+  "h": "6c9a792545",
+  "en": "Offline and online evaluation"
+ },
+ "gl.cevrimdisi-ve-cevrimici-degerlendirme.why": {
+  "h": "b9ce019f1f",
+  "en": "A model with a high offline score can still perform worse than expected in production because real users ask different questions. Relying only on online measurement, on the other hand, risks putting a flawed version straight in front of users. Using both strikes a balance between speed and realism."
+ },
  "gl.cift-inis.def": {
   "h": "2e63dd6337",
   "en": "A pattern in which test error falls, then rises, then falls again as model size, data amount or training time increases, departing from the classic U-shaped expectation."
@@ -3622,6 +3874,42 @@
  "gl.cikarim.why": {
   "h": "20465a8924",
   "en": "A model is trained once but serves millions of users, so most of an AI company's operating costs and energy consumption come from inference. Long-running systems such as agents are pushing inference demand even higher."
+ },
+ "gl.cikti-dogrulama.def": {
+  "h": "5eb12235d9",
+  "en": "Checking an AI model's response for format, accuracy and safety before it reaches the user or another system."
+ },
+ "gl.cikti-dogrulama.example": {
+  "h": "1d8cfca2da",
+  "en": "An insurer's AI assistant writes a claim summary as structured data, and a validation layer checks that required fields are filled and that no identity numbers appear in the text before the record goes into the system."
+ },
+ "gl.cikti-dogrulama.faq.0.a": {
+  "h": "ac601778ed",
+  "en": "No. It can catch format errors and some false statements, but it cannot notice every mistake. It reduces the risk rather than removing it."
+ },
+ "gl.cikti-dogrulama.faq.0.q": {
+  "h": "b615fd5db4",
+  "en": "Does output validation completely prevent hallucinations?"
+ },
+ "gl.cikti-dogrulama.faq.1.a": {
+  "h": "c3e9096ae6",
+  "en": "Guardrails is a broader term covering both input and output checks as well as behavior rules. Output validation is the part that works on the output side."
+ },
+ "gl.cikti-dogrulama.faq.1.q": {
+  "h": "67c3bbe14c",
+  "en": "Is output validation the same as guardrails?"
+ },
+ "gl.cikti-dogrulama.how": {
+  "h": "9c46cce258",
+  "en": "The model produces an answer, and a separate layer then checks it. Checks can include whether it matches the expected format, contains banned content, leaks personal data, or contradicts the sources it was given. Generated software code can be run and tested. Some systems use a second model as the reviewer. If a check fails, the answer is regenerated, corrected, blocked or sent to a person. Rule-based and model-based checks are often used together."
+ },
+ "gl.cikti-dogrulama.term": {
+  "h": "9c8a5bf50a",
+  "en": "Output validation"
+ },
+ "gl.cikti-dogrulama.why": {
+  "h": "fe1d8283ab",
+  "en": "Language models can produce fluent but wrong or harmful outputs. If the output triggers a database update or a payment, an error can spread down the chain. Output validation complements filtering on the input side and is one of the basic steps toward using AI more safely in real work."
  },
  "gl.cin-odasi-argumani.def": {
   "h": "cc5c46b379",
@@ -3910,6 +4198,42 @@
  "gl.cok-ornekli-jailbreak.why": {
   "h": "358eda2af4",
   "en": "As context windows grow, new attack surfaces appear, and this method shows that a gain in capability can also bring a security risk. Developers look for defenses by classifying and filtering prompts or by further training models to resist such inputs. It is also a good example for understanding the logic behind many jailbreak stories in the news."
+ },
+ "gl.cok-turlu-konusma.def": {
+  "h": "193bb0666c",
+  "en": "A style of chat in which a user and an AI exchange several messages back and forth, and what was said earlier shapes the later answers."
+ },
+ "gl.cok-turlu-konusma.example": {
+  "h": "dde5634b12",
+  "en": "A user asks an assistant for a holiday plan and then says “lower the budget”; the assistant knows which plan is meant from the earlier messages."
+ },
+ "gl.cok-turlu-konusma.faq.0.a": {
+  "h": "c32fb2b22e",
+  "en": "In a single-turn prompt the model sees only the current message and gives one answer. In a multi-turn conversation, earlier messages are passed to the model too, so later questions are answered in light of the history."
+ },
+ "gl.cok-turlu-konusma.faq.0.q": {
+  "h": "b3482f10da",
+  "en": "How is a multi-turn conversation different from a single-turn prompt?"
+ },
+ "gl.cok-turlu-konusma.faq.1.a": {
+  "h": "7a2bd3863b",
+  "en": "Because the model does not store history itself; it only sees the messages the application sends. In a new chat the old history is not sent, so the model knows nothing about that earlier conversation."
+ },
+ "gl.cok-turlu-konusma.faq.1.q": {
+  "h": "65a4de98db",
+  "en": "Why doesn’t the model know my earlier chat when I start a new one?"
+ },
+ "gl.cok-turlu-konusma.how": {
+  "h": "2ca659b6b8",
+  "en": "Language models do not remember a conversation on their own. At each new turn, the application sends the full message history, or a summary of it, to the model along with the new message. The model reads that history to resolve context-dependent phrases such as “make it shorter” or “what about the second one?” If the history grows too long to fit in the model’s context window, older turns are trimmed or summarized, which can cause details mentioned early on to be lost."
+ },
+ "gl.cok-turlu-konusma.term": {
+  "h": "4a4527e578",
+  "en": "Multi-turn conversation"
+ },
+ "gl.cok-turlu-konusma.why": {
+  "h": "ec09d08053",
+  "en": "In real use, people rarely finish with a single message; they clarify the question, ask for corrections and add details. The multi-turn format makes chat assistants and customer service bots feel natural. On the other hand, long conversations cost more and the model may mix up older information, so managing the history matters."
  },
  "gl.coklu-ajan-sistemi.def": {
   "h": "2ab1318dcf",
@@ -4378,6 +4702,42 @@
  "gl.degerlendirme-farkindaligi.why": {
   "h": "4702c7e19b",
   "en": "The whole value of a safety evaluation rests on the assumption that test results reflect real use. If a model breaks that assumption, the assurance behind 'it passed the test' weakens. That is why evaluation awareness is taken seriously by AI labs and independent auditors, and it remains an active research problem."
+ },
+ "gl.degerlendirme-odakli-gelistirme.def": {
+  "h": "be182c9a7a",
+  "en": "An approach to building AI applications in which the team first defines how success will be measured and then develops the system against those measurements, much like test-driven development in software."
+ },
+ "gl.degerlendirme-odakli-gelistirme.example": {
+  "h": "4f0c5ced3e",
+  "en": "A team building a legal document summarizer first writes down what a good summary must include, then scores every prompt change against those criteria and keeps or reverts it accordingly."
+ },
+ "gl.degerlendirme-odakli-gelistirme.faq.0.a": {
+  "h": "bceb2f70f7",
+  "en": "Both start by writing the criteria first. But classic software tests pass or fail, while AI outputs vary, so results are usually read as a rate or a score."
+ },
+ "gl.degerlendirme-odakli-gelistirme.faq.0.q": {
+  "h": "72b21a83d6",
+  "en": "How does eval-driven development differ from test-driven development?"
+ },
+ "gl.degerlendirme-odakli-gelistirme.faq.1.a": {
+  "h": "0949411ab3",
+  "en": "Yes. Even fifteen or twenty examples and a clear scoring rule turn development from guesswork into something measurable. The set can grow over time."
+ },
+ "gl.degerlendirme-odakli-gelistirme.faq.1.q": {
+  "h": "7ec70ccd08",
+  "en": "Can small teams use this approach too?"
+ },
+ "gl.degerlendirme-odakli-gelistirme.how": {
+  "h": "5b48a6dd62",
+  "en": "The team starts by writing down, as examples and criteria, how the system should behave in different situations. These evaluations run with automatic scorers: some rely on fixed rules, some on a language model acting as a judge, and some on human review. Whenever the prompt, model or workflow changes, the evaluations are rerun and the scores are compared with the previous version. Only changes that improve the results are kept. New failures seen in production are turned into tests and added to the set."
+ },
+ "gl.degerlendirme-odakli-gelistirme.term": {
+  "h": "29735377d7",
+  "en": "Eval-driven development"
+ },
+ "gl.degerlendirme-odakli-gelistirme.why": {
+  "h": "1df619379b",
+  "en": "Because the outputs of large language models are not identical each time, fixing one prompt can break behavior elsewhere. This approach makes that risk visible and lets teams decide on evidence rather than guesses. It is a common practice among teams that take AI products from prototype to production."
  },
  "gl.denetimli-ince-ayar.def": {
   "h": "f9b4fc1f98",
@@ -7115,6 +7475,42 @@
   "h": "5245f322c0",
   "en": "Latent space is key to understanding how models hold meaning. Semantic search, recommendation systems, image generation and editing all rely on proximity relationships in this space. Because its dimensions are not directly readable by humans, it is also a subject of interpretability research."
  },
+ "gl.golge-modu.def": {
+  "h": "47689cf679",
+  "en": "Running a new model or feature on real user traffic so it produces responses, but without showing those responses to users. The outputs are only logged and compared with the existing system."
+ },
+ "gl.golge-modu.example": {
+  "h": "fff7c284cc",
+  "en": "An email app runs a new summarization model in shadow mode: users keep seeing summaries from the old model while the team reviews the new model's summaries behind the scenes."
+ },
+ "gl.golge-modu.faq.0.a": {
+  "h": "85d023fe97",
+  "en": "In an A/B test, some users see the new version's output and their reactions are measured. In shadow mode, nobody sees the new output; it is only recorded in the background and compared."
+ },
+ "gl.golge-modu.faq.0.q": {
+  "h": "75280231b6",
+  "en": "How is shadow mode different from A/B testing?"
+ },
+ "gl.golge-modu.faq.1.a": {
+  "h": "8c6c4f10f9",
+  "en": "Not directly, since the responses are never shown. Still, if the new system can take actions such as sending emails or changing records, those should be switched off, and the background call should be set up so it does not slow users down."
+ },
+ "gl.golge-modu.faq.1.q": {
+  "h": "4670211494",
+  "en": "Does shadow mode affect users at all?"
+ },
+ "gl.golge-modu.how": {
+  "h": "d6ab2b6552",
+  "en": "Every request in the live system goes to the current model as usual, and its answer is returned to the user. The same request is also sent to the new model in the background, and that answer is never shown, only recorded. The team later compares the two sets of outputs through human review, automated metrics, latency, and cost. This reveals how the new model behaves on real traffic without anyone being affected. The limitation is that users never see the new output, so their reactions cannot be measured."
+ },
+ "gl.golge-modu.term": {
+  "h": "8140b4c591",
+  "en": "Shadow mode"
+ },
+ "gl.golge-modu.why": {
+  "h": "bcd0139663",
+  "en": "Test data never fully reflects the variety of real usage. Shadow mode is a relatively safe way to catch unexpected failures before a risky switch. It does add compute cost, however, and sending user data to a second system also deserves separate privacy consideration."
+ },
  "gl.golge-yapay-zeka.def": {
   "h": "c611431cc3",
   "en": "AI tools that employees use for work without the knowledge or approval of their organization. It usually refers to chatbots and similar apps used through personal accounts."
@@ -7222,6 +7618,78 @@
  "gl.gomme.why": {
   "h": "f1ce23aa1e",
   "en": "It enables search by meaning rather than word-for-word matching. Document search, recommendation systems, duplicate content detection and chatbots based on company documents (RAG) all rely on embeddings."
+ },
+ "gl.gorev-basari-orani.def": {
+  "h": "2ba1836da8",
+  "en": "The share of tasks given to an AI system that it completes successfully according to a predefined success criterion."
+ },
+ "gl.gorev-basari-orani.example": {
+  "h": "138712bf70",
+  "en": "If a coding agent is given a hundred bug-fixing tasks and the relevant tests pass for only forty of them, its task success rate is 40 percent."
+ },
+ "gl.gorev-basari-orani.faq.0.a": {
+  "h": "788725887d",
+  "en": "Not exactly. Accuracy usually measures how often individual answers are correct. Task success rate looks at whether a whole multi-step job reached the desired result from start to finish."
+ },
+ "gl.gorev-basari-orani.faq.0.q": {
+  "h": "eb8c1d585b",
+  "en": "Is task success rate the same as accuracy?"
+ },
+ "gl.gorev-basari-orani.faq.1.a": {
+  "h": "5eacc8906b",
+  "en": "Not by itself. The difficulty of the tasks, how strict the criterion is, consistency across repeated runs, and the cost or risk involved all need to be considered too."
+ },
+ "gl.gorev-basari-orani.faq.1.q": {
+  "h": "81309b5c3c",
+  "en": "Does a high task success rate mean a system is reliable?"
+ },
+ "gl.gorev-basari-orani.how": {
+  "h": "bb1e5ed4b6",
+  "en": "First, a set of tasks is chosen, each with a clear success criterion. The criterion can be binary, where a task either succeeds or fails, or it can allow partial credit. Checking can be automatic, for example running tests on a coding task, or left to human reviewers. The rate is the number of successful tasks divided by the total number of tasks. Because model outputs can differ from run to run, the same task is often attempted several times and the results are averaged."
+ },
+ "gl.gorev-basari-orani.term": {
+  "h": "96251f6075",
+  "en": "Task success rate"
+ },
+ "gl.gorev-basari-orani.why": {
+  "h": "06cfa9397c",
+  "en": "As a single number, it is widely used in news about agents and coding systems. But if the task set and the definition of success are vague, rates from different systems cannot be compared. The rate alone also says nothing about cost, speed or safety, so it should be read in context."
+ },
+ "gl.gorev-basina-maliyet.def": {
+  "h": "82eff59a0a",
+  "en": "The total money spent for an AI system to finish one piece of work from start to end, including model usage, extra tool calls and, where needed, human review."
+ },
+ "gl.gorev-basina-maliyet.example": {
+  "h": "64548e859f",
+  "en": "A customer service team adds up the model, search tool and human approval costs for each support request resolved with AI, then compares the average cost per request with what an employee would cost for the same work."
+ },
+ "gl.gorev-basina-maliyet.faq.0.a": {
+  "h": "fd1a50c806",
+  "en": "No. The token price is a unit price, while cost per task also reflects how many units a job consumes and how often the work fails and has to be repeated."
+ },
+ "gl.gorev-basina-maliyet.faq.0.q": {
+  "h": "1902ae5c03",
+  "en": "Is the price per token the same as cost per task?"
+ },
+ "gl.gorev-basina-maliyet.faq.1.a": {
+  "h": "acf8bb0dd3",
+  "en": "Starting with a smaller, cheaper model, cutting unnecessary model calls, caching repeated inputs and lowering the error rate can all help. What works best depends on the task."
+ },
+ "gl.gorev-basina-maliyet.faq.1.q": {
+  "h": "4dbeb76cbb",
+  "en": "How can cost per task be reduced?"
+ },
+ "gl.gorev-basina-maliyet.how": {
+  "h": "9a0c64ed8d",
+  "en": "The calculation simply adds up every step of a task. Language model usage is usually priced by the number of text chunks (tokens) processed. In agent-style systems, the model may be called several times for one task, and tools such as search or code execution add their own costs. Failed attempts and the time a person spends fixing results also count. Dividing the total by the number of tasks completed correctly gives the cost per task."
+ },
+ "gl.gorev-basina-maliyet.term": {
+  "h": "ef5c37e182",
+  "en": "Cost per task"
+ },
+ "gl.gorev-basina-maliyet.why": {
+  "h": "8ed727178d",
+  "en": "Even if a model's price per token is low, the real cost rises when many calls are needed to get the job done. Companies use this measure to judge whether an AI solution is cheaper than human work while still being reliable enough. When reading news about price cuts, it also helps to look at the whole job rather than only the token price."
  },
  "gl.goru-dil-eylem-modeli.def": {
   "h": "0d958a1889",
@@ -8483,6 +8951,42 @@
   "h": "2ca2b9e6aa",
   "en": "Not every question needs long deliberation. On simple tasks, thinking adds delay and unnecessary cost, while on hard math and coding problems it can improve accuracy. The hybrid approach removes the need to choose between two separate models and lets the user balance speed, cost and quality."
  },
+ "gl.hibrit-arama.def": {
+  "h": "945a63abf3",
+  "en": "A search approach that combines keyword matching with meaning-based vector search and merges the results of both methods into a single ranked list."
+ },
+ "gl.hibrit-arama.example": {
+  "h": "8a093e7d26",
+  "en": "In a company’s internal document assistant, searching for a specific form code finds the exact match through keywords, while the question “how do I request leave” brings up the right policy through semantic search."
+ },
+ "gl.hibrit-arama.faq.0.a": {
+  "h": "c602bb7334",
+  "en": "No. RAG is an approach where a model retrieves relevant documents before answering. Hybrid search is one method that can be used in that retrieval step."
+ },
+ "gl.hibrit-arama.faq.0.q": {
+  "h": "fd20357101",
+  "en": "Is hybrid search the same as RAG?"
+ },
+ "gl.hibrit-arama.faq.1.a": {
+  "h": "d593912925",
+  "en": "Not always. It usually gives more balanced results on mixed data that includes codes or proper names, but how well it works depends on the data and the tuning, so teams test it on real queries."
+ },
+ "gl.hibrit-arama.faq.1.q": {
+  "h": "9ef194e927",
+  "en": "Is hybrid search always better than semantic search alone?"
+ },
+ "gl.hibrit-arama.how": {
+  "h": "172a17b583",
+  "en": "The query is searched in two ways at once. The first is a keyword method such as BM25, which checks whether the query’s words appear in documents and how rare they are. The second is semantic search using embedding vectors, which finds texts that express the same idea in different words. The two result lists are usually merged with a technique such as reciprocal rank fusion, and a re-ranking model can then refine the final order."
+ },
+ "gl.hibrit-arama.term": {
+  "h": "6281f1b24b",
+  "en": "Hybrid search"
+ },
+ "gl.hibrit-arama.why": {
+  "h": "589dd68134",
+  "en": "Semantic search alone can miss queries that need an exact match, such as a product code, an error message or a proper name, while keyword search alone cannot see synonyms. Hybrid search balances the two weaknesses. That is why it is a common choice for improving answer quality in retrieval-augmented generation (RAG) systems."
+ },
  "gl.hiper-olcekli-sirket.def": {
   "h": "7d713a3373",
   "en": "A technology company that operates huge worldwide networks of data centers, offers cloud services at enormous scale, and can expand its capacity quickly when needed."
@@ -9095,6 +9599,42 @@
   "h": "1af48c2259",
   "en": "RLHF is one of the main techniques that make chat assistants more helpful and less harmful. OpenAI is known to have used it in developing InstructGPT and ChatGPT. At the same time, problems such as unreliable human preferences and models that agree with users too readily are debated."
  },
+ "gl.insana-devretme.def": {
+  "h": "44c9a682e7",
+  "en": "The moment an AI-powered system passes a conversation or task to a human worker because it cannot solve it alone or considers it too risky. It is most common in customer service."
+ },
+ "gl.insana-devretme.example": {
+  "h": "0389639e5e",
+  "en": "When a telecom company's chatbot cannot resolve a billing dispute, it connects the customer to a live agent along with a summary of the conversation."
+ },
+ "gl.insana-devretme.faq.0.a": {
+  "h": "e909af4d50",
+  "en": "They are related but not identical. In human-in-the-loop, a person is part of the process and approves or corrects outputs. In a handoff, the work moves entirely to a person. Many systems use both."
+ },
+ "gl.insana-devretme.faq.0.q": {
+  "h": "a4676014ef",
+  "en": "Is human handoff the same as human-in-the-loop?"
+ },
+ "gl.insana-devretme.faq.1.a": {
+  "h": "c43d2dc0b3",
+  "en": "Requirements vary by country and sector, so the relevant regulations need to be checked. As a general good practice, users should always have a clear route to a person."
+ },
+ "gl.insana-devretme.faq.1.q": {
+  "h": "f176c66971",
+  "en": "Are chatbots required to offer a way to reach a human?"
+ },
+ "gl.insana-devretme.how": {
+  "h": "b3f4f1aea0",
+  "en": "A handoff can be triggered in several ways: the user asks for a person, the system's confidence drops, the same question goes unanswered several times, or the topic touches a sensitive area such as payments, health or complaints. Some systems also hand off when they detect that the user is frustrated. During the transfer, the conversation history and a short summary go to the human, so the user does not have to explain everything again. The user is also told the expected wait or what happens next."
+ },
+ "gl.insana-devretme.term": {
+  "h": "cc0eace2f9",
+  "en": "Human handoff"
+ },
+ "gl.insana-devretme.why": {
+  "h": "b0295a3a0b",
+  "en": "AI systems make mistakes and cannot cover every situation. A bot with no way out of the conversation leaves users stuck. Handoff is the most common practical way to keep human oversight in higher-risk work. How smoothly it is done largely shapes customer satisfaction."
+ },
  "gl.insansi-robot.def": {
   "h": "a3782f5e60",
   "en": "A robot with a human-like body of two arms, two legs and a torso, aiming to walk and handle objects in environments designed for people."
@@ -9383,6 +9923,42 @@
   "h": "931f68ff0b",
   "en": "When companies run an AI model hundreds or thousands of times for the same job, writing the prompt by hand each time is slow and inconsistent. A template makes quality measurable and repeatable. It is one of the basic building blocks of language-model applications in production."
  },
+ "gl.istem-surumleme.def": {
+  "h": "8f386683bc",
+  "en": "The practice of recording every change to the prompts given to a language model, with date and author, so that earlier versions can be restored and versions can be compared."
+ },
+ "gl.istem-surumleme.example": {
+  "h": "9c1fe5b686",
+  "en": "When an online retailer's product-description assistant starts producing overly long texts after the third version of its prompt, the team rolls back to the second version and examines the difference between the two."
+ },
+ "gl.istem-surumleme.faq.0.a": {
+  "h": "6c0db0dae5",
+  "en": "No. For small projects, a version control system such as Git can be enough. Dedicated prompt management tools make testing, comparison and release management easier."
+ },
+ "gl.istem-surumleme.faq.0.q": {
+  "h": "3a7efc6a1c",
+  "en": "Do I need a special tool for prompt versioning?"
+ },
+ "gl.istem-surumleme.faq.1.a": {
+  "h": "89c39f928a",
+  "en": "No. Prompt engineering is the craft of designing prompts that get good results from a model. Prompt versioning is about tracking and managing how those prompts change over time."
+ },
+ "gl.istem-surumleme.faq.1.q": {
+  "h": "621ec31808",
+  "en": "Is prompt versioning the same as prompt engineering?"
+ },
+ "gl.istem-surumleme.how": {
+  "h": "a9aec09447",
+  "en": "The prompt text is stored in a code repository or a dedicated prompt management tool. Each edit gets a new version number or tag, along with a note on who changed it and why. Before a new version goes live, it is compared with the old one on the same set of test examples. If something goes wrong, the application can be rolled back to the previous version in one step. This keeps prompts separate from application code and makes it possible to see in the traces which prompt version produced each answer."
+ },
+ "gl.istem-surumleme.term": {
+  "h": "9b42f21fcd",
+  "en": "Prompt versioning"
+ },
+ "gl.istem-surumleme.why": {
+  "h": "299db0171c",
+  "en": "A small wording change in a prompt can shift outputs in unexpected ways. Without versioning, it is hard to tell which change caused which problem. When several people edit the same prompt, versioning also provides a shared record and a safe way back."
+ },
  "gl.istem.def": {
   "h": "3a09c528a0",
   "en": "An instruction or question given to an AI model. How a prompt is written directly affects the quality of the response."
@@ -9418,6 +9994,42 @@
  "gl.istem.why": {
   "h": "2297ae7655",
   "en": "A well-written prompt yields far more accurate, usable and consistent results from the same model. That is why prompt writing has become a core skill useful to anyone working with AI."
+ },
+ "gl.iz-kaydi.def": {
+  "h": "b5f7b7d7f6",
+  "en": "Recording every step a single user request passes through in an AI application, including model calls, searches and tool use, in order and in detail."
+ },
+ "gl.iz-kaydi.example": {
+  "h": "e9f2871723",
+  "en": "When an assistant states the wrong refund policy, the trace shows that the wrong document was retrieved from the knowledge base, so the problem lies in the search step, not in the model."
+ },
+ "gl.iz-kaydi.faq.0.a": {
+  "h": "240a58c873",
+  "en": "Logging keeps individual events as separate lines. Tracing links all the steps of one request into a single flow, which makes it easy to see how long each step took and where an error occurred."
+ },
+ "gl.iz-kaydi.faq.0.q": {
+  "h": "15dcbe29c4",
+  "en": "What is the difference between tracing and logging?"
+ },
+ "gl.iz-kaydi.faq.1.a": {
+  "h": "a2a0cb1cc7",
+  "en": "Because it can record inputs and outputs, it may contain personal data. That is why sensitive information should be masked, access should be limited and a retention period should be set."
+ },
+ "gl.iz-kaydi.faq.1.q": {
+  "h": "9b6d78bf12",
+  "en": "Does tracing store user data?"
+ },
+ "gl.iz-kaydi.how": {
+  "h": "b504770465",
+  "en": "When the application receives a request, a trace begins. Each step, such as a knowledge-base search, a call to a language model or a tool run, is added to the trace as its own record. The record holds the input, output, duration, number of tokens used and any error. The steps are displayed as a tree, nested or in sequence. A developer finds out why an answer was wrong by walking through that tree step by step."
+ },
+ "gl.iz-kaydi.term": {
+  "h": "fdddf722fd",
+  "en": "Tracing"
+ },
+ "gl.iz-kaydi.why": {
+  "h": "88e59d5b98",
+  "en": "In agents and retrieval-based applications that involve several steps, the fault often sits in an intermediate step rather than in the final answer. Tracing makes that step visible. It is also a basic tool for understanding where cost and latency build up and for reproducing real user problems."
  },
  "gl.jailbreak.def": {
   "h": "22a52192fe",
@@ -10174,6 +10786,42 @@
  "gl.kirmizi-takim.why": {
   "h": "6def2812a6",
   "en": "It ensures security vulnerabilities are found before malicious actors find them. Long used in cybersecurity, this method has become a standard part of AI safety as well; in some countries, making it mandatory through regulation is under discussion."
+ },
+ "gl.kisisel-veri-maskeleme.def": {
+  "h": "9fdb17dbb0",
+  "en": "The process of removing or replacing details that can identify a person, such as names, ID numbers, phone numbers and addresses, in text, images or data tables."
+ },
+ "gl.kisisel-veri-maskeleme.example": {
+  "h": "21154aae9c",
+  "en": "Before using AI to summarize customer complaint emails, a bank replaces national ID numbers and phone numbers with placeholder labels."
+ },
+ "gl.kisisel-veri-maskeleme.faq.0.a": {
+  "h": "2599c32a68",
+  "en": "Not quite. Redaction hides direct identifiers, but the remaining details, such as occupation, age or neighborhood, can sometimes be combined to find the person again. True anonymization also has to prevent this indirect identification."
+ },
+ "gl.kisisel-veri-maskeleme.faq.0.q": {
+  "h": "eb2e5858f9",
+  "en": "Is redaction the same as anonymization?"
+ },
+ "gl.kisisel-veri-maskeleme.faq.1.a": {
+  "h": "1bfa67c552",
+  "en": "PII stands for personally identifiable information, meaning any data that can identify a person directly or indirectly. Names, addresses, ID numbers and email addresses are typical examples."
+ },
+ "gl.kisisel-veri-maskeleme.faq.1.q": {
+  "h": "245f4e0199",
+  "en": "What does PII stand for?"
+ },
+ "gl.kisisel-veri-maskeleme.how": {
+  "h": "6e17ccdeea",
+  "en": "The process first finds personal information in the data. It uses pattern matching (for example, phone or card number formats), dictionaries, or language models that recognize names and addresses from context. The detected pieces are deleted, blacked out, or swapped for labels like [NAME] and [PHONE]. Some systems instead insert made-up but realistic values. This step is applied before data is sent to an AI model, added to a training dataset, or stored in log files."
+ },
+ "gl.kisisel-veri-maskeleme.term": {
+  "h": "119d726dee",
+  "en": "PII redaction"
+ },
+ "gl.kisisel-veri-maskeleme.why": {
+  "h": "cb82f31661",
+  "en": "When AI tools handle sensitive material such as customer emails, health records and call center transcripts, there is a risk that this information leaks. Redaction makes it easier to comply with personal data rules like GDPR and Turkey's data protection law (KVKK), and it allows data to be shared more safely. It is not perfect, though, and a single missed detail can still identify someone."
  },
  "gl.kisisel-verilerin-yurt-disina-aktarimi.def": {
   "h": "f48b1f75b4",
@@ -11219,6 +11867,42 @@
   "h": "8a79abdafe",
   "en": "Large language models can answer the same input differently, and failures are often silent: the system does not crash, it just presents made-up information. Without observability that is hard to notice and fix. It is also needed for cost control. Since the logs may contain personal data, retention and privacy need care."
  },
+ "gl.llmops.def": {
+  "h": "569afbb092",
+  "en": "The set of practices and tools used to build, deploy, monitor and continuously improve applications based on large language models."
+ },
+ "gl.llmops.example": {
+  "h": "d8765db901",
+  "en": "A bank tests every prompt change for its customer-service assistant against a fixed test set before release, then watches the rate of faulty answers in production on a dashboard."
+ },
+ "gl.llmops.faq.0.a": {
+  "h": "aeb7f2477f",
+  "en": "MLOps is a broad approach to training, deploying and monitoring machine learning models. LLMOps usually focuses on applications built on top of an existing model, with concerns such as prompt management, evaluation, context data and response quality."
+ },
+ "gl.llmops.faq.0.q": {
+  "h": "d9e3224fe7",
+  "en": "What is the difference between LLMOps and MLOps?"
+ },
+ "gl.llmops.faq.1.a": {
+  "h": "734b4e51d1",
+  "en": "Not for small experiments or personal use. But for customer-facing or business-critical applications, basic practices like testing, monitoring and version management quickly become necessary."
+ },
+ "gl.llmops.faq.1.q": {
+  "h": "467e5e677d",
+  "en": "Does every company need LLMOps?"
+ },
+ "gl.llmops.how": {
+  "h": "cde598edc6",
+  "en": "LLMOps adapts DevOps from software engineering and MLOps from machine learning to language models. It covers prompt versioning, automated evaluation tests, tracing, cost and latency tracking, safety filters and controlled rollout of model changes. While the application is live, real user traffic is monitored, problematic answers are flagged, and fixes are tested again before release. The goal is to keep a system whose output varies slightly each time predictable and auditable."
+ },
+ "gl.llmops.term": {
+  "h": "31410ad3a7",
+  "en": "LLMOps (large language model operations)"
+ },
+ "gl.llmops.why": {
+  "h": "ce08c638b4",
+  "en": "Building an impressive demo with a language model is easy; running it reliably, affordably and safely for thousands of users is a separate engineering job. LLMOps closes that gap between prototype and production. It is also a useful concept for understanding why many corporate AI projects stall at the pilot stage."
+ },
  "gl.lojistik-regresyon.def": {
   "h": "90abf63faf",
   "en": "Despite its name, a method used for classification: it computes a probability from input features and uses it to place an example into one of two classes."
@@ -11795,6 +12479,42 @@
   "h": "a53a1c71d7",
   "en": "It could change the cost and time of producing film, advertising and social media content; systems such as OpenAI's Sora and Google DeepMind's Veo often appear in the news. The ability to make realistic fake videos also puts misleading content, watermarking and labeling in the spotlight."
  },
+ "gl.minimum-uygulanabilir-urun.def": {
+  "h": "63a3923498",
+  "en": "The first simple version of a product, built with only its core function and put in front of real users, to find out whether an idea actually works."
+ },
+ "gl.minimum-uygulanabilir-urun.example": {
+  "h": "06beee0e80",
+  "en": "Before building a full tool that summarizes contracts for law firms, a startup puts up a simple web page that summarizes just one type of contract and lets a few firms try it."
+ },
+ "gl.minimum-uygulanabilir-urun.faq.0.a": {
+  "h": "cebd12cd1e",
+  "en": "A prototype is usually made to demonstrate an idea and test it internally. An MVP is released to real users and aims to collect real usage data."
+ },
+ "gl.minimum-uygulanabilir-urun.faq.0.q": {
+  "h": "5350b0d605",
+  "en": "What is the difference between an MVP and a prototype?"
+ },
+ "gl.minimum-uygulanabilir-urun.faq.1.a": {
+  "h": "d433731892",
+  "en": "No. An MVP has few features, but those features should work properly. The goal is to learn quickly, not to ship something low in quality."
+ },
+ "gl.minimum-uygulanabilir-urun.faq.1.q": {
+  "h": "19b8e9147b",
+  "en": "Does MVP mean a poor or unfinished product?"
+ },
+ "gl.minimum-uygulanabilir-urun.how": {
+  "h": "4f6df8d663",
+  "en": "The team first picks one problem it wants to solve and builds the smallest product that solves only that. Fancy features, detailed interfaces and extra scenarios are left for later. The product goes to a small number of real users, and usage data and feedback are collected. Based on the results, the team improves the product, changes direction or drops the idea. In AI, this is often just a simple prompt and interface built on top of an existing language model, with no need to train a model from scratch."
+ },
+ "gl.minimum-uygulanabilir-urun.term": {
+  "h": "7d8c30e692",
+  "en": "Minimum viable product (MVP)"
+ },
+ "gl.minimum-uygulanabilir-urun.why": {
+  "h": "bed06c9d16",
+  "en": "An MVP lets a team test whether demand really exists before spending much money or time. Because ready-made models make prototypes easy to build, the approach is especially common among AI startups. Still, an MVP that works well in a demo is not guaranteed to keep the same quality in real-world use."
+ },
  "gl.mlops.def": {
   "h": "4b8982ddb5",
   "en": "A set of practices and tools for managing the whole life of a machine learning model, from development to deployment, monitoring and updating, in an orderly, repeatable and reliable way."
@@ -12299,6 +13019,42 @@
   "h": "a5112b2b20",
   "en": "Drift is a reminder that a model doing well in testing does not guarantee it will keep doing well in production. In areas such as fraud detection, credit assessment or demand forecasting, an unnoticed decline can cause real financial losses. That is why models are monitored continuously after launch."
  },
+ "gl.model-surumu-sabitleme.def": {
+  "h": "57b45cd097",
+  "en": "Locking an application to a specific, named model version instead of letting it follow the provider's automatic updates. The goal is to keep the model's behavior from changing without notice."
+ },
+ "gl.model-surumu-sabitleme.example": {
+  "h": "a99e417755",
+  "en": "A company that extracts fields from invoices uses a dated model identifier so a change in output format does not break its code. It tries each new version on test data first and switches only if the results hold up."
+ },
+ "gl.model-surumu-sabitleme.faq.0.a": {
+  "h": "fac5d898a7",
+  "en": "No. Pinning means choosing a particular version offered by a provider, and the provider may retire that version later. Self-hosting requires having the model weights and is a separate undertaking."
+ },
+ "gl.model-surumu-sabitleme.faq.0.q": {
+  "h": "5592b11c7a",
+  "en": "Is model pinning the same as running a model on your own servers?"
+ },
+ "gl.model-surumu-sabitleme.faq.1.a": {
+  "h": "6e460f49fa",
+  "en": "It depends on the provider and the model. It is wise to follow deprecation notices and plan the move to a newer version early."
+ },
+ "gl.model-surumu-sabitleme.faq.1.q": {
+  "h": "38aa082c6e",
+  "en": "How long can a pinned version be used?"
+ },
+ "gl.model-surumu-sabitleme.how": {
+  "h": "a694d72f02",
+  "en": "Model providers usually offer two kinds of names: general aliases that can point to a newer version over time, and dated or numbered identifiers tied to one specific version. Pinning means the application uses the second kind when it makes requests. Even if the provider releases a new model behind the scenes, the application keeps getting the same behavior. Pinned versions do not last forever, though, because providers retire older versions on a published schedule. Teams therefore need to test newer versions ahead of time and plan their migration."
+ },
+ "gl.model-surumu-sabitleme.term": {
+  "h": "3bb0d629b8",
+  "en": "Model pinning"
+ },
+ "gl.model-surumu-sabitleme.why": {
+  "h": "2f1e519d47",
+  "en": "Even a small model update can change the format, length, or instruction-following of responses. That can break carefully tuned prompts, parsing code, and quality tests. Pinning gives predictability, but it delays the benefits of newer versions, so teams have to strike a deliberate balance."
+ },
  "gl.model-surumu-ve-kullanimdan-kaldirma.def": {
   "h": "601f2fbe2e",
   "en": "The practice of AI companies releasing models as numbered or dated versions and retiring older versions on a set schedule. Retiring a version is called deprecation."
@@ -12586,6 +13342,42 @@
  "gl.nist-yapay-zeka-risk-yonetimi-cercevesi.why": {
   "h": "2c7fa3542c",
   "en": "This voluntary, non-binding framework is a frequent reference point for organizations, in the US and beyond, as they build risk policies. Because it provides a shared vocabulary, it eases communication among companies, auditors and public bodies. It is not a legal requirement, but it is often cited in compliance work."
+ },
+ "gl.niyet-siniflandirma.def": {
+  "h": "387b393cd2",
+  "en": "A method that matches a user's written or spoken message to one of several predefined goals. For example, 'where is my order?' is assigned to a 'track shipment' intent."
+ },
+ "gl.niyet-siniflandirma.example": {
+  "h": "57ba0f9a3a",
+  "en": "A bank's chatbot assigns 'I lost my card' to a 'block card' intent and 'my account statement' to a 'request statement' intent, sending each to a different process."
+ },
+ "gl.niyet-siniflandirma.faq.0.a": {
+  "h": "1c35a21209",
+  "en": "The intent says what the user wants to do, while entities are the concrete details in the message, such as dates, cities or amounts. In 'Find me a ticket to Istanbul tomorrow', the intent is finding a ticket, and 'Istanbul' and 'tomorrow' are entities."
+ },
+ "gl.niyet-siniflandirma.faq.0.q": {
+  "h": "a45d70e49b",
+  "en": "What is the difference between intent classification and entity extraction?"
+ },
+ "gl.niyet-siniflandirma.faq.1.a": {
+  "h": "37f012b2f8",
+  "en": "The task has not gone away; only the method has changed, since many systems now let a language model do the classifying. Clear categories and a confidence threshold still help keep the system's behavior predictable."
+ },
+ "gl.niyet-siniflandirma.faq.1.q": {
+  "h": "700f3d0fff",
+  "en": "Is intent classification still needed now that large language models exist?"
+ },
+ "gl.niyet-siniflandirma.how": {
+  "h": "c5d7518049",
+  "en": "The system is either trained on example sentences labeled with their intents, or a large language model is given a list of categories and asked to place each message in one. Every incoming message gets a confidence score for each intent. If the top score is high enough, the matching workflow starts, such as opening a return form. If it is low, the system asks a clarifying question or passes the request to a person. A single message can also contain more than one intent, and well-designed systems pick up each of them."
+ },
+ "gl.niyet-siniflandirma.term": {
+  "h": "1d277da03e",
+  "en": "Intent classification"
+ },
+ "gl.niyet-siniflandirma.why": {
+  "h": "4c023c57c7",
+  "en": "Customer service bots, voice assistants and smart search boxes cannot give a useful answer without knowing what the user wants. A wrong guess leads to irrelevant replies and erodes trust in the product. Accurate classification also routes requests to the right tool or team, which cuts waiting times and costs."
  },
  "gl.noro-sembolik-yapay-zeka.def": {
   "h": "8476559613",
@@ -14567,6 +15359,42 @@
   "h": "bd08c05c6c",
   "en": "People do not always phrase what they want with the words used in a document. Because semantic search can catch synonyms and different phrasings, it is a core building block in enterprise search, recommendation systems and especially retrieval-augmented generation (RAG), where it finds the information handed to the model."
  },
+ "gl.semantik-onbellek.def": {
+  "h": "332d22ba50",
+  "en": "A caching method for AI applications that returns a stored answer when a new question means roughly the same as one already answered, instead of running the model again."
+ },
+ "gl.semantik-onbellek.example": {
+  "h": "2381b76206",
+  "en": "Many customers ask a bank’s support assistant how to freeze a card, each in different words; the first answer is stored and later ones are served quickly without calling the model."
+ },
+ "gl.semantik-onbellek.faq.0.a": {
+  "h": "41f9275090",
+  "en": "A regular cache needs the new request to match an earlier one exactly. A semantic cache compares meaning, so differently worded questions can still hit the same stored answer."
+ },
+ "gl.semantik-onbellek.faq.0.q": {
+  "h": "a02367d237",
+  "en": "How is semantic caching different from regular caching?"
+ },
+ "gl.semantik-onbellek.faq.1.a": {
+  "h": "b3be75a306",
+  "en": "Yes. If the similarity threshold is too loose, two similar-looking questions that actually ask different things may get the same answer. It needs extra care for personalized or fast-changing information."
+ },
+ "gl.semantik-onbellek.faq.1.q": {
+  "h": "ea648845d1",
+  "en": "Can semantic caching return a wrong answer?"
+ },
+ "gl.semantik-onbellek.how": {
+  "h": "dea3de6470",
+  "en": "Each question is first turned into a vector, a list of numbers that captures its meaning, using an embedding model. That vector is searched against the vectors of previously asked questions. If the new question matches one above a set similarity threshold, the saved answer is returned directly; if not, the question goes to the language model and the new answer is stored for later. A classic cache only catches identical text, while this method can treat “I forgot my password” and “How do I reset my password?” as the same question."
+ },
+ "gl.semantik-onbellek.term": {
+  "h": "c22de7bf1e",
+  "en": "Semantic caching"
+ },
+ "gl.semantik-onbellek.why": {
+  "h": "e03b2c01ab",
+  "en": "Every language model call costs time and money, so a cache for frequently repeated questions shortens response times and lowers costs. If the threshold is set poorly, though, two questions with different meanings may get the same answer, so teams balance accuracy against savings. It is a common optimization in applications such as customer support bots, where the same questions keep coming up."
+ },
  "gl.sembolik-yapay-zeka.def": {
   "h": "dbc90d578f",
   "en": "An approach that tries to build intelligence by manipulating human-readable symbols according to logical rules. Instead of learning from data, it relies on knowledge and rules that people write down explicitly."
@@ -15718,6 +16546,42 @@
  "gl.spekulatif-kod-cozme.why": {
   "h": "f5ee973f46",
   "en": "Response latency is one of the main problems for large models, affecting both user experience and server costs. This technique aims to add speed without shrinking the model or sacrificing quality. How much it helps depends on how often the draft model's guesses are accepted."
+ },
+ "gl.spesifikasyon-odakli-gelistirme.def": {
+  "h": "5d1b32da4f",
+  "en": "An approach to building software in which a detailed written document, the specification, describes what should be built first, and AI agents then generate the software from it instead of being told to write code directly."
+ },
+ "gl.spesifikasyon-odakli-gelistirme.example": {
+  "h": "c27f147c1b",
+  "en": "A team writes down the flow, error cases and security rules for a 'password reset' feature, and a coding assistant derives the tasks, code and tests from that document."
+ },
+ "gl.spesifikasyon-odakli-gelistirme.faq.0.a": {
+  "h": "081439344d",
+  "en": "No. Test-driven development starts by writing tests, while the spec-driven approach starts by describing the desired behavior, and tests can be derived from that. The two can also be combined."
+ },
+ "gl.spesifikasyon-odakli-gelistirme.faq.0.q": {
+  "h": "149ece9f75",
+  "en": "Is spec-driven development the same as test-driven development?"
+ },
+ "gl.spesifikasyon-odakli-gelistirme.faq.1.a": {
+  "h": "e9d294be1c",
+  "en": "For small, experimental work a spec may be unnecessary overhead. It makes more sense for long-lived projects with clear requirements and several people involved."
+ },
+ "gl.spesifikasyon-odakli-gelistirme.faq.1.q": {
+  "h": "f3540c4905",
+  "en": "Is it suitable for every software project?"
+ },
+ "gl.spesifikasyon-odakli-gelistirme.how": {
+  "h": "60a53396c1",
+  "en": "A person writes down how a feature should behave, what constraints it must respect and what counts as done. An AI coding assistant turns that document into a plan and a task list, then produces the code and tests. The output is checked against the criteria in the document. When something needs to change, the spec is updated first and the code is regenerated or adjusted to match. The document becomes the shared reference for both the team and the AI."
+ },
+ "gl.spesifikasyon-odakli-gelistirme.term": {
+  "h": "ab643901b0",
+  "en": "Spec-driven development"
+ },
+ "gl.spesifikasyon-odakli-gelistirme.why": {
+  "h": "55cc38ac06",
+  "en": "Generating code from short, loose prompts is fast, but results can be inconsistent because the AI fills gaps with its own assumptions. A spec puts the intent in writing and reduces that ambiguity. Critics, however, see it as a return to old-style up-front design and point out that writing detailed specs takes effort of its own."
  },
  "gl.stil-aktarimi.def": {
   "h": "132aec10ea",
@@ -17771,6 +18635,42 @@
   "h": "0996b29f85",
   "en": "It lets organizations base decisions on evidence instead of intuition and gives AI projects a solid footing. Machine learning is an important tool of data science, but data science also covers defining the problem, data quality and interpreting results. That is why it has become one of the most sought-after skill areas in business."
  },
+ "gl.veri-carki.def": {
+  "h": "7887584acb",
+  "en": "A self-reinforcing loop in which usage of a product generates data that improves the model, and the better model attracts more users and therefore more data."
+ },
+ "gl.veri-carki.example": {
+  "h": "9aab70cb6b",
+  "en": "In a customer support assistant, replies that users mark as helpful or unhelpful are collected, and the poorly rated ones are reviewed and added to the test and training data for the next version."
+ },
+ "gl.veri-carki.faq.0.a": {
+  "h": "3c232b7551",
+  "en": "No. In a network effect, the product becomes more valuable to each user as more people join. In a data flywheel, user-generated data improves the model, and that improvement attracts more users."
+ },
+ "gl.veri-carki.faq.0.q": {
+  "h": "085b1f0736",
+  "en": "Is a data flywheel the same as a network effect?"
+ },
+ "gl.veri-carki.faq.1.a": {
+  "h": "3d0fd1c188",
+  "en": "No. The collected data has to be high quality, the feedback has to carry a meaningful signal, and the data must actually feed back into the model or product. Otherwise data just piles up without improving anything."
+ },
+ "gl.veri-carki.faq.1.q": {
+  "h": "86b3ec660e",
+  "en": "Does a data flywheel work for every AI product?"
+ },
+ "gl.veri-carki.how": {
+  "h": "e77ef70e49",
+  "en": "As an AI product is used, interaction logs, user feedback and corrections accumulate. This data is cleaned and labeled, then used to train or fine-tune the model or to expand evaluation sets. A better model makes the product more useful, which brings more users and speeds up the flow of new data. Like a heavy wheel gaining momentum, each turn makes the next one easier. For the loop to work, data collection has to respect consent and privacy rules."
+ },
+ "gl.veri-carki.term": {
+  "h": "9a89aaad93",
+  "en": "Data flywheel"
+ },
+ "gl.veri-carki.why": {
+  "h": "4ed7eef5f5",
+  "en": "The data flywheel is a common way to explain the competitive edge of AI companies: the model alone may not set a company apart, but a steady stream of real-world usage data is harder to imitate. Debates in the news about data deals and the use of customer data for training are tied to this logic. For product teams, it shows that collecting feedback is an investment."
+ },
  "gl.veri-duvari.def": {
   "h": "b7dc0c66f5",
   "en": "The idea that the supply of high-quality training data, especially human-written text, is limited, so the growth of AI models could stall at some point."
@@ -18706,6 +19606,42 @@
  "gl.yapay-super-zeka.why": {
   "h": "cafd5bc366",
   "en": "Superintelligence sits at the center of debates about AI safety and alignment. Some people regard it as a serious long-term risk that warrants precautions today; others think the focus distracts from present-day problems such as bias and effects on jobs. Knowing this divide helps when reading news claims about it."
+ },
+ "gl.yapay-zeka-ag-gecidi.def": {
+  "h": "7b9e1260ac",
+  "en": "An intermediate layer between applications and different AI model providers that routes, controls and logs requests from a single point."
+ },
+ "gl.yapay-zeka-ag-gecidi.example": {
+  "h": "9e20a5bd84",
+  "en": "All teams in a company send their language model requests through a shared gateway that masks sensitive data, enforces a monthly spending cap per team and switches to another model during an outage."
+ },
+ "gl.yapay-zeka-ag-gecidi.faq.0.a": {
+  "h": "aebfa21d8d",
+  "en": "A traditional API gateway manages general traffic. An AI gateway adds tasks specific to language models, such as counting tokens, filtering prompts, routing between models and caching responses."
+ },
+ "gl.yapay-zeka-ag-gecidi.faq.0.q": {
+  "h": "965354bcc8",
+  "en": "How is an AI gateway different from a traditional API gateway?"
+ },
+ "gl.yapay-zeka-ag-gecidi.faq.1.a": {
+  "h": "ed30e5708c",
+  "en": "Since it adds a step, it usually introduces a small extra delay. On the other hand, features such as caching can speed up repeated requests."
+ },
+ "gl.yapay-zeka-ag-gecidi.faq.1.q": {
+  "h": "a3ecb14847",
+  "en": "Does a gateway slow down responses?"
+ },
+ "gl.yapay-zeka-ag-gecidi.how": {
+  "h": "ab1bd1c05b",
+  "en": "Instead of connecting to each provider separately, the application sends its requests to the gateway. The gateway forwards each request to the right model and handles shared tasks along the way, such as authentication, rate limits, caching, safety filters and cost logging. If one provider fails to respond, it can reroute the request to a backup model. Because all traffic passes through one point, usage and spending can be monitored centrally. The design resembles API gateways in conventional software."
+ },
+ "gl.yapay-zeka-ag-gecidi.term": {
+  "h": "5b31842e66",
+  "en": "AI gateway"
+ },
+ "gl.yapay-zeka-ag-gecidi.why": {
+  "h": "7e8930c55c",
+  "en": "As companies work with several models and providers, key management, cost control and data security become scattered. A gateway lets them enforce those rules in one place and makes it easier to switch providers. It is a common building block for governance and oversight in enterprise AI use."
  },
  "gl.yapay-zeka-ajani.def": {
   "h": "92b6ce3c6a",
@@ -19715,6 +20651,42 @@
   "h": "afa225e9e4",
   "en": "The term often comes up when today's wave of AI investment is discussed. One view holds that inflated expectations could lead to another downturn; another says things are different now because today's systems are actually used by large numbers of people. History cannot predict the future, but it is a useful reminder about managing expectations."
  },
+ "gl.yapay-zeka-kullanici-deneyimi.def": {
+  "h": "36b6402323",
+  "en": "The design discipline concerned with making AI-powered products understandable, trustworthy and controllable for users, even though their outputs are uncertain and sometimes wrong."
+ },
+ "gl.yapay-zeka-kullanici-deneyimi.example": {
+  "h": "9cc5c95921",
+  "en": "A chat assistant shows source links under its answer and offers a 'regenerate' button, while an email writing tool lets the user edit the draft before sending it."
+ },
+ "gl.yapay-zeka-kullanici-deneyimi.faq.0.a": {
+  "h": "b817c673f1",
+  "en": "In traditional design the system behaves predictably. With AI, outputs vary and errors are possible, so uncertainty, correction and user control have to be central to the design."
+ },
+ "gl.yapay-zeka-kullanici-deneyimi.faq.0.q": {
+  "h": "546c65ec7e",
+  "en": "How does AI UX differ from traditional UX?"
+ },
+ "gl.yapay-zeka-kullanici-deneyimi.faq.1.a": {
+  "h": "bf9b49c5b1",
+  "en": "The goal is for users to trust the system exactly as much as it deserves. Too much trust lets mistakes slip through, while too little means the product's benefits go unused."
+ },
+ "gl.yapay-zeka-kullanici-deneyimi.faq.1.q": {
+  "h": "d496be1930",
+  "en": "Why does calibrating trust matter?"
+ },
+ "gl.yapay-zeka-kullanici-deneyimi.how": {
+  "h": "4170032386",
+  "en": "In traditional software the same input always gives the same result, whereas an AI system's output can vary and can be wrong. Designers therefore state clearly what the system can and cannot do, show sources or reasoning, and make it easy to edit or undo outputs. They add feedback controls such as thumbs up or down, and use techniques like streaming a reply piece by piece to ease the feeling of waiting. When the system fails, they leave the user an alternative path."
+ },
+ "gl.yapay-zeka-kullanici-deneyimi.term": {
+  "h": "d75bebcb27",
+  "en": "AI user experience (AI UX)"
+ },
+ "gl.yapay-zeka-kullanici-deneyimi.why": {
+  "h": "fa7cead2ce",
+  "en": "However good the model is, a poor interface leads users either to over-trust the system or to ignore it. A common point in AI coverage is that the same model can feel very different in different products. Good design helps keep user trust in line with what the system can actually do."
+ },
  "gl.yapay-zeka-okuryazarligi.def": {
   "h": "672e30d43d",
   "en": "The ability to understand what everyday AI systems do, how they work and where they can go wrong, and to use, question and evaluate them thoughtfully."
@@ -20362,6 +21334,42 @@
  "gl.yasakli-yapay-zeka-uygulamalari.why": {
   "h": "f1c563189f",
   "en": "The bans draw the clearest line against using AI for surveillance and manipulation. Which applications fall within them is debated because it touches the balance between security and freedoms; the biometric identification exceptions in particular have drawn criticism."
+ },
+ "gl.yedek-model.def": {
+  "h": "186379d691",
+  "en": "A second model to which a request is automatically handed over when the primary model fails, errors out, or becomes too slow. It is used to keep a service from going down."
+ },
+ "gl.yedek-model.example": {
+  "h": "30fbbefe35",
+  "en": "A customer-support chatbot that gets no answer from its primary model sends the request to a smaller model automatically, and the user carries on chatting without interruption."
+ },
+ "gl.yedek-model.faq.0.a": {
+  "h": "3012f8d35b",
+  "en": "Not exactly. Routing sends each request to a suitable model from the start, based on difficulty or cost. A fallback only comes into play when the main path fails."
+ },
+ "gl.yedek-model.faq.0.q": {
+  "h": "6a7d8c38c8",
+  "en": "Is a fallback model the same as model routing?"
+ },
+ "gl.yedek-model.faq.1.a": {
+  "h": "9b251393be",
+  "en": "No. Sometimes it is an equally capable model from another provider. Other times a smaller model is chosen for speed and cost, depending on the application's priorities."
+ },
+ "gl.yedek-model.faq.1.q": {
+  "h": "2d6d7b7198",
+  "en": "Does a fallback model always have to be weaker than the primary one?"
+ },
+ "gl.yedek-model.how": {
+  "h": "88781dabb5",
+  "en": "There is usually a routing layer between the application and the models. A request goes to the primary model first. If a failure such as a timeout, a rate limit, an outage, or an invalid response is detected, the same request is passed to the next model in line. The fallback might come from a different provider or be a smaller, cheaper model from the same one. One caveat is that a prompt does not always behave the same on every model, so the fallback path should be tested regularly too."
+ },
+ "gl.yedek-model.term": {
+  "h": "a6c7976c45",
+  "en": "Model fallback"
+ },
+ "gl.yedek-model.why": {
+  "h": "014a75e140",
+  "en": "AI services are subject to outages, heavy load, and quota limits like any other. A fallback model keeps the product from stopping altogether in those moments and protects the user experience. In return, quality, cost, and data-handling terms may differ on the fallback, and that difference should be assessed in advance, especially when personal data is involved."
  },
  "gl.yeniden-beceri-kazandirma.def": {
   "h": "db8e0c6fa7",

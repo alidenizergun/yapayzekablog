@@ -12013,5 +12013,672 @@ export const EXTRA = [
     "Yapay zeka araçlarını kendi alanlarında kullanmayı öğrenmek ve insana özgü becerilere, yani muhakemeye, iletişime ve alan bilgisine yatırım yapmak sık dile getirilen önerilerdir. Bunlar bir güvence değil, genel bir yaklaşımdır."
    ]
   ]
+ },
+ {
+  "slug": "altin-veri-seti",
+  "term": "Altın veri seti (golden dataset)",
+  "en": "golden dataset",
+  "match": [
+   "altın veri seti",
+   "golden dataset"
+  ],
+  "cat": "Veri ve değerlendirme",
+  "def": "Uzmanlarca elle hazırlanmış ve doğru yanıtları kesin kabul edilen, bir yapay zeka sisteminin kalitesini ölçmek için referans olarak kullanılan küçük ama özenle seçilmiş örnek koleksiyonu.",
+  "how": "Ekip, ürünün gerçekte karşılaşacağı girdilerden bir örneklem toplar: müşteri soruları, belgeler, kod parçaları gibi. Alan uzmanları her girdi için beklenen çıktıyı ya da kabul edilebilir bir yanıtın ölçütlerini yazar. Model, istem ya da sistem her değiştiğinde aynı set üzerinden çalıştırılır ve sonuçlar önceki sürümle karşılaştırılır. Set sabit kaldığı için puan farkı, test verisindeki değişimden değil sistemdeki değişimden kaynaklanır. Zor ve uç durumlar da sete eklenir; kullanımda yeni hata türleri çıktıkça set genişletilir.",
+  "why": "Yapay zeka çıktıları tek tek bakınca iyi görünebilir; sistematik bir referans olmadan iyileştirme iddiaları sezgiye dayanır. Altın veri seti, sürümler arasındaki geriye gidişi yakalamaya ve farklı modelleri aynı zeminde kıyaslamaya yarar. Etiketler hatalıysa ya da set gerçek kullanımı yansıtmıyorsa yüksek puanlar yanıltıcı olur.",
+  "example": "Bir bankanın müşteri destek botu için çalışanlar, gerçek sorulardan seçtikleri birkaç yüz soruya doğru yanıtları yazar; bot her güncellemeden sonra bu sorularla sınanır.",
+  "faq": [
+   [
+    "Altın veri seti ile eğitim verisi aynı şey mi?",
+    "Hayır. Eğitim verisi modele bir şey öğretmek için kullanılır, altın veri seti ise yalnızca ölçüm içindir. Ölçümün güvenilir olması için modelin bu örnekleri eğitimde görmemiş olması gerekir."
+   ],
+   [
+    "Altın veri seti kaç örnekten oluşmalı?",
+    "Sabit bir sayı yoktur. Başlangıç için onlarca ya da yüzlerce örnek yeterli olabilir. Sayıdan çok, gerçek kullanımın çeşitliliğini ve zor durumları kapsaması önemlidir."
+   ]
+  ]
+ },
+ {
+  "slug": "degerlendirme-odakli-gelistirme",
+  "term": "Değerlendirme odaklı geliştirme (eval-driven development)",
+  "en": "eval-driven development",
+  "match": [
+   "değerlendirme odaklı geliştirme",
+   "eval-driven development"
+  ],
+  "cat": "Veri ve değerlendirme",
+  "def": "Yapay zeka uygulamasını yazmadan ya da değiştirmeden önce başarının nasıl ölçüleceğini belirleyip geliştirmeyi bu ölçümlere göre yürüten yaklaşım; yazılımdaki test odaklı geliştirmeye benzer.",
+  "how": "Ekip işe, sistemin hangi durumlarda nasıl davranması gerektiğini örnekler ve ölçütler halinde yazarak başlar. Bu değerlendirmeler otomatik puanlayıcılarla çalışır: bazıları kesin kurallara, bazıları bir dil modelinin hakem olarak verdiği puana, bazıları da insan incelemesine dayanır. İstem, model veya akış her değiştiğinde değerlendirmeler yeniden koşulur ve puanlar bir öncekiyle karşılaştırılır. Yalnızca sonucu iyileştiren değişiklikler tutulur. Üretimde görülen yeni hatalar da teste dönüştürülüp sete eklenir.",
+  "why": "Büyük dil modellerinin çıktıları her seferinde aynı olmadığı için bir istemi düzeltmek başka bir yerde bozulmaya yol açabilir. Bu yaklaşım riski görünür kılar ve ekiplerin tahmin yerine kanıtla karar vermesini sağlar. Yapay zeka ürünlerini prototipten üretime taşıyan ekiplerde yaygın bir pratiktir.",
+  "example": "Bir hukuk belgesi özetleme aracını geliştiren ekip, önce iyi bir özetin içermesi gereken noktaları ölçüt olarak yazar; ardından her istem değişikliğini bu ölçütlere göre puanlayarak kabul eder ya da geri alır.",
+  "faq": [
+   [
+    "Değerlendirme odaklı geliştirme ile test odaklı geliştirme arasındaki fark ne?",
+    "İkisinde de önce ölçüt yazılır. Ancak klasik yazılım testleri geçer ya da kalır; yapay zekada çıktılar değişken olduğundan sonuç genellikle bir oran ya da puan olarak okunur."
+   ],
+   [
+    "Küçük ekipler de bu yaklaşımı kullanabilir mi?",
+    "Evet. On beş yirmi örnekten oluşan basit bir set ve net bir puanlama kuralı bile geliştirmeyi sezgiden çıkarıp ölçülebilir hâle getirir. Set zamanla büyütülebilir."
+   ]
+  ]
+ },
+ {
+  "slug": "cevrimdisi-ve-cevrimici-degerlendirme",
+  "term": "Çevrimdışı ve çevrimiçi değerlendirme",
+  "en": "offline and online evaluation",
+  "match": [
+   "çevrimdışı ve çevrimiçi değerlendirme",
+   "offline and online evaluation"
+  ],
+  "cat": "Veri ve değerlendirme",
+  "def": "Çevrimdışı değerlendirme, sistemi yayına almadan önce hazır veriyle sınamak; çevrimiçi değerlendirme ise sistem gerçek kullanıcılarla çalışırken canlı ortamda ölçmektir.",
+  "how": "Çevrimdışı değerlendirmede sistem, önceden hazırlanmış bir veri seti üzerinde yayına çıkmadan sınanır; sonuçlar hızlı, ucuz ve tekrarlanabilirdir. Çevrimiçi değerlendirmede ise sistem gerçek kullanıcılarla çalışırken ölçülür. Burada A/B testi, kullanıcı geri bildirimi, görevi tamamlama oranı ve hata kayıtları gibi sinyaller izlenir. Çevrimdışı aşama kötü sürümleri eler, çevrimiçi aşama ise hazırlanan veri setinin kaçırdığı gerçek hayat davranışlarını yakalar.",
+  "why": "Çevrimdışı puanı yüksek bir model, gerçek kullanıcılar farklı sorular sorduğu için canlıda beklenenden kötü çalışabilir. Yalnızca çevrimiçi ölçüm ise hatalı bir sürümü doğrudan kullanıcıya ulaştırma riski taşır. İki yöntemi birlikte kullanmak, hız ile gerçekçilik arasında denge kurar.",
+  "example": "Bir e-ticaret şirketi yeni alışveriş asistanını önce kayıtlı müşteri sorularıyla çevrimdışı sınar; sonra kullanıcıların küçük bir bölümüne açarak sohbetin satın alma ile sonuçlanma oranını eski sürümle karşılaştırır.",
+  "faq": [
+   [
+    "Çevrimdışı ve çevrimiçi değerlendirmeden hangisi daha iyi?",
+    "Biri ötekinin yerini tutmaz. Çevrimdışı yöntem yayından önce hızlı eleme sağlar, çevrimiçi yöntem gerçek kullanıcı davranışını gösterir. Olgun ekipler ikisini birlikte kullanır."
+   ],
+   [
+    "Çevrimiçi değerlendirmenin riski nedir?",
+    "Hatalı bir sürüm gerçek kullanıcıların karşısına çıkabilir. Bu yüzden genellikle küçük bir kullanıcı grubuyla başlanır ve sorun görülürse sürüm geri çekilir."
+   ]
+  ]
+ },
+ {
+  "slug": "ajan-degerlendirmesi",
+  "term": "Ajan değerlendirmesi (yörünge değerlendirmesi)",
+  "en": "agent evaluation",
+  "match": [
+   "ajan değerlendirmesi",
+   "trajectory evaluation"
+  ],
+  "cat": "Veri ve değerlendirme",
+  "def": "Araç kullanarak çok adımlı çalışan yapay zeka ajanlarını yalnızca nihai sonucuna göre değil, o sonuca giderken attığı adımların dizisine, yani yörüngesine göre de ölçme yöntemi.",
+  "how": "Ajan çalışırken yaptığı araç çağrıları, bu çağrılara verdiği girdiler ve aldığı yanıtlar kaydedilir; bu kayıt yörüngeyi oluşturur. Değerlendirme iki düzeyde yapılır: Sonuç doğru mu ve yol doğru muydu? İkincisinde doğru araç seçilmiş mi, gereksiz ya da tekrarlanan adım var mı, ajan bir döngüye girmiş mi, izin verilen sınırların dışına çıkmış mı gibi sorulara bakılır. Yörünge bir referans yörüngeyle karşılaştırılabilir ya da bir model hakem tarafından puanlanabilir. Deneyler çoğu zaman, gerçek sonuçlar doğurmaması için bir test ortamında yürütülür.",
+  "why": "Ajanlar yalnızca metin üretmez, e-posta gönderir, kayıt değiştirir, ödeme başlatır. Doğru sonuca yanlış yoldan varmak, güvenlik ve maliyet açısından ciddi sorun olabilir. Yörünge incelemesi ayrıca hatanın hangi adımda başladığını göstererek ajanı düzeltmeyi kolaylaştırır.",
+  "example": "Seyahat rezervasyonu yapan bir ajan doğru uçuşu bulur ama kullanıcıdan onay almadan ödeme adımını dener; sonuç doğru görünse de yörünge değerlendirmesi bu ihlali yakalar.",
+  "faq": [
+   [
+    "Yörünge ne demek?",
+    "Ajanın bir görevi çözerken izlediği adımların sırasıdır: hangi aracı hangi girdiyle çağırdığı, ne yanıt aldığı ve bir sonraki adıma nasıl karar verdiği."
+   ],
+   [
+    "Ajan değerlendirmesi sohbet botu değerlendirmesinden nasıl ayrılır?",
+    "Sohbet botunda genellikle tek bir yanıtın kalitesine bakılır. Ajanda ise birbirine bağlı birçok adım ve bunların yan etkileri vardır; bu yüzden hem sonuç hem süreç ölçülür."
+   ]
+  ]
+ },
+ {
+  "slug": "gorev-basari-orani",
+  "term": "Görev başarı oranı",
+  "en": "task success rate",
+  "match": [
+   "görev başarı oranı",
+   "task success rate"
+  ],
+  "cat": "Veri ve değerlendirme",
+  "def": "Bir yapay zeka sistemine verilen görevlerin, önceden tanımlanmış başarı ölçütüne göre ne kadarının sonuca ulaştırıldığını gösteren oran.",
+  "how": "Önce bir görev seti ve her görev için açık bir başarı ölçütü belirlenir. Ölçüt ikili olabilir, yani görev ya başarılıdır ya değildir; bazen de kısmi puan verilir. Kontrol otomatik yapılabilir, örneğin bir kod görevinde testlerin geçip geçmediğine bakılır; ya da insan değerlendiricilere bırakılır. Oran, başarılı görevlerin toplam görevlere bölünmesiyle bulunur. Model çıktıları her çalıştırmada değişebildiği için aynı görev genellikle birkaç kez denenir ve ortalama alınır.",
+  "why": "Tek bir sayıyla anlaşılan bu ölçü, özellikle ajan ve kodlama sistemleriyle ilgili haberlerde sık kullanılır. Ancak görev seti ve başarı tanımı belirsizse farklı sistemlerin oranları karşılaştırılamaz. Oran tek başına maliyeti, süreyi ve güvenliği de göstermez; bu yüzden bağlamıyla okunmalıdır.",
+  "example": "Bir kod ajanına yüz hata düzeltme görevi verilir ve yalnızca kırkında ilgili testler geçerse görev başarı oranı yüzde 40 olur.",
+  "faq": [
+   [
+    "Görev başarı oranı ile doğruluk aynı şey mi?",
+    "Tam olarak değil. Doğruluk genellikle tek tek yanıtların doğru olma oranıdır. Görev başarı oranı ise çok adımlı bir işin baştan sona istenen sonuca ulaşıp ulaşmadığına bakar."
+   ],
+   [
+    "Yüksek görev başarı oranı sistemin güvenilir olduğunu gösterir mi?",
+    "Tek başına göstermez. Görevlerin zorluğu, ölçütün sıkılığı, tekrarlar arasındaki tutarlılık ve ortaya çıkan maliyet ya da riskler de birlikte değerlendirilmelidir."
+   ]
+  ]
+ },
+ {
+  "slug": "veri-carki",
+  "term": "Veri çarkı (data flywheel)",
+  "en": "data flywheel",
+  "match": [
+   "veri çarkı",
+   "data flywheel"
+  ],
+  "cat": "Veri ve değerlendirme",
+  "def": "Ürünün kullanımından doğan verinin modeli iyileştirmesi, iyileşen modelin de daha çok kullanıcı ve dolayısıyla daha fazla veri çekmesiyle kendini besleyen döngü.",
+  "how": "Bir yapay zeka ürünü kullanıldıkça etkileşim kayıtları, kullanıcı geri bildirimleri ve düzeltmeler birikir. Bu kayıtlar temizlenip etiketlenir, ardından modeli eğitmek, ince ayar yapmak ya da değerlendirme setlerini genişletmek için kullanılır. Model iyileştikçe ürün daha faydalı hale gelir, daha çok kişi kullanır ve yeni veri akışı hızlanır. Dönen bir çarkın ivme kazanması gibi, her tur bir sonrakini kolaylaştırır. Döngünün işlemesi için veri toplamanın izne ve gizlilik kurallarına uygun yapılması gerekir.",
+  "why": "Veri çarkı, yapay zeka şirketlerinin rekabet avantajını anlatırken sık kullanılan bir çerçevedir: Modelin kendisi tek başına öne çıkmayabilir, ama gerçek kullanımdan süren veri akışı taklit etmesi daha zor bir birikim yaratır. Haberlerdeki veri anlaşmaları ve kullanıcı verisinin eğitimde kullanılması tartışmaları da bu mantıkla ilişkilidir. Ürün ekipleri için geri bildirim toplamanın bir yatırım olduğunu gösterir.",
+  "example": "Bir müşteri destek asistanında kullanıcıların 'işe yaradı' ya da 'yaramadı' diye işaretlediği yanıtlar toplanır; kötü işaretlenen örnekler incelenip bir sonraki sürümün test ve eğitim verisine eklenir.",
+  "faq": [
+   [
+    "Veri çarkı ile ağ etkisi aynı şey mi?",
+    "Hayır. Ağ etkisinde kullanıcı sayısı arttıkça ürün her kullanıcı için daha değerli hale gelir. Veri çarkında ise kullanıcıların ürettiği veri modeli iyileştirir ve bu iyileşme yeni kullanıcı çeker."
+   ],
+   [
+    "Her yapay zeka ürününde veri çarkı çalışır mı?",
+    "Hayır. Toplanan verinin kaliteli olması, geri bildirimin anlamlı sinyal taşıması ve verinin gerçekten modele ya da ürüne yansıtılması gerekir. Aksi halde yalnızca veri yığılır, ürün iyileşmez."
+   ]
+  ]
+ },
+ {
+  "slug": "llmops",
+  "term": "LLMOps",
+  "en": "large language model operations",
+  "match": [
+   "llmops",
+   "large language model operations"
+  ],
+  "cat": "Kullanım ve araçlar",
+  "def": "Büyük dil modeli tabanlı uygulamaların geliştirilmesi, canlıya alınması, izlenmesi ve sürekli iyileştirilmesi için kullanılan yöntem ve araçların bütünü.",
+  "how": "LLMOps, yazılımdaki DevOps ve makine öğrenmesindeki MLOps pratiklerinin dil modellerine uyarlanmasıdır. İstemlerin sürümlenmesi, otomatik değerlendirme testleri, iz kaydı, maliyet ve gecikme takibi, güvenlik filtreleri ve model değişikliklerinin kontrollü biçimde yayına alınması bu çerçevede yer alır. Uygulama canlıdayken gelen gerçek kullanıcı verisi izlenir, sorunlu yanıtlar saptanır ve düzeltmeler yeniden teste sokulur. Amaç, çıktısı her seferinde biraz değişen bir sistemi öngörülebilir ve denetlenebilir tutmaktır.",
+  "why": "Bir dil modeliyle etkileyici bir demo hazırlamak kolaydır; onu binlerce kullanıcıya güvenilir, makul maliyetle ve güvenli biçimde sunmak ise ayrı bir mühendislik işidir. LLMOps, prototip ile üretim arasındaki bu boşluğu kapatır. Şirketlerin yapay zeka projelerinin neden pilot aşamasında takılabildiğini anlamak için de işe yarayan bir kavramdır.",
+  "example": "Bir banka, müşteri sorularını yanıtlayan asistanındaki her istem değişikliğini test setiyle denedikten sonra yayına alır ve canlıdaki hatalı yanıt oranını bir panelden izler.",
+  "faq": [
+   [
+    "LLMOps ile MLOps arasındaki fark nedir?",
+    "MLOps, makine öğrenmesi modellerinin eğitim, dağıtım ve izleme süreçlerini kapsayan genel bir yaklaşımdır. LLMOps ise çoğunlukla hazır bir model üzerine kurulan uygulamalarda istem yönetimi, değerlendirme, bağlam verisi ve yanıt kalitesi gibi konulara odaklanır."
+   ],
+   [
+    "Her şirketin LLMOps sürecine ihtiyacı var mı?",
+    "Küçük denemeler ve kişisel kullanım için tam bir süreç gerekmez. Ancak kullanıcıya dönük ya da iş açısından kritik uygulamalarda test, izleme ve sürüm yönetimi gibi temel pratikler hızla gerekli hale gelir."
+   ]
+  ]
+ },
+ {
+  "slug": "istem-surumleme",
+  "term": "İstem sürümleme",
+  "en": "prompt versioning",
+  "match": [
+   "istem sürümleme",
+   "prompt versioning"
+  ],
+  "cat": "Kullanım ve araçlar",
+  "def": "Dil modeline verilen istemlerdeki her değişikliğin tarih ve yazar bilgisiyle kaydedilmesi, böylece eski sürümlere dönülebilmesi ve sürümlerin birbiriyle karşılaştırılabilmesi uygulaması.",
+  "how": "İstem metni, kod gibi bir depoda ya da özel bir istem yönetim aracında saklanır. Her düzenleme yeni bir sürüm numarası veya etiket alır; yanında kimin neden değiştirdiğini anlatan bir not bulunur. Yeni sürüm canlıya çıkmadan önce aynı test örnekleri üzerinde eskisiyle karşılaştırılır. Sorun çıkarsa uygulama tek adımda önceki sürüme döndürülür. Böylece istem uygulama kodundan ayrı yönetilebilir ve her yanıtın hangi istem sürümüyle üretildiği iz kaydında görülebilir.",
+  "why": "Bir istemdeki küçük bir kelime değişikliği çıktıları beklenmedik biçimde değiştirebilir. Sürümleme olmadan hangi değişikliğin hangi soruna yol açtığını bulmak zorlaşır. Birden fazla kişi aynı istemi düzenlediğinde de ortak bir kayıt ve güvenli bir geri dönüş yolu sağlar.",
+  "example": "Bir e-ticaret şirketinin ürün açıklaması yazan asistanı, istemin üçüncü sürümünden sonra gereğinden uzun metinler üretmeye başlayınca ekip ikinci sürüme dönüp iki sürüm arasındaki farkı inceler.",
+  "faq": [
+   [
+    "İstem sürümleme için özel bir araç şart mı?",
+    "Hayır. Küçük projelerde Git gibi bir sürüm kontrol sistemi yeterli olabilir. Özel istem yönetim araçları ise test, karşılaştırma ve yayın yönetimini kolaylaştırır."
+   ],
+   [
+    "İstem sürümleme ile istem mühendisliği aynı şey mi?",
+    "Hayır. İstem mühendisliği, modelden iyi sonuç alacak istemleri tasarlama işidir. İstem sürümleme ise bu istemlerin zaman içindeki değişimini kayıt altına alıp yönetmeye odaklanır."
+   ]
+  ]
+ },
+ {
+  "slug": "iz-kaydi",
+  "term": "İz kaydı (tracing)",
+  "en": "tracing",
+  "match": [],
+  "cat": "Kullanım ve araçlar",
+  "def": "Bir yapay zeka uygulamasında tek bir kullanıcı isteğinin geçtiği tüm adımların, yani model çağrılarının, aramaların ve araç kullanımlarının, sırayla ve ayrıntılı biçimde kaydedilmesi.",
+  "how": "Uygulama bir istek aldığında bir iz başlar. Her adım, örneğin bilgi tabanında arama, dil modeline yapılan çağrı ya da bir aracın çalıştırılması, bu izin içinde ayrı bir kayıt olarak eklenir. Kayıtta girdi, çıktı, süre, harcanan token sayısı ve varsa hata bilgisi yer alır. Adımlar iç içe ya da art arda bir ağaç biçiminde görüntülenir. Geliştirici, bir yanıtın neden yanlış çıktığını bu ağaçta adım adım ilerleyerek bulur.",
+  "why": "Birkaç adımdan oluşan ajan ve bilgi getirmeye dayalı uygulamalarda hata çoğu zaman son yanıtta değil, aradaki bir adımda saklıdır. İz kaydı bu adımı görünür kılar. Maliyetin ve gecikmenin nerede biriktiğini anlamak ve gerçek kullanıcı sorunlarını yeniden üretmek için de temel araçlardan biridir.",
+  "example": "Bir asistan yanlış bir iade politikası söylediğinde iz kaydı, bilgi tabanından yanlış belgenin getirildiğini gösterir; sorun modelde değil, arama adımındadır.",
+  "faq": [
+   [
+    "İz kaydı ile günlük kaydı (log) arasındaki fark nedir?",
+    "Günlük kaydı, tek tek olayları ayrı satırlar halinde tutar. İz kaydı ise bir isteğin tüm adımlarını birbirine bağlayıp tek bir akış olarak gösterir; bu sayede hangi adımın ne kadar sürdüğü ve nerede hata çıktığı kolayca görülür."
+   ],
+   [
+    "İz kaydı kullanıcı verisi saklar mı?",
+    "Girdi ve çıktıları da kaydedebildiği için kişisel veri içerebilir. Bu yüzden hassas bilgilerin maskelenmesi, erişimin sınırlanması ve saklama süresinin belirlenmesi gerekir."
+   ]
+  ]
+ },
+ {
+  "slug": "yapay-zeka-ag-gecidi",
+  "term": "Yapay zeka ağ geçidi (AI gateway)",
+  "en": "AI gateway",
+  "match": [
+   "yapay zeka ağ geçidi",
+   "aı gateway"
+  ],
+  "cat": "Kullanım ve araçlar",
+  "def": "Uygulamalar ile farklı yapay zeka modeli sağlayıcıları arasında duran, istekleri tek noktadan yönlendiren, denetleyen ve kaydeden ara katman.",
+  "how": "Uygulama, her sağlayıcıya ayrı ayrı bağlanmak yerine isteklerini ağ geçidine gönderir. Ağ geçidi isteği uygun modele iletir; bu sırada kimlik doğrulama, kullanım limiti, önbellek, güvenlik filtreleri ve maliyet kaydı gibi ortak işleri üstlenir. Bir sağlayıcı yanıt vermezse isteği yedek bir modele yönlendirebilir. Tüm trafik tek noktadan geçtiği için kullanım ve harcama merkezi olarak izlenir. Bu yapı, klasik yazılımdaki API ağ geçitlerine benzer.",
+  "why": "Şirketler birden fazla model ve sağlayıcıyla çalıştıkça anahtar yönetimi, maliyet kontrolü ve veri güvenliği dağınık hale gelir. Ağ geçidi bu kuralları tek yerde uygulamayı mümkün kılar ve sağlayıcı değiştirmeyi kolaylaştırır. Kurumsal yapay zeka kullanımında yönetişim ve denetim açısından sık başvurulan bir bileşendir.",
+  "example": "Bir şirketin tüm ekipleri dil modeli isteklerini ortak bir ağ geçidi üzerinden gönderir; geçit hassas verileri maskeler, ekip başına aylık harcama sınırı uygular ve kesinti olursa başka bir modele geçer.",
+  "faq": [
+   [
+    "Yapay zeka ağ geçidi ile klasik API ağ geçidi arasındaki fark nedir?",
+    "Klasik API ağ geçidi genel trafiği yönetir. Yapay zeka ağ geçidi buna ek olarak token sayımı, istem filtreleme, modeller arası yönlendirme ve yanıt önbellekleme gibi dil modellerine özgü işleri de yapar."
+   ],
+   [
+    "Ağ geçidi yanıt süresini uzatır mı?",
+    "Araya bir adım eklediği için genellikle küçük bir ek gecikme olur. Öte yandan önbellek gibi özellikler, tekrarlanan isteklerde yanıtı hızlandırabilir."
+   ]
+  ]
+ },
+ {
+  "slug": "semantik-onbellek",
+  "term": "Semantik önbellek",
+  "en": "semantic caching",
+  "match": [
+   "semantik önbellek",
+   "semantic caching"
+  ],
+  "cat": "Kullanım ve araçlar",
+  "def": "Bir yapay zeka uygulamasında, daha önce yanıtlanmış sorulara anlamca benzer yeni sorular geldiğinde, modeli yeniden çalıştırmak yerine kayıtlı yanıtı geri veren önbellekleme yöntemi.",
+  "how": "Her soru önce bir gömme (embedding) modeliyle sayı dizisine, yani anlam vektörüne dönüştürülür. Bu vektör, daha önce sorulmuş soruların vektörlerinin tutulduğu bir veri tabanında aranır. Yeni soru, belirlenen eşiğin üzerinde bir benzerlikle eşleşirse kayıtlı yanıt doğrudan döndürülür; eşleşme yoksa soru dil modeline gider ve çıkan yanıt ileride kullanılmak üzere kaydedilir. Klasik önbellek yalnızca birebir aynı metni yakalarken bu yöntem \"Şifremi unuttum\" ile \"Parolamı nasıl sıfırlarım?\" cümlelerini aynı soru sayabilir.",
+  "why": "Dil modeli çağrıları hem zaman hem para harcar; sık tekrarlanan sorularda önbellek yanıt süresini kısaltır ve maliyeti düşürür. Öte yandan eşik yanlış ayarlanırsa farklı anlama gelen iki soruya aynı yanıt verilebilir, bu yüzden doğruluk ile tasarruf arasında denge kurulur. Müşteri destek botları gibi aynı soruların sürekli geldiği uygulamalarda yaygın bir iyileştirmedir.",
+  "example": "Bir bankanın destek asistanına çok sayıda kişi \"Kartımı nasıl dondururum?\" sorusunu farklı sözcüklerle sorar; ilk yanıt kaydedilir, sonrakiler model çağrılmadan hızla verilir.",
+  "faq": [
+   [
+    "Semantik önbellek ile klasik önbellek arasındaki fark ne?",
+    "Klasik önbellek, sorunun daha önce gelenle birebir aynı olmasını ister. Semantik önbellek ise sözcükler farklı olsa bile anlamı yakın olan soruları aynı kabul eder."
+   ],
+   [
+    "Semantik önbellek yanlış yanıt verebilir mi?",
+    "Evet. Benzerlik eşiği çok gevşek bırakılırsa birbirine benzeyen ama farklı şeyler soran iki soru aynı yanıtı alabilir. Kişiye özel ya da sık değişen bilgi gerektiren sorularda bu yöntem dikkatle kullanılır."
+   ]
+  ]
+ },
+ {
+  "slug": "hibrit-arama",
+  "term": "Hibrit arama",
+  "en": "hybrid search",
+  "match": [
+   "hibrit arama",
+   "hybrid search"
+  ],
+  "cat": "Kullanım ve araçlar",
+  "def": "Anahtar kelime eşleştirmesini, anlam temelli vektör aramasıyla birleştirip iki yöntemin sonuçlarını tek bir ortak sıralamada sunan bir arama yaklaşımı.",
+  "how": "Sorgu aynı anda iki yoldan aranır. Birincisi BM25 gibi sözcük temelli yöntemdir; sorgudaki kelimelerin belgelerde geçip geçmediğine ve ne kadar nadir olduklarına bakar. İkincisi gömme vektörleriyle çalışan anlamsal aramadır; farklı sözcüklerle ifade edilmiş ama aynı şeyi anlatan metinleri bulur. İki listedeki sonuçlar, çoğunlukla karşılıklı sıra füzyonu gibi bir yöntemle birleştirilir ve gerekirse bir yeniden sıralama modeli son sıralamayı düzeltir.",
+  "why": "Yalnızca anlamsal arama, ürün kodu, hata mesajı ya da özel ad gibi tam eşleşme gereken sorgularda kaçırma yapabilir; yalnızca anahtar kelime araması ise eş anlamlıları göremez. Hibrit arama bu iki zayıflığı dengeler. Bu yüzden geri getirmeyle güçlendirilmiş üretim (RAG) sistemlerinde yanıt kalitesini artırmak için sık tercih edilir.",
+  "example": "Bir şirketin iç belge asistanında belirli bir form kodu aranınca kelime araması tam eşleşmeyi bulur; \"izin başvurusu nasıl yapılır\" sorusunda ise anlamsal arama ilgili yönergeyi getirir.",
+  "faq": [
+   [
+    "Hibrit arama ile RAG aynı şey mi?",
+    "Hayır. RAG, modelin yanıt vermeden önce ilgili belgeleri bulup kullanması yaklaşımıdır. Hibrit arama ise bu belgeleri bulma adımında kullanılabilen bir arama yöntemidir."
+   ],
+   [
+    "Hibrit arama her zaman yalnızca anlamsal aramadan daha mı iyi?",
+    "Her zaman değil. Ürün kodu ya da özel ad içeren karma veri kümelerinde genellikle daha dengeli sonuç verir, ama başarısı veriye ve ayara bağlıdır; bu yüzden gerçek sorgularla denenip ölçülür."
+   ]
+  ]
+ },
+ {
+  "slug": "bilgi-tabani",
+  "term": "Bilgi tabanı (knowledge base)",
+  "en": "knowledge base",
+  "match": [
+   "bilgi tabanı",
+   "knowledge base"
+  ],
+  "cat": "Kullanım ve araçlar",
+  "def": "Bir yapay zeka sisteminin yanıt verirken başvurabileceği belgelerin, sıkça sorulan soruların ve diğer kaynakların düzenli biçimde toplandığı, aranabilir bilgi deposu.",
+  "how": "Şirket belgeleri, kılavuzlar, e-postalar veya web sayfaları toplanır, temizlenir ve parçalara bölünür. Her parça gömme vektörüne çevrilip vektör veri tabanı ya da arama dizini gibi bir yapıda saklanır. Kullanıcı soru sorduğunda sistem ilgili parçaları bulur ve dil modeline yanıtı hazırlarken kaynak olarak verir. Böylece model, eğitim verisinde olmayan şirkete özgü ya da güncel bilgilere de dayanabilir; tabanın içeriği değişince modeli yeniden eğitmek gerekmez.",
+  "why": "Dil modelleri eğitim verisinin dışındaki özel ya da yeni bilgileri bilmez ve bazen yanıt uydurur. Bilgi tabanı yanıtları somut kaynaklara bağlayarak bu riski azaltır ve kaynak göstermeyi mümkün kılar. Ancak içerik eskiyse ya da hatalıysa yanıtlar da bozulur; bu yüzden tabanın bakımı kritik bir iştir.",
+  "example": "Bir telekom operatörünün müşteri asistanı, tarife koşullarının ve arıza giderme kılavuzlarının yer aldığı bilgi tabanından ilgili bölümü bulup yanıtını ona dayandırır.",
+  "faq": [
+   [
+    "Bilgi tabanı ile klasik veri tabanı arasındaki fark ne?",
+    "Klasik veri tabanı genellikle tablolar halinde yapılandırılmış kayıtları tutar. Yapay zeka bağlamındaki bilgi tabanı ise çoğunlukla metin belgelerinden oluşur ve anlama göre aranabilecek biçimde hazırlanır."
+   ],
+   [
+    "Bilgi tabanına belge eklemek modeli eğitmek anlamına gelir mi?",
+    "Hayır. Model değişmez; sistem yalnızca soru geldiğinde tabandan ilgili parçaları bulup modele ek bilgi olarak verir. Bu yüzden içerik, yeniden eğitim yapmadan güncellenebilir."
+   ]
+  ]
+ },
+ {
+  "slug": "ajan-dongusu",
+  "term": "Ajan döngüsü (agent loop)",
+  "en": "agent loop",
+  "match": [
+   "ajan döngüsü",
+   "agent loop"
+  ],
+  "cat": "Kullanım ve araçlar",
+  "def": "Yapay zeka ajanının bir hedefe ulaşana kadar durumu değerlendirip bir eylem seçtiği, bu eylemi yürüttüğü ve sonucu görüp yeniden karar verdiği tekrarlayan çalışma çevrimi.",
+  "how": "Ajan, kullanıcının hedefini ve elindeki araçların listesini dil modeline verir. Model bir sonraki adımı seçer; örneğin web'de arama yapmayı, dosya okumayı ya da bir yazılım arayüzünü çağırmayı önerir. Uygulama bu aracı çalıştırır ve çıktıyı modele geri iletir. Model sonucu değerlendirip yeni bir araç çağırır ya da hedefin tamamlandığına karar verip son yanıtı yazar. Döngü; görev bitince, adım sınırına ulaşılınca ya da insan müdahale edince sona erer.",
+  "why": "Tek seferlik soru-yanıt ile çok adımlı iş yapan ajanlar arasındaki temel fark bu döngüdür. Ajanın hata yapıp kendini düzeltebilmesini sağlar, ama her turda maliyet ve süre artar; kontrolsüz kalırsa model yanlış yolda dönüp durabilir. Bu yüzden adım sınırı, izleme ve insan onayı gibi önlemler tasarımın parçasıdır.",
+  "example": "Kod yazan bir asistan testleri çalıştırır, hata mesajını okur, kodu düzeltir ve testleri yeniden çalıştırır; bütün testler geçene kadar bu tur sürer.",
+  "faq": [
+   [
+    "Ajan döngüsü sonsuza kadar sürebilir mi?",
+    "Önlem alınmazsa evet; ajan aynı hatayı tekrar tekrar deneyebilir. Bu yüzden uygulamalar genellikle en fazla adım sayısı, zaman ya da maliyet sınırı koyar."
+   ],
+   [
+    "Ajan döngüsü ile ReAct aynı şey mi?",
+    "Tam olarak değil. Ajan döngüsü genel çalışma düzenidir. ReAct ise modelin düşünme ve eylem adımlarını iç içe yürüttüğü, bu döngüyü kurmak için kullanılan bilinen bir istem yaklaşımıdır."
+   ]
+  ]
+ },
+ {
+  "slug": "cok-turlu-konusma",
+  "term": "Çok turlu konuşma",
+  "en": "multi-turn conversation",
+  "match": [
+   "çok turlu konuşma",
+   "multi-turn conversation"
+  ],
+  "cat": "Kullanım ve araçlar",
+  "def": "Kullanıcı ile yapay zeka arasında birkaç mesajlık karşılıklı alışverişin sürdüğü ve önceki söylenenlerin sonraki yanıtları etkilediği bir sohbet biçimi.",
+  "how": "Dil modelleri konuşmayı kendiliğinden hatırlamaz. Uygulama her yeni turda, o ana kadarki mesajların tamamını ya da özetini yeni mesajla birlikte modele gönderir. Model bu geçmişe bakarak \"bunu kısalt\" ya da \"peki ikincisi?\" gibi bağlama bağlı ifadeleri çözer. Geçmiş modelin bağlam penceresine sığmayacak kadar uzarsa eski turlar kırpılır veya özetlenir; bu da erken söylenen ayrıntıların unutulmasına yol açabilir.",
+  "why": "Gerçek kullanımda insanlar nadiren tek mesajla işini bitirir; soruyu netleştirir, düzeltme ister, ayrıntı ekler. Çok turlu yapı, sohbet asistanlarını ve müşteri botlarını doğal kılar. Öte yandan uzun konuşmalarda maliyet artar ve model eski bilgiyi karıştırabilir, bu yüzden geçmişin yönetimi önemlidir.",
+  "example": "Bir kullanıcı asistandan tatil planı ister, ardından \"bütçeyi düşür\" der; asistan hangi plandan söz edildiğini önceki mesajlardan bilir.",
+  "faq": [
+   [
+    "Çok turlu konuşma ile tek turlu istem arasındaki fark ne?",
+    "Tek turlu istemde model yalnızca o anki mesajı görür ve bir yanıt verip biter. Çok turlu konuşmada ise önceki mesajlar da modele iletilir, böylece sonraki sorular geçmişe göre yanıtlanır."
+   ],
+   [
+    "Yeni bir sohbet açınca model neden önceki konuşmayı bilmiyor?",
+    "Çünkü model geçmişi kendi içinde saklamaz; yalnızca uygulamanın gönderdiği mesajları görür. Yeni sohbette eski geçmiş gönderilmediği için model o konuşmadan habersizdir."
+   ]
+  ]
+ },
+ {
+  "slug": "baglam-curumesi",
+  "term": "Bağlam çürümesi (context rot)",
+  "en": "context rot",
+  "match": [
+   "bağlam çürümesi",
+   "context rot"
+  ],
+  "cat": "Kullanım ve araçlar",
+  "def": "Bir dil modeline verilen metin uzadıkça, girdi bağlam penceresine sığsa bile yanıtların kalitesinin ve tutarlılığının giderek bozulması. Uzun sohbetlerde ve çok belgeli işlerde sık görülür.",
+  "how": "Model, girdideki her parçaya aynı özenle bakamaz. Metin uzadıkça önemli bilgi gereksiz ayrıntıların arasında kaybolabilir, baştaki talimatlar zayıflayabilir, birbiriyle çelişen parçalar modeli şaşırtabilir. Bunu, saatlerce süren bir toplantıda en baştaki kararı hatırlamaya çalışmaya benzetmek mümkün. Etkinin şiddeti modele ve göreve göre değişir; herkesin kabul ettiği tek bir eşik yoktur. Sohbeti özetleyip yeniden başlatmak, bağlama yalnızca ilgili parçaları koymak ve kritik talimatları tekrarlamak yaygın önlemlerdir.",
+  "why": "Model tanıtımlarında uzun bağlam penceresi büyük bir özellik olarak öne çıkar; ancak pencerenin geniş olması her bilgiyi aynı güvenilirlikle kullanmak anlamına gelmez. Bağlam çürümesini bilmek, uzun belgelerle çalışan ya da ajan sistemler kuran ekiplerin beklentisini gerçekçi tutar ve özetleme, bilgi getirme gibi çözümleri doğru yerde kullanmalarına yardım eder.",
+  "example": "Saatlerdir süren bir kod yardımı sohbetinde asistan en baştaki kısıtlamaları göz ardı etmeye başlarsa, sorun çoğu zaman yeni bir sohbet açıp kısa bir özeti taşımakla düzelir.",
+  "faq": [
+   [
+    "Bağlam çürümesi ile bağlam penceresinin dolması aynı şey mi?",
+    "Hayır. Pencere dolduğunda metnin bir kısmı sığmaz, kesilir ya da hata alınır. Bağlam çürümesinde ise girdi pencereye sığar ama modelin yanıt kalitesi düşer."
+   ],
+   [
+    "Bağlam çürümesini tamamen önlemek mümkün mü?",
+    "Tamamen değil. Yine de bağlamı kısa ve ilgili tutmak, uzun işleri aşamalara bölmek ve önemli talimatları yeniden hatırlatmak etkisini belirgin biçimde azaltabilir."
+   ]
+  ]
+ },
+ {
+  "slug": "model-surumu-sabitleme",
+  "term": "Model sürümü sabitleme (model pinning)",
+  "en": "model pinning",
+  "match": [
+   "model sürümü sabitleme",
+   "model pinning"
+  ],
+  "cat": "Kullanım ve araçlar",
+  "def": "Bir uygulamanın, sağlayıcının otomatik güncellemelerine bırakılmak yerine belirli ve adlandırılmış bir model sürümünü kullanmaya devam etmesi. Amaç, modelin davranışının habersiz değişmesini önlemektir.",
+  "how": "Model sağlayıcıları genellikle iki tür ad sunar: zaman içinde yeni sürüme işaret edebilen genel takma adlar ve belirli bir sürüme bağlı tarihli ya da numaralı kimlikler. Sabitleme, uygulamanın istek yaparken ikinci türü kullanması demektir. Böylece sağlayıcı arka planda yeni bir model yayımlasa da uygulama aynı davranışı almaya devam eder. Sabitlenen sürümler sonsuza dek kalmaz; sağlayıcılar eski sürümleri belirli bir takvimle kullanımdan kaldırır. Bu nedenle ekipler yeni sürümü önceden test edip geçişi planlamak zorundadır.",
+  "why": "Küçük bir model güncellemesi bile yanıtların biçimini, uzunluğunu ya da talimatlara uyumunu değiştirebilir. Bu da özenle kurulmuş istemlerin, ayrıştırma kodlarının ve kalite testlerinin bozulması anlamına gelir. Sabitleme öngörülebilirlik sağlar, ancak yeni sürümlerin iyileştirmelerinden yararlanmayı geciktirir; bu yüzden bilinçli bir denge gerekir.",
+  "example": "Fatura belgelerinden alan çıkaran bir şirket, modelin çıktı biçimi değişip kodunu bozmasın diye tarihli sürüm kimliğini kullanır; yeni sürümü önce test verisiyle dener, sonuç iyiyse geçiş yapar.",
+  "faq": [
+   [
+    "Model sürümü sabitlemek, modeli kendi sunucuda çalıştırmakla aynı şey mi?",
+    "Hayır. Sabitleme, sağlayıcının sunduğu belirli bir sürümü seçmektir; sağlayıcı o sürümü ileride kullanımdan kaldırabilir. Modeli kendi altyapısında çalıştırmak ise ağırlıkların elde olmasını gerektirir ve ayrı bir iştir."
+   ],
+   [
+    "Sabitlenen sürüm ne kadar süre kullanılabilir?",
+    "Bu, sağlayıcıya ve modele göre değişir. Sağlayıcıların kullanımdan kaldırma duyurularını izlemek ve geçişi erkenden planlamak gerekir."
+   ]
+  ]
+ },
+ {
+  "slug": "yedek-model",
+  "term": "Yedek model (fallback)",
+  "en": "model fallback",
+  "match": [],
+  "cat": "Kullanım ve araçlar",
+  "def": "Ana model yanıt veremediğinde, hata verdiğinde ya da aşırı yavaşladığında isteğin otomatik olarak devredildiği ikinci model. Hizmetin kesintiye uğramasını önlemek için kullanılır.",
+  "how": "Uygulama ile modeller arasında genellikle bir yönlendirme katmanı bulunur. İstek önce ana modele gider; zaman aşımı, kota sınırı, hizmet kesintisi ya da geçersiz yanıt gibi bir başarısızlık algılanırsa aynı istek sıradaki yedek modele aktarılır. Yedek, başka bir sağlayıcının modeli ya da aynı sağlayıcının daha küçük ve ucuz bir modeli olabilir. Burada dikkat edilecek nokta, bir istemin her modelde aynı sonucu vermemesidir; yedek yol da düzenli olarak denenmelidir.",
+  "why": "Yapay zeka hizmetleri de kesintiye, yoğunluğa ve kota sınırlarına açıktır. Yedek model, bu anlarda ürünün tamamen durmasını önler ve kullanıcı deneyimini korur. Karşılığında kalite, maliyet ve veri işleme koşulları yedekte farklı olabilir; özellikle kişisel veri söz konusuysa bu fark önceden değerlendirilmelidir.",
+  "example": "Bir müşteri hizmetleri sohbet botu ana modelden yanıt alamazsa isteği otomatik olarak daha küçük bir modele yollar ve kullanıcı sohbete kesintisiz devam eder.",
+  "faq": [
+   [
+    "Yedek model ile model yönlendirme aynı şey mi?",
+    "Tam olarak değil. Yönlendirme, isteğin zorluğuna ya da maliyete göre en baştan uygun modele gönderilmesidir. Yedek model ise yalnızca ana yol başarısız olduğunda devreye girer."
+   ],
+   [
+    "Yedek model her zaman ana modelden daha zayıf mı olur?",
+    "Hayır. Bazen aynı kalitede ama farklı bir sağlayıcıdaki model seçilir. Bazen de hız ve maliyet için daha küçük bir model tercih edilir; seçim, uygulamanın önceliğine bağlıdır."
+   ]
+  ]
+ },
+ {
+  "slug": "golge-modu",
+  "term": "Gölge modu (shadow mode)",
+  "en": "shadow mode",
+  "match": [
+   "gölge modu",
+   "shadow mode"
+  ],
+  "cat": "Kullanım ve araçlar",
+  "def": "Yeni bir modelin ya da özelliğin gerçek kullanıcı trafiğini işleyip yanıt üretmesi, ama bu yanıtların kullanıcıya gösterilmemesi. Yanıtlar yalnızca kaydedilir ve mevcut sistemle karşılaştırılır.",
+  "how": "Canlı sistemdeki her istek her zamanki gibi mevcut modele gider ve yanıtı kullanıcıya iletilir. Aynı istek arka planda yeni modele de gönderilir; onun yanıtı kullanıcıya gösterilmez, yalnızca kaydedilir. Ekip daha sonra iki yanıtı insan değerlendirmesi, otomatik ölçütler, gecikme ve maliyet açısından karşılaştırır. Böylece yeni modelin gerçek trafikte nasıl davrandığı, kimse etkilenmeden görülür. Sınırı şudur: kullanıcı yanıtı görmediği için onun tepkisi ölçülemez.",
+  "why": "Test verisi gerçek kullanımın çeşitliliğini tam yansıtmaz. Gölge modu, riskli bir geçişten önce beklenmedik hataları yakalamanın görece güvenli yoludur. Ancak ek hesaplama maliyeti getirir ve kullanıcı verilerinin ikinci bir sisteme de gitmesi gizlilik açısından ayrıca düşünülmelidir.",
+  "example": "Bir e-posta uygulaması yeni özetleme modelini gölge modunda çalıştırır; kullanıcılar eski modelin özetlerini görürken ekip yeni modelin özetlerini arka planda inceler.",
+  "faq": [
+   [
+    "Gölge modu ile A/B testi arasındaki fark ne?",
+    "A/B testinde kullanıcıların bir kısmı yeni sürümün çıktısını görür ve tepkileri ölçülür. Gölge modunda ise yeni sürümün çıktısı kimseye gösterilmez; yalnızca arka planda kaydedilip karşılaştırılır."
+   ],
+   [
+    "Gölge modu kullanıcıları hiç etkilemez mi?",
+    "Yanıtlar görünmediği için doğrudan etkilemez. Yine de yeni sistem e-posta göndermek ya da kayıt değiştirmek gibi eylemler yapabiliyorsa bunlar kapatılmalı, arka plandaki çağrı da kullanıcıyı yavaşlatmayacak biçimde kurulmalıdır."
+   ]
+  ]
+ },
+ {
+  "slug": "a-b-testi",
+  "term": "A/B testi (yapay zeka özellikleri)",
+  "en": "A/B testing",
+  "match": [
+   "a/b testi",
+   "=a/b"
+  ],
+  "cat": "Kullanım ve araçlar",
+  "def": "Kullanıcıların rastgele iki gruba ayrılıp birine mevcut sürümün, diğerine değiştirilmiş sürümün (yeni model, farklı istem ya da yeni özellik) sunulduğu ve sonuçların karşılaştırıldığı deney yöntemi.",
+  "how": "Kullanıcılar rastgele iki gruba ayrılır. Bir gruba mevcut sürüm, diğerine değiştirilmiş sürüm gösterilir; bu yeni bir model, farklı bir istem ya da yeni bir arayüz olabilir. Önceden belirlenen ölçütler, örneğin görev tamamlama oranı, beğeni düğmesi, memnuniyet, yanıt süresi ve maliyet, iki grupta karşılaştırılır. Fark rastlantıdan ibaret olmasın diye yeterli sayıda kullanıcı ve yeterli süre gerekir. Yapay zekada çıktılar her seferinde değiştiği ve iyi yanıtın tanımı bulanık olduğu için ölçüt seçimi ayrıca zordur.",
+  "why": "Bir modelin laboratuvar testlerinde iyi görünmesi, gerçek kullanıcıların onu daha yararlı bulacağı anlamına gelmez. A/B testi kararı sezgiye değil gözleme dayandırır. Yine de kısa vadeli tek bir ölçüte takılmak yanıltıcı olabilir; örneğin daha uzun yanıtlar daha çok beğenilirken daha pahalı da olabilir.",
+  "example": "Bir sohbet asistanı geliştiren ekip, iki farklı sistem istemini kullanıcıların yarısına ayrı ayrı sunar ve hangisinin daha fazla olumlu geri bildirim aldığına bakar.",
+  "faq": [
+   [
+    "A/B testi için kaç kullanıcı gerekir?",
+    "Sabit bir sayı yoktur. Aranan fark küçüldükçe ve ölçüt oynaklaştıkça daha fazla kullanıcı gerekir; ekipler bunu genellikle istatistiksel güç hesabıyla önceden belirler."
+   ],
+   [
+    "Yapay zeka özelliklerinde A/B testi neden daha zordur?",
+    "Çıktılar her seferinde değişir, iyi yanıtın tek bir ölçütü yoktur ve kullanıcı memnuniyeti zamanla farklılaşabilir. Bu yüzden beğeni gibi ölçütlerin yanında insan incelemesi ve uzun vadeli göstergeler de izlenir."
+   ]
+  ]
+ },
+ {
+  "slug": "niyet-siniflandirma",
+  "term": "Niyet sınıflandırma (intent classification)",
+  "en": "intent classification",
+  "match": [
+   "niyet sınıflandırma",
+   "intent classification"
+  ],
+  "cat": "Kullanım ve araçlar",
+  "def": "Kullanıcının yazdığı ya da söylediği bir mesajın ardındaki amacı, önceden tanımlı kategorilerden biriyle eşleştiren yöntem. Örneğin 'siparişim nerede?' cümlesi 'kargo sorgulama' niyetine atanır.",
+  "how": "Sistem, örnek cümlelerle etiketlenmiş bir veri kümesiyle eğitilir. Başka bir yol da büyük bir dil modeline kategori listesini verip mesajı bunlardan birine yerleştirmesini istemektir. Gelen mesaj işlenir ve her niyet için bir güven skoru üretilir. Skor yeterince yüksekse ilgili akış başlar, örneğin iade formu açılır. Skor düşükse sistem açıklayıcı bir soru sorar ya da isteği bir insana yönlendirir. Bir mesajda birden fazla niyet de olabilir; iyi tasarlanmış sistemler bunları ayrı ayrı yakalar.",
+  "why": "Müşteri hizmetleri botları, sesli asistanlar ve akıllı arama kutuları, kullanıcının ne istediğini anlamadan işe yarar bir yanıt veremez. Niyet yanlış belirlenirse kullanıcı alakasız cevaplarla karşılaşır ve sisteme güveni azalır. Doğru sınıflandırma, isteklerin uygun araca ya da ekibe gitmesini sağlayarak bekleme süresini ve maliyeti düşürür.",
+  "example": "Bir bankanın sohbet botu 'kartımı kaybettim' mesajını 'kart bloke etme' niyetine, 'hesap özetim' mesajını 'ekstre isteme' niyetine atar ve her birini farklı bir işleme yönlendirir.",
+  "faq": [
+   [
+    "Niyet sınıflandırma ile varlık çıkarımı arasındaki fark nedir?",
+    "Niyet, kullanıcının ne yapmak istediğini gösterir; varlık ise mesajdaki tarih, şehir, tutar gibi somut ayrıntılardır. 'Yarın İstanbul'a bilet bul' cümlesinde niyet bilet aramak, 'yarın' ve 'İstanbul' ise varlıklardır."
+   ],
+   [
+    "Büyük dil modelleri varken niyet sınıflandırma hâlâ gerekli mi?",
+    "Görev ortadan kalkmadı, yalnızca yöntem değişti; birçok sistem artık sınıflandırmayı bir dil modeline yaptırıyor. Net kategoriler ve güven eşiği ise sistemin davranışını öngörülebilir kılmak için hâlâ işe yarıyor."
+   ]
+  ]
+ },
+ {
+  "slug": "insana-devretme",
+  "term": "İnsana devretme (human handoff)",
+  "en": "human handoff",
+  "match": [
+   "insana devretme",
+   "human handoff"
+  ],
+  "cat": "Kullanım ve araçlar",
+  "def": "Yapay zeka destekli bir sistemin, kendi başına çözemediği ya da riskli bulduğu bir durumda konuşmayı veya işlemi bir insan çalışana aktarması. En çok müşteri hizmetlerinde görülür.",
+  "how": "Devretme birkaç durumda tetiklenir: kullanıcı bir insanla konuşmak ister, sistemin güveni düşer, aynı soru birkaç kez yanıtsız kalır ya da konu ödeme, sağlık, şikâyet gibi hassas bir alana girer. Bazı sistemler kullanıcının sinirli olduğunu fark edince de devreder. Devir sırasında konuşma geçmişi ve kısa bir özet insana iletilir; böylece kullanıcı derdini baştan anlatmak zorunda kalmaz. Kullanıcıya da tahmini bekleme süresi ya da bir sonraki adım bildirilir.",
+  "why": "Yapay zeka sistemleri hata yapabilir ve her durumu kapsayamaz. İnsana çıkış yolu olmayan bir bot kullanıcıyı çıkmaza sokar. Devretme, yüksek riskli işlerde insan gözetimini sağlamanın en yaygın pratik yoludur. Devrin ne kadar sorunsuz yapıldığı, müşteri memnuniyetini büyük ölçüde belirler.",
+  "example": "Bir telekom şirketinin sohbet botu fatura itirazında çözüm üretemeyince, konuşmanın özetiyle birlikte müşteriyi canlı destek temsilcisine bağlar.",
+  "faq": [
+   [
+    "İnsana devretme ile insan döngüde (human-in-the-loop) aynı şey mi?",
+    "Yakın kavramlardır ama aynı değildir. İnsan döngüde, insan sürecin içinde onay verir ya da düzeltme yapar; devretmede ise iş tamamen insana geçer. Pratikte çoğu sistem ikisini birlikte kullanır."
+   ],
+   [
+    "Botların insana devretme seçeneği sunması zorunlu mu?",
+    "Zorunluluk ülkeye ve sektöre göre değişir, bu yüzden ilgili mevzuata bakmak gerekir. Genel iyi uygulama ise kullanıcıya insana ulaşma yolunu açık bırakmaktır."
+   ]
+  ]
+ },
+ {
+  "slug": "spesifikasyon-odakli-gelistirme",
+  "term": "Spesifikasyon odaklı geliştirme (spec-driven development)",
+  "en": "spec-driven development",
+  "match": [
+   "spesifikasyon odaklı geliştirme",
+   "spec-driven development"
+  ],
+  "cat": "Kullanım ve araçlar",
+  "def": "Yapay zeka ajanlarına doğrudan kod yazdırmak yerine, önce yapılacak işi ayrıntılı anlatan bir belge (spesifikasyon) hazırlayıp yazılımı bu belgeden üreterek geliştirme yaklaşımı.",
+  "how": "İnsan, özelliğin nasıl davranacağını, hangi kısıtlara uyacağını ve neyin tamamlanmış sayılacağını bir belgede yazar. Kod yazan yapay zeka asistanı bu belgeden önce bir plan ve görev listesi çıkarır, sonra kodu ve testleri üretir. Üretilen çıktı, belgedeki ölçütlere göre kontrol edilir. Bir değişiklik gerektiğinde önce belge güncellenir, ardından kod buna göre yeniden üretilir ya da düzeltilir. Belge böylece ekibin ve yapay zekanın ortak başvuru kaynağı olur.",
+  "why": "Kısa ve gevşek istemlerle kod üretmek hızlıdır ama sonuçlar tutarsız olabilir; yapay zeka eksik bırakılan yerleri kendi varsayımlarıyla doldurur. Spesifikasyon, niyeti yazılı hale getirerek bu belirsizliği azaltır. Eleştirenler ise bunun eski usul 'önce ayrıntılı tasarım' anlayışına dönüş olduğunu ve belge yazmanın da emek istediğini söylüyor.",
+  "example": "Bir ekip 'şifre sıfırlama' özelliği için akışı, hata durumlarını ve güvenlik kurallarını yazar; bir kod asistanı bu belgeden görevleri çıkarıp kodu ve testleri üretir.",
+  "faq": [
+   [
+    "Spesifikasyon odaklı geliştirme ile test odaklı geliştirme aynı şey mi?",
+    "Hayır. Test odaklı geliştirmede önce testler yazılır; spesifikasyon odaklı yaklaşımda ise önce istenen davranışın tanımı yazılır ve testler bundan türetilebilir. İki yöntem birlikte de kullanılabilir."
+   ],
+   [
+    "Her yazılım projesi için uygun mu?",
+    "Küçük ve deneysel işlerde belge hazırlamak gereksiz yük olabilir. Gereksinimleri net, birden çok kişinin çalıştığı ve uzun ömürlü projelerde daha anlamlı olur."
+   ]
+  ]
+ },
+ {
+  "slug": "yapay-zeka-kullanici-deneyimi",
+  "term": "Yapay zeka kullanıcı deneyimi (AI UX)",
+  "en": "AI user experience",
+  "match": [
+   "yapay zeka kullanıcı deneyimi",
+   "aı user experience"
+  ],
+  "cat": "Kullanım ve araçlar",
+  "def": "Yapay zeka destekli ürünlerin, belirsiz ve zaman zaman hatalı çıktılar üretmelerine rağmen kullanıcı için anlaşılır, güvenilir ve kontrol edilebilir olmasını amaçlayan tasarım alanı.",
+  "how": "Klasik yazılımda aynı girdi hep aynı sonucu verir; yapay zekada ise çıktı değişebilir ve yanlış olabilir. Tasarımcılar bu yüzden sistemin neyi yapıp neyi yapamadığını açıkça belirtir, kaynakları ya da gerekçeyi gösterir ve çıktıyı düzenlemeyi veya geri almayı kolaylaştırır. Beğendim ya da beğenmedim gibi geri bildirim düğmeleri sunar. Yanıtın parça parça akması gibi çözümlerle bekleme hissini azaltır. Sistem hata yaptığında da kullanıcıya alternatif bir yol bırakır.",
+  "why": "Model ne kadar iyi olursa olsun arayüz kötüyse kullanıcı ya sisteme aşırı güvenir ya da hiç güvenmez. Yapay zeka haberlerinde sık anlatılan fark, aynı modelin farklı ürünlerde çok farklı deneyimler sunabilmesidir. İyi tasarım, kullanıcının güvenini sistemin gerçek başarısıyla uyumlu tutmaya yardım eder.",
+  "example": "Bir sohbet asistanı yanıtının altında kaynak bağlantıları gösterir ve 'yeniden oluştur' düğmesi sunar; bir e-posta yazım aracı taslağı göndermeden önce kullanıcıya düzenleme imkânı verir.",
+  "faq": [
+   [
+    "Yapay zeka kullanıcı deneyimi klasik kullanıcı deneyiminden nasıl ayrılır?",
+    "Klasik tasarımda sistem öngörülebilir davranır. Yapay zekada çıktı değişkendir ve hata olasılığı vardır; bu yüzden belirsizliği, düzeltmeyi ve kullanıcının kontrolünü tasarımın merkezine almak gerekir."
+   ],
+   [
+    "Güven ayarı neden önemlidir?",
+    "Amaç kullanıcının sisteme tam gerektiği kadar güvenmesidir. Aşırı güven hataların gözden kaçmasına, yetersiz güven ise ürünün faydasının kullanılmamasına yol açar."
+   ]
+  ]
+ },
+ {
+  "slug": "cikti-dogrulama",
+  "term": "Çıktı doğrulama",
+  "en": "output validation",
+  "match": [
+   "çıktı doğrulama",
+   "output validation"
+  ],
+  "cat": "Güvenlik ve etik",
+  "def": "Bir yapay zeka modelinin ürettiği yanıtın, kullanıcıya ya da başka bir sisteme ulaşmadan önce biçim, doğruluk ve güvenlik açısından denetlenmesi.",
+  "how": "Model yanıtı üretir, ardından ayrı bir katman bu yanıtı kontrol eder. Kontroller arasında beklenen biçime uyup uymadığı, yasaklı içerik bulunup bulunmadığı, kişisel veri sızıp sızmadığı ve verilen kaynaklarla çelişip çelişmediği vardır. Üretilen yazılım kodu ise çalıştırılıp test edilebilir. Bazı sistemler denetimi yapması için ikinci bir model kullanır. Kontrol başarısız olursa yanıt yeniden üretilir, düzeltilir, engellenir ya da bir insana gönderilir. Kural tabanlı ve model tabanlı denetimler çoğu zaman birlikte kullanılır.",
+  "why": "Dil modelleri akıcı ama yanlış ya da zararlı çıktılar üretebilir. Çıktı bir veri tabanını ya da ödeme sistemini tetikliyorsa hata zincirleme büyüyebilir. Çıktı doğrulama, girdi tarafındaki filtrelemeyi tamamlar ve yapay zekanın gerçek işlerde daha güvenli kullanılmasının temel adımlarından biridir.",
+  "example": "Bir sigorta şirketinin yapay zeka asistanı hasar özetini yapılandırılmış veri olarak üretir; doğrulama katmanı zorunlu alanların dolu olduğunu ve yanıtta müşterinin kimlik numarası gibi bir bilginin bulunmadığını kontrol ettikten sonra kaydı sisteme iletir.",
+  "faq": [
+   [
+    "Çıktı doğrulama halüsinasyonu tamamen önler mi?",
+    "Hayır. Biçim hatalarını ve bazı yanlış bilgileri yakalayabilir, ama her yanlışı fark etmesi mümkün değildir. Riski azaltır, ortadan kaldırmaz."
+   ],
+   [
+    "Çıktı doğrulama ile koruma bariyerleri (guardrails) aynı şey mi?",
+    "Koruma bariyerleri daha geniş bir kavramdır; hem girdi hem çıktı kontrollerini ve davranış kurallarını kapsar. Çıktı doğrulama bunların çıkış tarafındaki parçasıdır."
+   ]
+  ]
+ },
+ {
+  "slug": "kisisel-veri-maskeleme",
+  "term": "Kişisel veri maskeleme (PII redaction)",
+  "en": "PII redaction",
+  "match": [
+   "kişisel veri maskeleme",
+   "pıı redaction"
+  ],
+  "cat": "Güvenlik ve etik",
+  "def": "Metin, görüntü veya veri tablolarındaki ad, kimlik numarası, telefon, adres gibi bir kişiyi belirleyebilecek bilgilerin silinmesi ya da yerine yer tutucu konulması işlemi.",
+  "how": "Süreç önce veri içindeki kişisel bilgileri bulur. Bunun için düzenli ifadeler (örneğin telefon ve kart numarası kalıpları), sözlükler ya da adları ve adresleri bağlamdan tanıyan dil modelleri kullanılır. Bulunan parçalar silinir, siyah kutuyla kapatılır ya da [AD] ve [TELEFON] gibi etiketlerle değiştirilir. Bazı sistemler bunun yerine uydurma ama gerçekçi değerler koyar. Bu adım, veri bir yapay zeka modeline gönderilmeden, eğitim veri kümesine eklenmeden ya da kayıt dosyalarında saklanmadan önce uygulanır.",
+  "why": "Yapay zeka araçları müşteri yazışmaları, sağlık kayıtları ve çağrı merkezi dökümleri gibi hassas verilerle çalıştığında bu bilgilerin sızma riski doğar. Maskeleme, KVKK ve GDPR gibi kişisel veri düzenlemelerine uyumu kolaylaştırır ve veriyi daha güvenle paylaşmayı sağlar. Yine de kusursuz değildir; gözden kaçan tek bir bilgi bile kişiyi ele verebilir.",
+  "example": "Bir banka, müşteri şikâyet yazışmalarını yapay zekayla özetlemeden önce kimlik ve telefon numaralarını etiketlerle değiştirir.",
+  "faq": [
+   [
+    "Maskeleme ile anonimleştirme aynı şey mi?",
+    "Tam olarak değil. Maskeleme doğrudan tanımlayıcıları gizler; ancak geriye kalan meslek, yaş, semt gibi bilgiler birleştirilerek kişi yine bulunabilir. Gerçek anonimleştirme bu dolaylı tanımlamayı da engellemeyi gerektirir."
+   ],
+   [
+    "PII ne anlama geliyor?",
+    "PII, İngilizce personally identifiable information ifadesinin kısaltmasıdır; yani bir kişiyi doğrudan ya da dolaylı olarak belirleyebilen bilgi demektir. Ad, adres, kimlik numarası ve e-posta adresi bunlara örnektir."
+   ]
+  ]
+ },
+ {
+  "slug": "gorev-basina-maliyet",
+  "term": "Görev başına maliyet (cost per task)",
+  "en": "cost per task",
+  "match": [
+   "görev başına maliyet",
+   "cost per task"
+  ],
+  "cat": "Hukuk, iş ve politika",
+  "def": "Bir yapay zeka sisteminin tek bir işi baştan sona tamamlaması için harcanan toplam para; model kullanımı, ek araç çağrıları ve gerekirse insan kontrolü dahil.",
+  "how": "Hesap, bir görevin bütün adımlarını toplamaktan ibarettir. Dil modellerinin kullanımı genellikle işlenen metin parçası (token) sayısı üzerinden ücretlendirilir; ajan türü sistemlerde bir görev için model birkaç kez çağrılabilir, arama ya da kod çalıştırma gibi araçlar da maliyet ekler. Başarısız denemeler ve insanın düzeltme süresi de hesaba katılır. Toplam, doğru biçimde tamamlanan görev sayısına bölününce görev başına maliyet çıkar.",
+  "why": "Bir modelin token başına fiyatı düşük olsa bile işi çözmek için çok sayıda çağrı gerekiyorsa gerçek maliyet yükselir. Şirketler bir yapay zeka çözümünün insan emeğinden ucuz ve yeterince güvenilir olup olmadığını bu ölçüyle karşılaştırır. Haberlerdeki fiyat indirimlerini yorumlarken de yalnızca token fiyatına değil, işin bütününe bakmak gerekir.",
+  "example": "Bir müşteri hizmetleri ekibi, yapay zekayla çözülen her destek talebi için model, arama aracı ve gerektiğinde insan onayı masraflarını toplar ve talep başına ortalama maliyeti, bir çalışanın aynı işe harcadığı maliyetle karşılaştırır.",
+  "faq": [
+   [
+    "Token fiyatı ile görev başına maliyet aynı şey mi?",
+    "Hayır. Token fiyatı bir birim fiyattır; görev başına maliyet ise bu birimin bir iş için kaç kez kullanıldığını ve işin ne sıklıkla başarısız olup tekrarlandığını da içerir."
+   ],
+   [
+    "Görev başına maliyet nasıl düşürülür?",
+    "Daha küçük ve ucuz bir modelle başlamak, gereksiz model çağrılarını azaltmak, tekrar eden girdileri önbelleğe almak ve hata oranını düşürmek yardımcı olur. Hangi yolun işe yarayacağı göreve göre değişir."
+   ]
+  ]
+ },
+ {
+  "slug": "minimum-uygulanabilir-urun",
+  "term": "Minimum uygulanabilir ürün (MVP)",
+  "en": "minimum viable product",
+  "match": [
+   "minimum uygulanabilir ürün",
+   "=mvp",
+   "minimum viable product"
+  ],
+  "cat": "Hukuk, iş ve politika",
+  "def": "Bir fikrin işe yarayıp yaramadığını anlamak için, yalnızca temel işlevi barındıracak biçimde hazırlanan ve gerçek kullanıcılara sunulan ilk sade ürün sürümü.",
+  "how": "Ekip önce çözmek istediği tek bir sorunu seçer ve yalnızca bunu çözen en küçük ürünü yapar. Süslü özellikler, ayrıntılı arayüzler ve ek senaryolar sonraya bırakılır. Ürün az sayıda gerçek kullanıcıya verilir; kullanım verileri ve geri bildirimler toplanır. Sonuçlara göre ürün geliştirilir, yön değiştirilir ya da vazgeçilir. Yapay zekada bu çoğu zaman hazır bir dil modeli üzerine yazılmış basit bir istem ve arayüzden oluşur, sıfırdan model eğitmek gerekmez.",
+  "why": "MVP, çok para ve zaman harcamadan önce talebin gerçekten var olup olmadığını sınamayı sağlar. Yapay zeka girişimlerinde hazır modeller sayesinde prototip çıkarmak kolaylaştığı için bu yaklaşım daha da yaygındır. Öte yandan demoda iyi çalışan bir MVP'nin gerçek kullanımda aynı kalitede kalacağı garanti değildir.",
+  "example": "Bir girişim, hukuk bürolarına sözleşme özeti çıkaran bir araç geliştirmeden önce yalnızca tek tür sözleşmeyi özetleyen basit bir web sayfası hazırlar ve birkaç büroya denetir.",
+  "faq": [
+   [
+    "MVP ile prototip arasındaki fark nedir?",
+    "Prototip genellikle fikri göstermek ve ekip içinde denemek için yapılır. MVP ise gerçek kullanıcılara sunulur ve gerçek kullanım verisi toplamayı amaçlar."
+   ],
+   [
+    "MVP kötü ya da yarım bir ürün demek mi?",
+    "Hayır. MVP az özellikli ama o özellikleri düzgün çalışan bir üründür. Amaç hızlı öğrenmektir, kalitesiz ürün çıkarmak değil."
+   ]
+  ]
  }
 ];
