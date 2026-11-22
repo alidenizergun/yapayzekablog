@@ -43,8 +43,8 @@ jobs:
           base="https://huggingface.co/rhasspy/piper-voices/resolve/main/tr/tr_TR/$SES/medium"
           curl -fsSL -o voice.onnx "$base/tr_TR-$SES-medium.onnx"
           curl -fsSL -o voice.onnx.json "$base/tr_TR-$SES-medium.onnx.json"
-          curl -fsSL -o MODEL_CARD.txt "$base/MODEL_CARD" || true
-          cat MODEL_CARD.txt || true
+          curl -fsSL -o "$RUNNER_TEMP/MODEL_CARD.txt" "$base/MODEL_CARD" || true
+          cat "$RUNNER_TEMP/MODEL_CARD.txt" || true
       - name: Seslendir
         env:
           METIN: ${{ inputs.metin }}
@@ -65,7 +65,7 @@ jobs:
           fi
           mkdir -p "$KLASOR" && rm -f "$KLASOR"/*.wav
           cp "$RUNNER_TEMP"/ses/*.wav "$KLASOR"/
-          cp MODEL_CARD.txt "$KLASOR/SES_LISANSI.txt" 2>/dev/null || true
+          cp "$RUNNER_TEMP/MODEL_CARD.txt" "$KLASOR/SES_LISANSI.txt" 2>/dev/null || true
           git add "$KLASOR"
           git commit -q -m "Seslendirme: $KLASOR ($SES)"
           git push -q origin medya
