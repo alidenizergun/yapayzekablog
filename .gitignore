@@ -11,3 +11,6 @@ src/content/haberler/_deneme-*
 # Markalı haber kartları yayın sırasında üretilir
 public/og/haber/
 public/og/news/
+
+# Python derleme önbelleği
+__pycache__/
