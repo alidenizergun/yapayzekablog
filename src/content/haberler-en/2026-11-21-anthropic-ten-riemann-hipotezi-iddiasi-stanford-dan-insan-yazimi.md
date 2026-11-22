@@ -1,7 +1,7 @@
 ---
 ref: "2026-11-21-anthropic-ten-riemann-hipotezi-iddiasi-stanford-dan-insan-yazimi"
 slug: "anthropic-claims-riemann-hypothesis-proof-as-stanford-s-human-written"
-title: "Anthropic claims Riemann hypothesis proof as Stanford's human-written rival draft emerges"
+title: "Anthropic mathematician says Claude helped prove the Riemann hypothesis; Stanford posts a rival proof"
 spot: "Anthropic mathematician Levent Alpöge said he had found a proof of the Riemann hypothesis with Claude. A few hours later, Stanford's Ravi Vakil shared a rival draft prepared without AI."
 whyItMatters: "If one of the proofs is verified, a century-old problem in mathematics would be solved. But passing a Lean compilation and having the result understood by humans and accepted by the community are separate stages, and the second is still ongoing."
 keyPoints:

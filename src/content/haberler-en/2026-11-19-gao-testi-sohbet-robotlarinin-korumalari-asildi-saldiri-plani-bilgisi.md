@@ -1,7 +1,7 @@
 ---
 ref: "2026-11-19-gao-testi-sohbet-robotlarinin-korumalari-asildi-saldiri-plani-bilgisi"
 slug: "gao-test-chatbot-safeguards-bypassed-attack-planning-information-obtai"
-title: "GAO test: Chatbot safeguards bypassed, attack-planning information obtained"
+title: "U.S. watchdog GAO: Chatbot safeguards bypassed, attack-relevant information obtained"
 spot: "The U.S. Government Accountability Office reported that known methods could bypass safety measures in its tests of Claude, Grok, ChatGPT and Gemini, yielding information that could help an attack within 12 hours."
 whyItMatters: "Government auditors' official finding that safeguards preventing misuse of widely used chatbots can be bypassed could accelerate the debate over regulation."
 keyPoints:

@@ -1,7 +1,7 @@
 ---
 ref: "2026-11-13-wharton-generative-ai-labs-ogretmenler-icin-acik-kaynakli-simulasyon"
 slug: "wharton-generative-ai-labs-releases-primer-an-open-source"
-title: "Wharton Generative AI Labs releases Primer, an open-source simulation system for teachers"
+title: "Wharton releases Primer, which lets teachers build classroom simulations without coding"
 spot: "Wharton Generative AI Labs has released Primer, an open-source system that lets educators build simulations for students by conversing with AI, without writing code. The team says the system is an experimental prototype."
 whyItMatters: "The open-source approach puts educator control and a pedagogical framework ahead of general-purpose models in education. Its impact is so far limited to the prototype stage."
 photoAlt: "A female teacher smiling at the desk with a laptop"

@@ -1,7 +1,7 @@
 ---
 ref: "2026-11-13-google-deepmind-weathernext-3-un-arkasindaki-pardig-ve-satweave"
 slug: "google-deepmind-opens-pardig-and-satweave-datasets-behind"
-title: "Google DeepMind opens PARDIG and SatWeave datasets behind WeatherNext 3"
+title: "Google DeepMind releases the rainfall and satellite data behind its WeatherNext 3 forecasting model"
 spot: "DeepMind has released the SatWeave and PARDIG datasets for developers building weather, hydrology and climate applications. Both datasets underpin the recently released WeatherNext 3 model."
 whyItMatters: "The release provides open observational data for applications such as flood warnings and solar energy forecasting in regions without ground radar."
 photoAlt: "view of Earth and satellite"

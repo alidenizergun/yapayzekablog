@@ -1,7 +1,7 @@
 ---
 ref: "2026-11-17-isomorphic-labs-yapay-zeka-destekli-ilac-kesfi-icin-5"
 slug: "isomorphic-labs-announces-5-billion-series-c-round"
-title: "Isomorphic Labs announces $5 billion Series C round for AI-driven drug discovery"
+title: "Isomorphic Labs raises $5 billion for AI-driven drug discovery"
 spot: "Isomorphic Labs completed a $5 billion Series C funding round led by Greenoaks and Sequoia Capital. The funding is primarily aimed at moving drug candidates into clinical trials."
 whyItMatters: "A round of this size in AI-driven drug discovery shows that investor focus is shifting from laboratory work to clinical trials."
 keyPoints:

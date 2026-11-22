@@ -1,7 +1,7 @@
 ---
 ref: "2026-11-13-kongre-de-nvidia-skandali-sonrasi-yapay-zeka-cipi-ihracat"
 slug: "momentum-builds-in-congress-for-ai-chip-export"
-title: "Momentum builds in Congress for AI chip export controls after Nvidia scandal"
+title: "Nvidia scandal boosts support in Congress for tighter AI chip export controls"
 spot: "According to Semafor, House Speaker Mike Johnson and Democratic leader Hakeem Jeffries back tighter chip export controls after Jensen Huang's alleged ties to a purported Chinese spy came to light. The measure could become law by the end of the year."
 whyItMatters: "Export controls directly affect Nvidia's sales in China. The growing likelihood of legislation shows the company faces regulatory uncertainty on top of its leadership shake-up."
 ---

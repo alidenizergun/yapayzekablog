@@ -1,7 +1,7 @@
 ---
 ref: "2026-11-19-fiziksel-yapay-zeka-girisimi-humyn-labs-47-milyon-dolarlik"
 slug: "physical-ai-startup-humyn-labs-closes-47-million"
-title: "Physical AI startup Humyn Labs closes $47 million Series A round"
+title: "Humyn Labs, which collects data for robots, raises $47 million"
 spot: "Humyn Labs, which collects data for robots, raised $47 million in a round led by Accel. The company claims it has reached more than $50 million in annual revenue within the six months since it began operating."
 whyItMatters: "Investment continues in the data infrastructure needed to test and deploy robots in the real world. The round shows that investors are interested in the data collection side of physical AI."
 keyPoints:

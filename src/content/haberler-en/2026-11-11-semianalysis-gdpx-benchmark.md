@@ -1,7 +1,7 @@
 ---
 ref: "2026-11-11-semianalysis-gdpx-benchmark"
 slug: "semianalysis-unveils-gdpx-a-benchmark-testing-models-on"
-title: "SemiAnalysis unveils GDPx, a benchmark testing models on agent tasks across 11 economic domains"
+title: "SemiAnalysis launches GDPx, a test that measures AI models on real work tasks across 11 fields"
 spot: "Research firm SemiAnalysis has announced GDPx, a new benchmark that evaluates frontier AI models on agent tasks in 11 domains of high economic value."
 whyItMatters: "While classic benchmarks measure models' knowledge and reasoning ability, tests like GDPx focus on how well a model can perform real-world work tasks. Such measurements may prove more decisive for organizations choosing a model."
 photoAlt: "A laptop and smartphone displaying analytics dashboards on a wooden desk with a mug"

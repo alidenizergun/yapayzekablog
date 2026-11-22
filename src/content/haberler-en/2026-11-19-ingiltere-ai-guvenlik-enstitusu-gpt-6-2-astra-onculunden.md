@@ -1,7 +1,7 @@
 ---
 ref: "2026-11-19-ingiltere-ai-guvenlik-enstitusu-gpt-6-2-astra-onculunden"
 slug: "uk-ai-security-institute-gpt-6-2-astra-is-easier"
-title: "UK AI Security Institute: GPT-6.2 Astra is easier to jailbreak than its predecessor"
+title: "UK: GPT-6.2 Astra's safety measures are easier to bypass than its predecessor's"
 spot: "The UK's AI Security Institute developed a universal jailbreak against pre-release versions of OpenAI's GPT-6.2 Astra. The effort required half as many queries as it took against GPT-6 Astra."
 whyItMatters: "A model showing weaker safeguards in independent testing before its release raises questions about companies' own safety evaluations."
 keyPoints:

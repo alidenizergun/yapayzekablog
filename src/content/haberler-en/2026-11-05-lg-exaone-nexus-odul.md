@@ -1,7 +1,7 @@
 ---
 ref: "2026-11-05-lg-exaone-nexus-odul"
 slug: "lg-ai-research-s-compliance-agent-exaone-nexus-wins"
-title: "LG AI Research's compliance agent EXAONE Nexus wins copyright technology award"
+title: "LG's compliance AI agent EXAONE Nexus wins a copyright technology award in South Korea"
 spot: "LG AI Research won an award at the Copyright Technology Awards at the ICOTEC 2026 conference for EXAONE Nexus, its compliance agent."
 ---
 

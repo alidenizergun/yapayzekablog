@@ -1,7 +1,7 @@
 ---
 ref: "2026-11-16-alibaba-qwen4-max-i-resmen-kullanima-acti-1-milyon"
 slug: "alibaba-officially-launches-qwen4-max-1-million-token-context-window"
-title: "Alibaba officially launches Qwen4-Max: 1 million-token context window, closed weights"
+title: "Alibaba launches its new flagship model Qwen4-Max without open-sourcing it"
 spot: "Alibaba announced Qwen4-Max, its new flagship model, with 2.4 trillion parameters and a 1 million-token context window. The company did not release the model's weights but did publish API pricing."
 whyItMatters: "The Qwen family, known for its open-weight models, is releasing its flagship with closed weights this time. According to the company, cost per task has fallen compared with the previous model."
 keyPoints:

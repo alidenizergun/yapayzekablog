@@ -1,7 +1,7 @@
 ---
 ref: "2026-11-16-imf-genel-muduru-yapay-zeka-sirketleri-arasindaki-dongusel-finansman"
 slug: "imf-chief-circular-financing-among-ai-companies-tops"
-title: "IMF chief: Circular financing among AI companies tops $1 trillion"
+title: "IMF: Deals in which AI companies invest in each other and buy each other's products top $1 trillion"
 spot: "IMF Managing Director Kristalina Georgieva said circular financing among AI companies has slightly exceeded $1 trillion, with two-thirds of it funded by debt. She likened the global economy to a structure standing \"on one leg.\""
 whyItMatters: "The IMF says AI investment is carrying global growth. That is why its warning that financial stability problems could emerge if confidence is shaken stands out."
 keyPoints:

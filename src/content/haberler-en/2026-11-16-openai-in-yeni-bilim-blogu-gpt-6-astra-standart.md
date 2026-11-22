@@ -1,7 +1,7 @@
 ---
 ref: "2026-11-16-openai-in-yeni-bilim-blogu-gpt-6-astra-standart"
 slug: "openai-s-new-science-blog-gpt-6-astra-helped-with"
-title: "OpenAI's new science blog: GPT-6 Astra helped with candidate lattice definition for the Standard Model"
+title: "Physicist Nathaniel Craig: OpenAI's GPT-6 Astra led a proof in particle physics"
 spot: "In the first guest post on its science blog, OpenAI described physicist Nathaniel Craig's work with GPT-6 Astra on a candidate lattice definition for the Standard Model. The result is not a settled solution."
 whyItMatters: "OpenAI is highlighting that its model took on the details of the proof in an expert physicist's work. This shows the company's ambitions in science."
 keyPoints:

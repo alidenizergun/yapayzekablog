@@ -1,7 +1,7 @@
 ---
 ref: "2026-11-13-openai-chatgpt-wallet-i-duyurdu-dot-ajanlari-kullanici-adina"
 slug: "openai-unveils-chatgpt-wallet-dot-agents-can-shop"
-title: "OpenAI unveils ChatGPT Wallet: dot agents can shop on users' behalf"
+title: "OpenAI unveils ChatGPT Wallet, letting AI agents shop on users' behalf"
 spot: "OpenAI has announced ChatGPT Wallet, which lets its \"dots\" AI agents make purchases on behalf of users. The feature is initially available to Pro subscribers in the US who are 18 or older."
 whyItMatters: "AI agents are moving beyond product research to completing payments. OpenAI is taking the step with an infrastructure that does not share card details with the agent and requires user approval for every purchase."
 turkeyAngle: "ChatGPT Wallet is currently available only to Pro subscribers in the US who are 18 or older; users in Turkey cannot yet use the feature."
