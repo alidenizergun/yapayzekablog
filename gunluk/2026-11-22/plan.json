@@ -1,0 +1,60 @@
+{
+ "skip": false,
+ "created": "2026-11-22T16:16+03:00",
+ "hours": 24,
+ "date_label": "22.11.2026",
+ "intro": "Yapay zeka gündeminde son 24 saatte neler oldu? İşte öne çıkanlar.",
+ "outro": "Haberlerin tamamı ve kaynakları, Ye Zegündemi nokta kom'da.",
+ "stories": [
+  {
+   "slug": "anthropic-ten-riemann-hipotezi-iddiasi-stanford-dan-insan-yazimi",
+   "cat": "ARAŞTIRMA",
+   "headline": "Anthropic matematikçisi Riemann hipotezini Claude ile kanıtladığını açıkladı",
+   "sub": "Birkaç saat sonra Stanford'dan Ravi Vakil, yapay zekasız hazırlanmış rakip bir kanıt taslağını paylaştı.",
+   "say": "Anthropic matematikçisi Levent Alpöge, Claude ile Riemann hipotezinin kanıtını bulduğunu açıkladı. Stanford'dan rakip bir taslak da geldi.",
+   "image": {
+    "type": "remote",
+    "src": "https://images.unsplash.com/photo-1770719269462-d3c1ed7e184f?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8NHx8Y2hhbGtib2FyZCUyMG1hdGhlbWF0aWNhbCUyMGVxdWF0aW9uc3xlbnwxfDB8fHwxNzk1MjkxNzU2fDA&ixlib=rb-4.1.0",
+    "fallback_brand": "claude"
+   }
+  },
+  {
+   "slug": "amazon-yapay-zeka-girisimi-decart-i-7-5-milyar",
+   "cat": "GİRİŞİM & YATIRIM",
+   "headline": "Amazon'un Decart'ı 7,5 milyar dolara almaya yaklaştığı bildirildi",
+   "sub": "Financial Times kaynaklara dayandırdı; görüşmeler hâlâ çökebilir, anlaşma resmen duyurulmadı.",
+   "say": "Financial Times'a göre Amazon, Decart'ı yaklaşık yedi buçuk milyar dolara almak için görüşüyor. Anlaşma henüz resmen duyurulmadı.",
+   "image": {
+    "type": "remote",
+    "src": "https://images.unsplash.com/photo-1770233621425-5d9ee7a0a700?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8MTN8fGFydGlmaWNpYWwlMjBpbnRlbGxpZ2VuY2UlMjB0ZWNobm9sb2d5fGVufDF8MHx8fDE3OTUyODg4ODh8MA&ixlib=rb-4.1.0",
+    "fallback_brand": "amazon"
+   }
+  },
+  {
+   "slug": "google-ana-sayfasinda-google-search-dugmesi-kalkti-yapay-zeka",
+   "cat": "PLATFORMLAR",
+   "headline": "Google ana sayfasında arama düğmesi kalktı, yapay zeka paneli geldi",
+   "sub": "Yan panel son AI Mode sohbetlerini listeliyor. Değişiklik yalnızca masaüstünde ve kademeli açılıyor.",
+   "say": "Google, masaüstü ana sayfasının yeni tasarımını kullanıma sunuyor. Google Search düğmesi kalktı, yerine yapay zeka kısayolları geldi.",
+   "image": {
+    "type": "remote",
+    "src": "https://images.unsplash.com/photo-1614091473310-072faa6a091c?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8OHx8bGFwdG9wJTIwc2VhcmNoJTIwZW5naW5lJTIwaG9tZXBhZ2V8ZW58MXwwfHx8MTc5NTI5MTc2MXww&ixlib=rb-4.1.0",
+    "fallback_brand": "google"
+   }
+  },
+  {
+   "slug": "trump-abd-disinda-veri-merkezi-kuran-sirketlere-muazzam-vergi",
+   "cat": "REGÜLASYON",
+   "headline": "Trump, yurt dışında veri merkezi kuran şirketlere vergi getireceğini söyledi",
+   "sub": "Vergi oranı, kapsam ve yasal dayanak açıklanmadı; ortada henüz resmi bir düzenleme yok.",
+   "say": "Amerika Başkanı Donald Trump, yurt dışında veri merkezi kuran şirketlere muazzam bir vergi uygulayacağını söyledi. Ayrıntı vermedi.",
+   "image": {
+    "type": "remote",
+    "src": "https://images.unsplash.com/photo-1506399309177-3b43e99fead2?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8Nnx8ZGF0YSUyMGNlbnRlciUyMHNlcnZlciUyMGFpc2xlfGVufDF8MHx8fDE3OTUyOTE3NTl8MA&ixlib=rb-4.1.0",
+    "fallback_brand": ""
+   }
+  }
+ ],
+ "caption_instagram": "Yapay zeka gündeminde son 24 saat\n• Anthropic matematikçisi Levent Alpöge, Claude ile Riemann hipotezini kanıtladığını açıkladı; Stanford'dan rakip taslak geldi.\n• Financial Times'a göre Amazon, Decart'ı yaklaşık 7,5 milyar dolara almaya yaklaştı; anlaşma resmen duyurulmadı.\n• Google ana sayfasında Google Search düğmesi kalktı, yapay zeka sohbet geçmişi yan paneli geldi.\n• Trump, yurt dışında veri merkezi kuran şirketlere muazzam vergi uygulayacağını söyledi; ayrıntı vermedi.\n• Signal, yapay zeka ajanlarına karşı mobilde ekran görüntüsünü kısıtladı.\n• Cenevre'deki BM görüşmelerinde otonom silahlar için bağlayıcı kural çıkmadı.\n\nHaberlerin tamamı ve kaynakları: yzgundemi.com (profildeki bağlantı)\n#yapayzeka #YZGündemi #Anthropic #Google #Signal",
+ "caption_x": "Anthropic matematikçisi Claude ile Riemann hipotezini kanıtladığını açıkladı, Stanford'dan yapay zekasız rakip taslak geldi. Amazon'un Decart'ı 7,5 milyar dolara almaya yaklaştığı bildirildi. #yapayzeka #YZGündemi"
+}
