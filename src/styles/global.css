@@ -1355,6 +1355,7 @@ img.thumb { color: transparent; font-size: 0; }
 
 /* Araç dizini (/arac/): arama en üstte, tür sekmeleri ve süzgeçler tek yapışkan çubukta, sonuç sayısı her an görünür */
 .tx-head { max-width: 760px; padding-top: 8px; }
+.tx-head .page-h { margin: 0; }
 .tx-lead { margin: 10px 0 0; font-size: var(--fs-lg); line-height: var(--lh-snug); color: var(--muted); }
 .tx-search { position: relative; margin-top: 22px; }
 .tx-search svg { position: absolute; left: 18px; top: 50%; width: 22px; height: 22px; transform: translateY(-50%); color: var(--muted); pointer-events: none; }
@@ -1363,14 +1364,14 @@ img.thumb { color: transparent; font-size: 0; }
 .tx-help { margin: 12px 0 0; font-size: var(--fs-sm); color: var(--muted); }
 .tx-help a { color: var(--accent-text); font-weight: 600; }
 .tx-help a:hover { text-decoration: underline; }
-.tx-bar { position: sticky; top: 48px; z-index: 5; margin-top: 28px; padding-block: 12px; background: var(--bg); border-bottom: 1px solid var(--line); box-shadow: 0 0 0 100vmax var(--bg); clip-path: inset(0 -100vmax); display: grid; grid-template-columns: minmax(0, 1fr); gap: 10px; }
+.tx-bar { position: sticky; top: 48px; z-index: 5; margin-top: 20px; padding-block: 0 6px; background: var(--bg); border-bottom: 1px solid var(--line); box-shadow: 0 0 0 100vmax var(--bg); clip-path: inset(0 -100vmax); display: grid; grid-template-columns: minmax(0, 1fr); gap: 10px; }
 .tx-bar > *, .tx-row > * { min-width: 0; }
-.tx-tabs { display: flex; gap: 6px; overflow-x: auto; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
-.tx-tabs::-webkit-scrollbar { display: none; }
-.tx-tabs button { flex: none; display: inline-flex; align-items: center; gap: 6px; min-height: 40px; padding: 0 14px; border: 1px solid var(--line); border-radius: 999px; background: var(--bg); color: var(--fg); font: inherit; font-size: var(--fs-sm); font-weight: 600; cursor: pointer; white-space: nowrap; }
-.tx-tabs button:hover { border-color: var(--fg); }
-.tx-tabs button[aria-pressed="true"] { background: var(--fg); color: var(--bg); border-color: var(--fg); }
-.tx-tabs .meta, .tx-flags .meta { font-weight: 500; opacity: .7; }
+.tx-tabs { display: flex; flex-wrap: wrap; gap: 0 6px; border-bottom: 1px solid var(--line); }
+.tx-tabs button { display: inline-flex; align-items: center; gap: 5px; min-height: 44px; padding: 0 12px; margin-bottom: -1px; border: 0; border-bottom: 3px solid transparent; background: none; color: var(--muted); font: inherit; font-size: var(--fs-sm); font-weight: 600; cursor: pointer; white-space: nowrap; }
+.tx-tabs button:first-child { padding-left: 0; }
+.tx-tabs button:hover { color: var(--fg); }
+.tx-tabs button[aria-pressed="true"] { color: var(--fg); border-bottom-color: var(--accent-fill); }
+.tx-tabs .meta, .tx-flags .meta { font-weight: 500; color: var(--muted); font-variant-numeric: tabular-nums; }
 .tx-row { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 6px 16px; }
 .tx-flags { display: flex; flex-wrap: wrap; gap: 4px 18px; }
 .tx-flags button { display: inline-flex; align-items: center; gap: 8px; min-height: 40px; padding: 0; border: 0; background: none; color: var(--fg); font: inherit; font-size: var(--fs-sm); font-weight: 600; cursor: pointer; }
@@ -1400,7 +1401,7 @@ img.thumb { color: transparent; font-size: 0; }
 @media (max-width: 760px) {
   .tx-lead { font-size: var(--fs-base); }
   .tx-search input { height: 54px; font-size: var(--fs-base); }
-  .tx-bar { padding-block: 8px; gap: 2px; }
+  .tx-bar { padding-block: 0 4px; gap: 2px; }
   .tx-row { flex-direction: column; flex-wrap: nowrap; align-items: stretch; gap: 0; }
   .tx-flags { flex-wrap: nowrap; gap: 0 16px; overflow-x: auto; scrollbar-width: none; }
   .tx-flags::-webkit-scrollbar { display: none; }
@@ -1408,3 +1409,4 @@ img.thumb { color: transparent; font-size: 0; }
   .tx-count { font-size: var(--fs-xs); }
   .tx-count, .tx-reset { min-height: 24px; }
 }
+@media (max-width: 1100px) { .tx-tabs { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; } .tx-tabs::-webkit-scrollbar { display: none; } .tx-tabs button { flex: none; } }

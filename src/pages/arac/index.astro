@@ -1,5 +1,4 @@
 ---
-import SubNav from '../../components/SubNav.astro';
 import Base from '../../layouts/Base.astro';
 import ToolCard from '../../components/ToolCard.astro';
 import { TOOLS, TOOL_CATS, TASKS, COMPARISONS, TOOLS_CHECKED, toolBySlug, compareSlug, trDate, toolUrl, vsTr, withGen } from '../../lib/tools.js';
@@ -18,28 +17,26 @@ const trN = TOOLS.filter((t) => t.turkish).length;
 const FIRST = TOOLS.map((t) => t.added).sort()[0];
 const newN = TOOLS.filter((t) => t.added > FIRST).length;
 const topTasks = TASKS.slice(0, 12);
+// Sekmelerde kısa adlar: hepsi tek satıra sığsın (bölüm başlıklarında tam ad kalır)
+const SHORT = { asistan: ['Sohbet', 'Chat'], gorsel: ['Görsel', 'Image'], video: ['Video', 'Video'], ses: ['Ses ve müzik', 'Audio'], kod: ['Kodlama', 'Coding'],
+  verimlilik: ['Verimlilik', 'Productivity'], arastirma: ['Araştırma', 'Research'], ajan: ['Ajanlar', 'Agents'], uygulama: ['Uygulama yapma', 'App builders'] };
+const shortCat = (slug) => (SHORT[slug] ? SHORT[slug][lang === 'en' ? 1 : 0] : toolCat(slug, lang));
 const jsonLd = { '@type': 'CollectionPage', name: T('Yapay zeka araçları', 'AI tools'), url: pageUrl, inLanguage: L.locale,
   mainEntity: { '@type': 'ItemList', itemListElement: TOOLS.map((t, i) => ({ '@type': 'ListItem', position: i + 1, name: t.name, url: new URL(url(toolUrl(t.slug)), Astro.site).href })) } };
 ---
 <Base title={T('Yapay zeka araçları: fiyatlar, ücretsiz planlar ve alternatifler', 'AI tools directory: pricing, free plans and alternatives')} description={T(`ChatGPT, Claude, Gemini, Midjourney, ElevenLabs ve ${TOOLS.length} yapay zeka aracının fiyatları, ücretsiz planları, Türkçe desteği ve alternatifleri; görevlere göre en iyi araçlar ve karşılaştırmalar.`, `Pricing, free plans and alternatives for ${TOOLS.length} AI tools including ChatGPT, Claude, Gemini, Midjourney and ElevenLabs, plus the best tools by task and head-to-head comparisons.`)}
   jsonLd={jsonLd} breadcrumbs={[{ name: 'Ana sayfa', path: '/' }, { name: T('Yapay zeka araçları', 'AI tools'), path: '/arac/' }]}>
-  <SubNav set="tools" />
   <section class="tools-index tx" data-tools>
     <header class="tx-head">
       <h1 class="page-h">{T('Yapay zeka araçları', 'AI tools')}</h1>
       <p class="tx-lead">{T(`${TOOLS.length} aracın ne işe yaradığı, ne kadar tuttuğu ve ücretsiz kullanılıp kullanılamadığı tek sayfada.`, `What ${TOOLS.length} AI tools do, what they cost and whether you can use them for free, on one page.`)}</p>
-      <div class="tx-search" role="search">
-        <label for="tl-q" class="sr-only">{T('Araçlarda ara', 'Search tools')}</label>
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
-        <input id="tl-q" type="search" autocomplete="off" placeholder={T('Araç adı ya da iş yazın: video, sunum, Claude…', 'Type a tool or a task: video, slides, Claude…')} data-tl-q />
-      </div>
       <p class="tx-help">{T('Hangisini seçeceğinizi bilmiyor musunuz?', 'Not sure which one to pick?')} <a href={url('/arac-secici/')}>{T('3 soruda size uygun aracı bulun →', 'Find the right tool in 3 questions →')}</a></p>
     </header>
 
     <div class="tx-bar" data-tx-bar>
       <div class="tx-tabs" role="group" aria-label={T('Türe göre süz', 'Filter by type')}>
         <button type="button" aria-pressed="true" data-tl-cat="">{T('Tümü', 'All')} <span class="meta">{TOOLS.length}</span></button>
-        {groups.map((g) => <button type="button" aria-pressed="false" data-tl-cat={g.slug}>{toolCat(g.slug, lang)} <span class="meta">{g.items.length}</span></button>)}
+        {groups.map((g) => <button type="button" aria-pressed="false" data-tl-cat={g.slug} title={toolCat(g.slug, lang)}>{shortCat(g.slug)} <span class="meta">{g.items.length}</span></button>)}
       </div>
       <div class="tx-row">
         <div class="tx-flags" role="group" aria-label={T('Özelliğe göre süz', 'Filter by feature')}>
@@ -115,7 +112,7 @@ const jsonLd = { '@type': 'CollectionPage', name: T('Yapay zeka araçları', 'AI
 <script>
   const root = document.querySelector<HTMLElement>('[data-tools]');
   if (root) {
-    const q = root.querySelector<HTMLInputElement>('[data-tl-q]')!;
+    const q = root.querySelector<HTMLInputElement>('[data-tl-q]');
     const cards = [...root.querySelectorAll<HTMLElement>('.tool-card')];
     const groups = [...root.querySelectorAll<HTMLElement>('.tool-group')];
     const count = root.querySelector<HTMLElement>('[data-tl-count]')!;
@@ -135,7 +132,7 @@ const jsonLd = { '@type': 'CollectionPage', name: T('Yapay zeka araçları', 'AI
     const catBtns = [...root.querySelectorAll<HTMLButtonElement>('[data-tl-cat]')];
     const flagBtns = [...root.querySelectorAll<HTMLButtonElement>('[data-tl-flag]')];
     const apply = () => {
-      const v = norm(q.value.trim());
+      const v = q ? norm(q.value.trim()) : '';
       let n = 0;
       groups.forEach((g) => {
         let gn = 0;
@@ -158,11 +155,11 @@ const jsonLd = { '@type': 'CollectionPage', name: T('Yapay zeka araçları', 'AI
     }));
     catBtns.forEach((b) => b.addEventListener('click', () => { cat = b.dataset.tlCat || ''; catBtns.forEach((x) => x.setAttribute('aria-pressed', String(x === b))); apply(); scrollToList(); }));
     resets.forEach((r) => r.addEventListener('click', () => {
-      q.value = ''; cat = ''; flags.clear();
+      if (q) q.value = ''; cat = ''; flags.clear();
       catBtns.forEach((x, i) => x.setAttribute('aria-pressed', String(i === 0)));
       flagBtns.forEach((x) => x.setAttribute('aria-pressed', 'false'));
-      apply(); q.focus();
+      apply();
     }));
-    q.addEventListener('input', apply);
+    q?.addEventListener('input', apply);
   }
 </script>
