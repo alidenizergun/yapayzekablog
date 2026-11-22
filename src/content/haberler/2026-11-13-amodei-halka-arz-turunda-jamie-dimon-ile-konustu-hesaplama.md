@@ -16,6 +16,13 @@ photo:
   author: "Robb Miller"
   authorUrl: "https://unsplash.com/@robbmiller"
   link: "https://unsplash.com/photos/a-street-sign-on-wall-street-in-new-york-city-oEGDKf4ZtNg"
+photo2:
+  id: "mHdATQY9fIU"
+  url: "https://images.unsplash.com/photo-1534469650761-fce6cc26ac0d?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8MXx8d2FsbCUyMHN0cmVldCUyMG5ldyUyMHlvcmt8ZW58MXwwfHx8MTc5NTMxNjU2OXww&ixlib=rb-4.1.0"
+  alt: "concrete building with USA flags"
+  author: "Aditya Vyas"
+  authorUrl: "https://unsplash.com/@aditya1702"
+  link: "https://unsplash.com/photos/concrete-building-with-usa-flags-mHdATQY9fIU"
 sources:
   - title: "@AnthropicAI X gönderisi"
     url: "https://x.com/AnthropicAI/status/2121272083863011714"

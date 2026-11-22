@@ -16,6 +16,13 @@ photo:
   author: "Danial Igdery"
   authorUrl: "https://unsplash.com/@ricaros"
   link: "https://unsplash.com/photos/man-programming-using-laptop-FCHlYvR5gJI"
+photo2:
+  id: "xrVDYZRGdw4"
+  url: "https://images.unsplash.com/photo-1484417894907-623942c8ee29?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8M3x8ZGV2ZWxvcGVyJTIwY29kaW5nJTIwbGFwdG9wfGVufDF8MHx8fDE3OTUzMTY1OTR8MA&ixlib=rb-4.1.0"
+  alt: "MacBook Pro showing programming language"
+  author: "Emile Perron"
+  authorUrl: "https://unsplash.com/@emilep"
+  link: "https://unsplash.com/photos/macbook-pro-showing-programming-language-xrVDYZRGdw4"
 sources:
   - title: "Yapay Zeka Gündemi #61"
     url: "https://webrazzi.com/2026/09/04/yapay-zeka-gundemi-61/"

@@ -15,6 +15,13 @@ photo:
   author: "Vagaro"
   authorUrl: "https://unsplash.com/@vagaro"
   link: "https://unsplash.com/photos/laptop-and-smartphone-analytics-workspace-vlILZQL3sV0"
+photo2:
+  id: "1fhzUGpPk5I"
+  url: "https://images.unsplash.com/photo-1781914476939-91a41b914899?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8NHx8YW5hbHl0aWNzJTIwY2hhcnRzJTIwZGFzaGJvYXJkJTIwc2NyZWVufGVufDF8MHx8fDE3OTUzMTY1OTB8MA&ixlib=rb-4.1.0"
+  alt: "Dark workspace with laptop, monitor displaying code, and plant"
+  author: "JEFERSON DA PAULINO"
+  authorUrl: "https://unsplash.com/@jeffersonjsp"
+  link: "https://unsplash.com/photos/dark-workspace-with-laptop-monitor-displaying-code-and-plant-1fhzUGpPk5I"
 sources:
   - title: "AF.net — Yapay zeka gelişmeleri akışı"
     url: "https://af.net/realtime/page/201/?news_page=12"

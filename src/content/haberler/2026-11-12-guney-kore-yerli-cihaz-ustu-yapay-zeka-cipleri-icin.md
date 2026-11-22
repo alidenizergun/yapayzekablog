@@ -16,6 +16,13 @@ photo:
   authorUrl: "https://pixabay.com/users/geralt-9301/"
   link: "https://pixabay.com/photos/system-web-network-connection-2660914/"
   source: "pixabay"
+photo2:
+  id: "tTurhPw9bwQ"
+  url: "https://images.unsplash.com/photo-1675602488512-bdd631490fcb?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8OXx8Y29tcHV0ZXIlMjBjaGlwJTIwc2VtaWNvbmR1Y3RvcnxlbnwxfDB8fHwxNzk1MzE2NTc5fDA&ixlib=rb-4.1.0"
+  alt: "a close up of a computer chip on a printed circuit board"
+  author: "Bermix Studio"
+  authorUrl: "https://unsplash.com/@bermixstudio"
+  link: "https://unsplash.com/photos/a-close-up-of-a-computer-chip-on-a-printed-circuit-board-tTurhPw9bwQ"
 sources:
   - title: "South Korea unveils roadmap to develop homegrown on-device AI chips"
     url: "https://www.mlex.com/mlex/artificial-intelligence/articles/2549103"

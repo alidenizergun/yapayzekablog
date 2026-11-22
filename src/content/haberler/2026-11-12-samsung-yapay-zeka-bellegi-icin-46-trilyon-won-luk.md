@@ -24,6 +24,13 @@ photo:
   authorUrl: "https://pixabay.com/users/cliffsmith23-38386472/"
   link: "https://pixabay.com/photos/memory-ram-computer-technology-8141642/"
   source: "pixabay"
+photo2:
+  id: "qOx9KsvpqcM"
+  url: "https://images.unsplash.com/photo-1587845323226-bad89242c735?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8NXx8c2VtaWNvbmR1Y3RvciUyMHdhZmVyJTIwZmFjdG9yeXxlbnwxfDB8fHwxNzk1MzE2NTcxfDA&ixlib=rb-4.1.0"
+  alt: "A silicon wafer with a grid of iridescent microchip dies under shallow focus"
+  author: "Laura Ockel"
+  authorUrl: "https://unsplash.com/@viazavier"
+  link: "https://unsplash.com/photos/silicon-wafer-with-iridescent-microchip-grid-qOx9KsvpqcM"
 sources:
   - title: "'Megaproject' breaks ground at Samsung HBM plant"
     url: "https://www.koreaherald.com/article/10935341"

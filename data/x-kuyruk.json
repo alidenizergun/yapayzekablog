@@ -398,5 +398,21 @@
     "importance": 60,
     "featured": false,
     "date": "2026-11-21T23:06:29+03:00"
+  },
+  {
+    "slug": "signal-yapay-zeka-ajanlarina-karsi-mobilde-ekran-goruntusunu-kisitladi",
+    "title": "Signal, yapay zeka ajanlarına karşı mobilde ekran görüntüsünü kısıtladı",
+    "text": "Signal, işletim sistemlerine entegre yapay zeka ajanlarına karşı Android ve iOS'ta ekran görüntüsü almayı kısıtladı. Başkan Whittaker bu ajanları \"varoluşsal tehdit\" olarak niteledi.",
+    "importance": 55,
+    "featured": false,
+    "date": "2026-11-22T06:02:46+03:00"
+  },
+  {
+    "slug": "cenevre-deki-bm-gorusmelerinde-otonom-silahlar-icin-baglayici-kural",
+    "title": "Cenevre'deki BM görüşmelerinde otonom silahlar için bağlayıcı kural çıkmadı",
+    "text": "Cenevre'deki BM görüşmeleri otonom silahlar için bağlayıcı kurallara yönelik müzakere yetkisi vermeden sona erdi. Ülkeler yalnızca seçenekleri tartışmaya başlama konusunda uzlaştı.",
+    "importance": 45,
+    "featured": false,
+    "date": "2026-11-22T06:01:46+03:00"
   }
 ]

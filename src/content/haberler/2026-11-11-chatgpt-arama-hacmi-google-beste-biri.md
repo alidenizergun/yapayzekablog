@@ -17,6 +17,13 @@ photo:
   author: "Zulfugar Karimov"
   authorUrl: "https://unsplash.com/@zulfugarkarimov"
   link: "https://unsplash.com/photos/smartphone-displaying-search-results-on-a-keyboard-ri99XpAZamY"
+photo2:
+  id: "Qw_u8x5XS68"
+  url: "https://images.unsplash.com/photo-1598912592915-26ac8f20d44e?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8MTN8fHNtYXJ0cGhvbmUlMjBzZWFyY2glMjB0eXBpbmd8ZW58MXwwfHx8MTc5NTMxNjU5Mnww&ixlib=rb-4.1.0"
+  alt: "black qwerty phone turned on in dark room"
+  author: "Nate Smith"
+  authorUrl: "https://unsplash.com/@thekidflames"
+  link: "https://unsplash.com/photos/black-qwerty-phone-turned-on-in-dark-room-Qw_u8x5XS68"
 sources:
   - title: "AI Update, November 6, 2026: AI News and Views From the Past Week"
     url: "https://www.marketingprofs.com/opinions/2026/56257/ai-update-november-6-2026-ai-news-and-views-from-the-past-week"

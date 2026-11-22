@@ -16,6 +16,13 @@ photo:
   authorUrl: "https://pixabay.com/users/pohjakroon-165862/"
   link: "https://pixabay.com/photos/trophies-show-award-trophy-prize-710169/"
   source: "pixabay"
+photo2:
+  id: "w8snfgbEmRY"
+  url: "https://images.unsplash.com/photo-1706193589333-da530df63ecf?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8NHx8YXdhcmQlMjBjZXJlbW9ueSUyMHRyb3BoeSUyMHN0YWdlfGVufDF8MHx8fDE3OTUzMTY2MDB8MA&ixlib=rb-4.1.0"
+  alt: "a silver trophy sitting on top of a table"
+  author: "Michael Fousert"
+  authorUrl: "https://unsplash.com/@michaelfousert"
+  link: "https://unsplash.com/photos/a-silver-trophy-sitting-on-top-of-a-table-w8snfgbEmRY"
 sources:
   - title: "Veille IA du 4 novembre 2026"
     url: "https://www.actuia.com/veille/2026-11-04/"

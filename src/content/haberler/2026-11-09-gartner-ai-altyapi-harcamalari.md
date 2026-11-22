@@ -15,6 +15,13 @@ photo:
   author: "imgix"
   authorUrl: "https://unsplash.com/@imgix"
   link: "https://unsplash.com/photos/server-racks-in-data-center-klWUhr-wPJ8"
+photo2:
+  id: "M5tzZtFCOfs"
+  url: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8Mnx8ZGF0YSUyMGNlbnRlciUyMHNlcnZlciUyMHJhY2tzfGVufDF8MHx8fDE3OTUyNTUyODR8MA&ixlib=rb-4.1.0"
+  alt: "cable network"
+  author: "Taylor Vick"
+  authorUrl: "https://unsplash.com/@tvick"
+  link: "https://unsplash.com/photos/cable-network-M5tzZtFCOfs"
 sources:
   - title: "This Week in NLP"
     url: "https://thisweekinnlp.substack.com/i/212204975/search"

@@ -16,6 +16,13 @@ photo:
   authorUrl: "https://pixabay.com/users/BrianPenny-29844978/"
   link: "https://pixabay.com/photos/artificial-intelligence-ai-7450797/"
   source: "pixabay"
+photo2:
+  id: "YxSKnaiYpig"
+  url: "https://images.unsplash.com/photo-1738255654134-1877cb984a8f?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8OXx8cHJvZ3JhbW1lciUyMGNvZGUlMjBzY3JlZW4lMjBkYXJrfGVufDF8MHx8fDE3OTUzMTY1OTZ8MA&ixlib=rb-4.1.0"
+  alt: "A computer screen with a bunch of code on it"
+  author: "Jiří Navrátil"
+  authorUrl: "https://unsplash.com/@stillwell_"
+  link: "https://unsplash.com/photos/a-computer-screen-with-a-bunch-of-code-on-it-YxSKnaiYpig"
 sources:
   - title: "AF.net — Yapay zeka gelişmeleri akışı"
     url: "https://af.net/realtime/page/201/?news_page=12"

@@ -333,6 +333,74 @@
    "author": "Pathum Danthanarayana",
    "authorUrl": "https://unsplash.com/@pathum_danthanarayana",
    "link": "https://unsplash.com/photos/turned-on-android-smartphone-t8TOMKe6xZU"
+  },
+  {
+   "id": "pixabay-410311",
+   "url": "/foto/px-410311",
+   "alt": "iphone, hand, screen, smartphone, apps",
+   "author": "JESHOOTS-com",
+   "authorUrl": "https://pixabay.com/users/JESHOOTS-com-264599/",
+   "link": "https://pixabay.com/photos/iphone-hand-screen-smartphone-apps-410311/",
+   "source": "pixabay"
+  },
+  {
+   "id": "a_lBsEZZjWc",
+   "url": "https://images.unsplash.com/photo-1675352161865-27816c76141a?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8NXx8c29jaWFsJTIwbWVkaWElMjBwaG9uZXxlbnwxfDB8fHwxNzk1MzE2NTY3fDA&ixlib=rb-4.1.0",
+   "alt": "a close up of a cell phone with social media icons on it",
+   "author": "Shutter Speed",
+   "authorUrl": "https://unsplash.com/@shutter_speed_",
+   "link": "https://unsplash.com/photos/a-close-up-of-a-cell-phone-with-social-media-icons-on-it-a_lBsEZZjWc"
   }
- ]
+ ],
+ "pazarlama": [
+  {
+   "id": "KdeqA3aTnBY",
+   "url": "https://images.unsplash.com/photo-1517048676732-d65bc937f952?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8MXx8bWFya2V0aW5nJTIwdGVhbSUyMG1lZXRpbmd8ZW58MXwwfHx8MTc5NTMxNjU2N3ww&ixlib=rb-4.1.0",
+   "alt": "people sitting on chair in front of table while holding pens during daytime",
+   "author": "Dylan Gillis",
+   "authorUrl": "https://unsplash.com/@mainermedia",
+   "link": "https://unsplash.com/photos/people-sitting-on-chair-in-front-of-table-while-holding-pens-during-daytime-KdeqA3aTnBY"
+  },
+  {
+   "id": "qr4Vew7j0vY",
+   "url": "https://images.unsplash.com/photo-1794553750023-94732c78c540?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8MTJ8fGFkdmVydGlzaW5nJTIwYmlsbGJvYXJkfGVufDF8MHx8fDE3OTUzMTY1Njh8MA&ixlib=rb-4.1.0",
+   "alt": "A 3D render of a mobile billboard trailer with a large blank white rectangular sign",
+   "author": "Mockaps",
+   "authorUrl": "https://unsplash.com/@mockaps",
+   "link": "https://unsplash.com/photos/mobile-billboard-trailer-with-blank-sign-qr4Vew7j0vY"
+  },
+  {
+   "id": "bf9sZBcGQl4",
+   "url": "https://images.unsplash.com/photo-1686061593213-98dad7c599b9?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8MTR8fGFuYWx5dGljcyUyMGRhc2hib2FyZHxlbnwxfDB8fHwxNzk1MzE2NTY4fDA&ixlib=rb-4.1.0",
+   "alt": "a computer screen with a bunch of data on it",
+   "author": "1981 Digital",
+   "authorUrl": "https://unsplash.com/@1981digital",
+   "link": "https://unsplash.com/photos/a-computer-screen-with-a-bunch-of-data-on-it-bf9sZBcGQl4"
+  },
+  {
+   "id": "5U_28ojjgms",
+   "url": "https://images.unsplash.com/photo-1568992687947-868a62a9f521?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8NHx8bWFya2V0aW5nJTIwdGVhbSUyMG1lZXRpbmd8ZW58MXwwfHx8MTc5NTMxNjU2N3ww&ixlib=rb-4.1.0",
+   "alt": "people sitting on chair",
+   "author": "Redd Francisco",
+   "authorUrl": "https://unsplash.com/@reddfrancisco",
+   "link": "https://unsplash.com/photos/people-sitting-on-chair-5U_28ojjgms"
+  },
+  {
+   "id": "Dnkr_lmdKi8",
+   "url": "https://images.unsplash.com/photo-1513757378314-e46255f6ed16?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8MXx8YWR2ZXJ0aXNpbmclMjBiaWxsYm9hcmR8ZW58MXwwfHx8MTc5NTMxNjU2OHww&ixlib=rb-4.1.0",
+   "alt": "rectangular blank billboard",
+   "author": "Kate Trysh",
+   "authorUrl": "https://unsplash.com/@katetrysh",
+   "link": "https://unsplash.com/photos/rectangular-blank-billboard-Dnkr_lmdKi8"
+  },
+  {
+   "id": "oMe_FjZnHGU",
+   "url": "https://images.unsplash.com/photo-1686061594183-8c864f508b00?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8MTV8fGFuYWx5dGljcyUyMGRhc2hib2FyZHxlbnwxfDB8fHwxNzk1MzE2NTY4fDA&ixlib=rb-4.1.0",
+   "alt": "a close up of a computer screen with a blurry background",
+   "author": "1981 Digital",
+   "authorUrl": "https://unsplash.com/@1981digital",
+   "link": "https://unsplash.com/photos/a-close-up-of-a-computer-screen-with-a-blurry-background-oMe_FjZnHGU"
+  }
+ ],
+ "donanim": []
 }

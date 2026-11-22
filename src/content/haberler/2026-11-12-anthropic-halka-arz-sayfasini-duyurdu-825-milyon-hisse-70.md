@@ -31,6 +31,14 @@ byNumbers:
     label: "Hisse başına fiyat aralığı"
   - value: "1,4 trilyon dolar"
     label: "Aralığın üst ucundaki değerleme"
+photo2:
+  id: "pixabay-3556719"
+  url: "/foto/px-3556719"
+  alt: "stock exchange, courses, shares, trading, forex"
+  author: "kalhh"
+  authorUrl: "https://pixabay.com/users/kalhh-86169/"
+  link: "https://pixabay.com/photos/stock-exchange-courses-shares-3556719/"
+  source: "pixabay"
 sources:
   - title: "@AnthropicAI X gönderisi"
     url: "https://x.com/AnthropicAI/status/2120841731302154708"
