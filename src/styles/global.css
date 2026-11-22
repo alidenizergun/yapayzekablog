@@ -80,7 +80,8 @@ h3 { font-size: var(--fs-md); line-height: var(--lh-snug); }
 .thumb { display: block; width: 100%; object-fit: cover; border-radius: 6px; background: var(--soft); }
 .badge { background: var(--accent-fill); color: #fff; font-weight: 700; padding: 2px 8px; border-radius: 3px; letter-spacing: var(--ls-caps); font-size: var(--fs-xs); text-transform: uppercase; }
 
-.ticker { background: var(--band); color: var(--band-fg); font-size: var(--fs-sm); }
+.ticker { background: var(--soft); color: var(--fg); border-bottom: 1px solid var(--line); font-size: var(--fs-sm); }
+.ticker a { color: var(--fg); }
 .ticker .wrap { display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: center; padding-block: 8px; }
 .ticker .tick-items { flex: 1 1 260px; min-width: 0; }
 .ticker .tick-items a[hidden] { display: none; }
@@ -89,7 +90,7 @@ h3 { font-size: var(--fs-md); line-height: var(--lh-snug); }
 @keyframes tick-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
 @media (prefers-reduced-motion: reduce) { .ticker .tick-items a:not([hidden]) { animation: none; } }
 .ticker a:hover { text-decoration: underline; }
-.ticker .date { color: var(--band-muted); }
+.ticker .date { color: var(--muted); }
 
 .logo { display: flex; align-items: center; gap: 10px; min-height: 44px; }
 .btn { height: 44px; padding: 0 18px; display: inline-flex; align-items: center; justify-content: center; background: var(--fg); color: var(--bg); border-radius: 999px; font-weight: 600; font-size: var(--fs-sm); border: 0; cursor: pointer; font-family: inherit; }
