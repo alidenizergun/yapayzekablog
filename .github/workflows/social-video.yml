@@ -1,0 +1,102 @@
+# Günlük sosyal medya videosu: son 24 saatin haberlerinden dikey video (dış ses + müzik) üretir,
+# Instagram'da Reels ve X'te video gönderisi olarak paylaşır (tam otomatik; kullanıcı kararı, Kasım 2026).
+# Video, açıklamalar ve paylaşım kaydı "medya" dalında gunluk/<tarih>/ altında arşivlenir (site etkilenmez).
+# Anahtarlar: ANTHROPIC_API_KEY, ELEVENLABS_API_KEY, IG_USER_ID, IG_ACCESS_TOKEN, X_API_KEY, X_API_SECRET,
+# X_ACCESS_TOKEN, X_ACCESS_SECRET. Ses: repo değişkeni ELEVENLABS_VOICE_ID (varsayılan aşağıda).
+name: Günlük sosyal medya videosu
+
+on:
+  schedule:
+    - cron: '30 5 * * *' # 08:30 İstanbul (GitHub zamanlaması birkaç dakika gecikebilir)
+  workflow_dispatch:
+    inputs:
+      yayinla:
+        description: 'Instagram ve X''te paylaş (kapalıysa yalnızca video üretilir ve arşivlenir)'
+        type: boolean
+        default: true
+
+permissions:
+  contents: write
+
+concurrency:
+  group: medya
+  cancel-in-progress: false
+
+jobs:
+  video:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    env:
+      OUT: ${{ github.workspace }}/../gunluk
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Tarih ve önceki kayıt
+        id: gun
+        run: |
+          D=$(TZ=Europe/Istanbul date +%F); echo "tarih=$D" >> "$GITHUB_OUTPUT"
+          mkdir -p "$OUT"
+          if git ls-remote --exit-code origin medya >/dev/null && git fetch -q origin medya:refs/remotes/origin/medya \
+             && git cat-file -e "origin/medya:gunluk/$D/video.mp4" 2>/dev/null; then
+            git archive origin/medya "gunluk/$D" | tar -x -C "$OUT" --strip-components=2
+            echo "Bugünün videosu zaten üretilmiş; yalnızca eksik paylaşımlar denenecek."
+            echo "hazir=1" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Araçları kur
+        if: steps.gun.outputs.hazir != '1'
+        run: |
+          python3 -m pip install --quiet pyyaml==6.0.2 numpy==2.2.6 pillow==11.3.0 playwright==1.52.0
+          python3 -m playwright install --with-deps chromium >/dev/null
+
+      - name: Haberleri seç ve metni yaz
+        if: steps.gun.outputs.hazir != '1'
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: python3 scripts/social/plan.py "$OUT"
+
+      - name: Seslendir (ElevenLabs)
+        id: ses
+        if: steps.gun.outputs.hazir != '1'
+        env:
+          ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
+          SES: ${{ vars.ELEVENLABS_VOICE_ID || 'z2ObNnp0E5ZGeTlSXkX0' }}
+        run: |
+          if python3 -c "import json,sys; sys.exit(0 if json.load(open('$OUT/plan.json')).get('skip') else 1)"; then echo "atla=1" >> "$GITHUB_OUTPUT"; exit 0; fi
+          METIN="$(cat "$OUT/metin.json")" python3 scripts/tts_elevenlabs.py "$SES" "$OUT/ses"
+
+      - name: Videoyu üret
+        if: steps.gun.outputs.hazir != '1' && steps.ses.outputs.atla != '1'
+        run: python3 scripts/social/render.py "$OUT"
+
+      - name: Paylaş
+        if: steps.ses.outputs.atla != '1' && (github.event_name == 'schedule' || inputs.yayinla)
+        env:
+          IG_USER_ID: ${{ secrets.IG_USER_ID }}
+          IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
+          IG_API_HOST: ${{ vars.IG_API_HOST }}
+          X_API_KEY: ${{ secrets.X_API_KEY }}
+          X_API_SECRET: ${{ secrets.X_API_SECRET }}
+          X_ACCESS_TOKEN: ${{ secrets.X_ACCESS_TOKEN }}
+          X_ACCESS_SECRET: ${{ secrets.X_ACCESS_SECRET }}
+        run: python3 scripts/social/publish.py "$OUT"
+
+      - name: medya dalına arşivle
+        if: always() && steps.ses.outputs.atla != '1'
+        env:
+          D: ${{ steps.gun.outputs.tarih }}
+        run: |
+          [ -f "$OUT/video.mp4" ] || { echo "Arşivlenecek video yok"; exit 0; }
+          git config user.name "yzgundemi-bot"
+          git config user.email "yzgundemi-bot@users.noreply.github.com"
+          if git ls-remote --exit-code origin medya >/dev/null; then
+            git fetch -q origin medya && git switch -q -f medya
+          else
+            git switch -q --orphan medya; find . -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf {} +
+          fi
+          mkdir -p "gunluk/$D"
+          for f in video.mp4 kapak.jpg plan.json metin.json yayin.json; do [ -f "$OUT/$f" ] && cp "$OUT/$f" "gunluk/$D/"; done
+          git add "gunluk/$D"
+          git diff --cached --quiet && exit 0
+          git commit -q -m "Günlük video: $D"
+          git push -q origin medya

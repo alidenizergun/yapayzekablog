@@ -146,10 +146,11 @@ jobs:
     secrets:
       REPORT_FORM_KEY: ${{ secrets.REPORT_FORM_KEY }}
 
-  # X'te paylaşım KAPALI. Açmak için repo değişkeni X_POSTS_PER_RUN'a 1 veya daha büyük bir sayı yazın.
+  # X'te paylaşım AÇIK (kullanıcı kararı, Kasım 2026): turda 1 linksiz gönderi. Kapatmak için repo değişkeni X_POSTS_PER_RUN = 0.
+  # X anahtarları tanımlı değilse betik paylaşmadan çıkar.
   tweet:
     needs: [generate, deploy]
-    if: needs.deploy.result == 'success' && needs.generate.outputs.count != '0' && vars.X_POSTS_PER_RUN != '' && vars.X_POSTS_PER_RUN != '0'
+    if: needs.deploy.result == 'success' && needs.generate.outputs.count != '0' && vars.X_POSTS_PER_RUN != '0'
     runs-on: ubuntu-latest
     timeout-minutes: 10
     permissions:
@@ -169,7 +170,7 @@ jobs:
           X_API_SECRET: ${{ secrets.X_API_SECRET }}
           X_ACCESS_TOKEN: ${{ secrets.X_ACCESS_TOKEN }}
           X_ACCESS_SECRET: ${{ secrets.X_ACCESS_SECRET }}
-          X_POSTS_PER_RUN: ${{ vars.X_POSTS_PER_RUN || '0' }}
+          X_POSTS_PER_RUN: ${{ vars.X_POSTS_PER_RUN || '1' }}
           X_WITH_LINK: ${{ vars.X_WITH_LINK || 'false' }}
           SITE_URL: ${{ vars.SITE_URL }}
           BASE_PATH: ${{ vars.BASE_PATH }}
