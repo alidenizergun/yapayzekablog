@@ -48,6 +48,7 @@ jobs:
         run: |
           # Tarayıcı indirilmez: sunucudaki Google Chrome kullanılır (render.py)
           python3 -m pip install --quiet pyyaml==6.0.2 numpy==2.2.6 pillow==11.3.0 playwright==1.52.0
+          command -v ffmpeg >/dev/null || { sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg >/dev/null; }
           google-chrome --version; ffmpeg -version | head -1
 
       - name: Haberleri seç ve metni yaz
