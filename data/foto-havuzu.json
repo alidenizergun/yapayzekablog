@@ -402,5 +402,75 @@
    "link": "https://unsplash.com/photos/a-close-up-of-a-computer-screen-with-a-blurry-background-oMe_FjZnHGU"
   }
  ],
- "donanim": []
+ "donanim": [
+  {
+   "id": "bN5XdU-bap4",
+   "url": "https://images.unsplash.com/photo-1517077304055-6e89abbf09b0?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8MTJ8fGNvbXB1dGVyJTIwY2hpcCUyMHNlbWljb25kdWN0b3J8ZW58MXwwfHx8MTc5NTI4ODg5OXww&ixlib=rb-4.1.0",
+   "alt": "tilt-shift photography of green computer motherboard",
+   "author": "Chris Ried",
+   "authorUrl": "https://unsplash.com/@cdr6934",
+   "link": "https://unsplash.com/photos/tilt-shift-photography-of-green-computer-motherboard-bN5XdU-bap4"
+  },
+  {
+   "id": "jXd2FSvcRr8",
+   "url": "https://images.unsplash.com/photo-1562408590-e32931084e23?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8MXx8Y2lyY3VpdCUyMGJvYXJkfGVufDF8MHx8fDE3OTUzMzgxMTN8MA&ixlib=rb-4.1.0",
+   "alt": "blue circuit board",
+   "author": "Umberto",
+   "authorUrl": "https://unsplash.com/@umby",
+   "link": "https://unsplash.com/photos/blue-circuit-board-jXd2FSvcRr8"
+  },
+  {
+   "id": "pixabay-8097838",
+   "url": "/foto/px-8097838",
+   "alt": "internet, information, service, system, room",
+   "author": "cookieone",
+   "authorUrl": "https://pixabay.com/users/cookieone-14478386/",
+   "link": "https://pixabay.com/photos/internet-information-service-system-8097838/",
+   "source": "pixabay"
+  },
+  {
+   "id": "aNaq4lbX99E",
+   "url": "https://images.unsplash.com/photo-1666037801539-f30fd661657a?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8MTR8fGNvbXB1dGVyJTIwY2hpcCUyMHNlbWljb25kdWN0b3J8ZW58MXwwfHx8MTc5NTI4ODg5OXww&ixlib=rb-4.1.0",
+   "alt": "a close-up of a computer",
+   "author": "Maxence Pira",
+   "authorUrl": "https://unsplash.com/@maxence_pira",
+   "link": "https://unsplash.com/photos/a-close-up-of-a-computer-aNaq4lbX99E"
+  },
+  {
+   "id": "pfR18JNEMv8",
+   "url": "https://images.unsplash.com/photo-1592659762303-90081d34b277?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8Mnx8Y2lyY3VpdCUyMGJvYXJkfGVufDF8MHx8fDE3OTUzMzgxMTN8MA&ixlib=rb-4.1.0",
+   "alt": "close up of dark blue circuit board",
+   "author": "Vishnu Mohanan",
+   "authorUrl": "https://unsplash.com/@vishnumaiea",
+   "link": "https://unsplash.com/photos/close-up-of-dark-blue-circuit-board-pfR18JNEMv8"
+  },
+  {
+   "id": "pixabay-2891812",
+   "url": "/foto/px-2891812",
+   "alt": "server, technology, web, data, internet",
+   "author": "QuinceCreative",
+   "authorUrl": "https://pixabay.com/users/QuinceCreative-1031690/",
+   "link": "https://pixabay.com/photos/server-technology-web-data-2891812/",
+   "source": "pixabay"
+  }
+ ],
+ "guvenlik": [
+  {
+   "id": "pixabay-1591018",
+   "url": "/foto/px-1591018",
+   "alt": "computer, security, padlock, hacker, hacking",
+   "author": "TheDigitalWay",
+   "authorUrl": "https://pixabay.com/users/TheDigitalWay-3008341/",
+   "link": "https://pixabay.com/photos/computer-security-padlock-hacker-1591018/",
+   "source": "pixabay"
+  },
+  {
+   "id": "2T4l02ZYj-k",
+   "url": "https://images.unsplash.com/photo-1654588831193-0285dab84d5a?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8OHx8cGFkbG9jayUyMGNvbXB1dGVyfGVufDF8MHx8fDE3OTUzMzgxMTV8MA&ixlib=rb-4.1.0",
+   "alt": "a computer keyboard with a padlock on top of it",
+   "author": "Sasun Bughdaryan",
+   "authorUrl": "https://unsplash.com/@sasun1990",
+   "link": "https://unsplash.com/photos/a-computer-keyboard-with-a-padlock-on-top-of-it-2T4l02ZYj-k"
+  }
+ ]
 }
