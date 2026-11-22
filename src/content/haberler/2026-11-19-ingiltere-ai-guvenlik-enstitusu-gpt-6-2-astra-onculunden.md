@@ -1,5 +1,5 @@
 ---
-title: "İngiltere AI Güvenlik Enstitüsü: GPT-6.2 Astra, öncülünden daha kolay jailbreak ediliyor"
+title: "İngiltere: GPT-6.2 Astra'nın güvenlik önlemleri öncülünden daha kolay aşılıyor"
 spot: "İngiltere Yapay Zeka Güvenlik Enstitüsü, OpenAI'nin GPT-6.2 Astra ön sürümlerine karşı evrensel bir jailbreak geliştirdi. Bu iş, GPT-6 Astra'ya göre yarı sayıda sorgu gerektirdi."
 category: guvenlik
 tags: ["OpenAI", "GPT62Astra", "UKAISI", "Jailbreak"]

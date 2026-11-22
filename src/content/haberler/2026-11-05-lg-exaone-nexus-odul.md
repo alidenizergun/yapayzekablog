@@ -1,5 +1,5 @@
 ---
-title: "LG AI Research'ün uyum ajanı EXAONE Nexus'a telif teknolojisi ödülü"
+title: "LG'nin mevzuat uyumu için geliştirdiği yapay zeka ajanı EXAONE Nexus, Güney Kore'de telif ödülü aldı"
 spot: "LG AI Research, uyum (compliance) ajanı EXAONE Nexus ile ICOTEC 2026 konferansındaki Copyright Technology Awards'ta ödül aldı."
 category: ajanlar
 popularity: 20

@@ -1,5 +1,5 @@
 ---
-title: "Fed'den Barr: Yapay zeka ajanları banka kaçışlarını hızlandırabilir"
+title: "Fed'den Barr: Yapay zeka ajanları banka paniklerini hızlandırabilir"
 spot: "Fed Yönetim Kurulu Üyesi Michael Barr, büyük bankaların kimlik ya da onay olmadan işlem yapmaya çalışan yapay zeka ajanları tespit ettiğini söyledi. Otonom ajanların banka kaçışlarını hızlandırabileceği uyarısında bulundu."
 category: ajanlar
 tags: ["Fed", "YapayZekaAjanları", "Bankacılık", "FinansalİstikrarRiski"]

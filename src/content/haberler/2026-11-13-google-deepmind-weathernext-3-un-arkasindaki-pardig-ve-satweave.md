@@ -1,5 +1,5 @@
 ---
-title: "Google DeepMind, WeatherNext 3'ün arkasındaki PARDIG ve SatWeave veri setlerini açtı"
+title: "Google DeepMind, hava tahmini modeli WeatherNext 3'ün kullandığı yağış ve uydu verilerini herkese açtı"
 spot: "DeepMind, hava, hidroloji ve iklim uygulamaları geliştirenler için SatWeave ve PARDIG veri setlerini yayımladı. İki veri seti de yakın zamanda çıkan WeatherNext 3 modelinin temelinde yer alıyor."
 category: arastirma
 popularity: 25

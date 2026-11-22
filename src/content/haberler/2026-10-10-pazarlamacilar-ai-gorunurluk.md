@@ -1,5 +1,5 @@
 ---
-title: "Pazarlamacıların dörtte üçü yapay zeka görünürlüğüne yatırımı artırmayı planlıyor"
+title: "Pazarlamacıların dörtte üçü, markalarının yapay zeka asistanlarında görünmesi için yatırımı artıracak"
 spot: "Tüketicilerin yapay zekaya güveni düşük olsa da pazarlamacıların dörtte üçü, markalarının yapay zeka asistanlarındaki görünürlüğüne yaptıkları yatırımı artırmayı planlıyor."
 category: pazarlama
 popularity: 40

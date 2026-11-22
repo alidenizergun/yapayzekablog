@@ -1,5 +1,5 @@
 ---
-title: "Naver, yapay zeka fabrikası için 1,5 milyar dolarlık ilk müşteri sözleşmesini imzaladı"
+title: "Naver, yapay zeka veri merkezi için ABD'li bir şirketle 1,5 milyar dolarlık ilk sözleşmeyi imzaladı"
 spot: "Naver, ABD'li bir yapay zeka çıkarım şirketiyle 2 trilyon won (1,5 milyar dolar) tutarında bilgi işlem hizmeti sözleşmesi imzaladı. Anlaşma, şirketin yapay zeka fabrikası projesinin ilk müşteri sözleşmesi."
 category: donanim
 deal:

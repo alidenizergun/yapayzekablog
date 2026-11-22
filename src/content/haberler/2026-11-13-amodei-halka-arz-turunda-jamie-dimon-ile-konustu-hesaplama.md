@@ -1,5 +1,5 @@
 ---
-title: "Amodei, halka arz turunda Jamie Dimon ile konuştu: hesaplama gücü, kamu yararı fonu, ajanlar"
+title: "Anthropic CEO'su Amodei, halka arz öncesi JPMorgan CEO'su Jamie Dimon'la söyleşti"
 spot: "Anthropic CEO'su Dario Amodei, JPMorgan CEO'su Jamie Dimon ile canlı yayında söyleşti. Bloomberg'e göre söyleşi, Anthropic'in halka arz öncesi yatırımcı tanıtım turunun bir parçasıydı."
 category: girisim-yatirim
 popularity: 55

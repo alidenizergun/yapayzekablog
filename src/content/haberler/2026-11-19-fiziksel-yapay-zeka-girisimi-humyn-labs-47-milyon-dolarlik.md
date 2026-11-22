@@ -1,5 +1,5 @@
 ---
-title: "Fiziksel yapay zeka girişimi Humyn Labs, 47 milyon dolarlık Series A turu kapattı"
+title: "Robotlar için veri toplayan Humyn Labs, 47 milyon dolar yatırım aldı"
 spot: "Robotlar için veri toplayan Humyn Labs, Accel liderliğindeki turla 47 milyon dolar topladı. Şirket, faaliyete geçtiği altı ayda 50 milyon doların üzerinde yıllık gelire ulaştığını iddia ediyor."
 category: girisim-yatirim
 tags: ["HumynLabs", "FizikselYapayZeka", "Accel", "Yatırım"]

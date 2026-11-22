@@ -1,5 +1,5 @@
 ---
-title: "Kongre'de Nvidia skandalı sonrası yapay zeka çipi ihracat kontrolleri için ivme"
+title: "Nvidia skandalı, Kongre'de yapay zeka çipi ihracatına sıkı denetim desteğini artırdı"
 spot: "Semafor'a göre ABD Temsilciler Meclisi Başkanı Mike Johnson ve Demokrat lider Hakeem Jeffries, Jensen Huang'ın Çinli olduğu iddia edilen bir casusla ilişkisinin ortaya çıkmasının ardından çip ihracat kontrollerinin sıkılaştırılmasını destekliyor. Düzenleme yıl sonuna kadar yasalaşabilir."
 category: regulasyon
 popularity: 55

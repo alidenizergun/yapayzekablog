@@ -1,5 +1,5 @@
 ---
-title: "Anthropic'ten Riemann hipotezi iddiası, Stanford'dan insan yazımı rakip taslak"
+title: "Anthropic matematikçisi Claude ile Riemann hipotezini kanıtladığını açıkladı; Stanford'dan rakip kanıt"
 spot: "Anthropic matematikçisi Levent Alpöge, Claude ile Riemann hipotezinin kanıtını bulduğunu açıkladı. Birkaç saat sonra Stanford'dan Ravi Vakil, yapay zekasız hazırlanmış bir rakip taslağı paylaştı."
 category: arastirma
 tags: ["Anthropic", "Claude", "RiemannHipotezi", "Matematik", "Lean", "Stanford"]

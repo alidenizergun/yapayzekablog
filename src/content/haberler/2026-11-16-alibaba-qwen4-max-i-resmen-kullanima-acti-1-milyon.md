@@ -1,5 +1,5 @@
 ---
-title: "Alibaba, Qwen4-Max'i resmen kullanıma açtı: 1 milyon token bağlam, ağırlıklar kapalı"
+title: "Alibaba, yeni amiral gemisi modeli Qwen4-Max'i açık kaynak yapmadan kullanıma sundu"
 spot: "Alibaba, yeni nesil amiral gemisi modeli Qwen4-Max'i 2,4 trilyon parametre ve 1 milyon token bağlam penceresiyle duyurdu. Şirket modelin ağırlıklarını açmadı, API fiyatlarını ise açıkladı."
 category: modeller
 tags: ["Alibaba", "Qwen4Max", "Qwen", "YapayZekaModelleri"]

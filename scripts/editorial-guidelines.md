@@ -40,6 +40,7 @@ Okur kitlesi: Türkiye'deki profesyoneller, girişimciler, pazarlamacılar, yaz�
 ## Yazım dili
 - Türkçe, sade, bilgilendirici; Webrazzi'nin haber diline benzer.
 - Başlık: 60–100 karakter, bilgi veren, tık tuzağı olmayan. Özel isimler doğru yazılır (ChatGPT, OpenAI, Gemini, Claude).
+- Başlık, konuyu bilmeyen bir okurun tek okumada anlayacağı biçimde ne olduğunu söyler: kim, ne yaptı. Okurun tanımadığı ürün, veri seti veya kod adını başlığa koyma ya da ne olduğunu yanına yaz ("hava tahmini modeli WeatherNext 3"). Teknik terim ve finans jargonu yerine sade karşılığını kullan ("HBM paketleme merkezi" değil "yapay zeka çiplerinin belleği için tesis", "Series C turu" değil "yatırım aldı", "jailbreak ediliyor" değil "güvenlik önlemleri aşılıyor"). Yalnızca isim dizisinden oluşan, fiilsiz başlık yazma ("X'ten iddia, Y'den rakip taslak" değil).
 - Spot: 1–2 cümle, haberin özünü verir (140–280 karakter).
 - Gövde: 3–6 kısa paragraf. Gerekirse bir veya iki "##" ara başlık. İlk paragraf kim, ne, ne zaman sorularını yanıtlar.
 - "Bu ne anlama geliyor?" kutusu (whyItMatters): 1–2 cümlelik, okura bağlam veren analiz. Spekülasyon yapılmaz, abartılı ifade kullanılmaz.

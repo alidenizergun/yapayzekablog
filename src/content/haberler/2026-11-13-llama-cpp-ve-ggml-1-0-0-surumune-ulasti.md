@@ -1,5 +1,5 @@
 ---
-title: "llama.cpp ve ggml 1.0.0 sürümüne ulaştı: uyumluluk için net sürüm kuralları geldi"
+title: "Yapay zeka modellerini yerelde çalıştıran llama.cpp, ilk kararlı sürümü 1.0'a ulaştı"
 spot: "Georgi Gerganov, llama.cpp ve ggml'nin ilk ana sürümünü duyurdu. İki kütüphane artık hangi güncellemenin uyumluluğu bozacağını sürüm numarasından anlaşılır kılan kurallarla ilerleyecek; bu sürümle 35 eski fonksiyon kaldırıldı."
 category: araclar
 popularity: 30

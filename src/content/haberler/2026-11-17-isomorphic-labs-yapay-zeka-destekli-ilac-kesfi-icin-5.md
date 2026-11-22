@@ -1,5 +1,5 @@
 ---
-title: "Isomorphic Labs, yapay zeka destekli ilaç keşfi için 5 milyar dolarlık Series C turunu açıkladı"
+title: "Isomorphic Labs, yapay zekayla ilaç keşfi için 5 milyar dolar yatırım aldı"
 spot: "Isomorphic Labs, Greenoaks ve Sequoia Capital liderliğinde 5 milyar dolarlık Series C finansman turunu tamamladı. Finansmanın asıl amacı, ilaç adaylarını klinik deneylere taşımak."
 category: girisim-yatirim
 tags: ["IsomorphicLabs", "Yatırım", "İlaçKeşfi", "SeriesC"]

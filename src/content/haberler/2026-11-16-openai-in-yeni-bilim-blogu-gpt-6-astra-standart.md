@@ -1,5 +1,5 @@
 ---
-title: "OpenAI'ın yeni bilim blogu: GPT-6 Astra, Standart Model için aday kafes tanımına katkı verdi"
+title: "Fizikçi Nathaniel Craig: OpenAI'ın GPT-6 Astra modeli parçacık fiziğindeki bir ispatta başı çekti"
 spot: "OpenAI, bilim blogunun ilk konuk yazısında fizikçi Nathaniel Craig'in GPT-6 Astra ile Standart Model için aday bir kafes tanımı üzerinde çalışmasını anlattı. Sonuç kesinleşmiş bir çözüm değil."
 category: arastirma
 tags: ["OpenAI", "GPT6Astra", "Fizik", "BilimBlogu"]

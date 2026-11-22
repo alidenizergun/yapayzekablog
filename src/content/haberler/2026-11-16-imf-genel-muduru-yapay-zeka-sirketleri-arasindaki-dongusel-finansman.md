@@ -1,5 +1,5 @@
 ---
-title: "IMF Genel Müdürü: Yapay zeka şirketleri arasındaki döngüsel finansman 1 trilyon doları aştı"
+title: "IMF: Yapay zeka şirketlerinin birbirine yatırım yapıp sipariş verdiği anlaşmalar 1 trilyon doları aştı"
 spot: "IMF Genel Müdürü Kristalina Georgieva, yapay zeka şirketleri arasındaki döngüsel finansmanın 1 trilyon doları biraz aştığını ve bunun üçte ikisinin borçla finanse edildiğini söyledi. Küresel ekonomiyi \"tek ayak üzerinde\" duran bir yapıya benzetti."
 category: girisim-yatirim
 tags: ["IMF", "YapayZekaYatırımları", "DöngüselFinansman", "Nvidia"]

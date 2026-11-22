@@ -1,5 +1,5 @@
 ---
-title: "GAO testi: Sohbet robotlarının korumaları aşıldı, saldırı planı bilgisi elde edildi"
+title: "ABD'nin denetim ofisi GAO: Sohbet robotlarının korumaları aşıldı, saldırıya yarar bilgi alındı"
 spot: "ABD Hükümet Sorumluluk Ofisi, Claude, Grok, ChatGPT ve Gemini'ye yönelik testte bilinen yöntemlerle güvenlik önlemlerinin aşılabildiğini ve 12 saat içinde saldırıya yardımcı olabilecek bilgi alındığını raporladı."
 category: guvenlik
 tags: ["GAO", "YapayZekaGüvenliği", "SohbetRobotları", "Jailbreak"]
