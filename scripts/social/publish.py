@@ -7,7 +7,8 @@ Anahtarları tanımlı olmayan platform atlanır; bir platformdaki hata diğerin
 Sonuçlar <OUT>/yayin.json dosyasına yazılır (aynı gün ikinci kez paylaşımı önlemek için).
 
 Anahtarlar (GitHub secrets; hiçbir yere yazılmaz):
-  IG_USER_ID, IG_ACCESS_TOKEN            (IG_API_HOST: graph.facebook.com varsayılan, graph.instagram.com da olur)
+  IG_ACCESS_TOKEN (Instagram ile giriş, App Dashboard > Instagram > API setup with Instagram login > Generate token)
+  IG_USER_ID isteğe bağlı (yoksa anahtardan bulunur); IG_API_HOST varsayılan graph.instagram.com
   X_API_KEY, X_API_SECRET, X_ACCESS_TOKEN, X_ACCESS_SECRET   (OAuth 1.0a, "Read and write")
 Kullanım: python scripts/social/publish.py <OUT> [--dry-run]
 """
@@ -59,12 +60,19 @@ def http(method, url, data=None, headers=None, timeout=120):
 # ---------------------------------------------------------------- Instagram
 def instagram():
     uid, token = os.environ.get('IG_USER_ID', '').strip(), os.environ.get('IG_ACCESS_TOKEN', '').strip()
-    if not uid or not token:
-        log('Instagram anahtarları yok (IG_USER_ID, IG_ACCESS_TOKEN); atlandı.')
+    if not token:
+        log('Instagram anahtarı yok (IG_ACCESS_TOKEN); atlandı.')
         return None
-    host = os.environ.get('IG_API_HOST', '').strip() or 'graph.facebook.com'
+    # Varsayılan: "Instagram ile giriş" API'si (Facebook sayfası gerekmez). Facebook ile giriş için IG_API_HOST=graph.facebook.com
+    host = os.environ.get('IG_API_HOST', '').strip() or 'graph.instagram.com'
     ver = os.environ.get('IG_API_VERSION', '').strip() or 'v23.0'
     base = f'https://{host}/{ver}'
+    if not uid:  # hesap kimliği anahtardan bulunur
+        st, me = http('GET', f'{base}/me?' + urllib.parse.urlencode({'fields': 'user_id,username', 'access_token': token}))
+        uid = str((me or {}).get('user_id') or (me or {}).get('id') or '') if isinstance(me, dict) else ''
+        if not uid:
+            raise RuntimeError(f'Instagram hesap kimliği alınamadı ({st}): {me}')
+        log(f"Instagram hesabı: @{me.get('username', '?')}")
     size = os.path.getsize(VIDEO)
     form = urllib.parse.urlencode({'media_type': 'REELS', 'upload_type': 'resumable', 'caption': instagram_caption(),
                                    'share_to_feed': 'true', 'access_token': token}).encode()
