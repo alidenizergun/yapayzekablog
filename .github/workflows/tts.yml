@@ -1,4 +1,6 @@
-# Seslendirme: video dış sesleri için Türkçe metni Piper (açık kaynak, çevrimdışı, ücretsiz) ile sese çevirir.
+# Seslendirme: video dış sesleri için Türkçe metni sese çevirir.
+#   elevenlabs (varsayılan): ticari lisanslı, doğal ses; ELEVENLABS_API_KEY secret'ı gerekir.
+#   piper: açık kaynak, ücretsiz; Türkçe sesi CC BY-NC-SA lisanslı (ticari kullanım yok, yalnızca deneme).
 # Ses dosyaları "medya" dalına yazılır; ana dal ve site etkilenmez.
 name: Seslendirme
 
@@ -11,13 +13,19 @@ on:
       klasor:
         description: 'medya dalında çıktı klasörü (ör. video/2026-11-22)'
         required: true
-      ses:
-        description: 'Piper sesi'
+      motor:
+        description: 'Ses motoru'
         type: choice
-        default: dfki
-        options: [dfki]
+        default: elevenlabs
+        options: [elevenlabs, piper]
+      ses:
+        description: 'ElevenLabs ses kimliği (voice_id); boş = varsayılan anlatıcı'
+        default: ''
+      model:
+        description: 'ElevenLabs modeli (boş = eleven_multilingual_v2)'
+        default: ''
       hiz:
-        description: 'Konuşma hızı (1.0 normal)'
+        description: 'Piper konuşma hızı (1.0 normal)'
         default: '1.0'
 
 permissions:
@@ -33,27 +41,36 @@ jobs:
     timeout-minutes: 15
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
-      - name: Piper'ı kur
-        run: python3 -m pip install --quiet piper-tts==1.6.1
-      - name: Sesi indir
+
+      - name: Seslendir (ElevenLabs)
+        if: inputs.motor == 'elevenlabs'
         env:
+          ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
+          METIN: ${{ inputs.metin }}
           SES: ${{ inputs.ses }}
+          MODEL: ${{ inputs.model }}
+        run: python3 scripts/tts_elevenlabs.py "${SES:-onwK4e9ZLuTAKqWW03F9}" "$RUNNER_TEMP/ses" "$MODEL"
+
+      - name: Piper'ı kur ve sesi indir
+        if: inputs.motor == 'piper'
         run: |
-          case "$SES" in dfki) ;; *) echo "geçersiz ses"; exit 1;; esac
-          base="https://huggingface.co/rhasspy/piper-voices/resolve/main/tr/tr_TR/$SES/medium"
-          curl -fsSL -o voice.onnx "$base/tr_TR-$SES-medium.onnx"
-          curl -fsSL -o voice.onnx.json "$base/tr_TR-$SES-medium.onnx.json"
+          python3 -m pip install --quiet piper-tts==1.6.1
+          base="https://huggingface.co/rhasspy/piper-voices/resolve/main/tr/tr_TR/dfki/medium"
+          curl -fsSL -o voice.onnx "$base/tr_TR-dfki-medium.onnx"
+          curl -fsSL -o voice.onnx.json "$base/tr_TR-dfki-medium.onnx.json"
           curl -fsSL -o "$RUNNER_TEMP/MODEL_CARD.txt" "$base/MODEL_CARD" || true
-          cat "$RUNNER_TEMP/MODEL_CARD.txt" || true
-      - name: Seslendir
+
+      - name: Seslendir (Piper)
+        if: inputs.motor == 'piper'
         env:
           METIN: ${{ inputs.metin }}
           HIZ: ${{ inputs.hiz }}
         run: python3 scripts/tts.py voice.onnx "$RUNNER_TEMP/ses" "$HIZ"
+
       - name: medya dalına kaydet
         env:
           KLASOR: ${{ inputs.klasor }}
-          SES: ${{ inputs.ses }}
+          MOTOR: ${{ inputs.motor }}
         run: |
           case "$KLASOR" in *..*|/*|"") echo "geçersiz klasör"; exit 1;; esac
           git config user.name "yzgundemi-bot"
@@ -61,11 +78,11 @@ jobs:
           if git ls-remote --exit-code origin medya >/dev/null; then
             git fetch -q origin medya && git switch -q medya
           else
-            git switch -q --orphan medya && git rm -rq --cached . 2>/dev/null || true; find . -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf {} +
+            git switch -q --orphan medya; find . -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf {} +
           fi
-          mkdir -p "$KLASOR" && rm -f "$KLASOR"/*.wav
-          cp "$RUNNER_TEMP"/ses/*.wav "$KLASOR"/
-          cp "$RUNNER_TEMP/MODEL_CARD.txt" "$KLASOR/SES_LISANSI.txt" 2>/dev/null || true
+          mkdir -p "$KLASOR/$MOTOR" && rm -f "$KLASOR/$MOTOR"/*
+          cp "$RUNNER_TEMP"/ses/* "$KLASOR/$MOTOR"/
+          [ "$MOTOR" = piper ] && cp "$RUNNER_TEMP/MODEL_CARD.txt" "$KLASOR/$MOTOR/SES_LISANSI.txt" 2>/dev/null || true
           git add "$KLASOR"
-          git commit -q -m "Seslendirme: $KLASOR ($SES)"
+          git commit -q -m "Seslendirme: $KLASOR ($MOTOR)"
           git push -q origin medya
