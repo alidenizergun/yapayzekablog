@@ -29,7 +29,7 @@ TZ = dt.timezone(dt.timedelta(hours=3))
 INTRO = 'Yapay zeka gündeminde son 24 saatte neler oldu? İşte öne çıkanlar.'
 # Kapanış okunuşu kullanıcının kararıdır: "Ye Zegündemi nokta kom"
 OUTRO = "Haberlerin tamamı ve kaynakları, Ye Zegündemi nokta kom'da."
-MAX_SAY_CHARS = 640  # haber cümlelerinin toplamı; giriş ve kapanışla birlikte ~55 sn
+MAX_SAY_CHARS = 760  # haber cümlelerinin toplamı; giriş ve kapanışla birlikte ~55-60 sn (render gerekirse hızlandırır)
 
 
 def tr_upper(t):
@@ -98,18 +98,19 @@ def image_for(x):
 
 SCHEMA = {
     'type': 'object', 'additionalProperties': False,
-    'required': ['stories', 'caption_instagram', 'caption_x'],
+    'required': ['stories', 'hashtags', 'caption_x'],
     'properties': {
         'stories': {'type': 'array', 'items': {
             'type': 'object', 'additionalProperties': False,
-            'required': ['slug', 'headline', 'sub', 'say'],
+            'required': ['slug', 'headline', 'sub', 'say', 'caption_line'],
             'properties': {
                 'slug': {'type': 'string'},
                 'headline': {'type': 'string', 'description': 'Ekran başlığı, en fazla 75 karakter'},
                 'sub': {'type': 'string', 'description': 'Ekran alt metni, en fazla 110 karakter'},
-                'say': {'type': 'string', 'description': 'Dış ses, en fazla 2 cümle ve 130 karakter'},
+                'say': {'type': 'string', 'description': 'Dış ses, en fazla 2 kısa cümle ve 125 karakter'},
+                'caption_line': {'type': 'string', 'description': 'Instagram açıklamasında bu haberin tek satırlık özeti'},
             }}},
-        'caption_instagram': {'type': 'string'},
+        'hashtags': {'type': 'array', 'items': {'type': 'string'}, 'description': 'En fazla 5 hashtag, # ile'},
         'caption_x': {'type': 'string'},
     },
 }
@@ -120,10 +121,11 @@ Kurallar:
 - Yalnızca haber metninde yazan bilgileri kullan. Rakam, isim ve tarih aynen korunur. İddialar iddia olarak aktarılır ("… kanıtladığını açıkladı", "… iddia ediyor"); kesinleşmemiş bir şeyi olmuş gibi yazma.
 - headline (ekranda): en fazla 75 karakter, fiilli, konuyu bilmeyen birinin anlayacağı sade Türkçe. Jargon ve tanınmayan kod adı kullanma. Rakamlar rakamla yazılabilir ("yüzde 63").
 - sub (ekranda): en fazla 110 karakter, başlığa bir bilgi ekler; tekrar etmez.
-- say (dış ses): en fazla 2 kısa cümle, toplam en fazla 130 karakter. Seslendirme için yazılır: bütün sayılar YAZIYLA ("yüzde altmış üç", "yüz on beş virgül sekiz milyar dolar"), sürüm numaraları da yazıyla ("GPT altı nokta iki"). Kısaltma kullanma ("ABD" yerine "Amerika" de; "TÜİK" kalabilir). Şirket ve ürün adları özgün yazımıyla kalır (Nvidia, OpenAI, Claude). Türkiye haberlerinde cümleye "Türkiye'de" diye başla.
+- say (dış ses): en fazla 2 kısa cümle, toplam en fazla 125 karakter; bilgi yoğun ve sade yaz. Seslendirme için yazılır: bütün sayılar YAZIYLA ("yüzde altmış üç", "yüz on beş virgül sekiz milyar dolar"), sürüm numaraları da yazıyla ("GPT altı nokta iki"). Kısaltma kullanma ("ABD" yerine "Amerika" de; "TÜİK" kalabilir). Şirket ve ürün adları özgün yazımıyla kalır (Nvidia, OpenAI, Claude). Türkiye haberlerinde cümleye "Türkiye'de" diye başla.
 - Bütün say cümlelerinin toplamı {max_say} karakteri geçmesin.
-- caption_instagram: Instagram açıklaması. İlk satır kısa bir giriş ("Yapay zeka gündeminde son 24 saat"). Ardından her haber için "• " ile başlayan tek satırlık özet. Sonra boş satır ve "Haberlerin tamamı ve kaynakları: yzgundemi.com (profildeki bağlantı)". En sonda en fazla 5 hashtag (#yapayzeka #YZGündemi dahil). Emoji yok.
-- caption_x: en fazla 240 karakter, Türkçe, tek paragraf. İçinde bağlantı, alan adı ("yzgundemi.com") ve @ etiketi OLMAYACAK. En fazla 2 hashtag.
+- caption_line: Instagram açıklamasında bu haberin tek satırlık özeti (en fazla 140 karakter, rakamlar rakamla), emoji yok.
+- hashtags: en fazla 5 hashtag; #yapayzeka ve #YZGündemi her zaman olsun.
+- caption_x: en fazla 240 karakter, Türkçe, tek paragraf; YALNIZCA listedeki İLK İKİ haberi anlat. İçinde bağlantı, alan adı ("yzgundemi.com") ve @ etiketi OLMAYACAK. En fazla 2 hashtag.
 - Abartılı ifade, ünlem ve tık tuzağı yok.
 
 HABERLER:
@@ -175,6 +177,7 @@ def main():
         stories.append({
             'slug': x['_slug'], 'cat': tr_upper(name),
             'headline': s['headline'].strip()[:90], 'sub': s['sub'].strip()[:130], 'say': s['say'].strip(),
+            'caption_line': s['caption_line'].strip()[:160],
             'image': image_for(x),
         })
     # Dış ses toplamı sınırı aşarsa sondan haber düşülür
@@ -184,7 +187,8 @@ def main():
     plan = {
         'skip': False, 'created': now.isoformat(timespec='minutes'), 'hours': hours,
         'date_label': now.strftime('%d.%m.%Y'), 'intro': INTRO, 'outro': OUTRO, 'stories': stories,
-        'caption_instagram': res['caption_instagram'].strip(), 'caption_x': res['caption_x'].strip()[:270],
+        'hashtags': [h.strip() for h in res['hashtags'] if h.strip().startswith('#')][:5] or ['#yapayzeka', '#YZGündemi'],
+        'caption_x': res['caption_x'].strip()[:270],
     }
     json.dump(plan, open(os.path.join(OUT, 'plan.json'), 'w'), ensure_ascii=False, indent=1)
     json.dump([INTRO] + [s['say'] for s in stories] + [OUTRO], open(os.path.join(OUT, 'metin.json'), 'w'), ensure_ascii=False)

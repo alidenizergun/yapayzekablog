@@ -26,6 +26,13 @@ import uuid
 OUT = os.path.abspath(sys.argv[1])
 DRY = '--dry-run' in sys.argv
 plan = json.load(open(os.path.join(OUT, 'plan.json'), encoding='utf8'))
+
+
+def instagram_caption():
+    """Açıklama videodaki haberlerden kurulur (süre için düşülen haber açıklamada da yer almaz)."""
+    lines = ['Yapay zeka gündeminde son 24 saat', ''] + [f"• {s['caption_line']}" for s in plan.get('stories', [])]
+    lines += ['', 'Haberlerin tamamı ve kaynakları: yzgundemi.com (profildeki bağlantı)', '', ' '.join(plan.get('hashtags') or ['#yapayzeka', '#YZGündemi'])]
+    return '\n'.join(lines)
 VIDEO = os.path.join(OUT, 'video.mp4')
 RESULT = os.path.join(OUT, 'yayin.json')
 result = json.load(open(RESULT)) if os.path.exists(RESULT) else {}
@@ -59,7 +66,7 @@ def instagram():
     ver = os.environ.get('IG_API_VERSION', '').strip() or 'v23.0'
     base = f'https://{host}/{ver}'
     size = os.path.getsize(VIDEO)
-    form = urllib.parse.urlencode({'media_type': 'REELS', 'upload_type': 'resumable', 'caption': plan['caption_instagram'],
+    form = urllib.parse.urlencode({'media_type': 'REELS', 'upload_type': 'resumable', 'caption': instagram_caption(),
                                    'share_to_feed': 'true', 'access_token': token}).encode()
     st, res = http('POST', f'{base}/{uid}/media', form)
     if st != 200 or 'id' not in res:
@@ -158,7 +165,7 @@ def main():
         log('Paylaşılacak video yok.')
         return
     if DRY:
-        log('Deneme: paylaşım yapılmadı.\n--- Instagram ---\n' + plan['caption_instagram'] + '\n--- X ---\n' + plan['caption_x'])
+        log('Deneme: paylaşım yapılmadı.\n--- Instagram ---\n' + instagram_caption() + '\n--- X ---\n' + plan['caption_x'])
         return
     failed = False
     for name, fn in (('instagram', instagram), ('x', x_post)):
