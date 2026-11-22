@@ -513,3 +513,33 @@ P|Model sürümü ve kullanımdan kaldırma|model deprecation|kullanımdan kald�
 P|Yapay zeka yatırım getirisi (ROI)|AI return on investment|yatırım getiri,=roi
 P|Yapay zeka ile verimlilik artışı|AI productivity gains|verimlilik artış
 P|Yapay zekanın istihdama etkisi|AI impact on jobs|istihdama etki,iş kaybı
+
+# Yapay zeka ile ürün geliştirme (Kasım 2026)
+V|Altın veri seti (golden dataset)|golden dataset
+V|Değerlendirme odaklı geliştirme (eval-driven development)|eval-driven development
+V|Çevrimdışı ve çevrimiçi değerlendirme|offline and online evaluation
+V|Ajan değerlendirmesi (yörünge değerlendirmesi)|agent evaluation|ajan değerlendirmesi,trajectory evaluation
+V|Görev başarı oranı|task success rate
+V|Veri çarkı (data flywheel)|data flywheel
+K|LLMOps|large language model operations
+K|İstem sürümleme|prompt versioning
+K|İz kaydı (tracing)|tracing|-
+K|Yapay zeka ağ geçidi (AI gateway)|AI gateway
+K|Semantik önbellek|semantic caching
+K|Hibrit arama|hybrid search
+K|Bilgi tabanı (knowledge base)|knowledge base|bilgi tabanı,knowledge base
+K|Ajan döngüsü (agent loop)|agent loop
+K|Çok turlu konuşma|multi-turn conversation
+K|Bağlam çürümesi (context rot)|context rot
+K|Model sürümü sabitleme (model pinning)|model pinning
+K|Yedek model (fallback)|model fallback|-
+K|Gölge modu (shadow mode)|shadow mode
+K|A/B testi (yapay zeka özellikleri)|A/B testing|a/b testi,=a/b
+K|Niyet sınıflandırma (intent classification)|intent classification
+K|İnsana devretme (human handoff)|human handoff
+K|Spesifikasyon odaklı geliştirme (spec-driven development)|spec-driven development
+K|Yapay zeka kullanıcı deneyimi (AI UX)|AI user experience
+G|Çıktı doğrulama|output validation
+G|Kişisel veri maskeleme (PII redaction)|PII redaction
+P|Görev başına maliyet (cost per task)|cost per task
+P|Minimum uygulanabilir ürün (MVP)|minimum viable product
