@@ -51,6 +51,7 @@ jobs:
     outputs:
       count: ${{ steps.news.outputs.count }}
       changed: ${{ steps.news.outputs.changed }}
+      new_files: ${{ steps.save.outputs.new_files }}
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
@@ -118,6 +119,7 @@ jobs:
 
       # Haber çıkmasa da X takip durumu kaydedilir; aynı gönderiler tekrar ücretlendirilmez.
       - name: Kaydet ve gönder
+        id: save
         if: always() && steps.news.outcome == 'success'
         env:
           COUNT: ${{ steps.news.outputs.count }}
@@ -127,6 +129,8 @@ jobs:
           git config user.email "yzgundemi-bot@users.noreply.github.com"
           git add src/content/haberler src/content/haberler-en data public/foto 2>/dev/null || git add src/content/haberler src/content/haberler-en data
           git diff --cached --quiet && exit 0
+          # WhatsApp bildirimi için bu turda eklenen Türkçe haberler
+          echo "new_files=$(git diff --cached --name-only --diff-filter=A -- 'src/content/haberler/*.md' | tr '\n' ' ')" >> "$GITHUB_OUTPUT"
           git commit -m "Haberler: ${COUNT} yeni haber, görseller güncellendi ($(TZ=Europe/Istanbul date '+%d.%m.%Y %H:%M'))"
           git pull --rebase origin "$BRANCH"
           git push
@@ -145,6 +149,27 @@ jobs:
     # Yalnızca sayfaya gömülen (herkese açık) form anahtarı aktarılır; diğer gizli anahtarlar aktarılmaz
     secrets:
       REPORT_FORM_KEY: ${{ secrets.REPORT_FORM_KEY }}
+
+  # Yeni haber yayına girince WhatsApp bildirimi (CallMeBot, kullanıcı kararı Kasım 2026).
+  # Anahtarlar: CALLMEBOT_PHONE, CALLMEBOT_APIKEY (tanımlı değilse adım sessizce atlar). Kapatmak için repo değişkeni WHATSAPP_NOTIFY = false.
+  whatsapp:
+    needs: [generate, deploy]
+    if: needs.deploy.result == 'success' && needs.generate.outputs.new_files != '' && vars.WHATSAPP_NOTIFY != 'false'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ github.ref_name }}
+      - name: WhatsApp bildirimi
+        env:
+          CALLMEBOT_PHONE: ${{ secrets.CALLMEBOT_PHONE }}
+          CALLMEBOT_APIKEY: ${{ secrets.CALLMEBOT_APIKEY }}
+          SITE_URL: ${{ vars.SITE_URL }}
+          NEW_FILES: ${{ needs.generate.outputs.new_files }}
+        run: python3 scripts/whatsapp-notify.py $NEW_FILES
 
   # X'te paylaşım AÇIK (kullanıcı kararı, Kasım 2026): turda 1 linksiz gönderi. Kapatmak için repo değişkeni X_POSTS_PER_RUN = 0.
   # X anahtarları tanımlı değilse betik paylaşmadan çıkar.
