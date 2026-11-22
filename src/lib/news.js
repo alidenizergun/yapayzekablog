@@ -187,18 +187,27 @@ export const HOME_MAIN = 15;
 // Okunma potansiyeli: puanı olmayan eski haberlerde manşet işaretliyse 80, değilse 50
 export const popularityOf = (n) => n.data.popularity ?? (n.data.featured ? 80 : 50);
 
-/** Manşet: her zaman en son yayınlanan 5 haberden biri.
- *  Bu 5 haber içinden fotoğrafı ya da logosu olanlar adaydır (manşette illüstrasyon yok); aralarından
- *  puanı en yüksek olan seçilir. Puan = okunma potansiyeli (1-100) − saat başına 1,5 puan.
- *  Son 5 haberin hiçbirinde gerçek görsel yoksa yine bu 5 haberin en yüksek puanlısı seçilir
+/** Haber hattının bir turda yayımladığı haberler birer dakika arayla tarihlenir; aradaki boşluk
+ *  bu süreyi aşmayan ardışık haberler aynı tur sayılır. */
+const BATCH_GAP_MS = 15 * 60e3;
+
+/** Manşet: her zaman EN SON GELEN haber grubundan (son tur) biri.
+ *  Yeni haber geldiğinde manşet o turun haberlerinden birine geçer; eski bir haber manşette kalmaz.
+ *  Grup içinden fotoğrafı ya da logosu olanlar adaydır (manşette illüstrasyon yok); aralarından
+ *  okunma potansiyeli (1-100) en yüksek olan seçilir, eşitlikte daha yeni olan.
+ *  Grubun hiçbirinde gerçek görsel yoksa yine grubun en yüksek puanlısı seçilir
  *  (haber hattı her yeni habere fotoğraf bulmaya çalıştığı için bu çok nadirdir). */
-export function pickLead(news, now = Date.now()) {
-  const ageH = (n) => Math.max(0, (now - n.data.date.valueOf()) / 3600e3);
-  const latest = [...news].sort((a, b) => b.data.date - a.data.date).slice(0, 5);
-  if (!latest.length) return undefined;
-  const pool = latest.filter(hasRealVisual).length ? latest.filter(hasRealVisual) : latest;
-  const score = (n) => popularityOf(n) - ageH(n) * 1.5;
-  return pool.reduce((best, n) => (score(n) > score(best) ? n : best));
+export function pickLead(news) {
+  const sorted = [...news].sort((a, b) => b.data.date - a.data.date);
+  if (!sorted.length) return undefined;
+  const batch = [sorted[0]];
+  for (let i = 1; i < sorted.length; i++) {
+    if (sorted[i - 1].data.date - sorted[i].data.date > BATCH_GAP_MS) break;
+    batch.push(sorted[i]);
+  }
+  const pool = batch.filter(hasRealVisual).length ? batch.filter(hasRealVisual) : batch;
+  // pool en yeniden eskiye sıralı: eşit puanda ilk (daha yeni) haber kalır
+  return pool.reduce((best, n) => (popularityOf(n) > popularityOf(best) ? n : best));
 }
 
 /** Haftalık özetler (en yeni önce) */
