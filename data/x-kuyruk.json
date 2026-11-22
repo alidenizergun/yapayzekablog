@@ -414,5 +414,13 @@
     "importance": 45,
     "featured": false,
     "date": "2026-11-22T06:01:46+03:00"
+  },
+  {
+    "slug": "dragos-yapay-zeka-saglayicilarinda-aws-anahtarlari-calindi-istekler-okundu",
+    "title": "Dragos: Yapay zeka sağlayıcılarında AWS anahtarları çalındı, istekler okundu",
+    "text": "Dragos, yaklaşık 2 milyon sahte kimlik bilgili istekle yapay zeka sağlayıcılarını test etti: en az üç sağlayıcıda kullanıcı verisi çalındı, yüzlerce AWS anahtarı toplandı.",
+    "importance": 45,
+    "featured": false,
+    "date": "2026-11-22T18:02:47+03:00"
   }
 ]

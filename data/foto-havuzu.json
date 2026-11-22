@@ -471,6 +471,74 @@
    "author": "Sasun Bughdaryan",
    "authorUrl": "https://unsplash.com/@sasun1990",
    "link": "https://unsplash.com/photos/a-computer-keyboard-with-a-padlock-on-top-of-it-2T4l02ZYj-k"
+  },
+  {
+   "id": "pixabay-2851201",
+   "url": "/foto/px-2851201",
+   "alt": "cyber security, internet security, hacking, gray internet, gray security",
+   "author": "TheDigitalArtist",
+   "authorUrl": "https://pixabay.com/users/TheDigitalArtist-202249/",
+   "link": "https://pixabay.com/photos/cyber-security-internet-security-2851201/",
+   "source": "pixabay"
+  },
+  {
+   "id": "cX8kNl8X0Ys",
+   "url": "https://images.unsplash.com/photo-1768839722988-91767bb82b10?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8OXx8cGFkbG9jayUyMGNvbXB1dGVyfGVufDF8MHx8fDE3OTUzNTk3Njh8MA&ixlib=rb-4.1.0",
+   "alt": "Padlock and keys resting on a computer keyboard",
+   "author": "Sasun Bughdaryan",
+   "authorUrl": "https://unsplash.com/@sasun1990",
+   "link": "https://unsplash.com/photos/padlock-and-keys-resting-on-a-computer-keyboard-cX8kNl8X0Ys"
+  },
+  {
+   "id": "aWslrFhs1w4",
+   "url": "https://images.unsplash.com/photo-1564457461758-8ff96e439e83?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8NXx8c2VydmVyJTIwcm9vbXxlbnwxfDB8fHwxNzk1MzU5NzY5fDA&ixlib=rb-4.1.0",
+   "alt": "A server room with rows of black and white cabinets under blue cables",
+   "author": "Taylor Vick",
+   "authorUrl": "https://unsplash.com/@tvick",
+   "link": "https://unsplash.com/photos/server-room-with-network-cabinets-aWslrFhs1w4"
+  },
+  {
+   "id": "pixabay-4610993",
+   "url": "/foto/px-4610993",
+   "alt": "cyber, security, internet, network, technology",
+   "author": "TheDigitalArtist",
+   "authorUrl": "https://pixabay.com/users/TheDigitalArtist-202249/",
+   "link": "https://pixabay.com/photos/cyber-security-internet-network-4610993/",
+   "source": "pixabay"
+  }
+ ],
+ "turkiye": [
+  {
+   "id": "rj9H-W3q4Oo",
+   "url": "https://images.unsplash.com/photo-1791222992949-166ae5ef279a?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8OXx8aXN0YW5idWwlMjBza3lsaW5lfGVufDF8MHx8fDE3OTUzNTk3Njl8MA&ixlib=rb-4.1.0",
+   "alt": "Two people on a ferry deck overlooking the Istanbul skyline at golden hour",
+   "author": "M K",
+   "authorUrl": "https://unsplash.com/@mateokartuzzo1",
+   "link": "https://unsplash.com/photos/people-on-ferry-overlooking-istanbul-skyline-rj9H-W3q4Oo"
+  },
+  {
+   "id": "4SuqYh9h9ts",
+   "url": "https://images.unsplash.com/photo-1698739630779-a351b42132a8?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8OHx8YW5rYXJhJTIwY2l0eXxlbnwxfDB8fHwxNzk1MzU5NzcwfDA&ixlib=rb-4.1.0",
+   "alt": "a view of a city with mountains in the background",
+   "author": "Felix Munyika",
+   "authorUrl": "https://unsplash.com/@phelix_zambia",
+   "link": "https://unsplash.com/photos/a-view-of-a-city-with-mountains-in-the-background-4SuqYh9h9ts"
+  },
+  {
+   "id": "WA1u0scVLZU",
+   "url": "https://images.unsplash.com/photo-1589561454226-796a8aa89b05?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8MXx8aXN0YW5idWwlMjBib3NwaG9ydXN8ZW58MXwwfHx8MTc5NTM1OTc3MHww&ixlib=rb-4.1.0",
+   "alt": "A ferry crossing the Bosphorus with the skyline of Eminönü, Istanbul, in the background",
+   "author": "Engin Yapici",
+   "authorUrl": "https://unsplash.com/@yapici",
+   "link": "https://unsplash.com/photos/ferry-crossing-bosphorus-in-istanbul-WA1u0scVLZU"
+  },
+  {
+   "id": "9sKCBdNgadA",
+   "url": "https://images.unsplash.com/photo-1766826236752-8ffd1eafffcd?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8MTB8fGlzdGFuYnVsJTIwc2t5bGluZXxlbnwxfDB8fHwxNzk1MzU5NzY5fDA&ixlib=rb-4.1.0",
+   "alt": "A vast blue ocean stretches towards a distant city skyline",
+   "author": "Julien Goettelmann",
+   "authorUrl": "https://unsplash.com/@juliengoettelmann",
+   "link": "https://unsplash.com/photos/a-vast-blue-ocean-stretches-towards-a-distant-city-skyline-9sKCBdNgadA"
   }
  ]
 }
