@@ -150,6 +150,28 @@ jobs:
     secrets:
       REPORT_FORM_KEY: ${{ secrets.REPORT_FORM_KEY }}
 
+  # Her tur bitince telefona push bildirimi (ntfy, kullanıcı kararı Kasım 2026): yeni haberler, haber çıkmadı ya da hata.
+  # Kanal: NTFY_TOPIC secret'ı (tanımlı değilse adım sessizce atlar). Kapatmak için repo değişkeni PUSH_NOTIFY = false.
+  push:
+    needs: [generate, deploy]
+    if: always() && vars.PUSH_NOTIFY != 'false'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ github.ref_name }}
+      - name: Push bildirimi
+        env:
+          NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
+          GEN_RESULT: ${{ needs.generate.result }}
+          DEPLOY_RESULT: ${{ needs.deploy.result }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+          NEW_FILES: ${{ needs.generate.outputs.new_files }}
+        run: python3 scripts/push-notify.py $NEW_FILES
+
   # Yeni haber yayına girince WhatsApp bildirimi (CallMeBot, kullanıcı kararı Kasım 2026).
   # Anahtarlar: CALLMEBOT_PHONE, CALLMEBOT_APIKEY (tanımlı değilse adım sessizce atlar). Kapatmak için repo değişkeni WHATSAPP_NOTIFY = false.
   whatsapp:
