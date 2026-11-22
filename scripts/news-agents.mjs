@@ -14,7 +14,7 @@
  */
 
 const UA = 'YZGundemiBot/1.0 (+https://www.yzgundemi.com/hakkimizda/)';
-const PAGE_CHARS = 12000; // okunan sayfadan modele giden en fazla karakter
+const PAGE_CHARS = 6000; // okunan sayfadan modele giden en fazla karakter (konuşma boyunca tekrar gönderilir)
 const MAX_BYTES = 2_000_000;
 
 // ---------------------------------------------------------------- sayfa okuma (güvenli)
@@ -43,12 +43,23 @@ export function htmlToText(html) {
     html.match(/<time[^>]+datetime=["']([^"']+)["']/i)?.[1] || '';
   let body = html.match(/<article[\s\S]*?<\/article>/i)?.[0] || html.match(/<main[\s\S]*?<\/main>/i)?.[0] || html;
   body = body
-    .replace(/<(script|style|noscript|svg|nav|footer|header|form|iframe|template)[\s\S]*?<\/\1>/gi, ' ')
+    .replace(/<(script|style|noscript|svg|nav|footer|header|form|iframe|template|aside|button|select)[\s\S]*?<\/\1>/gi, ' ')
     .replace(/<!--[\s\S]*?-->/g, ' ')
     .replace(/<\/(p|div|h[1-6]|li|tr|br|section|blockquote)>|<br\s*\/?>/gi, '\n')
     .replace(/<[^>]+>/g, ' ');
-  const text = decode(body).replace(/[ \t\f\v]+/g, ' ').replace(/\s*\n\s*/g, '\n').replace(/\n{2,}/g, '\n').trim();
-  return { title, published, text };
+  const lines = decode(body).replace(/[ \t\f\v]+/g, ' ').split(/\s*\n\s*/);
+  // Menü, düğme ve paylaşım satırları: kısa ve noktalama içermeyen satırlar ile tekrar eden satırlar atılır
+  const keep = [];
+  const dup = new Set();
+  for (const l of lines) {
+    const t = l.trim();
+    if (!t || dup.has(t)) continue;
+    dup.add(t);
+    if (t.length < 40 && !/[.!?:;"”%$€£₺0-9]/.test(t)) continue;
+    if (/^(share|paylaş|subscribe|abone ol|sign up|log in|giriş yap|read more|devamını oku|advertisement|reklam|cookie|çerez)\b/i.test(t)) continue;
+    keep.push(t);
+  }
+  return { title, published, text: keep.join('\n') };
 }
 
 /** Bir web sayfasını okur. Yalnızca herkese açık http(s) adresleri; engelli siteler ve iç ağ adresleri reddedilir. */
@@ -139,7 +150,7 @@ function withCacheMark(messages) {
  * Tek bir ajanın araç kullanma döngüsü.
  * handlers: { araçAdı: async (input) => sonuç }  ·  stopTools: çağrıldığında döngüyü bitiren araçlar
  */
-async function agentLoop(ctx, { label, model, system, messages, clientTools, handlers, stopTools = [], searchBudget = 0, searchesLeft: startLeft, maxTurns = 10 }) {
+async function agentLoop(ctx, { label, model, system, messages, clientTools, handlers, stopTools = [], searchBudget = 0, searchesLeft: startLeft, maxTurns = 10, effort }) {
   let searchesLeft = startLeft ?? searchBudget;
   let stoppedBy = null;
   // Araç listesi döngü boyunca DEĞİŞMEZ: düşünme blokları araç listesine bağlıdır, değişirse istek reddedilir.
@@ -150,7 +161,19 @@ async function agentLoop(ctx, { label, model, system, messages, clientTools, han
   for (let turn = 0; turn < maxTurns; turn++) {
     if (ctx.overBudget()) return { stoppedBy: 'budget', searchesLeft };
     if (searchesLeft < 0) { ctx.log(`${label}: arama hakkı aşıldı, durduruldu`); return { stoppedBy: 'search_limit', searchesLeft }; }
-    const res = await ctx.anthropic.messages.create({ model, max_tokens: 16000, system: cached(system), messages: withCacheMark(messages), tools });
+    const req = { model, max_tokens: 16000, system: cached(system), messages: withCacheMark(messages), tools };
+    // Düşünme miktarı: muhabir düşük, doğrulama orta. Model ayarı desteklemezse ayarsız tekrar denenir.
+    if (effort && !ctx.noEffort.has(model)) req.output_config = { effort };
+    let res;
+    try {
+      res = await ctx.anthropic.messages.create(req);
+    } catch (err) {
+      if (!req.output_config || err?.status !== 400 || !/effort|output_config/i.test(String(err?.message))) throw err;
+      ctx.noEffort.add(model);
+      ctx.log(`${model}: düşünme sınırı desteklenmiyor, ayarsız devam`);
+      delete req.output_config;
+      res = await ctx.anthropic.messages.create(req);
+    }
     ctx.track(res, model);
     const used = res.usage?.server_tool_use?.web_search_requests ?? 0;
     searchesLeft -= used;
@@ -210,7 +233,7 @@ export async function runNewsroom(opts) {
   const rejected = [];
   const pages = new Map(); // normalizeUrl -> okunan sayfa
   const ctx = {
-    anthropic, track, blockedDomains, log, searches: 0,
+    anthropic, track, blockedDomains, log, searches: 0, noEffort: new Set(),
     overBudget: () => costOf(ctx.searches) >= budgetUsd,
     see(url, title, pageAge) {
       const k = normalizeUrl(url);
@@ -306,7 +329,7 @@ ${xList ? `\nX TAKİP LİSTESİ (resmi API):\n${xList}\n` : ''}`;
     },
   ];
   let editorSummary = '';
-  await agentLoop(ctx, {
+  const editorRun = await agentLoop(ctx, {
     label: 'yayın yönetmeni', model: editorModel, system: editorSystem,
     messages: [{ role: 'user', content: editorUser }],
     clientTools: editorTools, searchBudget: editorSearches, maxTurns: 12, stopTools: ['finish_planning'],
@@ -331,7 +354,9 @@ ${xList ? `\nX TAKİP LİSTESİ (resmi API):\n${xList}\n` : ''}`;
   assignments.sort((a, b) => b.priority - a.priority);
   note(`yayın yönetmeni (${editorModel}): ${assignments.length} konu atadı${editorSummary ? ` · ${editorSummary.slice(0, 300)}` : ''}`);
   for (const a of assignments) note(`  → [${a.priority}] ${a.topic} (${a.format}) — ${a.why}`);
-  if (!assignments.length) return { articles: [], seen, searches: ctx.searches, rejected, notes };
+  const editorDone = editorRun.stoppedBy === 'finish_planning' || editorRun.stoppedBy === 'end_turn';
+  const assignedLeads = assignments.flatMap((a) => a.leads);
+  if (!assignments.length) return { articles: [], seen, searches: ctx.searches, rejected, notes, editorDone, assignedLeads };
 
   // ------------------------------------------------ 2) muhabirler + 3) doğrulama
   const reporterSystem = `Sen YZ Gündemi adlı Türkçe yapay zeka haber sitesinin muhabirisin. Yayın yönetmeninin verdiği tek bir konuyu araştırıp Türkçe haber taslağı yazarsın.
@@ -398,7 +423,7 @@ Kaynak sayfa metni eksik kaldıysa fetch_page ile yeniden okuyabilirsin. Sayfala
         fetch_page: async ({ url }) => (fetches-- > 0 ? readPage(url) : { error: 'okuma hakkın bitti' }),
         give_verdict: async (v) => { verdict = { verdict: ['onay', 'duzelt', 'ele'].includes(v.verdict) ? v.verdict : 'duzelt', problems: Array.isArray(v.problems) ? v.problems.slice(0, 10) : [] }; return 'kaydedildi'; },
       },
-      stopTools: ['give_verdict'], maxTurns: 4,
+      stopTools: ['give_verdict'], maxTurns: 4, effort: 'medium',
     });
     return verdict;
   }
@@ -444,7 +469,7 @@ Okuma hakkın: ${reporterFetches} sayfa · arama hakkın: ${reporterSearches}.`,
     const run = async (maxTurns) => {
       const r = await agentLoop(ctx, {
         label: `muhabir: ${a.topic}`, model: reporterModel, system: reporterSystem, messages,
-        clientTools: tools, handlers, stopTools: ['submit_draft', 'drop_story'], searchBudget: reporterSearches, searchesLeft: left, maxTurns,
+        clientTools: tools, handlers, stopTools: ['submit_draft', 'drop_story'], searchBudget: reporterSearches, searchesLeft: left, maxTurns, effort: 'low',
       });
       left = r.searchesLeft ?? left;
       return r;
@@ -471,6 +496,19 @@ Okuma hakkın: ${reporterFetches} sayfa · arama hakkın: ${reporterSearches}.`,
       }
       // Bir kez muhabire geri gönder
       note(`düzeltmeye gönderildi: ${draft.title} (${probs.length} sorun)`);
+      // Taslakta kullanılmayan sayfaların metni konuşmadan çıkarılır (düzeltme turu daha az token gönderir)
+      const cited = new Set((draft.sources || []).map((x) => normalizeUrl(x.url)));
+      const fetchIds = new Map();
+      for (const m of messages) if (m.role === 'assistant') for (const b of m.content) if (b.type === 'tool_use' && b.name === 'fetch_page') fetchIds.set(b.id, b.input?.url);
+      for (const m of messages) {
+        if (m.role !== 'user' || !Array.isArray(m.content)) continue;
+        for (const b of m.content) {
+          if (b.type !== 'tool_result' || !fetchIds.has(b.tool_use_id)) continue;
+          const u = fetchIds.get(b.tool_use_id);
+          const page = pages.get(normalizeUrl(u));
+          if (!cited.has(normalizeUrl(u)) && !(page && cited.has(normalizeUrl(page.url)))) b.content = `(${u} taslakta kullanılmadı; metni çıkarıldı. Gerekirse fetch_page ile yeniden oku.)`;
+        }
+      }
       const last = messages.at(-1);
       last.content.push({ type: 'text', text: `Doğrulama editörü taslakta şu olgusal sorunları buldu:\n${probs.map((p) => `- ${p}`).join('\n')}\n\nKaynakları yeniden kontrol et, hataları düzelt ve submit_draft ile yeniden gönder. Düzeltilemiyorsa drop_story çağır.` });
       draft = null;
@@ -487,5 +525,5 @@ Okuma hakkın: ${reporterFetches} sayfa · arama hakkın: ${reporterSearches}.`,
   }));
   const articles = drafts.filter(Boolean);
   note(`haber masası: ${assignments.length} konu → ${articles.length} doğrulanmış taslak · ${ctx.searches} arama · ${pages.size ? new Set([...pages.values()].map((p) => p.url)).size : 0} sayfa okundu · tavan ${'$' + budgetUsd.toFixed(2)}${ctx.overBudget() ? ' (doldu)' : ''}`);
-  return { articles, seen, searches: ctx.searches, rejected, notes };
+  return { articles, seen, searches: ctx.searches, rejected, notes, editorDone, assignedLeads };
 }

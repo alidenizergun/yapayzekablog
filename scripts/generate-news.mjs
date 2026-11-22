@@ -697,6 +697,38 @@ let feedNote = 'Haber akışları okunmadı';
 
 // Aynı tur iki kez tetiklenirse (GitHub zamanlayıcısı + dış zamanlayıcı) ikincisi ücret çıkarmadan atlanır
 const LAST_RUN_FILE = path.join(ROOT, 'data/son-tur.json');
+// Haber masasının değerlendirip atamadığı akış başlıkları (72 saat tutulur): ara turda tekrar gösterilmez
+const FEED_MEMO_FILE = path.join(ROOT, 'data/haber-masasi-gorulen.json');
+
+function readFeedMemo() {
+  try {
+    const j = JSON.parse(fs.readFileSync(FEED_MEMO_FILE, 'utf8'));
+    const cut = Date.now() - 72 * 3600e3;
+    return Object.fromEntries(Object.entries(j).filter(([, v]) => new Date(v.at).valueOf() > cut));
+  } catch { return {}; }
+}
+
+function writeFeedMemo(memo) {
+  if (DRY || SHADOW) return;
+  fs.mkdirSync(path.dirname(FEED_MEMO_FILE), { recursive: true });
+  fs.writeFileSync(FEED_MEMO_FILE, JSON.stringify(memo, null, 1) + '\n');
+}
+
+/** Akış başlığı, son 3 günde yayımlanan bir haberle aynı olayı mı anlatıyor? (özel adlar ve rakamlar dillerden bağımsızdır) */
+// Bizim haberimizden SONRA yayımlanan başlık elenmez: aynı konunun yeni gelişmesi olabilir.
+const nameTokens = (t) => new Set((String(t).replace(/(\d),(\d)/g, '$1.$2').match(/[\p{Lu}\d][\p{L}\d.-]{2,}/gu) || []).map((w) => w.toLocaleLowerCase('tr').replace(/[.-]+$/, '').replace(/'.*$/, '')));
+function coveredByArchive(item, recent) {
+  const a = nameTokens(item.title);
+  if (a.size < 2) return false;
+  const at = item.date ? new Date(item.date).valueOf() || 0 : 0;
+  for (const r of recent) {
+    if (at && at > r.date + 2 * 3600e3) continue;
+    let shared = 0;
+    for (const w of a) if (r.tokens.has(w)) shared++;
+    if (shared >= 2 && shared / a.size >= 0.6) return true;
+  }
+  return false;
+}
 const MIN_GAP_MIN = Number(process.env.MIN_GAP_MIN ?? 90);
 function recentRun() {
   try {
@@ -760,17 +792,39 @@ async function main() {
     }
     log(xNote);
     let feedItems = [];
+    let feedsOk = false; // en az bir akış okunduysa
     try {
       const known = new Set(existing.flatMap((e) => e.urls.map(normalizeUrl)).filter(Boolean));
       const f = await fetchFeeds({ root: ROOT, lookbackHours: LOOKBACK_HOURS, known, normalize: normalizeUrl, max: MIDDAY ? 40 : 60, log: (m) => log(m) });
       feedItems = f.items;
       feedNote = f.note;
+      feedsOk = !/\b0\/\d+ akış okundu/.test(f.note || '');
     } catch (err) {
       feedNote = `Haber akışları atlandı: ${err.message}`;
       log(feedNote);
     }
     if (ENGINE === 'ajan') {
       // Haber masası: yayın yönetmeni → muhabirler → doğrulama. Çıktı aşağıdaki kod kapısından geçer.
+      // Önce kodla eleme (ücretsiz): sitede zaten haberi olan başlıklar ve önceki turda değerlendirilip atanmayanlar
+      const recent = existing.filter((e) => e.date.valueOf() > Date.now() - 3 * 86400e3).map((e) => ({ tokens: nameTokens(e.title), date: e.date.valueOf() }));
+      const memo = readFeedMemo();
+      const memoKey = (f) => normalizeUrl(f.discovery ? f.origin || f.url : f.url);
+      const before = feedItems.length;
+      const dupes = feedItems.filter((f) => coveredByArchive(f, recent));
+      feedItems = feedItems.filter((f) => !dupes.includes(f));
+      const old = feedItems.filter((f) => memo[memoKey(f)]);
+      const fresh = feedItems.filter((f) => !memo[memoKey(f)]);
+      log(`haber masası ön eleme: ${before} başlık → ${fresh.length} yeni (${dupes.length} sitede zaten var, ${old.length} önceki turda değerlendirildi)`);
+      agentNotes.push(`ön eleme (kod): ${before} başlık → ${fresh.length} yeni · ${dupes.length} sitede zaten var · ${old.length} önceki turda değerlendirildi`);
+      if (MIDDAY && feedsOk && !fresh.length) {
+        log('ara tur: son turdan beri yeni başlık yok; Claude çağrılmadı.');
+        agentNotes.push('ara tur atlandı: yeni başlık yok (ücret yok)');
+        await backfillPhotos();
+        return summary([], [], 0);
+      }
+      // Ara turda yalnızca yeni başlıklar; tam turda önceki turların başlıkları da kısa liste olarak verilir
+      const oldText = !MIDDAY && old.length ? `\n\nÖNCEKİ TURLARDA DEĞERLENDİRİLİP ATANMAYAN BAŞLIKLAR (yalnızca yeni bilgi varsa ata):\n${old.map((f) => `- ${f.title} — ${f.source} (${f.discovery ? f.origin || f.url : f.url})`).join('\n')}` : '';
+      feedItems = MIDDAY ? fresh : [...fresh, ...old];
       seen = new Map();
       for (const f of feedItems) {
         const u = f.discovery ? f.origin : f.url;
@@ -779,7 +833,7 @@ async function main() {
       for (const p of xPosts) seen.set(normalizeUrl(p.url), { url: p.url, title: `@${p.username} X gönderisi` });
       const room = await runNewsroom({
         anthropic, existing, seen, normalizeUrl, isBlockedSource, blockedDomains: BLOCKED_DOMAINS,
-        feedText: formatFeedsForPrompt(feedItems), xText: xPosts.length ? formatPostsForPrompt(xPosts) : '',
+        feedText: formatFeedsForPrompt(fresh) + oldText, xText: xPosts.length ? formatPostsForPrompt(xPosts) : '',
         guidelines: GUIDELINES, articleSchema: ARTICLE_SCHEMA, styleBrief: styleBrief(),
         track, costOf: (n) => usage.tokenCost + n * SEARCH_PRICE, log: (m) => log(m),
         now: istanbulIso(), lookbackHours: LOOKBACK_HOURS, midday: MIDDAY, maxArticles: Math.min(MAX_ARTICLES, AGENT_MAX_TOPICS),
@@ -792,6 +846,13 @@ async function main() {
       articles = room.articles.map((x) => (IMAGES[x.image] ? x : { ...x, image: IMAGES[x.category] ? x.category : Object.keys(IMAGES)[0] }));
       agentRejected.push(...room.rejected);
       agentNotes.push(...room.notes);
+      // Yayın yönetmeni turu tamamladıysa, gördüğü ve atamadığı başlıklar kaydedilir
+      if (room.editorDone) {
+        const assigned = new Set(room.assignedLeads.map(normalizeUrl));
+        const now = new Date().toISOString();
+        for (const f of fresh) { const k = memoKey(f); if (k && !assigned.has(k) && !assigned.has(normalizeUrl(f.url))) memo[k] = { at: now, title: f.title.slice(0, 140) }; }
+        writeFeedMemo(memo);
+      }
     } else {
       const r = await research(anthropic, existing, xPosts, feedItems);
       seen = r.seen;
