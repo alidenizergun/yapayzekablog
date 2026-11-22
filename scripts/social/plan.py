@@ -136,9 +136,9 @@ def ask_claude(news_text):
     if not key:
         sys.exit('ANTHROPIC_API_KEY yok')
     body = {
-        'model': MODEL, 'max_tokens': 4000,
+        'model': MODEL, 'max_tokens': 16000,
         'messages': [{'role': 'user', 'content': PROMPT.replace('{max_say}', str(MAX_SAY_CHARS)).replace('{news}', news_text)}],
-        'output_config': {'format': {'type': 'json_schema', 'schema': SCHEMA}},
+        'output_config': {'format': {'type': 'json_schema', 'schema': SCHEMA}, 'effort': 'low'},
     }
     req = urllib.request.Request('https://api.anthropic.com/v1/messages', data=json.dumps(body).encode(), method='POST', headers={
         'x-api-key': key, 'anthropic-version': '2023-06-01', 'content-type': 'application/json'})
@@ -146,7 +146,9 @@ def ask_claude(news_text):
         res = json.load(r)
     text = ''.join(b.get('text', '') for b in res['content'] if b.get('type') == 'text')
     u = res.get('usage', {})
-    print(f"Claude: {u.get('input_tokens')} giriş + {u.get('output_tokens')} çıkış token ({MODEL})")
+    print(f"Claude: {u.get('input_tokens')} giriş + {u.get('output_tokens')} çıkış token ({MODEL}, {res.get('stop_reason')})")
+    if not text.strip():
+        sys.exit(f"Claude metin döndürmedi (stop_reason: {res.get('stop_reason')})")
     return json.loads(text)
 
 
