@@ -356,8 +356,7 @@ const isBreaking = latest && Date.now() - latest.data.date.valueOf() < BREAKING_
         <a class="logo" href={L.u('/')} aria-label={T('YZ Gündemi ana sayfa', 'YZ Gündemi home')}><span class="wm" aria-hidden="true"><span class="wm-badge">YZ</span><span class="wm-text"><span class="wm-sub">{T('YAPAY ZEKA', 'AI NEWS')}</span><span class="wm-main">Gündemi</span></span></span></a>
         <p>{SITE_DESC}</p>
         <p class="foot-ai">{T('Haberler yapay zeka desteğiyle, belirtilen kaynaklardan derlenir; her haberin altında kaynak bağlantıları yer alır.', 'Stories are compiled with AI assistance from the cited sources; every article links to its sources.')} <a href={L.u('/hakkimizda/')}>{T('Nasıl çalışıyoruz?', 'How we work')}</a></p>
-        <h2 class="foot-follow-h">{T('Takip edin', 'Follow us')}</h2>
-        <ul class="foot-follow">
+        <ul class="foot-follow" aria-label={T('Bağlantılar', 'Links')}>
           <li><a href="https://www.google.com/preferences/source?q=yzgundemi.com" rel="noopener" target="_blank"><svg viewBox="0 0 24 24" aria-hidden="true" fill="currentColor"><path d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.4l-5.9 3.1 1.2-6.5-4.8-4.6 6.6-.9z"/></svg>{T("Google'da tercih et", 'Prefer on Google')}</a></li>
           {newsletterOn && <li><a href={L.u('/') + '#bulten'}>{T('E-posta bülteni', 'Newsletter')}</a></li>}
           {SITE.social?.x && <li><a href={`https://x.com/${SITE.social.x}`}>X</a></li>}
