@@ -183,7 +183,7 @@ figcaption { margin-top: 8px; font-size: var(--fs-sm); color: var(--muted); }
 .why-tr-label { font-size: var(--fs-xs); font-weight: 700; letter-spacing: var(--ls-caps); text-transform: uppercase; color: var(--accent-text); }
 .sources { margin-top: 36px; padding: 20px 24px; border: 1px solid var(--line); border-radius: 8px; }
 .sources h2 { font-family: var(--body); font-size: var(--fs-base); font-weight: 700; margin-bottom: 10px; letter-spacing: 0; }
-.sources ol { margin: 0; padding-left: 20px; font-size: var(--fs-base); display: flex; flex-direction: column; gap: 8px; }
+.sources ol, .sources ul { margin: 0; padding-left: 0; list-style: none; font-size: var(--fs-base); display: flex; flex-direction: column; gap: 8px; }
 .sources a { color: var(--accent-text); text-decoration: underline; text-underline-offset: 3px; }
 .sources .host { color: var(--muted); font-size: var(--fs-sm); }
 .ai-note { margin-top: 16px; font-size: var(--fs-sm); color: var(--muted); }
