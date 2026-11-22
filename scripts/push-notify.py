@@ -41,7 +41,10 @@ for f in sorted(files):
     m = re.search(r'^title:\s*(.+)$', open(f, encoding='utf8').read(), re.M)
     titles.append('• ' + (m.group(1).strip().strip('"\'').replace('\\"', '"') if m else os.path.basename(f)))
 
-if gen != 'success':
+if os.environ.get('PUSH_TEST'):
+    title, body, prio, tags = 'YZ Gündemi test bildirimi', 'Bildirimler çalışıyor. Her haber turu bitince buradan haber alacaksınız.', 'default', 'tada'
+    gen = dep = 'success'
+elif gen != 'success':
     title, body, prio, tags = 'Haber turu başarısız', f'Haber üretimi tamamlanamadı ({gen or "bilinmiyor"}). Ayrıntı için dokunun.', 'high', 'warning'
 elif dep != 'success':
     title, body, prio, tags = 'Haberler yayına alınamadı', f'Haberler üretildi ama site güncellenemedi ({dep or "bilinmiyor"}).', 'high', 'warning'

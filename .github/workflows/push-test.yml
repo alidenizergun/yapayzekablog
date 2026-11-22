@@ -1,0 +1,20 @@
+# Push bildirimi denemesi: elle çalıştırılır, yalnızca test bildirimi gönderir (haber turu başlatmaz).
+name: Push bildirimi testi
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - name: Test bildirimi
+        env:
+          NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
+          PUSH_TEST: '1'
+        run: python3 scripts/push-notify.py
