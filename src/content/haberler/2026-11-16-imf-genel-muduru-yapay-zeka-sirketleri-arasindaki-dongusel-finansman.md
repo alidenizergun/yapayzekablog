@@ -20,7 +20,7 @@ keyPoints:
   - "Bu finansmanın üçte ikisi borçla sağlanıyor."
   - "Georgieva bazı düzeltmelerin kaçınılmaz olduğunu söyledi ve dikkatli olunması çağrısı yaptı."
 byNumbers:
-  - value: "1 trilyon dolar"
+  - value: "1 trilyon doların biraz üzerinde"
     label: "Yapay zeka şirketleri arasındaki döngüsel finansman"
   - value: "1 trilyon doların üzerinde"
     label: "Nvidia'nın son bir ayda kaybettiği piyasa değeri"

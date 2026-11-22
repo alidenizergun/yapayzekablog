@@ -21,7 +21,7 @@ byNumbers:
   - value: "6.910,39"
     label: "S&P 500'ün geldiği seviye"
   - value: "yüzde 10"
-    label: "Rekor kapanışların altına inen Dow Jones ve S&P 500"
+    label: "Dow Jones ve S&P 500'ün rekor kapanışa göre düşüşü"
 photo:
   id: "xnzSgqyP8Hs"
   url: "https://images.unsplash.com/photo-1770461846516-b7e5993a8e4f?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8Mnx8c3RvY2slMjBleGNoYW5nZSUyMHRyYWRpbmclMjBmbG9vcnxlbnwxfDB8fHwxNzk1MjU1MjgyfDA&ixlib=rb-4.1.0"

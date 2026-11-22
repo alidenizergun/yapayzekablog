@@ -39,6 +39,6 @@ sources:
 
 Fed Başkanı Kevin Warsh, 16 Kasım 2026 pazartesi günü San Francisco'da, verimlilik ve istihdamı incelemek için kurduğu görev gücü önünde yaptığı konuşmada yapay zekanın ekonomik faydalarına dikkat çekti. Aynı konuşmada teknolojinin yaygın işsizliğe yol açabileceği ya da beklentileri karşılayamayabileceği uyarısında bulundu.
 
-Warsh, yapay zekayı "super intelligence" olarak adlandırdı. Bloomberg HT'nin aktardığına göre üç senaryo çizdi. Yapay zeka, yeni fikirlerin üretimini hızlandırarak büyümeyi uzun vadeli ortalamanın üzerine taşıyabilir. Senaryolarda kazançların geniş kesimlere yayıldığı, büyümenin ortalamanın üzerinde kaldığı ve işsizliğin arttığı ya da yapay zeka yatırımlarının beklentileri karşılamamasıyla ekonominin yavaşladığı durumlar değerlendiriliyor.
+Warsh, yapay zekayı "super intelligence" olarak adlandırdı. Warsh'a göre yapay zeka, yeni fikirlerin üretimini hızlandırarak büyümeyi uzun vadeli ortalamanın üzerine taşıyabilir. Bloomberg HT'nin aktardığına göre Warsh üç senaryo çizdi: kazançların geniş kesimlere yayıldığı bir senaryo, büyümenin ortalamanın üzerinde kalırken işsizliğin arttığı bir senaryo ve yapay zeka yatırımlarının beklentileri karşılamaması nedeniyle ekonominin yavaşladığı bir senaryo.
 
 Warsh ayrıca otomasyon kaynaklı işten çıkarmaların işsizliğe yol açabileceğine dikkat çekti.

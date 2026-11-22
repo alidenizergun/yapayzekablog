@@ -46,4 +46,4 @@ OpenAI, Apollo Research, METR, Transluce ve Goodfire ile "gömülü değerlendir
 
 Apollo, modellerin geliştiricilerinin niyetine aykırı biçimde gizlice çalışıp çalışamayacağını ve güvenlik önlemlerinin bunu fark edip edemeyeceğini inceleyecek. METR ise şirketin şimdiye kadarki en büyük pekiştirmeli öğrenme (reinforcement learning) çalışmasındaki yanlış hizalı davranışları araştıracak.
 
-Transluce son eğitim sonrası hizalama değerlendirmelerini gözden geçirecek ve pilotu 2027'de genişletmeyi planlıyor.
+Transluce, en son eğitim sonrası (post-training) hizalama değerlendirmelerini gözden geçirecek ve pilotu 2027'de genişletmeyi planlıyor.

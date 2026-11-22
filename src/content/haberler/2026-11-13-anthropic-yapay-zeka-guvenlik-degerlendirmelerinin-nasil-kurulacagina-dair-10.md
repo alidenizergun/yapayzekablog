@@ -1,6 +1,6 @@
 ---
 title: "Anthropic, yapay zeka güvenlik değerlendirmelerinin nasıl kurulacağına dair 10 öneri yayımladı"
-spot: "Anthropic, mühendislik ekibinin imzasıyla yayımladığı yazıda yapay zeka güvenlik testlerinin nasıl tasarlanması gerektiğine dair 10 öneri sundu. Öneriler, testin gerçekten ölçmek istediğini ölçmesinden sonuçların şeffaf raporlanmasına uzanıyor."
+spot: "Anthropic, mühendislik ekibinin imzasıyla yayımladığı yazıda yapay zeka güvenlik testlerinin nasıl tasarlanması gerektiğine dair 10 öneri sundu. Öneriler, testin ölçmek istediği şeyi gerçekten ölçmesinden sonuçların şeffaf raporlanmasına uzanıyor."
 category: guvenlik
 popularity: 30
 tags: ["Anthropic", "Claude", "YapayZekaGüvenliği", "Değerlendirme"]

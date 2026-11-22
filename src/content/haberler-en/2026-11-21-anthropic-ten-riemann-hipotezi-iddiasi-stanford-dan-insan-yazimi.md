@@ -35,4 +35,4 @@ Because Masullo's draft has not been translated into Lean, it is hard to say any
 
 According to Scientific American, Alpöge and Tristan Buckmaster of New York University shared a new AI-assisted proof for the Navier-Stokes equations on the same day. OpenAI's solution, presented in September, was criticized by experts as exploiting a loophole because it relied on an artificial, fine-tuned forcing assumption. The pair say they have closed that gap. Buckmaster said on Mastodon that the text he shared is unpolished and that the certificate for the result will be published soon.
 
-Alpöge says that timing the announcement for the week of Anthropic's IPO was bad timing, and stresses that it was not a promotional move.
+Alpöge says the announcement's coinciding with the week of Anthropic's IPO was bad timing, and stresses that it was not a promotional move.

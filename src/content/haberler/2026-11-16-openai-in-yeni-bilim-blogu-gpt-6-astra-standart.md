@@ -46,6 +46,6 @@ OpenAI, yeni bilim blogunu açtı. İlk konuk yazı 15 Kasım 2026 tarihli ve Op
 
 Craig, Santa Barbara'daki Kaliforniya Üniversitesi'nde parçacık kuramcısı. Ekim ayında yayımladığı arXiv ön baskısında Standart Model için aday bir tanım önerdi. Ayrıntılı ispatta Astra'nın başı çektiğini belirtiyor.
 
-Craig'e göre GPT-6 Astra, rafine etme fikrini çalışan bir yapıya dönüştürmede belirleyici oldu. Tam Standart Model için buna karşılık gelen sorunun 25 yıldan uzun süredir açık olduğunu da söylüyor.
+Craig'e göre GPT-6 Astra, kafesi adım adım inceltme (refinement) fikrini çalışan bir yapıya dönüştürmede belirleyici oldu. Tam Standart Model için buna karşılık gelen sorunun 25 yıldan uzun süredir açık olduğunu da söylüyor.
 
 Sonuç, kesinleşmiş bir çözüm olarak değil, “aday” bir tanım olarak sunuluyor ve henüz bağımsız uzmanlarca doğrulanmadı. Yazı OpenAI'ın X hesabından yeni bilim blogunun ilk gönderisi olarak duyuruldu; OpenAI'dan Greg Brockman da paylaştı.

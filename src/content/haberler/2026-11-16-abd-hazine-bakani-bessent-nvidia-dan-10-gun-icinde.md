@@ -15,7 +15,7 @@ keyPoints:
   - "Bessent, Nvidia yönetim kurulundan 10 gün içinde yanıt istedi."
   - "Bakan, bir sonraki CEO'nun şirket dışından seçilmesi gerektiğini söyledi."
   - "Nvidia, Salı günü açıklayacağı bilançoyla ilk önemli kamuoyu açıklamasını yapacak."
-whatsNext: "Bessent, Nvidia yönetim kurulundan 10 gün içinde yanıt bekliyor; Nvidia ilk önemli kamuoyu açıklamasını Salı günü açıklayacağı bilançoyla yapacak."
+whatsNext: "Bessent, Nvidia yönetim kurulundan 10 gün içinde yanıt bekliyor; Nvidia'nın Salı günü açıklayacağı bilanço, şirketin ilk önemli kamuoyu açıklaması olacak."
 photo:
   id: "pixabay-3389904"
   url: "/foto/px-3389904"
@@ -47,4 +47,4 @@ ABD Hazine Bakanı Scott Bessent, 15 Kasım Pazar günü Fox News'te yaptığı 
 
 Bessent, şirketin gelirini ve kârını şişirmek için “görünüşte yasa dışı” satışları zorlayıp zorlamadığını sorguladı. Bakan ayrıca Çin satışları düşerken Singapur'da kaydedilen gelirin artmasına dikkat çekti.
 
-Nvidia, CEO Jensen Huang'ın istifasından ve CFO Colette Kress'in vekil CEO olmasından sonraki ilk önemli kamuoyu açıklamasını Salı günü yapacağı bilançoyla verecek. Şirketin bu açıklamada Bessent'in sorularına nasıl yaklaşacağı merak konusu.
+Nvidia'nın Salı günü açıklayacağı bilanço, CEO Jensen Huang'ın istifasından ve CFO Colette Kress'in geçici CEO olmasından sonraki ilk önemli kamuoyu açıklaması olacak. Şirketin bu açıklamada Bessent'in sorularına nasıl yaklaşacağı merak konusu.

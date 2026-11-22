@@ -19,4 +19,4 @@ byNumbers:
 
 European stock markets ended the week lower amid concerns about returns on AI investments and sell-offs in technology stocks. On Friday, November 20, the Stoxx Europe 600 index fell 2% to 625.65 points. In Germany, the DAX 40 dropped 2.60%, in France the CAC 40 fell 1.89%, and in Britain the FTSE 100 declined 1.02%.
 
-The drop is reportedly triggered by a sharp decline in shares of AI company Anthropic after they began trading on Nasdaq yesterday. Selling pressure on Nvidia and other chip stocks continued in the US; in Europe, losses in ASML, Infineon and STMicroelectronics stood out.
+The drop is reportedly triggered by a sharp decline in shares of AI company Anthropic, which began trading on Nasdaq on November 19. Selling pressure on Nvidia and other chip stocks continued in the US; in Europe, losses in ASML, Infineon and STMicroelectronics stood out.

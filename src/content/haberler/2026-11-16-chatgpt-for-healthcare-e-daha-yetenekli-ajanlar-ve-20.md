@@ -38,4 +38,4 @@ OpenAI, ChatGPT for Healthcare'in daha yetenekli bilgisayar kullanan ajanlar, da
 
 Abridge, Ambience Healthcare, Cigna ve CVS Health gibi kuruluşlar modelleri ön yetkilendirme, sevk, taburculuk planlaması ve hasta iletişimi süreçlerinde kullanıyor.
 
-Şirket, modellerin tıbbi kanıtları günlük kullanılan araçlarla bağlamayı hedeflediğini belirtti.
+Şirket, modellerin tıbbi kanıtları sağlık çalışanlarının her gün kullandığı araçlarla buluşturmayı hedeflediğini belirtti.

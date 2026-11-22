@@ -47,4 +47,4 @@ Sanayi ve Teknoloji Bakanı Mehmet Fatih Kacır, Türkiye'nin ev sahipliğinde A
 
 Kacır'a göre girişim, yenilikçi yapay zeka destekli temiz teknolojilerin pratik uygulamaya geçirilmesi için uluslararası bir platform sağlayacak. Girişim, teknoloji geliştiricilerini sanayi ortakları ve yatırımcılarla buluşturarak pilot projeleri kolaylaştırmayı amaçlıyor.
 
-Bakan ayrıca yapay zeka destekli şebeke yönetiminin, sanayi üretiminde yeni güç hatları kurmadan 175 gigavata kadar ek iletim kapasitesi açabileceğine dikkat çekti.
+Bakan ayrıca yapay zeka destekli şebeke yönetiminin, yeni iletim hatları kurmadan 175 gigavata kadar ek iletim kapasitesi açabileceğine dikkat çekti.

@@ -23,8 +23,8 @@ keyPoints:
 byNumbers:
   - value: "4,5 milyar dolar"
     label: "Satın alma bedeli (tamamı hisse senedi)"
-  - value: "500 milyon dolar"
-    label: "Applied Compute'un önceki fonlaması (üzerinde)"
+  - value: "500 milyon doların üzerinde"
+    label: "Applied Compute'un önceki fonlaması"
   - value: "3,45 milyar dolar"
     label: "Palo Alto'nun bildirdiği gelir"
 photo:

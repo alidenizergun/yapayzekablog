@@ -15,8 +15,8 @@ byNumbers:
     label: "Equity led by Accel"
   - value: "$21 million"
     label: "Debt led by Lighthouse Canton"
-  - value: "$50 million"
-    label: "Claimed annual revenue (over)"
+  - value: "Over $50 million"
+    label: "Claimed annual revenue"
 photoAlt: "blue industrial robot arm in factory"
 dealAmount: "$47 million"
 ---

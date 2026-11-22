@@ -6,7 +6,7 @@ spot: "LS Electric said it has signed a contract worth about $93.83 million to s
 whyItMatters: "As AI use grows, the time it takes for a data center to connect to electricity, known as time to power, is becoming a decisive factor in competition."
 keyPoints:
   - "LS Electric signed a power system contract worth about $93.83 million."
-  - "The contract covers 38-kilovolt high-voltage and low-voltage switchgear."
+  - "The contract covers 38-kilovolt high-voltage switchgear as well as low-voltage switchgear."
   - "The equipment will be delivered in stages; the customer's name was not disclosed."
 byNumbers:
   - value: "$93.83 million"
@@ -20,6 +20,6 @@ dealAmount: "about $93.83 million (130 billion won)"
 
 LS Electric announced on November 16, 2026, that it will supply power systems to a hyperscale data center operated by a global technology company. The deal is worth about $93.83 million (130 billion won).
 
-Under the contract, the company will deliver 38-kilovolt high-voltage and low-voltage switchgear in stages. Switchgear is a core component of a data center's power distribution network.
+Under the contract, the company will deliver 38-kilovolt high-voltage switchgear and low-voltage switchgear in stages. Switchgear is a core component of a data center's power distribution network.
 
 LS Electric's customer had previously worked with the company on a large data center project in the United States. The customer's name was not disclosed.

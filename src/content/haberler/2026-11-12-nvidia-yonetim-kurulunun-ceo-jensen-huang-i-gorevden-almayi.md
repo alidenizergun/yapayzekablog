@@ -39,7 +39,7 @@ sources:
     publisher: "Yahoo Finance"
 ---
 
-Nvidia hisseleri Çarşamba günü piyasa kapanışı sonrasında, yönetim kurulunun CEO Jensen Huang'ı görevden almayı değerlendirdiği haberlerinin ardından yüzde 8'den fazla değer kaybetti. Düşüş, Wall Street Journal'ın haberine dayanıyor. Reuters ise bir kaynağa dayanarak kurulun Çarşamba akşamı Huang'ın görevden alınıp alınmayacağını görüşmek üzere toplandığını bildirdi. Perşembe sabahı itibarıyla bir karar açıklanmamıştı.
+Nvidia hisseleri Çarşamba günü piyasa kapanışı sonrasında, yönetim kurulunun CEO Jensen Huang'ı görevden almayı değerlendirdiği haberlerinin ardından yüzde 8'den fazla değer kaybetti. Düşüşü, Wall Street Journal'ın haberi tetikledi. Reuters ise bir kaynağa dayanarak kurulun Çarşamba akşamı Huang'ın görevden alınıp alınmayacağını görüşmek üzere toplandığını bildirdi. Perşembe sabahı itibarıyla bir karar açıklanmamıştı.
 
 Nvidia henüz bir karar açıklamadı; ortada resmi bir görevden alma değil, yönetim kurulunda yürütüldüğü bildirilen bir değerlendirme var.
 

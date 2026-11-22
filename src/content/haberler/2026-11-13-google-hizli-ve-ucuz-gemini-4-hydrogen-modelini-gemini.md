@@ -42,7 +42,7 @@ Google, Gemini 4 Hydrogen'ı 12 Kasım 2026'da duyurdu. Şirket, Carbon ve Argon
 
 Model, Google AI Studio'nun tüm katmanlarında, Gemini API'de, Gemini for business'ta, Gemini uygulamasında ve Google Search'te sunuluyor. Google AI Pro ve Ultra aboneleri modeli Antigravity'de kullanabiliyor. Ücretsiz Gemini kullanıcıları ise Hydrogen'ı, uygulamanın otomatik model seçimi devreye girdiğinde kullanabilecek.
 
-Google'a göre model, Gemini 3.8 Flash'a kıyasla görevleri 2,5 kat hızlı tamamlıyor. Terminal-Bench 4.1'de yüzde 57 alırken Flash'ın puanı yüzde 18,2. Google ayrıca modelin uydurma bilgi üretme oranının beşte birin altına indiğini belirtiyor. Artificial Analysis Intelligence Index'te modelin varsayılan ayarda 51 puan aldığı, Argon'un ise 50 aldığı bildiriliyor.
+Google'a göre model, Gemini 3.8 Flash'a kıyasla görevleri 2,5 kat hızlı tamamlıyor. Terminal-Bench 4.1'de yüzde 57 alırken Flash'ın puanı yüzde 18,2. Google ayrıca modelin uydurma iddiaları Gemini 3.8 Flash'a göre beş kattan fazla azalttığını belirtiyor. Artificial Analysis Intelligence Index'te modelin varsayılan ayarda 51 puan aldığı, Argon'un ise 50 aldığı bildiriliyor.
 
 ## Fiyat ve teknik ayrıntılar
 

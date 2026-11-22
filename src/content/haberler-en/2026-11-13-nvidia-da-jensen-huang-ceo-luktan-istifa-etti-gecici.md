@@ -12,8 +12,8 @@ whatsNext: "Colette Kress will serve as interim CEO until a permanent CEO is cho
 byNumbers:
   - value: "33 years"
     label: "Huang's tenure as CEO"
-  - value: "13%"
-    label: "Stock drop in morning trading (more than)"
+  - value: "More than 13%"
+    label: "Stock drop in morning trading"
   - value: "$12.9 billion"
     label: "Pending Hugging Face acquisition"
 dealCounterparty: "Hugging Face"

@@ -25,8 +25,8 @@ whatsNext: "Kalıcı CEO seçilene kadar Colette Kress geçici CEO olarak görev
 byNumbers:
   - value: "33 yıl"
     label: "Huang'ın CEO olarak görev süresi"
-  - value: "yüzde 13"
-    label: "Hissenin sabah işlemlerindeki düşüşü (üzeri)"
+  - value: "yüzde 13'ten fazla"
+    label: "Hissenin sabah işlemlerindeki düşüşü"
   - value: "12,9 milyar dolar"
     label: "Bekleyen Hugging Face satın alması"
 photo:

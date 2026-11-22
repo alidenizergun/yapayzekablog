@@ -23,14 +23,14 @@ deal:
   amountUsdM: 94
 keyPoints:
   - "LS Electric yaklaşık 93,83 milyon dolarlık güç sistemi sözleşmesi imzaladı."
-  - "Sözleşme 38 kilovoltluk yüksek ve alçak gerilim şalt ekipmanlarını kapsıyor."
+  - "Sözleşme, 38 kilovoltluk yüksek gerilim şalt ekipmanları ile alçak gerilim şalt ekipmanlarını kapsıyor."
   - "Ekipman aşamalı olarak teslim edilecek; müşterinin adı açıklanmadı."
 format: kisa
 byNumbers:
   - value: "93,83 milyon dolar"
     label: "Sözleşme değeri (130 milyar won)"
   - value: "38 kilovolt"
-    label: "Teslim edilecek şalt ekipmanı"
+    label: "Yüksek gerilim şalt ekipmanının gerilimi"
 photo2:
   id: "RPqSaXajfO4"
   url: "https://images.unsplash.com/photo-1792419764801-582dd74454d9?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8MTR8fGRhdGElMjBjZW50ZXIlMjBwb3dlciUyMGVxdWlwbWVudHxlbnwxfDB8fHwxNzk1Mjg4ODYzfDA&ixlib=rb-4.1.0"
@@ -49,6 +49,6 @@ sources:
 
 LS Electric, küresel bir teknoloji şirketinin hiperölçekli veri merkezine güç sistemleri sağlayacağı sözleşmeyi 16 Kasım 2026'da duyurdu. Anlaşmanın değeri yaklaşık 93,83 milyon dolar (130 milyar won).
 
-Sözleşme kapsamında şirket, veri merkezi güç şebekesinin temel ekipmanı olan 38 kilovoltluk yüksek gerilim ve alçak gerilim şalt ekipmanlarını aşamalı olarak teslim edecek.
+Sözleşme kapsamında şirket, veri merkezi güç şebekesinin temel ekipmanı olan 38 kilovoltluk yüksek gerilim şalt ekipmanlarını ve alçak gerilim şalt ekipmanlarını aşamalı olarak teslim edecek.
 
 LS Electric'in müşterisi, ABD'deki büyük veri merkezi projesinde şirketle daha önce de çalışmıştı. Müşterinin adı açıklanmadı.

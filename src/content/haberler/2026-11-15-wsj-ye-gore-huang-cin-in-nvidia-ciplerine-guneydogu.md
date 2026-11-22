@@ -46,6 +46,6 @@ Haberde Malezya'nın, ABD'nin Virginia eyaletinden sonra dünyanın en büyük i
 
 ## Bloomberg'in ilgili haberi
 
-Bloomberg'in 13 Kasım'da yayımladığı ve incelediği belgelere dayanan habere göre ise Megaspeed yöneticisi Alice Huang'ın kurduğu Çinli bir şirket, yasa dışı yollarla Nvidia çipleri edinip bunları Şanghay'daki bir veri merkezinde kullanmaya başladı. Haber, Nvidia'nın Singapur'daki bulut ortağı Aperia ile de bağlantılı.
+Bloomberg'in 13 Kasım'da yayımladığı ve incelediği belgelere dayanan habere göre ise Megaspeed yöneticisi Alice Huang'ın kurduğu Çinli bir şirket, yasa dışı yollarla Nvidia çipleri edinip bunları Şanghay'daki bir veri merkezinde kullanmaya başladı. Haberde Nvidia'nın Singapur'daki bulut ortağı Aperia'nın adı da geçiyor.
 
 İki haberdeki bilgiler de gazetelerin incelediği belgelere dayanıyor ve bağımsız olarak doğrulanmış değil.

@@ -14,7 +14,7 @@ photo:
   author: "Tyler"
   authorUrl: "https://unsplash.com/@tylergm"
   link: "https://unsplash.com/photos/a-close-up-of-a-green-light-in-a-server-zMrGQu21qcU"
-whyItMatters: "Çinli şirketlerin fiyat baskısı sürüyor. Alibaba'nın Qwen4-Max'in hemen ardından gelen bu model, ajan görevlerinde maliyeti düşürmeyi hedefliyor."
+whyItMatters: "Çinli şirketlerin fiyat baskısı sürüyor. Alibaba'nın Qwen4-Max modelinin hemen ardından gelen bu model, ajan görevlerinde maliyeti düşürmeyi hedefliyor."
 keyPoints:
   - "Hy4 flash, 224 milyar parametreli ve her geçişte 12 milyarını kullanan bir model."
   - "Girdi için milyon token başına 0,07 dolar, çıktı için 0,281 dolar isteniyor."

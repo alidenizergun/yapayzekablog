@@ -11,7 +11,7 @@ Google announced Gemini 4 Hydrogen on November 12, 2026. The company positions C
 
 The model is available across all tiers of Google AI Studio, in the Gemini API, in Gemini for business, in the Gemini app and in Google Search. Google AI Pro and Ultra subscribers can use the model in Antigravity. Free Gemini users will be able to use Hydrogen when the app's automatic model selection kicks in.
 
-According to Google, the model completes tasks 2.5 times faster than Gemini 3.8 Flash. It scores 57% on Terminal-Bench 4.1, compared with 18.2% for Flash. Google also says the model's hallucination rate has fallen to under one-fifth. On the Artificial Analysis Intelligence Index, the model reportedly scored 51 points at its default setting, while Argon scored 50.
+According to Google, the model completes tasks 2.5 times faster than Gemini 3.8 Flash. It scores 57% on Terminal-Bench 4.1, compared with 18.2% for Flash. Google also says the model cuts fabricated claims by more than five times compared with Gemini 3.8 Flash. On the Artificial Analysis Intelligence Index, the model reportedly scored 51 points at its default setting, while Argon scored 50.
 
 ## Pricing and technical details
 

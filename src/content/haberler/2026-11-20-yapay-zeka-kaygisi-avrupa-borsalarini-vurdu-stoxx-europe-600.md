@@ -44,4 +44,4 @@ sources:
 
 Avrupa borsaları, yapay zeka yatırımlarının getirisine ilişkin kaygılarla teknoloji hisselerinde yaşanan satışlar nedeniyle haftayı düşüşle tamamladı. 20 Kasım Cuma günü Stoxx Europe 600 endeksi yüzde 2 değer kaybederek 625,65 puana geriledi. Almanya'da DAX 40 yüzde 2,60, Fransa'da CAC 40 yüzde 1,89, İngiltere'de FTSE 100 ise yüzde 1,02 düştü.
 
-Düşüşü, yapay zeka şirketi Anthropic'in dün Nasdaq'ta işlem görmeye başlamasının ardından hisselerindeki sert düşüşün tetiklediği belirtiliyor. ABD'de Nvidia ve diğer çip hisselerinde satış baskısı sürdü; Avrupa'da ASML, Infineon ve STMicroelectronics hisselerindeki kayıplar öne çıktı.
+Düşüşü, 19 Kasım'da Nasdaq'ta işlem görmeye başlayan Anthropic'in hisselerindeki sert düşüşün tetiklediği belirtiliyor. ABD'de Nvidia ve diğer çip hisselerinde satış baskısı sürdü; Avrupa'da ASML, Infineon ve STMicroelectronics hisselerindeki kayıplar öne çıktı.

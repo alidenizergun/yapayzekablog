@@ -15,8 +15,8 @@ keyPoints:
   - "Hugging Face'in Nvidia'ya katılma planı değişmedi; konu soru-cevapta ele alınmadı."
   - "Nemotron, OpenRouter'da en yaygın kullanılan ABD kökenli açık model olarak anıldı."
 byNumbers:
-  - value: "118 milyon"
-    label: "Hugging Face'in hizmet verdiği geliştirici (üzerinde)"
+  - value: "118 milyondan fazla"
+    label: "Hugging Face'in hizmet verdiği geliştirici"
   - value: "200.000"
     label: "Platformu kullanan şirket"
 photo:

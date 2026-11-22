@@ -30,4 +30,4 @@ sources:
 ---
 LG AI Research, 4 Kasım 2026'da ICOTEC 2026 konferansı kapsamında düzenlenen Copyright Technology Awards'ta ödül aldı. Ödül, şirketin uyum süreçlerine yönelik geliştirdiği yapay zeka ajanı EXAONE Nexus için verildi.
 
-Ödülü, Güney Kore Ulusal Fikri Mülkiyet Komisyonu başkanı adına verilen başkanlık ödülü olarak aldığı bildirildi.
+Şirketin aldığı ödülün, Güney Kore Ulusal Fikri Mülkiyet Komisyonu başkanı adına verilen başkanlık ödülü olduğu bildirildi.

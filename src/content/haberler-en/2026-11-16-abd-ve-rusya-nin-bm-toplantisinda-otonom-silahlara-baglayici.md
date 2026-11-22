@@ -6,7 +6,7 @@ spot: "According to Reuters, the US and Russia are expected to oppose an effort 
 whyItMatters: "Whether the international framework governing military AI will be binding may become clear at the Geneva meeting. Major military powers are opposed."
 keyPoints:
   - "The US and Russia appear set to oppose launching negotiations on binding rules."
-  - "The US proposed a five-year negotiating mandate, while the meeting chair proposed a two-year one."
+  - "The US proposed a five-year mandate for a non-binding agreement, while the meeting chair proposed a two-year mandate for a binding protocol."
   - "The UN Secretary-General urged states to negotiate a binding instrument."
 whatsNext: "Whether negotiations on a binding instrument will begin may become clear this week, it was reported."
 ---

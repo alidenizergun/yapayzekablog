@@ -9,8 +9,8 @@ keyPoints:
   - "The plan for Hugging Face to join Nvidia has not changed; the topic was not addressed in the Q&A."
   - "Nemotron was cited as the most widely used U.S.-developed open model on OpenRouter."
 byNumbers:
-  - value: "118 million"
-    label: "Developers served by Hugging Face (on the platform)"
+  - value: "More than 118 million"
+    label: "Developers served by Hugging Face"
   - value: "200,000"
     label: "Companies using the platform"
 ---

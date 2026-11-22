@@ -16,7 +16,7 @@ byNumbers:
   - value: "6,910.39"
     label: "Level the S&P 500 fell to"
   - value: "10%"
-    label: "Dow Jones and S&P 500 fell below their record closing levels"
+    label: "Dow Jones and S&P 500 drop from record closes"
 ---
 
 In reports dated November 21, 2026, a sharp selloff in US AI and chip stocks pushed the major indexes into correction territory. The Nasdaq fell 1,000 points, or 5.28%, while the Dow Jones dropped 1.93%. The S&P 500 lost 3.7%, falling to 6,910.39.

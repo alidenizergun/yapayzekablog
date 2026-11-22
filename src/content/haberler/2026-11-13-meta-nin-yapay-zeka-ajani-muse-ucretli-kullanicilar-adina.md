@@ -41,6 +41,6 @@ Meta'nın tüketici yapay zeka ajanı Muse, kullanıcılar adına ABD'deki işle
 
 Abonelik planları, haftada 500 milyon Muse token'ı için aylık 20 dolardan başlıyor. Yoğun kullanıcılar için 3 milyar token'lık, aylık 100 dolarlık bir plan da bulunuyor.
 
-Meta'nın yapay zeka sorumlusu Alexandr Wang, özelliğin kablo şirketi, DMV (ehliyet ve araç tescil dairesi) veya online rezervasyon kabul etmeyen restoranlar gibi aranmak istenmeyen yerler için kullanılabileceğini söyledi. Wang'a göre Muse'a kendi e-posta adresini tanımlama özelliği de yakında ücretsiz kullanıcılara açılacak.
+Meta'nın yapay zeka sorumlusu Alexandr Wang, özelliğin kablo şirketi, DMV (ehliyet ve araç tescil dairesi) veya online rezervasyon kabul etmeyen restoranlar gibi insanların aramaktan kaçındığı yerler için kullanılabileceğini söyledi. Wang'a göre Muse'a kendi e-posta adresini tanımlama özelliği de yakında ücretsiz kullanıcılara açılacak.
 
 Öte yandan bazı işletmeler ve resepsiyon görevlileri, arayanın yapay zeka olduğunu fark edince telefonu kapatabiliyor.

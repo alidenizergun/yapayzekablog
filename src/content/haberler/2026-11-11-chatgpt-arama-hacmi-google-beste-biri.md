@@ -31,6 +31,6 @@ sources:
 ---
 OpenAI, ChatGPT üzerinden yapılan arama hacminin Google'daki arama hacminin yaklaşık beşte birine ulaştığını açıkladı. Rakam, sohbet tabanlı yapay zeka asistanlarının bilgiye erişimde artık yan bir kanal değil, ana kanallardan biri haline geldiğine işaret ediyor.
 
-Açıklama, yapay zeka yanıtlarının haber ekosistemine etkisinin Avrupa'da tartışıldığı bir döneme denk geldi. Yayıncılar, yapay zeka tarafından üretilen yanıtların karşılığında telif ödenmeden haber içeriğinin yerini alabildiğini savunuyor. Google ise mevcut yasal istisnalara ve yayıncılara sunduğu kontrol araçlarına dikkat çekiyor.
+Açıklama, yapay zeka yanıtlarının haber ekosistemine etkisinin Avrupa'da tartışıldığı bir döneme denk geldi. Yayıncılar, yapay zekanın ürettiği yanıtların, karşılığında telif ödenmeden haber içeriğinin yerini alabildiğini savunuyor. Google ise mevcut yasal istisnalara ve yayıncılara sunduğu kontrol araçlarına dikkat çekiyor.
 
 Avrupa'daki tartışmada şimdiye kadar ortaya konan görüş bağlayıcı değil. Verilecek nihai kararın, yayıncılar ile yapay zeka şirketleri arasındaki ilişkiyi ve olası lisans anlaşmalarını belirlemesi bekleniyor.

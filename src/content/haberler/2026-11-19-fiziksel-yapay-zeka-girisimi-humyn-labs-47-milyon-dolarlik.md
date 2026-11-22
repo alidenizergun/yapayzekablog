@@ -33,8 +33,8 @@ byNumbers:
     label: "Accel liderliğindeki özkaynak"
   - value: "21 milyon dolar"
     label: "Lighthouse Canton liderliğindeki borç"
-  - value: "50 milyon dolar"
-    label: "Şirketin iddia ettiği yıllık gelir (üzerinde)"
+  - value: "50 milyon doların üzerinde"
+    label: "Şirketin iddia ettiği yıllık gelir"
 photo2:
   id: "UlzVZGPByrg"
   url: "https://images.unsplash.com/photo-1792865411791-4c0a0f809315?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8MTJ8fHJvYm90JTIwYXJtJTIwd2FyZWhvdXNlfGVufDF8MHx8fDE3OTUyNTUzMjB8MA&ixlib=rb-4.1.0"

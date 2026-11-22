@@ -63,4 +63,4 @@ Masullo'nun taslağı Lean'e çevrilmediği için doğruluğu konusunda şimdili
 
 Scientific American'a göre Alpöge ve New York Üniversitesi'nden Tristan Buckmaster aynı gün Navier-Stokes denklemleri için yapay zeka destekli yeni bir kanıt paylaştı. OpenAI'ın eylülde sunduğu çözüm, yapay ve ince ayarlı bir kuvvet varsayımına dayandığı için uzmanlarca bir boşluktan yararlanma olarak eleştirilmişti. İkili, bu boşluğu kapattığını söylüyor. Buckmaster Mastodon'da paylaştığı metnin cilalanmamış olduğunu, sonucun sertifikasının ise yakında yayımlanacağını belirtti.
 
-Alpöge, açıklamayı Anthropic'in borsaya açıldığı haftaya denk getirmesinin kötü bir zamanlama olduğunu söylüyor ve bunun bir tanıtım hamlesi olmadığını vurguluyor.
+Alpöge, açıklamanın Anthropic'in borsaya açıldığı haftaya denk gelmesinin kötü bir zamanlama olduğunu söylüyor ve bunun bir tanıtım hamlesi olmadığını vurguluyor.

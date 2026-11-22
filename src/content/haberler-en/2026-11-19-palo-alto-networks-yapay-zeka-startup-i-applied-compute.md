@@ -11,8 +11,8 @@ keyPoints:
 byNumbers:
   - value: "$4.5 billion"
     label: "Acquisition price (entirely in stock)"
-  - value: "$500 million"
-    label: "Applied Compute's previous funding (more than)"
+  - value: "More than $500 million"
+    label: "Applied Compute's previous funding"
   - value: "$3.45 billion"
     label: "Palo Alto's reported revenue"
 dealCounterparty: "Applied Compute"

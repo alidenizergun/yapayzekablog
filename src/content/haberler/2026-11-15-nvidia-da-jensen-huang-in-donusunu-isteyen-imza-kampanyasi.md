@@ -8,7 +8,7 @@ date: 2026-11-15T19:04:47+03:00
 image: altyapi
 brand: nvidia
 imageQuery: "corporate headquarters glass building"
-whyItMatters: "Yapay zeka çiplerinin en büyük tedarikçisinde liderlik boşluğu sürüyor ve yönetim kurulu üzerindeki baskı artıyor. Ancak imza sayıları kendi beyanına dayandığı için kurulun kararını ne ölçüde etkileyeceği belirsiz."
+whyItMatters: "Yapay zeka çiplerinin en büyük tedarikçisinde liderlik boşluğu sürüyor ve yönetim kurulu üzerindeki baskı artıyor. Ancak imzalar kişilerin kendi beyanına dayandığı için kurulun kararını ne ölçüde etkileyeceği belirsiz."
 photo:
   id: "pixabay-3963945"
   url: "/foto/px-3963945"

@@ -22,10 +22,10 @@ keyPoints:
   - "BIST 100 güne yüzde 1,22 düşüşle başladı."
 format: kisa
 byNumbers:
-  - value: "yüzde 2"
-    label: "Wall Street'in 19 Kasım'daki değer kaybı (üzerinde)"
-  - value: "yüzde 4"
-    label: "Japonya ve Güney Kore borsalarındaki gerileme (fazla)"
+  - value: "yüzde 2'nin üzerinde"
+    label: "Wall Street'in 19 Kasım'daki değer kaybı"
+  - value: "yüzde 4'ten fazla"
+    label: "Japonya ve Güney Kore borsalarındaki gerileme"
   - value: "yüzde 1,22"
     label: "BIST 100'ün açılıştaki düşüşü"
   - value: "11.261,44"

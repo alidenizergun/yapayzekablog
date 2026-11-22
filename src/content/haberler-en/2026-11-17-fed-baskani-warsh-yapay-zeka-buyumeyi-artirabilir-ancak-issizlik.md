@@ -12,6 +12,6 @@ keyPoints:
 
 Fed Chair Kevin Warsh highlighted the economic benefits of artificial intelligence in a speech on Monday, November 16, 2026, in San Francisco, before a task force he set up to examine productivity and employment. In the same speech, he warned that the technology could lead to widespread unemployment or fail to meet expectations.
 
-Warsh called AI "super intelligence." According to Bloomberg HT, he outlined three scenarios. AI could accelerate the generation of new ideas, pushing growth above its long-term average. The scenarios also cover cases in which gains are spread across broad segments of the economy and growth stays above average, and cases in which unemployment rises or the economy slows because AI investments fail to meet expectations.
+Warsh called AI "super intelligence." In his view, AI could accelerate the generation of new ideas and push growth above its long-term average. According to Bloomberg HT, he outlined three scenarios: one in which the gains are widely shared, one in which growth stays above average while unemployment rises, and one in which the economy slows because AI investments fail to meet expectations.
 
 Warsh also noted that job cuts driven by automation could lead to unemployment.

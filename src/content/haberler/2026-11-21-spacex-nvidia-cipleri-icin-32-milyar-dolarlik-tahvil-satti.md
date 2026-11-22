@@ -23,8 +23,8 @@ whatsNext: "Çiplerin ocak ayında gelmeye başlaması bekleniyor."
 byNumbers:
   - value: "32 milyar dolar"
     label: "Nvidia çipleri için satılan tahvil"
-  - value: "yüzde 8"
-    label: "En büyük dilimde ödenen getirinin üzerinde kaldığı oran"
+  - value: "yüzde 8'in üzerinde"
+    label: "En büyük dilimde ödenen getiri"
   - value: "7,6 milyar dolar"
     label: "Yapay zeka biriminin üçüncü çeyrek geliri"
 photo2:

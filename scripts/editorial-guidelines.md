@@ -98,7 +98,7 @@ Bir güncellemede en fazla bir haber manşet olarak işaretlenir: yalnızca ger�
 
 ## whats_next ("Sırada ne var?") ve by_numbers ("Rakamlarla")
 - whats_next: Kaynaklarda yazan somut bir sonraki adım: açıklanan tarih, beklenen karar, son başvuru günü, planlanan lansman. Tahmin, yorum ve "gelişmeler takip edilecek" gibi boş cümleler yazma; yoksa boş bırak.
-- by_numbers: Haberin anlaşılması için en önemli 2-4 rakam (tutar, kullanıcı sayısı, oran, tarih). Rakamı metindeki yazımıyla aynen yaz; etiketi kısa tut. Rakam yoksa boş bırak.
+- by_numbers: Haberin anlaşılması için en önemli 2-4 rakam (tutar, kullanıcı sayısı, oran, tarih). Rakamı metindeki yazımıyla aynen yaz; etiketi kısa tut. "Üzerinde", "fazla" gibi nitelemeler değere yazılır ("yüzde 8'in üzerinde"), etikete değil; etiket rakamın neyi gösterdiğini kendi başına anlatan bir ad öbeğidir ("En büyük dilimde ödenen getiri"), parantezli ek almaz. Rakam yoksa boş bırak.
 
 ## format: kisa (kısa not)
 - Tek bir olguyu duyuran gelişmeler ve gün içi ara tur haberleri için. Gövde 2-3 kısa paragraf, 80-150 kelime; arka plan en fazla bir cümle.

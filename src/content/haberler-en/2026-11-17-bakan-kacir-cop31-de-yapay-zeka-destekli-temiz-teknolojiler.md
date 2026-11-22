@@ -16,4 +16,4 @@ Industry and Technology Minister Mehmet Fatih Kacır launched the AI-Powered Cle
 
 According to Kacır, the initiative will provide an international platform for putting innovative AI-powered clean technologies into practical use. The initiative aims to facilitate pilot projects by connecting technology developers with industrial partners and investors.
 
-The minister also noted that AI-powered grid management could open up to 175 gigawatts of additional transmission capacity without building new power lines for industrial production.
+The minister also noted that AI-powered grid management could open up to 175 gigawatts of additional transmission capacity without building new transmission lines.

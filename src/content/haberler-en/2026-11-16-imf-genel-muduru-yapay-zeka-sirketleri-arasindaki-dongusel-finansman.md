@@ -9,7 +9,7 @@ keyPoints:
   - "Two-thirds of this financing is provided through debt."
   - "Georgieva said some corrections are inevitable and called for caution."
 byNumbers:
-  - value: "$1 trillion"
+  - value: "Just over $1 trillion"
     label: "Circular financing among AI companies"
   - value: "Over $1 trillion"
     label: "Market value Nvidia has lost in the past month"
