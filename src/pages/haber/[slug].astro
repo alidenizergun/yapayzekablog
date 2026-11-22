@@ -189,7 +189,7 @@ const crumbs = [{ name: 'Ana sayfa', path: '/' }, { name: cat, path: `/kategori/
       )}
 
       <section class="sources" aria-labelledby="src-h" data-pagefind-ignore>
-        <h2 id="src-h">{T('Kaynaklar', 'Sources')}</h2>
+        <h2 id="src-h">{d.sources.length === 1 ? T('Kaynak', 'Source') : T('Kaynaklar', 'Sources')}</h2>
         <ul>
           {d.sources.map((s) => (
             <li>
