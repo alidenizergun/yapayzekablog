@@ -134,7 +134,11 @@ def esc(t):
 from playwright.sync_api import sync_playwright
 
 with sync_playwright() as pw:
-    br = pw.chromium.launch(); pg = br.new_page(viewport={'width': W, 'height': H})
+    try:  # GitHub sunucusunda kurulu Google Chrome; yoksa Playwright'ın kendi Chromium'u
+        br = pw.chromium.launch(channel=os.environ.get('CHROME_CHANNEL', 'chrome'))
+    except Exception:
+        br = pw.chromium.launch()
+    pg = br.new_page(viewport={'width': W, 'height': H})
 
     def shot(html, path, transparent):
         pg.set_content(f'<style>{CSS}</style>{html}')

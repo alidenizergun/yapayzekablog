@@ -46,8 +46,9 @@ jobs:
       - name: Araçları kur
         if: steps.gun.outputs.hazir != '1'
         run: |
+          # Tarayıcı indirilmez: sunucudaki Google Chrome kullanılır (render.py)
           python3 -m pip install --quiet pyyaml==6.0.2 numpy==2.2.6 pillow==11.3.0 playwright==1.52.0
-          python3 -m playwright install --with-deps chromium >/dev/null
+          google-chrome --version; ffmpeg -version | head -1
 
       - name: Haberleri seç ve metni yaz
         if: steps.gun.outputs.hazir != '1'
