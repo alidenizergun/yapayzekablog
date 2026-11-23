@@ -1,0 +1,93 @@
+{
+ "skip": false,
+ "created": "2026-11-23T21:38+03:00",
+ "hours": 168,
+ "date_label": "16-22 Kasım 2026",
+ "seed": 20261123,
+ "intro": "Yapay zeka gündeminde bu hafta neler oldu? İşte öne çıkanlar.",
+ "outro": "Haberlerin tamamı ve kaynakları, Ye Zegündemi nokta kom'da.",
+ "stories": [
+  {
+   "slug": "nvidia-nin-geliri-yuzde-103-artti-yonetim-kurulu-huang",
+   "cat": "DONANIM",
+   "headline": "Nvidia'nın geliri yüzde 103 arttı, Huang CEO'luğa dönmeyecek",
+   "sub": "Üçüncü çeyrekte net kâr 65,3 milyar dolar oldu; 150 milyar dolarlık hisse geri alımı duyuruldu.",
+   "say": "Nvidia'nın geliri yüzde yüz üç artarak yüz on beş virgül sekiz milyar dolar oldu. Jensen Huang CEO olarak dönmeyecek.",
+   "caption_line": "Nvidia'nın geliri yüzde 103 artışla 115,8 milyar dolara çıktı; yönetim kurulu Jensen Huang'ı CEO olarak geri getirmeyecek.",
+   "image": {
+    "type": "logo",
+    "src": "nvidia"
+   }
+  },
+  {
+   "slug": "openai-gpt-6-2-astra-ve-sol-modellerini-chatgpt",
+   "cat": "MODELLER",
+   "headline": "OpenAI, GPT-6.2 Astra ve Sol modellerini kullanıma açtı",
+   "sub": "Astra'nın API fiyatı yüzde 20 düştü; model kendini geliştirme riskinde 'yüksek' derecelendi.",
+   "say": "OpenAI, GPT altı nokta iki Astra ve Sol modellerini duyurdu. Astra'nın API fiyatı yüzde yirmi düşürüldü.",
+   "caption_line": "OpenAI, GPT-6.2 Astra ve Sol modellerini duyurdu; Astra'nın API fiyatı yüzde 20 düşürüldü.",
+   "image": {
+    "type": "logo",
+    "src": "openai"
+   }
+  },
+  {
+   "slug": "adalet-bakanligi-ndan-yapay-zekayla-uretilen-sahte-goruntu-ve",
+   "cat": "TÜRKİYE",
+   "headline": "Sahte görüntü ve ses üretmek suç sayılabilir",
+   "sub": "Taslak 13. Yargı Paketi'ne eklenecek; son metin ve yürürlük tarihi henüz belli değil.",
+   "say": "Türkiye'de yapay zekayla izinsiz üretilen sahte görüntü ve sesler suç sayılabilir. Düzenleme henüz taslak aşamasında.",
+   "caption_line": "Adalet Bakanlığı, izinsiz üretilen yapay zeka görüntü ve seslerini suç sayan düzenlemeyi 13. Yargı Paketi'ne eklemeye hazırlanıyor.",
+   "image": {
+    "type": "local",
+    "src": "public/foto/px-719066-1280.webp"
+   }
+  },
+  {
+   "slug": "anthropic-ten-riemann-hipotezi-iddiasi-stanford-dan-insan-yazimi",
+   "cat": "ARAŞTIRMA",
+   "headline": "Anthropic matematikçisi, Riemann hipotezini kanıtladığını açıkladı",
+   "sub": "Stanford'dan Ravi Vakil, yapay zekasız hazırlanmış rakip bir taslağı birkaç saat sonra paylaştı.",
+   "say": "Anthropic'ten Levent Alpöge, Claude ile Riemann hipotezinin kanıtını bulduğunu açıkladı. Stanford'dan rakip taslak geldi.",
+   "caption_line": "Anthropic'ten Levent Alpöge Claude ile Riemann hipotezini kanıtladığını açıkladı; Stanford'dan yapay zekasız rakip taslak geldi.",
+   "image": {
+    "type": "remote",
+    "src": "https://images.unsplash.com/photo-1770719269462-d3c1ed7e184f?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8NHx8Y2hhbGtib2FyZCUyMG1hdGhlbWF0aWNhbCUyMGVxdWF0aW9uc3xlbnwxfDB8fHwxNzk1MjkxNzU2fDA&ixlib=rb-4.1.0",
+    "fallback_brand": "claude"
+   }
+  },
+  {
+   "slug": "palo-alto-networks-yapay-zeka-startup-i-applied-compute",
+   "cat": "GİRİŞİM & YATIRIM",
+   "headline": "Palo Alto Networks, Applied Compute'u 4,5 milyar dolara alıyor",
+   "sub": "Anlaşma tamamen hisse karşılığı; kurucu Yash Patil eş baş yapay zeka sorumlusu olacak.",
+   "say": "Palo Alto Networks, Applied Compute'u tamamen hisse karşılığı dört buçuk milyar dolara almayı kabul etti.",
+   "caption_line": "Palo Alto Networks, eski OpenAI araştırmacılarının kurduğu Applied Compute'u hisse karşılığı 4,5 milyar dolara alacak.",
+   "image": {
+    "type": "local",
+    "src": "public/foto/px-7111764-1280.webp"
+   }
+  },
+  {
+   "slug": "yapay-zeka-hisselerindeki-satis-dow-jones-ve-s-p",
+   "cat": "GİRİŞİM & YATIRIM",
+   "headline": "Yapay zeka hisselerindeki satış Dow Jones ve S&P 500'ü düşürdü",
+   "sub": "S&P 500 yüzde 3,7 geriledi; Nasdaq yüzde 5,28 düştü. Nedenler arasında yapay zeka yatırımı kaygıları var.",
+   "say": "Haberlere göre yapay zeka hisselerindeki satış Dow Jones ve S&P beş yüzü düzeltme bölgesine itti.",
+   "caption_line": "Yapay zeka ve çip hisselerindeki satış Dow Jones ve S&P 500'ü rekor seviyelerinin yüzde 10 altına, düzeltme bölgesine itti.",
+   "image": {
+    "type": "remote",
+    "src": "https://images.unsplash.com/photo-1770461846516-b7e5993a8e4f?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8Mnx8c3RvY2slMjBleGNoYW5nZSUyMHRyYWRpbmclMjBmbG9vcnxlbnwxfDB8fHwxNzk1MjU1MjgyfDA&ixlib=rb-4.1.0",
+    "fallback_brand": ""
+   }
+  }
+ ],
+ "hashtags": [
+  "#yapayzeka",
+  "#YZGündemi",
+  "#Nvidia",
+  "#OpenAI",
+  "#Anthropic"
+ ],
+ "caption_x": "Nvidia üçüncü çeyrekte yüzde 103 artışla 115,8 milyar dolar gelir açıkladı; yönetim kurulu istifa eden Jensen Huang'ı CEO olarak geri getirmeyecek. OpenAI ise GPT-6.2 Astra ve Sol modellerini duyurdu. #yapayzeka #YZGündemi"
+}
