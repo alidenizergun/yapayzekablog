@@ -198,5 +198,125 @@
  "arstechnica.com/security/2026/11/a-leaky-ai-supply-chain-is-exposing-secret-user-data-at-an-alarming-rate": {
   "at": "2026-11-22T21:03:26.293Z",
   "title": "Researchers used canary credentials in requests to AI routers like OpenRouter and Vercel, even under \"ZDR\" policies, and saw \"privacy\" often"
+ },
+ "digg.com/ai/1249rdgi": {
+  "at": "2026-11-23T03:02:12.539Z",
+  "title": "Sakana AI says a paper co-written with AI Scientist v3 was accepted at ALIFE 2026"
+ },
+ "digg.com/ai/rp8odug9": {
+  "at": "2026-11-23T03:02:12.539Z",
+  "title": "BuggyMLE authors say breaking code on purpose makes tougher tests for AI agents"
+ },
+ "digg.com/ai/pjzk9maw": {
+  "at": "2026-11-23T03:02:12.539Z",
+  "title": "Tobi Lutke says all human-written code probably needs replacing within 6–12 months"
+ },
+ "digg.com/ai/jy7elyy6": {
+  "at": "2026-11-23T03:02:12.539Z",
+  "title": "GPT-4’s training compute was hiding on line 207, RidgerZhu says"
+ },
+ "thenewstack.io/gpt-6-2-astra-vs-claude-fable-5-2": {
+  "at": "2026-11-23T03:02:12.539Z",
+  "title": "GPT-6.2 Astra vs. Claude Fable 5.2 hands-on: nearly tied on three custom accounting, coding, and data tasks, but Fable used far more tokens "
+ },
+ "digg.com/ai/m8t2eu3w": {
+  "at": "2026-11-23T03:02:12.539Z",
+  "title": "NYT: Alice Huang was in contact with a Chinese intelligence officer"
+ },
+ "digg.com/ai/poyzfruf": {
+  "at": "2026-11-23T03:02:12.539Z",
+  "title": "Hamel Husain says he’s plotting “Data Science for AI” with @eugeneyan and @randal_olson"
+ },
+ "techcrunch.com/2026/11/22/how-notable-capital-gic-and-baillie-gifford-bet-big-on-anthropic-before-its-ipo": {
+  "at": "2026-11-23T03:02:12.539Z",
+  "title": "How Notable Capital, GIC, and Baillie Gifford bet big on Anthropic before its IPO"
+ },
+ "digg.com/ai/ivbqu2bx": {
+  "at": "2026-11-23T03:02:12.539Z",
+  "title": "Tuhin Chakrabarty says his AI-fiction experiments were short—and he supplied the plots"
+ },
+ "digg.com/ai/jh2r8lde": {
+  "at": "2026-11-23T03:02:12.539Z",
+  "title": "Suleyman says MAI-2 Base is in GPT-5.6 Sol’s ballpark—mind the metric"
+ },
+ "digg.com/ai/lql2x7v0": {
+  "at": "2026-11-23T03:02:12.539Z",
+  "title": "Theo draws the Gemini subscription line at Antigravity"
+ },
+ "digg.com/ai/cw6wqdle": {
+  "at": "2026-11-23T03:02:12.539Z",
+  "title": "Repligate says EleutherAI’s GPT-3 reasoning post played down its implications on purpose"
+ },
+ "digg.com/ai/n41k2t6s": {
+  "at": "2026-11-23T03:02:12.539Z",
+  "title": "Musk reposts claim that Tesla Cybercab stopped while a human driver kept going"
+ },
+ "axios.com/2026/11/23/jay-clayton-acting-national-cyber-director": {
+  "at": "2026-11-23T03:02:12.539Z",
+  "title": "Sources: Jay Clayton, director of national intelligence and AI czar, will also be acting national cyber director pending Kirsten A. Davies' "
+ },
+ "testingcatalog.com/grok-bot-to-get-local-computer-use-and-dictation-in-any-app": {
+  "at": "2026-11-23T03:02:12.539Z",
+  "title": "Grok Bot to get local Computer Use and Dictation in any app"
+ },
+ "wsj.com/tech/ai/anthropic-dario-daniela-amodei-siblings-ipo-be84ad11": {
+  "at": "2026-11-23T03:02:12.539Z",
+  "title": "A profile of siblings Dario and Daniela Amodei; while at OpenAI, Dario suggested immersive videogames might ease political strife from AI-in"
+ },
+ "testingcatalog.com/google-prepares-new-inbox-mode-for-antigravity-sidebar": {
+  "at": "2026-11-23T03:02:12.539Z",
+  "title": "Google prepares new Inbox mode for Antigravity sidebar"
+ },
+ "digg.com/ai/05g1klmo": {
+  "at": "2026-11-23T03:02:12.539Z",
+  "title": "SemiAnalysis says SGLang on Rubin NVL72 delivers 6.5× GB300 NVL72’s performance per dollar"
+ },
+ "digg.com/ai/n1ovjchf": {
+  "at": "2026-11-23T03:02:12.539Z",
+  "title": "Anthropic fired a Slack leaker and Amodei vowed not to self-censor, ex-employee says"
+ },
+ "digg.com/ai/4xhxhyp6": {
+  "at": "2026-11-23T03:02:12.539Z",
+  "title": "Visa says its updated CLI wallet lets AI agents take paid gigs"
+ },
+ "digg.com/ai/97l6vna6": {
+  "at": "2026-11-23T03:02:12.539Z",
+  "title": "AI can identify some anonymous writers from a single text, preprint reports"
+ },
+ "digg.com/ai/ceyniayr": {
+  "at": "2026-11-23T03:02:12.539Z",
+  "title": "CPU-ARC researchers want AI to stop doing the same homework twice"
+ },
+ "washingtonpost.com/technology/2026/11/22/inside-an-ai-prophets-secretive-plans-humanitys-future": {
+  "at": "2026-11-23T03:02:12.539Z",
+  "title": "How Dario Amodei built Anthropic's tightly knit culture with essays, Slack memos, and \"Vision Quest\" talks, as Anthropic seeds his ideas wit"
+ },
+ "digg.com/ai/mnoqayls": {
+  "at": "2026-11-23T03:02:12.539Z",
+  "title": "@rm_rafailov says they’re already at work on Gemini after leaving Thinking Machines"
+ },
+ "theverge.com/tech/1039851/major-tech-outages": {
+  "at": "2026-11-23T03:02:12.539Z",
+  "title": "We haven’t seen the last of the major tech outages"
+ },
+ "digg.com/ai/ems304pc": {
+  "at": "2026-11-23T03:02:12.539Z",
+  "title": "Kevin Frazier pitches a 500-person citizens’ assembly for AI policy"
+ },
+ "digg.com/ai/5hxbayhm": {
+  "at": "2026-11-23T03:02:12.539Z",
+  "title": "Posts citing WSJ say Amodei floated immersive games to quell unrest over AI job losses"
+ },
+ "digg.com/ai/2gdfqrbz": {
+  "at": "2026-11-23T03:02:12.539Z",
+  "title": "“Vocab Surgery” claims to cut AI refusals. Another tester says “no” just got a rewrite"
+ },
+ "techcrunch.com/2026/11/22/openais-chief-scientist-has-thoughts-on-how-to-limit-ai-development": {
+  "at": "2026-11-23T03:02:12.539Z",
+  "title": "OpenAI’s chief scientist has thoughts on how to limit AI development"
+ },
+ "simonwillison.net/2026/nov/22/select-styling": {
+  "at": "2026-11-23T03:02:12.539Z",
+  "title": "Select Styling Specimens"
  }
 }
