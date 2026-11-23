@@ -430,5 +430,21 @@
     "importance": 45,
     "featured": false,
     "date": "2026-11-23T06:02:16+03:00"
+  },
+  {
+    "slug": "nvidia-yonetim-kurulu-istifa-eden-jensen-huang-i-yeniden",
+    "title": "Nvidia yönetim kurulu, istifa eden Jensen Huang'ı yeniden CEO yaptı",
+    "text": "Nvidia yönetim kurulu, istifa eden Jensen Huang'ı CEO ve başkan olarak geri getirdi. Kurul birkaç gün önce geri getirmeyi düşünmediğini söylemişti. Hisseler yüzde 30 yüksek açıldı. #Nvidia",
+    "importance": 88,
+    "featured": false,
+    "date": "2026-11-23T18:02:43+03:00"
+  },
+  {
+    "slug": "z-ai-loop-transformer-mimarili-750-milyar-parametreli-glm",
+    "title": "Z.ai, Loop Transformer mimarili 750 milyar parametreli GLM-5.4'ü tanıttı",
+    "text": "Z.ai, ilk Loop Transformer modeli GLM-5.4'ü tanıttı: 750 milyar parametre ve görme desteği var, GLM Coding Plan abonelerine açıldı. API ve açık ağırlıklar güvenlik çalışmalarından sonra gelecek.",
+    "importance": 45,
+    "featured": false,
+    "date": "2026-11-23T18:01:43+03:00"
   }
 ]
