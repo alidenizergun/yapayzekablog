@@ -16,7 +16,10 @@ const ROOT = path.resolve(path.dirname(new URL(import.meta.url).pathname), '..')
 const SET = (process.argv.find((a) => a.startsWith('--set=')) || '--set=tools').slice(6);
 const DIR = path.join(ROOT, SET === 'brands' ? 'public/logo/marka' : 'public/logo/arac');
 const MAP = path.join(ROOT, SET === 'brands' ? 'data/marka-logolari.json' : 'data/arac-logolari.json');
-const SIZE = SET === 'brands' ? 192 : 96;
+// Şirket kartlarında logo büyük gösterilir (manşette ~300 px, 2x ekranda ~600 px): 512 px saklanır
+const SIZE = SET === 'brands' ? 512 : 96;
+// Şirket logosu en az bu genişlikte bir kaynaktan gelmeli; yoksa kartta keskin vektör çizim (Simple Icons) kullanılır
+const BRAND_MIN = 256;
 // Şirketlerin ana sayfaları (simge buradan alınır)
 const BRAND_HOME = { openai: 'https://openai.com', anthropic: 'https://www.anthropic.com', claude: 'https://claude.ai', google: 'https://www.google.com', gemini: 'https://gemini.google.com',
   deepmind: 'https://deepmind.google', meta: 'https://www.meta.com', nvidia: 'https://www.nvidia.com', microsoft: 'https://www.microsoft.com', apple: 'https://www.apple.com',
@@ -62,11 +65,25 @@ function iconLinks(html, base) {
   return out.sort((a, b) => b.score - a.score);
 }
 
-async function toWebp(buf) {
+async function toWebp(buf, min = SET === 'brands' ? BRAND_MIN : 32) {
   const img = sharp(buf, { density: 300 });
   const meta = await img.metadata();
-  if ((meta.width || 0) < (SET === 'brands' ? 48 : 32) && meta.format !== 'svg') throw new Error(`çok küçük (${meta.width}px)`);
-  return img.resize(SIZE, SIZE, { fit: 'contain', background: { r: 255, g: 255, b: 255, alpha: 0 } }).webp({ quality: 90 }).toBuffer();
+  if ((meta.width || 0) < min && meta.format !== 'svg') throw new Error(`çok küçük (${meta.width}px)`);
+  // Kaynak hedeften küçükse büyütülmez (bulanıklaşmasın); kart CSS ile ölçekler
+  const size = meta.format === 'svg' ? SIZE : Math.min(SIZE, meta.width || SIZE, meta.height || SIZE);
+  return img.resize(size, size, { fit: 'contain', background: { r: 255, g: 255, b: 255, alpha: 0 } }).webp({ quality: 92 }).toBuffer();
+}
+
+/** Web uygulama bildirimindeki (manifest) simgeler: genellikle 512 px */
+async function manifestIcons(html, base) {
+  const href = (html.match(/<link\b[^>]*rel=["']manifest["'][^>]*>/i)?.[0].match(/href=["']([^"']+)["']/i) || [])[1];
+  if (!href) return [];
+  try {
+    const murl = new URL(href.replace(/&amp;/g, '&'), base).href;
+    const m = await (await get(murl)).json();
+    return (m.icons || []).map((i) => ({ url: new URL(i.src, murl).href, size: Math.max(0, ...String(i.sizes || '').split(/\s+/).map((x) => Number(x.split('x')[0]) || 0)) }))
+      .sort((a, b) => b.size - a.size).map((x) => x.url);
+  } catch { return []; }
 }
 
 async function fetchIcon(t) {
@@ -75,20 +92,29 @@ async function fetchIcon(t) {
   try {
     const res = await get(home);
     const html = await res.text();
+    if (SET === 'brands') tries.push(...await manifestIcons(html, res.url));
     tries.push(...iconLinks(html, res.url).map((x) => x.url));
     tries.push(new URL('/apple-touch-icon.png', res.url).href);
   } catch (e) { console.log(`  ${t.slug}: sayfa alınamadı (${e.message})`); }
   const host = new URL(home).hostname;
-  tries.push(`https://www.google.com/s2/favicons?domain=${host}&sz=128`);
-  tries.push(`https://www.google.com/s2/favicons?domain=${host.replace(/^www\./, '')}&sz=256`, `https://icons.duckduckgo.com/ip3/${host}.ico`, `https://${host}/favicon.ico`);
+  tries.push(`https://www.google.com/s2/favicons?domain=${host.replace(/^www\./, '')}&sz=256`);
+  if (SET !== 'brands') tries.push(`https://www.google.com/s2/favicons?domain=${host}&sz=128`, `https://icons.duckduckgo.com/ip3/${host}.ico`, `https://${host}/favicon.ico`);
+  // Şirket logoları: adaylardan çözünürlüğü en yüksek olan seçilir; araç simgeleri: ilk uygun aday
+  let best = null;
   for (const u of [...new Set(tries)]) {
     try {
       const buf = Buffer.from(await (await get(u)).arrayBuffer());
-      const out = await toWebp(buf);
-      return { out, from: u };
+      const meta = await sharp(buf, { density: 300 }).metadata();
+      // Vektör çizimi olmayan şirketlerde (OpenAI, Microsoft…) daha küçük logo da kabul edilir; yoksa kartta yalnızca ad görünür
+      const out = await toWebp(buf, SET === 'brands' ? (BRANDS[t.slug]?.path ? BRAND_MIN : 96) : 32);
+      const px = meta.format === 'svg' ? 1e6 : (meta.width || 0);
+      if (SET !== 'brands') return { out, from: u };
+      // Google favicon hizmeti istenen boyutu her zaman veremez: gerçek boyut tekrar kontrol edilir
+      if (!best || px > best.px) best = { out, from: u, px };
+      if (px >= SIZE) break;
     } catch (e) { console.log(`  ${t.slug}: ${u} → ${e.message}`); }
   }
-  return null;
+  return best;
 }
 
 let changed = 0;
@@ -98,7 +124,16 @@ for (const t of ITEMS) {
   const file = path.join(DIR, `${t.slug}.webp`);
   if (!FORCE && map[t.slug] && fs.existsSync(file)) continue;
   const r = await fetchIcon(t);
-  if (!r) { console.log(`✗ ${t.slug}: logo bulunamadı`); continue; }
+  if (!r) {
+    // Yeterince büyük logo yok: eski (küçük) logo kaldırılır, kartta vektör çizim kullanılır
+    if (SET === 'brands' && FORCE && (map[t.slug] || fs.existsSync(file))) {
+      if (fs.existsSync(file)) fs.unlinkSync(file);
+      delete map[t.slug];
+      changed++;
+      console.log(`– ${t.slug}: ${BRAND_MIN} px üstü logo yok; vektör çizim kullanılacak`);
+    } else console.log(`✗ ${t.slug}: logo bulunamadı`);
+    continue;
+  }
   fs.writeFileSync(file, r.out);
   map[t.slug] = { from: r.from, fetched: new Date().toISOString().slice(0, 10) };
   changed++;
