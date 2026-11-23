@@ -5,7 +5,6 @@ title: "OpenAI unveils ChatGPT Wallet, letting AI agents shop on users' behalf"
 spot: "OpenAI has announced ChatGPT Wallet, which lets its \"dots\" AI agents make purchases on behalf of users. The feature is initially available to Pro subscribers in the US who are 18 or older."
 whyItMatters: "AI agents are moving beyond product research to completing payments. OpenAI is taking the step with an infrastructure that does not share card details with the agent and requires user approval for every purchase."
 turkeyAngle: "ChatGPT Wallet is currently available only to Pro subscribers in the US who are 18 or older; users in Turkey cannot yet use the feature."
-photoAlt: "Young woman smiling while holding phone and credit card"
 ---
 
 OpenAI announced ChatGPT Wallet on Friday, November 13, a product that lets its AI agents, which it calls "dots," make purchases on behalf of users. The product was developed with American Express, Mastercard and Visa. OpenAI President Greg Brockman also announced the product and the partnership with the payment networks on his X account.

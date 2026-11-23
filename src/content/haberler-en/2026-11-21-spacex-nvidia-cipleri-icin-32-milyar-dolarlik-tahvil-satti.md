@@ -16,7 +16,6 @@ byNumbers:
     label: "Yield paid on the largest tranche"
   - value: "$7.6 billion"
     label: "AI unit's third-quarter revenue"
-photoAlt: "Server rack with blinking green lights"
 ---
 
 SpaceX had to pay a yield above 8% on the largest tranche of the $32 billion bond sale used to buy Nvidia chips. The report appeared in a November 20, 2026 article by Motley Fool.

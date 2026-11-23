@@ -7,20 +7,6 @@ date: 2026-11-23T18:01:43+03:00
 image: modeller
 popularity: 45
 imageQuery: "neural network abstract light"
-photo:
-  id: "KnPWJn20hvY"
-  url: "https://images.unsplash.com/photo-1791158669894-a043b640c8fa?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8NXx8bmV1cmFsJTIwbmV0d29yayUyMGFic3RyYWN0JTIwbGlnaHR8ZW58MXwwfHx8MTc5NTQ0NjE1OHww&ixlib=rb-4.1.0"
-  alt: "A glowing blue wireframe human brain against a solid black background"
-  author: "Mirella Callage"
-  authorUrl: "https://unsplash.com/@mcallage"
-  link: "https://unsplash.com/photos/glowing-blue-wireframe-brain-KnPWJn20hvY"
-photo2:
-  id: "Kile7-U74s0"
-  url: "https://images.unsplash.com/photo-1764336312138-14a5368a6cd3?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8Nnx8bmV1cmFsJTIwbmV0d29yayUyMGFic3RyYWN0JTIwbGlnaHR8ZW58MXwwfHx8MTc5NTQ0NjE1OHww&ixlib=rb-4.1.0"
-  alt: "Abstract blue and purple light streaks forming a head shape"
-  author: "Mirella Callage"
-  authorUrl: "https://unsplash.com/@mcallage"
-  link: "https://unsplash.com/photos/abstract-blue-and-purple-light-streaks-forming-a-head-shape-Kile7-U74s0"
 whyItMatters: "Parametre sayısını artırmadan katmanları döngüyle çalıştıran yaklaşım, büyük modellerle rekabette farklı bir yol sunuyor. Başarı iddiası bağımsız kıyaslamalarla henüz sınanmadı."
 keyPoints:
   - "GLM-5.4, Z.ai'nin ilk Loop Transformer tabanlı amiral gemisi modeli."

@@ -21,12 +21,13 @@ keyPoints:
   - "Haberde, kuralın Asya borsalarını aşağı çektiği belirtiliyor."
 format: kisa
 photo2:
-  id: "tebFqdANuxs"
-  url: "https://images.unsplash.com/photo-1507333199169-84fd735371fb?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8MTV8fGRhdGElMjBjZW50ZXIlMjBzZXJ2ZXIlMjByYWNrc3xlbnwxfDB8fHwxNzk1MjcyNjYyfDA&ixlib=rb-4.1.0"
-  alt: "a close up of a bunch of wires in a rack"
-  author: "imgix"
-  authorUrl: "https://unsplash.com/@imgix"
-  link: "https://unsplash.com/photos/a-close-up-of-a-bunch-of-wires-in-a-rack-tebFqdANuxs"
+  id: "pixabay-389107"
+  url: "/foto/px-389107"
+  alt: "circuitry, microchip, close-up, circuit, electronic"
+  author: "mikadago"
+  authorUrl: "https://pixabay.com/users/mikadago-328028/"
+  link: "https://pixabay.com/photos/circuitry-microchip-close-up-389107/"
+  source: "pixabay"
 sources:
   - title: "ABD'nin yapay zeka çip kısıtlamaları Asya borsalarını vurdu"
     url: "https://tr.investing.com/news/stock-market-news/abdnin-yapay-zeka-cip-kstlamalar-asya-borsalarn-vurdu-4160453"

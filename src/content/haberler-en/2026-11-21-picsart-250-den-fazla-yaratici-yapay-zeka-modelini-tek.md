@@ -14,7 +14,6 @@ byNumbers:
     label: "Creative AI models in the catalog"
   - value: "November 20-22"
     label: "Unlimited access period for Wan 3.0"
-photoAlt: "turned on gray laptop computer"
 ---
 
 Picsart has opened the AI models that run behind its platform to developers and businesses via an API (application programming interface). The announcement was made on November 20, 2026; the catalog reportedly covers more than 250 creative AI models.

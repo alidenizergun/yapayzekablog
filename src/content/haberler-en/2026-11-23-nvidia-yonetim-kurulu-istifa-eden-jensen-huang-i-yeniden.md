@@ -8,7 +8,6 @@ keyPoints:
   - "The board unanimously reinstated Huang as CEO and president."
   - "The board chair had said just days earlier that they were not considering bringing Huang back."
   - "Trump backed the decision, and Nvidia shares opened 30% higher."
-photoAlt: "A close up of a computer circuit board"
 ---
 
 Nvidia's board announced on Monday, November 23, that it had reinstated Jensen Huang as CEO and president. Huang had resigned after acknowledging at least two extramarital relationships, one of them with a woman the U.S. government suspected of being a Chinese spy. The board said it determined that Huang posed no national security risk after consulting senior U.S. government officials, and that the decision was reached unanimously.

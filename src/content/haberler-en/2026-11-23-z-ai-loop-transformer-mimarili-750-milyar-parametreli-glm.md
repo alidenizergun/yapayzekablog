@@ -16,7 +16,6 @@ byNumbers:
     label: "Layers run through twice in a loop"
   - value: "2T-3T"
     label: "Model scale the company compares against"
-photoAlt: "A glowing blue wireframe human brain against a solid black background"
 ---
 
 Z.ai (Zhipu AI) released its first flagship Loop Transformer model, GLM-5.4, on November 23. The model runs the 28 layers of the GLM-5 base model through twice in a loop, deepening the network without adding parameters. Vision support has also been added to the 750-billion-parameter model.

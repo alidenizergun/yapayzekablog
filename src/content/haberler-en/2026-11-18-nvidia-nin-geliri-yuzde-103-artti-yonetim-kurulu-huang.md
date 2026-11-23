@@ -17,7 +17,6 @@ byNumbers:
     label: "Data center revenue"
   - value: "$150 billion"
     label: "Share buyback program"
-photoAlt: "Close-up of server cooling fans in a vibrant data center"
 ---
 
 Nvidia reported third-quarter results after the market close on Tuesday, November 17, 2026. The company's revenue rose 103% year over year to $115.8 billion, and net income was recorded at $65.3 billion.

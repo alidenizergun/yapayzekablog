@@ -4,7 +4,6 @@ slug: "deepseek-opens-its-app-s-search-file-link-and"
 title: "DeepSeek opens its app's search, file, link and voice features to developers via API"
 spot: "DeepSeek has made the app capabilities of its V4.1-Flash model available to developers through its API. Search, file reading, link reading and safety checks are being brought together in a single interface."
 whyItMatters: "Developers will be able to get search, file reading and voice layers through a single API instead of building each one separately."
-photoAlt: "silver Android smartphone"
 ---
 
 DeepSeek has begun offering the app capabilities of its V4.1-Flash (deepseek-flash) model through the Messages, Responses and Chat Completions interfaces. Under the change, announced on November 13, tool calls and context preparation are handled on DeepSeek's servers, so developers no longer need to build these layers themselves.

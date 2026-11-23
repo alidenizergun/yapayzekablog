@@ -22,14 +22,6 @@ byNumbers:
   - value: "yüzde 96"
     label: "MAI Code 2'nin Claude Opus 5.5'e göre performans oranı"
 photo:
-  id: "pixabay-7978588"
-  url: "/foto/px-7978588"
-  alt: "laptop, conference table, mouse, work, business"
-  author: "jhenning"
-  authorUrl: "https://pixabay.com/users/jhenning-8658480/"
-  link: "https://pixabay.com/photos/laptop-conference-table-mouse-work-7978588/"
-  source: "pixabay"
-photo2:
   id: "qzO9a6oQ8AM"
   url: "https://images.unsplash.com/photo-1773829020694-413e879d2957?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8N3x8Y29uZmVyZW5jZSUyMHN0YWdlJTIwa2V5bm90ZSUyMHRlY2hub2xvZ3l8ZW58MXwwfHx8MTc5NTI3MjYyMXww&ixlib=rb-4.1.0"
   alt: "Speaker presenting to a large audience in an auditorium"

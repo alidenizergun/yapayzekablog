@@ -8,13 +8,6 @@ image: gemini
 popularity: 60
 brand: gemini
 imageQuery: "person using smartphone assistant"
-photo:
-  id: "cqFKhqv6Ong"
-  url: "https://images.unsplash.com/photo-1514575110897-1253ff7b2ccb?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8N3x8cGVyc29uJTIwdXNpbmclMjBzbWFydHBob25lJTIwYXNzaXN0YW50fGVufDF8MHx8fDE3OTQ5NDE0Mjd8MA&ixlib=rb-4.1.0"
-  alt: "person using black smartphone with gray and pink case"
-  author: "Rob Hampson"
-  authorUrl: "https://unsplash.com/@robman"
-  link: "https://unsplash.com/photos/person-using-black-smartphone-with-gray-and-pink-case-cqFKhqv6Ong"
 whyItMatters: "Yapay zeka asistanı bilgi vermenin ötesinde işlem yapmaya geçiyor ve bu yetenek artık ücretsiz kullanıcılara da açılıyor."
 keyPoints:
   - "Tasks, altı ülkede uygun kullanıcılar için ücretsiz oldu."
@@ -22,12 +15,13 @@ keyPoints:
   - "Aramalar ve ödemeler gibi işlemler önce yalnızca ABD'de başlıyor."
 format: kisa
 photo2:
-  id: "iDqNlr1Y1_w"
-  url: "https://images.unsplash.com/photo-1759752393975-7ca7b302fcc6?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8Nnx8bGFwdG9wJTIwYXV0b21hdGlvbiUyMHdvcmtmbG93fGVufDF8MHx8fDE3OTUyNzI2NTB8MA&ixlib=rb-4.1.0"
-  alt: "Hands typing on a laptop with a spreadsheet on screen"
-  author: "Bluestonex"
-  authorUrl: "https://unsplash.com/@bluestonex_apphaus"
-  link: "https://unsplash.com/photos/hands-typing-on-a-laptop-with-a-spreadsheet-on-screen-iDqNlr1Y1_w"
+  id: "pixabay-1281632"
+  url: "/foto/px-1281632"
+  alt: "smartphone, technology, mobile phone, lg, google nexus 4"
+  author: "Pexels"
+  authorUrl: "https://pixabay.com/users/Pexels-2286921/"
+  link: "https://pixabay.com/photos/smartphone-technology-mobile-phone-1281632/"
+  source: "pixabay"
 sources:
   - title: "You can now assign Gemini 'tasks' for free in six countries"
     url: "https://9to5google.com/2026/11/17/gemini-tasks-free/"

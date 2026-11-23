@@ -8,12 +8,13 @@ image: regulasyon
 popularity: 45
 imageQuery: "united nations conference hall delegates"
 photo:
-  id: "kE0JmtbvXxM"
-  url: "https://images.unsplash.com/photo-1655393001768-d946c97d6fd1?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8MTV8fGFydGlmaWNpYWwlMjBpbnRlbGxpZ2VuY2UlMjB0ZWNobm9sb2d5fGVufDF8MHx8fDE3OTUyNTUyOTN8MA&ixlib=rb-4.1.0"
-  alt: "white robotic arm in display showroom"
-  author: "ZHENYU LUO"
-  authorUrl: "https://unsplash.com/@mrnuclear"
-  link: "https://unsplash.com/photos/white-robotic-arm-in-display-showroom-kE0JmtbvXxM"
+  id: "pixabay-2181919"
+  url: "/foto/px-2181919"
+  alt: "chairs, conference room, empty, indoors, tables"
+  author: "Pexels"
+  authorUrl: "https://pixabay.com/users/Pexels-2286921/"
+  link: "https://pixabay.com/photos/chairs-conference-room-empty-2181919/"
+  source: "pixabay"
 photo2:
   id: "pixabay-6651873"
   url: "/foto/px-6651873"

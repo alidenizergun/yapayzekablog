@@ -16,12 +16,12 @@ photo:
   authorUrl: "https://unsplash.com/@sample_in_photography"
   link: "https://unsplash.com/photos/black-laptop-computer-turned-on-displaying-google-search-6HiS_zsgxIc"
 photo2:
-  id: "nGoCBxiaRO0"
-  url: "https://images.unsplash.com/photo-1674027444485-cec3da58eef4?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8Mnx8YXJ0aWZpY2lhbCUyMGludGVsbGlnZW5jZSUyMHRlY2hub2xvZ3l8ZW58MXwwfHx8MTc5NTI4ODg4OHww&ixlib=rb-4.1.0"
-  alt: "an abstract image of a sphere with dots and lines"
-  author: "Growtika"
-  authorUrl: "https://unsplash.com/@growtika"
-  link: "https://unsplash.com/photos/an-abstract-image-of-a-sphere-with-dots-and-lines-nGoCBxiaRO0"
+  id: "lY2_2xcgz18"
+  url: "https://images.unsplash.com/photo-1762330465551-5217a6dec84f?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8MTF8fGNvbXB1dGVyJTIwc2NyZWVuJTIwd2l0aCUyMHNlYXJjaCUyMGJhcnxlbnwxfDB8fHwxNzk1NDQ3ODA5fDA&ixlib=rb-4.1.0"
+  alt: "Browser search bar with medium suggestions"
+  author: "Zulfugar Karimov"
+  authorUrl: "https://unsplash.com/@zulfugarkarimov"
+  link: "https://unsplash.com/photos/browser-search-bar-with-medium-suggestions-lY2_2xcgz18"
 whyItMatters: "Google, ana sayfada yapay zeka özelliklerini öne çıkarırken ayrı bir arama düğmesine yer vermiyor. Ars Technica'ya göre değişiklik, klasik aramanın giderek geri plana itildiğini gösteriyor."
 keyPoints:
   - "Masaüstü ana sayfadaki Google Search düğmesi kaldırıldı, yerine üç yapay zeka kısayolu geldi."

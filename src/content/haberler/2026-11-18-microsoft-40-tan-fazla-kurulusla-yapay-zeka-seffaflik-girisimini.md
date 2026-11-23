@@ -14,21 +14,14 @@ keyPoints:
   - "Girişime Accenture, Adobe, KPMG, Mastercard ve Volvo Cars dahil 40'tan fazla kuruluş katıldı."
   - "Microsoft, NIST'in Yapay Zeka Ajanı Standartları Girişimi'ne katılımını genişletecek."
 format: kisa
-photo:
-  id: "pixabay-3685829"
-  url: "/foto/px-3685829"
-  alt: "hand, robot, human, keyboard, networks"
-  author: "geralt"
-  authorUrl: "https://pixabay.com/users/geralt-9301/"
-  link: "https://pixabay.com/photos/hand-robot-human-keyboard-networks-3685829/"
-  source: "pixabay"
 photo2:
-  id: "ZPOoDQc8yMw"
-  url: "https://images.unsplash.com/photo-1677442136019-21780ecad995?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8MTB8fGFydGlmaWNpYWwlMjBpbnRlbGxpZ2VuY2UlMjB0ZWNobm9sb2d5fGVufDF8MHx8fDE3OTUyNzI2MzB8MA&ixlib=rb-4.1.0"
-  alt: "3D rendered ai text on dark digital background"
-  author: "Steve A Johnson"
-  authorUrl: "https://unsplash.com/@steve_j"
-  link: "https://unsplash.com/photos/3d-rendered-ai-text-on-dark-digital-background-ZPOoDQc8yMw"
+  id: "pixabay-3002431"
+  url: "/foto/px-3002431"
+  alt: "contract, agreement, signature, document, deal"
+  author: "Tumisu"
+  authorUrl: "https://pixabay.com/users/Tumisu-148124/"
+  link: "https://pixabay.com/photos/contract-agreement-signature-3002431/"
+  source: "pixabay"
 sources:
   - title: "Microsoft 40'tan fazla ortakla yapay zeka şeffaflık girişimini başlattı"
     url: "https://tr.investing.com/news/company-news/microsoft-40tan-fazla-ortakla-yapay-zeka-seffaflk-girisimini-baslatt-93CH-4162171"

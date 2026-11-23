@@ -8,12 +8,12 @@ image: guvenlik
 popularity: 45
 imageQuery: "server room cables"
 photo:
-  id: "Kqg_6JPhxRk"
-  url: "https://images.unsplash.com/photo-1680992045563-2ab442f3feee?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8MTB8fHNlcnZlciUyMHJvb20lMjBjYWJsZXN8ZW58MXwwfHx8MTc5NTM1OTc2M3ww&ixlib=rb-4.1.0"
-  alt: "a close up of a computer in a dark room"
-  author: "Tyler"
-  authorUrl: "https://unsplash.com/@tylergm"
-  link: "https://unsplash.com/photos/a-close-up-of-a-computer-in-a-dark-room-Kqg_6JPhxRk"
+  id: "biBRoGc7ir0"
+  url: "https://images.unsplash.com/photo-1722080826167-4ea87368cbc5?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8MTB8fGNvbXB1dGVyJTIwc2NyZWVuJTIwY29kZSUyMGRhcmslMjBiYWNrZ3JvdW5kfGVufDF8MHx8fDE3OTU0NDc3NjZ8MA&ixlib=rb-4.1.0"
+  alt: "A close up of a computer screen with green text"
+  author: "wesfly"
+  authorUrl: "https://unsplash.com/@blender_person"
+  link: "https://unsplash.com/photos/a-close-up-of-a-computer-screen-with-green-text-biBRoGc7ir0"
 photo2:
   id: "dyUp7WPu5q4"
   url: "https://images.unsplash.com/photo-1691435828932-911a7801adfb?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8MXx8c2VydmVyJTIwcm9vbSUyMGNhYmxlc3xlbnwxfDB8fHwxNzk1MzU5NzYzfDA&ixlib=rb-4.1.0"

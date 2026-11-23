@@ -8,12 +8,12 @@ image: kod
 popularity: 25
 imageQuery: "developer laptop code screen"
 photo:
-  id: "XJXWbfSo2f0"
-  url: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8MTR8fGRldmVsb3BlciUyMGxhcHRvcCUyMGNvZGUlMjBzY3JlZW58ZW58MXwwfHx8MTc5NTIyNDgxMHww&ixlib=rb-4.1.0"
-  alt: "turned on gray laptop computer"
-  author: "Luca Bravo"
-  authorUrl: "https://unsplash.com/@lucabravo"
-  link: "https://unsplash.com/photos/turned-on-gray-laptop-computer-XJXWbfSo2f0"
+  id: "mZnx9429i94"
+  url: "https://images.unsplash.com/photo-1619410283995-43d9134e7656?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8MTB8fGRldmVsb3BlciUyMEFQSSUyMGRvY3VtZW50YXRpb24lMjBvbiUyMHNjcmVlbnxlbnwxfDB8fHwxNzk1NDQ3Nzk5fDA&ixlib=rb-4.1.0"
+  alt: "code editor displaying react source code"
+  author: "Juanjo Jaramillo"
+  authorUrl: "https://unsplash.com/@juanjodev02"
+  link: "https://unsplash.com/photos/code-editor-displaying-react-source-code-mZnx9429i94"
 whyItMatters: "Tek bir API'den çok sayıda yaratıcı modele erişmek, model seçimini ve entegrasyonu kolaylaştırabilir; ancak fiyat ve hız sınırları henüz belli değil."
 keyPoints:
   - "Picsart, platformunun arkasındaki yapay zeka modellerini API üzerinden geliştiricilere açtı."
@@ -27,12 +27,12 @@ byNumbers:
   - value: "20-22 Kasım"
     label: "Wan 3.0'a sınırsız erişim dönemi"
 photo2:
-  id: "vpOeXr5wmR4"
-  url: "https://images.unsplash.com/photo-1587620962725-abab7fe55159?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8NXx8ZGV2ZWxvcGVyJTIwbGFwdG9wJTIwY29kZSUyMHNjcmVlbnxlbnwxfDB8fHwxNzk1MjUxMjU0fDA&ixlib=rb-4.1.0"
-  alt: "black laptop computer turned on on table"
-  author: "James Harrison"
-  authorUrl: "https://unsplash.com/@jstrippa"
-  link: "https://unsplash.com/photos/black-laptop-computer-turned-on-on-table-vpOeXr5wmR4"
+  id: "g5jpH62pwes"
+  url: "https://images.unsplash.com/photo-1627398242454-45a1465c2479?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8M3x8c29mdHdhcmUlMjBjb2RlJTIwb24lMjBjb21wdXRlciUyMG1vbml0b3J8ZW58MXwwfHx8MTc5NTQ0Nzc5NHww&ixlib=rb-4.1.0"
+  alt: "JavaScript code displayed on a dark screen with colorful syntax highlighting"
+  author: "Gabriel Heinzer"
+  authorUrl: "https://unsplash.com/@6heinz3r"
+  link: "https://unsplash.com/photos/javascript-code-with-syntax-highlighting-g5jpH62pwes"
 sources:
   - title: "Picsart Platform Puts 250+ Creative AI Models Behind One API"
     url: "https://dev.to/paullovelace/picsart-platform-puts-250-creative-ai-models-behind-one-api-3n18"

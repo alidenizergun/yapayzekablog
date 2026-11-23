@@ -16,7 +16,6 @@ byNumbers:
     label: "Parameters activated on each pass"
   - value: "$0.07"
     label: "Input price per million tokens"
-photoAlt: "a close up of a green light in a server"
 ---
 
 China's Tencent on Monday announced Hy4 flash, a low-cost model designed for everyday tasks such as research, slide preparation and spreadsheet editing. The model has 224 billion parameters and activates 12 billion of them on each pass. It supports multimodal input and a context window of up to one million tokens.

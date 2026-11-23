@@ -16,14 +16,6 @@ keyPoints:
   - "Reuters, adımı Huang'la ilgili skandalın ardından gelen güvenlik kaygılarına yanıt olarak aktardı."
 format: kisa
 photo:
-  id: "pixabay-3157431"
-  url: "/foto/px-3157431"
-  alt: "trace, circuit board, technology, science, grid"
-  author: "geralt"
-  authorUrl: "https://pixabay.com/users/geralt-9301/"
-  link: "https://pixabay.com/photos/trace-circuit-board-technology-3157431/"
-  source: "pixabay"
-photo2:
   id: "8ZGZYOLeYz0"
   url: "https://images.unsplash.com/photo-1794415287131-2b8bbb5e06b5?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8MTB8fGNvcnBvcmF0ZSUyMGJvYXJkcm9vbSUyMG1lZXRpbmd8ZW58MXwwfHx8MTc5NTI1NTMyNHww&ixlib=rb-4.1.0"
   alt: "A conference room with a long black table, black chairs, and framed pictures on the wall"

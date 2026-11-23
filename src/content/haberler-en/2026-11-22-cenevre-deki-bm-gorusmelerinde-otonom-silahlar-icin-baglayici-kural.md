@@ -8,7 +8,6 @@ keyPoints:
   - "Countries agreed to begin discussing options; some rules may remain voluntary."
   - "Experts will make proposals on a binding treaty by 2028."
 whatsNext: "Government experts will discuss additional elements until 2028 and present a proposal on whether the process should move toward a binding treaty."
-photoAlt: "white robotic arm in display showroom"
 ---
 
 The Convention on Certain Conventional Weapons (CCW) conference in Geneva ended early Saturday without agreement on a mandate to negotiate binding rules for autonomous weapons, often called "killer robots." The outcome matched the expectation we reported in our November 16 story. Around 100 countries had called for negotiations on a binding ban; the United States, Israel, Belarus and the United Kingdom were among those opposing a dedicated negotiating mandate.

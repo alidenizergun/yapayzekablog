@@ -20,13 +20,6 @@ keyPoints:
   - "OpenAI, bilim blogunu fizikçi Nathaniel Craig'in konuk yazısıyla açtı."
   - "Craig, Standart Model için aday kafes tanımının ayrıntılı ispatında GPT-6 Astra'nın başı çektiğini söylüyor."
   - "Sonuç kesinleşmiş bir çözüm değil, aday bir tanım."
-photo2:
-  id: "CZFVxKoFmI4"
-  url: "https://images.unsplash.com/photo-1792995974533-51d21315a3af?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8Nnx8cGh5c2ljcyUyMGxhYm9yYXRvcnklMjBlcXVpcG1lbnR8ZW58MXwwfHx8MTc5NTI3MjY2Nnww&ixlib=rb-4.1.0"
-  alt: "A 3D render of a central glass sphere with glowing orange light beams extending outward"
-  author: "Brecht Corbeel"
-  authorUrl: "https://unsplash.com/@brechtcorbeel"
-  link: "https://unsplash.com/photos/glowing-light-beams-in-glass-sphere-CZFVxKoFmI4"
 sources:
   - title: "A step toward defining the Standard Model on a lattice"
     url: "https://openai.com/index/step-toward-defining-the-standard-model/"

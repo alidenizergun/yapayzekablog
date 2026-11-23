@@ -9,21 +9,14 @@ image: guvenlik
 brand: openai
 imageQuery: "cyber security hacker screen"
 whyItMatters: "OpenAI, siber güvenlik modellerini açık tespitinden yama önerisine uzanan ticari ürünlere dönüştürüyor. Ajan tabanlı güvenlik araçları kurumsal pazarda rekabet alanı olmaya başlıyor."
-photo:
-  id: "pixabay-2851245"
-  url: "/foto/px-2851245"
-  alt: "cyber security, hacking, internet, network, information"
-  author: "TheDigitalArtist"
-  authorUrl: "https://pixabay.com/users/TheDigitalArtist-202249/"
-  link: "https://pixabay.com/photos/cyber-security-hacking-internet-2851245/"
-  source: "pixabay"
 photo2:
-  id: "tiSE_paTt0A"
-  url: "https://images.unsplash.com/photo-1606606767399-01e271823a2e?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8MTV8fGN5YmVyJTIwc2VjdXJpdHklMjBoYWNrZXIlMjBzY3JlZW58ZW58MXwwfHx8MTc5NTI5MTc3NHww&ixlib=rb-4.1.0"
-  alt: "black flat screen computer monitor"
-  author: "Compare Fibre"
-  authorUrl: "https://unsplash.com/@comparefibre"
-  link: "https://unsplash.com/photos/black-flat-screen-computer-monitor-tiSE_paTt0A"
+  id: "pixabay-265130"
+  url: "/foto/px-265130"
+  alt: "security, protection, antivirus, software, cms"
+  author: "pixelcreatures"
+  authorUrl: "https://pixabay.com/users/pixelcreatures-127599/"
+  link: "https://pixabay.com/photos/security-protection-antivirus-265130/"
+  source: "pixabay"
 sources:
   - title: "@gdb X gönderisi"
     url: "https://x.com/gdb/status/2121004237413142656"

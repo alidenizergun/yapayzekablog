@@ -8,20 +8,13 @@ image: girisim
 popularity: 66
 brand: amazon
 imageQuery: "data center server racks"
-photo:
-  id: "7F9PhBM1gFM"
-  url: "https://images.unsplash.com/photo-1770233621425-5d9ee7a0a700?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8MTN8fGFydGlmaWNpYWwlMjBpbnRlbGxpZ2VuY2UlMjB0ZWNobm9sb2d5fGVufDF8MHx8fDE3OTUyODg4ODh8MA&ixlib=rb-4.1.0"
-  alt: "Artificial intelligence concept within a human head"
-  author: "Zach M"
-  authorUrl: "https://unsplash.com/@zachmmalin"
-  link: "https://unsplash.com/photos/artificial-intelligence-concept-within-a-human-head-7F9PhBM1gFM"
 photo2:
-  id: "IsYT5rUuVcs"
-  url: "https://images.unsplash.com/photo-1739036868260-c26b292cd85d?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8MTR8fGFydGlmaWNpYWwlMjBpbnRlbGxpZ2VuY2UlMjB0ZWNobm9sb2d5fGVufDF8MHx8fDE3OTUyODg4ODh8MA&ixlib=rb-4.1.0"
-  alt: "A black computer processor chip with gold pins on a dark circuit board"
-  author: "Igor Omilaev"
-  authorUrl: "https://unsplash.com/@omilaev"
-  link: "https://unsplash.com/photos/computer-processor-chip-with-gold-pins-IsYT5rUuVcs"
+  id: "4mEyvORkbN0"
+  url: "https://images.unsplash.com/photo-1681505531034-8d67054e07f6?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8Mnx8YnVzaW5lc3MlMjBhY3F1aXNpdGlvbiUyMGNvbnRyYWN0JTIwc2lnbmluZyUyMG9uJTIwdGFibGV8ZW58MXwwfHx8MTc5NTQ0NzgxMnww&ixlib=rb-4.1.0"
+  alt: "two people shaking hands over a piece of paper"
+  author: "Amina Atar"
+  authorUrl: "https://unsplash.com/@minaslens"
+  link: "https://unsplash.com/photos/two-people-shaking-hands-over-a-piece-of-paper-4mEyvORkbN0"
 whyItMatters: "Anlaşma gerçekleşirse Amazon, çip tarafındaki rekabetini yazılım katmanıyla da güçlendirmiş olacak. Ancak şu an elde yalnızca kaynaklara dayanan bir haber var ve görüşmeler hâlâ çökebilir."
 deal:
   type: "Satın alma"

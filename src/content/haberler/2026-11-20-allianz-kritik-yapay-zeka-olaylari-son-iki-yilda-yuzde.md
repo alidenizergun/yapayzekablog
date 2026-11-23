@@ -19,12 +19,12 @@ byNumbers:
   - value: "100 milyon dolar"
     label: "Bazı davalarda olası sigorta sektörü kaybı"
 photo:
-  id: "pixabay-1841158"
-  url: "/foto/px-1841158"
-  alt: "analysis, analytics, business, charts, computer"
-  author: "Pexels"
-  authorUrl: "https://pixabay.com/users/Pexels-2286921/"
-  link: "https://pixabay.com/photos/analysis-analytics-business-charts-1841158/"
+  id: "pixabay-385506"
+  url: "/foto/px-385506"
+  alt: "calculator, calculation, insurance, finance, accounting"
+  author: "stevepb"
+  authorUrl: "https://pixabay.com/users/stevepb-282134/"
+  link: "https://pixabay.com/photos/calculator-calculation-insurance-385506/"
   source: "pixabay"
 photo2:
   id: "OQptsc4P3NM"

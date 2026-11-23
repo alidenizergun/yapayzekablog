@@ -18,7 +18,6 @@ byNumbers:
     label: "Funding round in May"
   - value: "2023"
     label: "Year Decart was founded"
-photoAlt: "Artificial intelligence concept within a human head"
 dealCounterparty: "Decart"
 dealAmount: "approximately $7.5 billion"
 ---

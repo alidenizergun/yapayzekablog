@@ -9,21 +9,6 @@ image: altyapi
 brand: nvidia
 imageQuery: "corporate headquarters glass building"
 whyItMatters: "Yapay zeka çiplerinin en büyük tedarikçisinde liderlik boşluğu sürüyor ve yönetim kurulu üzerindeki baskı artıyor. Ancak imzalar kişilerin kendi beyanına dayandığı için kurulun kararını ne ölçüde etkileyeceği belirsiz."
-photo:
-  id: "pixabay-3963945"
-  url: "/foto/px-3963945"
-  alt: "web, network, technology, developer, touch"
-  author: "geralt"
-  authorUrl: "https://pixabay.com/users/geralt-9301/"
-  link: "https://pixabay.com/photos/web-network-technology-developer-3963945/"
-  source: "pixabay"
-photo2:
-  id: "b_GcLCaKt94"
-  url: "https://images.unsplash.com/photo-1697952431907-8542919a16b3?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8MTF8fGNvbXB1dGVyJTIwY2hpcCUyMHNlbWljb25kdWN0b3J8ZW58MXwwfHx8MTc5NTI4ODg5OXww&ixlib=rb-4.1.0"
-  alt: "a black and white photo of a computer motherboard"
-  author: "Albert Stoynov"
-  authorUrl: "https://unsplash.com/@albertstoynov"
-  link: "https://unsplash.com/photos/a-black-and-white-photo-of-a-computer-motherboard-b_GcLCaKt94"
 sources:
   - title: "Could Jensen Huang make a comeback? Musk, other tech heavyweights pressure Nvidia board"
     url: "https://www.scmp.com/tech/big-tech/article/3374494/could-jensen-huang-make-comeback-musk-other-tech-heavyweights-pressure-nvidia-board"

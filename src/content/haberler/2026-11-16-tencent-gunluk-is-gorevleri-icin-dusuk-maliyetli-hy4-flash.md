@@ -7,13 +7,6 @@ date: 2026-11-16T17:27:51+03:00
 image: modeller
 popularity: 45
 imageQuery: "server room blue lights"
-photo:
-  id: "zMrGQu21qcU"
-  url: "https://images.unsplash.com/photo-1680992046617-e2e35451bcdb?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8NHx8c2VydmVyJTIwcm9vbSUyMGJsdWUlMjBsaWdodHN8ZW58MXwwfHx8MTc5NDgzOTQ1MHww&ixlib=rb-4.1.0"
-  alt: "a close up of a green light in a server"
-  author: "Tyler"
-  authorUrl: "https://unsplash.com/@tylergm"
-  link: "https://unsplash.com/photos/a-close-up-of-a-green-light-in-a-server-zMrGQu21qcU"
 whyItMatters: "Çinli şirketlerin fiyat baskısı sürüyor. Alibaba'nın Qwen4-Max modelinin hemen ardından gelen bu model, ajan görevlerinde maliyeti düşürmeyi hedefliyor."
 keyPoints:
   - "Hy4 flash, 224 milyar parametreli ve her geçişte 12 milyarını kullanan bir model."
@@ -27,13 +20,6 @@ byNumbers:
     label: "Her geçişte etkinleştirilen parametre"
   - value: "0,07 dolar"
     label: "Milyon token başına girdi fiyatı"
-photo2:
-  id: "eqd0f78u9nI"
-  url: "https://images.unsplash.com/photo-1680992046615-065f58bcb4d8?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8NXx8c2VydmVyJTIwcm9vbSUyMGJsdWUlMjBsaWdodHN8ZW58MXwwfHx8MTc5NTI3MjY2NHww&ixlib=rb-4.1.0"
-  alt: "a close up of a rack of computer equipment"
-  author: "Tyler"
-  authorUrl: "https://unsplash.com/@tylergm"
-  link: "https://unsplash.com/photos/a-close-up-of-a-rack-of-computer-equipment-eqd0f78u9nI"
 sources:
   - title: "Tencent launches Hy4 flash, cutting AI task costs by 95% in internal tests"
     url: "https://technode.com/2026/11/16/tencent-launches-hy4-flash-cutting-ai-task-costs-by-95-in-internal-tests/"

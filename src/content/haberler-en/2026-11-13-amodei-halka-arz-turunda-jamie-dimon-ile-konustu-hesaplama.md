@@ -4,7 +4,6 @@ slug: "amodei-talks-compute-public-benefit-fund-agents-with"
 title: "Anthropic CEO Amodei sits down with JPMorgan CEO Jamie Dimon ahead of the IPO"
 spot: "Anthropic CEO Dario Amodei sat down for a live conversation with JPMorgan CEO Jamie Dimon. According to Bloomberg, the discussion was part of Anthropic's pre-IPO investor roadshow."
 whyItMatters: "The messages delivered to investors ahead of the IPO show how the company is positioning its compute costs and its public benefit commitment."
-photoAlt: "a street sign on wall street in new york city"
 ---
 
 Anthropic CEO Dario Amodei sat down for a live conversation with JPMorgan CEO Jamie Dimon on November 13. According to Bloomberg, the discussion was part of the roadshow Anthropic is holding for investors ahead of its IPO.

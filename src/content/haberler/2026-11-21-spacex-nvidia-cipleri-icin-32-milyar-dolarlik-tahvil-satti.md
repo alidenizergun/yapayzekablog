@@ -8,12 +8,12 @@ image: altyapi
 popularity: 55
 imageQuery: "data center server racks"
 photo:
-  id: "VHmBX7FnXw0"
-  url: "https://images.unsplash.com/photo-1762163516269-3c143e04175c?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8Nnx8ZGF0YSUyMGNlbnRlciUyMHNlcnZlciUyMHJhY2tzfGVufDF8MHx8fDE3OTUyMjQ4MDl8MA&ixlib=rb-4.1.0"
-  alt: "Server rack with blinking green lights"
-  author: "Domaintechnik"
-  authorUrl: "https://unsplash.com/@fslfsl"
-  link: "https://unsplash.com/photos/server-rack-with-blinking-green-lights-VHmBX7FnXw0"
+  id: "ip7GFn5JqX8"
+  url: "https://images.unsplash.com/photo-1707761918029-1295034aa31e?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8M3x8c3RvY2slMjBtYXJrZXQlMjB0cmFkaW5nJTIwc2NyZWVufGVufDF8MHx8fDE3OTU0NDc3ODR8MA&ixlib=rb-4.1.0"
+  alt: "smartphone calculator on desk with financial charts behind"
+  author: "Jakub Żerdzicki"
+  authorUrl: "https://unsplash.com/@jakubzerdzicki"
+  link: "https://unsplash.com/photos/smartphone-calculator-on-desk-with-financial-charts-behind-ip7GFn5JqX8"
 whyItMatters: "Yapay zeka altyapısının borçla ve bilanço dışı yapılarla finanse edilmesi yaygınlaşıyor; bu örnek, büyük çip alımlarının nasıl borçlandırıldığını gösteriyor."
 keyPoints:
   - "SpaceX'in 32 milyar dolarlık tahvil satışında en büyük dilim yüzde 8'in üzerinde getiri sundu."
@@ -28,12 +28,12 @@ byNumbers:
   - value: "7,6 milyar dolar"
     label: "Yapay zeka biriminin üçüncü çeyrek geliri"
 photo2:
-  id: "OnI_TNcIv9U"
-  url: "https://images.unsplash.com/photo-1680992046626-418f7e910589?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8MTB8fGRhdGElMjBjZW50ZXIlMjBzZXJ2ZXIlMjByYWNrc3xlbnwxfDB8fHwxNzk1MjU1Mjg0fDA&ixlib=rb-4.1.0"
-  alt: "a rack of electronic equipment in a dark room"
-  author: "Tyler"
-  authorUrl: "https://unsplash.com/@tylergm"
-  link: "https://unsplash.com/photos/a-rack-of-electronic-equipment-in-a-dark-room-OnI_TNcIv9U"
+  id: "XrIfY_4cK1w"
+  url: "https://images.unsplash.com/photo-1618044733300-9472054094ee?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8Mnx8Ym9uZCUyMGNlcnRpZmljYXRlJTIwZmluYW5jaWFsJTIwZG9jdW1lbnR8ZW58MXwwfHx8MTc5NTQ0Nzc5MXww&ixlib=rb-4.1.0"
+  alt: "financial newspaper with stock chart"
+  author: "Markus Spiske"
+  authorUrl: "https://unsplash.com/@markusspiske"
+  link: "https://unsplash.com/photos/financial-newspaper-with-stock-chart-XrIfY_4cK1w"
 sources:
   - title: "SpaceX Just Raised $32 Billion for AI Chips. Lenders Want Elon Musk to Keep Them on Earth."
     url: "https://fool.com/investing/2026/11/20/spacex-just-raised-32-billion-for-ai-chips-lenders-want-elon-musk-to-keep-them-on-earth"

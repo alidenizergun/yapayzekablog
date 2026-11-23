@@ -13,7 +13,6 @@ byNumbers:
     label: "Requests with fake credentials sent"
   - value: "125"
     label: "Endpoints with ZDR approval revoked"
-photoAlt: "a close up of a computer in a dark room"
 ---
 
 The researchers at security firm Dragos sent roughly 2 million AI requests containing fake credentials between July and November 2026. Testing found that at least three providers had been compromised and that attackers were actively stealing user data. None of the three providers was aware of the situation until Dragos informed them.

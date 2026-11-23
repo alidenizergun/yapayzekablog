@@ -29,21 +29,6 @@ byNumbers:
     label: "Hissenin sabah işlemlerindeki düşüşü"
   - value: "12,9 milyar dolar"
     label: "Bekleyen Hugging Face satın alması"
-photo:
-  id: "pixabay-2202279"
-  url: "/foto/px-2202279"
-  alt: "nvidia, video, card"
-  author: "WikimediaImages"
-  authorUrl: "https://pixabay.com/users/WikimediaImages-1185597/"
-  link: "https://pixabay.com/photos/nvidia-video-card-2202279/"
-  source: "pixabay"
-photo2:
-  id: "3GUW88tRmv8"
-  url: "https://images.unsplash.com/photo-1555618254-84e2cf498b01?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8NHx8Y29tcHV0ZXIlMjBncmFwaGljcyUyMGNhcmQlMjBoYXJkd2FyZXxlbnwxfDB8fHwxNzk1MjkxNzgxfDA&ixlib=rb-4.1.0"
-  alt: "selective focus photography of GEFORCE RTX graphics card"
-  author: "Christian Wiediger"
-  authorUrl: "https://unsplash.com/@christianw"
-  link: "https://unsplash.com/photos/selective-focus-photography-of-geforce-rtx-graphics-card-3GUW88tRmv8"
 sources:
   - title: "Nvidia's Jensen Huang resigns, chipmaker names CFO Colette Kress as interim CEO"
     url: "https://techcrunch.com/2026/11/12/nvidias-jensen-huang-resigns-chipmaker-names-cfo-colette-kress-as-interim-ceo/"

@@ -15,12 +15,12 @@ photo:
   authorUrl: "https://unsplash.com/@imgix"
   link: "https://unsplash.com/photos/black-imgix-server-system-pgdaAwf6IJg"
 photo2:
-  id: "3Nwt6w-KU3E"
-  url: "https://images.unsplash.com/photo-1667264501379-c1537934c7ab?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8NXx8ZGF0YSUyMGNlbnRlciUyMHNlcnZlciUyMGFpc2xlfGVufDF8MHx8fDE3OTUyOTE3NTl8MA&ixlib=rb-4.1.0"
-  alt: "Black cables and wires connected to the back of modular LED display panels"
-  author: "Kier in Sight Archives"
-  authorUrl: "https://unsplash.com/@kierinsightarchives"
-  link: "https://unsplash.com/photos/cables-and-wires-on-display-panels-3Nwt6w-KU3E"
+  id: "I306rDlvTYY"
+  url: "https://images.unsplash.com/photo-1658761492656-a088d80f65c5?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8Mnx8V2hpdGUlMjBIb3VzZSUyMGJyaWVmaW5nJTIwcm9vbSUyMHBvZGl1bXxlbnwxfDB8fHwxNzk1NDQ3NzgxfDA&ixlib=rb-4.1.0"
+  alt: "a podium with flags in a room"
+  author: "Fine Photographics"
+  authorUrl: "https://unsplash.com/@finephotographics"
+  link: "https://unsplash.com/photos/a-podium-with-flags-in-a-room-I306rDlvTYY"
 whyItMatters: "Açıklama, büyük bulut şirketlerinin yurt dışı veri merkezi yatırımlarında yeni bir belirsizlik yaratıyor. Ancak vergi oranı, kapsam ve yasal dayanak açıklanmadığı için şimdilik bağlayıcı bir politika değil, bir niyet beyanı."
 keyPoints:
   - "Trump, ABD dışında veri merkezi kuran şirketlere \"muazzam bir vergi\" getireceğini söyledi."

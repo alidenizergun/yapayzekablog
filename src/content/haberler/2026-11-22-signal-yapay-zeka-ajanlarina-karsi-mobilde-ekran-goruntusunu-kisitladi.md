@@ -15,12 +15,12 @@ photo:
   authorUrl: "https://unsplash.com/@kommumikation"
   link: "https://unsplash.com/photos/a-hand-holding-a-phone-NU4LprLqjts"
 photo2:
-  id: "zs-41Br0WhQ"
-  url: "https://images.unsplash.com/photo-1611746869696-d09bce200020?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8MXx8c21hcnRwaG9uZSUyMG1lc3NhZ2luZyUyMGFwcCUyMGxvY2t8ZW58MXwwfHx8MTc5NTMxNjU0N3ww&ixlib=rb-4.1.0"
-  alt: "white and green remote control"
-  author: "Adem AY"
-  authorUrl: "https://unsplash.com/@ademay"
-  link: "https://unsplash.com/photos/white-and-green-remote-control-zs-41Br0WhQ"
+  id: "I_JgcNln5R4"
+  url: "https://images.unsplash.com/photo-1723609275983-9496fa96e8fd?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8NHx8c21hcnRwaG9uZSUyMHNob3dpbmclMjBtZXNzYWdpbmclMjBhcHAlMjBjbG9zZXVwfGVufDF8MHx8fDE3OTU0NDc3NjR8MA&ixlib=rb-4.1.0"
+  alt: "A close up of a cell phone on a table"
+  author: "Mikhail Pushkarev"
+  authorUrl: "https://unsplash.com/@dismilated"
+  link: "https://unsplash.com/photos/a-close-up-of-a-cell-phone-on-a-table-I_JgcNln5R4"
 whyItMatters: "İşletim sistemi düzeyindeki yapay zeka ajanları, uçtan uca şifreli uygulamaların kontrolü dışında ekran içeriğine erişebiliyor. Signal bunu, gizlilik sözünü korumak için ürün işlevinden taviz vermesini gerektiren bir sorun olarak görüyor."
 keyPoints:
   - "Signal, Android ve iOS'ta ekran görüntüsü almayı kısıtladı."

@@ -10,12 +10,12 @@ brand: anthropic
 imageQuery: "stock market chart screen"
 whyItMatters: "Talep rakamı, yatırımcıların yapay zeka şirketlerine olan ilgisini ve halka arzın rekor kırma ihtimalini gösteriyor."
 photo:
-  id: "pixabay-1730089"
-  url: "/foto/px-1730089"
-  alt: "business, stock, finance, market, financial"
-  author: "AhmadArdity"
-  authorUrl: "https://pixabay.com/users/AhmadArdity-3112014/"
-  link: "https://pixabay.com/photos/business-stock-finance-market-1730089/"
+  id: "pixabay-3087396"
+  url: "/foto/px-3087396"
+  alt: "stock exchange, win, boom, businessman, tablet"
+  author: "geralt"
+  authorUrl: "https://pixabay.com/users/geralt-9301/"
+  link: "https://pixabay.com/photos/stock-exchange-win-boom-businessman-3087396/"
   source: "pixabay"
 photo2:
   id: "pixabay-1905224"

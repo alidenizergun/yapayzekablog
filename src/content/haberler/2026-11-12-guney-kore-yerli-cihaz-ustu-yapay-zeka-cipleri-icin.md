@@ -9,12 +9,12 @@ image: altyapi
 imageQuery: "seoul skyline night"
 whyItMatters: "Ülkelerin yerli yapay zeka çipi üretme çabaları, Nvidia'ya bağımlılığı azaltma yarışının bir parçası. Güney Kore'nin hedefi bu yarışta cihaz üstü çiplere odaklanıyor."
 photo:
-  id: "pixabay-2660914"
-  url: "/foto/px-2660914"
-  alt: "system, web, network, connection, connected"
-  author: "geralt"
-  authorUrl: "https://pixabay.com/users/geralt-9301/"
-  link: "https://pixabay.com/photos/system-web-network-connection-2660914/"
+  id: "pixabay-6560489"
+  url: "/foto/px-6560489"
+  alt: "circuit board, electronics, printed circuit board, solder joint, computer"
+  author: "11082974"
+  authorUrl: "https://pixabay.com/users/11082974-11082974/"
+  link: "https://pixabay.com/photos/circuit-board-electronics-6560489/"
   source: "pixabay"
 photo2:
   id: "tTurhPw9bwQ"

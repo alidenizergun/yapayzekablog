@@ -15,21 +15,13 @@ keyPoints:
   - "Kurul başkanı birkaç gün önce Huang'ı geri getirmeyi düşünmediklerini söylemişti."
   - "Trump kararı destekledi; Nvidia hisseleri yüzde 30 yüksek açıldı."
 format: kisa
-photo:
-  id: "tBvF46kmwBw"
-  url: "https://images.unsplash.com/photo-1727434032773-af3cd98375ba?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8MTF8fHRlY2hub2xvZ3klMjBhYnN0cmFjdHxlbnwxfDB8fHwxNzk1NDQ2MTM2fDA&ixlib=rb-4.1.0"
-  alt: "A close up of a computer circuit board"
-  author: "Luke Jones"
-  authorUrl: "https://unsplash.com/@lukejonesdesign"
-  link: "https://unsplash.com/photos/a-close-up-of-a-computer-circuit-board-tBvF46kmwBw"
 photo2:
-  id: "pixabay-631577"
-  url: "/foto/px-631577"
-  alt: "new york, stock exchange, money"
-  author: "Angelo_Giordano"
-  authorUrl: "https://pixabay.com/users/Angelo_Giordano-753934/"
-  link: "https://pixabay.com/photos/new-york-stock-exchange-money-631577/"
-  source: "pixabay"
+  id: "YnqYhUioGRY"
+  url: "https://images.unsplash.com/photo-1794415286919-b9178fea600f?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8Nnx8Y29ycG9yYXRlJTIwYm9hcmRyb29tJTIwbWVldGluZyUyMHRhYmxlfGVufDF8MHx8fDE3OTU0NDc3NDl8MA&ixlib=rb-4.1.0"
+  alt: "A conference table with black chairs and glass water bottles in a modern office meeting room"
+  author: "David Marquez"
+  authorUrl: "https://unsplash.com/@mark_ez_estudio"
+  link: "https://unsplash.com/photos/conference-table-in-modern-meeting-room-YnqYhUioGRY"
 sources:
   - title: "Nvidia reverses course and brings Jensen Huang back as CEO"
     url: "https://techcrunch.com/2026/11/23/nvidia-reverses-course-and-brings-jensen-huang-back-as-ceo/"

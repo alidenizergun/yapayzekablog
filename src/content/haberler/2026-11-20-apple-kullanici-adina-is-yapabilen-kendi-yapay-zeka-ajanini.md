@@ -14,13 +14,6 @@ keyPoints:
   - "Plan, şirketin web sitesine bu hafta eklenen iş ilanlarında yer alıyor."
   - "Sistemin kod yazması, web'de gezinmesi ve uygulamaları kontrol etmesi bekleniyor."
 photo:
-  id: "mcSDtbWXUZU"
-  url: "https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8Mnx8bGFwdG9wJTIwYXV0b21hdGlvbiUyMHdvcmtmbG93fGVufDF8MHx8fDE3OTUyNTEyNTd8MA&ixlib=rb-4.1.0"
-  alt: "turned on black and grey laptop computer"
-  author: "Lukas Blazek"
-  authorUrl: "https://unsplash.com/@goumbik"
-  link: "https://unsplash.com/photos/turned-on-black-and-grey-laptop-computer-mcSDtbWXUZU"
-photo2:
   id: "m_HRfLhgABo"
   url: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8MXx8c29mdHdhcmUlMjBlbmdpbmVlciUyMGxhcHRvcCUyMG9mZmljZXxlbnwxfDB8fHwxNzk1MjU1Mjk1fDA&ixlib=rb-4.1.0"
   alt: "A MacBook with lines of code on its screen on a busy desk"

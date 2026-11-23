@@ -8,7 +8,6 @@ keyPoints:
   - "Qwen4-Max has 2.4 trillion total parameters and a 1 million-token context window."
   - "API pricing is $1.5 per million input tokens and $4.5 per million output tokens."
   - "Alibaba did not release the model's weights; it confirmed that smaller Qwen4 models will be open-sourced."
-photoAlt: "a close up of a server in a server room"
 ---
 
 Alibaba has officially announced Qwen4-Max, its new flagship model, following last week's preview release. The company disclosed the model's architecture, evaluation results and API pricing. The preview was made available on November 11.

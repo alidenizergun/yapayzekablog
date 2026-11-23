@@ -15,12 +15,12 @@ keyPoints:
   - "Hedef, ABD yapımı çip ve modellerin yurt dışına tek paket satılması."
 whatsNext: "Açıklamanın bir hafta içinde Ticaret Bakanı Howard Lutnick tarafından yapılması bekleniyor; bazı kaynaklar zamanlamanın gecikebileceğini söylüyor."
 photo:
-  id: "pixabay-7772914"
-  url: "/foto/px-7772914"
-  alt: "technology, circuit, board, head, light"
-  author: "flutie8211"
-  authorUrl: "https://pixabay.com/users/flutie8211-17475707/"
-  link: "https://pixabay.com/photos/technology-circuit-board-head-7772914/"
+  id: "pixabay-13863"
+  url: "/foto/px-13863"
+  alt: "white house, washington dc, senate, capital, congress"
+  author: "PublicDomainPictures"
+  authorUrl: "https://pixabay.com/users/PublicDomainPictures-14/"
+  link: "https://pixabay.com/photos/white-house-washington-dc-senate-13863/"
   source: "pixabay"
 photo2:
   id: "j3VuKymcjwc"

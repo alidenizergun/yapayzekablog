@@ -9,13 +9,6 @@ featured: true
 popularity: 88
 brand: nvidia
 imageQuery: "data center servers"
-photo:
-  id: "iZe21DzHnUg"
-  url: "https://images.unsplash.com/photo-1782094673136-5198a372980c?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8MTN8fGRhdGElMjBjZW50ZXIlMjBzZXJ2ZXJzfGVufDF8MHx8fDE3OTQ5NjU2MjJ8MA&ixlib=rb-4.1.0"
-  alt: "Close-up of server cooling fans in a vibrant data center"
-  author: "Winston Chen"
-  authorUrl: "https://unsplash.com/@winstonchen"
-  link: "https://unsplash.com/photos/close-up-of-server-cooling-fans-in-a-vibrant-data-center-iZe21DzHnUg"
 whyItMatters: "Sonuçların beklentilerin üzerinde gelmesi, yönetimdeki belirsizliğin finansal tabloya henüz yansımadığını gösteriyor. Huang'ın dönmeyeceğinin açıklanması ise liderlik tartışmasında önemli bir eşik."
 story: nvidia-jensen-huang-krizi
 keyPoints:
@@ -32,12 +25,13 @@ byNumbers:
   - value: "150 milyar dolar"
     label: "Hisse geri alım programı"
 photo2:
-  id: "i_JUAdanGH0"
-  url: "https://images.unsplash.com/photo-1597138768744-9f97be8cdd64?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8OHx8ZGF0YSUyMGNlbnRlciUyMHNlcnZlcnN8ZW58MXwwfHx8MTc5NTI1NTMyNXww&ixlib=rb-4.1.0"
-  alt: "a close up of a server's nameplates on the side of a"
-  author: "Marc PEZIN"
-  authorUrl: "https://unsplash.com/@fennings"
-  link: "https://unsplash.com/photos/a-close-up-of-a-servers-nameplates-on-the-side-of-a-i_JUAdanGH0"
+  id: "pixabay-1863880"
+  url: "/foto/px-1863880"
+  alt: "stock, trading, monitor, business, finance"
+  author: "3844328"
+  authorUrl: "https://pixabay.com/users/3844328-3844328/"
+  link: "https://pixabay.com/photos/stock-trading-monitor-business-1863880/"
+  source: "pixabay"
 sources:
   - title: "Nvidia earnings live: Nvidia posts Q3 beat as revenue rose 103% YOY to $115.8B, board says it will not reinstate Jensen Huang as CEO"
     url: "https://finance.yahoo.com/technology/live/nvidia-live-updates-interim-ceo-kress-prepares-for-q3-earnings-with-huang-reportedly-planning-comeback-153114076.html"
