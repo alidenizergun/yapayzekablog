@@ -22,6 +22,14 @@ photo:
   author: "David Marquez"
   authorUrl: "https://unsplash.com/@mark_ez_estudio"
   link: "https://unsplash.com/photos/conference-room-with-black-table-8ZGZYOLeYz0"
+photo2:
+  id: "pixabay-2181980"
+  url: "/foto/px-2181980"
+  alt: "chairs, conference room, contemporary, empty, indoors"
+  author: "Pexels"
+  authorUrl: "https://pixabay.com/users/Pexels-2286921/"
+  link: "https://pixabay.com/photos/chairs-conference-room-contemporary-2181980/"
+  source: "pixabay"
 sources:
   - title: "News Archive"
     url: "https://nvidianews.nvidia.com/news"

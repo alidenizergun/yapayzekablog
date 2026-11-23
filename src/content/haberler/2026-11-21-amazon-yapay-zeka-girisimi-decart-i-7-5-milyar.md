@@ -37,6 +37,14 @@ byNumbers:
     label: "Mayıs'taki yatırım turu"
   - value: "2023"
     label: "Decart'ın kuruluş yılı"
+photo:
+  id: "pixabay-593304"
+  url: "/foto/px-593304"
+  alt: "startup, start-up, notebooks, creative, computer"
+  author: "StartupStockPhotos"
+  authorUrl: "https://pixabay.com/users/StartupStockPhotos-690514/"
+  link: "https://pixabay.com/photos/startup-start-up-notebooks-creative-593304/"
+  source: "pixabay"
 sources:
   - title: "Amazon nearing $7.5B deal to buy AI start-up Decart: FT"
     url: "https://www.tradingview.com/news/seekingalpha:71b3d28ff094b:0-amazon-nearing-7-5b-deal-to-buy-ai-start-up-decart-ft/"

@@ -22,6 +22,14 @@ photo2:
   authorUrl: "https://pixabay.com/users/Tumisu-148124/"
   link: "https://pixabay.com/photos/contract-agreement-signature-3002431/"
   source: "pixabay"
+photo:
+  id: "pixabay-2548826"
+  url: "/foto/px-2548826"
+  alt: "meeting, conference, meet, teamwork, organization"
+  author: "patricksommer"
+  authorUrl: "https://pixabay.com/users/patricksommer-6021945/"
+  link: "https://pixabay.com/photos/meeting-conference-meet-teamwork-2548826/"
+  source: "pixabay"
 sources:
   - title: "Microsoft 40'tan fazla ortakla yapay zeka şeffaflık girişimini başlattı"
     url: "https://tr.investing.com/news/company-news/microsoft-40tan-fazla-ortakla-yapay-zeka-seffaflk-girisimini-baslatt-93CH-4162171"

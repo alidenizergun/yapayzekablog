@@ -24,6 +24,13 @@ photo2:
   authorUrl: "https://pixabay.com/users/Jo_Johnston-1865729/"
   link: "https://pixabay.com/photos/office-boardroom-meeting-table-1516329/"
   source: "pixabay"
+photo:
+  id: "lf4OXwuT7zE"
+  url: "https://images.unsplash.com/photo-1786056371046-4101a1efdd57?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8OHx8Z292ZXJubWVudCUyMGJ1aWxkaW5nJTIwd2FzaGluZ3RvbiUyMGNvbHVtbnN8ZW58MXwwfHx8MTc5NTQ2NzkxMHww&ixlib=rb-4.1.0"
+  alt: "White house with american flag flying in washington"
+  author: "Chandler Cruttenden"
+  authorUrl: "https://unsplash.com/@chanphoto"
+  link: "https://unsplash.com/photos/white-house-with-american-flag-flying-in-washington-lf4OXwuT7zE"
 sources:
   - title: "Bessent questions did Nvidia \"goose\" earnings with suspect China chip sales"
     url: "https://www.axios.com/2026/11/15/bessent-nvidia-earnings-china-chip-sales-ceo"

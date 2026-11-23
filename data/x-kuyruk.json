@@ -446,5 +446,21 @@
     "importance": 45,
     "featured": false,
     "date": "2026-11-23T18:01:43+03:00"
+  },
+  {
+    "slug": "anthropic-pull-request-leri-inceleyip-duzeltip-onaylayan-claude-ship",
+    "title": "Anthropic, pull request'leri inceleyip düzeltip onaylayan Claude Ship'i duyurdu",
+    "text": "Anthropic, Claude Ship'i duyurdu: Claude artık pull request'leri inceleyip düzeltebiliyor ve onaylayabiliyor. PR Steward ve Claude Approvals beta'da; Team ve Enterprise müşterilerine açık. #Claude",
+    "importance": 55,
+    "featured": false,
+    "date": "2026-11-24T00:03:35+03:00"
+  },
+  {
+    "slug": "oregon-ve-virginia-grok-un-mustehcen-deepfake-goruntuleri-nedeniyle",
+    "title": "Oregon ve Virginia, Grok'un müstehcen deepfake görüntüleri nedeniyle SpaceX'e dava açtı",
+    "text": "Oregon ve Virginia başsavcıları, Grok'un cinsel içerikli deepfake görüntüleri nedeniyle SpaceX'e tüketici koruma yasaları kapsamında dava açtı. X Safety, korumaların kullanıcılarca bilerek aşıldığını söyledi.",
+    "importance": 58,
+    "featured": false,
+    "date": "2026-11-24T00:02:35+03:00"
   }
 ]

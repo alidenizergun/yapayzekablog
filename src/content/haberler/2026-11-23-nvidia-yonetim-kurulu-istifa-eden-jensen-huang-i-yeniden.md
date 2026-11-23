@@ -22,6 +22,14 @@ photo2:
   author: "David Marquez"
   authorUrl: "https://unsplash.com/@mark_ez_estudio"
   link: "https://unsplash.com/photos/conference-table-in-modern-meeting-room-YnqYhUioGRY"
+photo:
+  id: "pixabay-5842784"
+  url: "/foto/px-5842784"
+  alt: "team, colleagues, coworkers, office, team work"
+  author: "fahribaabdullah14"
+  authorUrl: "https://pixabay.com/users/fahribaabdullah14-19581918/"
+  link: "https://pixabay.com/photos/team-colleagues-coworkers-office-5842784/"
+  source: "pixabay"
 sources:
   - title: "Nvidia reverses course and brings Jensen Huang back as CEO"
     url: "https://techcrunch.com/2026/11/23/nvidia-reverses-course-and-brings-jensen-huang-back-as-ceo/"

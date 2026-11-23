@@ -20,6 +20,13 @@ photo:
   author: "Christopher Gower"
   authorUrl: "https://unsplash.com/@cgower"
   link: "https://unsplash.com/photos/a-macbook-with-lines-of-code-on-its-screen-on-a-busy-desk-m_HRfLhgABo"
+photo2:
+  id: "psGV5KhidlY"
+  url: "https://images.unsplash.com/photo-1587560699334-cc4ff634909a?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8MTV8fHNvZnR3YXJlJTIwZW5naW5lZXIlMjBsYXB0b3AlMjBvZmZpY2V8ZW58MXwwfHx8MTc5NTQ2Nzk2NXww&ixlib=rb-4.1.0"
+  alt: "macbook pro on white table"
+  author: "Julian Hochgesang"
+  authorUrl: "https://unsplash.com/@julianhochgesang"
+  link: "https://unsplash.com/photos/macbook-pro-on-white-table-psGV5KhidlY"
 sources:
   - title: "Apple Is Working on AI Agent for Device Control, Apps, Browsing and Coding"
     url: "https://www.bloomberg.com/news/articles/2026-11-19/apple-is-working-on-ai-agent-for-device-control-apps-browsing-and-coding"

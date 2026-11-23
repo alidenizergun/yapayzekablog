@@ -20,6 +20,14 @@ keyPoints:
   - "OpenAI, bilim blogunu fizikçi Nathaniel Craig'in konuk yazısıyla açtı."
   - "Craig, Standart Model için aday kafes tanımının ayrıntılı ispatında GPT-6 Astra'nın başı çektiğini söylüyor."
   - "Sonuç kesinleşmiş bir çözüm değil, aday bir tanım."
+photo2:
+  id: "pixabay-1314823"
+  url: "/foto/px-1314823"
+  alt: "cyclotron, electrons, apparatus, physics, atom"
+  author: "JerzyGórecki"
+  authorUrl: "https://pixabay.com/users/JerzyGórecki-2233926/"
+  link: "https://pixabay.com/photos/cyclotron-electrons-apparatus-1314823/"
+  source: "pixabay"
 sources:
   - title: "A step toward defining the Standard Model on a lattice"
     url: "https://openai.com/index/step-toward-defining-the-standard-model/"

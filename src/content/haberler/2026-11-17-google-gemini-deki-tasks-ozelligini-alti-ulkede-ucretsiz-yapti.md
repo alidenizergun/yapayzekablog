@@ -22,6 +22,14 @@ photo2:
   authorUrl: "https://pixabay.com/users/Pexels-2286921/"
   link: "https://pixabay.com/photos/smartphone-technology-mobile-phone-1281632/"
   source: "pixabay"
+photo:
+  id: "pixabay-1851218"
+  url: "/foto/px-1851218"
+  alt: "hands, phone, smartphone, electronics, mobile phone"
+  author: "Pexels"
+  authorUrl: "https://pixabay.com/users/Pexels-2286921/"
+  link: "https://pixabay.com/photos/hands-phone-smartphone-electronics-1851218/"
+  source: "pixabay"
 sources:
   - title: "You can now assign Gemini 'tasks' for free in six countries"
     url: "https://9to5google.com/2026/11/17/gemini-tasks-free/"

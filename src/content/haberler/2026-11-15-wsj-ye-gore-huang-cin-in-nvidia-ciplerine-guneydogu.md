@@ -16,6 +16,14 @@ photo:
   authorUrl: "https://unsplash.com/@ismailenesayhan"
   link: "https://unsplash.com/photos/server-room-aisle-with-metal-equipment-racks-lVZjvw-u9V8"
 whyItMatters: "Haber, ABD'nin ihracat kontrollerinin Çin dışındaki veri merkezlerinden bilgi işlem gücü kiralanarak aşılabildiği tartışmasını belgelere dayandırarak yeniden gündeme taşıyor."
+photo2:
+  id: "pixabay-7388620"
+  url: "/foto/px-7388620"
+  alt: "data center, technology, server, network, internet"
+  author: "MightyFineBros"
+  authorUrl: "https://pixabay.com/users/MightyFineBros-17490253/"
+  link: "https://pixabay.com/photos/data-center-technology-server-7388620/"
+  source: "pixabay"
 sources:
   - title: "WSJ: Huang personally built Asia route feeding Nvidia GPUs to China"
     url: "https://aiweekly.co/alerts/wsj-huang-personally-built-asia-route-feeding-nvidia-gpus-to-china"

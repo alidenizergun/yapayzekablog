@@ -15,6 +15,13 @@ keyPoints:
   - "Transluce pilotu 2027'de genişletmeyi planlıyor."
 format: kisa
 whatsNext: "Transluce pilot çalışmayı 2027'de genişletmeyi planlıyor."
+photo:
+  id: "BMnhuwFYr7w"
+  url: "https://images.unsplash.com/photo-1545665277-5937489579f2?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8MTF8fHNlY3VyaXR5JTIwYXVkaXQlMjB0ZWFtJTIwY29tcHV0ZXIlMjBzY3JlZW5zfGVufDF8MHx8fDE3OTU0Njc5MDB8MA&ixlib=rb-4.1.0"
+  alt: "A laptop and a wide monitor displaying lines of code on a desk"
+  author: "Joshua Aragon"
+  authorUrl: "https://unsplash.com/@goshua13"
+  link: "https://unsplash.com/photos/laptop-and-monitor-displaying-code-workspace-BMnhuwFYr7w"
 sources:
   - title: "@OpenAI X gönderisi"
     url: "https://x.com/OpenAI/status/2122359930628063248"

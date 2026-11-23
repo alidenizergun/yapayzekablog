@@ -17,6 +17,13 @@ photo2:
   authorUrl: "https://pixabay.com/users/pixelcreatures-127599/"
   link: "https://pixabay.com/photos/security-protection-antivirus-265130/"
   source: "pixabay"
+photo:
+  id: "tiSE_paTt0A"
+  url: "https://images.unsplash.com/photo-1606606767399-01e271823a2e?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8MTV8fGN5YmVyJTIwc2VjdXJpdHklMjBoYWNrZXIlMjBzY3JlZW58ZW58MXwwfHx8MTc5NTQ2NzkxOHww&ixlib=rb-4.1.0"
+  alt: "black flat screen computer monitor"
+  author: "Compare Fibre"
+  authorUrl: "https://unsplash.com/@comparefibre"
+  link: "https://unsplash.com/photos/black-flat-screen-computer-monitor-tiSE_paTt0A"
 sources:
   - title: "@gdb X gönderisi"
     url: "https://x.com/gdb/status/2121004237413142656"
