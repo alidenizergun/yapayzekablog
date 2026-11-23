@@ -891,7 +891,7 @@ async function main() {
   for (const a of ok) {
     try {
       const qs = [a.image_query, CATEGORY_QUERIES[a.category]];
-      const po = await photoOpts(`${a.title} — ${a.spot}`);
+      const po = await photoOpts(`${a.title} — ${a.spot}${a.brand ? ' (Haberin konusu tek bir şirket; uygun fotoğraf yoksa şirket logosu gösterilecek, bu yüzden yalnızca gerçekten uyumlu bir fotoğraf seç.)' : ''}`);
       a.photo = await findPhoto(qs, usedPhotos, po);
       if (a.photo) { photoNote.added++; a.photo2 = await findPhoto(qs, usedPhotos, po); }
     } catch (err) { photoNote.error = err.message; break; }

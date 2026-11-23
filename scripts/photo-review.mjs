@@ -24,7 +24,7 @@ const files = fs.readdirSync(DIR).filter((f) => f.endsWith('.md')).sort().revers
 const news = files.map((f) => {
   const raw = fs.readFileSync(path.join(DIR, f), 'utf8');
   const fm = parse(raw.split(/^---$/m)[1]);
-  return { f, fm, context: `${fm.title} — ${fm.spot}` };
+  return { f, fm, context: `${fm.title} — ${fm.spot}${fm.brand ? ' (Haberin konusu tek bir şirket; uygun fotoğraf yoksa şirket logosu gösterilir.)' : ''}` };
 });
 const items = [];
 for (const n of news) for (const field of ['photo', 'photo2']) if (n.fm[field]) items.push({ key: `${n.f}|${field}`, context: n.context, alt: n.fm[field].alt });

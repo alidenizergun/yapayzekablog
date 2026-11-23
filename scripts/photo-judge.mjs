@@ -6,6 +6,10 @@ const RULES = `Kurallar:
 - Fotoğraf haberin ANA konusunu doğrudan çağrıştırmalı (ör. çip haberi → çip/devre kartı; borsa haberi → borsa ekranı/grafik; mahkeme/yasa haberi → adliye, tokmak, yasa kitapları; sağlık → hastane/doktor).
 - Yanlış ülke, kurum, şehir ya da marka çağrıştıran fotoğrafı SEÇME (ör. ABD Merkez Bankası haberinde başka bir ülkenin banka tabelası; Türkiye haberinde başka bir ülkenin simgesi; ilgisiz bir şehrin silueti).
 - Haberde adı geçen gerçek bir kişi sanılabilecek, yüzü öne çıkan insan fotoğrafını SEÇME.
+- İllüstrasyon, 3B çizim, konsept görsel ve "yapay zekayı" sembolize eden görseller (parlayan beyin, tel kafes, hologram, insansı robot, "kafanın içinde yapay zeka" vb.) ASLA seçilmez; yalnızca gerçek fotoğraf.
+- Robot kol, robot ya da devre kartı yalnızca haber gerçekten robotlarla ya da çiplerle ilgiliyse uygundur; "yapay zeka" genel sembolü olarak kullanılmaz.
+- Şirket yönetimi (CEO, istifa, atama), satın alma, yatırım ve model duyurusu haberlerinde devre kartı, sunucu ya da rastgele bilgisayar gibi her habere uyan teknoloji fotoğrafları UYUMSUZDUR (puan 1-2 / -1). Bu haberlerde şirket logosu gösterilir.
+- Kurum ya da yer adı geçen haberlerde (BM, Cenevre, mahkeme, borsa) o kurumu ya da yeri gösteren fotoğraf tercih edilir.
 - "İnsanlar ofiste çalışıyor", "masa başında toplantı", "binanın cephesi" gibi her habere uyabilecek genel fotoğraflar ancak daha iyi aday yoksa ve konuyla gerçekten ilgiliyse seçilir.`;
 
 /** judge(context, candidates) → seçilen adayın sırası ya da -1. candidates: [{ text }] */

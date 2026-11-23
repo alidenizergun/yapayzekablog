@@ -1,14 +1,6 @@
 {
  "modeller": [
   {
-   "id": "7F9PhBM1gFM",
-   "url": "https://images.unsplash.com/photo-1770233621425-5d9ee7a0a700?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8Nnx8YXJ0aWZpY2lhbCUyMGludGVsbGlnZW5jZSUyMG5ldXJhbCUyMG5ldHdvcmt8ZW58MXwwfHx8MTc5NTI1MTI0OHww&ixlib=rb-4.1.0",
-   "alt": "Artificial intelligence concept within a human head",
-   "author": "Zach M",
-   "authorUrl": "https://unsplash.com/@zachmmalin",
-   "link": "https://unsplash.com/photos/artificial-intelligence-concept-within-a-human-head-7F9PhBM1gFM"
-  },
-  {
    "id": "oXlXu2qukGE",
    "url": "https://images.unsplash.com/photo-1607706189992-eae578626c86?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8NHx8Y29tcHV0ZXIlMjBjb2RlJTIwc2NyZWVufGVufDF8MHx8fDE3OTUyNTEyNDh8MA&ixlib=rb-4.1.0",
    "alt": "Computer screen displaying HTML code for a web development project",
@@ -23,14 +15,6 @@
    "author": "imgix",
    "authorUrl": "https://unsplash.com/@imgix",
    "link": "https://unsplash.com/photos/black-imgix-server-system-pgdaAwf6IJg"
-  },
-  {
-   "id": "sv2SuTA-9ug",
-   "url": "https://images.unsplash.com/photo-1753513291124-4f615bf1f6de?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8OHx8YXJ0aWZpY2lhbCUyMGludGVsbGlnZW5jZSUyMG5ldXJhbCUyMG5ldHdvcmt8ZW58MXwwfHx8MTc5NTI1MTI0OHww&ixlib=rb-4.1.0",
-   "alt": "A brain over cpu represents artificial intelligence",
-   "author": "Sumaid pal Singh Bakshi",
-   "authorUrl": "https://unsplash.com/@sumaidsingh",
-   "link": "https://unsplash.com/photos/a-brain-over-cpu-represents-artificial-intelligence-sv2SuTA-9ug"
   },
   {
    "id": "cYyqhdbJ9TI",
@@ -59,28 +43,12 @@
    "link": "https://unsplash.com/photos/closeup-photo-of-white-robot-arm-jIBMSMs4_kA"
   },
   {
-   "id": "IBgpSXU6jjA",
-   "url": "https://images.unsplash.com/photo-1782712819441-bdd182c29340?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8MTJ8fGF1dG9tYXRpb24lMjB3b3JrZmxvd3xlbnwxfDB8fHwxNzk1MjUxMjUwfDA&ixlib=rb-4.1.0",
-   "alt": "Rockwell automation logo on red square with abstract shapes",
-   "author": "Brecht Corbeel",
-   "authorUrl": "https://unsplash.com/@brechtcorbeel",
-   "link": "https://unsplash.com/photos/rockwell-automation-logo-on-red-square-with-abstract-shapes-IBgpSXU6jjA"
-  },
-  {
    "id": "-0xMiYQmk8g",
    "url": "https://images.unsplash.com/photo-1684369175833-4b445ad6bfb5?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8Mnx8cm9ib3QlMjBoYW5kJTIwbGFwdG9wfGVufDF8MHx8fDE3OTUyNTUyNzl8MA&ixlib=rb-4.1.0",
    "alt": "a white robot with blue eyes and a laptop",
    "author": "Mohamed Nohassi",
    "authorUrl": "https://unsplash.com/@coopery",
    "link": "https://unsplash.com/photos/a-white-robot-with-blue-eyes-and-a-laptop--0xMiYQmk8g"
-  },
-  {
-   "id": "ZG83on5l0hY",
-   "url": "https://images.unsplash.com/photo-1782712819372-8c9082cf6bfb?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8MTJ8fGF1dG9tYXRpb24lMjB3b3JrZmxvd3xlbnwxfDB8fHwxNzk1MjU1MjgwfDA&ixlib=rb-4.1.0",
-   "alt": "Rockwell automation logo on a red square with abstract shapes",
-   "author": "Brecht Corbeel",
-   "authorUrl": "https://unsplash.com/@brechtcorbeel",
-   "link": "https://unsplash.com/photos/rockwell-automation-logo-on-a-red-square-with-abstract-shapes-ZG83on5l0hY"
   },
   {
    "id": "pixabay-1850613",
@@ -108,14 +76,6 @@
    "author": "Mohammad Rahmani",
    "authorUrl": "https://unsplash.com/@afgprogrammer",
    "link": "https://unsplash.com/photos/laptop-displaying-code-and-steaming-mug-LrxSl4ZxoRs"
-  },
-  {
-   "id": "ZVhbwDfLtYU",
-   "url": "https://images.unsplash.com/photo-1601034913836-a1f43e143611?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8M3x8c21hcnRwaG9uZSUyMGFwcCUyMHNjcmVlbnxlbnwxfDB8fHwxNzk1MjU1MjgyfDA&ixlib=rb-4.1.0",
-   "alt": "blue and white logo guessing game",
-   "author": "Brett Jordan",
-   "authorUrl": "https://unsplash.com/@brett_jordan",
-   "link": "https://unsplash.com/photos/blue-and-white-logo-guessing-game-ZVhbwDfLtYU"
   },
   {
    "id": "PgoNjR2tlpw",
@@ -362,14 +322,6 @@
    "link": "https://unsplash.com/photos/people-sitting-on-chair-in-front-of-table-while-holding-pens-during-daytime-KdeqA3aTnBY"
   },
   {
-   "id": "qr4Vew7j0vY",
-   "url": "https://images.unsplash.com/photo-1794553750023-94732c78c540?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8MTJ8fGFkdmVydGlzaW5nJTIwYmlsbGJvYXJkfGVufDF8MHx8fDE3OTUzMTY1Njh8MA&ixlib=rb-4.1.0",
-   "alt": "A 3D render of a mobile billboard trailer with a large blank white rectangular sign",
-   "author": "Mockaps",
-   "authorUrl": "https://unsplash.com/@mockaps",
-   "link": "https://unsplash.com/photos/mobile-billboard-trailer-with-blank-sign-qr4Vew7j0vY"
-  },
-  {
    "id": "bf9sZBcGQl4",
    "url": "https://images.unsplash.com/photo-1686061593213-98dad7c599b9?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8MTR8fGFuYWx5dGljcyUyMGRhc2hib2FyZHxlbnwxfDB8fHwxNzk1MzE2NTY4fDA&ixlib=rb-4.1.0",
    "alt": "a computer screen with a bunch of data on it",
@@ -568,22 +520,6 @@
    "source": "pixabay"
   },
   {
-   "id": "FAlYVtV1kRg",
-   "url": "https://images.unsplash.com/photo-1668681919287-7367677cdc4c?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8Nnx8dGVjaG5vbG9neSUyMGFic3RyYWN0fGVufDF8MHx8fDE3OTUzODE0MDh8MA&ixlib=rb-4.1.0",
-   "alt": "purple and pink curved abstract shapes",
-   "author": "Pawel Czerwinski",
-   "authorUrl": "https://unsplash.com/@pawel_czerwinski",
-   "link": "https://unsplash.com/photos/purple-and-pink-curved-abstract-shapes-FAlYVtV1kRg"
-  },
-  {
-   "id": "MERDjcUqFI0",
-   "url": "https://images.unsplash.com/photo-1733844982998-f31a1111c74d?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8MTV8fGZ1dHVyaXN0aWMlMjBjb21wdXRlcnxlbnwxfDB8fHwxNzk1MzgxNDA4fDA&ixlib=rb-4.1.0",
-   "alt": "A computer generated image of a futuristic city",
-   "author": "Logan Voss",
-   "authorUrl": "https://unsplash.com/@loganvoss",
-   "link": "https://unsplash.com/photos/a-computer-generated-image-of-a-futuristic-city-MERDjcUqFI0"
-  },
-  {
    "id": "pixabay-5288034",
    "url": "/foto/px-5288034",
    "alt": "mockup, typewriter, word, artificial intelligence, computer",
@@ -591,23 +527,6 @@
    "authorUrl": "https://pixabay.com/users/viarami-13458823/",
    "link": "https://pixabay.com/photos/mockup-typewriter-word-5288034/",
    "source": "pixabay"
-  },
-  {
-   "id": "pixabay-5090539",
-   "url": "/foto/px-5090539",
-   "alt": "circle, tech, technology, abstract, science",
-   "author": "xresch",
-   "authorUrl": "https://pixabay.com/users/xresch-7410129/",
-   "link": "https://pixabay.com/photos/circle-tech-technology-abstract-5090539/",
-   "source": "pixabay"
-  },
-  {
-   "id": "yP89apz2TAA",
-   "url": "https://images.unsplash.com/flagged/photo-1569144654912-5f146d08b98b?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8Mnx8ZnV0dXJpc3RpYyUyMGNvbXB1dGVyfGVufDF8MHx8fDE3OTUzODE0MDh8MA&ixlib=rb-4.1.0",
-   "alt": "white monitor illustration",
-   "author": "Lorenzo Herrera",
-   "authorUrl": "https://unsplash.com/@lorenzoherrera",
-   "link": "https://unsplash.com/photos/white-monitor-illustration-yP89apz2TAA"
   }
  ]
 }

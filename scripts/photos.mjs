@@ -32,7 +32,11 @@ export function usedPhotoIds(contentDir) {
 }
 
 // Hiçbir sorgu sonuç vermezse son çare: genel yapay zeka ve teknoloji fotoğrafları
-const GENERIC_QUERIES = ['artificial intelligence technology', 'technology abstract', 'computer screen code'];
+// Genel yedek sorgu yok: "technology abstract" gibi aramalar habere uymayan ya da illüstrasyon görseller getiriyordu.
+// Habere özel ve kategori sorgusunda uygun fotoğraf çıkmazsa haber şirket logosuyla ya da kategori havuzundaki fotoğrafla gösterilir.
+const GENERIC_QUERIES = [];
+// İllüstrasyon, 3B çizim ve konsept görseller aday bile olmaz (sitede yalnızca gerçek fotoğraf ve logo kullanılır)
+export const ILLUSTRATION_RE = /\b(illustration|illustrated|render|rendering|3d|cgi|concept|conceptual|abstract|digital art|artwork|wireframe|hologram|holographic|futuristic|sci-fi|vector|graphic|glowing brain|brain|neural network|humanoid|robot head|ai generated|generated|fantasy|surreal)\b/i;
 
 /**
  * Sorguya uygun, daha önce kullanılmamış yatay bir fotoğraf bulur.
@@ -50,7 +54,7 @@ async function unsplashFind(queries, used, opts = {}) {
     const q = new URLSearchParams({ query, orientation: 'landscape', per_page: '15', content_filter: 'high' });
     const r = await uget(key, `${API}/search/photos?${q}`);
     // Adaylar: kullanılmamış ve yüzü öne çıkan portre olmayan fotoğraflar (haberde adı geçen gerçek bir kişi sanılmasın)
-    const candidates = (r.results || []).filter((p) => !used.has(p.id) && !/\b(portrait|selfie|face|headshot|woman|man|girl|boy|person)\b/i.test(text(p)));
+    const candidates = (r.results || []).filter((p) => !used.has(p.id) && !ILLUSTRATION_RE.test(text(p)) && !/\b(portrait|selfie|face|headshot|woman|man|girl|boy|person)\b/i.test(text(p)));
     const words = query.toLowerCase().split(/\s+/).filter((w) => w.length > 2).map((w) => w.replace(/s$/, ''));
     const score = (p) => { const t = text(p); return words.filter((w) => t.includes(w)).length; };
     let pick = null; let best = qi === 0 ? 0 : -1;
@@ -94,7 +98,7 @@ async function pexelsFind(queries, used, opts = {}) {
     if (!res.ok) throw new Error(`Pexels hatası ${res.status}`);
     const r = await res.json();
     const text = (p) => `${p.alt || ''}`.toLowerCase();
-    const candidates = (r.photos || []).filter((p) => !used.has(`pexels-${p.id}`) && !/\b(portrait|selfie|face|headshot|woman|man|girl|boy|person)\b/i.test(text(p)));
+    const candidates = (r.photos || []).filter((p) => !used.has(`pexels-${p.id}`) && !ILLUSTRATION_RE.test(text(p)) && !/\b(portrait|selfie|face|headshot|woman|man|girl|boy|person)\b/i.test(text(p)));
     const words = query.toLowerCase().split(/\s+/).filter((w) => w.length > 2).map((w) => w.replace(/s$/, ''));
     const score = (p) => words.filter((w) => text(p).includes(w)).length;
     let pick = null; let best = qi === 0 ? 0 : -1;
@@ -135,7 +139,7 @@ async function pixabayFind(queries, used, opts = {}) {
     if (!res.ok) throw new Error(`Pixabay hatası ${res.status}`);
     const r = await res.json();
     const text = (p) => `${p.tags || ''}`.toLowerCase();
-    const candidates = (r.hits || []).filter((p) => !used.has(`pixabay-${p.id}`) && p.largeImageURL && !/\b(portrait|selfie|face|headshot|woman|man|girl|boy|person|people|model)\b/i.test(text(p)));
+    const candidates = (r.hits || []).filter((p) => !used.has(`pixabay-${p.id}`) && p.largeImageURL && !ILLUSTRATION_RE.test(text(p)) && !/\b(portrait|selfie|face|headshot|woman|man|girl|boy|person|people|model)\b/i.test(text(p)));
     const words = query.toLowerCase().split(/\s+/).filter((w) => w.length > 2).map((w) => w.replace(/s$/, ''));
     const score = (p) => words.filter((w) => text(p).includes(w)).length;
     let pick = null; let best = qi === 0 ? 0 : -1;
@@ -242,8 +246,8 @@ export function addPhotoToFile(file, photo, field = 'photo') {
 export const POOL_FILE = 'data/foto-havuzu.json';
 const POOL_MIN = 6;
 const POOL_QUERIES = {
-  modeller: ['artificial intelligence neural network', 'computer code screen', 'data center server'],
-  ajanlar: ['robot hand laptop', 'automation workflow', 'laptop typing'],
+  modeller: ['computer code screen', 'data center server', 'programmer laptop'],
+  ajanlar: ['laptop typing', 'automation workflow', 'computer desk workspace'],
   araclar: ['software developer laptop', 'smartphone app screen', 'computer desk workspace'],
   'girisim-yatirim': ['startup office team', 'stock market chart', 'business meeting'],
   regulasyon: ['government building', 'law books justice', 'parliament'],
@@ -253,7 +257,7 @@ const POOL_QUERIES = {
   donanim: ['computer chip semiconductor', 'circuit board', 'server rack'],
   guvenlik: ['cyber security', 'padlock computer', 'server room'],
   turkiye: ['istanbul skyline', 'ankara city', 'istanbul bosphorus'],
-  genel: ['artificial intelligence technology', 'technology abstract', 'futuristic computer'],
+  genel: ['laptop office desk', 'server room', 'computer code screen'],
 };
 export function readPool(root = '.') {
   try { return JSON.parse(fs.readFileSync(path.join(root, POOL_FILE), 'utf8')); } catch { return {}; }
