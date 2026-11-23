@@ -107,10 +107,6 @@
     "from": "https://s.pstatic.net/static/www/u/2014/0328/mma_204243574.png",
     "fetched": "2026-11-21"
   },
-  "nvidia": {
-    "from": "https://www.google.com/s2/favicons?domain=www.nvidia.com&sz=128",
-    "fetched": "2026-11-21"
-  },
   "ollama": {
     "from": "https://ollama.com/public/apple-touch-icon.png",
     "fetched": "2026-11-21"
