@@ -123,6 +123,8 @@ for (const t of ITEMS) {
   if (ONLY.length && !ONLY.includes(t.slug)) continue;
   const file = path.join(DIR, `${t.slug}.webp`);
   if (!FORCE && map[t.slug] && fs.existsSync(file)) continue;
+  // Açık lisanslı vektör setinden (svg-logos, CC0) üretilen logolar yalnızca adıyla istenirse yeniden indirilir
+  if (map[t.slug]?.from?.startsWith('svg-logos') && !ONLY.includes(t.slug)) continue;
   const r = await fetchIcon(t);
   if (!r) {
     // Yeterince büyük logo yok: eski (küçük) logo kaldırılır, kartta vektör çizim kullanılır

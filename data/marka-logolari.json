@@ -1,6 +1,6 @@
 {
   "adobe": {
-    "from": "https://www.google.com/s2/favicons?domain=adobe.com&sz=256",
+    "from": "svg-logos (CC0) logos:adobe-icon",
     "fetched": "2026-11-23"
   },
   "arm": {
@@ -19,20 +19,28 @@
     "from": "https://claude.ai/images/icon-1024x1024.png",
     "fetched": "2026-11-23"
   },
+  "cloudflare": {
+    "from": "svg-logos (CC0) logos:cloudflare-icon",
+    "fetched": "2026-11-23"
+  },
   "cursor": {
     "from": "https://cursor.com/marketing-static/icon-512x512.png",
     "fetched": "2026-11-23"
   },
   "databricks": {
-    "from": "https://www.databricks.com/icons/icon-512x512.png?v=c9b9916c3b27dc51866c46b79a6e9b88",
+    "from": "svg-logos (CC0) logos:databricks-icon",
     "fetched": "2026-11-23"
   },
   "gemini": {
-    "from": "https://www.google.com/s2/favicons?domain=gemini.google.com&sz=256",
+    "from": "svg-logos (CC0) logos:google-gemini-icon",
     "fetched": "2026-11-23"
   },
   "github": {
     "from": "https://github.githubassets.com/assets/app-icon-512-7f9c4ff2e960.png",
+    "fetched": "2026-11-23"
+  },
+  "google": {
+    "from": "svg-logos (CC0) logos:google-icon",
     "fetched": "2026-11-23"
   },
   "huawei": {
@@ -44,27 +52,43 @@
     "fetched": "2026-11-23"
   },
   "ibm": {
-    "from": "https://www.google.com/s2/favicons?domain=ibm.com&sz=256",
+    "from": "svg-logos (CC0) logos:ibm",
+    "fetched": "2026-11-23"
+  },
+  "meta": {
+    "from": "svg-logos (CC0) logos:meta-icon",
     "fetched": "2026-11-23"
   },
   "microsoft": {
-    "from": "https://www.google.com/s2/favicons?domain=microsoft.com&sz=256",
+    "from": "svg-logos (CC0) logos:microsoft-icon",
     "fetched": "2026-11-23"
   },
   "mistral": {
-    "from": "https://www.google.com/s2/favicons?domain=mistral.ai&sz=256",
+    "from": "svg-logos (CC0) logos:mistral-ai-icon",
     "fetched": "2026-11-23"
   },
   "openai": {
-    "from": "https://openai.com/favicon.svg",
+    "from": "svg-logos (CC0) logos:openai-icon",
+    "fetched": "2026-11-23"
+  },
+  "oracle": {
+    "from": "svg-logos (CC0) logos:oracle",
     "fetched": "2026-11-23"
   },
   "perplexity": {
-    "from": "https://www.google.com/s2/favicons?domain=perplexity.ai&sz=256",
+    "from": "svg-logos (CC0) logos:perplexity-icon",
     "fetched": "2026-11-23"
   },
   "qualcomm": {
-    "from": "https://www.qualcomm.com/etc.clientlibs/qcomm-martech/clientlibs/clientlib-react/resources/logo512.png",
+    "from": "svg-logos (CC0) logos:qualcomm",
+    "fetched": "2026-11-23"
+  },
+  "salesforce": {
+    "from": "svg-logos (CC0) logos:salesforce",
+    "fetched": "2026-11-23"
+  },
+  "tsmc": {
+    "from": "svg-logos (CC0) logos:tsmc",
     "fetched": "2026-11-23"
   },
   "x": {
