@@ -16,6 +16,13 @@ photo:
   author: "David Klein"
   authorUrl: "https://unsplash.com/@diklein"
   link: "https://unsplash.com/photos/a-modern-curved-building-with-glass-windows-and-green-landscaping-HORHoSqzB0Y"
+photo2:
+  id: "S4jSvcHYcOs"
+  url: "https://images.unsplash.com/photo-1494083306499-e22e4a457632?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8NHx8Y29tcHV0ZXIlMjBjaGlwJTIwc2VtaWNvbmR1Y3RvcnxlbnwxfDB8fHwxNzk1NDg5NDI1fDA&ixlib=rb-4.1.0"
+  alt: "A computer processor held by black tweezers against a neutral background"
+  author: "Brian Kostiuk"
+  authorUrl: "https://unsplash.com/@briankost"
+  link: "https://unsplash.com/photos/computer-processor-held-by-tweezers-S4jSvcHYcOs"
 sources:
   - title: "Could Jensen Huang make a comeback? Musk, other tech heavyweights pressure Nvidia board"
     url: "https://www.scmp.com/tech/big-tech/article/3374494/could-jensen-huang-make-comeback-musk-other-tech-heavyweights-pressure-nvidia-board"

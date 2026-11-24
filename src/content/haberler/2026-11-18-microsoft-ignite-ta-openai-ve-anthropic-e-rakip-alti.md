@@ -28,6 +28,13 @@ photo:
   author: "Marwen Larafa"
   authorUrl: "https://unsplash.com/@marwen_larafa"
   link: "https://unsplash.com/photos/speaker-presenting-to-a-large-audience-in-an-auditorium-qzO9a6oQ8AM"
+photo2:
+  id: "_96edJ8IVC4"
+  url: "https://images.unsplash.com/photo-1773828755374-0ee802d9f44b?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8M3x8Y29uZmVyZW5jZSUyMHN0YWdlJTIwa2V5bm90ZSUyMHRlY2hub2xvZ3l8ZW58MXwwfHx8MTc5NTQ4OTQwOHww&ixlib=rb-4.1.0"
+  alt: "Speaker presenting to large audience in auditorium"
+  author: "Marwen Larafa"
+  authorUrl: "https://unsplash.com/@marwen_larafa"
+  link: "https://unsplash.com/photos/speaker-presenting-to-large-audience-in-auditorium-_96edJ8IVC4"
 sources:
   - title: "Microsoft aims to challenge OpenAI, Anthropic with cheaper, specialized AI models"
     url: "https://www.axios.com/2026/11/17/microsoft-ai-models-openai-anthropic-ignite"
