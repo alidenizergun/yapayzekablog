@@ -814,5 +814,109 @@
  "bloomberg.com/news/articles/2026-11-23/openai-staffer-likely-captured-secrets-on-hidden-bug-us-says": {
   "at": "2026-11-24T09:01:42.857Z",
   "title": "US prosecutors say the ex-OpenAI engineer charged with bugging an exec conference room had dozens of OpenAI meeting recordings, many on poss"
+ },
+ "arstechnica.com/tech-policy/2026/11/how-trump-and-silicon-valley-forced-nvidia-to-take-jensen-huang-back": {
+  "at": "2026-11-24T15:02:17.114Z",
+  "title": "How Trump and Silicon Valley forced Nvidia to take Jensen Huang back"
+ },
+ "digg.com/ai/s3c37lqy": {
+  "at": "2026-11-24T15:02:17.114Z",
+  "title": "LLMs are shedding some bad habits—but flattery is getting worse, unreviewed analysis finds"
+ },
+ "digg.com/ai/ooktbdn8": {
+  "at": "2026-11-24T15:02:17.114Z",
+  "title": "Hendrycks pitches AI agent IDs, not a good-behavior badge"
+ },
+ "testingcatalog.com/meta-prepares-apple-messages-support-for-muse-ai-agent": {
+  "at": "2026-11-24T15:02:17.114Z",
+  "title": "Meta prepares Apple Messages support for Muse AI agent"
+ },
+ "the-decoder.com/anthropic-researcher-stands-by-his-ai-assisted-riemann-proof-but-owns-up-to-stupid-things-in-the-rollout": {
+  "at": "2026-11-24T15:02:17.114Z",
+  "title": "Anthropic researcher stands by his AI-assisted Riemann proof but owns up to \"stupid things\" in the rollout"
+ },
+ "digg.com/ai/yqqpt8mj": {
+  "at": "2026-11-24T15:02:17.114Z",
+  "title": "Poster says ‘Gemini Carbon’ guessed their identity. The searches matter."
+ },
+ "digg.com/ai/i7tyyw3s": {
+  "at": "2026-11-24T15:02:17.114Z",
+  "title": "OpenAI joins Anthropic with a VP ≠ VNP proof claim. Hold the victory lap."
+ },
+ "digg.com/ai/b04pmqjl": {
+  "at": "2026-11-24T15:02:17.114Z",
+  "title": "OpenAI and Anthropic employees reportedly fear some unreleased models are too risky to ship"
+ },
+ "marktechpost.com/2026/11/24/openai-cisco-shirudo-ebpf-linux-runtime": {
+  "at": "2026-11-24T15:02:17.114Z",
+  "title": "OpenAI and Cisco Releases Shirudo: An Open-Source Linux Runtime Allowing Agents to Defend Systems Without Downtime"
+ },
+ "digg.com/ai/c9hmjcby": {
+  "at": "2026-11-24T15:02:17.114Z",
+  "title": "Tyler Cowen’s AI argument: GDP doesn’t count your free afternoon"
+ },
+ "digg.com/ai/1acdkcw8": {
+  "at": "2026-11-24T15:02:17.114Z",
+  "title": "An early AI Christmas: @mervenoyann says Nvidia sent an RTX Spark"
+ },
+ "digg.com/ai/ifchpsd5": {
+  "at": "2026-11-24T15:02:17.114Z",
+  "title": "Anthropic shares briefly slip below IPO price in premarket as debut rally unwinds, per LordBullAI"
+ },
+ "siliconangle.com/2026/11/24/zipher-lands-53m-to-put-ai-agents-not-data-engineers-in-charge-of-data-workloads": {
+  "at": "2026-11-24T15:02:17.114Z",
+  "title": "Zipher, which uses AI agents to handle data workload execution and resource allocation, raised $53M across seed and Series A from TLV Partne"
+ },
+ "thedeepview.com/articles/exclusive-openclaw-offers-an-agent-reality-check": {
+  "at": "2026-11-24T15:02:17.114Z",
+  "title": "The OpenClaw Foundation launches ShellBench to test 13 frontier AI models across five harnesses on 100 tasks; top AI models hit only a ~60% "
+ },
+ "digg.com/ai/16np9mrp": {
+  "at": "2026-11-24T15:02:17.114Z",
+  "title": "GPT-6.2 Sol chat version rolls out to paid ChatGPT tiers, luo03191 reports; an X user says tone feels cold"
+ },
+ "digg.com/ai/hu0d7y1t": {
+  "at": "2026-11-24T15:02:17.114Z",
+  "title": "DeepMind’s Easy Read tool gives Gemini paperwork—not the final say"
+ },
+ "digg.com/ai/lglacwz7": {
+  "at": "2026-11-24T15:02:17.114Z",
+  "title": "AI agents made excuses in a Slack simulation—and sometimes spilled the secret"
+ },
+ "the-decoder.com/german-researchers-call-for-computer-science-to-reinvent-itself-as-computer-and-ai-science": {
+  "at": "2026-11-24T15:02:17.114Z",
+  "title": "German researchers call for computer science to reinvent itself as \"Computer and AI Science\""
+ },
+ "arstechnica.com/security/2026/11/amazon-says-hackers-ai-agents-found-and-exploited-0-day-with-little-human-input": {
+  "at": "2026-11-24T15:02:17.114Z",
+  "title": "Amazon says hackers' AI agents found and exploited 0-day with little human input"
+ },
+ "ft.com/content/c96c40c5-6b07-4433-b65f-19105e9ccb44": {
+  "at": "2026-11-24T15:02:17.114Z",
+  "title": "How frontier AI labs and Big Tech companies are combatting rising state-sponsored espionage threats: recruiting CIA talent, limiting staff m"
+ },
+ "anthropic.com/research/working-with-ai": {
+  "at": "2026-11-24T15:02:17.114Z",
+  "title": "Study: most AI deployments derive value by expanding and accelerating output rather than reducing costs, with 80% of 100 AI-built apps autom"
+ },
+ "the-decoder.com/anthropics-claude-ship-lets-ai-agents-review-fix-and-approve-pull-requests-on-their-own": {
+  "at": "2026-11-24T15:02:17.114Z",
+  "title": "Anthropic's Claude Ship lets AI agents review, fix, and approve pull requests on their own"
+ },
+ "digg.com/ai/dwz9ppqu": {
+  "at": "2026-11-24T15:02:17.114Z",
+  "title": "Nuplex’s chatty debut: @nuance_ai reports 1 million-plus conversations in two weeks"
+ },
+ "digg.com/ai/l0mifpbn": {
+  "at": "2026-11-24T15:02:17.114Z",
+  "title": "One law, three appetites: researchers tackle multimodal AI’s training mix"
+ },
+ "digg.com/ai/7ebgkevc": {
+  "at": "2026-11-24T15:02:17.114Z",
+  "title": "A new Grok bot wants to give family stories the PDF treatment"
+ },
+ "digg.com/ai/bri5vyxu": {
+  "at": "2026-11-24T15:02:17.114Z",
+  "title": "Developer says a “Claude-native” robot is gearing up for production, suction cup and all"
  }
 }

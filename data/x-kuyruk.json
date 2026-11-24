@@ -478,5 +478,13 @@
     "importance": 48,
     "featured": false,
     "date": "2026-11-24T12:01:02+03:00"
+  },
+  {
+    "slug": "axios-openai-ve-anthropic-calisanlari-yayimlanmamis-modellerden-endiseli",
+    "title": "Axios: OpenAI ve Anthropic çalışanları yayımlanmamış modellerden endişeli",
+    "text": "Axios'un kaynaklara dayanan haberine göre OpenAI ve Anthropic'te çok sayıda çalışan, yayımlanmamış modellerin güvenle kontrol edilemeyeceğinden endişeli. Şirketler yayını durdurmayı tartışıyor iddiası var.",
+    "importance": 55,
+    "featured": false,
+    "date": "2026-11-24T18:02:36+03:00"
   }
 ]
