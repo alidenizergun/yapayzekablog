@@ -486,5 +486,21 @@
     "importance": 55,
     "featured": false,
     "date": "2026-11-24T18:02:36+03:00"
+  },
+  {
+    "slug": "huang-calisanlardan-ozur-diledi-nvidia-hisseleri-yuzde-7-dustu",
+    "title": "Huang çalışanlardan özür diledi, Nvidia hisseleri yüzde 7 düştü",
+    "text": "Jensen Huang ilk çalışan toplantısında \"çok ciddi kişisel hatalar\" yaptığını söyleyip özür diledi. Nvidia hisseleri salı günü yaklaşık yüzde 7 düştü. #Nvidia",
+    "importance": 80,
+    "featured": false,
+    "date": "2026-11-25T00:03:33+03:00"
+  },
+  {
+    "slug": "anthropic-claude-artifacts-i-mac-ve-windows-icin-masaustu",
+    "title": "Anthropic, Claude Artifacts'ı Mac ve Windows için masaüstü uygulamasına dönüştürdü",
+    "text": "Anthropic, Claude Artifacts'ı Mac ve Windows için bağımsız masaüstü uygulamasına dönüştürdü. Beta aşamasında, kod gerektirmiyor ve ücretsiz hesap yeterli. #Claude",
+    "importance": 55,
+    "featured": false,
+    "date": "2026-11-25T00:02:33+03:00"
   }
 ]
