@@ -16,13 +16,13 @@
     "news:dry": "node scripts/generate-news.mjs --dry-run"
   },
   "dependencies": {
-    "@anthropic-ai/sdk": "1.8.0",
-    "@astrojs/sitemap": "3.7.4",
-    "astro": "7.4.11"
+    "@anthropic-ai/sdk": "1.12.0",
+    "@astrojs/sitemap": "3.7.6",
+    "astro": "7.4.13"
   },
   "devDependencies": {
     "pagefind": "1.6.0",
-    "playwright-core": "1.63.0",
+    "playwright-core": "1.65.1",
     "sharp": "0.35.5"
   }
 }
