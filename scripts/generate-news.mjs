@@ -816,9 +816,10 @@ async function main() {
       const fresh = feedItems.filter((f) => !memo[memoKey(f)]);
       log(`haber masası ön eleme: ${before} başlık → ${fresh.length} yeni (${dupes.length} sitede zaten var, ${old.length} önceki turda değerlendirildi)`);
       agentNotes.push(`ön eleme (kod): ${before} başlık → ${fresh.length} yeni · ${dupes.length} sitede zaten var · ${old.length} önceki turda değerlendirildi`);
-      if (MIDDAY && feedsOk && !fresh.length) {
-        log('ara tur: son turdan beri yeni başlık yok; Claude çağrılmadı.');
-        agentNotes.push('ara tur atlandı: yeni başlık yok (ücret yok)');
+      // Akışlar okunduysa ve son turdan beri yeni başlık yoksa ajanlar hiç çalıştırılmaz (her tur türünde; ücret yok)
+      if (feedsOk && !fresh.length) {
+        log('son turdan beri yeni başlık yok; Claude çağrılmadı.');
+        agentNotes.push('tur atlandı: yeni başlık yok (ücret yok)');
         await backfillPhotos();
         return summary([], [], 0);
       }
