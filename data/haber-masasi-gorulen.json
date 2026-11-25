@@ -1094,5 +1094,129 @@
  "testingcatalog.com/thestage-launches-edgent-and-asrkit-for-offline-speech": {
   "at": "2026-11-24T21:03:02.728Z",
   "title": "TheStage launches Edgent and ASRKit for offline speech"
+ },
+ "bloomberg.com/news/articles/2026-11-24/hp-gives-profit-forecast-signaling-better-handle-on-memory-costs": {
+  "at": "2026-11-25T03:01:48.146Z",
+  "title": "HP reports Q4 revenue up 9.3% YoY to $16B, above $15.3B est., gives \"prudent\" fiscal 2027 guidance above estimates, and says AI PCs reached "
+ },
+ "digg.com/ai/bq1rwz2e": {
+  "at": "2026-11-25T03:01:48.146Z",
+  "title": "Timothy Gowers quoted saying fears for the world may outweigh his concerns for mathematics"
+ },
+ "digg.com/ai/nf6npstf": {
+  "at": "2026-11-25T03:01:48.146Z",
+  "title": "MIT’s Alex Zhang bets on AI models that divide and conquer"
+ },
+ "generativehistory.substack.com/p/gpt-62-astra-solves-a-historical": {
+  "at": "2026-11-25T03:01:48.146Z",
+  "title": "A history professor says GPT-6.2 Astra solved a historical mystery in 22 minutes by identifying the creator of an anonymous 1808 sketchbook "
+ },
+ "digg.com/ai/g78e4mt0": {
+  "at": "2026-11-25T03:01:48.146Z",
+  "title": "Post citing 36Kr: Chinese AI researcher says useful distillation data can now take 10 tries instead of one"
+ },
+ "digg.com/ai/0dnadk3z": {
+  "at": "2026-11-25T03:01:48.146Z",
+  "title": "@0xpainy quotes Perplexity CEO: 4–5x revenue growth, just 10–20% more staff"
+ },
+ "digg.com/ai/6d63cpzx": {
+  "at": "2026-11-25T03:01:48.146Z",
+  "title": "Ramp’s Diego Zaks says he’s trying to teach AI a design process he can’t explain"
+ },
+ "digg.com/ai/tahv894p": {
+  "at": "2026-11-25T03:01:48.146Z",
+  "title": "Tinker offers free Inkling 2 Mini training and sampling—bring a positive balance, expect rate limits"
+ },
+ "digg.com/ai/dcgihs5m": {
+  "at": "2026-11-25T03:01:48.146Z",
+  "title": "SemiAnalysis: Unconventional AI’s test chip made small images at about 900 nanojoules each"
+ },
+ "techcrunch.com/2026/11/24/yales-sonnenfeld-nvidia-is-a-detriment-to-u-s-industrial-might-not-a-champion": {
+  "at": "2026-11-25T03:01:48.146Z",
+  "title": "Yale’s Sonnenfeld: Nvidia is a ‘detriment’ to US industrial might — not a champion"
+ },
+ "digg.com/ai/vo6j039h": {
+  "at": "2026-11-25T03:01:48.146Z",
+  "title": "scaling01 wishes Claude Opus 4.5 a happy “intelligence explosion” anniversary"
+ },
+ "digg.com/ai/vhk4nb6q": {
+  "at": "2026-11-25T03:01:48.146Z",
+  "title": "Together announces half-price GPU compute—with interruptions attached"
+ },
+ "digg.com/ai/005krrnh": {
+  "at": "2026-11-25T03:01:48.146Z",
+  "title": "Dell reports a $132.3 billion AI server backlog—and sees no slowdown"
+ },
+ "openai.com/index/gpt-6-models-demonstrate-intrinsic-protein-design-capabilities": {
+  "at": "2026-11-25T03:01:48.146Z",
+  "title": "OpenAI says GPT-6 models can design new protein shapes and sequences using only reasoning and code, without calling specialized biology mode"
+ },
+ "digg.com/ai/m9yd6yel": {
+  "at": "2026-11-25T03:01:48.146Z",
+  "title": "Kaszek raises $650 million for Latin America’s AI startups, Bloomberg reports"
+ },
+ "digg.com/ai/yhdj8yxp": {
+  "at": "2026-11-25T03:01:48.146Z",
+  "title": "ARC Prize announces an Atlanta rooftop happy hour for NeurIPS 2026"
+ },
+ "digg.com/ai/xarw2vgg": {
+  "at": "2026-11-25T03:01:48.146Z",
+  "title": "Town says its new Plaid integration can mind your bills—but not pay them"
+ },
+ "digg.com/ai/sd0dhu3u": {
+  "at": "2026-11-25T03:01:48.146Z",
+  "title": "Scalable Beckmann Maps need one step and no teacher, @tullebull3 says"
+ },
+ "digg.com/ai/tuwnkh33": {
+  "at": "2026-11-25T03:01:48.146Z",
+  "title": "Kaggle says it reproduced ShellBench—100 everyday tasks, no partial credit"
+ },
+ "digg.com/ai/sus1l8pj": {
+  "at": "2026-11-25T03:01:48.146Z",
+  "title": "Two actions, one robot: @justinlidard says Gemini 4 Hydrogen controls Spot"
+ },
+ "marktechpost.com/2026/11/24/meta-facebook-your-algorithm-llm-recommendations": {
+  "at": "2026-11-25T03:01:48.146Z",
+  "title": "Meet Facebook’s Your Algorithm: How Meta Turns Plain-Language Preferences Into Ranking"
+ },
+ "simonwillison.net/2026/nov/24/llm-inflection-points": {
+  "at": "2026-11-25T03:01:48.146Z",
+  "title": "Three LLM inflection points in twelve months"
+ },
+ "digg.com/ai/zamgis60": {
+  "at": "2026-11-25T03:01:48.146Z",
+  "title": "Three rejections, then NeurIPS 2026 reproducibility honors, Rylan Schaeffer says"
+ },
+ "digg.com/ai/resdgm6d": {
+  "at": "2026-11-25T03:01:48.146Z",
+  "title": "Claude Fable’s word-for-word copying tripped up an AI detector, @alexcdot says"
+ },
+ "digg.com/ai/sxx9x703": {
+  "at": "2026-11-25T03:01:48.146Z",
+  "title": "@jauneclaude alleges T3 Code sends hashed account IDs without a UI opt-out"
+ },
+ "digg.com/ai/0cnmetv1": {
+  "at": "2026-11-25T03:01:48.146Z",
+  "title": "Voice Arena says even its top speech-to-text performer flubs key details in 68% of test clips"
+ },
+ "techcrunch.com/2026/11/24/jensen-huang-still-thinks-a-succession-plan-creates-unnecessary-hierarchy": {
+  "at": "2026-11-25T03:01:48.146Z",
+  "title": "Jensen Huang still thinks a succession plan creates unnecessary hierarchy"
+ },
+ "techcrunch.com/2026/11/24/even-the-best-ai-agents-struggle-with-everyday-life": {
+  "at": "2026-11-25T03:01:48.146Z",
+  "title": "Even the best AI agents struggle with everyday life"
+ },
+ "techcrunch.com/2026/11/24/walmart-teams-up-with-meta-to-bring-black-friday-deals-to-ai-agent-muse": {
+  "at": "2026-11-25T03:01:48.146Z",
+  "title": "Walmart teams up with Meta to bring Black Friday deals to AI agent Muse"
+ },
+ "techcrunch.com/2026/11/24/maple-raises-5-3m-to-build-ai-products-that-protect-your-data-even-from-itself": {
+  "at": "2026-11-25T03:01:48.146Z",
+  "title": "Maple raises $5.3M to build AI products that protect your data, even from itself"
+ },
+ "bloomberg.com/news/articles/2026-11-24/openai-staffer-charged-with-planting-bug-released-on-bond": {
+  "at": "2026-11-25T03:01:48.146Z",
+  "title": "A judge orders the ex-OpenAI staffer charged with bugging an exec conference room released on $1M bond, finding prosecutors lack evidence to"
  }
 }
