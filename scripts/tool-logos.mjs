@@ -1,11 +1,4 @@
 /**
- * Şirket logoları (--set=brands), API ücreti yok:
- *   1. Açık lisanslı renkli vektör set (svg-logos, CC0; npm @iconify-json/logos): varsa her zaman bu kullanılır, 512 px üretilir
- *   2. Yoksa şirketin sitesindeki en yüksek çözünürlüklü simge (web manifest, apple-touch-icon…); en az 256 px,
- *      boş/beyaz görünen ya da başka bir şeyin simgesi olduğu bilinen görseller elenir
- *   3. O da yoksa kartta sitenin kendi vektör çizimi (src/lib/brands.js > path) ya da şirket adı gösterilir
- * Yeni şirket src/lib/brands.js'e eklenince Logolar iş akışı kendiliğinden çalışır ve yalnızca eksik logoyu üretir.
- *
  * Araç logoları: her aracın kendi sitesindeki uygulama simgesini (apple-touch-icon / en büyük favicon) indirir,
  * 96x96 WebP'ye çevirip public/logo/arac/<slug>.webp olarak kaydeder ve data/arac-logolari.json'a yazar.
  * Site simgesine ulaşılamazsa Google'ın favicon hizmeti denenir. Logolar marka sahiplerine aittir;
@@ -15,7 +8,6 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import sharp from 'sharp';
-import { createRequire } from 'node:module';
 import { TOOLS } from '../src/lib/tools.js';
 import { BRANDS } from '../src/lib/brands.js';
 
@@ -110,11 +102,9 @@ async function fetchIcon(t) {
   // Şirket logoları: adaylardan çözünürlüğü en yüksek olan seçilir; araç simgeleri: ilk uygun aday
   let best = null;
   for (const u of [...new Set(tries)]) {
-    if (SET === 'brands' && BAD_ICON.test(u)) { console.log(`  ${t.slug}: ${u} → bilinen yanlış simge, atlandı`); continue; }
     try {
       const buf = Buffer.from(await (await get(u)).arrayBuffer());
       const meta = await sharp(buf, { density: 300 }).metadata();
-      if (SET === 'brands' && !(await visibleEnough(buf))) throw new Error('beyaz kartta görünmüyor');
       // Vektör çizimi olmayan şirketlerde (OpenAI, Microsoft…) daha küçük logo da kabul edilir; yoksa kartta yalnızca ad görünür
       const out = await toWebp(buf, SET === 'brands' ? (BRANDS[t.slug]?.path ? BRAND_MIN : 96) : 32);
       const px = meta.format === 'svg' ? 1e6 : (meta.width || 0);
@@ -127,52 +117,15 @@ async function fetchIcon(t) {
   return best;
 }
 
-// ---- 1. Açık lisanslı vektör set (svg-logos, CC0) ----
-const SVG = createRequire(import.meta.url)('@iconify-json/logos/icons.json');
-// Adı şirket kısaltmasından farklı olanlar; diğerleri için '<slug>-icon' ve '<slug>' sırayla denenir
-const SVG_NAME = { gemini: 'google-gemini-icon', mistral: 'mistral-ai-icon', deepmind: null, qualcomm: 'qualcomm', ibm: 'ibm', oracle: 'oracle', tsmc: 'tsmc',
-  // Sitedeki vektör çizimi zaten aynı olanlar ya da sette eski sürümü bulunanlar: sitedeki çizim kullanılır
-  anthropic: null, nvidia: null, apple: null, samsung: null, intel: null, amd: null, deepseek: null, reddit: null, snowflake: null, ollama: null, arm: null,
-  // Kendi sitesindeki 512 px simgesi daha güncel olanlar
-  claude: null, github: null, cursor: null, x: null };
-// Kare simgeler kartın %64'ünü, yazı logoları (geniş) %78'ini kaplar
-async function fromSvgSet(slug) {
-  const names = slug in SVG_NAME ? [SVG_NAME[slug]] : [`${slug}-icon`, slug];
-  for (const name of names) {
-    const ic = name && SVG.icons[name];
-    if (!ic) continue;
-    const w = ic.width || SVG.width || 256, h = ic.height || SVG.height || 256;
-    const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="${ic.left || 0} ${ic.top || 0} ${w} ${h}">${ic.body}</svg>`;
-    const box = Math.round(SIZE * (w / h > 1.6 ? 0.78 : 0.64));
-    const inner = await sharp(Buffer.from(svg), { density: Math.ceil((72 * box) / Math.min(w, h)) * 2 })
-      .resize(box, box, { fit: 'inside', background: { r: 0, g: 0, b: 0, alpha: 0 } }).png().toBuffer();
-    const m = await sharp(inner).metadata();
-    const out = await sharp({ create: { width: SIZE, height: SIZE, channels: 4, background: { r: 0, g: 0, b: 0, alpha: 0 } } })
-      .composite([{ input: inner, left: Math.round((SIZE - m.width) / 2), top: Math.round((SIZE - m.height) / 2) }]).webp({ quality: 92 }).toBuffer();
-    return { out, from: `svg-logos (CC0) logos:${name}` };
-  }
-  return null;
-}
-
-// ---- 2. Site simgesi için kalite denetimi ----
-// Bilinen yanlış simgeler (ör. sitenin kendi logosu yerine React'in varsayılan simgesi): adres kalıbıyla elenir
-const BAD_ICON = /\/logo512\.png|\/logo192\.png|react|vite\.svg|next\.svg/i;
-/** Görsel beyaz kartın üzerinde neredeyse görünmüyorsa (beyaz/şeffaf logo) reddedilir */
-async function visibleEnough(buf) {
-  const { data, info } = await sharp(buf).resize(64, 64, { fit: 'contain', background: { r: 255, g: 255, b: 255, alpha: 0 } })
-    .flatten({ background: '#ffffff' }).raw().toBuffer({ resolveWithObject: true });
-  let ink = 0;
-  for (let i = 0; i < data.length; i += info.channels) if (255 * 3 - (data[i] + data[i + 1] + data[i + 2]) > 60) ink++;
-  return ink / (info.width * info.height) > 0.03;
-}
-
 let changed = 0;
 const ITEMS = SET === 'brands' ? Object.keys(BRANDS).map((slug) => ({ slug, url: BRAND_HOME[slug] })).filter((x) => x.url) : TOOLS;
 for (const t of ITEMS) {
   if (ONLY.length && !ONLY.includes(t.slug)) continue;
   const file = path.join(DIR, `${t.slug}.webp`);
   if (!FORCE && map[t.slug] && fs.existsSync(file)) continue;
-  const r = (SET === 'brands' && (await fromSvgSet(t.slug))) || (await fetchIcon(t));
+  // Açık lisanslı vektör setinden (svg-logos, CC0) üretilen logolar yalnızca adıyla istenirse yeniden indirilir
+  if (map[t.slug]?.from?.startsWith('svg-logos') && !ONLY.includes(t.slug)) continue;
+  const r = await fetchIcon(t);
   if (!r) {
     // Yeterince büyük logo yok: eski (küçük) logo kaldırılır, kartta vektör çizim kullanılır
     if (SET === 'brands' && FORCE && (map[t.slug] || fs.existsSync(file))) {
