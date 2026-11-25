@@ -1,6 +1,6 @@
-# Logolar: araç rehberi simgeleri ve haberlerdeki şirket logoları (yalnızca eksik olanlar; "force" ile hepsi).
-# API ücreti yoktur. Şirket logoları yeni şirket eklenince kendiliğinden, diğerleri elle çalıştırılır.
-name: Logolar
+# Araç logoları: araçların kendi sitelerindeki uygulama simgelerini indirir (yalnızca eksik olanlar; "force" ile hepsi).
+# API ücreti yoktur. Elle çalıştırılır.
+name: Araç logoları
 
 on:
   # Yeni şirket eklenince (src/lib/brands.js) eksik şirket logosu kendiliğinden üretilir; API ücreti yok
