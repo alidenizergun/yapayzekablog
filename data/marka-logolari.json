@@ -41,7 +41,7 @@
   },
   "google": {
     "from": "svg-logos (CC0) logos:google-icon",
-    "fetched": "2026-11-23"
+    "fetched": "2026-11-25"
   },
   "huawei": {
     "from": "https://www.huawei.com/-/media/htemplate-home/1.0.1.20251205144752/components/assets/img/favicon-logo.svg",
@@ -53,7 +53,7 @@
   },
   "ibm": {
     "from": "svg-logos (CC0) logos:ibm",
-    "fetched": "2026-11-23"
+    "fetched": "2026-11-25"
   },
   "meta": {
     "from": "svg-logos (CC0) logos:meta-icon",
@@ -69,7 +69,7 @@
   },
   "openai": {
     "from": "svg-logos (CC0) logos:openai-icon",
-    "fetched": "2026-11-23"
+    "fetched": "2026-11-25"
   },
   "oracle": {
     "from": "svg-logos (CC0) logos:oracle",
@@ -81,11 +81,11 @@
   },
   "qualcomm": {
     "from": "svg-logos (CC0) logos:qualcomm",
-    "fetched": "2026-11-23"
+    "fetched": "2026-11-25"
   },
   "salesforce": {
     "from": "svg-logos (CC0) logos:salesforce",
-    "fetched": "2026-11-23"
+    "fetched": "2026-11-25"
   },
   "tsmc": {
     "from": "svg-logos (CC0) logos:tsmc",
