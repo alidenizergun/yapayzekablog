@@ -502,5 +502,21 @@
     "importance": 55,
     "featured": false,
     "date": "2026-11-25T00:02:33+03:00"
+  },
+  {
+    "slug": "pentagon-un-nvidia-yonetim-kuruluna-baski-icin-savas-donemi",
+    "title": "Pentagon'un Nvidia yönetim kuruluna baskı için savaş dönemi yasasını tartıştığı iddia edildi",
+    "text": "Washington Post'a göre Pentagon yetkilileri, Huang'ın yeniden CEO yapılması için Nvidia yönetim kuruluna baskıda Savunma Üretim Yasası'nı tartıştı. Pentagon yetkilisi iddiayı reddetti.",
+    "importance": 62,
+    "featured": false,
+    "date": "2026-11-26T06:02:46+03:00"
+  },
+  {
+    "slug": "chatgpt-de-chat-ve-work-sekmeleri-birlesiyor-yogun-kullanicilar",
+    "title": "ChatGPT'de Chat ve Work sekmeleri birleşiyor, yoğun kullanıcılar limite erken ulaşabilir",
+    "text": "OpenAI, ChatGPT'de Chat ve Work sekmelerini birleştirip küçük bir Pro grubuna açtı. Ortak kullanım göstergesi geliyor; en yoğun kullanıcılar limitlere daha erken ulaşabilir. #ChatGPT",
+    "importance": 62,
+    "featured": false,
+    "date": "2026-11-26T06:01:46+03:00"
   }
 ]

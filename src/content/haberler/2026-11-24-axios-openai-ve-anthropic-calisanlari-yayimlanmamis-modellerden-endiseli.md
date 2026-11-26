@@ -21,6 +21,14 @@ keyPoints:
   - "Çalışanlar yayımlanmamış modellerin güvenle kontrol edilemeyeceğini düşünüyor."
   - "Şirketlerin yayını durdurmayı tartıştığı iddia ediliyor."
 format: kisa
+photo2:
+  id: "pixabay-428549"
+  url: "/foto/px-428549"
+  alt: "padlock, locked, secured, lock, old padlock"
+  author: "jarmoluk"
+  authorUrl: "https://pixabay.com/users/jarmoluk-143740/"
+  link: "https://pixabay.com/photos/padlock-locked-secured-lock-428549/"
+  source: "pixabay"
 sources:
   - title: "Dozens of insiders say OpenAI and Anthropic's unreleased models have outgrown their safety measures"
     url: "https://the-decoder.com/dozens-of-insiders-say-openai-and-anthropics-unreleased-models-have-outgrown-their-safety-measures/"
