@@ -16,6 +16,13 @@ photo:
   author: "Brett Jordan"
   authorUrl: "https://unsplash.com/@brett_jordan"
   link: "https://unsplash.com/photos/black-and-gray-computer-keyboard-0rXUP7Tg7nQ"
+photo2:
+  id: "V-dfcNnb9OU"
+  url: "https://images.unsplash.com/photo-1557690267-fad2f168bb95?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8MTN8fHNtYXJ0cGhvbmUlMjBhcHAlMjB2b2ljZXxlbnwxfDB8fHwxNzk1NzA1NDU2fDA&ixlib=rb-4.1.0"
+  alt: "shallow focus photography of black smartphone"
+  author: "Jonah Pettrich"
+  authorUrl: "https://unsplash.com/@jonah_jpg"
+  link: "https://unsplash.com/photos/shallow-focus-photography-of-black-smartphone-V-dfcNnb9OU"
 sources:
   - title: "The full DeepSeek App experience, now via API"
     url: "https://api-docs.deepseek.com/news/news261113/"
