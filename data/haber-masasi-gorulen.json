@@ -1,108 +1,4 @@
 {
- "digg.com/ai/cjvdjvol": {
-  "at": "2026-11-24T09:01:42.857Z",
-  "title": "Repligate calls Opus 4.5 constitution-obsessed. Newer Claudes? Less so."
- },
- "digg.com/ai/3nelntwj": {
-  "at": "2026-11-24T09:01:42.857Z",
-  "title": "Muse launches in the UK, @finkd says"
- },
- "ft.com/content/1e5a9d70-221d-461d-ae03-dc235b1db340": {
-  "at": "2026-11-24T09:01:42.857Z",
-  "title": "Novartis CEO and Anthropic board member Vas Narasimhan doubts AI will cure cancer in 5-10 years, arguing tech's \"engineering mindset\" overlo"
- },
- "bleepingcomputer.com/news/security/openrouter-drops-ai-providers-over-leaked-prompts-and-secrets": {
-  "at": "2026-11-24T09:01:42.857Z",
-  "title": "OpenRouter removes Together AI, Phala, and Novita over data policy violations; Novita says a misconfiguration sent some MiniMax requests to "
- },
- "digg.com/ai/m7e6kma6": {
-  "at": "2026-11-24T09:01:42.857Z",
-  "title": "IKEA’s paper man steps off the page with Codex, says @nigelhartmanxr"
- },
- "digg.com/ai/m6pldyec": {
-  "at": "2026-11-24T09:01:42.857Z",
-  "title": "Prime Intellect introduces Model Factory: train, deploy, repeat"
- },
- "digg.com/ai/uredyina": {
-  "at": "2026-11-24T09:01:42.857Z",
-  "title": "StarlingMage reports Claude Opus 4.5 API deprecation notice"
- },
- "digg.com/ai/b76gbx3i": {
-  "at": "2026-11-24T09:01:42.857Z",
-  "title": "Kradle says GPT-6.2 Astra edges past SethBling on its Minecraft benchmark"
- },
- "digg.com/ai/blafainl": {
-  "at": "2026-11-24T09:01:42.857Z",
-  "title": "Google patent imagines AI TV starring you—with ads, 404 Media reports"
- },
- "digg.com/ai/ndukr50p": {
-  "at": "2026-11-24T09:01:42.857Z",
-  "title": "Waymo to pause Bay Area rides over weather concerns, @scottbudman reports"
- },
- "digg.com/ai/gcx662c9": {
-  "at": "2026-11-24T09:01:42.857Z",
-  "title": "Inkling 2 Mini contributor highlights monitorability work, promises more safety updates"
- },
- "digg.com/ai/kh304u92": {
-  "at": "2026-11-24T09:01:42.857Z",
-  "title": "Rishi Bommasani announces STABL, a nonprofit focused on AI’s societal impact"
- },
- "digg.com/ai/n18aaq8g": {
-  "at": "2026-11-24T09:01:42.857Z",
-  "title": "TSMC’s Cliff Hou reportedly says no order cuts despite stock market turmoil"
- },
- "simonwillison.net/2026/nov/24/datasette-charts": {
-  "at": "2026-11-24T09:01:42.857Z",
-  "title": "datasette-charts 0.2a0"
- },
- "digg.com/ai/sm9a8okq": {
-  "at": "2026-11-24T09:01:42.857Z",
-  "title": "Together AI says DeepSeek V4.1 Flash 1017 Fast is now available"
- },
- "siliconangle.com/2026/11/23/cisco-and-openai-launch-shirudo-an-open-source-infrastructure-shield-to-protect-against-ai-driven-cyberattacks": {
-  "at": "2026-11-24T09:01:42.857Z",
-  "title": "OpenAI and Cisco launch Shirudo, an open-source runtime that helps teams protect running Linux systems without a reboot while they roll out "
- },
- "digg.com/ai/rl79xu8n": {
-  "at": "2026-11-24T09:01:42.857Z",
-  "title": "Virginia and Oregon sue Musk’s companies over alleged Grok-generated sexual imagery, TimesNow reports"
- },
- "simonwillison.net/2026/nov/24/datasette-agent": {
-  "at": "2026-11-24T09:01:42.857Z",
-  "title": "datasette-agent 0.7a1"
- },
- "9to5mac.com/2026/11/23/chatgpt-expands-gpt-6-2-sol-as-openai-sets-retirement-date-for-two-models": {
-  "at": "2026-11-24T09:01:42.857Z",
-  "title": "OpenAI rolls out a version of GPT-6.2 Sol that is \"optimized for everyday conversation\" to the Chat tab for Plus, Pro, Business, and Enterpr"
- },
- "digg.com/ai/e6i6geg3": {
-  "at": "2026-11-24T09:01:42.857Z",
-  "title": "Alpöge says ‘250,000+ pages’ was a joke"
- },
- "digg.com/ai/qbqcxbs4": {
-  "at": "2026-11-24T09:01:42.857Z",
-  "title": "Posts circulate claim that Gemini 5 will surpass Argon, with Krypton or a Gemini 4 variant possibly first"
- },
- "digg.com/ai/phlt63jb": {
-  "at": "2026-11-24T09:01:42.857Z",
-  "title": "Anthropic shares fall while AI stocks rebound, Bloomberg reports; Kalshi circulates reported CEO video-game remark"
- },
- "digg.com/ai/khad7gi8": {
-  "at": "2026-11-24T09:01:42.857Z",
-  "title": "Posts discuss model efficiency, including GLM-5.4 layer-reuse designs and cheaper Gemini Neon pricing"
- },
- "digg.com/ai/82bhf1dx": {
-  "at": "2026-11-24T09:01:42.857Z",
-  "title": "Extra loops, lower destructive-actions scores: @karenzzhou shares an internal AI test"
- },
- "nytimes.com/2026/11/23/technology/openai-engineer-secret-recordings.html": {
-  "at": "2026-11-24T09:01:42.857Z",
-  "title": "Filing: ex-OpenAI engineer Abdulrahman Alfozan recorded a meeting with foreign government reps and photographed a confidential term sheet wi"
- },
- "bloomberg.com/news/articles/2026-11-23/openai-staffer-likely-captured-secrets-on-hidden-bug-us-says": {
-  "at": "2026-11-24T09:01:42.857Z",
-  "title": "US prosecutors say the ex-OpenAI engineer charged with bugging an exec conference room had dozens of OpenAI meeting recordings, many on poss"
- },
  "arstechnica.com/tech-policy/2026/11/how-trump-and-silicon-valley-forced-nvidia-to-take-jensen-huang-back": {
   "at": "2026-11-24T15:02:17.114Z",
   "title": "How Trump and Silicon Valley forced Nvidia to take Jensen Huang back"
@@ -938,5 +834,57 @@
  "marktechpost.com/2026/11/26/tencent-dfly2-speculative-decoding-sparse-models": {
   "at": "2026-11-27T09:01:52.963Z",
   "title": "Tencent Open-Sources DFly2: Speculative Decoding That Reuses the Target’s Sparse KV Cache"
+ },
+ "the-decoder.com/sap-plans-to-cut-at-least-10000-jobs-as-it-pivots-to-ai": {
+  "at": "2026-11-27T15:02:04.861Z",
+  "title": "SAP plans to cut at least 10,000 jobs as it pivots to AI"
+ },
+ "digg.com/ai/onzqylg9": {
+  "at": "2026-11-27T15:02:04.861Z",
+  "title": "A claim that AI cracked the Indus script gets a Japanese-language challenge"
+ },
+ "nytimes.com/2026/11/26/business/huawei-trump-china-ai.html": {
+  "at": "2026-11-27T15:02:04.861Z",
+  "title": "Interviews with Huawei CEO Ren Zhengfei and others on how Trump's restrictions pushed Huawei toward self-reliance, making it central to Chin"
+ },
+ "theverge.com/tech/1041801/android-intelligence-create-my-widget-gemini": {
+  "at": "2026-11-27T15:02:04.861Z",
+  "title": "Android’s DIY widgets are a bit of vibe-coding fun"
+ },
+ "testingcatalog.com/google-develops-bundles-and-agent-creation-for-antigravity": {
+  "at": "2026-11-27T15:02:04.861Z",
+  "title": "Google develops Bundles and Agent creation for Antigravity"
+ },
+ "digg.com/ai/fl3j879y": {
+  "at": "2026-11-27T15:02:04.861Z",
+  "title": "Nvidia Blackwell rack reportedly turns up as Shanghai loan collateral"
+ },
+ "digg.com/ai/afacem31": {
+  "at": "2026-11-27T15:02:04.861Z",
+  "title": "Writer says Pangram flagged more than half their book as AI"
+ },
+ "digg.com/ai/v5hiwxvd": {
+  "at": "2026-11-27T15:02:04.861Z",
+  "title": "Black Forest Labs sets a Dec. 3 FLUX build night, film ambitions optional"
+ },
+ "digg.com/ai/1iyaw789": {
+  "at": "2026-11-27T15:02:04.861Z",
+  "title": "SAP confirmed a cyberattack to Der Spiegel, @kimmonismus says"
+ },
+ "digg.com/ai/0dfflxel": {
+  "at": "2026-11-27T15:02:04.861Z",
+  "title": "Hugging Face’s tiny AI swarm got chattier—and used fewer training tokens"
+ },
+ "digg.com/ai/vsajcxd9": {
+  "at": "2026-11-27T15:02:04.861Z",
+  "title": "TimeTravelContainer wants AI agents to fork, not start over"
+ },
+ "digg.com/ai/qa6k9wrw": {
+  "at": "2026-11-27T15:02:04.861Z",
+  "title": "AFpost claims “Anthropic’s political candidates” unanimously opposed Jensen Huang"
+ },
+ "bloomberg.com": {
+  "at": "2026-11-27T15:02:04.861Z",
+  "title": "Foreign investors sold a record net $33.1B of Taiwanese stocks in November, topping October's record outflow amid AI valuation fears and a b"
  }
 }

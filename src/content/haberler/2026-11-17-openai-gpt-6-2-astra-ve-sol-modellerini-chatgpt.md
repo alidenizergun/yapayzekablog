@@ -22,6 +22,14 @@ byNumbers:
     label: "Astra, milyon çıktı tokenı başına standart fiyat"
   - value: "yüzde 20"
     label: "Astra token fiyatlarındaki indirim"
+photo:
+  id: "pixabay-10207363"
+  url: "/foto/px-10207363"
+  alt: "artificial intelligence, automation, machine learning, laptop, workspace"
+  author: "konkapo"
+  authorUrl: "https://pixabay.com/users/konkapo-55292388/"
+  link: "https://pixabay.com/photos/artificial-intelligence-automation-10207363/"
+  source: "pixabay"
 sources:
   - title: "OpenAI X gönderisi"
     url: "https://x.com/OpenAI/status/2122750124543926515"
