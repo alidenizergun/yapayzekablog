@@ -22,6 +22,13 @@ photo:
   author: "Joshua Aragon"
   authorUrl: "https://unsplash.com/@goshua13"
   link: "https://unsplash.com/photos/laptop-and-monitor-displaying-code-workspace-BMnhuwFYr7w"
+photo2:
+  id: "Im_cQ6hQo10"
+  url: "https://images.unsplash.com/photo-1629904853893-c2c8981a1dc5?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8M3x8c2VjdXJpdHklMjBhdWRpdCUyMHRlYW0lMjBjb21wdXRlciUyMHNjcmVlbnN8ZW58MXwwfHx8MTc5NTc3MDE4Mnww&ixlib=rb-4.1.0"
+  alt: "Two people working on computer code at monitors in a bright office workspace"
+  author: "Compagnons"
+  authorUrl: "https://unsplash.com/@sigmund"
+  link: "https://unsplash.com/photos/people-coding-at-monitors-in-workspace-Im_cQ6hQo10"
 sources:
   - title: "@OpenAI X gönderisi"
     url: "https://x.com/OpenAI/status/2122359930628063248"
