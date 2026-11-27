@@ -23,6 +23,13 @@ photo:
   authorUrl: "https://pixabay.com/users/MarkThomas-3675305/"
   link: "https://pixabay.com/photos/us-supreme-court-building-2225766/"
   source: "pixabay"
+photo2:
+  id: "P8rgDtEFn7s"
+  url: "https://images.unsplash.com/photo-1603119761708-9252f043c139?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8NXx8Z292ZXJubWVudCUyMGJ1aWxkaW5nJTIwbGF3fGVufDF8MHx8fDE3OTU3MDU0MTN8MA&ixlib=rb-4.1.0"
+  alt: "white concrete building during daytime"
+  author: "Ian Hutchinson"
+  authorUrl: "https://unsplash.com/@ianhutchinson92"
+  link: "https://unsplash.com/photos/white-concrete-building-during-daytime-P8rgDtEFn7s"
 sources:
   - title: "Pentagon considered invoking wartime law to reinstate Nvidia's Huang: WaPo"
     url: "https://www.tradingview.com/news/seekingalpha:fba55e1ea094b:0-pentagon-considered-invoking-wartime-law-to-reinstate-nvidia-s-huang-wapo/"

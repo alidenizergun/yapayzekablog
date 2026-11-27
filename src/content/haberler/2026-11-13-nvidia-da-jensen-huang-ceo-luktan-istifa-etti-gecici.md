@@ -37,6 +37,14 @@ photo:
   authorUrl: "https://pixabay.com/users/WikimediaImages-1185597/"
   link: "https://pixabay.com/photos/nvidia-video-card-2202279/"
   source: "pixabay"
+photo2:
+  id: "pixabay-4165307"
+  url: "/foto/px-4165307"
+  alt: "software development, guest post, content writing, cybersecurity, seo"
+  author: "DiggityMarketing"
+  authorUrl: "https://pixabay.com/users/DiggityMarketing-12123926/"
+  link: "https://pixabay.com/photos/software-development-guest-post-4165307/"
+  source: "pixabay"
 sources:
   - title: "Nvidia's Jensen Huang resigns, chipmaker names CFO Colette Kress as interim CEO"
     url: "https://techcrunch.com/2026/11/12/nvidias-jensen-huang-resigns-chipmaker-names-cfo-colette-kress-as-interim-ceo/"
