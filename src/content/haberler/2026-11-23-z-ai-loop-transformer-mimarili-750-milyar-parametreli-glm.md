@@ -21,6 +21,13 @@ byNumbers:
     label: "İki kez döngüyle çalışan katman sayısı"
   - value: "2T-3T"
     label: "Şirketin karşılaştırdığı model ölçeği"
+photo:
+  id: "cvBBO4PzWPg"
+  url: "https://images.unsplash.com/photo-1516259762381-22954d7d3ad2?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8OHx8Y29tcHV0ZXIlMjBjb2RlJTIwc2NyZWVufGVufDF8MHx8fDE3OTU4MzQ5MTZ8MA&ixlib=rb-4.1.0"
+  alt: "Lines of colorful JavaScript code displayed on a dark screen"
+  author: "Markus Spiske"
+  authorUrl: "https://unsplash.com/@markusspiske"
+  link: "https://unsplash.com/photos/javascript-code-on-dark-screen-cvBBO4PzWPg"
 sources:
   - title: "Z.ai launches GLM-5.4, its first Loop Transformer model"
     url: "https://www.testingcatalog.com/z-ai-launches-glm-5-4-its-first-loop-transformer-model/"

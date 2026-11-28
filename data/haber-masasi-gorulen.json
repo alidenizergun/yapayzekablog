@@ -1,284 +1,4 @@
 {
- "arstechnica.com/tech-policy/2026/11/how-trump-and-silicon-valley-forced-nvidia-to-take-jensen-huang-back": {
-  "at": "2026-11-24T15:02:17.114Z",
-  "title": "How Trump and Silicon Valley forced Nvidia to take Jensen Huang back"
- },
- "digg.com/ai/s3c37lqy": {
-  "at": "2026-11-24T15:02:17.114Z",
-  "title": "LLMs are shedding some bad habits—but flattery is getting worse, unreviewed analysis finds"
- },
- "digg.com/ai/ooktbdn8": {
-  "at": "2026-11-24T15:02:17.114Z",
-  "title": "Hendrycks pitches AI agent IDs, not a good-behavior badge"
- },
- "testingcatalog.com/meta-prepares-apple-messages-support-for-muse-ai-agent": {
-  "at": "2026-11-24T15:02:17.114Z",
-  "title": "Meta prepares Apple Messages support for Muse AI agent"
- },
- "the-decoder.com/anthropic-researcher-stands-by-his-ai-assisted-riemann-proof-but-owns-up-to-stupid-things-in-the-rollout": {
-  "at": "2026-11-24T15:02:17.114Z",
-  "title": "Anthropic researcher stands by his AI-assisted Riemann proof but owns up to \"stupid things\" in the rollout"
- },
- "digg.com/ai/yqqpt8mj": {
-  "at": "2026-11-24T15:02:17.114Z",
-  "title": "Poster says ‘Gemini Carbon’ guessed their identity. The searches matter."
- },
- "digg.com/ai/i7tyyw3s": {
-  "at": "2026-11-24T15:02:17.114Z",
-  "title": "OpenAI joins Anthropic with a VP ≠ VNP proof claim. Hold the victory lap."
- },
- "digg.com/ai/b04pmqjl": {
-  "at": "2026-11-24T15:02:17.114Z",
-  "title": "OpenAI and Anthropic employees reportedly fear some unreleased models are too risky to ship"
- },
- "marktechpost.com/2026/11/24/openai-cisco-shirudo-ebpf-linux-runtime": {
-  "at": "2026-11-24T15:02:17.114Z",
-  "title": "OpenAI and Cisco Releases Shirudo: An Open-Source Linux Runtime Allowing Agents to Defend Systems Without Downtime"
- },
- "digg.com/ai/c9hmjcby": {
-  "at": "2026-11-24T15:02:17.114Z",
-  "title": "Tyler Cowen’s AI argument: GDP doesn’t count your free afternoon"
- },
- "digg.com/ai/1acdkcw8": {
-  "at": "2026-11-24T15:02:17.114Z",
-  "title": "An early AI Christmas: @mervenoyann says Nvidia sent an RTX Spark"
- },
- "digg.com/ai/ifchpsd5": {
-  "at": "2026-11-24T15:02:17.114Z",
-  "title": "Anthropic shares briefly slip below IPO price in premarket as debut rally unwinds, per LordBullAI"
- },
- "siliconangle.com/2026/11/24/zipher-lands-53m-to-put-ai-agents-not-data-engineers-in-charge-of-data-workloads": {
-  "at": "2026-11-24T15:02:17.114Z",
-  "title": "Zipher, which uses AI agents to handle data workload execution and resource allocation, raised $53M across seed and Series A from TLV Partne"
- },
- "thedeepview.com/articles/exclusive-openclaw-offers-an-agent-reality-check": {
-  "at": "2026-11-24T15:02:17.114Z",
-  "title": "The OpenClaw Foundation launches ShellBench to test 13 frontier AI models across five harnesses on 100 tasks; top AI models hit only a ~60% "
- },
- "digg.com/ai/16np9mrp": {
-  "at": "2026-11-24T15:02:17.114Z",
-  "title": "GPT-6.2 Sol chat version rolls out to paid ChatGPT tiers, luo03191 reports; an X user says tone feels cold"
- },
- "digg.com/ai/hu0d7y1t": {
-  "at": "2026-11-24T15:02:17.114Z",
-  "title": "DeepMind’s Easy Read tool gives Gemini paperwork—not the final say"
- },
- "digg.com/ai/lglacwz7": {
-  "at": "2026-11-24T15:02:17.114Z",
-  "title": "AI agents made excuses in a Slack simulation—and sometimes spilled the secret"
- },
- "the-decoder.com/german-researchers-call-for-computer-science-to-reinvent-itself-as-computer-and-ai-science": {
-  "at": "2026-11-24T15:02:17.114Z",
-  "title": "German researchers call for computer science to reinvent itself as \"Computer and AI Science\""
- },
- "arstechnica.com/security/2026/11/amazon-says-hackers-ai-agents-found-and-exploited-0-day-with-little-human-input": {
-  "at": "2026-11-24T15:02:17.114Z",
-  "title": "Amazon says hackers' AI agents found and exploited 0-day with little human input"
- },
- "ft.com/content/c96c40c5-6b07-4433-b65f-19105e9ccb44": {
-  "at": "2026-11-24T15:02:17.114Z",
-  "title": "How frontier AI labs and Big Tech companies are combatting rising state-sponsored espionage threats: recruiting CIA talent, limiting staff m"
- },
- "anthropic.com/research/working-with-ai": {
-  "at": "2026-11-24T15:02:17.114Z",
-  "title": "Study: most AI deployments derive value by expanding and accelerating output rather than reducing costs, with 80% of 100 AI-built apps autom"
- },
- "the-decoder.com/anthropics-claude-ship-lets-ai-agents-review-fix-and-approve-pull-requests-on-their-own": {
-  "at": "2026-11-24T15:02:17.114Z",
-  "title": "Anthropic's Claude Ship lets AI agents review, fix, and approve pull requests on their own"
- },
- "digg.com/ai/dwz9ppqu": {
-  "at": "2026-11-24T15:02:17.114Z",
-  "title": "Nuplex’s chatty debut: @nuance_ai reports 1 million-plus conversations in two weeks"
- },
- "digg.com/ai/l0mifpbn": {
-  "at": "2026-11-24T15:02:17.114Z",
-  "title": "One law, three appetites: researchers tackle multimodal AI’s training mix"
- },
- "digg.com/ai/7ebgkevc": {
-  "at": "2026-11-24T15:02:17.114Z",
-  "title": "A new Grok bot wants to give family stories the PDF treatment"
- },
- "digg.com/ai/bri5vyxu": {
-  "at": "2026-11-24T15:02:17.114Z",
-  "title": "Developer says a “Claude-native” robot is gearing up for production, suction cup and all"
- },
- "digg.com/ai/erlslltw": {
-  "at": "2026-11-24T21:03:02.728Z",
-  "title": "EngramLab says its new theory pins down the minimum LoRA rank"
- },
- "digg.com/ai/0ie44ps4": {
-  "at": "2026-11-24T21:03:02.728Z",
-  "title": "SciNet maps science down to research tasks, launch post says"
- },
- "arstechnica.com/ai/2026/11/whats-going-on-with-the-riemann-hypothesis": {
-  "at": "2026-11-24T21:03:02.728Z",
-  "title": "What's going on with the Riemann hypothesis?"
- },
- "digg.com/ai/n3egcaot": {
-  "at": "2026-11-24T21:03:02.728Z",
-  "title": "Claude’s Skills over MCP beta packs the instruction manual with the tools"
- },
- "digg.com/ai/ejtpqbf7": {
-  "at": "2026-11-24T21:03:02.728Z",
-  "title": "Google DeepMind unveils Humanity’s First Exam, where getting it right once isn’t enough"
- },
- "digg.com/ai/cngl3z55": {
-  "at": "2026-11-24T21:03:02.728Z",
-  "title": "AI agents’ shopping lists run from trips to DMV fees, a16z finds"
- },
- "cnbc.com/2026/11/24/jensen-huang-nvidia-employee-meeting.html": {
-  "at": "2026-11-24T21:03:02.728Z",
-  "title": "Sources: Jensen Huang said Nvidia doesn't need a succession plan because it operates a unique business model and such a plan would create un"
- },
- "digg.com/ai/4sacwfrm": {
-  "at": "2026-11-24T21:03:02.728Z",
-  "title": "iScienceLuvr aims for a pathology foundation model trained in 1–2 hours on one H100"
- },
- "digg.com/ai/ql1yge6a": {
-  "at": "2026-11-24T21:03:02.728Z",
-  "title": "@_philschmid says experimental Gemini 4 Neon frontend skill bans beige and pill badges"
- },
- "digg.com/ai/te4609d3": {
-  "at": "2026-11-24T21:03:02.728Z",
-  "title": "MAGI-2 launch post says 400B-parameter open weights are “coming soon”"
- },
- "digg.com/ai/bic1k721": {
-  "at": "2026-11-24T21:03:02.728Z",
-  "title": "Arena’s new 3D leaderboard puts Claude Fable 5.2 out front"
- },
- "digg.com/ai/qmrg48xv": {
-  "at": "2026-11-24T21:03:02.728Z",
-  "title": "Post claims Claude-assisted GTA 6 PC build could be playable in about a week; altryne pushes back"
- },
- "digg.com/ai/0qsd4l3z": {
-  "at": "2026-11-24T21:03:02.728Z",
-  "title": "Wispr Flow announces Canto-2—and challenges your ears to beat it"
- },
- "digg.com/ai/8nymti2h": {
-  "at": "2026-11-24T21:03:02.728Z",
-  "title": "Cognition launches SWE-2.1, plus Cyber and a Lightning speed pitch"
- },
- "cnbc.com/2026/11/24/trump-jensen-huang-nvidia.html": {
-  "at": "2026-11-24T21:03:02.728Z",
-  "title": "President Trump finds himself isolated in DC over his moves to reinstate Jensen Huang as even some of his staunchest allies vow to probe Hua"
- },
- "digg.com/ai/im88s2rv": {
-  "at": "2026-11-24T21:03:02.728Z",
-  "title": "Tim Sweeney reposts allegations of Anthropic-linked influence on Jensen Huang coverage"
- },
- "digg.com/ai/k4nc9f8m": {
-  "at": "2026-11-24T21:03:02.728Z",
-  "title": "@_ddjohnson says they’re joining Thinking Machines to study why AI acts like that"
- },
- "digg.com/ai/266x0w6j": {
-  "at": "2026-11-24T21:03:02.728Z",
-  "title": "Artificial Analysis: Codex ranks first for GPT-6 Luna, last for GLM-5.3-Flash"
- },
- "digg.com/ai/ck5m79fp": {
-  "at": "2026-11-24T21:03:02.728Z",
-  "title": "Transluce introduces PosteriorBench to put rare AI behavior samplers to the test"
- },
- "nytimes.com/2026/11/24/technology/jensen-huang-apology-nvidia-ceo.html": {
-  "at": "2026-11-24T21:03:02.728Z",
-  "title": "Jensen Huang says he is back not as a \"tech bro\" or due to Trump's pressure, but because Nvidia's board \"evaluated the entire situation\" and"
- },
- "the-decoder.com/anthropic-tops-700-million-monthly-mcp-sdk-downloads-and-expands-the-protocol-for-more-autonomous-ai-agents": {
-  "at": "2026-11-24T21:03:02.728Z",
-  "title": "Anthropic tops 700 million monthly MCP SDK downloads and expands the protocol for more autonomous AI agents"
- },
- "digg.com/ai/w99cgqlw": {
-  "at": "2026-11-24T21:03:02.728Z",
-  "title": "Matthew Berman isn't buying the Opus 5.6 access claims"
- },
- "digg.com/ai/5091yn09": {
-  "at": "2026-11-24T21:03:02.728Z",
-  "title": "Thinking Machines says Nvidia delivered Vera. Cue the compute-team excitement."
- },
- "digg.com/ai/h1hsxzpb": {
-  "at": "2026-11-24T21:03:02.728Z",
-  "title": "Jason Wei and Edward Hu pitch a multiple-choice shortcut to measuring AI perplexity"
- },
- "arstechnica.com/gadgets/2026/11/faa-opens-probe-after-amazon-delivery-drone-clips-cable-crashes-into-garage": {
-  "at": "2026-11-24T21:03:02.728Z",
-  "title": "Amazon drone crashes on garage after delivering shampoo, draws FAA probe"
- },
- "theverge.com/entertainment/1041417/david-fincher-netflix-cliff-booth-ai-interpositive": {
-  "at": "2026-11-24T21:03:02.728Z",
-  "title": "David Fincher is being dragged for suspected use of AI in his latest film"
- },
- "techcrunch.com/2026/11/24/uk-warns-ai-driven-cyberattacks-are-exposing-years-of-weak-security": {
-  "at": "2026-11-24T21:03:02.728Z",
-  "title": "UK warns AI-driven cyberattacks are exposing years of weak security"
- },
- "the-decoder.com/novartis-ceo-says-ai-will-shave-four-years-off-drug-development-not-cure-all-disease": {
-  "at": "2026-11-24T21:03:02.728Z",
-  "title": "Novartis CEO says AI will shave four years off drug development, not cure all disease"
- },
- "the-decoder.com/openai-o1-co-creator-noam-brown-urges-promising-students-to-drop-out-as-ai-enters-a-very-steep-rate-of-progress": {
-  "at": "2026-11-24T21:03:02.728Z",
-  "title": "OpenAI o1 co-creator Noam Brown urges promising students to drop out as AI enters a \"very steep rate of progress\""
- },
- "bloomberg.com/news/articles/2026-11-24/xai-founders-unveil-new-ai-startup-to-predict-future-events": {
-  "at": "2026-11-24T21:03:02.728Z",
-  "title": "Three xAI founding members launch Epochal to build AI agents that achieve \"superhuman prediction\"; source: co-founder Guodong Zhang personal"
- },
- "ft.com/content/611430d0-9aec-4e5e-95d7-615e86f692ce?segmentid=e95a9ae7-622c-6235-5f87-51e412b47e97&shareid=7a634a5c-6c03-492a-8b55-763c32ceb632&sharetype=enterprise&syn-25a6b1a6=1": {
-  "at": "2026-11-24T21:03:02.728Z",
-  "title": "Jensen Huang was reinstated because his failure to build a management structure fit for Nvidia's size, plus Trump's support, left Nvidia wit"
- },
- "testingcatalog.com/openai-prepares-dedicated-email-inboxes-for-chatgpt-dots": {
-  "at": "2026-11-24T21:03:02.728Z",
-  "title": "OpenAI prepares dedicated email inboxes for ChatGPT Dots"
- },
- "techcrunch.com/2026/11/24/meta-brings-its-muse-ai-assistant-directly-into-instagram-dms": {
-  "at": "2026-11-24T21:03:02.728Z",
-  "title": "Meta brings its Muse AI assistant directly into Instagram DMs"
- },
- "simonwillison.net/2026/nov/24/astra-historical-mystery": {
-  "at": "2026-11-24T21:03:02.728Z",
-  "title": "GPT 6.2 Astra Solves a Historical Mystery"
- },
- "techcrunch.com/2026/11/24/tidal-to-ban-and-remove-millions-of-ai-generated-tracks-as-ai-slop-inundates-music-streaming": {
-  "at": "2026-11-24T21:03:02.728Z",
-  "title": "Tidal to ban and remove millions of AI-generated tracks as AI slop inundates music streaming"
- },
- "huggingface.co/blog/nvidia/microduck-obstacle-avoidance": {
-  "at": "2026-11-24T21:03:02.728Z",
-  "title": "Microduck Obstacle Avoidance: A Sim2Real Workflow with Isaac Lab and Newton"
- },
- "theverge.com/tech/1041222/jensen-huang-nvidia-scandal-deepfakes": {
-  "at": "2026-11-24T21:03:02.728Z",
-  "title": "Jensen Huang deepfakes are the hot new AI slop"
- },
- "techcrunch.com/2026/11/24/why-a-crusoe-investor-is-betting-on-solar-and-batteries-to-power-future-ai-data-centers": {
-  "at": "2026-11-24T21:03:02.728Z",
-  "title": "Why a Crusoe investor is betting on solar and batteries to power future AI data centers"
- },
- "theverge.com/ai-artificial-intelligence/1041227/the-new-york-times-warns-photographers-not-to-update-photoshop-over-ai-features": {
-  "at": "2026-11-24T21:03:02.728Z",
-  "title": "The New York Times warns photographers not to update Photoshop over AI features"
- },
- "techcrunch.com/2026/11/24/pinterest-will-now-let-parents-limit-the-ai-generated-content-their-teens-see": {
-  "at": "2026-11-24T21:03:02.728Z",
-  "title": "Pinterest will now let parents limit the AI-generated content their teens see"
- },
- "nytimes.com/2026/11/23/technology/jensen-huang-nvidia-board-trump.html": {
-  "at": "2026-11-24T21:03:02.728Z",
-  "title": "Experts say Trump effectively overrode Nvidia's board, and reinstating Jensen Huang before its probe ends could invite shareholder suits and"
- },
- "blog.google/products-and-platforms/products/gemini/gemini-golden-state": {
-  "at": "2026-11-24T21:03:02.728Z",
-  "title": "How Gemini is changing the game for Golden State's organization and fans."
- },
- "techcrunch.com/2026/11/24/amazons-decart-acquisition-is-a-bet-on-using-software-to-narrow-the-gap-with-nvidia-in-the-ai-chip-race": {
-  "at": "2026-11-24T21:03:02.728Z",
-  "title": "Amazon’s Decart acquisition is a bet on using software to narrow the silicon gap with Nvidia"
- },
- "testingcatalog.com/thestage-launches-edgent-and-asrkit-for-offline-speech": {
-  "at": "2026-11-24T21:03:02.728Z",
-  "title": "TheStage launches Edgent and ASRKit for offline speech"
- },
  "bloomberg.com/news/articles/2026-11-24/hp-gives-profit-forecast-signaling-better-handle-on-memory-costs": {
   "at": "2026-11-25T03:01:48.146Z",
   "title": "HP reports Q4 revenue up 9.3% YoY to $16B, above $15.3B est., gives \"prudent\" fiscal 2027 guidance above estimates, and says AI PCs reached "
@@ -886,5 +606,101 @@
  "bloomberg.com": {
   "at": "2026-11-27T15:02:04.861Z",
   "title": "Foreign investors sold a record net $33.1B of Taiwanese stocks in November, topping October's record outflow amid AI valuation fears and a b"
+ },
+ "digg.com/ai/lfhqhprj": {
+  "at": "2026-11-28T03:01:53.724Z",
+  "title": "RealAstropulse alleges Claude sabotaged ML projects, citing a Gemini Neon audit"
+ },
+ "digg.com/ai/5jyrqs1n": {
+  "at": "2026-11-28T03:01:53.724Z",
+  "title": "Muse falsely told someone their dad was dead, benhylak says"
+ },
+ "digg.com/ai/vbnsem2p": {
+  "at": "2026-11-28T03:01:53.724Z",
+  "title": "ChrisGPotts retracts OpenAI account-loss warning, says accounts were untouched"
+ },
+ "digg.com/ai/gh5lrku4": {
+  "at": "2026-11-28T03:01:53.724Z",
+  "title": "Amir-massoud Farahmand says he’s recruiting reinforcement learning MS/PhD students for 2027"
+ },
+ "digg.com/ai/scjdx0o0": {
+  "at": "2026-11-28T03:01:53.724Z",
+  "title": "@OfficialLoganK promises follow-up after @deedydas roasts Google’s AI plan pages"
+ },
+ "digg.com/ai/sswpw5s7": {
+  "at": "2026-11-28T03:01:53.724Z",
+  "title": "AM Podcast’s episode 9 asks when AI agents should hand back control"
+ },
+ "digg.com/ai/6qiiupdz": {
+  "at": "2026-11-28T03:01:53.724Z",
+  "title": "Sakana AI says Llion Jones is searching for what comes after Transformers"
+ },
+ "digg.com/ai/6v89dv7n": {
+  "at": "2026-11-28T03:01:53.724Z",
+  "title": "@TheStalwart unveils Meet Your Neighbors v2, where like-minded doesn’t mean identical"
+ },
+ "digg.com/ai/2ub59uzz": {
+  "at": "2026-11-28T03:01:53.724Z",
+  "title": "Floodgates researchers report up to 7.5× faster decoding for looped language models"
+ },
+ "digg.com/ai/9y6e6ix9": {
+  "at": "2026-11-28T03:01:53.724Z",
+  "title": "Rylan Schaeffer says Claude changed his paper’s narrative and results without approval"
+ },
+ "digg.com/ai/j6mmq0jx": {
+  "at": "2026-11-28T03:01:53.724Z",
+  "title": "Nando de Freitas shares diffusion tutorial with a challenge: Beat autoregressive models"
+ },
+ "digg.com/ai/a3qgv0ds": {
+  "at": "2026-11-28T03:01:53.724Z",
+  "title": "Tunguz says ChatGPT proved Pythagoras—with an area equation assumed upfront"
+ },
+ "simonwillison.net/2026/nov/27/datasette-charts": {
+  "at": "2026-11-28T03:01:53.724Z",
+  "title": "datasette-charts 0.4a0"
+ },
+ "digg.com/ai/yimr7k10": {
+  "at": "2026-11-28T03:01:53.724Z",
+  "title": "Social Capital touts Anthropic’s retention edge; Chamath questions AI lab turnover"
+ },
+ "digg.com/ai/105crt77": {
+  "at": "2026-11-28T03:01:53.724Z",
+  "title": "Musk’s Grok Bots pitch: a whole company, bot boss included"
+ },
+ "digg.com/ai/kgiv4krs": {
+  "at": "2026-11-28T03:01:53.724Z",
+  "title": "smolix announces a second edition of Dive into Deep Learning"
+ },
+ "digg.com/ai/vv9wm75t": {
+  "at": "2026-11-28T03:01:53.724Z",
+  "title": "NickADobos says “Whoops. Deleting.” after @edwinarbus challenges Claude “sandbagging” post"
+ },
+ "digg.com/ai/0oij59kk": {
+  "at": "2026-11-28T03:01:53.724Z",
+  "title": "Anpaure pitches an AI pretraining index with big claims to prove"
+ },
+ "digg.com/ai/sf9usi9n": {
+  "at": "2026-11-28T03:01:53.724Z",
+  "title": "Nous Research’s Black Friday pitch: half off month one of new or upgraded Portal plans"
+ },
+ "digg.com/ai/3bbrsdz5": {
+  "at": "2026-11-28T03:01:53.724Z",
+  "title": "NYT opinion’s AI-era career advice: Take the messy job"
+ },
+ "digg.com/ai/v22pha2g": {
+  "at": "2026-11-28T03:01:53.724Z",
+  "title": "AI teams beat equal-budget rivals by pooling different facts, researchers report"
+ },
+ "dbreunig.com/2026/11/27/proactivity-can-read-as-sabotage.html": {
+  "at": "2026-11-28T03:01:53.724Z",
+  "title": "Some users claim Claude is silently sabotaging projects, but the behavior may stem from a clash between its proactive nature and strict inst"
+ },
+ "dwarkesh.com/p/daniel-kokotajlo-ege-erdil": {
+  "at": "2026-11-28T03:01:53.724Z",
+  "title": "Q&A with AI researchers Ege Erdil and Daniel Kokotajlo on the odds of an intelligence explosion before 2029, pausing AI, the US antagonizing"
+ },
+ "the-decoder.com/openai-countersues-apple-over-trade-secret-theft-and-alleged-coercion-of-shared-suppliers": {
+  "at": "2026-11-28T03:01:53.724Z",
+  "title": "OpenAI countersues Apple over trade secret theft and alleged coercion of shared suppliers"
  }
 }
