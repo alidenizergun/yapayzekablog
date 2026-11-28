@@ -23,6 +23,13 @@ photo:
   authorUrl: "https://pixabay.com/users/tranmautritam-498081/"
   link: "https://pixabay.com/photos/iphone-hand-phone-mobile-phone-5537230/"
   source: "pixabay"
+photo2:
+  id: "ZVhbwDfLtYU"
+  url: "https://images.unsplash.com/photo-1601034913836-a1f43e143611?ixid=M3wxMTM0ODE0fDB8MXxzZWFyY2h8NXx8c21hcnRwaG9uZSUyMGFwcHN8ZW58MXwwfHx8MTc5NTg1NjY2M3ww&ixlib=rb-4.1.0"
+  alt: "blue and white logo guessing game"
+  author: "Brett Jordan"
+  authorUrl: "https://unsplash.com/@brett_jordan"
+  link: "https://unsplash.com/photos/blue-and-white-logo-guessing-game-ZVhbwDfLtYU"
 sources:
   - title: "OpenAI says heavy ChatGPT users may hit limits sooner as it merges Chat and Work"
     url: "https://techcrunch.com/2026/11/25/openai-says-heavy-chatgpt-users-may-hit-limits-sooner-as-it-merges-chat-and-work/"
